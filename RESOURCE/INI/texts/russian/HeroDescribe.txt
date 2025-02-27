@@ -281,11 +281,11 @@ animation_14{man}
 heroInfo_14{A thorn to Spain's New World holdings, Juan and his crew of loyal pirates seek gold and treasures where ever they may be. }
 
 heroName_15{Blaze}
-heroNameGen_15{Devlin}
+heroNameGen_15{Sharp}
 heroNameDat_15{Blaze}
-heroLastname_15{Devlin}
+heroLastname_15{Sharp}
 heroLastnameGen_15{Blaze}
-heroLastNameDat_15{Devlin}
+heroLastNameDat_15{Sharp}
 heroFace_15{2001}
 heroModel_15{Devlin}
 heroType_15{HeroType_1}
@@ -293,7 +293,7 @@ heroNation_15{ENGLAND}
 heroBaseNation_15{ENGLAND}
 sex_15{man}
 animation_15{man}
-heroInfo_15{Devlin is adventurous and daring as any other buccaneer and can stand his own in any battle...except when against his step-sister. }
+heroInfo_15{Sharp is adventurous and daring as any other buccaneer and can stand his own in any battle...except when against his step-sister. }
 
 heroName_16{Christopher}
 heroNameGen_16{Christopher}
@@ -628,9 +628,9 @@ heroInfo_37{"Anne Gods-wants-it"; as it seemed that if she wanted something, it 
 heroName_38{Beatrice}
 heroNameGen_38{Beatrice}
 heroNameDat_38{Beatrice}
-heroLastname_38{Devlin}
-heroLastnameGen_38{Devlin}
-heroLastNameDat_38{Devlin}
+heroLastname_38{Sharp}
+heroLastnameGen_38{Sharp}
+heroLastNameDat_38{Sharp}
 heroFace_38{2000}
 heroModel_38{Beatrice,Beatrice1,Beatrice1,Beatrice3,Beatrice2,Beatrice4,BeatriceC,Beatrice,Beatrice}
 heroType_38{HeroType_1}

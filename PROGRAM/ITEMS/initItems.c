@@ -1565,6 +1565,39 @@ int InitItems()
 	itm.Weight = 0.1;
 	itm.ItemType = "QUESTITEMS";
 	n++;
+		makeref(itm,Items[n]);
+	itm.id = "HalfMap1_Sharp";
+	itm.name = "itmname_HalfMap1_Sharp";
+	itm.describe = "itmdescr_HalfMap1_Sharp";
+	itm.model = "";
+	itm.picIndex = 1;
+	itm.picTexture = "ITEMS_7";
+	itm.price = 0;
+	itm.ItemType = "QUESTITEMS";
+	n++;
+
+	makeref(itm,Items[n]);
+	itm.id = "HalfMap2_Sharp";
+	itm.name = "itmname_HalfMap2_Sharp";
+	itm.describe = "itmdescr_HalfMap2_Sharp";
+	itm.model = "";
+	itm.picIndex = 3;
+	itm.picTexture = "ITEMS_7";
+	itm.price = 0;
+	itm.ItemType = "QUESTITEMS";
+	n++;
+
+	makeref(itm,Items[n]);
+	itm.id = "FullMap_Sharp";
+	itm.name = "itmname_FullMap_Sharp";
+	itm.describe = "itmdescr_FullMap_Sharp";
+	itm.model = "";
+	itm.picIndex = 2;
+	itm.picTexture = "ITEMS_7";
+	itm.price = 0;
+	itm.ItemType = "QUESTITEMS";
+
+	n++;
 	////////////////////////////////////////////////////////////////////////////////////////////		
 	//здесь начинаются квестовые предметы, заюзаные в локаторах item
 	//оформлять эти предметы ТОЛЬКО ЗДЕСЬ, до конца сектора квестовых предметов

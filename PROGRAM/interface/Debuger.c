@@ -624,7 +624,7 @@ totalInfo = totalInfo + NewStr() + NewStr() + "Success";
 SetFormatedText("INFO_TEXT",totalInfo);
 Statistic_AddValue(PChar, "Cheats.F29", 1);
 }
-string descF30 = "Cheat 30";
+string descF30 = "Get Weapons and ship.";
 void CalculateInfoDataF30()
 {
 totalInfo = descF30;
@@ -632,6 +632,31 @@ PlaySound("interface\knock.wav");
 totalInfo = totalInfo + NewStr() + NewStr() + "Success";
 SetFormatedText("INFO_TEXT",totalInfo);
 Statistic_AddValue(PChar, "Cheats.F30", 1);
+Pchar.rank = 41;
+SetFantomParamFromRank(pchar, 41, false);
+SetSPECIAL(pchar, 10, 10, 10, 10, 10, 10, 10);
+pchar.Ship.Type = GenerateShip(GOF_SHIP_MANOWAR, true);
+SetBaseShipData(pchar);
+pchar.Ship.Cannons.Type = CANNON_TYPE_CANNON_LBS42;
+SetCrewQuantityFull(pchar);
+SetCharacterGoods(pchar,GOOD_FOOD,1500);
+SetCharacterGoods(pchar,GOOD_BALLS,1500);
+SetCharacterGoods(pchar,GOOD_GRAPES,1500);
+SetCharacterGoods(pchar,GOOD_KNIPPELS,1500);
+SetCharacterGoods(pchar,GOOD_BOMBS,1500);
+SetCharacterGoods(pchar,GOOD_POWDER,2000);
+SetCharacterGoods(pchar,GOOD_PLANKS,200);
+SetCharacterGoods(pchar,GOOD_SAILCLOTH,200);
+SetCharacterGoods(pchar,GOOD_RUM,1500);
+SetCharacterGoods(pchar,GOOD_WEAPON,1500);
+GiveItem2Character(pchar,"spyglass5");
+GiveItem2Character(pchar,"pistol7");
+GiveItem2Character(pchar,"blade15");
+TakeNItems(pchar,"bullet", 180);
+TakeNItems(pchar,"powder", 180);
+EquipCharacterbyItem(pchar, "spyglass5");
+EquipCharacterbyItem(pchar, "pistol7");
+EquipCharacterbyItem(pchar, "blade32");
 }
 void ReloadByStr()
 {

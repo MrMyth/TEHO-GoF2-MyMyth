@@ -43,8 +43,8 @@ void ProcessDialogEvent()
                          "I think that I have made myself clear, stop annoying me.", "Although I've made myself clear, you keep annoying me!",
                          "Right, I am getting tired of this rudeness, get out, freak.", "repeat", 3, npchar, Dialog.CurrentNode);
 			link.l1 = HeroStringReactionRepeat("I am leaving already.",
-                                               "Sure, Jackman...",
-                                               "Sorry, Jackman...",
+                                               "Sure, Karlos...",
+                                               "Sorry, Karlos...",
                                                "Ouch...", npchar, Dialog.CurrentNode);
 			link.l1.go = "exit";
 			NextDiag.TempNode = "First time";
@@ -63,9 +63,9 @@ void ProcessDialogEvent()
 				link.l1 = "Where can I find Jimmy Higgins?";
 				link.l1.go = "Saga_Jimmy";
 			}	
-			if(CheckAttribute(pchar, "questTemp.Saga") && pchar.questTemp.Saga == "jackman")
+			if(CheckAttribute(pchar, "questTemp.Saga") && pchar.questTemp.Saga == "Karlos")
 			{
-				link.l1 = "Me again, Jackman. They say that you are looking for some missing people...";
+				link.l1 = "Me again, Karlos. They say that you are looking for some missing people...";
 				link.l1.go = "Saga_search";
 			}	
 			//<-- Сага
@@ -81,7 +81,7 @@ void ProcessDialogEvent()
 				}	
 				if(CheckAttribute(pchar,"GenQuest.CaptainComission.PirateShips"))
 				{
-					link.l1 = "Hello, Jackman. It's about your mission.";
+					link.l1 = "Hello, Karlos. It's about your mission.";
 					link.l1.go = "CapComission3";
 				}
 				if(CheckAttribute(pchar,"GenQuest.CaptainComission.RepeatSpeak"))
@@ -103,7 +103,7 @@ void ProcessDialogEvent()
                          "You are "+ GetSexPhrase("a good privateer"," a good girl") +", so you can live for now. But I don't want to talk to you anymore.", "repeat", 10, npchar, Dialog.CurrentNode);
 			link.l1 = HeroStringReactionRepeat("Just paying a visit.",
                                                "Nothing...",
-                                               "Fine, Jackman, I am sorry...",
+                                               "Fine, Karlos, I am sorry...",
                                                "Damn it! Well, as you say...", npchar, Dialog.CurrentNode);
 			link.l1.go = "exit";
 			NextDiag.TempNode = "I_know_you_good";
@@ -185,42 +185,42 @@ void ProcessDialogEvent()
 		break;
 		
 		// абордаж, в каюте
-		case "Jackman_abordage":
+		case "Karlos_abordage":
 			dialog.text = "Ha! We've met again, captain "+GetFullName(pchar)+". I admit, you are a worthy opponent despite of your tries to pretend yourself as a simpleton in Maroon-Town. I have found out something about you, your intrigues with the Dutch West India Company were uncovered... I understand now what type you are.";
 			link.l1 = "I know your type too, Jacob. So let's not create illusions.";
-			link.l1.go = "Jackman_abordage_1";
+			link.l1.go = "Karlos_abordage_1";
 		break;
 		
-		case "Jackman_abordage_1":
+		case "Karlos_abordage_1":
 			dialog.text = "And how you have tricked me with 'Marlin'! I suppose that my poor brother is dead...";
 			link.l1 = "I take it that you want to revenge for him? But I've got a long bill to you as well. For the cornered Nathaniel, his wife, this frigate, slandered Shark, Blaze Sharp...";
-			link.l1.go = "Jackman_abordage_2";
+			link.l1.go = "Karlos_abordage_2";
 		break;
 		
-		case "Jackman_abordage_2":
+		case "Karlos_abordage_2":
 			dialog.text = "Blaze? I didn't kill him.";
-			link.l1 = "Even if it's true, the rest of my list is enough. I am sick of your name. Enough words, Jackman! Our blades will speak!";
-			link.l1.go = "Jackman_abordage_3";
+			link.l1 = "Even if it's true, the rest of my list is enough. I am sick of your name. Enough words, Karlos! Our blades will speak!";
+			link.l1.go = "Karlos_abordage_3";
 		break;
 		
-		case "Jackman_abordage_3":
-			dialog.text = "Such a vehement fool.. Damn you! Now you'd better hold on! Jacob Jackman has been never defeated! Carpacho, you are just in time! Come here!";
+		case "Karlos_abordage_3":
+			dialog.text = "Such a vehement fool.. Damn you! Now you'd better hold on! Jacob Karlos has been never defeated! Carpacho, you are just in time! Come here!";
 			link.l1 = "...";
-			link.l1.go = "Jackman_abordage_4";
+			link.l1.go = "Karlos_abordage_4";
 		break;
 		
-		case "Jackman_abordage_4":
+		case "Karlos_abordage_4":
 			DialogExit();
 			LAi_SetCurHPMax(npchar);
 			QuestAboardCabinDialogFree();
 			LAi_group_SetRelation(LAI_GROUP_BRDENEMY, LAI_GROUP_PLAYER, LAI_GROUP_ENEMY);
 			LAi_group_FightGroups(LAI_GROUP_BRDENEMY, LAI_GROUP_PLAYER, true);
-			LAi_group_SetCheck(LAI_GROUP_BRDENEMY, "Saga_AfterJackmanBoarding");
+			LAi_group_SetCheck(LAI_GROUP_BRDENEMY, "Saga_AfterKarlosBoarding");
 			AddDialogExitQuest("MainHeroFightModeOn");
 			// подкрепление
 			int iRank = sti(pchar.rank)+MOD_SKILL_ENEMY_RATE+12;
 			int iScl = 30 + 2*sti(pchar.rank);
-			sld = GetCharacter(NPC_GenerateCharacter("Saga_JackmanCabinHelper", "citiz_58", "man", "man", iRank, sti(npchar.nation), 0, true, "quest"));
+			sld = GetCharacter(NPC_GenerateCharacter("Saga_KarlosCabinHelper", "citiz_58", "man", "man", iRank, sti(npchar.nation), 0, true, "quest"));
 			FantomMakeCoolFighter(sld, iRank, iScl, iScl, "blade_21", "pistol4", "bullet", iScl*2+100);
 			LAi_SetCheckMinHP(sld, 150, true, "Saga_DannyHurryHelp");
 			LAi_SetWarriorType(sld);
@@ -386,7 +386,7 @@ void ProcessDialogEvent()
 			dialog.text = "Damn! Met them or didn't, it doesn't matter now! And what will be your next suggest?";
 			link.l1 = "Maybe you've got an easer job for me?";
 			link.l1.go = "CapComission4_1";
-			link.l2 = "Listen, Jackman, bring down the price for the prisoner...";
+			link.l2 = "Listen, Karlos, bring down the price for the prisoner...";
 			link.l2.go = "CapComission4_2";
 		break;
 		
@@ -411,7 +411,7 @@ void ProcessDialogEvent()
 			ChangeCharacterComplexReputation(pchar,"nobility", -2);
 			AddQuestRecord("CaptainComission1", "27");
 			AddQuestUserData("CaptainComission1", "sSex", GetSexPhrase("",""));
-			AddQuestUserData("CaptainComission1", "sName", "Jackman");
+			AddQuestUserData("CaptainComission1", "sName", "Karlos");
 			AddQuestUserData("CaptainComission1", "sCity", XI_ConvertString("Colony" + pchar.GenQuest.CaptainComission.City + "Acc"));
 			AddQuestUserData("CaptainComission1", "sCharName", pchar.GenQuest.CaptainComission.Name);
 			DeleteAttribute(pchar,"GenQuest.CaptainComission.PirateShips");
@@ -422,7 +422,7 @@ void ProcessDialogEvent()
 			ChangeCharacterComplexReputation(pchar,"nobility", -2);
 			AddQuestRecord("CaptainComission1", "28");
 			AddQuestUserData("CaptainComission1", "sSex", GetSexPhrase("",""));
-			AddQuestUserData("CaptainComission1", "sName", "Jackman");
+			AddQuestUserData("CaptainComission1", "sName", "Karlos");
 			AddQuestUserData("CaptainComission1", "sCity", XI_ConvertString("Colony" + pchar.GenQuest.CaptainComission.City + "Acc"));
 			AddQuestUserData("CaptainComission1", "sCharName", pchar.GenQuest.CaptainComission.Name);
 			DeleteAttribute(pchar,"GenQuest.CaptainComission.PirateShips");
@@ -506,7 +506,7 @@ void ProcessDialogEvent()
                 if (GetNpcQuestPastDayParam(npchar, "angry.terms") > sti(npchar.angry.terms))
                 {
          			dialog.text = "I hope that you will show more respect to me too and will stop getting rude? I would have to kill you otherwise. That would be very unpleasant.";
-        			link.l1 = "You can be sure, Jackman, I will.";
+        			link.l1 = "You can be sure, Karlos, I will.";
         			link.l1.go = NextDiag.TempNode;
         			CharacterDelAngry(npchar);
                 }
@@ -521,6 +521,37 @@ void ProcessDialogEvent()
             DeleteAttribute(npchar, "angry.ok");
             DoReloadCharacterToLocation("Fortorange_town","reload","reload6");
 		break;
+		
+			case "Sharp_1":
+			dialog.text = "Captain. My men tell me you came to challenge me?";
+			link.l1 = "Indeed. You are unworthy of your position and must be replaced immediately. Therefore, as our customs allow, I challenge you to a duel - to the death.";
+			link.l1.go = "Sharp_2";
+		break;
+
+		case "Sharp_2":
+			dialog.text = "Ah, another one. Do you know, you're the third suicidal idiot this month? Oh well, it matters not. Another blade for my collection, and one less idiot.";
+			link.l1 = "Dead idiots don't collect blades. Unsheathe your weapon sir!.";
+			link.l1.go = "Exit_Sharp1";
+
+		break;
+
+		case "Sharp_3":
+			dialog.text = "AAAAARRRRRR...YYYOOoouuuuuu..ssccurrvyyy...bbaassst...";
+			link.l1 = "Scurvy? No. Bastard? Maybe. Alive? Victorious? Most definitely.";
+			link.l1.go = "Exit_Sharp2";
+		break;
+		
+			case "Exit_Sharp1":
+			NextDiag.CurrentNode = NextDiag.TempNode;
+			DialogExit();
+			AddDialogExitQuest("Story_Sharp35");
+		break;
+		
+				case "Exit_Sharp2":
+			NextDiag.CurrentNode = NextDiag.TempNode;
+			DialogExit();
+			AddDialogExitQuest("Story_Sharp36");
+		break;	
 		
 		// <<<<<<<<<<<<============= блок нод angry =============================
 		case "pirate_town":

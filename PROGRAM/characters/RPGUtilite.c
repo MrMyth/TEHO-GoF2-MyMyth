@@ -3595,6 +3595,7 @@ void initNewMainCharacter()//инициализация главного гер�
 	ch.Ship.Type = GenerateShipExt((SHIP_CAREERLUGGER + rand(2)), 0, ch);
 	SetBaseShipData(ch);
 	ch.Ship.Name = "Quicksilver";
+	pchar.questTemp.Shark.StoryStep = "ChooseHero";
 	SetCrewQuantity(ch, GetMinCrewQuantity(ch));
 	// коцаем корабль
 	// ch.ship.SP = sti(ch.ship.SP) - 10; <-- этот код не имеет смысла
@@ -3608,6 +3609,13 @@ void initNewMainCharacter()//инициализация главного гер�
     }
     else
     {
+
+		bool bSharp1 = ch.name == "Blaze" && ch.lastname == "Sharp";
+		bool bSharp2 = ch.name == "Beatrice" && ch.lastname == "Sharp";
+		if(bSharp1 || bSharp2)
+		{
+		DoQuestCheckDelay("Story_Sharp_Start", 2);
+		}
     	pchar.quest.Tut_start.win_condition.l1          = "location";
     	pchar.quest.Tut_start.win_condition.l1.location = "Ship_deck_Low";
     	pchar.quest.Tut_start.function                  = "Tut_StartGame";

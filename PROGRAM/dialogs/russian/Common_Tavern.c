@@ -65,6 +65,15 @@ void ProcessDialogEvent()
 				break;
 			}
 			
+				if(CheckAttribute(pchar, "questTemp.Sharp.Map") && CheckCharacterItem(pchar, pchar.questTemp.Sharp.Map) && sti(pchar.money) >= 1000 && sti(pchar.rank) > 7)
+			{
+			//1
+			pchar.questTemp.Sharp.StoryStep = "cangetmap2_end";
+				dialog.text = "Ah, captain Sharp! Just who I wanted to see. Would you mind if I asked you a question?";
+				link.l1 = "Shoot.";
+				link.l1.go = "2_Sharp";
+				break;
+			}
 			   if (Pchar.questTemp.CapBloodLine == true)
             {
                 dialog.Text = LinkRandPhrase("Hey, Doctor Blood! " + TimeGreeting() + ".",
@@ -92,6 +101,7 @@ void ProcessDialogEvent()
                 }
                 break;
     		}
+			
 			//Jason, Бремя гасконца
 			if (CheckAttribute(pchar, "questTemp.Sharlie") && pchar.questTemp.Sharlie == "crew" && npchar.city == "FortFrance")
 			{
@@ -246,7 +256,59 @@ void ProcessDialogEvent()
 				Link.l4 = "Alas, I am already leaving, " + NPChar.name + ". See you.";
 				Link.l4.go = "exit";
 		break;
-		
+				case "2_Sharp":
+			dialog.text = "What would you say if someone offered you the chance to buy an old scrap of paper for an outrageous sum of money? Provided that he would tell you said scrap is in fact a piece of a treasure map?";
+			link.l1 = "It would depend on the amount of outrageous we were talking about. Too much of it, and I might consider myself insulted, forcing me to exact equally outrageous vengeance on the offender in order to satisfy my injured honour...";
+			link.l1.go = "3_Sharp";
+		break;
+
+		case "3_Sharp":
+			dialog.text = "...I see. Hmm... So it's probably safe to assume that you'd find a price of 900 piasters offensive?";
+			link.l1 = "900? No doubt about it. I would have snapped the cheeky bastard's neck the moment he dared make such an offer. 900 piasters for a dubiously useful piece of paper is pretty much the pinnacle of impudence in my book.";
+			link.l1.go = "4_Sharp";
+		break;
+
+		case "4_Sharp":
+			dialog.text = "And what if this someone also told you that the map has your name written on it? Wouldn't that pique your interest?";
+			link.l1 = "Indeed, my interest would be piqued and my attention riveted. Our esteemed 'someone' would also now be in grave personal danger. Overcharging me for something I should probably have anyway tends to have unpredictable, but usually violent consequences for the seller.";
+			link.l1.go = "5_Sharp";
+		break;
+
+		case "5_Sharp":
+			dialog.text = "Heh... You drive a hard bargain, captain. 600 piasters, and that's my final offer. I have to make some damn profit!";
+			link.l1 = "I'm delighted to meet a man who can see the light of reason in the dark sea of madness that surrounds us. It's a deal.";
+			link.l1.go = "6_Sharp";
+			link.l2 = "Still too much. Besides, there's every chance that this 'treasure map' is actually just a piece of privie paper with my name scrawled upon it.";
+			link.l2.go = "7_Sharp";
+		break;
+
+		case "6_Sharp":
+			dialog.text = "Pleasure doing business with you, Cap'n. You will not be disappointed with your purchase, I assure you.";
+			link.l1 = "Your capacity for extortion would shame Black Bart himself. This map better be worth the money, for your own sake...";
+			link.l1.go = "SL exit map_Sharp";
+		break;
+
+		case "7_Sharp":
+			dialog.text = "Suit yourself, captain. But the offer will not stand for long - there's a lot of other people who would be quite interested in it too. I'm only offering it to you at such a low price because it's got your name on it. But, if you don't want it...";
+			link.l1 = "All right, damn you! I'll buy it.";
+			link.l1.go = "6_Sharp";
+			//link.l2 = "Exactly. I don't want it. Goodbye.";
+			//link.l2.go = "SL exit no map_Sharp";
+		break;
+
+		case "SL exit map_Sharp":
+			DialogExit();
+			NextDiag.CurrentNode = NextDiag.TempNode;
+			//give map, continue SL
+			AddDialogExitQuest("Story_Sharp6");
+		break;
+
+		case "SL exit no map_Sharp":
+			DialogExit();
+			NextDiag.CurrentNode = NextDiag.TempNode;
+			//wrap up SL
+			AddDialogExitQuest("Story_Sharp5");
+		break;
 		case "Meeting":
 			// Квестовый генератор священника. Квест №1. Warship -->
 			if(CheckAttribute(PChar, "GenQuest.ChurchQuest_1.NeedToDialogWithBarmen") && PChar.location == PChar.GenQuest.ChurchQuest_1.CurPortManColony + "_tavern")

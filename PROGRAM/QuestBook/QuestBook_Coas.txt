@@ -229,3 +229,53 @@ I'll need to tell Atila all about this when I get the chance. After all, it did 
 #TEXT  31_NONE
 //////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 
+#QUEST	Story_Sharp
+Sharp's Legacy
+#TEXT	1_man
+I met a strange man at the port today. He said that he had something for me from my father, shoved a scroll into my hands and ran off. The scroll turned out to be half a piece of map, but I can't tell where it points to without the other half. The funny thing is, the map has a name written on it - 'Beatrice' - which is the name of my step-sister. Mind you, I can't even remember her face now - the last time I saw her she was a little girl, and I wasn't much older myself...
+#TEXT	1_woman
+I met a strange man at the port today. He said that he had something for me from my father, shoved a scroll into my hands and ran off. The scroll turned out to be half a piece of map, but I can't tell where it points to without the other half. The funny thing is, the map has a name written on it - 'Blaze' - which is the name of my step-brother. Mind you, I can't even remember his face - the last time I saw him he was a little boy...
+#TEXT	2_man
+An innkeeper pal of mine has sold me a piece of what he claims is a treasure map. The price was insane, but given the fact that the map has my name on it, I couldn't refuse. I thought this was a simple coincidence at first, but this half matches the one that I already have... It would seem that my father left half of the map for me, and the other half for Beatrice. But why then, was the half given to me by that man at the port, Beatrice's half? Besides, the map only makes sense when it's complete - couldn't my father foresee the possibility that Beatrice and I could become separated for years, as in fact happened? Ah well. Since I've got the complete map now, I may as well go and see where it leads. Assuming I can decipher these rather cryptic directions...
+#TEXT	2_woman
+An innkeeper pal of mine has sold me a piece of what he claims is a treasure map. The price was insane, but given the fact that the map has my name on it, I couldn't refuse. I thought this was a simple coincidence at first, but this half matches the one that I already have... It would seem that my father left half of the map for me, and the other half for Blaze. But why then, was the half given to me by that man at the port Blaze's half? Besides, the map only makes sense when it's complete - couldn't my father have foreseen the possibility that Blaze and I could become separated for years, as in fact happened? Ah well. Since I've got the complete map now, I may as well go and see where it leads. Assuming I can decipher these rather cryptic directions...
+#TEXT	3_man
+An innkeeper friend of mine tried to sell me a piece of some old map for an absolutely mad price. He even claimed it had my name written on it! Right, and I'm the Duke of Marlborough.
+#TEXT	3_woman
+An innkeeper friend of mine tried to sell me a piece of some old map for an absolutely mad price. He even claimed it had my name written on it! Right, and I'm the Queen of England.
+#TEXT	4_kill_man
+I found father's treasure trove, and damn me if it wasn't the biggest pile of gold I'd ever seen! Too bad my long lost step-sister had to show up and spoil the fun. Oh well, at least she put up an entertaining fight before dying. What matters is, that now the money's all mine. Mine!
+#TEXT	4_kill_woman
+I found father's treasure trove, and damn me if it wasn't the biggest pile of gold I'd ever seen! Too bad my long lost step-brother had to show up and spoil the fun. Oh well, at least he put up an entertaining fight before dying. What matters is, that now the money's all mine. Mine!
+#TEXT	4_half_man
+I found father's treasure... Then my step-sister showed up and started rambling on about what insane plans father had for the gold, and how we should try to realise his crazy dreams. 'Romantic nonsense' I said. I did the sensible thing - took my half of the treasure and left her to squander hers on whatever mad scheme she has in mind. Women!
+#TEXT	4_half_woman
+I found father's treasure... Then my step-brother showed up and started rambling on about what insane plans father had for the gold, and how we should try to realise his crazy dreams. 'Romantic nonsense' I said. I did the sensible thing - took my half of the treasure and left him to squander his on whatever mad scheme he has in mind. Men!
+#TEXT	4_continue_man
+I followed father's map, and along with an enormous pile of gold, I found what I would have least expected - my step-sister! After we stopped trying to kill each other, we talked for a looong time. It became clear that father had separated us in our formative years to protect us, and that he had intended the two halves of the map to bring us together. As for the treasure, we agreed that he probably wanted us to pursue his dream of Libertania using this gold... It's not going to be easy. Actually, it's going to be as hard as all hell, but I think we'll manage. And I think I'm beginning to like this 'we'... Anyway, we've decided to visit an old acquaintance of father's - Robert Staffordshire, who lives on Isla del Tesoro. Seems he was father's advisor on matters of state, so we're going to try and enlist his help. I'm to meet with Beatrice in the tavern on Isla del Tesoro.
+#TEXT	4_continue_woman
+I followed father's map, and along with an enormous pile of gold, I found what I would have least expected - my step-brother! After we stopped trying to kill each other, we talked for a looong time. It became clear that father had separated us in our formative years to protect us, and that he had intended the two halves of the map to bring us together. As for the treasure, we agreed that he probably wanted us to pursue his dream of Libertania using this gold... It's not going to be easy. Actually, it's going to be as hard as all hell, but I think we'll manage. And I think I'm beginning to like this 'we'... Anyway, we've decided to visit an old acquaintance of father's - Robert Staffordshire, who lives on Isla del Tesoro. Seems he was father's advisor on matters of state, so we're going to try and enlist his help. I'm to meet with Blaze in the tavern on Isla del Tesoro.
+#TEXT	5_man
+I've met with father's old advisor, Robert Staffordshire. He seems willing to help us, but he wants to test my abilities first. It seems a certain pirate, Marcus Le Sanguinaire, has been causing him trouble for some time. Staffordshire wants me to take care of this Marcus, permanently. The biscuit-eating bastard is often to be seen in the waters off Isla del Tesoro, so I should have no trouble finding him.
+#TEXT	5_woman
+I've met with father's old advisor, Robert Staffordshire. He seems willing to help us, but he wants to test my abilities first. It seems a certain pirate, Marcus Le Sanguinaire, has been causing him trouble for some time. Staffordshire wants me to take care of this Marcus, permanently. The biscuit-eating bastard is often to be seen in the waters off Isla del Tesoro, so I should have no trouble finding him.
+#TEXT	6_man
+I've killed the pirate Le Sanguinaire, so Staffordshire should be more than happy to help us. I should go and see him now.
+#TEXT	6_woman
+I've killed the pirate Le Sanguinaire, so Staffordshire should be more than happy to help us. I should go and see him now.
+#TEXT	7_man
+After talking with Staffordshire, it seems that I'll have to challenge the local pirate leader to a duel to the death. Then I can take his position and call a meeting of the free captains. This pirate leader, Kurt Karlos by name, holds court from a residence in the centre of Isla del Tesoro. He's said to be the best fencer in this part of the world... Looks like a good fight is in the offing.
+#TEXT	7_woman
+After talking with Staffordshire, it seems that I'll have to challenge the local pirate leader to a duel to the death. Then I can take his position and call a meeting of the free captains. This pirate leader, Kurt Karlos by name, holds court from a residence in the centre of Isla del Tesoro. He's said to be the best fencer in this part of the world... Looks like a good fight is in the offing.
+#TEXT	8_man
+Odd. That dog Karlos wasn't all that tough in the end. Anyway, now that I'm the new pirate leader, I've called a meeting of the free captains. They should arrive in about two weeks.
+#TEXT	8_woman
+Odd. That dog Karlos wasn't all that tough in the end. Anyway, now that I'm the new pirate leader, I've called a meeting of the free captains. They should arrive in about two weeks.
+#TEXT	9_man
+The free captains have arrived at Isla del Tesoro for the meeting. I should return to my residence and address them.
+#TEXT	9_woman
+The free captains have arrived at Isla del Tesoro for the meeting. I should return to my residence and address them.
+#TEXT	10_man
+Against all odds, I've been able to convince the captains to join my cause. Although if it wasn't for Beatrice's perfectly timed arrival and fiery speech, they'd have probably just laughed at me. But now that we have a whole fleet of privateers harassing the nations, and the traders and bankers on our side, we have a chance of taking over the colonies.
+#TEXT	10_woman
+Against all odds, I've been able to convince the captains to join my cause. Although truth be told, if it wasn't for Blaze's perfectly timed arrival and fiery speech, they'd have probably just laughed at me. But now that we have a whole fleet of privateers harassing the nations, and the traders and bankers on our side, we have a chance of taking over the colonies.

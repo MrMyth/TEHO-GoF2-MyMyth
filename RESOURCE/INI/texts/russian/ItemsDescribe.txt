@@ -3534,3 +3534,18 @@ On a severed finger, no less. Charming.}
 
 itmname_order {False promissory note}
 itmdescr_order {A false promissory note, with Isabella's entire estate as collateral. With the help of these notes, Salvatore stole his wife's money.}
+
+itmname_HalfMap1_Sharp	{Half of an old map}
+itmdescr_HalfMap1_Sharp
+{
+Half of an old map of the islands. It has the name "Beatrice" written on it, as well as what seems to be part of an inscription: "...and one up from it's beautiful namesake".
+}
+itmname_HalfMap2_Sharp	{Half of an old map}
+itmdescr_HalfMap2_Sharp
+{
+Half of an old map of the islands. It has the name "Blaze" written on it, as well as what seems to be part of an inscription: "Look down from the northern saint...".
+}
+itmname_FullMap_Sharp	{An old map}
+itmdescr_FullMap_Sharp
+{
+Two halves of an old map of the islands put together. It has the names "Blaze" and "Beatrice" written upon it, as well as a strange inscription: "Look down from the northern saint and one up from it's beautiful namesake".

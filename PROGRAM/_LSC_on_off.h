@@ -34,7 +34,7 @@ bool    bPlayerIsCheater =  false;  // на перспективу, патчем
 // режим супер читов
 bool    bBettaTestMode = true; // в релизе убрать!!!!!!!!!!!!!
 // показывать quest_reaction Log
-bool    bQuestLogShow  = false;
+bool    bQuestLogShow  = true;
 // показывать инфу по балансу
 bool    bExpLogShow    = false;
 // всегда сдаются капитаны - отладка
@@ -64,7 +64,7 @@ bool startGameWeather = false;
 // отображение статусной инфы у кораблей в море и у противника на суше
 bool bDrawBars = true;
 // отправление полученных ачивок в стим; для внутренних тестов устанавливать в false !!!
-bool bSteamAchievements	= true;
+bool bSteamAchievements	= false;
 // дополнительный контент, для внутренних тестов ставим в true
 bool bAddonContent = true;
 

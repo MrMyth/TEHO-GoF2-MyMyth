@@ -71,7 +71,7 @@ int LocationInitBermudes(int n)
 	locations[n].reload.l3.emerge = "reload1";
 	locations[n].reload.l3.autoreload = "0";
 	locations[n].reload.l3.label = "Residence";
-	locations[n].reload.l3.disable = true; //закрыто до поры
+	locations[n].reload.l3.close_for_night = 1;
 
 	locations[n].reload.l4.name = "reload4_back";
 	locations[n].reload.l4.go = "Pirates_tavern";

@@ -7,6 +7,63 @@ int CreateBermudesCharacters(int n)
 	// ОСНОВНЫЕ ПЕРСОНАЖИ
 	///////////////////////////////////////////////////////////////////////////////
 		
+		makeref(ch,Characters[n]);			//Глава пиратов
+	ch.id		= "SharpPirateLead";
+	ch.name 	= "Karlos";
+    ch.lastname = "";
+	ch.rank = 30;
+	ch.model	= "capitan";
+	ch.sex = "man";
+	ch.model.animation = "man";
+	ch.City = "Pirates";
+	ch.location	= "Pirates_townhall";
+	ch.location.group = "sit";
+	ch.location.locator = "sit1";
+	ch.Dialog.Filename = "Mayor\Karlos.c";
+	ch.nation = PIRATE;
+	ch.quest.type = "hovernor";
+	ch.reputation = "35";
+    SetRandSPECIAL(ch);
+    SetSelfSkill(ch, 90, 90, 90, 70, 90);
+    SetShipSkill(ch, 90, 80, 70, 10, 10, 20, 10, 10, 50);
+	GiveItem2Character(ch, GUN_COMMON);
+	ch.equip.gun = GUN_COMMON;
+	GiveItem2Character(ch, BLADE_LONG);
+	ch.equip.blade = BLADE_LONG;
+	ch.Ship.Name = "Manchester";
+	ch.Ship.Type = GenerateShip(SHIP_CORVETTE, true);
+	ch.Ship.Stopped = true;
+    SetCrewQuantityFull(ch);
+    Fantom_SetBalls(ch, "pirate");    
+	ch.rank 	= 20;
+	ch.reputation = "25";
+	ch.money = "25000";
+	ch.greeting = "Gr_HeadPirates";
+	SetCharacterPerk(ch, "FastReload");
+	SetCharacterPerk(ch, "HullDamageUp");
+	SetCharacterPerk(ch, "SailsDamageUp");
+	SetCharacterPerk(ch, "CrewDamageUp");
+	SetCharacterPerk(ch, "CriticalShoot");
+	SetCharacterPerk(ch, "LongRangeShoot");
+	SetCharacterPerk(ch, "CannonProfessional");
+	SetCharacterPerk(ch, "ShipDefenseProfessional");
+	SetCharacterPerk(ch, "ShipSpeedUp");
+	SetCharacterPerk(ch, "ShipTurnRateUp");
+	SetCharacterPerk(ch, "SwordplayProfessional");
+	SetCharacterPerk(ch, "AdvancedDefense");
+	SetCharacterPerk(ch, "CriticalHit");
+	SetCharacterPerk(ch, "Sliding");
+    SetSelfSkill(ch, 90, 90, 90, 60, 70);
+    SetShipSkill(ch, 100, 10, 100, 100, 90, 60, 80, 90, 50);
+	LAi_NoRebirthDisable(ch);
+	LAi_RebirthOldName(ch);
+	LAi_SetHuberType(ch);
+    LAi_group_MoveCharacter(ch, "PIRATE_CITIZENS");
+	LAi_SetLoginTime(ch, 0.0, 24.0);
+	LAi_SetHP(ch, 200.0, 200.0);
+	LAi_SetImmortal(ch, true);
+	n = n + 1;
+
 	makeref(ch,Characters[n]);		// ОФициантка
 	ch.id		= "Pirates_waitress";
 	ch.model	= "women_7";

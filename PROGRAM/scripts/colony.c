@@ -1225,6 +1225,12 @@ void SetCaptureTownByNation(string sColony, int iNation)
 	}
 	if (sti(Colonies[iColony].HeroOwn) == true)
 	{
+	if(pchar.questTemp.Sharp.StoryStep == "captains_done")
+	{
+	int ColoniesHero = sti(pchar.questTemp.Sharp.ColonyNum);
+	ColoniesHero--;
+	pchar.questTemp.Sharp.ColonyNum = ColoniesHero;
+	}	
     	Colonies[iColony].HeroOwn = false; // все, это не наш город
     	//  СЖ -->
     	sGroup =  GetNationNameByType(iNation);
@@ -1295,6 +1301,18 @@ void SetCaptureTownByHero(string sColony)
     Move_Govenour_Nation(j); // переселяем губера нации, которая была если паузы мира нет
     Colonies[iColony].HeroOwn = true;
 	Colonies[iColony].capture_flag = "1";
+	if(pchar.questTemp.Sharp.StoryStep == "captains_done")
+	{
+	int ColoniesHero = sti(pchar.questTemp.Sharp.ColonyNum);
+	ColoniesHero++;
+	pchar.questTemp.Sharp.ColonyNum = ColoniesHero;
+		if(ColoniesHero > 9)
+	{
+		pchar.quest.Sharp.win_condition.l1 = "nation_location";
+		pchar.quest.Sharp.win_condition.l1.nation = sti(pchar.nation);
+		pchar.quest.Sharp.win_condition = "Story_Sharp58";
+	}
+	}	
 	RemoveGovernor(sColony);
     // выкупленность города не меняем, тк отбив от мятежа дело ГГ
 	SaveCurrentNpcQuestDateParam(&Colonies[iColony], "CaptureDate");

@@ -530,7 +530,7 @@ case "OpenTheDoors_R":
 LAi_SetFightMode(pchar, false);
 LAi_group_SetAlarm("EnemyFight", LAI_GROUP_PLAYER, 0);
 chrDisableReloadToLocation = false;
-bDisableFastReload = false; 
+bDisableFastReload = false;
 sld = characterFromID("Husband");
 sld.talker = 10;
 LAi_SetFightMode(pchar, false);
@@ -839,7 +839,7 @@ pchar.RomanticQuest = "Widding";
 sld = characterFromID("Isabella");
 LAi_SetActorType(pchar);
 SetActorDialogAny2Pchar(sld.id, "", 0.0, 0.0);
-LAi_ActorFollow(pchar, sld, "ActorDialog_Any2Pchar", 0.0);	
+LAi_ActorFollow(pchar, sld, "ActorDialog_Any2Pchar", 0.0);
 break;
 case "Romantic_Padre":
 LAi_SetActorType(pchar);
@@ -989,6 +989,500 @@ QuestSetCurrentNode("Isabella", "NewLife");
 break;
 case "sleep_in_home":
 DoQuestReloadToLocation("SanJuan_houseS1Bedroom", "goto", "goto4", "restore_hp");
+break;
+case "Story_Sharp_Start":
+pchar.quest.Story_Sharp_Start_Check.win_condition.l1 = "Location_Type";
+pchar.quest.Story_Sharp_Start_Check.win_condition.l1.Location_Type = "town";
+pchar.quest.Story_Sharp_Start_Check.win_condition = "Story_Sharp0";
+break;
+case "Story_Sharp0":
+if(pchar.sex == "man")
+{
+pchar.questTemp.Sharp.Startvideo = "IntroBlaze";
+pchar.questTemp.Sharp.Endvideo = "OutroBlaseQuest";
+pchar.questTemp.Sharp.Map = "HalfMap2_Sharp";
+pchar.questTemp.Sharp.Family.Id = "Beatrice_Sharp";
+pchar.questTemp.Sharp.Family.Dialog = "Coas_quests\Sharp\Beatrice_Sharp_dialog.c";
+pchar.questTemp.Sharp.Family.Model = "Beatrice";
+pchar.questTemp.Sharp.Family.Sex = "woman";
+pchar.questTemp.Sharp.Family.Ani = "beatrice_ab";
+}
+else
+{
+pchar.questTemp.Sharp.Startvideo = "IntroBeatrice";
+pchar.questTemp.Sharp.Endvideo = "OutroBeatriceQuest";
+pchar.questTemp.Sharp.Map = "HalfMap1_Sharp";
+pchar.questTemp.Sharp.Family.Id = "Young_Sharp";
+pchar.questTemp.Sharp.Family.Dialog = "Coas_quests\Sharp\Young_Sharp_dialog.c";
+pchar.questTemp.Sharp.Family.Model = "Delvin";
+pchar.questTemp.Sharp.Family.Sex = "man";
+pchar.questTemp.Sharp.Family.Ani = "man";
+}
+PChar.GenQuest.VideoAVI = pchar.questTemp.Sharp.Startvideo;;
+PChar.GenQuest.VideoAfterQuest = "Story_Sharp1";
+DoQuestCheckDelay("PostVideo_Start", 0.2);
+break;
+case "Story_Sharp1":
+pchar.questTemp.Sharp.StoryStep = "HalfMap1";
+sld = GetCharacter(NPC_GenerateCharacter("Map_Man", "citiz_7", "man", "man", 1, PIRATE, 0, true, "quest"));
+PlaceCharacter(sld, "goto", "random_must_be_near");
+LAi_SetActorType(sld);
+sld.dialog.filename = "Coas_quests\Sharp\Map_Man_dialog.c";
+LAi_ActorDialog(sld, pchar, "Story_Sharp2", 5.0, 1.0);
+chrDisableReloadToLocation = true;
+LAI_SetStayType(pchar);
+break;
+case "Story_Sharp2":
+chrDisableReloadToLocation = false;
+LAI_setPlayerType(pchar);
+GiveItem2Character(pchar, pchar.questTemp.Sharp.Map);
+SetQuestHeader("Story_Sharp");
+AddQuestRecord("Story_Sharp", "1_"+pchar.sex);
+sld = CharacterFromID("Map_Man");
+LAi_CharacterDisableDialog(sld);
+LAi_ActorRunToLocation(sld, "reload", "reload4", "none", "goto", "goto1", "", 10.0);
+break;
+case "Story_Sharp5":
+pchar.questTemp.Sharp.StoryStep = "end";
+TakeItemFromCharacter(pchar, pchar.questTemp.Sharp.Map);
+SetQuestHeader("Story_Sharp");
+AddQuestRecord("Story_Sharp", "3_"+pchar.sex);
+break;
+case "Story_Sharp6":
+pchar.questTemp.Sharp.StoryStep = "fullmap";
+AddMoneyToCharacter(pchar, -600);
+TakeItemFromCharacter(pchar, pchar.questTemp.Sharp.Map);
+SetQuestHeader("Story_Sharp");
+AddQuestRecord("Story_Sharp", "2_"+pchar.sex);
+GiveItem2Character(pchar, "FullMap_Sharp");
+pchar.quest.Story_Sharp6_Check.win_condition.l1 = "locator";
+pchar.quest.Story_Sharp6_Check.win_condition.l1.location = "Dominica_Grot";
+pchar.quest.Story_Sharp6_Check.win_condition.l1.locator_group = "goto";
+pchar.quest.Story_Sharp6_Check.win_condition.l1.locator = "goto4";
+pchar.quest.Story_Sharp6_Check.win_condition = "Story_Sharp7";
+LAi_LocationDisableOfficersGen("Dominica_Grot", true);
+LAi_LocationDisableMonstersGen("Dominica_Grot", true);
+Locations[FindLocation("Dominica_Grot")].locators_radius.goto.goto4 = 5.0;
+break;
+case "Story_Sharp7":
+chrDisableReloadToLocation = true;
+LAI_SetStayType(pchar);
+sld = GetCharacter(NPC_GenerateCharacter(pchar.questTemp.Sharp.Family.Id, pchar.questTemp.Sharp.Family.Model, pchar.questTemp.Sharp.Family.Sex, pchar.questTemp.Sharp.Family.Ani, 15, PIRATE, -1, true, "quest"));
+FantomMakeCoolFighter(sld, 30, 80, 70, "blade_15", "pistol3", "bullet",40);
+LAi_RemoveLoginTime(sld);
+sld.name = NPCharSexPhrase(sld,"Blaze", "Beatrice")
+sld.lastname = "Sharp";
+ChangeCharacterAddressGroup(sld, "Dominica_Grot", "goto", "goto2");
+LAi_SetActorType(sld);
+sld.dialog.filename = pchar.questTemp.Sharp.Family.Dialog;
+sld.dialog.currentnode = "First time";
+LAi_ActorDialog(sld, pchar, "Story_Sharp8", 5.0, 1.0);
+LAi_LocationDisableOfficersGen("Dominica_Grot", false);
+LAi_LocationDisableMonstersGen("Dominica_Grot", false);
+break;
+case "Story_Sharp8":
+sld = CharacterFromID(pchar.questTemp.Sharp.Family.Id);
+LAI_SetPlayerType(pchar);
+LAi_SetFightMode(pchar, true);
+LAi_SetWarriorType(sld);
+LAi_group_MoveCharacter(sld, "Sharp");
+LAi_group_FightGroups("Sharp", LAI_GROUP_PLAYER, false);
+LAi_SetCheckMinHP(sld, LAi_GetCharacterMaxHP(sld)/2, 0, "Story_Sharp9");
+pchar.quest.Story_Sharp8_Check.win_condition.l1 = "ExitFromLocation";
+pchar.quest.Story_Sharp8_Check.win_condition.l1.location = pchar.location;
+pchar.quest.Story_Sharp8_Check.win_condition = "Story_Sharp13";
+break;
+case "Story_Sharp9":
+LAi_group_SetAlarm("Sharp", LAI_GROUP_PLAYER, 0);
+LAi_SetActorType(pchar);
+sld = CharacterFromID(pchar.questTemp.Sharp.Family.Id);
+LAi_SetActorType(sld);
+LAi_type_actor_Reset(sld);
+LAi_ActorWaitDialog(pchar, sld);
+LAi_RemoveCheckMinHP(sld);
+sld.dialog.currentnode = "5";
+LAi_ActorDialog(sld, pchar, "", 5.0, 1.0);
+break;
+case "Story_Sharp10":
+chrDisableReloadToLocation = false;
+LAI_setPlayerType(pchar);
+LAi_SetFightMode(pchar, true);
+sld = CharacterFromID(pchar.questTemp.Sharp.Family.Id);
+LAi_SetWarriorType(sld);
+LAi_group_MoveCharacter(sld, "Sharp2");
+LAi_group_FightGroups("Sharp2", LAI_GROUP_PLAYER, true);
+LAi_group_SetCheck("Sharp2", "Story_Sharp11");
+break;
+case "Story_Sharp11":
+sld = CharacterFromID(pchar.questTemp.Sharp.Family.Id);
+LAi_RemoveCheckMinHP(sld);
+SetQuestHeader("Story_Sharp");
+AddQuestRecord("Story_Sharp", "4_kill_"+pchar.sex);
+AddMoneyToCharacter(pchar, 400000);
+LAi_group_SetAlarm("Sharp2", LAI_GROUP_PLAYER, 0);
+LAi_SetFightMode(pchar, false);
+CloseQuestHeader("Story_Sharp");
+break;
+case "Story_Sharp12":
+chrDisableReloadToLocation = false;
+LAI_setPlayerType(pchar);
+AddMoneyToCharacter(pchar, 200000);
+SetQuestHeader("Story_Sharp");
+AddQuestRecord("Story_Sharp", "4_half_"+pchar.sex);
+CloseQuestHeader("Story_Sharp");
+sld = CharacterFromID(pchar.questTemp.Sharp.Family.Id);
+LAi_RemoveCheckMinHP(sld);
+LAi_SetImmortal(sld, true);
+break;
+case "Story_Sharp13":
+LAi_LocationDisableOfficersGen("Dominica_Grot", false);
+LAi_LocationDisableMonstersGen("Dominica_Grot", false);
+TakeItemFromCharacter(pchar, "FullMap_Sharp");
+break;
+case "Story_Sharp14":
+sld = CharacterFromID(pchar.questTemp.Sharp.Family.Id);
+LAi_type_actor_Reset(sld);
+LAi_ActorWaitDialog(pchar, sld);
+LAi_RemoveCheckMinHP(sld);
+sld.dialog.currentnode = "12";
+LAi_ActorDialog(sld, pchar, "", 5.0, 1.0);
+break;
+case "Story_Sharp15":
+pchar.questTemp.Sharp.StoryStep = "advisor_meet";
+pchar.quest.Story_Sharp15_Check.win_condition.l1 = "location";
+pchar.quest.Story_Sharp15_Check.win_condition.l1.location = "Pirates_tavern";
+pchar.quest.Story_Sharp15_Check.win_condition = "Story_Sharp16";
+SetQuestHeader("Story_Sharp");
+AddQuestRecord("Story_Sharp", "4_continue_"+pchar.sex);
+sld = CharacterFromID(pchar.questTemp.Sharp.Family.Id);
+LAi_SetImmortal(sld, true);
+LAi_CharacterDisableDialog(sld);
+LAi_ActorRunToLocation(sld, "reload", "reload1_back", "none", "goto", "goto1", "", 10.0);
+chrDisableReloadToLocation = false;
+LAI_setPlayerType(pchar);
+break;
+case "Story_Sharp16":
+chrDisableReloadToLocation = true;
+LAI_setActorType(pchar);
+sld = CharacterFromID(pchar.questTemp.Sharp.Family.Id);
+LAi_SetCurHPMax(sld);
+LAi_SetActorType(sld);
+PlaceCharacter(sld, "goto", "random_must_be_near");
+LAi_ActorFollow(sld, Pchar, "", -1);
+FreeSitLocator("Pirates_tavern", "sit_base3");
+FreeSitLocator("Pirates_tavern", "sit_front2");
+FreeSitLocator("Pirates_tavern", "sit_base2");
+sld = GetCharacter(NPC_GenerateCharacter("Advisor", "trader_7", "man", "man", 15, PIRATE, -1, true, "quest"));
+sld.name = "Robert";
+sld.lastname = "Staffordshire";
+sld.dialog.filename = "Coas_quests\Sharp\Advisor_dialog.c";
+sld.dialog.currentnode = "First time";
+LAi_SetImmortal(sld, true);
+LAi_SetActorType(sld);
+LAi_ActorSetSitMode(sld);
+LAi_ActorWaitDialog(sld, pchar);
+ChangeCharacterAddressGroup(sld, "Pirates_tavern", "sit", "sit_base3");
+LAi_ActorGoToLocator(pchar, "tables", "stay2", "Story_Sharp16_add", 5.0);
+break;
+case "Story_Sharp16_add":
+sld = characterFromID("Advisor");
+LAi_ActorDialogNow(pchar, sld, "Story_Sharp17", -1);
+break;
+case "Story_Sharp17":
+pchar.questTemp.Sharp.StoryStep = "advisor_quest";
+sld = CharacterFromID("Advisor");
+sld.dialog.currentnode = "8";
+sld = CharacterFromID(pchar.questTemp.Sharp.Family.Id);
+sld.dialog.currentnode = "15";
+LAi_SetSitType(sld);
+LAi_CharacterEnableDialog(sld);
+chrDisableReloadToLocation = false;
+LAI_setPlayerType(pchar);
+ChangeCharacterAddressGroup(sld, "Pirates_tavern", "sit", "sit_base2");
+pchar.quest.Story_Sharp18_Check.win_condition.l1 = "location";
+pchar.quest.Story_Sharp18_Check.win_condition.l1.location = "Bermudes";
+pchar.quest.Story_Sharp18_Check.win_condition = "Story_Sharp19";
+SetQuestHeader("Story_Sharp");
+AddQuestRecord("Story_Sharp", "5_"+pchar.sex);
+sld = CharacterFromID("Advisor");
+LAi_SetSitType(sld);
+break;
+case "Story_Sharp19":
+for (i=1; i<=2; i++)
+{
+sld = GetCharacter(NPC_GenerateCharacter("Story_Sharp_Enemy"+i, "officer_"+i, "man", "man", 20, PIRATE, -1, true, "quest"));
+FantomMakeCoolSailor(sld, SHIP_FRIGATE, "", CANNON_TYPE_CANNON_LBS20, 70, 70, 70);
+FantomMakeCoolFighter(sld, 20, 70, 50, "GOF_blade2"+i, "pistol3", "bullet", 20);
+sld.DontRansackCaptain = true;
+sld.AlwaysEnemy = true;
+Group_AddCharacter("Story_Sharp_Enemy","Story_Sharp_Enemy"+i);
+}
+sld = CharacterFromID("Story_Sharp_Enemy1");
+sld.name = "Marcus";
+sld.lastname = "Le Sanguinaire";
+Group_SetGroupCommander("Story_Sharp_Enemy", "Story_Sharp_Enemy1");
+Group_SetTaskAttack("Story_Sharp_Enemy", PLAYER_GROUP);
+Group_SetPursuitGroup("Story_Sharp_Enemy", PLAYER_GROUP);
+Group_SetAddress("Story_Sharp_Enemy", "Bermudes", "", "");
+Group_LockTask("Story_Sharp_Enemy");
+UpdateRelations();
+bQuestDisableMapEnter = true;
+Island_SetReloadEnableGlobal("Bermudes", false);
+pchar.quest.Story_Sharp19_Check.win_condition.l1 = "Group_Death";
+pchar.quest.Story_Sharp19_Check.win_condition.l1.group = "Story_Sharp_Enemy";
+pchar.quest.Story_Sharp19_Check.win_condition = "Story_Sharp20";
+break;
+case "Story_Sharp20":
+pchar.questTemp.Sharp.StoryStep = "advisor_quest_done";
+sld = CharacterFromID("Advisor");
+LAi_SetSitType(sld);
+sld.dialog.currentnode = "9";
+SetQuestHeader("Story_Sharp");
+AddQuestRecord("Story_Sharp", "6_"+pchar.sex);
+bQuestDisableMapEnter = false;
+Island_SetReloadEnableGlobal("Bermudes", true);
+break;
+case "Story_Sharp21":
+LAi_SetActorType(pchar);
+LAi_ActorSetSitMode(pchar);
+ChangeCharacterAddressGroup(pchar, "Pirates_tavern", "sit", "sit_front2");
+break;
+case "Story_Sharp22":
+WaitDate("", 0, 0, 0, 3, 0);
+LAi_Fade("Story_Sharp21","Story_Sharp23");
+break;
+case "Story_Sharp23":
+sld = CharacterFromID("Advisor");
+sld.dialog.currentnode = "11";
+LAi_ActorDialogNow(pchar, sld, "",-1);
+break;
+case "Story_Sharp24":
+sld = CharacterFromID(pchar.questTemp.Sharp.Family.Id);
+LAi_SetSitType(sld);
+sld.dialog.currentnode = "16";
+LAi_SetActorType(pchar);
+LAi_ActorSetSitMode(pchar);
+LAi_ActorDialogNow(pchar, sld, "Story_Sharp25",-1);
+break;
+case "Story_Sharp25":
+sld = CharacterFromID(pchar.questTemp.Sharp.Family.Id);
+PlaceCharacter(sld, "tables", "random_must_be_near");
+LAI_setActorType(sld);
+LAi_ActorRunToLocation(sld, "reload", "reload1", "none", "goto", "goto1", "", 5.0);
+DoQuestCheckDelay("Story_Sharp26", 1.0);
+break;
+case "Story_Sharp26":
+pchar.questTemp.Sharp.StoryStep = "give_boss";
+sld = CharacterFromID("Advisor");
+sld.dialog.currentnode = "13";
+LAi_ActorDialog(pchar, sld, "Story_Sharp27", 5.0, 1.0);
+break;
+case "Story_Sharp27":
+LAI_setPlayerType(pchar);
+PlaceCharacter(pchar, "tables", "random_must_be_near");
+sld = CharacterFromID("Advisor");
+sld.dialog.currentnode = "19";
+pchar.questTemp.Sharp.StoryStep = "pirate_boss_quest";
+pchar.quest.Story_Sharp27_Check.win_condition.l1 = "location";
+pchar.quest.Story_Sharp27_Check.win_condition.l1.location = "Pirates_townhall";
+pchar.quest.Story_Sharp27_Check.win_condition = "Story_Sharp30";
+SetQuestHeader("Story_Sharp");
+AddQuestRecord("Story_Sharp", "7_"+pchar.sex);
+break;
+case "Story_Sharp30":
+chrDisableReloadToLocation = true;
+LAI_setActorType(pchar);
+LAi_ActorGoToLocator(pchar, "quest", "quest3", "Story_Sharp31", 4.0);
+break;
+case "Story_Sharp31":
+sld = CharacterFromID("SharpPirateLead");
+sld.dialog.currentnode = "Sharp_1";
+LAi_setImmortal(sld, false);
+LAI_setActorType(pchar);
+LAi_ActorDialogNow(pchar, sld, "", -1);
+break;
+case "Story_Sharp35":
+chrDisableReloadToLocation = true;
+LAI_setPlayerType(pchar);
+LAi_LocationFightDisable(loadedLocation, false);
+sld = CharacterFromID("SharpPirateLead");
+ChangeCharacterAddressGroup(sld, "Pirates_townhall", "goto", "governor1");
+LAI_SetWarriorType(sld);
+LAi_group_MoveCharacter(sld, "SharpBoss");
+LAi_group_FightGroups("SharpBoss", LAI_GROUP_PLAYER, true);
+LAi_SetCheckMinHP(sld, 10.0, 0, "Story_Sharp36");
+break;
+case "Story_Sharp36":
+LAi_group_SetAlarm("SharpBoss", LAI_GROUP_PLAYER, 0);
+LAI_setActorType(pchar);
+sld = CharacterFromID("SharpPirateLead");
+LAi_setActorType(sld);
+LAi_LocationFightDisable(loadedLocation, true);
+sld.dialog.currentnode = "Sharp_3";
+LAi_ActorWaitDialog(sld, pchar);
+LAi_ActorDialog(pchar, sld, "Story_Sharp37", 5.0, 1.0);
+break;
+case "Story_Sharp37":
+sld = CharacterFromID("SharpPirateLead");
+LAi_NoRebirthEnable(sld);
+LAi_KillCharacter(sld);
+DoQuestCheckDelay("Story_Sharp38", 2.0);
+break;
+case "Story_Sharp38":
+sld = CharacterFromID(pchar.questTemp.Sharp.Family.Id);
+sld.dialog.currentnode = "19";
+LAi_group_MoveCharacter(sld, "PIRATE_CITIZENS");
+LAi_setImmortal(sld, false);
+sld = GetCharacter(NPC_GenerateCharacter("Bandit_Pir", "officer_1", "man", "man", 30, PIRATE, 0, true, "quest"));
+ChangeCharacterAddressGroup(sld, "Pirates_townhall", "reload", "reload1");
+LAi_SetActorType(sld);
+sld.dialog.filename = "Coas_quests\Sharp\Map_Man_dialog.c";
+sld.dialog.currentnode = "19";
+LAi_ActorDialog(sld, pchar, "", 5.0, 1.0);
+LAI_SetStayType(pchar);
+SetNationRelation2MainCharacter(PIRATE, RELATION_FRIEND);
+ChangeCharacterNationReputation(pchar, PIRATE, -100);
+SetNationRelation2MainCharacter(ENGLAND, RELATION_ENEMY);
+ChangeCharacterNationReputation(pchar, ENGLAND, 100);
+SetNationRelation2MainCharacter(FRANCE, RELATION_ENEMY);
+ChangeCharacterNationReputation(pchar, FRANCE, 100);
+SetNationRelation2MainCharacter(SPAIN, RELATION_ENEMY);
+ChangeCharacterNationReputation(pchar, SPAIN, 100);
+SetNationRelation2MainCharacter(HOLLAND, RELATION_ENEMY);
+ChangeCharacterNationReputation(pchar, HOLLAND, 100);
+LAi_group_SetRelation(LAI_GROUP_PLAYER, "PIRATE_CITIZENS", LAI_GROUP_FRIEND);
+pchar.nation = PIRATE;
+break;
+case "Story_Sharp40":
+sld = CharacterFromID("Bandit_Pir");
+LAi_CharacterDisableDialog(sld);
+LAi_ActorRunToLocation(sld, "reload", "reload4", "none", "goto", "goto1", "", 10.0);
+pchar.questTemp.Sharp.StoryStep = "pirate_boss_dead";
+sld = CharacterFromID("Advisor");
+sld.dialog.currentnode = "20";
+pchar.quest.Story_Sharp40_Check.win_condition.l1 = "timer";
+pchar.quest.Story_Sharp40_Check.win_condition.l1.date.day = GetAddingDataDay(0, 0, 13);
+pchar.quest.Story_Sharp40_Check.win_condition.l1.date.month = GetAddingDataMonth(0, 0, 13);
+pchar.quest.Story_Sharp40_Check.win_condition.l1.date.year = GetAddingDataYear(0, 0, 13);
+pchar.quest.Story_Sharp40_Check.win_condition.l1.date.hour = rand(23);
+pchar.quest.Story_Sharp40_Check.win_condition = "Story_Sharp42";
+SetQuestHeader("Story_Sharp");
+AddQuestRecord("Story_Sharp", "8_"+pchar.sex);
+chrDisableReloadToLocation = false;
+LAI_setPlayerType(pchar);
+break;
+case "Story_Sharp42":
+pchar.questTemp.Sharp.StoryStep = "captains_ready";
+sld = CharacterFromID("Advisor");
+sld.dialog.currentnode = "21";
+pchar.quest.Story_Sharp42_Check.win_condition.l1 = "location";
+pchar.quest.Story_Sharp42_Check.win_condition.l1.location = "Pirates_townhall";
+pchar.quest.Story_Sharp42_Check.win_condition = "Story_Sharp43";
+SetQuestHeader("Story_Sharp");
+AddQuestRecord("Story_Sharp", "9_"+pchar.sex);
+break;
+case "Story_Sharp43":
+chrDisableReloadToLocation = true;
+LAI_setActorType(pchar);
+n = 3;
+for (i=1; i<=5; i++)
+{
+sld = GetCharacter(NPC_GenerateCharacter("Story_Sharp_Cap"+i, "officer_"+i, "man", "man", 20, PIRATE, -1, true, "quest"));
+n++;
+LAi_SetStayType(sld);
+LAi_SetImmortal(sld, true);
+ChangeCharacterAddressGroup(sld, "Pirates_townhall", "quest", "quest"+n);
+}
+sld = CharacterFromID("Story_Sharp_Cap1");
+sld.name = "Russel";
+sld.lastname = "Leblanc";
+sld.dialog.filename = "Coas_quests\Sharp\Captain_dialog.c";
+sld.dialog.currentnode = "1";
+LAi_ActorDialog(pchar, sld, "Story_Sharp45", 5.0, 1.0);
+break;
+case "Story_Sharp45":
+sld = CharacterFromID(pchar.questTemp.Sharp.Family.Id);
+ChangeCharacterAddressGroup(sld, "Pirates_townhall", "reload", "reload1");
+LAi_ActorGoToLocator(sld, "quest", "quest9", "Story_Sharp46", 3.0);
+break;
+case "Story_Sharp46":
+LAi_SetStayType(pchar);
+sld = CharacterFromID(pchar.questTemp.Sharp.Family.Id);
+sld.dialog.currentnode = "22";
+LAi_ActorDialog(sld, pchar, "Story_Sharp47", 5.0, 1.0);
+break;
+case "Story_Sharp47":
+sld = CharacterFromID("Story_Sharp_Cap1");
+sld.dialog.currentnode = "2";
+LAi_SetActorType(sld);
+LAi_ActorDialog(sld, pchar, "Story_Sharp49", 5.0, 1.0);
+break;
+case "Story_Sharp49":
+sld = CharacterFromID(pchar.questTemp.Sharp.Family.Id);
+sld.dialog.currentnode = "23";
+LAi_SetActorType(sld);
+LAi_ActorDialog(sld, pchar, "Story_Sharp50", 5.0, 1.0);
+break;
+case "Story_Sharp50":
+Lai_fade("", "Story_Sharp51");
+WaitDate("", 0, 0, 0, 2, 0);
+break;
+case "Story_Sharp51":
+sld = CharacterFromID(pchar.questTemp.Sharp.Family.Id);
+LAi_SetActorType(sld);
+sld.dialog.currentnode = "24";
+LAi_ActorDialog(sld, pchar, "Story_Sharp52", 5.0, 1.0);
+break;
+case "Story_Sharp52":
+DoQuestCheckDelay("Story_Sharp53", 1.0);
+DoQuestCheckDelay("Story_Sharp54", 10.0);
+break;
+case "Story_Sharp53":
+for (i=1; i<=5; i++)
+{
+sld = CharacterFromID("Story_Sharp_Cap"+i);
+LAi_SetActorType(sld);
+LAi_ActorGoToLocation(sld, "reload", "reload1", "none", "", "", "", 5.0);
+}
+break;
+case "Story_Sharp54":
+sld = CharacterFromID(pchar.questTemp.Sharp.Family.Id);
+LAi_ActorGoToLocator(sld, "quest", "quest4", "", 2.0);
+DoQuestCheckDelay("Story_Sharp55", 1.0);
+break;
+case "Story_Sharp55":
+sld = CharacterFromID(pchar.questTemp.Sharp.Family.Id);
+LAi_ActorTurnToLocator(sld, "quest", "quest8");
+sld.dialog.currentnode = "25";
+LAi_ActorDialog(sld, pchar, "Story_Sharp56", 5.0, 1.0);
+break;
+case "Story_Sharp56":
+pchar.questTemp.Sharp.StoryStep = "captains_done";
+pchar.questTemp.Sharp.ColonyNum = 0;
+LAi_Fade("", "");
+sld = CharacterFromID("Advisor");
+sld.dialog.currentnode = "22";
+DoQuestCheckDelay("Story_Sharp57", 0.5);
+break;
+case "Story_Sharp57":
+WaitDate("", 0, 0, 0, 4, 0);
+chrDisableReloadToLocation = false;
+LAI_setPlayerType(pchar);
+sld = CharacterFromID(pchar.questTemp.Sharp.Family.Id);
+ChangeCharacterAddressGroup(sld, "none", "", "");
+DoQuestReloadToLocation("Pirates_town", "reload", "reload3_back", "");
+SetQuestHeader("Story_Sharp");
+AddQuestRecord("Story_Sharp", "10_"+pchar.sex);
+n = FindLocation("Pirates_town");
+locations[n].reload.l3.close_for_night = false;
+break;
+case "Story_Sharp58":
+PChar.GenQuest.VideoAVI = pchar.questTemp.Sharp.Endvideo;
+PChar.GenQuest.VideoAfterQuest = "Story_Sharp59";
+DoQuestCheckDelay("PostVideo_Start", 0.2);
+break;
+case "Story_Sharp59":
+CloseQuestHeader("Story_Sharp");
 break;
 }
 }
