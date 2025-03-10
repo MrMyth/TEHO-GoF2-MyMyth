@@ -27,8 +27,46 @@ void ProcessCommonDialogEvent(ref NPChar, aref Link, aref NextDiag)
 				link.l1 = ""+npchar.name+", the 'Rosbohom' was found and captured. Should we start unloading and counting?";
 				link.l1.go = "mtraxx_5";
 			}
+			if (pchar.questTemp.BlueBird == "toBermudes")
+			{
+				link.l1 = "Good man, I am looking for one unusual ship, a xebec called 'Blue Bird'. Heard anything about her? I am ready to pay for any information regarding her...";
+				link.l1.go = "BlueBird_1";
+			}
+			if (pchar.questTemp.BlueBird == "weWon")
+			{
+				link.l1 = "I wanted to tell you that I finally caught the 'Blue Bird'. She won't serve you any more.";
+				link.l1.go = "BlueBird_3";
+			}
 		break;
-				
+		case "BlueBird_1":
+			dialog.text = NPCStringReactionRepeat("I know nothing about this ship. If this is everything you wanted, then leave.", 
+				"Again? I told you everything.", 
+				"What, again the same old song?",
+                "Oh, when will it come to an end?! I ask you, don't distract me from my work!", "block", 1, npchar, Dialog.CurrentNode);
+			link.l1 = HeroStringReactionRepeat("You're not very welcoming, dear sir!", 
+				"Yes-yes, I remember...",
+                "Aha.", 
+				"Alright, alright...", npchar, Dialog.CurrentNode);
+			link.l1.go = DialogGoNodeRepeat("BlueBird_2", "exit", "exit", "exit", npchar, Dialog.CurrentNode);
+		break;
+		case "BlueBird_2":
+			dialog.text = "I'm not a dear sir to you, didn't have the pleasure of gulping rum and sleeping under a fence in your company.";
+			link.l1 = "Oh, really? I simply asked. Well fine, thanks for at least that much...";
+			link.l1.go = "exit";
+			AddQuestRecord("Xebeca_BlueBird", "2");
+		break;
+
+		case "BlueBird_3":
+			dialog.text = NPCStringReactionRepeat("Get lost, idiot...", 
+				"You're tiring me...", 
+				"Hm, you seem to have lost your mind...",
+                "Again about the same things? What do I have in common with this?", "block", 1, npchar, Dialog.CurrentNode);
+			link.l1 = HeroStringReactionRepeat("Oooh, what epithets!", 
+				"Yes-yes.",
+                "I'm in perfect order!", 
+				"Maybe nothing, maybe something.", npchar, Dialog.CurrentNode);
+			link.l1.go = DialogGoNodeRepeat("exit", "", "", "", npchar, Dialog.CurrentNode);
+		break;				
 		// город майя
 		case "tieyasal":
 			dialog.text = "Yes, I have. He bought supplies for his ship here. It has been very recently by the way. You literally missed each other by a few days. By the way, he might still be in this settlement. I don't spy for people, you know. Ask around some more and who knows you just might find your don.";

@@ -716,7 +716,13 @@ void ProcessDialogEvent()
 
 		case "business":
 			iTest = 0;			
-			
+						if (pchar.questTemp.BlueBird == "begin" && sti(npchar.nation) == GetBaseHeroNation() && sti(npchar.nation) != PIRATE && npchar.city != "Panama")
+			{
+				dialog.text = RandPhraseSimple("Oh Captain! Help us, I beg you!", "Captain, on behalf of all the traders, I beg you to come to our aid! ");
+				link.l1 = "Oh? What happened?"; 
+				link.l1.go = "RBlueBird";
+				break;
+			}		
 //Jason --> ----------------------------------мини-квест Бесчестный конкурент------------------------------------
 			if (!CheckAttribute(pchar, "questTemp.Shadowtrader") && sti(npchar.nation) != PIRATE && sti(pchar.rank) < 6 && drand(2) == 0) 
 			{
@@ -905,6 +911,29 @@ void ProcessDialogEvent()
 						GetFullName(characterFromId(pchar.GenQuest.Intelligence.MayorId)) + " sent me to you. I am supposed to pick up something...");
 					link.l4.go = "IntelligenceForAll";
 				}	
+	if (pchar.questTemp.BlueBird == "weWon" && pchar.questTemp.BlueBird.traiderId == npchar.id)
+				{
+					link.l1 = "Just here to tell you I did as you asked. The Blue Bird will torment merchants no more. So, about that reward...";
+					link.l1.go = "RBlueBirdWon";
+				}
+				if (pchar.questTemp.BlueBird == "DieHard" && pchar.questTemp.BlueBird.traiderId == npchar.id)
+				{
+					link.l1 = "I regret to inform you that I was unable to sink the Blue Bird. I did all I could, of course. You know how it goes.";
+					link.l1.go = "RBlueBirdDieHard";
+				}
+				if (pchar.questTemp.BlueBird == "returnMoney" && pchar.questTemp.BlueBird.traiderId == npchar.id && sti(pchar.questTemp.BlueBird.count) > 0)
+				{
+					if (sti(pchar.questTemp.BlueBird.count) < 5)
+					{
+						link.l1 = "How are your colleagues' flutes doing? Everything fine there?";
+						link.l1.go = "RBlueBird_retMoney_1";
+					}
+					else
+					{
+						link.l1 = "You sure you don't want to give me that money? I have earned it, fair and square. Now, don't answer right off. Stop and think a moment.";
+						link.l1.go = "RBlueBird_retMoney_3";
+					}
+				}
 				
 				//homo 25/06/06 слухи
                 link.l6 = pcharrepphrase(RandPhraseSimple("Can you tell me the latest gossips? You're hanging around here all day, anyway.",
@@ -1828,7 +1857,223 @@ void ProcessDialogEvent()
 			DeleteAttribute(npchar, "quest.trial_usurer");
 			CloseQuestHeader("Trial");
 		break;
-		
+			case "RBlueBird":
+			dialog.text = "Oh, captain, it didn't happen, but has been happening for a long time now. We, the merchants of the Caribbean sea, are on the verge of ruin. And it's all because of that damned 'Blue Bird'...";
+			link.l1 = "'Blue Bird'?";
+			link.l1.go = "RBlueBird_1";
+		break;
+		case "RBlueBird_1":
+			dialog.text = "Yes, that devil's xebec, the only ship of that type here, you can't escape it in the sea. It's plundering only the merchant ships. It doesn't bother big caravans guarded by military ships.";
+			link.l1 = "So why do you say that the merchants are ruined? After all, the goods are still arriving here with these caravans.";
+			link.l1.go = "RBlueBird_2";
+		break;
+		case "RBlueBird_2":
+			dialog.text = "They do, indeed. But the matter is that the turnover in this situation becomes unprofitable. It's better to have your own sloop or fleut, buy the goods in the Old World and carry them here yourself. Now that's what I call trade!   \nBut when we buy the goods from carriers, you're not thinking about the profits, it's a question of pure survival.";
+			link.l1 = "I understand. So it's just your ships that are plundered by the xebec...";
+			link.l1.go = "RBlueBird_3";
+		break;
+		case "RBlueBird_3":
+			dialog.text = "Rightly so. Almost all of the merchants have already lost their ships, devil take that 'Blue Bird'!";
+			link.l1 = "Right, that's sad for you... Well, so what do you want from me?";
+			link.l1.go = "RBlueBird_4";
+		break;
+		case "RBlueBird_4":
+			dialog.text = "We want you to destroy this gray-winged muskrat, damn it!!!";
+			link.l1 = "And what's in it for me?";
+			link.l1.go = "RBlueBird_5";
+		break;
+		case "RBlueBird_5":
+			dialog.text = "I will collect a worthy payment for your work from all my colleagues. I can firmly promise you fifty thousand piasters. The devil's xebec should go to the sea bed!";
+			link.l1 = "I won't even wiggle my finger for such money, my friend. Keep searching for a fool!";
+			link.l1.go = "RBlueBird_close";
+			link.l2 = "Hm, I'm interested in this money. I am ready to undertake this task. What are the terms of completion?";
+			link.l2.go = "RBlueBird_6";
+		break;
+		case "RBlueBird_6":
+			dialog.text = "You are not restricted in time. I perfectly understand that it's going to be difficult, damn it! To tell you the truth, we already tried to hire assassins for this business, wanted to remove the captain. Without results...";
+			link.l1 = "Really? Could you tell me about this in detail?";
+			link.l1.go = "RBlueBird_7";
+		break;
+		case "RBlueBird_7":
+			dialog.text = "Well, we each threw in some money and employed someone to find the cap'n of this xebec among the pirates. But it didn't work out, our hired fellow ransacked the Caribbean for about six months, but found nothing. Devil knows, where are they based and how they sell the loot...";
+			link.l1 = "Alright, my friend, that's something already. And now listen to my conditions for the deal.";
+			link.l1.go = "RBlueBird_8";
+		break;
+		case "RBlueBird_8":
+			dialog.text = "Listening carefully, " + GetAddress_Form(NPChar) + "." ;
+			link.l1 = "This deal is between you and me, collect the money as you wish, but not a word to nobody about my involvement. And another thing. You say that ALMOST all merchants have lost their ships. What do you mean 'almost'?";
+			link.l1.go = "RBlueBird_9";
+		break;
+		case "RBlueBird_9":
+			dialog.text = "One dealer still has a fleut. But he's lucky, never encountered this xebec. He's our only hope to firmly settle here, all of our men already owe him. If he wouldn't support us in this difficult time, we'd all meet our end long ago. He never refused our requests to borrow some money!";
+			link.l1 = "I understand. He's almost a saint! So what's his name?";
+			link.l1.go = "RBlueBird_10";
+		break;
+		case "RBlueBird_10":
+			dialog.text = "Pascal Vousier. He runs a store on Bermuda in the pirate settlement. So do you accept the job?";
+			link.l1 = "And do you accept my condition about silence?";
+			link.l1.go = "RBlueBird_11";
+		break;
+		case "RBlueBird_11":
+			dialog.text = "Certainly!";
+			link.l1 = "Then I take it. I begin my searches from this day, and hope to finish them soon.";
+			link.l1.go = "RBlueBird_12";
+		break;
+		case "RBlueBird_12":
+			dialog.text = "Oh, if only you were right! Well then, you may begin. I very much hope that it will all go as you said.";
+			link.l1 = "It will, have no doubt!";
+			link.l1.go = "exit";
+			pchar.questTemp.BlueBird = "toBermudes";
+			pchar.questTemp.BlueBird.traiderId = npchar.id; //запомним Id торговца
+			SetQuestHeader("Xebeca_BlueBird");
+			AddQuestRecord("Xebeca_BlueBird", "1");
+			AddQuestUserData("Xebeca_BlueBird", "sCity", XI_ConvertString("Colony" + npchar.city + "Gen"));
+			AddQuestUserData("Xebeca_BlueBird", "sName", GetFullName(npchar));
+		break;
+
+
+		case "RBlueBird_close":
+			dialog.text = "Well then, it's a pity. Perhaps, we will look for 'a fool' in other place...";
+			link.l1 = "Hmm...";
+			link.l1.go = "exit";
+			pchar.questTemp.BlueBird = "over";
+		break;
+		case "RBlueBirdWon":
+			dialog.text = "Excellent news, I must say! At last we can freely do our trade... Do you wish to receive your money right now?";
+			link.l1 = "Yes, that would be better...";
+			link.l1.go = "RBlueBirdWon_1";
+			int chComp;
+			for (i=0; i<=COMPANION_MAX; i++)
+        	{
+                chComp = GetCompanionIndex(pchar, i);
+                if(chComp != -1 && RealShips[sti(characters[chComp].ship.type)].Name == "XebekVML1")
+        		{	
+					dialog.text = "Hm, wait... As far as I know, you managed to overtake the xebec, but you didn't sink her! Now she is in your possession.";
+					link.l1 = "Yes, it is so. And what's the problem?";
+					link.l1.go = "RBlueBirdWon_10";
+					break;
+                }
+            }
+		break;
+
+		case "RBlueBirdWon_1":
+			dialog.text = "No problems, please receive your reward.";
+			link.l1 = "Thanks, that's settled. Wish you all the best... By the way, do you wish to learn who was behind all this?";
+			link.l1.go = "RBlueBirdWon_2";
+			AddMoneyToCharacter(pchar, 50000);
+		break;
+		case "RBlueBirdWon_2":
+			dialog.text = "Hm, that'll be very interesting to know...";
+			link.l1 = "It was the very 'saint' merchant of the Caribbean sea - Pascal Vousier.";
+			link.l1.go = "RBlueBirdWon_3";
+		break;
+		case "RBlueBirdWon_3":
+			dialog.text = "It can't be!..";
+			link.l1 = "It can. Unfortunately, I don't have any proof, but you keep in mind who's lending you your own money.";
+			link.l1.go = "RBlueBirdWon_4";
+		break;
+		case "RBlueBirdWon_4":
+			dialog.text = "Hm, all this needs to be checked... Well then, thanks for your work and the information.";
+			link.l1 = "Don't mention it, it's paid by you. Farewell.";
+			link.l1.go = "exit";
+			CloseQuestHeader("Xebeca_BlueBird");
+			pchar.questTemp.BlueBird = "over";
+		break;
+
+		case "RBlueBirdWon_10":
+			dialog.text = "The problem is that this damned ship is now in your hands. And you're a pirate too, by the way! So who will prevent you from plundering merchants in the same way as its previous owner?";
+			link.l1 = "Hm, it's an interesting question, of course... However, I did complete your work!";
+			link.l1.go = "RBlueBirdWon_11";
+		break;
+		case "RBlueBirdWon_11":
+			dialog.text = "No, you didn't. We agreed on sinking the 'Blue Bird', not boarding it.";
+			link.l1 = "Ah, so that's your answer! Well then, I understood you... All the best to you, send my ardent regards to your colleagues.";
+			link.l1.go = "RBlueBirdWon_12";
+		break;
+		case "RBlueBirdWon_12":
+			dialog.text = "I will, without fail! Farewell, and keep your word in full henceforth.";
+			link.l1 = "Of course. But I will see you again...";
+			link.l1.go = "exit";
+			AddQuestRecord("Xebeca_BlueBird", "9");
+			pchar.questTemp.BlueBird = "returnMoney";
+			pchar.questTemp.BlueBird.City = GetSharpCity();
+		break;
+
+		case "RBlueBirdDieHard":
+			dialog.text = "It's a pity. Well, you're not the first one who takes this job and achieves nothing. Too bad, we'll just have to stick with our misery...";
+			link.l1 = "I hope all will settle into shape in due course...";
+			link.l1.go = "RBlueBirdDieHard_1";
+		break;
+		case "RBlueBirdDieHard_1":
+			dialog.text = "That's true. We're living here in vanity, and fondly believe that the earth is spinning around us alone. But no, from the earth we came, to the earth we'll go   \nHeh, I'm feeling lyrical for some reason.";
+			link.l1 = "It happens... Well then, farewell.";
+			link.l1.go = "exit";
+			CloseQuestHeader("Xebeca_BlueBird");
+			pchar.questTemp.BlueBird = "over";
+		break;
+
+		case "RBlueBird_retMoney_1":
+			dialog.text = "Oh, you bastard! So our fears appeared to be true!!";
+			link.l1 = "I would leave you alone, if you wouldn't cheat me!";
+			link.l1.go = "RBlueBird_retMoney_2";
+		break;
+		case "RBlueBird_retMoney_2":
+			dialog.text = "Oh, damn! Guards, seize him!! You won't go far, bastard...";
+			link.l1 = "You should've given me my money, sly-boots. Let's continue your treatment...";
+			link.l1.go = "fight";
+		break;
+
+		case "RBlueBird_retMoney_3":
+			dialog.text = "Curse you, bastard! Oh how I regret dealing with you!! Before you came the 'Blue Bird' never gave us SO MUCH problems!..";
+			link.l1 = "My friends, you have only yourselves to blame, you should've kept to our agreement.";
+			link.l1.go = "RBlueBird_retMoney_4";
+		break;
+		case "RBlueBird_retMoney_4":
+			dialog.text = "What agreement, between us and you? We strictly adhered to it! It was you who broke it by not sinking the xebec!";
+			link.l1 = "Mon cher, there's no need to shout, it will have a pernicious effect on your vocal chords. What if you suddenly can't speak then? Anyway, I am ready to speak with you, but only if you can remain calm...";
+			link.l1.go = "RBlueBird_retMoney_5";
+		break;
+		case "RBlueBird_retMoney_5":
+			dialog.text = "Well alright, but calmness has nothing to do with this. It was you who broke the terms of our deal, not we - that's the problem!";
+			link.l1 = "Heh! You merchants are masters of such twisty contracts. I know your tricks. Put a comma somewhere, and the meaning of the text is changed.";
+			link.l1.go = "RBlueBird_retMoney_6";
+		break;
+		case "RBlueBird_retMoney_6":
+			dialog.text = "Why are you mentioning commas? We had a spoken arrangement.";
+			link.l1 = "Well, that's figuratively speaking. Thing is, you caught a possibility to keep the money you promised me, and done exactly that. And I'm a pirate, I don't have time to figure out the double meanings of your conditions.";
+			link.l1.go = "RBlueBird_retMoney_7";
+		break;
+		case "RBlueBird_retMoney_7":
+			dialog.text = "What conditions?";
+			link.l1 = "Conditions of our arrangements. The 'Blue Bird' was a trouble for you - I solved this problem. If you would have given me my money, I wouldn't even poke you with a finger. So all your problems are due to your wisdom, so to speak...";
+			link.l1.go = "RBlueBird_retMoney_8";
+		break;
+		case "RBlueBird_retMoney_8":
+			dialog.text = "Well fine, take your 50 thousand and get out of here!";
+			link.l1 = "Not so fast, mon cher. The thing is, I incurred additional financial costs while trying to put your mind on the right track. Let alone the stress I was subjected to. Therefore the sum was increased.";
+			link.l1.go = "RBlueBird_retMoney_9";
+		break;
+		case "RBlueBird_retMoney_9":
+			dialog.text = "So what is this new sum? Name it.";
+			link.l1 = "Increase it four times. 200 thousand, and I will leave you alone. Otherwise I will ruin you. And then kill. At first your family, and then you...";
+			link.l1.go = "RBlueBird_retMoney_10";
+		break;
+		case "RBlueBird_retMoney_10":
+			dialog.text = "Oh, you're a devil!!";
+			link.l1 = "And very, very angry one at that...";
+			link.l1.go = "RBlueBird_retMoney_11";
+		break;
+		case "RBlueBird_retMoney_11":
+			dialog.text = "Very well. Here's your money. And now be gone! And leave us alone!";
+			link.l1 = "Without fail. Now that you paid me in full, the 'Blue Bird' is no longer a threat to you. Farewell, good luck in your commercial affairs...";
+			link.l1.go = "exit";
+			DeleteAttribute(pchar, "questTemp.BlueBird");
+			pchar.questTemp.BlueBird = "over"; //закрываем квест
+			AddMoneyToCharacter(pchar, 200000);
+			AddQuestRecord("Xebeca_BlueBird", "14");
+			CloseQuestHeader("Xebeca_BlueBird");
+		break;
+
 		/*case "trial":
 			dialog.text = "God, why are you so loud, young man! Calm down, and watch your tongue while talking about respected people! Gerard LeCroix left Guadeloupe with an expedition to the mainland, but for you he left a message\nDid you calm down, sir? Ready to listen to me?";
 			link.l1 = "Hm... Please, excuse me, monsieur. I got heated up a bit. I am listening.";

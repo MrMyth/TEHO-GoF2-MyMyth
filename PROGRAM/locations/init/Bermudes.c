@@ -432,6 +432,7 @@ int LocationInitBermudes(int n)
 	locations[n].private1.key = "key3"; // сундучок Алекса
 	locations[n].private1.key.delItem = true;
 	locations[n].private1.items.alexs_chest = 1;
+	locations[n].locators_radius.quest.BlueBird = 1.0;
 	n = n + 1;
 
 	//////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////

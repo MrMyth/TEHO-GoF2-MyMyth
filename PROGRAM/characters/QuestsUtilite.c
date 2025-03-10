@@ -2269,6 +2269,16 @@ void SetQuestAboardCabinDialog(ref refChar)
 			refChar.Dialog.FileName = "Quest\LongHappy.c";
 			refChar.Dialog.CurrentNode = "Barbazon_boarding"; //даем абордажную ноду		
 		}
+				//капитан шебеки Синяя Птица
+		if (refChar.CaptanId == "BlueBirdCapitain" && pchar.questTemp.BlueBird == "toSeaBattle")
+		{
+		    LAi_SetCheckMinHP(refChar, 5, true, "QuestAboardCabinDialog");  // сколько НР мин
+		}
+		//капитан шебеки Синяя Птица
+		if (refChar.CaptanId == "BlueBirdTrader" && pchar.questTemp.BlueBird == "attackFleut")
+		{
+		    LAi_SetCheckMinHP(refChar, 20, true, "QuestAboardCabinDialog");  // сколько НР мин
+		}
 	}
 }
 

@@ -578,8 +578,59 @@ void initStartState2Character(ref ch)
 	// --> счетчики посещений таверн и верфей - ugeen 2016, нужно для ачивок
 	pchar.questTemp.TavernVisit.counter = 0;
 	pchar.questTemp.ShipyardVisit.counter = 0;
+	ch.questTemp.BlueBird = "begin";
+	ch.questTemp.BlueBird.City = "";
+	ch.questTemp.BlueBird.count = 0;
 }
+string BlueBurd_setTradeShip()
+{
+	pchar.questTemp.BlueBird.Island = GiveArealByLocation(loadedLocation);
+	Pchar.quest.BlueBird_loginFleut.win_condition.l1 = "location";
+	Pchar.quest.BlueBird_loginFleut.win_condition.l1.location = pchar.questTemp.BlueBird.Island;
+	Pchar.quest.BlueBird_loginFleut.function = "BlueBird_loginFleut";
+	pchar.questTemp.BlueBird.nation = colonies[FindColony(pchar.questTemp.BlueBird.City)].nation; //нация колонии, откуда кораблик
+	aref aName;
+	makearef(aName, pchar.questTemp.BlueBird);
+	SetRandomNameToShip(aName);
+	AddQuestRecord("Xebeca_BlueBird", "10");
+	AddQuestUserData("Xebeca_BlueBird", "sCity", XI_ConvertString("Colony" + pchar.questTemp.BlueBird.City + "Dat"));
+	AddQuestUserData("Xebeca_BlueBird", "sShipName", "'" + aName.Ship.Name + "'");
+	AddQuestUserData("Xebeca_BlueBird", "sCity_2", XI_ConvertString("Colony" + pchar.questTemp.BlueBird.City + "Gen"));
+	AddQuestUserData("Xebeca_BlueBird", "sTradeName", GetFullName(characterFromId(pchar.questTemp.BlueBird.City + "_trader")));
+	AddQuestUserData("Xebeca_BlueBird", "sIsland", XI_ConvertString(pchar.questTemp.BlueBird.Island + "Gen"));
+	SaveCurrentQuestDateParam("questTemp.BlueBird");
+	return GetBlueBirdRumour_Ship(); //текст слуха
+}
+//фразы по слухам, наводки на корабли тоговцев
+string GetBlueBirdRumour_Ship()
+{
+	string sRumour;
+	switch (rand(2))
+    {
+        case 0: sRumour = "Have you heard? The local trader, " + GetFullName(characterFromId(pchar.questTemp.BlueBird.City + "_trader")) + ", is sending his flute '" + pchar.questTemp.BlueBird.Ship.Name + "ÿ to haul back goods from the Old World. The ship just left harbor, not too long ago."; break;
+		case 1: sRumour = "Ho ho. Our little homegrown businessman is doing all right for himself! " + GetFullName(characterFromId(pchar.questTemp.BlueBird.City + "_trader")) + " sent his own flute '" + pchar.questTemp.BlueBird.Ship.Name + "ÿ to bring in a range of goods. It just left harbor a moment ago. "; break;
+        case 2:	sRumour = "Haw! " + GetFullName(characterFromId(pchar.questTemp.BlueBird.City + "_trader")) + " just gets richer and richer. Only yesterday he was unloading his sailer at the harbor, and already today it's gone! The '" + pchar.questTemp.BlueBird.Ship.Name + "ÿ turned right back for another load!"; break;
+    }
+	return sRumour;
+}
+string GetSharpCity()
+{
+	int n, iRes;
+    int storeArray[MAX_COLONIES];
+    int howStore = 0;
 
+	for(n=0; n<MAX_COLONIES; n++)
+	{
+		if (colonies[n].nation != "none" && GetRelation2BaseNation(sti(colonies[n].nation)) != RELATION_ENEMY && GiveArealByLocation(loadedLocation) != colonies[n].island && colonies[n].id != "Panama") //не на свой остров
+		{
+			storeArray[howStore] = n;
+			howStore++;
+		}
+	}
+	if (howStore == 0) return "none";
+	iRes = storeArray[rand(howStore-1)];
+	return colonies[iRes].id;
+}
 //==> eddy. квестовая обработка 'ноль часов'.
 void QuestActions()
 {
