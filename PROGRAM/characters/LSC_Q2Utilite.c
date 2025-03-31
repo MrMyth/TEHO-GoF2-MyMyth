@@ -578,8 +578,59 @@ void initStartState2Character(ref ch)
 	// --> счетчики посещений таверн и верфей - ugeen 2016, нужно для ачивок
 	pchar.questTemp.TavernVisit.counter = 0;
 	pchar.questTemp.ShipyardVisit.counter = 0;
+	ch.questTemp.BlueBird = "begin";
+	ch.questTemp.BlueBird.City = "";
+	ch.questTemp.BlueBird.count = 0;
 }
+string BlueBurd_setTradeShip()
+{
+	pchar.questTemp.BlueBird.Island = GiveArealByLocation(loadedLocation);
+	Pchar.quest.BlueBird_loginFleut.win_condition.l1 = "location";
+	Pchar.quest.BlueBird_loginFleut.win_condition.l1.location = pchar.questTemp.BlueBird.Island;
+	Pchar.quest.BlueBird_loginFleut.function = "BlueBird_loginFleut";
+	pchar.questTemp.BlueBird.nation = colonies[FindColony(pchar.questTemp.BlueBird.City)].nation; //нация колонии, откуда кораблик
+	aref aName;
+	makearef(aName, pchar.questTemp.BlueBird);
+	SetRandomNameToShip(aName);
+	AddQuestRecord("Xebeca_BlueBird", "10");
+	AddQuestUserData("Xebeca_BlueBird", "sCity", XI_ConvertString("Colony" + pchar.questTemp.BlueBird.City + "Dat"));
+	AddQuestUserData("Xebeca_BlueBird", "sShipName", "'" + aName.Ship.Name + "'");
+	AddQuestUserData("Xebeca_BlueBird", "sCity_2", XI_ConvertString("Colony" + pchar.questTemp.BlueBird.City + "Gen"));
+	AddQuestUserData("Xebeca_BlueBird", "sTradeName", GetFullName(characterFromId(pchar.questTemp.BlueBird.City + "_trader")));
+	AddQuestUserData("Xebeca_BlueBird", "sIsland", XI_ConvertString(pchar.questTemp.BlueBird.Island + "Gen"));
+	SaveCurrentQuestDateParam("questTemp.BlueBird");
+	return GetBlueBirdRumour_Ship(); //текст слуха
+}
+//фразы по слухам, наводки на корабли тоговцев
+string GetBlueBirdRumour_Ship()
+{
+	string sRumour;
+	switch (rand(2))
+    {
+        case 0: sRumour = "Have you heard? The local trader, " + GetFullName(characterFromId(pchar.questTemp.BlueBird.City + "_trader")) + ", is sending his flute '" + pchar.questTemp.BlueBird.Ship.Name + "ÿ to haul back goods from the Old World. The ship just left harbor, not too long ago."; break;
+		case 1: sRumour = "Ho ho. Our little homegrown businessman is doing all right for himself! " + GetFullName(characterFromId(pchar.questTemp.BlueBird.City + "_trader")) + " sent his own flute '" + pchar.questTemp.BlueBird.Ship.Name + "ÿ to bring in a range of goods. It just left harbor a moment ago. "; break;
+        case 2:	sRumour = "Haw! " + GetFullName(characterFromId(pchar.questTemp.BlueBird.City + "_trader")) + " just gets richer and richer. Only yesterday he was unloading his sailer at the harbor, and already today it's gone! The '" + pchar.questTemp.BlueBird.Ship.Name + "ÿ turned right back for another load!"; break;
+    }
+	return sRumour;
+}
+string GetSharpCity()
+{
+	int n, iRes;
+    int storeArray[MAX_COLONIES];
+    int howStore = 0;
 
+	for(n=0; n<MAX_COLONIES; n++)
+	{
+		if (colonies[n].nation != "none" && GetRelation2BaseNation(sti(colonies[n].nation)) != RELATION_ENEMY && GiveArealByLocation(loadedLocation) != colonies[n].island && colonies[n].id != "Panama") //не на свой остров
+		{
+			storeArray[howStore] = n;
+			howStore++;
+		}
+	}
+	if (howStore == 0) return "none";
+	iRes = storeArray[rand(howStore-1)];
+	return colonies[iRes].id;
+}
 //==> eddy. квестовая обработка 'ноль часов'.
 void QuestActions()
 {
@@ -1560,4 +1611,154 @@ void TestShipInCurrentSea()
 	Sea_LoginGroupCurrentSea("Pirate_Attack");
 	log_info("Валькирия на горизонте!");
 	PlaySound("interface\_EvEnemy1.wav");
+}
+
+void BerglarsInit()
+{
+	ref sld;
+	pchar.questTemp.tugs.berglarState = 1; //счетчик
+	//============> грабитель в Сент-Джонсе
+	pchar.questTemp.tugs.berglarSentJons = "SentJons_TownCave"; //указание где забивать стрелу
+	pchar.questTemp.tugs.berglarSentJons.hp = 160; //сколько HP
+	pchar.questTemp.tugs.berglarSentJons.locator = "basement1"; //выходной локатор
+	sld = GetCharacter(NPC_GenerateCharacter("BerglarSentJons", "citiz_12", "man", "man", 22, ENGLAND, -1, false, "quest"));
+	sld.name 	= "Albert";
+	sld.lastname = "Greene";
+	sld.rank = 25;
+	sld.city = "SentJons";
+	sld.location	= "SentJons_town";
+	sld.location.group = "goto";
+	sld.location.locator = "goto4";
+	sld.dialog.filename  = "Coas_quests\Berglars\Berglars.c";
+	sld.greeting = "pirat_quest";
+	GiveItem2Character(sld, "GOF_pistol2");
+	GiveItem2Character(sld, "GOF_blade21");
+	sld.money = 11460;
+	sld.talker = 7; //начать диалог
+	SetSelfSkill(sld, 10, 10, 60, 40, 70);
+	SetCharacterPerk(sld, "SwordplayProfessional");
+	LAi_SetHP(sld, 1.0, 1.0);
+	LAi_SetLoginTime(sld, 6.0, 21.99);
+	LAi_SetCitizenType(sld);
+	LAi_group_MoveCharacter(sld, "ENGLAND_CITIZENS");
+	//=============> грабитель на Мартинике
+	pchar.questTemp.tugs.berglarFortFrance = "FortFrance_Dungeon"; //указание где забивать стрелу
+	pchar.questTemp.tugs.berglarFortFrance.hp = 180; //сколько HP
+	pchar.questTemp.tugs.berglarFortFrance.locator = "basement1"; //выходной локатор
+	sld = GetCharacter(NPC_GenerateCharacter("BerglarFortFrance", "citiz_11", "man", "man", 23, FRANCE, -1, false, "quest"));
+	sld.name 	= "Gaytano";
+	sld.lastname = "Lemier";
+	sld.rank = 25;
+	sld.city = "FortFrance";
+	sld.location	= "FortFrance_town";
+	sld.location.group = "goto";
+	sld.location.locator = "goto5";
+	sld.dialog.filename  = "Coas_quests\Berglars\Berglars.c";
+	sld.greeting = "pirat_quest";
+	GiveItem2Character(sld, "GOF_pistol3");
+	GiveItem2Character(sld, "GOF_blade24");
+	sld.money = 22670;
+	sld.talker = 7; //начать диалог
+	SetSelfSkill(sld, 10, 70, 10, 50, 60);
+	SetCharacterPerk(sld, "BasicDefense");
+	LAi_SetHP(sld, 1.0, 1.0);
+	LAi_SetLoginTime(sld, 6.0, 21.99);
+	LAi_SetCitizenType(sld);
+	LAi_group_MoveCharacter(sld, "FRANCE_CITIZENS");
+	//============> грабитель в Мариго 
+	pchar.questTemp.tugs.berglarMarigo = "Marigo_Cave"; //указание где забивать стрелу
+	pchar.questTemp.tugs.berglarMarigo.hp = 200; //сколько HP
+	pchar.questTemp.tugs.berglarMarigo.locator = "gate_back"; //выходной локатор
+	sld = GetCharacter(NPC_GenerateCharacter("BerglarMarigo", "citiz_1", "man", "man", 21, HOLLAND, -1, false, "quest"));
+	sld.name 	= "Esteban";
+	sld.lastname = "Morua";
+	sld.rank = 25;
+	sld.city = "Marigo";
+	sld.location	= "Marigo_town";
+	sld.location.group = "goto";
+	sld.location.locator = "goto5";
+	sld.dialog.filename  = "Coas_quests\Berglars\Berglars.c";
+	sld.greeting = "pirat_quest";
+	GiveItem2Character(sld, "GOF_pistol6");
+	GiveItem2Character(sld, "GOF_blade22");
+	sld.money = 27480;
+	sld.talker = 7; //начать диалог
+	SetSelfSkill(sld, 60, 10, 10, 40, 40);
+	SetCharacterPerk(sld, "CriticalHit");
+	LAi_SetHP(sld, 1.0, 1.0);
+	LAi_SetLoginTime(sld, 6.0, 21.99);
+	LAi_SetCitizenType(sld);
+	LAi_group_MoveCharacter(sld, "HOLLAND_CITIZENS");
+	//============> грабитель в Панаме
+	pchar.questTemp.tugs.berglarPanama = "Panama_Cave"; //указание где забивать стрелу
+	pchar.questTemp.tugs.berglarPanama.hp = 200; //сколько HP
+	pchar.questTemp.tugs.berglarPanama.locator = "gate_back"; //выходной локатор
+	sld = GetCharacter(NPC_GenerateCharacter("BerglarPanama", "citiz_4", "man", "man", 27, SPAIN, -1, false, "quest"));
+	sld.name 	= "Juan";
+	sld.lastname = "Carlos";
+	sld.rank = 27;
+	sld.city = "Panama";
+	sld.location	= "Panama_town";
+	sld.location.group = "goto";
+	sld.location.locator = "goto5";
+	sld.dialog.filename  = "Coas_quests\Berglars\Berglars.c";
+	sld.greeting = "pirat_quest";
+	GiveItem2Character(sld, "GOF_pistol3");
+	GiveItem2Character(sld, "GOF_blade33");
+	sld.money = 30180;
+	sld.talker = 8; //начать диалог
+	SetSelfSkill(sld, 10, 10, 70, 50, 70);
+	SetCharacterPerk(sld, "AdvancedDefense");
+	LAi_SetHP(sld, 1.0, 1.0);
+	LAi_SetLoginTime(sld, 6.0, 21.99);
+	LAi_SetCitizenType(sld);
+	LAi_group_MoveCharacter(sld, "SPAIN_CITIZENS");
+	//============> грабитель в Картахене
+	pchar.questTemp.tugs.berglarCartahena = "Cartahena_Cave"; //указание где забивать стрелу
+	pchar.questTemp.tugs.berglarCartahena.hp = 170; //сколько HP
+	pchar.questTemp.tugs.berglarCartahena.locator = "gate_back"; //выходной локатор
+	sld = GetCharacter(NPC_GenerateCharacter("BerglarCartahena", "citiz_7", "man", "man", 22, SPAIN, -1, false, "quest"));
+	sld.name 	= "Miguel";
+	sld.lastname = "Carlitos";
+	sld.rank = 22;
+	sld.city = "Cartahena";
+	sld.location	= "Cartahena_town";
+	sld.location.group = "goto";
+	sld.location.locator = "goto5";
+	sld.dialog.filename  = "Coas_quests\Berglars\Berglars.c";
+	sld.greeting = "pirat_quest";
+	GiveItem2Character(sld, "GOF_pistol6");
+	GiveItem2Character(sld, "GOF_blade23");
+	sld.money = 19980;
+	sld.talker = 7; //начать диалог
+	SetSelfSkill(sld, 60, 10, 10, 50, 50);
+	SetCharacterPerk(sld, "Sliding");
+	LAi_SetHP(sld, 1.0, 1.0);
+	LAi_SetLoginTime(sld, 6.0, 21.99);
+	LAi_SetCitizenType(sld);
+	LAi_group_MoveCharacter(sld, "SPAIN_CITIZENS");
+	//============> грабитель в Санта Каталине
+	pchar.questTemp.tugs.berglarSantaCatalina = "SantaCatalina_Cave"; //указание где забивать стрелу
+	pchar.questTemp.tugs.berglarSantaCatalina.hp = 230; //сколько HP
+	pchar.questTemp.tugs.berglarSantaCatalina.locator = "gate_back"; //выходной локатор
+	sld = GetCharacter(NPC_GenerateCharacter("BerglarSantaCatalina", "citiz_9", "man", "man", 25, SPAIN, -1, false, "quest"));
+	sld.name 	= "Lorenso";
+	sld.lastname = "Santino";
+	sld.rank = 25;
+	sld.city = "SantaCatalina";
+	sld.location	= "SantaCatalina_town";
+	sld.location.group = "goto";
+	sld.location.locator = "goto5";
+	sld.dialog.filename  = "Coas_quests\Berglars\Berglars.c";
+	sld.greeting = "pirat_quest";
+	GiveItem2Character(sld, "GOF_pistol4");
+	GiveItem2Character(sld, "GOF_topor2");
+	sld.money = 30450;
+	sld.talker = 7; //начать диалог
+	SetSelfSkill(sld, 10, 10, 80, 50, 80);
+	SetCharacterPerk(sld, "CriticalHit");
+	LAi_SetHP(sld, 1.0, 1.0);
+	LAi_SetLoginTime(sld, 6.0, 21.99);
+	LAi_SetCitizenType(sld);
+	LAi_group_MoveCharacter(sld, "SPAIN_CITIZENS");
 }

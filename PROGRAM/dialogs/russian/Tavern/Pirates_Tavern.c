@@ -14,13 +14,73 @@ void ProcessCommonDialogEvent(ref NPChar, aref Link, aref NextDiag)
 				link.l1 = "Listen, "+npchar.name+", have you heard anything about a man named Miguel Dichoso? They say, his ship has been seen within waters of Isla Tesoro...";
 				link.l1.go = "guardoftruth";
 			}
+			         if (pchar.RomanticQuest == "BrotherIsDead") 
+			{				
+                link.l1 = HeroStringReactionRepeat("Hey, do you know where Atila is hanging out these days?",
+                "Yes, yes, we talked about Atila...", "Oh yes, truly...", "Ah, already figured it out. Sorry...", npchar, Dialog.CurrentNode);
+                link.l1.go = DialogGoNodeRepeat("Step_Romantic_1", "", "", "", npchar, Dialog.CurrentNode);
+            }
 			if(CheckAttribute(pchar, "questTemp.Tieyasal") && pchar.questTemp.Tieyasal == "begin" && !CheckAttribute(npchar, "quest.Tieyasal"))
 			{
 				link.l1 = "Listen, "+npchar.name+", haven't you seen Miguel Dichoso lately on Isla Tesoro?";
 				link.l1.go = "tieyasal";
 			}
+				if (pchar.questTemp.BlueBird == "toBermudes")
+			{
+				link.l1 = "Listen, friend, have you heard anything interesting in the tavern about a xebec called the 'Blue Bird'?";
+				link.l1.go = "BlueBird_1";
+			}
 		break;
-		
+			case "Step_Romantic_1":
+    		dialog.text = "I do know he bought a house here in town. So he should be there.";
+    		link.l1 = "Thanks, pal...";
+    		link.l1.go = "exit";
+ 		break;
+				case "BlueBird_1":
+			dialog.text = NPCStringReactionRepeat("I've heard a lot of things. Mostly, they say the ship is very fast. They tried to catch it, but to no avail...", 
+				"We've already gone over this.", 
+				"Again? We've already discussed everything.",
+                "Excuse me... If you don't need anything, I must tend to other customers.", "block", 1, npchar, Dialog.CurrentNode);
+			link.l1 = HeroStringReactionRepeat("So who tried to catch it?", 
+				"Yeah, that's for sure...",
+                "Hm, indeed.", 
+				"Fine...", npchar, Dialog.CurrentNode);
+			link.l1.go = DialogGoNodeRepeat("BlueBird_2", "exit", "exit", "exit", npchar, Dialog.CurrentNode);
+		break;
+
+		case "BlueBird_2":
+			dialog.text = "Many tried... and failed, ha-ha!";
+			link.l1 = "Do you know anything useful? Like... Where do they usually meet her?";
+			link.l1.go = "BlueBird_3";
+		break;
+		case "BlueBird_3":
+			dialog.text = "Why, right here in Bermuda. Nothing rivals the 'Blue Bird' when it comes to dodging our reefs. Time and time again galleons and frigates collide into them while pursuing the xebec. They often end up at the bottom!";
+			link.l1 = "You don't say... Well then, I'll keep looking. Listen, um, the local shopkeeper... What kind of man is he?";
+			link.l1.go = "BlueBird_4";
+		break;
+		case "BlueBird_4":
+			dialog.text = "He possesses much authority and is respected among the merchants.";
+			link.l1 = "I understand... Is there anyone who's in bad standing with the shopkeeper?";
+			link.l1.go = "BlueBird_5";
+		break;
+		case "BlueBird_5":
+			dialog.text = "He doesn't have any open enemies, but I think the former owner of the store has a grudge against him, he-he...";
+			link.l1 = "Would you be so kind as to tell me his name?";
+			link.l1.go = "BlueBird_6";
+		break;
+		case "BlueBird_6":
+			dialog.text = "His name is John Norton. You won't find him in Bermuda anymore. I heard he settled in Puerto Principe, quietly plying his trade and doesn't get out much.";
+			link.l1 = "A big thank you, my friend. You're a good innkeeper.";
+			link.l1.go = "BlueBird_7";
+		break;
+		case "BlueBird_7":
+			dialog.text = "Thanks for the compliment, " + GetAddress_Form(NPChar) + ". Good luck to you!";
+			link.l1 = "And best wishes to you, pal.";
+			link.l1.go = "exit";
+			AddQuestRecord("Xebeca_BlueBird", "3");
+			pchar.questTemp.BlueBird = "toPuertoPrincipe";
+		break;
+
 		case "guardoftruth":
 			dialog.text = "I have. That Spanish don sold Shark Dodson a remarkable ship, a frigate, when he still resided here. Eh that ship... She was an incredible...";
 			link.l1 = "Let me guess: a uniquely outlined frame and capable of reaching a speed of sixteen knots? And her name was 'Santa Quitaria'?";

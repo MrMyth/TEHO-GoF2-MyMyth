@@ -3628,6 +3628,7 @@ void initNewMainCharacter()//инициализация главного гер�
 	OtherQuestCharactersInit(); // Инициализация прочих квестов
 	MaryCelesteInit(); // Warship 07.07.09 Пасхалка "Мэри Селест"
 	// Установим начальный дневной рандом
+	BerglarsInit();
 	ch.DayRandom = Random();
 	DeleteClass(&sound);
 	ResumeAllSounds();

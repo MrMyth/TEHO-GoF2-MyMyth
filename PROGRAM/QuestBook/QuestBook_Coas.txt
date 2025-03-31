@@ -279,3 +279,43 @@ The free captains have arrived at Isla del Tesoro for the meeting. I should retu
 Against all odds, I've been able to convince the captains to join my cause. Although if it wasn't for Beatrice's perfectly timed arrival and fiery speech, they'd have probably just laughed at me. But now that we have a whole fleet of privateers harassing the nations, and the traders and bankers on our side, we have a chance of taking over the colonies.
 #TEXT	10_woman
 Against all odds, I've been able to convince the captains to join my cause. Although truth be told, if it wasn't for Blaze's perfectly timed arrival and fiery speech, they'd have probably just laughed at me. But now that we have a whole fleet of privateers harassing the nations, and the traders and bankers on our side, we have a chance of taking over the colonies.
+
+#QUEST Xebeca_BlueBird
+Hunting the "Blue Bird"
+#TEXT  1
+The owner of the @<sCity> shop, a fellow by the name of @<sName>, has asked me to find and destroy an elusive xebec known as the Blue Bird. The problem is, the captain to this peculiar ship keeps plundering the local merchant vessels, which are owned by the shopkeepers themselves. So basically, merchant profits have fallen below the waterline.
+Over the course of that conversation, I hit on one very important detail about this case. Curiously, of all the merchants in the Caribbean, only one possesses the improbable luck to have never met the Blue Bird. The name of this Fortune's favorite is Pascal Vousier, a shop owner from Bermuda. His merchant colleagues think of him as a saint, since he supports everyone financially.
+Though I do believe in good luck, Vousier's improbable level of fortune strikes me peculiar. I will deal with this case on the spot - that is, on Bermuda...
+#TEXT  2
+I tried to speak with Pascal Vousier about the Blue Bird. Monsieur Vousier suddenly became outright rude. Something's not right here; I'll need to investigate further...
+#TEXT  3
+The owner of a tavern on Bermuda revealed to me that the xebec is rather often seen near the island. Also he told me that the previous owner of the local shop, John Norton, has moved to Puerto Principe. I believe I should visit him...
+#TEXT  4
+John Norton has confirmed my suspicions concerning Pascal Vousier. John believes that the xebec belongs to Pascal, and that he is behind all of the attacks on the merchants.
+If this is true, I need to understand how Pascal transports the stolen goods. As far as I know, the shipyard in the pirate settlement has an underground passage that leads directly from the bay to the city...
+#TEXT  5
+Poxes, it looks like my guess about the shipyard's dungeon was incorrect. To be sure, it would be easier for Pascal to simply take a tartane and tote the loot directly to port, right in plain view, than to drag stuff through a hole in the ground. So all right, we've a problem here...
+Still, one thing is clear: the base where the goods are stored is somewhere on Bermuda. First, Bermuda is an outlying island, and it's one thing to send a tartane to the other end of an island, and completely another if you're sending it to another island altogether. And second, it is here that the xebec has been sighted rather frequently.
+I need to look for Pascal Vousier's base on the island.
+#TEXT  6
+Ah, at last I have found Pascal's base. I track down a group of armed pirates, presumably from the Blue Bird, as on their shoulders they lugged crates, barrels, large bottles, and other stuff through the cave. I have no doubt that this is the latest cargo looted from the merchants.
+Well, the Blue Bird is nearby. Time to set sail and sink it, while I can! Or would it, perhaps, be better to capture it?
+#TEXT  7
+The cap'n of the Blue Bird is dead. The deed is done. Now I can go back to claim my reward.
+#TEXT  8
+I was unable to catch up with the pirate and sink him. I failed in my task.
+#TEXT  9
+Oh, I don't believe this! They refused to pay my fee, on the grounds of my not sinking the Blue Bird. Well of course, I'm not cretin enough to send such a fine vessel to the blue depths.
+Now the merchants are afraid that I will plunder them with this ship. Well then, let's us make their fears a reality! Just you wait, you bloody prevaricators!
+Now I need to know where and when the merchants own ships mean to leave ports. I need to canvas more rumors.
+#TEXT  10
+At last, fortune smiled on me in @<sCity>! Rumor had it, a local merchant, @<sTradeName>, was about to send out his flute after some goods. And now that flute, @<sShipName>, has just left the @<sCity_2> harbor.
+I need to set sail immediately! I am counting on the assumption that the merchant's flute will not escape me in the waters of @<sIsland>.
+#TEXT  11
+Looks like I set off too late. There wasn't even a trace of the flute near @<sIsland>. Well, now I suppose I need to start all over again. There are more ships where that came from.
+#TEXT  12
+I set sail near @<sIsland>, but I couldn't meet with the flute, let alone board it. Well, back to the rumor mill. Perhaps I'll catch another break. Just have to keep asking...
+#TEXT  13
+In the waters of @<sIsland>, I sink a local merchant flute. This is fine; it's working. I will continue. I will make those merchants give me my money. As always, I need to collect rumors and be attentive.
+#TEXT  14
+It's done. I received not fifty, but two-hundred thousand for that business with the xebec. Doesn't that just warm a pirate's heart?

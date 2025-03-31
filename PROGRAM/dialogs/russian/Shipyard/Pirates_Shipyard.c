@@ -409,7 +409,11 @@ void ProcessCommonDialogEvent(ref NPChar, aref Link, aref NextDiag)
 				link.l2 = "Listen, I'd like to pass through and the door is locked...";
 				link.l2.go = "Step_Door_1";
 			}
-
+		if (pchar.questTemp.BlueBird == "toSeekBermudes") //шебека —ин€€ ѕтица
+			{
+				link.l1 = "Listen, I need to know one thing concerning your dungeon...";
+				link.l1.go = "BlueBird_1";
+			}
 			if ((pchar.questTemp.different == "GiveShipLetters") && !CheckAttribute(pchar, "questTemp.different.GiveShipLetters.speakAlexus"))
 			{
 				link.l1 = "I'd like to propose a deal.";
@@ -426,6 +430,36 @@ void ProcessCommonDialogEvent(ref NPChar, aref Link, aref NextDiag)
 				link.l1 = "Listen, "+npchar.name+", have you seen Miguel Dichoso on Isla Tesoro recently?";
 				link.l1.go = "tieyasal";
 			}
+		break;
+		
+				case "BlueBird_1":
+			dialog.text = "It's not mine. On the contrary, I try not to let anyone in there for their own sake.";
+			link.l1 = "Ah, well alright. Actually, here's the question I have. Is anyone carrying any goods into the city through this dungeon?";
+			link.l1.go = "BlueBird_2";
+		break;
+		case "BlueBird_2":
+			dialog.text = "Ha-ha, of course not, though the dungeon is pass-through. Judge for yourself, what kind of idiot you need to be to drag some cargo on your back through this hole, when you can employ any tartane and easily transport everything by the sea.";
+			link.l1 = "Well what if someone doesn't want it to be known in the city?";
+			link.l1.go = "BlueBird_3";
+		break;
+		case "BlueBird_3":
+			dialog.text = "And you think that nobody will notice if someone starts to drag cargo from my shipyard to the city?";
+			link.l1 = "Hm, yes, indeed... So you're saying that no one is carrying anything through your wharf?";
+			link.l1.go = "BlueBird_4";
+		break;
+		case "BlueBird_4":
+			dialog.text = "No, no one is carrying anything, rest assured.";
+			link.l1 = "Well then, I thank you very much!";
+			link.l1.go = "exit";
+			AddQuestRecord("Xebeca_BlueBird", "5");
+			pchar.questTemp.BlueBird = "toCavern";
+			pchar.quest.BlueBird_inCavern.win_condition.l1 = "locator";
+			pchar.quest.BlueBird_inCavern.win_condition.l1.location = "Bermudes_Cavern";
+			pchar.quest.BlueBird_inCavern.win_condition.l1.locator_group = "quest";
+			pchar.quest.BlueBird_inCavern.win_condition.l1.locator = "BlueBird";
+			pchar.quest.BlueBird_inCavern.function = "BlueBird_inCavern";
+			LAi_LocationDisableMonstersGen("Bermudes_Cavern", true); //монстров не генерить
+			LAi_LocationDisableOfficersGen("Bermudes_Cavern", true); //офицеров не пускать
 		break;
 //*************************** Генератор - "Найденные судовые документы" **************
 		

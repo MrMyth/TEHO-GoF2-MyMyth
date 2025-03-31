@@ -279,6 +279,13 @@ void ProcessDialogEvent()
 				DeleteAttribute(pchar, "questTemp.Mtraxx.Retribution.Bead");
 				AddDialogExitQuestFunction("Mtraxx_RetributionBead");
     		}
+			if (pchar.questTemp.BlueBird == "seenCarriers")
+			{
+				dialog.text = "Oh! I hear some noise. I'll stand here and see what happens next...";
+				Link.l1 = "...";
+    			Link.l1.go = "exit";
+				AddDialogExitQuestFunction("BlueBird_endCaveDialog");
+			}
 		break;
 		
 		// boal -->

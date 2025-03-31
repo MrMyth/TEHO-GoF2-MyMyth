@@ -1484,5 +1484,27 @@ break;
 case "Story_Sharp59":
 CloseQuestHeader("Story_Sharp");
 break;
+case "Berglars_Ostin":
+chrDisableReloadToLocation = true;
+sld = GetCharacter(NPC_GenerateCharacter("Ostin", "Ostin", "man", "man", 30, PIRATE, -1, false, "quest"));
+FantomMakeCoolFighter(sld, 20, 70, 50, "GOF_blade24", "pistol3", "bullet", 20);
+sld.name = "Alberto";
+sld.lastname = "Gaudio";
+sld.rank = 30;
+sld.dialog.filename  = "Coas_quests\Berglars\Berglars.c";
+sld.dialog.currentnode = "Final_fight";
+sld.greeting = "Gr_OliverTrast";
+sld.money = 110670;
+sld.SaveItemsForDead = true;
+sld.DontClearDead = true;
+SetCharacterPerk(sld, "Energaiser");
+SetCharacterPerk(sld, "SwordplayProfessional");
+SetCharacterPerk(sld, "AdvancedDefense");
+SetCharacterPerk(sld, "CriticalHit");
+SetCharacterPerk(sld, "Sliding");
+ChangeCharacterAddressGroup(sld, pchar.location, "goto", "goto1");
+LAi_SetActorType(sld);
+LAi_ActorDialog(sld, pchar, "", -1, 0);
+break;
 }
 }

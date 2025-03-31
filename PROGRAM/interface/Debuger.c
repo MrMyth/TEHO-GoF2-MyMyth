@@ -19,7 +19,7 @@ SetEventHandler("ievnt_command","ProcCommand",0);
 SetEventHandler("SetScrollerPos","SetScrollerPos",0);
 SetEventHandler("ScrollPosChange","ProcScrollPosChange",0);
 SetEventHandler("ScrollTopChange","ProcScrollChange",0);
-GameInterface.reload_edit.str = "Pirates_Shipyard, reload, reload1";
+GameInterface.reload_edit.str = "Bravo_village, reload, reload1";
 }
 void ProcessBreakExit()
 {
@@ -633,7 +633,7 @@ totalInfo = totalInfo + NewStr() + NewStr() + "Success";
 SetFormatedText("INFO_TEXT",totalInfo);
 Statistic_AddValue(PChar, "Cheats.F30", 1);
 Pchar.rank = 41;
-SetFantomParamFromRank(pchar, 41, false);
+SetFantomParamFromRank(pchar, 41, true);
 SetSPECIAL(pchar, 10, 10, 10, 10, 10, 10, 10);
 pchar.Ship.Type = GenerateShip(GOF_SHIP_MANOWAR, true);
 SetBaseShipData(pchar);
@@ -656,7 +656,7 @@ TakeNItems(pchar,"bullet", 180);
 TakeNItems(pchar,"powder", 180);
 EquipCharacterbyItem(pchar, "spyglass5");
 EquipCharacterbyItem(pchar, "pistol7");
-EquipCharacterbyItem(pchar, "blade32");
+EquipCharacterbyItem(pchar, "blade15");
 }
 void ReloadByStr()
 {

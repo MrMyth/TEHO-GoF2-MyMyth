@@ -90,6 +90,61 @@ void ProcessDialogEvent()
 					link.l1.go = "CapComission6";
 				}
 			}	
+					if (pchar.questTemp.BlueBird == "toBermudes")
+			{
+				link.l1 = "Listen, Karlos. Did a xebec called the Blue Bird dock at your port?";
+				link.l1.go = "BlueBird_1";
+			}
+			if (pchar.questTemp.BlueBird == "weWon")
+			{
+				link.l1 = "Imagine that. Blue Bird! Yeah, I caught that xebec.";
+				link.l1.go = "BlueBird_6";
+			}	
+		break;
+		
+		 //********************** поиски Синей птицы ***********************
+        case "BlueBird_1":
+			dialog.text = NPCStringReactionRepeat("Haw, that washtub's become famous. Who woulda thought... Why do you need that xebec, anyway?", 
+				"We already spoke about that xebec.", 
+				"Again with that?",
+                "Say what?! Again?! Nah, I've had just about enough...", "repeat", 10, npchar, Dialog.CurrentNode);
+			link.l1 = HeroStringReactionRepeat("You see, it's become something of interest to this group of friends...", 
+				"That's right, Karlos.",
+                "Hrm, pardon, I messed up my notes...", 
+				"Ooh!", npchar, Dialog.CurrentNode);
+			link.l1.go = DialogGoNodeRepeat("BlueBird_2", "exit", "exit", "exit", npchar, Dialog.CurrentNode);
+  		break;
+		case "BlueBird_2":
+			dialog.text = "They wouldn't be traders by any chance, would they? He-he. 'Cause I heard that they're getting it left and right from this Blue Bird.";
+			link.l1 = "You're right, it's the traders that are interested in the xebec. But you know, I'm also dying to see this birdie from which no one seems to escape. It sounds like a perfect sailer!";
+			link.l1.go = "BlueBird_3";
+		break;
+		case "BlueBird_3":
+			dialog.text = "Heh, you got that right! You ain't the first from the Brotherhood of the Coast to set your sights on that ship, but no one has caught it yet. I don't care much for the birdie personally. It's a bit too small for any serious operations.";
+			link.l1 = "Karlos, do you know where to find the xebec?";
+			link.l1.go = "BlueBird_4";
+		break;
+		case "BlueBird_4":
+			dialog.text = "Of course I don't. I mean, I saw it in the surrounding waters once or twice, but it never entered the port.";
+			link.l1 = "You have any idea where to start looking?";
+			link.l1.go = "BlueBird_5";
+		break;
+		case "BlueBird_5":
+			dialog.text = "Nah, never even thought about it. Nothing comes to mind.";
+			link.l1 = "I see. Well, thanks anyway bud.";
+			link.l1.go = "exit";
+		break;
+
+		case "BlueBird_6":
+			dialog.text = NPCStringReactionRepeat("Whoa, congratulations! Great job, man!", 
+				"Congratulations once again.", 
+				"I already heard that...",
+                "Hah! Boy, I swear you're the biggest braggart the Caribbean's ever seen!", "block", 1, npchar, Dialog.CurrentNode);
+			link.l1 = HeroStringReactionRepeat("Thanks, Karlos. A little sympathy goes a long way.", 
+				"Thanks again, Karlos.",
+                "Ah, don't mention it...", 
+				"I'm proud of it!", npchar, Dialog.CurrentNode);
+			link.l1.go = "exit";
 		break;
 
  		case "Exit":
