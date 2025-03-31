@@ -1502,9 +1502,20 @@ SetCharacterPerk(sld, "SwordplayProfessional");
 SetCharacterPerk(sld, "AdvancedDefense");
 SetCharacterPerk(sld, "CriticalHit");
 SetCharacterPerk(sld, "Sliding");
+sGunpowder = LAi_GetCharacterGunpowderType(sld);
+TakeNItems(sld, LAi_GetCharacterBulletType(sld), n);
+if(sGunPowder != "")
+{
+AddItems(sld, sGunpowder, n);
+}
 ChangeCharacterAddressGroup(sld, pchar.location, "goto", "goto1");
 LAi_SetActorType(sld);
 LAi_ActorDialog(sld, pchar, "", -1, 0);
+break;
+case "OpenTheDoors_O":
+LAi_SetFightMode(pchar, false);
+LAi_group_SetAlarm("EnemyFight", LAI_GROUP_PLAYER, 0);
+chrDisableReloadToLocation = false;
 break;
 }
 }

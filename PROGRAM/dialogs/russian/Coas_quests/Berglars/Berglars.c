@@ -4,7 +4,7 @@ void ProcessDialogEvent()
 	aref Link, NextDiag;
 	string sTemp, sStr, sPlace;
 	float locx, locy, locz;
-
+	int n;
 	DeleteAttribute(&Dialog,"Links");
 
 	makeref(NPChar,CharacterRef);
@@ -37,7 +37,7 @@ void ProcessDialogEvent()
   		link.l1.go = "Step1_2";
 		break;
  		case "Step1_2":
-			if (npchar.city == "SentJons" || npchar.city == "FortFrance") sStr = "under";
+			if (npchar.city == "SentJons") sStr = "under";
 			else sStr = "behind";
     	dialog.text = "That's good that you're listening closely, 'cause we've got something important to talk about. Here goes: There's a dungeon somewhere " + sStr + "the city. You can find me there. ";
   		link.l1 = "Maybe we should go to the tavern, discuss things there? What's the hell's the point of wandering around dungeons at night?";
@@ -96,7 +96,7 @@ void ProcessDialogEvent()
       link.l1.go = "Step2_3";
     break;
     case "Step2_3":
-			if (npchar.city == "SentJons" || npchar.city == "FortFrance") sStr = "under";
+			if (npchar.city == "SentJons") sStr = "under";
 			else sStr = "behind";
       dialog.text = "Sorry, that's no good. Believe me, there's a reason for it. I can't talk long with you, so I'll ask you to come to a certain dungeon in " + sStr + ".";
       link.l1 = "Hmm. This all seems familiar, somehow...";
@@ -196,7 +196,7 @@ void ProcessDialogEvent()
       link.l1.go = "Step4_2";
     break;
     case "Step4_2":
-			if (npchar.city == "SentJons" || npchar.city == "FortFrance") sStr = "under";
+			if (npchar.city == "SentJons") sStr = "under";
 			else sStr = "behind";
       dialog.text = "Not here, " + GetAddress_Form(NPChar) + ". We don't need any extra eyes or ears. I'll wait for you at midnight in a dungeon, in " + sStr + ". Come! You won't regret it!";
       link.l1 = "You know, buddy, you're the third unseemly type who's called me out to the local catacombs. The previous two ended in big trouble...";
@@ -274,7 +274,7 @@ void ProcessDialogEvent()
       link.l1.go = "Step5_4";
     break;
     case "Step5_4":
-			if (npchar.city == "SentJons" || npchar.city == "FortFrance") sStr = "under";
+			if (npchar.city == "SentJons") sStr = "under";
 			else sStr = "behind";
       dialog.text = "I'm prepared to discuss it in detail, but not here. I propose we meet, one on one, in the catacombs under the city of " + sStr + ". I won't take too much of your time, and I will be sure of my own security.";
       link.l1 = "Ha! I've been down this road before, brother. Every time, someone's tried to kill me. ";
@@ -342,9 +342,9 @@ void ProcessDialogEvent()
       link.l1.go = "Step6_2";
     break;
     case "Step6_2":
-			if (npchar.city == "SentJons" || npchar.city == "FortFrance") sStr = "under";
+			if (npchar.city == "SentJons") sStr = "under";
 			else sStr = "behind";
-      dialog.text = "Great. He'll wait for you until midnight, in the catacombs " + sStr + "the city. You can find me there. ";
+      dialog.text = "Great. He'll wait for you until midnight, in the catacombs " + sStr + "the city. You can find me there.";
       link.l1 = "This is getting monotonous. Yes, all right.";
       link.l1.go = "Step_overAll";
     break;
@@ -388,7 +388,7 @@ void ProcessDialogEvent()
 			SaveCurrentNpcQuestDateParam(npchar, "LifeTimeCreate");
       NextDiag.CurrentNode = "Fight_" + pchar.questTemp.tugs.berglarState;
 			npchar.equip.blade = FindCharacterItemByGroup(npchar, BLADE_ITEM_TYPE); 
-			npchar.equip.gun = FindCharacterItemByGroup(npchar, GUN_ITEM_TYPE); 			
+			npchar.equip.gun = FindCharacterItemByGroup(npchar, GUN_ITEM_TYPE); 	
 			LAi_LocationDisableMonGenTimer(pchar.questTemp.tugs.(sTemp), 1); //монстров не генерить 1 день
 			LAi_LocationDisableOffGenTimer(pchar.questTemp.tugs.(sTemp), 1); //офицеров не пускать 1 день
 			LAi_SetActorTypeNoGroup(NPChar);
@@ -409,11 +409,11 @@ void ProcessDialogEvent()
 			chrDisableReloadToLocation = true;
 			DeleteAttribute(npchar, "city"); //чтобы не ругались с нацией
 			LAi_group_MoveCharacter(npchar, "EnemyFight");
-			if (npchar.id == "BerglarFortFrance")
+			if (npchar.id == "BerglarMaracaibo")
 			{
 				GetCharacterPos(pchar, &locx, &locy, &locz);
 				sld = GetCharacter(NPC_GenerateCharacter("Berglars_Helper", "pirate_"+(rand(9)+1), "man", "man", 18, PIRATE, 0, true, "quest"));
-				FantomMakeCoolFighter(sld, 18, 60, 50, BLADE_LONG, "pistol3", 10);
+				FantomMakeCoolFighter(sld, 18, 60, 50, BLADE_LONG, "pistol3", "bullet", 10);
 				LAi_group_MoveCharacter(sld, "EnemyFight");
 				ChangeCharacterAddressGroup(sld, npchar.location, "monsters", LAi_FindNearestFreeLocator("monsters", locx, locy, locz));
 			}
@@ -421,7 +421,7 @@ void ProcessDialogEvent()
 			{
 				GetCharacterPos(pchar, &locx, &locy, &locz);
 				sld = GetCharacter(NPC_GenerateCharacter("Berglars_Helper", "pirate_"+(rand(9)+1), "man", "man", 21, PIRATE, 0, true, "quest"));
-				FantomMakeCoolFighter(sld, 21, 60, 50, BLADE_LONG, "pistol3", 20);
+				FantomMakeCoolFighter(sld, 21, 60, 50, BLADE_LONG, "pistol3", "bullet", 20);
 				LAi_group_MoveCharacter(sld, "EnemyFight");
 				ChangeCharacterAddressGroup(sld, npchar.location, "monsters", LAi_FindNearestFreeLocator("monsters", locx, locy, locz));
 			}
@@ -429,13 +429,19 @@ void ProcessDialogEvent()
 			{
 				GetCharacterPos(pchar, &locx, &locy, &locz);
 				sld = GetCharacter(NPC_GenerateCharacter("Berglars_Helper", "pirate_"+(rand(9)+1), "man", "man", 20, PIRATE, 0, true, "quest"));
-				FantomMakeCoolFighter(sld, 20, 60, 50, BLADE_LONG, "pistol3", 20);
+				FantomMakeCoolFighter(sld, 20, 60, 50, BLADE_LONG, "pistol3", "bullet", 20);
 				LAi_group_MoveCharacter(sld, "EnemyFight");
 				ChangeCharacterAddressGroup(sld, npchar.location, "monsters", LAi_FindNearestFreeLocator("monsters", locx, locy, locz));
 			}
+			string sGunpowder = LAi_GetCharacterGunpowderType(npchar);
+TakeNItems(npchar, LAi_GetCharacterBulletType(npchar), n);
+if(sGunPowder != "")
+{
+AddItems(sld, sGunpowder, n);
+}			
 			LAi_group_SetRelation("EnemyFight", LAI_GROUP_PLAYER, LAI_GROUP_ENEMY);
 			LAi_group_FightGroups("EnemyFight", LAI_GROUP_PLAYER, true);
-			LAi_group_SetCheck("EnemyFight", "OpenTheDoors");
+			LAi_group_SetCheck("EnemyFight", "OpenTheDoors_O");
 			DialogExit();
 			AddDialogExitQuest("MainHeroFightModeOn");
 			if (sti(pchar.questTemp.tugs.berglarState) > 6)
@@ -498,7 +504,7 @@ void ProcessDialogEvent()
 			LAi_group_MoveCharacter(npchar, "EnemyFight");
 			LAi_group_SetRelation("EnemyFight", LAI_GROUP_PLAYER, LAI_GROUP_ENEMY);
 			LAi_group_FightGroups("EnemyFight", LAI_GROUP_PLAYER, true);
-			LAi_group_SetCheck("EnemyFight", "OpenTheDoors");
+			LAi_group_SetCheck("EnemyFight", "OpenTheDoors_O");
 			DialogExit();
 			AddDialogExitQuest("MainHeroFightModeOn");
     break;

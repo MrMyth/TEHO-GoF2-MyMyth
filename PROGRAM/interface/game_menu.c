@@ -67,30 +67,8 @@ void InitInterface_gm(string iniName)
 	sText = "PiratesAhoy!, BlackMark Studio ";
 	sText = sText + "- 2024";
 	SetFormatedText("COPYRIGHTS_TEXT", sText);
-	
-	string sDLC = "";
-	SetFormatedText("DLC_TEXT", sDLC);
-
-	SetNewPicture("LOGO", "MainMenu\russian\TextLSC00.tga");
 
 	if(LAi_IsBoardingProcess())	SetSelectable("MB_RESUME",false);
-
-	if(bSteamAchievements && GetSteamEnabled())
-	{
-			DLCAppID = CheckUpdates();	
-			if(DLCAppID > 0) // есть обновления
-			{
-				SetSelectable("MB_UPDATES", true);
-			}
-			else
-			{	// обновлений нет
-				SetSelectable("MB_UPDATES", false);
-			}
-	}
-	else
-	{ // обновлений нет
-		SetSelectable("MB_UPDATES", false);
-	}
 }
 
 
