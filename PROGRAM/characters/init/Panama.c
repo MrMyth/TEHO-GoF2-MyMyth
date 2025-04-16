@@ -1,12 +1,9 @@
-
 int CreatePanamaCharacters(int n)
 {
 	ref ch;
-	
 	///////////////////////////////////////////////////////////////////////////////
 	// ОСНОВНЫЕ ПЕРСОНАЖИ
 	///////////////////////////////////////////////////////////////////////////////
-	
 	makeref(ch,Characters[n]);			//Губернатор
 	ch.id		= "Panama_Mayor";
 	ch.model	= "huber_21";
@@ -34,7 +31,6 @@ int CreatePanamaCharacters(int n)
 	LAi_group_MoveCharacter(ch, "SPAIN_CITIZENS");
 	LAi_SetImmortal(ch, true);
 	n = n + 1;
-
 	makeref(ch,Characters[n]);			//Священик
 	ch.id		= "Panama_Priest";
 	ch.model	= "priest_4";
@@ -52,7 +48,6 @@ int CreatePanamaCharacters(int n)
 	LAi_group_MoveCharacter(ch, "SPAIN_CITIZENS");
 	LAi_SetImmortal(ch, true);
 	n = n + 1;
-
 	makeref(ch,Characters[n]);		// ОФициантка
 	ch.id		= "Panama_waitress";
 	ch.model	= "women_12";
@@ -69,7 +64,6 @@ int CreatePanamaCharacters(int n)
 	LAi_group_MoveCharacter(ch, "SPAIN_CITIZENS");
 	LAi_SetImmortal(ch, true);
 	n = n + 1;
-
 	makeref(ch,Characters[n]);			//Трактирщик
 	ch.id		= "Panama_tavernkeeper";
 	ch.model	= "barmen_3";
@@ -87,8 +81,6 @@ int CreatePanamaCharacters(int n)
 	LAi_group_MoveCharacter(ch, "SPAIN_CITIZENS");
 	LAi_SetImmortal(ch, true);
 	n = n + 1;
-
-
 	makeref(ch,Characters[n]);			//Торговец
 	ch.id		= "Panama_trader";
 	ch.model	= "trader_3";
@@ -106,7 +98,6 @@ int CreatePanamaCharacters(int n)
 	LAi_SetImmortal(ch, true);
 	ch.item_date = "";
 	n = n + 1;
-
 	/*makeref(ch,Characters[n]);			//Корабел
 	ch.id		= "Panama_shipyarder";
 	ch.model	= "shipowner_16";
@@ -129,7 +120,6 @@ int CreatePanamaCharacters(int n)
 	LAi_group_MoveCharacter(ch, "SPAIN_CITIZENS");
 	LAi_SetImmortal(ch, true);
 	n = n + 1;*/
-
 	makeref(ch,Characters[n]);			//Банкир
 	ch.id		= "Panama_usurer";
 	ch.model	= "banker_3";
@@ -149,7 +139,6 @@ int CreatePanamaCharacters(int n)
 	LAi_group_MoveCharacter(ch, "SPAIN_CITIZENS");
 	LAi_SetImmortal(ch, true);
 	n = n + 1;
-
 	makeref(ch,Characters[n]);			//Начальник порта
 	ch.id		= "Panama_PortMan";
 	ch.model	= "citiz_4";
@@ -166,7 +155,6 @@ int CreatePanamaCharacters(int n)
 	LAi_SetImmortal(ch, true);
 	ch.item_date = "";
 	n = n + 1;
-
 	makeref(ch,Characters[n]);			//Хозяйка борделя
 	ch.id		= "Panama_Hostess";
 	ch.name		= "Dolores"
@@ -185,6 +173,5 @@ int CreatePanamaCharacters(int n)
 	LAi_SetOwnerType(ch);
 	LAi_group_MoveCharacter(ch, "SPAIN_CITIZENS");
 	n = n + 1;
-
 	return n;
 }

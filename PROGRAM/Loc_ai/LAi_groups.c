@@ -1,14 +1,10 @@
-
-
 //Объект, описывающий отнощение одной группы к другой
 object LAi_grp_relations;
 float LAi_grp_playeralarm = 0;
 bool LAi_grp_alarmactive = false;
-
 //------------------------------------------------------------------------------------------
 //Инициализация
 //------------------------------------------------------------------------------------------
-
 //Инициализация
 bool LAi_group_Init()
 {
@@ -36,7 +32,6 @@ bool LAi_group_Init()
 	LAi_group_SetHearRadius(LAI_GROUP_PLAYER_OWN, LAI_GROUP_PLA_HEAR);
 	LAi_group_SetSayRadius(LAI_GROUP_PLAYER_OWN, LAI_GROUP_PLA_SAY);
 	LAi_group_SetPriority(LAI_GROUP_PLAYER_OWN, LAI_GROUP_PPLAYER);
-	
 	LAi_group_Register("ENGLAND_CITIZENS");
 	LAi_group_SetPermanent("ENGLAND_CITIZENS");
 	LAi_group_SetLookRadius("ENGLAND_CITIZENS", LAI_GROUP_GRD_LOOK);
@@ -45,7 +40,6 @@ bool LAi_group_Init()
 	LAi_group_SetPriority("ENGLAND_CITIZENS", LAI_GROUP_PGUARDS);
 	LAi_group_SetAlarmReaction("ENGLAND_CITIZENS", LAI_GROUP_PLAYER, LAI_GROUP_ENEMY, LAI_GROUP_NEITRAL);
 	LAi_group_SetAlarmDown("ENGLAND_CITIZENS", LAI_GROUP_PLAYER, 0.02);
-
 	LAi_group_Register("FRANCE_CITIZENS");
 	LAi_group_SetPermanent("FRANCE_CITIZENS");
 	LAi_group_SetLookRadius("FRANCE_CITIZENS", LAI_GROUP_GRD_LOOK);
@@ -54,7 +48,6 @@ bool LAi_group_Init()
 	LAi_group_SetPriority("FRANCE_CITIZENS", LAI_GROUP_PGUARDS);
 	LAi_group_SetAlarmReaction("FRANCE_CITIZENS", LAI_GROUP_PLAYER, LAI_GROUP_ENEMY, LAI_GROUP_NEITRAL);
 	LAi_group_SetAlarmDown("FRANCE_CITIZENS", LAI_GROUP_PLAYER, 0.02);
-
 	LAi_group_Register("SPAIN_CITIZENS");
 	LAi_group_SetPermanent("SPAIN_CITIZENS");
 	LAi_group_SetLookRadius("SPAIN_CITIZENS", LAI_GROUP_GRD_LOOK);
@@ -63,7 +56,6 @@ bool LAi_group_Init()
 	LAi_group_SetPriority("SPAIN_CITIZENS", LAI_GROUP_PGUARDS);
 	LAi_group_SetAlarmReaction("SPAIN_CITIZENS", LAI_GROUP_PLAYER, LAI_GROUP_ENEMY, LAI_GROUP_NEITRAL);
 	LAi_group_SetAlarmDown("SPAIN_CITIZENS", LAI_GROUP_PLAYER, 0.02);
-
 	LAi_group_Register("HOLLAND_CITIZENS");
 	LAi_group_SetPermanent("HOLLAND_CITIZENS");
 	LAi_group_SetLookRadius("HOLLAND_CITIZENS", LAI_GROUP_GRD_LOOK);
@@ -72,7 +64,6 @@ bool LAi_group_Init()
 	LAi_group_SetPriority("HOLLAND_CITIZENS", LAI_GROUP_PGUARDS);
 	LAi_group_SetAlarmReaction("HOLLAND_CITIZENS", LAI_GROUP_PLAYER, LAI_GROUP_ENEMY, LAI_GROUP_NEITRAL);
 	LAi_group_SetAlarmDown("HOLLAND_CITIZENS", LAI_GROUP_PLAYER, 0.02);
-
 	LAi_group_Register("PIRATE_CITIZENS");
 	LAi_group_SetPermanent("PIRATE_CITIZENS");
 	LAi_group_SetLookRadius("PIRATE_CITIZENS", LAI_GROUP_GRD_LOOK);
@@ -81,14 +72,12 @@ bool LAi_group_Init()
 	LAi_group_SetPriority("PIRATE_CITIZENS", LAI_GROUP_PGUARDS);
 	LAi_group_SetAlarmReaction("PIRATE_CITIZENS", LAI_GROUP_PLAYER, LAI_GROUP_ENEMY, LAI_GROUP_NEITRAL);
 	LAi_group_SetAlarmDown("PIRATE_CITIZENS", LAI_GROUP_PLAYER, 0.02);
-
 	//Группа охраников
 	/*LAi_group_Register(LAI_GROUP_GUARDS);
 	LAi_group_SetLookRadius(LAI_GROUP_GUARDS, LAI_GROUP_GRD_LOOK);
 	LAi_group_SetHearRadius(LAI_GROUP_GUARDS, LAI_GROUP_GRD_HEAR);
 	LAi_group_SetSayRadius(LAI_GROUP_GUARDS, LAI_GROUP_GRD_SAY);
 	LAi_group_SetPriority(LAI_GROUP_PLAYER, LAI_GROUP_PGUARDS);*/
-
 	//Группа актёров
 	LAi_group_Register(LAI_GROUP_ACTOR);
 	LAi_group_SetPermanent(LAI_GROUP_ACTOR);
@@ -102,7 +91,6 @@ bool LAi_group_Init()
 	LAi_group_SetHearRadius(LAI_GROUP_GUARDS, LAI_GROUP_HUB_HEAR);
 	LAi_group_SetSayRadius(LAI_GROUP_GUARDS, LAI_GROUP_HUB_SAY);
 	LAi_group_SetPriority(LAI_GROUP_PLAYER, LAI_GROUP_PCITIZENS);*/
-	
 	//Группа монстров
 	LAi_group_Register(LAI_GROUP_MONSTERS);
 	LAi_group_SetPermanent(LAI_GROUP_MONSTERS);
@@ -111,7 +99,6 @@ bool LAi_group_Init()
 	LAi_group_SetHearRadius(LAI_GROUP_MONSTERS, LAI_GROUP_MNS_HEAR);
 	LAi_group_SetSayRadius(LAI_GROUP_MONSTERS, LAI_GROUP_MNS_SAY);
 	LAi_group_SetPriority(LAI_GROUP_PLAYER, 0);
-	
 	// Группа монстров Ксочитэма
 	LAi_group_Register("KSOCHITAM_MONSTERS");
 	LAi_group_SetPermanent("KSOCHITAM_MONSTERS");
@@ -120,7 +107,6 @@ bool LAi_group_Init()
 	LAi_group_SetHearRadius("KSOCHITAM_MONSTERS", LAI_GROUP_MNS_HEAR);
 	LAi_group_SetSayRadius("KSOCHITAM_MONSTERS", LAI_GROUP_MNS_SAY);
 	LAi_group_SetPriority(LAI_GROUP_PLAYER, 0);
-	
 	// Группа индейцев ица
 	LAi_group_Register("ITZA");
 	LAi_group_SetPermanent("ITZA");
@@ -128,7 +114,6 @@ bool LAi_group_Init()
 	LAi_group_SetHearRadius("ITZA", LAI_GROUP_GRD_HEAR);
 	LAi_group_SetSayRadius("ITZA", LAI_GROUP_GRD_SAY);
 	LAi_group_SetPriority(LAI_GROUP_PLAYER, 0);
-	
 	// группы LSC
 	LAi_group_Register("LSC_NARVAL");
 	LAi_group_SetPermanent("LSC_NARVAL");
@@ -139,7 +124,6 @@ bool LAi_group_Init()
 	LAi_group_SetAlarmReaction("LSC_NARVAL", LAI_GROUP_PLAYER, LAI_GROUP_ENEMY, LAI_GROUP_NEITRAL);
 	LAi_group_SetAlarmDown("LSC_NARVAL", LAI_GROUP_PLAYER, 0.02);
 	LAi_group_SetAlarmReaction("LSC_NARVAL", LAI_GROUP_ACTOR, LAI_GROUP_NEITRAL, LAI_GROUP_NEITRAL);
-	
 	LAi_group_Register("LSC_RIVADOS");
 	LAi_group_SetPermanent("LSC_RIVADOS");
 	LAi_group_SetLookRadius("LSC_RIVADOS", LAI_GROUP_GRD_LOOK);
@@ -149,7 +133,6 @@ bool LAi_group_Init()
 	LAi_group_SetAlarmReaction("LSC_RIVADOS", LAI_GROUP_PLAYER, LAI_GROUP_ENEMY, LAI_GROUP_NEITRAL);
 	LAi_group_SetAlarmDown("LSC_RIVADOS", LAI_GROUP_PLAYER, 0.02);
 	LAi_group_SetAlarmReaction("LSC_RIVADOS", LAI_GROUP_ACTOR, LAI_GROUP_NEITRAL, LAI_GROUP_NEITRAL);
-	
 	LAi_group_Register("LSC_SHARK");
 	LAi_group_SetPermanent("LSC_SHARK");
 	LAi_group_SetLookRadius("LSC_SHARK", LAI_GROUP_GRD_LOOK);
@@ -159,7 +142,6 @@ bool LAi_group_Init()
 	LAi_group_SetAlarmReaction("LSC_SHARK", LAI_GROUP_PLAYER, LAI_GROUP_ENEMY, LAI_GROUP_NEITRAL);
 	LAi_group_SetAlarmDown("LSC_SHARK", LAI_GROUP_PLAYER, 0.02);
 	LAi_group_SetAlarmReaction("LSC_SHARK", LAI_GROUP_ACTOR, LAI_GROUP_NEITRAL, LAI_GROUP_NEITRAL);
-	
 	LAi_group_Register("LSC_CITIZEN");
 	LAi_group_SetPermanent("LSC_CITIZEN");
 	LAi_group_SetLookRadius("LSC_CITIZEN", LAI_GROUP_GRD_LOOK);
@@ -200,7 +182,6 @@ bool LAi_group_Init()
 	}
 	return true;
 }
-
 //Освобождение ресурсов
 void LAi_group_Release()
 {
@@ -210,24 +191,19 @@ void LAi_group_Release()
 	SendMessage(&LAi_grp_relations, "s", "SaveData");
 	//Удаляем объект групп
 	DeleteClass(&LAi_grp_relations);
-	
 	LAi_group_Clean(); // mitrokosta сборка мусора
 }
-
 // Не очищать группу при отсутствии в ней персонажей
 void LAi_group_SetPermanent(string sName) {
 	LAi_grp_relations.permanent.(sName) = true;
 }
-
 // Надо ли чистить группу?
 bool LAi_group_IsPermanent(string sName) {
 	if (sName == "" || CheckAttribute(&LAi_grp_relations, "permanent." + sName)) {
 		return true;
 	}
-	
 	return false;
 }
-
 // Чистка пустых групп
 void LAi_group_Clean() {
 	object oGrp;
@@ -235,26 +211,21 @@ void LAi_group_Clean() {
 	ref chref, rGrp;
 	int i, j, nRel, nChar;
 	string sName, relName;
-	
 	makearef(arData, LAi_grp_relations.savedata);
 	makeref(rGrp, oGrp);
-	
 	// первый проход - запоминаем все группы
 	nRel = GetAttributesNum(arData);
 	for (i = 0; i < nRel; i++) {
 		arRel = GetAttributeN(arData, i);
-		
 		sName = arRel.name1;
 		if (!LAi_group_IsPermanent(sName)) {
 			rGrp.(sName) = true;
 		}
-		
 		sName = arRel.name2;
 		if (!LAi_group_IsPermanent(sName)) {
 			rGrp.(sName) = true;
 		}
 	}
-	
 	// второй проход - ищем непустые
 	nChar = GetArraySize(&characters);
 	for (i = 0; i < nChar; i++) {
@@ -264,23 +235,18 @@ void LAi_group_Clean() {
 			//trace("Group " + chref.chr_ai.group + " is not empty, it has " + chref.id + ", skipping");
 		}
 	}
-	
 	// третий проход - удаляем отношения между пустыми группами
 	bool bDelete;
-	
 	for (i = 0; i < nRel; i++) {
 		arRel = GetAttributeN(arData, i);
 		relName = GetAttributeName(arRel);
 		bDelete = false;
-		
 		if (!LAi_group_IsPermanent(arRel.name1) && CheckAttribute(rGrp, arRel.name1)) {
 			bDelete = true;
 		}
-		
 		if (!LAi_group_IsPermanent(arRel.name2) && CheckAttribute(rGrp, arRel.name2)) {
 			bDelete = true;
 		}
-		
 		if (bDelete) {
 			//trace("Deleted group relation " + relName + " between " + arRel.name1 + " and " + arRel.name2);
 			DeleteAttribute(arData, relName);
@@ -289,16 +255,13 @@ void LAi_group_Clean() {
 		}
 	}
 }
-
 void LAi_group_SaveInfo()
 {
 	SendMessage(&LAi_grp_relations, "s", "SaveData");
 }
-
 //------------------------------------------------------------------------------------------
 //Регистрация новой группы, установка общих параметров
 //------------------------------------------------------------------------------------------
-
 //Регистрация новой группы
 void LAi_group_Register(string groupName)
 {
@@ -307,65 +270,52 @@ void LAi_group_Register(string groupName)
 	LAi_group_SetHearRadius(groupName, LAI_GROUP_DEF_HEAR);
 	LAi_group_SetSayRadius(groupName, LAI_GROUP_DEF_SAY);
 }
-
 void LAi_group_Delete(string groupName)
 {
 	SendMessage(&LAi_grp_relations, "ss", "ReleaseGroup", groupName);
 }
-
-
 //Установить для группы радиус видимости
 void LAi_group_SetLookRadius(string groupName, float radius)
 {
 	SendMessage(&LAi_grp_relations, "ssf", "SetGroupLook", groupName, radius);
 }
-
 //Установить для группы радиус слышимости
 void LAi_group_SetHearRadius(string groupName, float radius)
 {
 	SendMessage(&LAi_grp_relations, "ssf", "SetGroupHear", groupName, radius);
 }
-
 //Установить для группы радиус сообщения
 void LAi_group_SetSayRadius(string groupName, float radius)
 {
 	SendMessage(&LAi_grp_relations, "ssf", "SetGroupSay", groupName, radius);
 }
-
 //Установить для группы приоритет
 void LAi_group_SetPriority(string groupName, int priority)
 {
 	SendMessage(&LAi_grp_relations, "ssl", "SetGroupPriority", groupName, priority);
 }
-
 //Установить уровень тревоги 0..1
 void LAi_group_SetAlarm(string group1, string group2, float level)
 {
 	SendMessage(&LAi_grp_relations, "sssf", "SetAlarm", group1, group2, level);
 }
-
 //Установить скорость убывания тревоги ед/сек
 void LAi_group_SetAlarmDown(string group1, string group2, float down)
 {
 	SendMessage(&LAi_grp_relations, "sssf", "SetAlarmDown", group1, group2, down);
 }
-
-
 //------------------------------------------------------------------------------------------
 //Перемещение персонажа в группы
 //------------------------------------------------------------------------------------------
-
 //Переместить персонажа в новую группу
 void LAi_group_MoveCharacter(aref chr, string groupName)
 {
 	chr.chr_ai.group = groupName;
 	SendMessage(&LAi_grp_relations, "sis", "MoveChr", chr, groupName);	
 }
-
 //------------------------------------------------------------------------------------------
 //Отношения групп
 //------------------------------------------------------------------------------------------
-
 //Установить отношения между группами
 void LAi_group_SetRelation(string group1, string group2, string curRelation)
 {
@@ -374,7 +324,6 @@ void LAi_group_SetRelation(string group1, string group2, string curRelation)
 		SendMessage(&LAi_grp_relations, "ssss", "SetRelation", group1, group2, curRelation);
 	}
 }
-
 //Установить отношения между группами при активации тревоги и после
 void LAi_group_SetAlarmReaction(string group1, string group2, string actRelation, string relRelation)
 {
@@ -383,7 +332,6 @@ void LAi_group_SetAlarmReaction(string group1, string group2, string actRelation
 		SendMessage(&LAi_grp_relations, "sssss", "SetAlarmReaction", group1, group2, actRelation, relRelation);
 	}
 }
-
 //Натравить друг на друга 2 группы
 void LAi_group_FightGroups(string group1, string group2, bool asignWarriarType)
 {
@@ -392,7 +340,6 @@ void LAi_group_FightGroups(string group1, string group2, bool asignWarriarType)
 		LAi_group_FightGroupsEx(group1, group2, asignWarriarType, -1, -1, true, false);
 	}
 }
-
 //Натравить друг на друга 2 группы, с возможной установкой командиров
 void LAi_group_FightGroupsEx(string group1, string group2, bool asignWarriarType, int commander1, int commander2, bool isStay, bool isDialog)
 {
@@ -465,13 +412,11 @@ void LAi_group_FightGroupsEx(string group1, string group2, bool asignWarriarType
 	LAi_group_SetHearRadius(group2, 40000000.0);	
 	LAi_group_SetSayRadius(group2, 40000000.0);
 }
-
 //вывести отладочную информацию о кол-ве групп
 void LAi_group_GetDbgInfo()
 {
 	SendMessage(&LAi_grp_relations, "s", "GetDbgInfo");
 }
-
 void LAi_group_NotFightPlayerVSGroup(string group2)
 {
 	LAi_group_SetHearRadius(LAI_GROUP_PLAYER, LAI_GROUP_PLA_HEAR);
@@ -479,11 +424,9 @@ void LAi_group_NotFightPlayerVSGroup(string group2)
 	LAi_group_SetHearRadius(group2, LAI_GROUP_DEF_HEAR);	
 	LAi_group_SetSayRadius(group2, LAI_GROUP_DEF_SAY);
 }
-
 //------------------------------------------------------------------------------------------
 //Цели
 //------------------------------------------------------------------------------------------
-
 //Выбрать цель для данного персонажа
 int LAi_group_GetTarget(aref chr)
 {
@@ -510,26 +453,21 @@ int LAi_group_GetTarget(aref chr)
 			}
 		}
 	}  */
-
 	return index;
 }
-
 //Проверить цель
 bool LAi_group_ValidateTarget(aref chr, aref trg)
 {	
 	return (SendMessage(&LAi_grp_relations, "sii", "VldTrg", chr, trg) != 0);
 }
-
 //Враг ли данный персонаж
 bool LAi_group_IsEnemy(aref chr, aref trg)
 {
 	return (SendMessage(&LAi_grp_relations, "sii", "IsEnemy", chr, trg) != 0);
 }
-
 //------------------------------------------------------------------------------------------
 //Реакция на атаку
 //------------------------------------------------------------------------------------------
-
 //Реакция групп на атаку attack->hit
 bool LAi_group_Attack(aref attack, aref hit)
 {
@@ -556,13 +494,11 @@ bool LAi_group_AttackGroup(string attack, string hit)
 	SendMessage(&LAi_grp_relations, "sss", "Attack", attack, hit);
 	return true;
 }
-
 //Обновить список врагов персонажа
 void LAi_group_UpdateTargets(aref chr)
 {
 	SendMessage(&LAi_grp_relations, "si", "UpdChrTrg", chr);
 }
-
 /*
 void LAI_group_SetRelationWithAllStock(string targetgroup, string rel)
 {
@@ -579,25 +515,21 @@ void LAI_group_SetRelationWithAllStock(string targetgroup, string rel)
 //------------------------------------------------------------------------------------------
 //Утилитные
 //------------------------------------------------------------------------------------------
-
 //Удалить все цели из списков
 void LAi_group_ClearAllTargets()
 {
 	SendMessage(&LAi_grp_relations, "s", "ClearAllTargets");
 }
-
 //Получить значение тревоги для игрока
 float LAi_group_GetPlayerAlarm()
 {
 	return LAi_grp_playeralarm;
 }
-
 //Активна ли тревога для игрока
 bool LAi_group_IsActivePlayerAlarm()
 {
 	return LAi_grp_alarmactive;
 }
-
 //Установить квест на убивание группы
 void LAi_group_SetCheck(string groupName, string quest)
 {
@@ -615,7 +547,6 @@ void LAi_group_SetCheck(string groupName, string quest)
 	quests.(atr).group = groupName;
 	quests.(atr).quest = quest;
 }
-
 // Warship 18.08.09 Проверка убийства группы с вызовом функции
 void LAi_group_SetCheckFunction(String _groupName, String _function)
 {
@@ -624,18 +555,15 @@ void LAi_group_SetCheckFunction(String _groupName, String _function)
 	makearef(quests, LAi_grp_relations.quests);
 	int num = GetAttributesNum(quests);
 	String atr = "q";
-	
 	for(int i = 0; i < num + 10; i++)
 	{
 		atr = "q" + i;
 		if(!CheckAttribute(quests, atr)) break;
 	}
-	
 	//Заполним
 	quests.(atr).group = _groupName;
 	quests.(atr).function = _function;
 }
-
 //Установить событие на убивание группы
 void LAi_group_SetCheckEvent(string groupName)
 {
@@ -652,8 +580,6 @@ void LAi_group_SetCheckEvent(string groupName)
 	//Заполним
 	quests.(atr).group = groupName;
 }
-
-
 //Убрать квест на убивание группы
 void LAi_group_RemoveCheck(string groupName)
 {
@@ -673,7 +599,6 @@ void LAi_group_RemoveCheck(string groupName)
 		}		
 	}
 }
-
 //Проверить квест на убивание группы
 void LAi_group_CheckGroupQuest(aref chr)
 {
@@ -682,7 +607,6 @@ void LAi_group_CheckGroupQuest(aref chr)
 	makearef(quests, LAi_grp_relations.quests);
 	int num = GetAttributesNum(&quests);
 	String function;
-	
 	if(num <= 0) return;
 	//Проверим остальных персонажей в данной группе
 	if(!CheckAttribute(chr, "chr_ai.group"))
@@ -741,19 +665,15 @@ void LAi_group_CheckGroupQuest(aref chr)
 		}
 	}
 }
-
-
 //------------------------------------------------------------------------------------------
 //Ответная реакция на запросы
 //------------------------------------------------------------------------------------------
-
 //Обновление аларма, вызывается на каждом кадре
 #event_handler("CharacterGroup_UpdateAlarm", "LAi_group_UpdateAlarm");
 void LAi_group_UpdateAlarm()
 {
 	LAi_grp_playeralarm = GetEventData();
 	LAi_grp_alarmactive = GetEventData();
-
 	/*if(CheckAttribute(pchar, "sneak.success"))
 	{
 		if(sti(pchar.sneak.success) == 1)
@@ -762,6 +682,5 @@ void LAi_group_UpdateAlarm()
 			LAi_grp_alarmactive = false;
 		}
 	}  */
-
 	Sound_OnAlarm(LAi_grp_alarmactive);
 }

@@ -3,13 +3,10 @@ void ProcessDialogEvent()
 {
 	ref NPChar;
 	aref Link, NextDiag;
-
 	DeleteAttribute(&Dialog,"Links");
-
 	makeref(NPChar,CharacterRef);
 	makearef(Link, Dialog.Links);
 	makearef(NextDiag, NPChar.Dialog);
-
     // вызов диалога по городам -->
     NPChar.FileDialog2 = "DIALOGS\" + LanguageGetLanguage() + "\Governor\" + NationShortName(sti(NPChar.nation)) + "_Governor.c";
     if (LoadSegment(NPChar.FileDialog2))
@@ -18,24 +15,20 @@ void ProcessDialogEvent()
 		UnloadSegment(NPChar.FileDialog2);
 	}
     // вызов диалога по городам <--
-    
     ref offref, sld;
     int i, cn;
     int qty;
     int iSumm;
     string attrLoc;
-
     /// выкуп колонии
     ref CaptGovenor, FortColony;
     int f, colony_money;
-
     int k = 1000;
     if (CheckAttribute(Nations[sti(NPChar.nation)], "Fort"))
     {
         k = (300 - sti(Nations[sti(NPChar.nation)].Fort)*10);
     }
 	bool ok;
-	
 	attrLoc = Dialog.CurrentNode;
 	if (findsubstr(attrLoc, "CityGive_" , 0) != -1)
  	{
@@ -43,7 +36,6 @@ void ProcessDialogEvent()
 	 	NPChar.quest.CityIdx = strcut(attrLoc, i+1, strlen(attrLoc)-1); // индех в конце
  	    Dialog.CurrentNode = "ColonyGive";
  	}
- 	
 	switch (Dialog.CurrentNode)
 	{
 		case "Exit":
@@ -51,13 +43,11 @@ void ProcessDialogEvent()
 			DialogExit();
 			AddDialogExitQuest("MainHeroFightModeOff");
 		break;
-		
 		case "fight":
 			DialogExit();
 			NextDiag.CurrentNode = NextDiag.TempNode;
 			LAi_group_Attack(NPChar, Pchar);
 		break;
-		
 		case "First time":
             NextDiag.TempNode = "First time";
 			if (LAi_grp_playeralarm > 0)
@@ -99,7 +89,6 @@ void ProcessDialogEvent()
 				link.l10.go = "exit";
 			}
 		break;
-		
 		case "node_1":
 			dialog.text = "So what was the reason for you to come here and distract me from important affairs of state?";
 			link.l1 = "I wanted to talk to you about work in the name of the Crown of " + NationNameGenitive(sti(NPChar.nation));
@@ -116,19 +105,16 @@ void ProcessDialogEvent()
 			link.l10 = "It is just a courtesy visit and nothing more, "+GetAddress_FormToNPC(NPChar);
 			link.l10.go = "node_2";
 		break;
-
 		case "node_2":
 			dialog.text = "In that case I would ask you to leave my office and stop distracting me from my work.";
 			link.l1 = "Yes, yes, of course. Sorry about bothering you.";
 			link.l1.go = "exit";
 		break;
-		
 		case "work":
             dialog.text = "If you are looking for work, talk with the governors of colonies. They are often in need for smart and brave captains.";
 			link.l1 = "I'll keep that in mind. Thank you.";
 			link.l1.go = "exit";
 		break;
-		
 		//--> Jason регата
 		case "Regata":
 			dialog.text = "Oh, great, glad to see you, captain! You've arrived just in time - the regatta is about to start in a few days. Did you read the rules of the regatta in the letter which must have been handed to you by messenger?";
@@ -138,7 +124,6 @@ void ProcessDialogEvent()
 			TakeNationLicence(HOLLAND);//уберем лицензию
 			DeleteAttribute(pchar, "questTemp.Regata.ToPortRoyal"); // patch-5
 		break;
-		
 		case "Regata_1":
 			dialog.text = "And did you prepare 50000 pesos - your entrance fee, which will contribute to the prize money?";
 			if (makeint(Pchar.money) >= 50000)
@@ -149,7 +134,6 @@ void ProcessDialogEvent()
 			link.l2 = "I am a bit short of money at the moment. But I will definitely bring it as fast as I can.";
 			link.l2.go = "Regata_nomoney";
 		break;
-		
 		case "Regata_2":
 			dialog.text = "Very well. If you win - your money will return to your fivefold more. Now, you should now how to not break the rules of the regatta\nDiscuss details with Henry Stevenson, he must be in residence's room. Meet with him, he will explain everything.";
 			link.l1 = "Alright. I'll do as you say.";
@@ -161,7 +145,6 @@ void ProcessDialogEvent()
 			pchar.questTemp.Regata.Begin = "true";
 			NextDiag.TempNode = "First time";
 		break;
-		
 		case "Regata_nomoney":
 			dialog.text = "Fine, but please don't take it too long, captain. The regatta is about to start soon.";
 			link.l1 = "I see. I will try to bring you money before the regatta starts.";
@@ -169,20 +152,17 @@ void ProcessDialogEvent()
 			NextDiag.TempNode = "Regata_1";
 			pchar.questTemp.Regata.nomoney = "true";
 		break;
-		
 		//регата-финал
 		case "Regata_Final":
 			dialog.text = "And here we have the winner of the regatta! Hello, captain " + GetFullName(pchar) + "! Allow me to congratulate you with this well-deserved success! The winners of the regatta are always popular in English colonies, deservedly popular.";
 			link.l1 = "Thank you, sir!";
 			link.l1.go = "Regata_complete";
 		break;
-		
 		case "Regata_complete":
 			dialog.text = "Now let's skip to the most pleasant part for you - the reward ceremony. The first prize in money is 250000 pesos. Here you go!";
 			link.l1 = "Thanks!";
 			link.l1.go = "Regata_complete_1";
 		break;
-		
 		case "Regata_complete_1":
 			AddMoneyToCharacter(pchar, 250000);
 			int iGift;
@@ -199,21 +179,18 @@ void ProcessDialogEvent()
 					sItem3 = "bussol";
 					sAdd = "cord, duelist's vest and boussole";
 				break;
-				
 				case 1:
 					sItem1 = "blade_15";//маринера
 					sItem2 = "cirass2";//рейтарский панцирь
 					sItem3 = "bussol";
 					sAdd = "marinera, reiter's armour and boussole";
 				break;
-				
 				case 2:
 					sItem1 = "blade_17";//бретта
 					sItem2 = "cirass7";//карацена
 					sItem3 = "bussol";
 					sAdd = "bretta, karacena and boussole";
 				break;
-				
 				case 3://
 					sItem1 = "blade_20";//мадонна
 					sItem2 = "cirass2";//офицерская кираса
@@ -228,13 +205,11 @@ void ProcessDialogEvent()
 			link.l1 = "I am very glad, sir! Really, I could't have expected it.";
 			link.l1.go = "Regata_complete_2";
 		break;
-		
 		case "Regata_complete_2":
 			dialog.text = "From the name of all English colonies, I am glad to thank you for participating in the regatta and once again congratulate you with your victory! If you made a bet, it is just the time to see sir Henry Stevenson and receive your winnings, if you hadn't done it already. Best of luck to you, captain!";
 			link.l1 = "Thank you for your kind words, sir! In turn, allow me to thank you for providing me with the opportunity to participate in such a grand event. And now, please allow me to say farewell and leave.";
 			link.l1.go = "Regata_complete_3";
 		break;
-		
 		case "Regata_complete_3":
 			DialogExit();
 			NextDiag.CurrentNode = "First time";

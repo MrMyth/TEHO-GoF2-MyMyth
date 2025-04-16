@@ -2,7 +2,6 @@ int Whr_GetColor(aref arRef, string sAttribute)
 {
 	return sti(arRef.(sAttribute));
 }
-
 float Whr_GetFloat(aref arRef, string sAttribute)
 {
 	string sTmpAttr = sAttribute + ".max";
@@ -12,12 +11,9 @@ float Whr_GetFloat(aref arRef, string sAttribute)
 		float fMax = stf(arRef.(sAttribute).max);
 		return fMin + frnd() * (fMax - fMin);
 	}
-
 	if (!CheckAttribute(&arRef, sAttribute)) return 0.0; //задолбало
-
 	return stf(arRef.(sAttribute));
 }
-
 int Whr_GetLong(aref arRef, string sAttribute)
 {
 	string sTmpAttr = sAttribute + ".max";
@@ -29,20 +25,16 @@ int Whr_GetLong(aref arRef, string sAttribute)
 	}
 	return sti(arRef.(sAttribute));
 }
-
 string Whr_GetString(aref arRef, string sAttribute)
 {
 	return arRef.(sAttribute);
 }
-
-
 void eChangeDayNight()
 {
 	/*if(Whr_IsDay() == true)
 	{
 		ShowCitizens(false, FindLocation(pchar.location));
 	}
-
 	if(Whr_IsNight() == true)
 	{
 		HideCitizens();
@@ -50,7 +42,6 @@ void eChangeDayNight()
 	RecalculateJumpTable();*/
 	// для вмл это не нужно, тк время обрабатывается он лайн
 }
-
 //navy -->
 float GetSunHeightAngle(int _hour)
 {
@@ -65,13 +56,11 @@ float GetSunHeightAngle(int _hour)
 	return -1;
 }
 //navy <--
-
 // конвертор часов в интенсивность освещения (2 часа ночи - самый чёрный час, интенсивность 0; 14 часов - самый яркий час, интенсивность 1)
 float SM_HourToLightIntencity(float hour)
 {
 	return abs(abs((hour - 14) / 12) - 1);
 }
-
 // тоже самое, только для текущего часа
 float SM_CurrentHourToLightIntencity()
 {

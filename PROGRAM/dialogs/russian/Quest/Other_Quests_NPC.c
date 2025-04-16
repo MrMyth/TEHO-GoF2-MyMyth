@@ -3,13 +3,10 @@ void ProcessDialogEvent()
 	ref NPChar;
 	aref Link, NextDiag;
 	string sTemp;
-	
 	DeleteAttribute(&Dialog,"Links");
-	
 	makeref(NPChar,CharacterRef);
 	makearef(Link, Dialog.Links);
 	makearef(NextDiag, NPChar.Dialog);
-	
 	switch(Dialog.CurrentNode)
 	{
 		case "First time":
@@ -18,7 +15,6 @@ void ProcessDialogEvent()
 			link.l1.go = "exit";			
 			NextDiag.TempNode = "First time";
 		break;
-        
 //////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 /////----------------------------------------- работорговец -----------------------------------------------------
 //////////////////////////////////////////////////////////////////////////////////////////////////////////////////
@@ -28,25 +24,21 @@ void ProcessDialogEvent()
     		link.l1 = "What?";
     		link.l1.go = "Node_1";
 		break;
-		
 		case "Node_1":
 			dialog.text = "Ha-ha! No slaves here! You are here for them, right?";
 			link.l1 = "Fuck. And I was thinking why the hell there were so many soldiers on a trading pinnace... A trap!";
 			link.l1.go = "Node_2";
 		break;
-		
  		case "Node_2":
 			dialog.text = "Yes, bastard, it is a trap. I am not a merchant, I am a military officer! Though you have won the fight, you won't get away from the judgement!";
 			link.l1 = "And why is that? I will end you now, sink your ship and no one will know a thing.";
 			link.l1.go = "Node_3";
 		break;
-		
  		case "Node_3":
 			dialog.text = "You are wrong. Your business with that banker was revealed. Soon, the governor-general will learn about your little business and you won't get away from the hallows. But I will do you a favour by slaying you right now and right here!";
 			link.l1 = "Try, you governor's dog!";
 			link.l1.go = "Node_4";
 		break;
-		
  		case "Node_4":
  		    pchar.questTemp.Slavetrader = "TakeShoreCap_end"; //это состояние квеста для проверки у квестодателя
             AddQuestRecord("Slavetrader", "13");
@@ -61,19 +53,16 @@ void ProcessDialogEvent()
 			DialogExit();	
 			AddDialogExitQuest("MainHeroFightModeOn");
 		break;
-		
 		case "Slave_arest":
 			dialog.text = "" + GetFullName(pchar) + ", in the name of the law, you are under arrest! Surrender your weapons and follow us!";
 			link.l1 = "What is going on, officer? To surrender on what grounds?";
 			link.l1.go = "Slave_arest_1";
 		break;
-		
 		case "Slave_arest_1":
 			dialog.text = "Don't try to play stupid, captain! Your dirty business was revealed. And for the slaughter you've committed and for the ship of " + NationNameGenitive(sti(npchar.nation)) + " that you sunk will see you hanged!";
 			link.l1 = "Well, since you put it that way... Go fuck yourself!";
 			link.l1.go = "Slave_arest_2";
 		break;
-		
 		case "Slave_arest_2":
 			LAi_LocationFightDisable(&Locations[FindLocation(pchar.location)], false);
 			LAi_SetWarriorTypeNoGroup(npchar);
@@ -83,26 +72,22 @@ void ProcessDialogEvent()
             DialogExit();
 			AddDialogExitQuest("MainHeroFightModeOn");
 		break;
-		
 		//--> крыса в доме
 		case "Rat_bandos":
 			dialog.text = "Hey, what are you doing here?!";
     		link.l1 = "Why are so rude, good sir? Is rat Gontier hiding somewhere here, huh?";
     		link.l1.go = "Node_rat_1";
 		break;
-			
 		case "Node_rat_1":
 			dialog.text = "No he is not! Get out!";
 			link.l1 = "Looks like you are lying. I will conduct a search of the house and I'll see...";
 			link.l1.go = "Node_rat_2";
 		break;
-		
  		case "Node_rat_2":
 			dialog.text = "Fuck you! Francois! Run! Guys, help me!";
 			link.l1 = "Crap!";
 			link.l1.go = "Node_rat_3";
 		break;
-		
 		case "Node_rat_3":
             LAi_SetPlayerType(pchar);
             LAi_SetWarriorType(npchar);
@@ -113,19 +98,16 @@ void ProcessDialogEvent()
 			DialogExit();
 			AddDialogExitQuest("MainHeroFightModeOn");
 		break;
-		
 		case "Rat_lover":
 			dialog.text = "Oh! Don't rape me!";
     		link.l1 = "What? Where is Francois Gontier? Answer me, you filthy slut, or you will end you just like those fellows of yours!";
     		link.l1.go = "Rat_lover_1";
 		break;
-			
 		case "Rat_lover_1":
 			dialog.text = "No, no, I will tell you everything! He has jumped from the window and run away to his ship.";
     		link.l1 = "What ship? I know that there is no his ship in the port. Don't lie to me, girl, or it will get worse...";
     		link.l1.go = "Rat_lover_2";
 		break;
-			
 		case "Rat_lover_2":
 			dialog.text = "I am not lying, I swear! He said that he landed on a small island and got here on a longboat... He must be there! Don't hurt me!";
     		link.l1 = "Alright, it seems that you are telling the truth. Stay here and be quite. And try to make friends in the more clever way in the future. But, you know, I see your eyes and they are telling me that you've got no brains.";
@@ -135,7 +117,6 @@ void ProcessDialogEvent()
             pchar.quest.Slavetrader_RatAttack.function = "Slavetrader_RatCorvette";//создание корвета
 			SetFunctionTimerCondition("Slavetrader_RatCorvetteOver", 0, 0, 1, false);
 		break;
-			
 		case "Rat_lover_3":
  		    LAi_SetPlayerType(pchar);
             SetCharacterRemovable(npchar, false);
@@ -144,7 +125,6 @@ void ProcessDialogEvent()
 			AddQuestRecord("Slavetrader", "21_9");
             DialogExit();
 		break;
-		
 		//--> беглые рабы
 		case "Slave_woman":
 			dialog.text = "Spare us! Mercy! We surrender!";
@@ -153,7 +133,6 @@ void ProcessDialogEvent()
 			AddDialogExitQuestFunction("Slavetrader_Slavewoman");
 		break;
 	//<--работорговец
-			
 //////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 /////----------------------------------------- Генераторы -----------------------------------------------------
 //////////////////////////////////////////////////////////////////////////////////////////////////////////////////
@@ -169,7 +148,6 @@ void ProcessDialogEvent()
 			link.l2 = "What, trading " + GetGoodsNameAlt(iCGood)+ "? I don't see any " + GetGoodsNameAlt(iCGood)+ " around, officer. I see only these shiny coins... And he sees the same. Why won't you and your soldiers take a look at our coins too?";
 			link.l2.go = "Contraoffer_patrol_pay1";
 		break;
-		
 		case "Contraoffer_patrol_1":
 			if (GetSummonSkillFromName(pchar, SKILL_SNEAK) > drand(120))
 			{
@@ -186,7 +164,6 @@ void ProcessDialogEvent()
 				link.l2.go = "Contraoffer_patrol_jail";
 			}
 		break;
-		
 		case "Contraoffer_patrol_pay1":
 			iCGood = sti(pchar.GenQuest.Contraoffer.Trader.Goods);
 			if (GetSummonSkillFromName(pchar, SKILL_FORTUNE) > drand(120))
@@ -206,13 +183,11 @@ void ProcessDialogEvent()
 				link.l2.go = "Contraoffer_patrol_jail";
 			}
 		break;
-		
 		case "Contraoffer_patrol_complete1":
 			dialog.text = "Yes, it looks like you are correct... Nothing of interest here except of several gentlemen and my shiny coins. You are free to go, captain and we will have a talk with your partner.";
 			link.l1 = "See you, officer. Don't hurt him.";
 			link.l1.go = "Contraoffer_patrol_complete";
 		break;
-		
 		case "Contraoffer_patrol_pay2":
 			dialog.text = "" + FindRussianMoneyString(sti(pchar.GenQuest.Contraoffer.Trader.PatrolSumm)) + ". Thank my good mood.";
 			link.l1 = "Thank you officer. I really had no idea... Here, I am ready to pay my fine.";
@@ -220,13 +195,11 @@ void ProcessDialogEvent()
 			link.l2 = "I take it that you aren't that honest too, officer. Your fine is too big. I suppose that I will help this colony by saving it from your existence.";
 			link.l2.go = "Contraoffer_patrol_fight";
 		break;
-		
 		case "Contraoffer_patrol_complete2":
 			dialog.text = "Fine. You may go now. And I advice you to study the local laws in order to avoid situations like this in the future. Go now, we have to deal with the second participant of the trade, he was aware of everything, that's for sure.";
 			link.l1 = "Good day to you, officer.";
 			link.l1.go = "Contraoffer_patrol_complete";
 		break;
-		
 		case "Contraoffer_patrol_complete":
 			AddMoneyToCharacter(pchar, -sti(pchar.GenQuest.Contraoffer.Trader.PatrolSumm));
 			AddQuestRecord("Contraoffer", "6");
@@ -234,7 +207,6 @@ void ProcessDialogEvent()
 			LAi_CharacterDisableDialog(npchar);
 			DialogExit();
 		break;
-		
 		case "Contraoffer_patrol_fight":
 			AddQuestRecord("Contraoffer", "7");
 			CloseQuestHeader("Contraoffer");
@@ -247,13 +219,11 @@ void ProcessDialogEvent()
             DialogExit();
 			AddDialogExitQuest("MainHeroFightModeOn");
 		break;
-		
 		case "Contraoffer_patrol_jail":
 			dialog.text = "The commandant will deal with you. Follow me!";
 			link.l1 = "...";
 			link.l1.go = "Contraoffer_patrol_jail_exit";
 		break;
-		
 		case "Contraoffer_patrol_jail_exit":
 			GoToPrison(pchar.GenQuest.Contraoffer.Trader.City, sti(pchar.GenQuest.Contraoffer.Trader.Summ), 7);
 			DialogExit();
@@ -262,14 +232,12 @@ void ProcessDialogEvent()
 			pchar.GenQuest.Contraoffer.Jail = "true";
 		break;
 	//<-- Сомнительное предложение	
-		
 	//Jason --> ----------------------------------- Неудачливый вор --------------------------------------------
 		case "Device_poorman":
 			dialog.text = "Good day. Do you want anything?";
 			link.l1 = "I do, pal. I take it that you are my guy. It was you who has stolen "+pchar.GenQuest.Device.Shipyarder.Type+"  from the local shipyard? Everything leads to you, so no arguing.";
 			link.l1.go = "Device_poorman_1";
 		break;
-		
 		case "Device_poorman_1":
 			switch (sti(pchar.GenQuest.Device.Shipyarder.Chance3))
 			{
@@ -299,7 +267,6 @@ void ProcessDialogEvent()
 				break;
 			}
 		break;
-		
 		case "Device_poorman_0_1"://идем на поиски
 			dialog.text = "Just behind the city gates, not far from the jungles. I beg you, good sir! If you really need that thing you can pick it up by yourself. It still must be over there, I am sure.";
 			link.l1 = "I should force you to find and bring it to me, but I fear that I would spend more time finding you than the "+pchar.GenQuest.Device.Shipyarder.Type+". I will do it myself. But I will find you if you are lying to me!";
@@ -314,7 +281,6 @@ void ProcessDialogEvent()
 			npchar.lifeday = 0;
 			LAi_CharacterDisableDialog(npchar);
 		break;
-		
 		case "Device_poorman_0_2"://получили девайс
 			dialog.text = "Here, take it. Thank you, kind sir!";
 			link.l1 = "Well, it must be what I was looking for... ha! You are free to go now. Move. And be careful next time.";
@@ -326,7 +292,6 @@ void ProcessDialogEvent()
 			npchar.lifeday = 0;
 			LAi_CharacterDisableDialog(npchar);
 		break;
-		
 		case "Device_poorman_1_1":
 			pchar.GenQuest.Device.Shipyarder.Poorsumm = 1000+drand(1000);
 			dialog.text = "Listen, are you talking about this instrument? It belongs to me and I haven't stolen it! And I am not going to give it to you for free. If you want to get it, pay me " + FindRussianMoneyString(sti(pchar.GenQuest.Device.Shipyarder.Poorsumm)) + ".";
@@ -337,7 +302,6 @@ void ProcessDialogEvent()
 			link.l3 = "Are you stupid, or what? Listen, bastard, you have got two options: either you give me the "+pchar.GenQuest.Device.Shipyarder.Type+" or I stab you and take the instrument from your dead body!";
 			link.l3.go = "Device_poorman_1_4";
 		break;
-		
 		case "Device_poorman_1_2":
 			dialog.text = "Nice deal, captain! I suppose that we will all get our profits, he-he... take it.";
 			link.l1 = "Less talking, thief! Don't think that I have trusted you, I just want to do it peacefully. These coins won't do anything good for you anyway. Get lost!";
@@ -352,7 +316,6 @@ void ProcessDialogEvent()
 			npchar.lifeday = 0;
 			LAi_CharacterDisableDialog(npchar);
 		break;
-		
 		case "Device_poorman_1_3":
 			if (sti(pchar.GenQuest.Device.Shipyarder.Chance2) == 0)//если мы в городе
 			{
@@ -367,7 +330,6 @@ void ProcessDialogEvent()
 				link.l1.go = "Device_poorman_fight";
 			}
 		break;
-		
 		case "Device_poorman_1_4":
 			if (sti(pchar.GenQuest.Device.Shipyarder.Chance2) == 0)//если мы в городе
 			{
@@ -389,7 +351,6 @@ void ProcessDialogEvent()
 				link.l1.go = "Device_poorman_fight";
 			}
 		break;
-		
 		case "Device_poorman_2_1":
 			dialog.text = "Searching? Please, good sire!";
 			link.l1 = "Now listen, either you will peacefully give me the thing you have just stolen from the shipyard or I will take you to the commandant's office. You will give this thing to me anyway, but your heels will be burned with a red-hot iron first. Perhaps they will even hang you after that. The choice is yours.";
@@ -397,7 +358,6 @@ void ProcessDialogEvent()
 			link.l2 = "Give me what you've stolen immediately, bastard, or I will end you right where you stand!";
 			link.l2.go = "Device_poorman_2_3";
 		break;
-		
 		case "Device_poorman_2_2":
 			if (sti(pchar.GenQuest.Device.Shipyarder.Chance1) < 2)//тут уж как повезет
 			{
@@ -419,13 +379,11 @@ void ProcessDialogEvent()
 				link.l1.go = "exit_device";
 			}
 		break;
-		
 		case "Device_poorman_2_3"://напугали
 			dialog.text = "Ouch! Don't hurt me, I will give everything I have to you! Here, take it!";
 			link.l1 = "Now you are talking! Get lost, I will deliver you to the commandant if I ever see you again in this town. Farewell!";
 			link.l1.go = "exit_device";
 		break;
-		
 		case "exit_device":
 			npchar.lifeday = 0;
 			TakeNItems(pchar, "Tool", 1);
@@ -435,7 +393,6 @@ void ProcessDialogEvent()
 			DialogExit();
 			LAi_CharacterDisableDialog(npchar);
 		break;
-		
 		case "Device_poorman_fight":
 			chrDisableReloadToLocation = true;
 			sld = characterFromId("Device_poorman");
@@ -461,7 +418,6 @@ void ProcessDialogEvent()
 			link.l2 = "These street folks are too insolent nowadays... Prepare yourself, scoundrels!";
 			link.l2.go = "PostHunters_fight";
 		break;
-		
 		case "PostGopHunters_1":
 			dialog.text = "Don't pretend of being a fool! Give us the package and you will live. Otherwise... we will take it from your corpse!";
 			link.l1 = "The odds are in your favor... take it, bastards, I have got no choice.";
@@ -469,25 +425,21 @@ void ProcessDialogEvent()
 			link.l2 = "Try!";
 			link.l2.go = "PostHunters_fight";
 		break;
-		
 		case "PostGopHunters_2":
 			dialog.text = "Watch you tongue, pal... It's clever of you to don't challenge you luck. The end would have been the same, ha-ha! You'll live for a while... See you.";
 			link.l1 = "...";
 			link.l1.go = "exit_gophunter";
 		break;
-		
 		case "PostProfHunters":
 			dialog.text = "Wait, " + GetAddress_Form(NPChar) + ", don't hurry like that. I have got a business for you.";
 			link.l1 = "What business? I don't know you.";
 			link.l1.go = "PostProfHunters_1";
 		break;
-		
 		case "PostProfHunters_1":
 			dialog.text = "I do know you, captain. Now straight to the business. You have just received "+pchar.questTemp.WPU.Current.Add+" in "+XI_ConvertString("Colony"+pchar.questTemp.WPU.Postcureer.City+"Gen")+". Don't try to deny it, we know this for sure - after all, we have been looking for this document for a few days.";
 			link.l1 = "Now I see. So what?";
 			link.l1.go = "PostProfHunters_2";
 		break;
-		
 		case "PostProfHunters_2":
 			dialog.text = "Give me the package and our brief meeting ends. Don't try to play hero, captain, we intend to get these papers and we are ready to fight the city garrison if we must\nAs you might understand, you will die first if the skirmish is to start. So give us the documents and we'll part as friends.";
 			link.l1 = "The odds are in your favour... take it, bastards, I have got no other choice.";
@@ -495,20 +447,17 @@ void ProcessDialogEvent()
 			link.l2 = "You won't scare me, I have seen tougher guys in the sea! Piss off.";
 			link.l2.go = "PostProfHunters_4";
 		break;
-		
 		case "PostProfHunters_3":
 			dialog.text = "I am glad that you were reasonable, captain. You have put yourself in a great danger by taking this job. Now I am going to take my leave, if you don't mind.";
 			link.l1 = "...";
 			link.l1.go = "exit_profhunter";
 		break;
-		
 		case "PostProfHunters_4":
 			dialog.text = "It was your decision...";
 			link.l1 = "...";
 			link.l1.go = "PostHunters_fight";
 			TraderHunterOnMap();//если деремся - запускаем ДУ вдогонку
 		break;
-		
 		case "PostHunters_fight":
 			LAi_LocationFightDisable(&Locations[FindLocation(pchar.location)], false);
 			LAi_group_SetRelation("EnemyFight", LAI_GROUP_PLAYER, LAI_GROUP_ENEMY);
@@ -517,7 +466,6 @@ void ProcessDialogEvent()
 			DialogExit();
 			AddDialogExitQuest("MainHeroFightModeOn");
 		break;
-		
 		case "exit_gophunter":
 			chrDisableReloadToLocation = false;
 			LAi_LocationFightDisable(&Locations[FindLocation(pchar.location)], false);
@@ -531,7 +479,6 @@ void ProcessDialogEvent()
 			AddQuestRecord("Postcureer", "11");
 			DialogExit();
 		break;
-		
 		case "exit_profhunter":
 			chrDisableReloadToLocation = false;
 			LAi_LocationFightDisable(&Locations[FindLocation(pchar.location)], false);
@@ -546,20 +493,17 @@ void ProcessDialogEvent()
 			pchar.questTemp.WPU.Postcureer.fail = "true";
 			DialogExit();
 		break;
-		
 		case "PostAgent":
 			bDisableFastReload = true; 
 			dialog.text = "Wait, " + GetAddress_Form(NPChar) + ", don't hurry like that. I have got a business for you.";
 			link.l1 = "What business? Speak it quickly, I am in a hurry.";
 			link.l1.go = "PostAgent_1";
 		break;
-		
 		case "PostAgent_1":
 			dialog.text = "I know who you are. And I also know that you have just received a "+pchar.questTemp.WPU.Current.Add+" "+XI_ConvertString("Colony"+pchar.questTemp.WPU.Postcureer.City+"Gen")+". These papers are the reason why I am so eager to talk with you.";
 			link.l1 = "And I don't want to discuss this matter with the people I don't know. Do you want to get those papers? Just give me a reason...";
 			link.l1.go = "PostAgent_2";
 		break;
-		
 		case "PostAgent_2":
 			dialog.text = "Enough, captain! Do I look like a robber? I am a businessman and I represent interests of " + NationNameGenitive(sti(pchar.questTemp.WPU.Postcureer.EnemyNation)) + ". I want to offer you a very profitable deal, but not here. Lets go to the tavern room and discuss this matter. It won't take a lot of your time.";
 			link.l1 = "That is way too suspicious... I am not going to have any business with you, sir! Get lost!";
@@ -567,13 +511,11 @@ void ProcessDialogEvent()
 			link.l2 = "Hm.. Let's see what you can offer me. But don't even try to attack me. Let's move, I will follow you.";
 			link.l2.go = "PostAgent_3";
 		break;
-		
 		case "PostAgent_getout":
 			dialog.text = "You are a stubborn and a foolish man, captain! I have offered you a chance to make easy money. And you... you will regret it.";
 			link.l1 = "Piss off!";
 			link.l1.go = "PostAgent_getout_exit";
 		break;
-	
 		case "PostAgent_3":
 			dialog.text = "Splendid! Follow me.";
 			link.l1 = "...";
@@ -584,7 +526,6 @@ void ProcessDialogEvent()
 			LAi_SetActorType(sld);
 			LAi_ActorRunToLocation(sld, "reload", "reload4_back", pchar.questTemp.WPU.Postcureer.StartCity +"_tavern_upstairs", "goto", "goto1", "PostAgent_inTavern_Room", -1);
 		break;
-		
 		case "PostAgent_getout_exit":
 			bDisableFastReload = false; 
 			chrDisableReloadToLocation = false;
@@ -599,25 +540,21 @@ void ProcessDialogEvent()
 			AddQuestRecord("Postcureer", "13");
 			DialogExit();
 		break;
-		
 		case "PostAgent_inTavern":
 			dialog.text = "Now we can talk freely.";
 			link.l1 = "And what is your proposal?";
 			link.l1.go = "PostAgent_inTavern_1";
 		break;
-		
 		case "PostAgent_inTavern_1":
 			dialog.text = "As I said, this is all about the papers you have received at harbour office. All I need is a copy of them, that's it\nYou will keep the original, so they'll pay you for the job. No one will ever know what happened, besides I will pay you well.";
 			link.l1 = "Excuse me... But the package is sealed. You won't be able to make copies without breaking a seal!";
 			link.l1.go = "PostAgent_inTavern_2";
 		break;
-		
 		case "PostAgent_inTavern_2":
 			dialog.text = "I was expecting this question. I will have to break the seal, but don't worry I will be able to restore it. I have got a duplicate cliche and sealing wax of course. No one will notice that the package was opened.";
 			link.l1 = "Do you have a false cliche of the port's administration of " +XI_ConvertString("Colony"+pchar.questTemp.WPU.Postcureer.StartCity+"Gen")+ "?";
 			link.l1.go = "PostAgent_inTavern_3";
 		break;
-		
 		case "PostAgent_inTavern_3":
 			pchar.questTemp.WPU.Postcureer.AgentMoney = sti(pchar.rank)*3500;
 			dialog.text = "Why are you asking, captain? Yes, I have one. Do you really think that I am just playing around? I am offering you "+ FindRussianMoneyString(sti(pchar.questTemp.WPU.Postcureer.AgentMoney))+" for a possibility to see these papers. So, will you give me the package at last? Please.";
@@ -626,13 +563,11 @@ void ProcessDialogEvent()
 			link.l2 = "You know, I will not. I don't like it.";
 			link.l2.go = "PostAgent_inTavern_getout";
 		break;
-		
 		case "PostAgent_inTavern_4":
 			dialog.text = "Don't worry. I am a professional. Take a sit and have a rest. It will take about an hour.";
 			link.l1 = "Fine.";
 			link.l1.go = "PostAgent_inTavern_5";
 		break;
-		
 		case "PostAgent_inTavern_5":
 			NextDiag.currentnode = "PostAgent_inTavern_6";
 			RemoveItems(PChar, pchar.questTemp.WPU.Current.Item, 1);
@@ -640,19 +575,16 @@ void ProcessDialogEvent()
 			DialogExit();
 			AddDialogExitQuest("PostAgent_inTavern_Room_end");
 		break;
-		
 		case "PostAgent_inTavern_getout":
 			dialog.text = "Hm... I didn't see this coming. You are too stubborn, captain, so I will have to kill you right where you stand and take the package for free. Pray, because I work with my blade just as good as I work with false cliches.";
 			link.l1 = "It is you who should pray, spy!";
 			link.l1.go = "PostAgent_inTavern_fight";
 		break;
-		
 		case "PostAgent_inTavern_6":
 			dialog.text = "Done. As I said, it has been done in the most accurate way. Take the package and promised "+ FindRussianMoneyString(sti(pchar.questTemp.WPU.Postcureer.AgentMoney))+". And I have to go. Good luck, captain, I am glad that we had a deal.";
 			link.l1 = "Farewell...";
 			link.l1.go = "PostAgent_inTavern_7";
 		break;
-		
 		case "PostAgent_inTavern_7":
 			DialogExit();
 			bDisableFastReload = false;
@@ -665,7 +597,6 @@ void ProcessDialogEvent()
 			AddQuestRecord("Postcureer", "15");
 			AddQuestUserData("Postcureer", "sMoney", FindRussianMoneyString(sti(pchar.questTemp.WPU.Postcureer.AgentMoney)));
 		break;
-		
 		case "PostAgent_inTavern_fight":
 			bDisableFastReload = false;
 			sld = characterFromID("PostAgent"); 
@@ -678,50 +609,42 @@ void ProcessDialogEvent()
 			AddQuestRecord("Postcureer", "16");
 		break;
 	//<-- почтовый генератор 2 уровня
-		
 	// --> --------------------------------- эскорт 2 уровень --------------------------------------------------
 		case "DisasterCap":
 			dialog.text = "Greetings! Oh, I am so glad to see you!";
 			link.l1 = "Good day. Hm, tell me, aren't you in command of the "+pchar.questTemp.WPU.Escort.ShipName+"?";
 			link.l1.go = "DisasterCap_1";
 		break;
-		
 		case "DisasterCap_1":
 			dialog.text = "Oh! And how did you find out about the "+pchar.questTemp.WPU.Escort.ShipName+"? Yes, I am her cap. Or I was... The ship was sunk not far from here.";
 			link.l1 = "Ah, and I have found you... Let me introduce myself - " + GetFullName(pchar) + ". I am here by the ask of the harbour master of "+XI_ConvertString("Colony"+pchar.questTemp.WPU.Escort.StartCity+"Gen")+". He briefly told me about your caravan's troubles and sent me to find your ship.";
 			link.l1.go = "DisasterCap_2";
 		break;
-		
 		case "DisasterCap_2":
 			dialog.text = "So you are a captain of the rescue party?";
 			link.l1 = "Something like that. My task was to find your ship or proofs of her death. Unfortunately, I haven't found the ship, but her captain is alive, that is a good thing for sure...";
 			link.l1.go = "DisasterCap_3";
 		break;
-		
 		case "DisasterCap_3":
 			dialog.text = "Oh, I am sorry, I forgot to introduce myself. I am " + GetFullName(npchar) + ". Do you already know how did we end up here? The storm made our ship uncontrollable\nA few days later, she hit the reefs not far from this bay and the gale destroyed her in minutes. Only a few dozens of my crew survived. The rest are lying at the bottom. We pray for their souls every day...";
 			link.l1 = "Accept my condolences, captain " + GetFullName(npchar) + ". I am so sorry.";
 			link.l1.go = "DisasterCap_4";
 		break;
-		
 		case "DisasterCap_4":
 			dialog.text = "Thank you... Survivors have set up a camp on the shore, hoping to get aid. You are just in time, captain! The local war-like Indians are aware of our presence, we will not stand a chance against hundreds of them if they attack us\nThere is also a pirate ship, cruising in this area, it looks like they are looking for us. Have you met this pirate, captain?";
 			link.l1 = "No I haven't.";
 			link.l1.go = "DisasterCap_5";
 		break;
-		
 		case "DisasterCap_5":
 			dialog.text = "Praise the Lord for that. He is one of those who attacked us before that damn storm. Like a hyena, he is eager to finish a wounded pray, so he has arrived here, to this island.";
 			link.l1 = "I see. Now it's time to decide what we do next.";
 			link.l1.go = "DisasterCap_6";
 		break;
-		
 		case "DisasterCap_6":
 			dialog.text = "To decide what, captain? Take us aboard and let's get away from this cursed place.";
 			link.l1 = "Absolutely. I have failed to save the ship, at least I will save her crew. Roll up your camp and I will order to send longboats here. Welcome aboard!";
 			link.l1.go = "DisasterCap_7";
 		break;
-		
 		case "DisasterCap_7":
 			PlaySound("people fight\rifle_fire1.wav");
 			PlaySound("people fight\player_man_shoot_01.wav");
@@ -730,7 +653,6 @@ void ProcessDialogEvent()
 			link.l1.go = "exit";
 			AddDialogExitQuestFunction("DisasterShipCrew_IndianAttack");
 		break;
-		
 		case "DisasterCap_8":
 			dialog.text = "Fuh, we have made it... See, captain, I have told you that this bay is the hell itself. It is the third Indian attack already! We have to leave this place as soon as possible, we won't survive another attack.";
 			link.l1 = "Yes, you are right. Gather every living soul and move on my ship! I will order to send us longboats immediately!";
@@ -742,20 +664,17 @@ void ProcessDialogEvent()
 			AddQuestUserData("Escort", "sShore", XI_ConvertString(pchar.questTemp.WPU.Current.TargetIslandID.Shore));
 		break;
 	// <-- эскорт 2 уровень
-		
 	//Jason --> -------------------------- Заносчивый аристократ ------------------------------------------------
 		case "Badboy":
 			dialog.text = "Hic... What do you want from me? Get lost I have no wish to talk with you.";
 			link.l1 = "Are you "+pchar.GenQuest.Badboy.Brothel.Name+"?";
 			link.l1.go = "Badboy_1";
 		break;
-		
 		case "Badboy_1":
 			dialog.text = "Yes, I am. And what is your business?";
 			link.l1 = "It is pretty simple. There is someone in this town who's got enough of your tricks. This person is fed up of them. Now I look at you and I see why. Don't show up in the local brothel ever again or you will get troubles. Got it?";
 			link.l1.go = "Badboy_2";
 		break;
-		
 		case "Badboy_2":
 			switch (sti(pchar.GenQuest.Badboy.Brothel.Type))
 			{
@@ -792,7 +711,6 @@ void ProcessDialogEvent()
 				break;
 			}
 		break;
-		
 		case "Badboy_fight_1":
 			chrDisableReloadToLocation = true;
 			LAi_LocationFightDisable(&Locations[FindLocation(pchar.location)], false);
@@ -807,13 +725,11 @@ void ProcessDialogEvent()
 			LAi_SetCheckMinHP(npchar, 10.0, true, "Badboy_capture");
 			DialogExit();
 		break;
-		
 		case "Badboy_after_fight":
 			dialog.text = "Wait! Stop! I surrender! Spare me!";
 			link.l1 = "And than's how you are talking now!";
 			link.l1.go = "Badboy_after_fight_1";
 		break;
-		
 		case "Badboy_after_fight_1":
 			dialog.text = "I beg you, please, spare me! I will do what you ask! I will never show up in that brothel!";
 			link.l1 = "This pose suits only to a scum like you. I hope that this will be a lesson for you for the rest of your life. And behave yourself properly in this town.";
@@ -822,7 +738,6 @@ void ProcessDialogEvent()
 			link.l2.go = "Badboy_killed";
 			pchar.GenQuest.Badboy.Complete = "true";
 		break;
-		
 		case "Badboy_exit":
 			LAi_SetPlayerType(pchar);
 			chrDisableReloadToLocation = false;
@@ -832,13 +747,11 @@ void ProcessDialogEvent()
 			LAi_ActorRunToLocation(npchar, "reload", "reload1", "none", "", "", "", -1);
 			DialogExit();
 		break;
-		
 		case "Badboy_killed":
 		DialogExit();
 		LAi_SetImmortal(npchar, false);
 		LAi_ActorAnimation(pchar, "shot", "Badboy_killed_end", 2.2);
 		break;
-		
 		case "Badboy_duel":
 			chrDisableReloadToLocation = true;//закрыть локацию
 			LAi_LocationDisableOfficersGen(pchar.GenQuest.Badboy.Brothel.City + "_ExitTown", true);//офицеров не пускать
@@ -864,13 +777,11 @@ void ProcessDialogEvent()
 			SetFunctionTimerCondition("Badboy_duelOver", 0, 0, 1, false);
 			DialogExit();
 		break;
-		
 		case "Badboy_duel_1":
 			dialog.text = "Time to go to hell, fucker! Pray for yourself, but do it fast, I don't have a whole damn day...";
 			link.l1 = "Less talking, more fighting, scum!";
 			link.l1.go = "Badboy_duel_2";
 		break;
-		
 		case "Badboy_duel_2":
 			chrDisableReloadToLocation = true;
 			LAi_SetPlayerType(pchar);
@@ -882,7 +793,6 @@ void ProcessDialogEvent()
 			DialogExit();
 			AddDialogExitQuest("MainHeroFightModeOn");
 		break;
-		
 		case "exit_continue":
 			sld = characterFromID("Badboy");        
 			LAi_RemoveLoginTime(sld); // patch-6
@@ -892,13 +802,11 @@ void ProcessDialogEvent()
 			LAi_ActorRunToLocation(sld, "reload", "reload1", "none", "", "", "", -1);
 			DialogExit();
 		break;		
-		
 		case "Badboy_friends":
 			dialog.text = "And there he is, this insolent bastard! Let's show him who owns this town, lads!";
 			link.l1 = "Ah, you're such a degenerate! But I have warned you. You and your apes will be sent right to the hell in a minute!";
 			link.l1.go = "Badboy_friends_fight";
 		break;
-		
 		case "Badboy_friends_fight":
 			LAi_LocationFightDisable(&Locations[FindLocation(pchar.location)], false);
 			LAi_group_SetRelation("EnemyFight", LAI_GROUP_PLAYER, LAI_GROUP_ENEMY);
@@ -909,7 +817,6 @@ void ProcessDialogEvent()
 			DeleteAttribute(pchar, "GenQuest.Badboy");
 		break;
 	//Jason <-- Заносчивый аристократ
-		
 	//Jason --> ------------------------------- Место под солнцем ----------------------------------------------
 		case "Sunplace_Store":
 			pchar.quest.SunplaceContinue_Over.over = "yes";
@@ -919,19 +826,16 @@ void ProcessDialogEvent()
 			link.l2 = "Hm... No... It is nothing. It looks like I was mistaken. Pardon me for bothering you.";
 			link.l2.go = "Sunplace_Store_exit";
 		break;
-		
 		case "Sunplace_Store_1":
 			dialog.text = "What a silly joke, sir! Explain yourself or I will...";
 			link.l1 = "And what are you going to do, miserable herring? You have done a bad turn to one good man and he is really upset. So pray now and do it quickly because I am in a hurry.";
 			link.l1.go = "Sunplace_Store_3";
 		break;
-		
 		case "Sunplace_Store_3":
 			dialog.text = "What... what are you doing, sir! Help! Somebody help! Murderer!";
 			link.l1 = "And I thought you would spend your last seconds on praying, at least you could've had a chance to reach the heavens...";
 			link.l1.go = "Sunplace_Store_fight";
 		break;
-		
 		case "Sunplace_Store_exit":
 			sld = CharacterFromID("SunplaceTrader");
 			sld.lifeday = 0;
@@ -941,13 +845,11 @@ void ProcessDialogEvent()
 			DeleteAttribute(pchar, "GenQuest.Sunplace.Trader");
 			NextDiag.currentnode = "Sunplace_Store_repeat";
 		break;
-		
 		case "Sunplace_Store_repeat":
 			dialog.text = "You again? Why wouldn't you tell me what do you want?";
 			link.l1 = "It is nothing.";
 			link.l1.go = "exit";
 		break;
-		
 		case "Sunplace_Store_fight":
 			LAi_LocationFightDisable(&Locations[FindLocation(pchar.location)], false);
 			DialogExit();
@@ -963,20 +865,17 @@ void ProcessDialogEvent()
 			pchar.quest.Kill_SunplaceTrader.function = "Kill_SunplaceTrader";
 		break;
 	// <-- место под солнцем
-		
 	//------------------------------------- киллеры Лиги-------------------------------------------------------
 		case "LigaHunters":
 			dialog.text = "";
 			link.l1 = "Ah?! What? What the hell are you doing here, damn you? Who has let you in?";
 			link.l1.go = "LigaHunters_1";
 		break;
-		
 		case "LigaHunters_1":
 			dialog.text = "The league needs your life, captain...";
 			link.l1 = "What? Fuck!";
 			link.l1.go = "LigaHunters_2";
 		break;
-		
 		case "LigaHunters_2":
 			DialogExit();
 			LAi_LocationFightDisable(&Locations[FindLocation(pchar.location)], false);
@@ -992,12 +891,10 @@ void ProcessDialogEvent()
 			AddDialogExitQuest("MainHeroFightModeOn");
 		break;
 	// <-- киллеры Лиги
-		
 		case "Exit":
 			NextDiag.CurrentNode = NextDiag.TempNode;
 			DialogExit();
 		break;
-		
 		//замечание по обнаженному оружию от персонажей типа citizen
 		case "CitizenNotBlade":
 			if (loadedLocation.type == "town")

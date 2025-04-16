@@ -1,7 +1,4 @@
-
-
 #define LAI_TMPL_FOLLOW		"follow"
-
 /*
 	Возможные состояния:
 		"wait"		ждёт цели
@@ -10,22 +7,18 @@
 		"pause"		ждёт возможности пройти к цели
 		"falure"	дальше шаблон работать не может
 */
-
-
 bool LAi_tmpl_SetFollow(aref chr, aref follow, float timeout)
 {
 	if(!LAi_tmpl_follow_InitTemplate(chr)) return false;
 	LAi_tmpl_follow_SetFollow(chr, follow, timeout);
 	return true;
 }
-
 bool LAi_tmpl_follow_IsGo(aref chr)
 {
 	if(!CheckAttribute(chr, "chr_ai.tmpl.state")) return false;
 	if(chr.chr_ai.tmpl.state == "go") return true;
 	return false;
 }
-
 bool LAi_tmpl_follow_InitTemplate(aref chr)
 {
 	SendMessage(&chr, "lsl", MSG_CHARACTER_EX_MSG, "LockFightMode", false);
@@ -64,7 +57,6 @@ bool LAi_tmpl_follow_InitTemplate(aref chr)
 	}
 	return true;
 }
-
 //Процессирование шаблона персонажа
 void LAi_tmpl_follow_CharacterUpdate(aref chr, float dltTime)
 {
@@ -111,130 +103,105 @@ void LAi_tmpl_follow_CharacterUpdate(aref chr, float dltTime)
 		}
 	}
 }
-
 //Персонаж выполнил команду  go to point
 void LAi_tmpl_follow_EndGoToPoint(aref chr)
 {
 	LAi_tmpl_follow_updatetemplate(chr);
 }
-
 //Персонаж провалил команду  go to point
 void LAi_tmpl_follow_FailureGoToPoint(aref chr)
 {
 	LAi_tmpl_follow_updatetemplate(chr);
 }
-
 //Персонаж выполнил команду  run to point
 void LAi_tmpl_follow_EndRunToPoint(aref chr)
 {	
 	LAi_tmpl_follow_updatetemplate(chr);
 }
-
 //Персонаж провалил команду  run to point
 void LAi_tmpl_follow_FailureRunToPoint(aref chr)
 {	
 	LAi_tmpl_follow_updatetemplate(chr);
 }
-
 //Персонаж не может добраться до точки назначения
 void LAi_tmpl_follow_BusyPos(aref chr, float x, float y, float z)
 {
 	LAi_tmpl_follow_Stop(chr, 1.0 + rand(3));
 }
-
 //Персонаж начал перемещение за другим
 void LAi_tmpl_follow_FollowGo(aref chr)
 {
 	chr.chr_ai.tmpl.state = "go";
 }
-
 //Персонаж начал дошёл до другого персонажа
 void LAi_tmpl_follow_FollowStay(aref chr)
 {	
 	chr.chr_ai.tmpl.state = "stay";
 	LAi_tmpl_follow_Complite(chr);
 }
-
 //Персонаж провалил команду  follow character
 void LAi_tmpl_follow_FailureFollow(aref chr)
 {	
 	LAi_tmpl_follow_updatetemplate(chr);
 }
-
-
 //Персонаж начал перемещение за другим
 void LAi_tmpl_follow_FightGo(aref chr)
 {
 	LAi_tmpl_follow_updatetemplate(chr);
 }
-
 //Персонаж начал дошёл до другого персонажа
 void LAi_tmpl_follow_FightStay(aref chr)
 {
 	LAi_tmpl_follow_updatetemplate(chr);
 }
-
 //Персонаж провалил команду  Fight
 void LAi_tmpl_follow_FailureFight(aref chr)
 {
 	LAi_tmpl_follow_updatetemplate(chr);
 }
-
 //Можно ли стрелять
 bool LAi_tmpl_follow_IsFire(aref chr)
 {	
 	return false;
 }
-
 //Можно ли использовать оружие
 bool LAi_tmpl_follow_IsFight(aref chr)
 {
 	return false;
 }
-
 //Персонаж выполнил команду  escape
 void LAi_tmpl_follow_EndEscape(aref chr)
 {
 	LAi_tmpl_follow_updatetemplate(chr);
 }
-
 //Персонаж скользит вдоль патча
 void LAi_tmpl_follow_EscapeSlide(aref chr)
 {
 	LAi_tmpl_follow_updatetemplate(chr);
 }
-
 //Персонаж провалил команду  escape
 void LAi_tmpl_follow_FailureEscape(aref chr)
 {
 	LAi_tmpl_follow_updatetemplate(chr);
 }
-
-
 //Персонаж толкается с другими персонажами
 void LAi_tmpl_follow_ColThreshold(aref chr)
 {
 	LAi_tmpl_follow_Stop(chr, 1.0 + rand(3));
 }
-
 //Персонаж закончил проигрывать анимацию
 void LAi_tmpl_follow_EndAction(aref chr)
 {
 	LAi_tmpl_follow_updatetemplate(chr);
 }
-
-
 //Персонажа просят освободить место
 void LAi_tmpl_follow_FreePos(aref chr, aref who)
 {
 	LAi_tmpl_follow_Go(chr);
 }
-
 //------------------------------------------------------------------------------------------
 //Внутреннии функции
 //------------------------------------------------------------------------------------------
-
-
 //Установить за кем следовать
 bool LAi_tmpl_follow_SetFollow(aref chr, aref follow, float timeout)
 {
@@ -258,7 +225,6 @@ bool LAi_tmpl_follow_SetFollow(aref chr, aref follow, float timeout)
 	}
 	return true;
 }
-
 void LAi_tmpl_follow_Go(aref chr)
 {
 	if(chr.chr_ai.tmpl.state != "pause") return;
@@ -266,7 +232,6 @@ void LAi_tmpl_follow_Go(aref chr)
 	chr.chr_ai.tmpl.state = "go";
 	LAi_tmpl_follow_updatetemplate(chr);
 }
-
 void LAi_tmpl_follow_Stop(aref chr, float time)
 {
 	if(chr.chr_ai.tmpl.state != "go") return;
@@ -274,7 +239,6 @@ void LAi_tmpl_follow_Stop(aref chr, float time)
 	chr.chr_ai.tmpl.state = "pause";
 	SetCharacterTask_Stay(chr);
 }
-
 bool LAi_tmpl_follow_Teleport(aref chr)
 {
 	if(stf(chr.chr_ai.tmpl.timeout) >= 0)
@@ -289,12 +253,10 @@ bool LAi_tmpl_follow_Teleport(aref chr)
 	}
 	return false;
 }
-
 void LAi_tmpl_follow_Complite(aref chr)
 {
 	LAi_Character_TemplateComplite(chr, LAI_TMPL_FOLLOW);
 }
-
 void LAi_tmpl_follow_updatetemplate(aref chr)
 {
 	bool isGo = false;

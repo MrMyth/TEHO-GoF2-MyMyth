@@ -1,4 +1,3 @@
-
 int LocationInitBarbados(int n)
 {	
 	//////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
@@ -7,11 +6,9 @@ int LocationInitBarbados(int n)
 	locations[n].id = "Bridgetown_town";
 	locations[n].id.label = "Street";
 	locations[n].worldmap = "Bridgetown";
-	
 	locations[n].townsack = "Bridgetown";
 	locations[n].fastreload = "Bridgetown";
 	locations[n].islandId = "Barbados";
-	
 	locations[n].filespath.models = "locations\Town_Barbados\Town\";
 	locations[n].image = "loading\Town.tga";
 	locations[n].citizens = true;
@@ -36,7 +33,6 @@ int LocationInitBarbados(int n)
     locations[n].models.always.Waterfall1.uvslide.v1 = 0.0;
 	locations[n].models.always.Waterfall1.tech = "LocationWaterFall";
 	locations[n].models.always.Waterfall1.level = 50;
-	
 	locations[n].models.always.Waterfall2 = "fontain2";
 	locations[n].models.always.Waterfall2.uvslide.v0 = 0.2;
     locations[n].models.always.Waterfall2.uvslide.v1 = 0.0;
@@ -67,150 +63,127 @@ int LocationInitBarbados(int n)
 	locations[n].reload.l1.autoreload = "0";
 	locations[n].reload.l1.label = "Sea";
 	locations[n].locators_radius.reload.reload1_back = 1.8;
-
 	locations[n].reload.l2.name = "reload2_back";
 	locations[n].reload.l2.go = "Barbados";
 	locations[n].reload.l2.emerge = "reload_1";
 	locations[n].reload.l2.autoreload = "0";
 	locations[n].reload.l2.label = "Sea";
 	locations[n].locators_radius.reload.reload2_back = 1.8;
-
 	locations[n].reload.l3.name = "reload3_back";
 	locations[n].reload.l3.go = "Bridgetown_townhall";
 	locations[n].reload.l3.emerge = "reload1";
 	locations[n].reload.l3.autoreload = "0";
 	locations[n].reload.l3.label = "Residence";
 	locations[n].reload.l3.close_for_night = 1;
-
 	/*locations[n].reload.lR1.name = "reloadR1";
 	locations[n].reload.lR1.go = "Bridgetown_TownhallRoom";
 	locations[n].reload.lR1.emerge = "reload3";
 	locations[n].reload.lR1.autoreload = "0";
 	locations[n].reload.lR1.label = "Residence";
 	locations[n].reload.lR1.close_for_night = 1;*/
-
 	locations[n].reload.l4.name = "reload4_back";
 	locations[n].reload.l4.go = "Bridgetown_tavern";
 	locations[n].reload.l4.emerge = "reload1";
 	locations[n].reload.l4.autoreload = "0";
 	locations[n].reload.l4.label = "Tavern";
-
 	locations[n].reload.l5.name = "reload5_back";
 	locations[n].reload.l5.go = "Bridgetown_shipyard";
 	locations[n].reload.l5.emerge = "reload1";
 	locations[n].reload.l5.autoreload = "0";
 	locations[n].reload.l5.label = "Shipyard";
 	locations[n].reload.l5.close_for_night = 1;
-
 	locations[n].reload.l6.name = "reload6_back";
 	locations[n].reload.l6.go = "Bridgetown_store";
 	locations[n].reload.l6.emerge = "reload1";
 	locations[n].reload.l6.autoreload = "0";
 	locations[n].reload.l6.label = "Store";
 	locations[n].reload.l6.close_for_night = 1;
-
 	locations[n].reload.l7.name = "reload7_back";
 	locations[n].reload.l7.go = "Bridgetown_church";
 	locations[n].reload.l7.emerge = "reload1";
 	locations[n].reload.l7.autoreload = "0";
 	locations[n].reload.l7.label = "Church";
 	//locations[n].reload.l7.close_for_night = 1;
-
 	locations[n].reload.l8.name = "reload8_back";
 	locations[n].reload.l8.go = "Bridgetown_bank";
 	locations[n].reload.l8.emerge = "reload1";
 	locations[n].reload.l8.autoreload = "0";
 	locations[n].reload.l8.label = "Usurer House";
 	locations[n].reload.l8.close_for_night = 1;
-
 	locations[n].reload.l9.name = "reload9_back";
 	locations[n].reload.l9.go = "Bridgetown_brothel";
 	locations[n].reload.l9.emerge = "reload1";
 	locations[n].reload.l9.autoreload = "0";
 	locations[n].reload.l9.label = "Brothel";
 	//locations[n].reload.l9.disable = 1;
-
 	locations[n].reload.l91.name = "reload91_back";
 	locations[n].reload.l91.go = "Bridgetown_SecBrRoom";
 	locations[n].reload.l91.emerge = "reload2";
 	locations[n].reload.l91.autoreload = "0";
 	locations[n].reload.l91.label = "Brothel";
-	
 	locations[n].reload.l10.name = "reload10_back";
 	locations[n].reload.l10.go = "Bridgetown_PortOffice";
 	locations[n].reload.l10.emerge = "reload1";
 	locations[n].reload.l10.autoreload = "0";
 	locations[n].reload.l10.label = "PortOffice";
 	locations[n].reload.l10.close_for_night = 1;
-
 	locations[n].reload.gate.name = "gate_back";
 	locations[n].reload.gate.go = "Bridgetown_ExitTown";
 	locations[n].reload.gate.emerge = "reload3";
 	locations[n].reload.gate.autoreload = "0";
 	locations[n].reload.gate.label = "ExitTown";
-
 	locations[n].reload.gate1.name = "gate1_back";
 	locations[n].reload.gate1.go = "Bridgetown_Plantation";
 	locations[n].reload.gate1.emerge = "reload1";
 	locations[n].reload.gate1.autoreload = "0";
 	locations[n].reload.gate1.label = "Plantation";
-	
 	locations[n].reload.jail.name = "reload_jail";
 	locations[n].reload.jail.go = "Bridgetown_prison";
 	locations[n].reload.jail.emerge = "reload1";
 	locations[n].reload.jail.autoreload = "0";
 	locations[n].reload.jail.label = "Prison";
-
     // --> Комоны, загрушки. Номера с начинаются с 20.
 	locations[n].reload.l20.name = "houseS2";
 	locations[n].reload.l20.go = "CommonCobHouse";
 	locations[n].reload.l20.emerge = "reload1";
 	locations[n].reload.l20.autoreload = "0";
 	locations[n].reload.l20.label = "House";
-
 	locations[n].reload.l21.name = "houseH1";
 	locations[n].reload.l21.go = "CommonRoom_MH7";
 	locations[n].reload.l21.emerge = "reload1";
 	locations[n].reload.l21.autoreload = "0";
 	locations[n].reload.l21.label = "House";
-
 	locations[n].reload.l22.name = "houseF2";
 	locations[n].reload.l22.go = "CommonRoom_MH3";
 	locations[n].reload.l22.emerge = "reload1";
 	locations[n].reload.l22.autoreload = "0";
 	locations[n].reload.l22.label = "House";
-
 	locations[n].reload.l23.name = "houseS3";
 	locations[n].reload.l23.go = "CommonStoneHouse";
 	locations[n].reload.l23.emerge = "reload1";
 	locations[n].reload.l23.autoreload = "0";
 	locations[n].reload.l23.label = "House";
-
 	locations[n].reload.l24.name = "houseSp2";
 	locations[n].reload.l24.go = "CommonFlamHouse";
 	locations[n].reload.l24.emerge = "reload1";
 	locations[n].reload.l24.autoreload = "0";
 	locations[n].reload.l24.label = "House";
-
 	locations[n].reload.l25.name = "houseSp1";
 	locations[n].reload.l25.go = "CommonPirateHouse";
 	locations[n].reload.l25.emerge = "reload1";
 	locations[n].reload.l25.autoreload = "0";
 	locations[n].reload.l25.label = "House";
-
 	locations[n].reload.l26.name = "houseF1";
 	locations[n].reload.l26.go = "CommonRoom_MH2";
 	locations[n].reload.l26.emerge = "reload1";
 	locations[n].reload.l26.autoreload = "0";
 	locations[n].reload.l26.label = "House";
-	
 	locations[n].reload.l27.name = "houseS1";
 	locations[n].reload.l27.go = "CommonDoubleflourHouse_1";
 	locations[n].reload.l27.emerge = "reload1";
 	locations[n].reload.l27.autoreload = "0";
 	locations[n].reload.l27.label = "House";
 	n = n + 1;
-
 	//////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 	// ТАВЕРНА
 	//////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
@@ -249,7 +222,6 @@ int LocationInitBarbados(int n)
 	locations[n].reload.l1.emerge = "reload4";
 	locations[n].reload.l1.autoreload = "0";
 	locations[n].reload.l1.label = "Street";
-
 	locations[n].reload.l2.name = "reload2_back";
 	locations[n].reload.l2.go = "Bridgetown_tavern_upstairs";
 	locations[n].reload.l2.emerge = "reload1";
@@ -258,7 +230,6 @@ int LocationInitBarbados(int n)
 	locations[n].reload.l2.disable = 1; // закроем, но связку сделаем для квестовых нужд.
 	LAi_LocationFightDisable(&locations[n], true);
 	n = n + 1;
-
 	//////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 	// КОМНАТА В ТАВЕРНЕ
 	//////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
@@ -281,7 +252,6 @@ int LocationInitBarbados(int n)
 	locations[n].models.always.window = "tavern_room_window";
 	locations[n].models.always.window.tech = "LocationWindows";
 	locations[n].models.always.window.level = 65539;
-
 	locations[n].models.always.back = "..\inside_back";
 	locations[n].models.always.back.level = 65529;
 	//Day
@@ -299,7 +269,6 @@ int LocationInitBarbados(int n)
 	locations[n].reload.l1.label = "Tavern";
 	locations[n].locators_radius.reload.reload1 = 0.8;
 	n = n + 1;
-
  	//////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 	// МАГАЗИН
 	//////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
@@ -346,7 +315,6 @@ int LocationInitBarbados(int n)
 	locations[n].reload.l2.label = "Room";
 	LAi_LocationFightDisable(&locations[n], true);
 	n = n + 1;
-
  	//////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 	// РОСТОВЩИК
 	//////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
@@ -368,7 +336,6 @@ int LocationInitBarbados(int n)
 	locations[n].models.always.window = "Bank02_windows";
 	locations[n].models.always.window.tech = "LocationWindows";
 	locations[n].models.always.window.level = 50;
-
 	locations[n].models.always.back = "..\inside_back";
 	//Day
 	locations[n].models.day.charactersPatch = "Bank02_patch";
@@ -383,7 +350,6 @@ int LocationInitBarbados(int n)
 	locations[n].reload.l1.emerge = "reload8";
 	locations[n].reload.l1.autoreload = "0";
 	locations[n].reload.l1.label = "Street";
-
 	locations[n].reload.l2.name = "reload2";
 	locations[n].reload.l2.go = "CommonResidence_1";
 	locations[n].reload.l2.emerge = "reload1";
@@ -391,7 +357,6 @@ int LocationInitBarbados(int n)
 	locations[n].reload.l2.label = "Room";
 	LAi_LocationFightDisable(&locations[n], true);
 	n = n + 1;
-
  	//////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 	// ВЕРФЬ
 	//////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
@@ -429,7 +394,6 @@ int LocationInitBarbados(int n)
 	locations[n].reload.l1.emerge = "reload5";
 	locations[n].reload.l1.autoreload = "0";
 	locations[n].reload.l1.label = "Street";
-
 	locations[n].reload.l2.name = "reload2";
 	locations[n].reload.l2.go = "CommonPackhouse_2";
 	locations[n].reload.l2.emerge = "reload1";
@@ -437,7 +401,6 @@ int LocationInitBarbados(int n)
 	locations[n].reload.l2.label = "Room";
 	locations[n].locators_radius.item.item1 = 1.0;
 	n = n + 1;
-
  	//////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 	// РЕЗИДЕНЦИЯ
 	//////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
@@ -478,20 +441,17 @@ int LocationInitBarbados(int n)
 	locations[n].reload.l1.emerge = "reload3";
 	locations[n].reload.l1.autoreload = "0";
 	locations[n].reload.l1.label = "Street";
-
 	locations[n].reload.l2.name = "reload2";
 	locations[n].reload.l2.go = "CommonResidence_4";
 	locations[n].reload.l2.emerge = "reload1";
 	locations[n].reload.l2.autoreload = "0";
 	locations[n].reload.l2.label = "Room";
-
 	locations[n].reload.l3.name = "reload3"; //кабинет направо от входа
 	locations[n].reload.l3.go = "Bridgetown_TownhallRoom";
 	locations[n].reload.l3.emerge = "reload1";
 	locations[n].reload.l3.autoreload = "0";
 	locations[n].reload.l3.label = "TownhallRoom";
 	n = n + 1;
-
 	//////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 	locations[n].id = "Bridgetown_TownhallRoom"; //кабинет со спальней и выходом в город сбоку
 	locations[n].id.label = "TownhallRoom";
@@ -511,7 +471,6 @@ int LocationInitBarbados(int n)
 	locations[n].models.always.window = "BigHouseBack_windows";
 	locations[n].models.always.window.tech = "LocationWindows";
 	locations[n].models.always.window.level = 65539;
-
 	locations[n].models.always.back = "..\inside_back";
 	locations[n].models.always.back.level = 65529;
 	//Day
@@ -529,13 +488,11 @@ int LocationInitBarbados(int n)
 	locations[n].reload.l1.emerge = "reload3";
 	locations[n].reload.l1.autoreload = "0";
 	locations[n].reload.l1.label = "Townhall";
-
 	locations[n].reload.l2.name = "reload2";
 	locations[n].reload.l2.go = "CommonBedroom";
 	locations[n].reload.l2.emerge = "reload1";
 	locations[n].reload.l2.autoreload = "0";
 	locations[n].reload.l2.label = "BedRoom";
-
 	/*locations[n].reload.l3.name = "reload3";
 	locations[n].reload.l3.go = "Bridgetown_town";
 	locations[n].reload.l3.emerge = "reloadR1";
@@ -543,7 +500,6 @@ int LocationInitBarbados(int n)
 	locations[n].reload.l3.label = "Street";*/
 	locations[n].locators_radius.item.item1 = 1.0;
 	n = n + 1;
-
 	//////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 	// БОРДЕЛЬ
 	//////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
@@ -566,9 +522,7 @@ int LocationInitBarbados(int n)
 	locations[n].models.always.window = "Brothel_window";
 	locations[n].models.always.window.tech = "LocationWindows";
 	locations[n].models.always.window.level = 50;
-	
 	locations[n].models.always.back = "..\inside_back";
-
 	//Day
 	locations[n].models.day.charactersPatch = "Brothel_patch";
 	//Night
@@ -582,14 +536,12 @@ int LocationInitBarbados(int n)
 	locations[n].reload.l1.emerge = "reload9";
 	locations[n].reload.l1.autoreload = "0";
 	locations[n].reload.l1.label = "Street";
-	
 	locations[n].reload.l2.name = "reload2_back";
 	locations[n].reload.l2.go = "Bridgetown_Brothel_room";
 	locations[n].reload.l2.emerge = "reload1";
 	locations[n].reload.l2.autoreload = "0";
 	locations[n].reload.l2.label = "Brothel Room";
 	locations[n].reload.l2.disable = 1;  //закроем, но связка пусть будет для квестов.
-
 	locations[n].reload.l3.name = "reload3";
 	locations[n].reload.l3.go = "Bridgetown_SecBrRoom";
 	locations[n].reload.l3.emerge = "reload1";
@@ -597,7 +549,6 @@ int LocationInitBarbados(int n)
 	locations[n].reload.l3.label = "Brothel";
 	LAi_LocationFightDisable(&locations[n], true);
 	n = n + 1;
-
 	//////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 	// Комнаты в борделе
 	//////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
@@ -619,7 +570,6 @@ int LocationInitBarbados(int n)
 	locations[n].models.always.window = "Brothel_room_window";
 	locations[n].models.always.window.tech = "LocationWindows";
 	locations[n].models.always.window.level = 50;
-	
 	locations[n].models.always.back = "..\inside_back";
 	//Day
 	locations[n].models.day.charactersPatch = "Brothel_room_patch";
@@ -637,7 +587,6 @@ int LocationInitBarbados(int n)
 	LAi_LocationFightDisable(&locations[n], true);
 	locations[n].locators_radius.item.item1 = 1;
 	n = n + 1;
-
 	//////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 	locations[n].id = "Bridgetown_SecBrRoom"; // вторая комната борделя
 	locations[n].id.label = "Room";
@@ -658,7 +607,6 @@ int LocationInitBarbados(int n)
 	locations[n].models.always.window = "BigHouse03_windows";
 	locations[n].models.always.window.tech = "LocationWindows";
 	locations[n].models.always.window.level = 65539;
-
 	locations[n].models.always.back = "..\inside_back";
 	locations[n].models.always.back.level = 65529;
 	//Day
@@ -676,7 +624,6 @@ int LocationInitBarbados(int n)
 	locations[n].reload.l1.emerge = "reload3";
 	locations[n].reload.l1.autoreload = "0";
 	locations[n].reload.l1.label = "Brothel";
-
 	locations[n].reload.l2.name = "reload2";
 	locations[n].reload.l2.go = "Bridgetown_town";
 	locations[n].reload.l2.emerge = "reload91";
@@ -684,7 +631,6 @@ int LocationInitBarbados(int n)
 	locations[n].reload.l2.label = "Street";
 	LAi_LocationFightDisable(&locations[n], true);
 	n = n + 1;
-
 	//////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 	// ЦЕРКОВЬ
 	//////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
@@ -707,7 +653,6 @@ int LocationInitBarbados(int n)
 	locations[n].models.always.window = "Church01_window";
 	locations[n].models.always.window.tech = "LocationWindows";
 	locations[n].models.always.window.level = 65539;
-
 	locations[n].models.always.back = "..\inside_back";
 	locations[n].models.always.back.level = 65529;
 	//Day
@@ -725,7 +670,6 @@ int LocationInitBarbados(int n)
 	locations[n].reload.l1.label = "Street";
 	LAi_LocationFightDisable(&locations[n], true);
 	n = n + 1;
-	
  	//////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 	// ПОРТОВЫЙ ОФИС
 	//////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
@@ -745,11 +689,9 @@ int LocationInitBarbados(int n)
 	locations[n].models.always.housePortOffice = "PortOffice";
 	locations[n].models.always.housePortOffice.level = 65538;
 	locations[n].models.always.locators = "PortOffice_locators";
-
 	Locations[n].models.always.PortOffice = "PortOffice_windows";
 	Locations[n].models.always.PortOffice.tech = "LocationWindows";
 	locations[n].models.always.PortOffice.level = 65539;
-
 	locations[n].models.always.back = "..\inside_back";
 	locations[n].models.always.back.level = 65529;
 	//Day
@@ -767,7 +709,6 @@ int LocationInitBarbados(int n)
 	locations[n].reload.l1.label = "Street";
 	LAi_LocationFightDisable(&locations[n], true);
 	n = n + 1;
-	
 	////////////////////// prison ////////////////////////////
 	Locations[n].id = "Bridgetown_prison";
 	locations[n].id.label = "Prison";
@@ -800,11 +741,9 @@ int LocationInitBarbados(int n)
 	Locations[n].reload.l1.go = "Bridgetown_town";
 	Locations[n].reload.l1.emerge = "reload_jail";
 	Locations[n].reload.l1.autoreload = "0";
-	
 	locations[n].locators_radius.box.box1 = 0.8;
 	locations[n].box1.QuestClosed = true;
 	n = n + 1;
-
 	//////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 	// Выход из города
 	//////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
@@ -821,12 +760,9 @@ int LocationInitBarbados(int n)
 	locations[n].filespath.models = "locations\Outside\Jungles\TownExitT";
 	Locations[n].models.always.townExit = "townExitT";
 	Locations[n].models.always.townWalls = "townExitT_stucco";
-	
 	Locations[n].models.always.locators = "townExitT_locators";
-		
 	Locations[n].models.always.grassPatch = "townExitT_grass";
 	Locations[n].models.always.grassPatch.texture = "grass\grassshore.tga.tx";
-	
 	Locations[n].models.always.l1 = "plan1";
 	Locations[n].models.always.l1.level = 9;
 	Locations[n].models.always.l1.tech = "LocationModelBlend";
@@ -852,21 +788,18 @@ int LocationInitBarbados(int n)
 	locations[n].reload.l1.autoreload = "1";
 	locations[n].reload.l1.label = "Jungle";
 	locations[n].locators_radius.reload.reload1_back = 2;
-
 	locations[n].reload.l2.name = "reload2_back";
 	locations[n].reload.l2.go = "Bridgetown_fort";
 	locations[n].reload.l2.emerge = "reload1";
 	locations[n].reload.l2.autoreload = "1";
 	locations[n].reload.l2.label = "Bridgetown Fort";
 	locations[n].locators_radius.reload.reload2_back = 2;
-
 	locations[n].reload.l3.name = "reload3";
 	locations[n].reload.l3.go = "Bridgetown_town";
 	locations[n].reload.l3.emerge = "gate_back";
 	locations[n].reload.l3.autoreload = "0";
 	locations[n].reload.l3.label = "Bridgetown";
 	n = n + 1;
-
 	//////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 	// Плантация Барбадоса
 	//////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
@@ -920,7 +853,6 @@ int LocationInitBarbados(int n)
 	locations[n].reload.l1.autoreload = "0";
 	locations[n].reload.l1.label = "Jungle";
 	locations[n].locators_radius.reload.reload1_back = 2;
-
 	locations[n].reload.l2.name = "reload2_back";
 	locations[n].reload.l2.go = "Mayak2";
 	locations[n].reload.l2.emerge = "reload1";
@@ -933,34 +865,28 @@ int LocationInitBarbados(int n)
 	locations[n].reload.l3.emerge = "reload1";
 	locations[n].reload.l3.autoreload = false;
 	locations[n].reload.l3.label = "house";
-
 	locations[n].reload.l4.name = "houseS1";
 	locations[n].reload.l4.go = "Plantation_S1";
 	locations[n].reload.l4.emerge = "reload1";
 	locations[n].reload.l4.autoreload = false;
 	locations[n].reload.l4.label = "house";
-
 	locations[n].reload.l5.name = "houseS2";
 	locations[n].reload.l5.go = "Plantation_S2";
 	locations[n].reload.l5.emerge = "reload2";
 	locations[n].reload.l5.autoreload = false;
 	locations[n].reload.l5.label = "house";
-
 	locations[n].reload.l6.name = "houseF1";
 	locations[n].reload.l6.go = "Plantation_F1";
 	locations[n].reload.l6.emerge = "reload1";
 	locations[n].reload.l6.autoreload = false;
 	locations[n].reload.l6.label = "house";
-
 	locations[n].reload.l7.name = "houseF2";
 	locations[n].reload.l7.go = "Plantation_F2";
 	locations[n].reload.l7.emerge = "reload1";
 	locations[n].reload.l7.autoreload = false;
 	locations[n].reload.l7.label = "house";
-
     locations[n].locators_radius.quest.detector1 = 5.0; //homo
     n = n + 1;
-
 	//////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 	locations[n].id = "Plantation_Sp1";
 	locations[n].filespath.models = "locations\inside\StoneHouse";
@@ -980,7 +906,6 @@ int LocationInitBarbados(int n)
 	locations[n].models.always.window.level = 65539;
 	locations[n].models.day.locators = "StoneHouse_locators";
 	locations[n].models.night.locators = "StoneHouse_Nlocators";
-
 	locations[n].models.always.back = "..\inside_back";
 	locations[n].models.always.back.level = 65529;
     //Day
@@ -997,7 +922,6 @@ int LocationInitBarbados(int n)
 	locations[n].reload.l1.autoreload = "0";
 	locations[n].reload.l1.label = "Plantation";
 	n = n + 1;
-
 	//////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 	locations[n].id = "Plantation_S1";
 	locations[n].filespath.models = "locations\inside\Hut";
@@ -1016,7 +940,6 @@ int LocationInitBarbados(int n)
 	locations[n].models.always.window = "Hut_window";
 	locations[n].models.always.window.tech = "LocationWindows";
 	locations[n].models.always.window.level = 65539;
-
 	locations[n].models.always.back = "..\inside_back2";
 	locations[n].models.always.back.level = 65529;
 	//Day
@@ -1033,7 +956,6 @@ int LocationInitBarbados(int n)
 	locations[n].reload.l1.autoreload = "0";
 	locations[n].reload.l1.label = "Plantation";
 	n = n + 1;
-
 	//////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 	locations[n].id = "Plantation_S2";
 	locations[n].filespath.models = "locations\inside\Hut";
@@ -1052,7 +974,6 @@ int LocationInitBarbados(int n)
 	locations[n].models.always.window = "Hut_window";
 	locations[n].models.always.window.tech = "LocationWindows";
 	locations[n].models.always.window.level = 65539;
-
 	locations[n].models.always.back = "..\inside_back2";
 	locations[n].models.always.back.level = 65529;
 	//Day
@@ -1069,7 +990,6 @@ int LocationInitBarbados(int n)
 	locations[n].reload.l1.autoreload = "0";
 	locations[n].reload.l1.label = "Plantation";
 	n = n + 1;
-
 	//////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 	locations[n].id = "Plantation_F1";
 	locations[n].id.label = "Room";
@@ -1086,11 +1006,9 @@ int LocationInitBarbados(int n)
 	locations[n].models.always.mediumhouse05.level = 65538;
 	locations[n].models.day.locators = "mediumhouse05_locators";
 	locations[n].models.night.locators = "mediumhouse05_Nlocators";
-
 	Locations[n].models.always.mediumhouse05windows = "mediumhouse05_windows";
 	Locations[n].models.always.mediumhouse05windows.tech = "LocationWindows";
 	locations[n].models.always.mediumhouse05windows.level = 65539;
-
 	locations[n].models.always.back = "..\inside_back2";
 	locations[n].models.always.back.level = 65529;
 	//Day
@@ -1108,7 +1026,6 @@ int LocationInitBarbados(int n)
 	locations[n].reload.l1.autoreload = "0";
 	locations[n].reload.l1.label = "Plantation";
 	n = n + 1;
-
 	//////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 	locations[n].id = "Plantation_F2";
 	locations[n].id.label = "House";
@@ -1125,11 +1042,9 @@ int LocationInitBarbados(int n)
 	locations[n].models.always.house.level = 65538;
 	locations[n].models.day.locators = "mediumhouse09_locators";
 	locations[n].models.night.locators = "mediumhouse09_Nlocators";
-
 	Locations[n].models.always.mediumhouse09windows = "mediumhouse09_windows";
 	Locations[n].models.always.mediumhouse09windows.tech = "LocationWindows";
 	locations[n].models.always.mediumhouse09windows.level = 65539;
-
 	locations[n].models.always.back = "..\inside_back";
 	locations[n].models.always.back.level = 65529;
 	//Day
@@ -1147,7 +1062,6 @@ int LocationInitBarbados(int n)
 	locations[n].reload.l1.autoreload = "0";
 	locations[n].reload.l1.label = "Plantation";
 	n = n + 1;
-
 	//////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 	// Маяк Барбадоса
 	//////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
@@ -1165,17 +1079,13 @@ int LocationInitBarbados(int n)
 	locations[n].models.always.lighthouse.sea_reflection = 1;
 	Locations[n].models.always.lighthouseSeabed = "lighthouse_sb";
 	Locations[n].models.always.locators = "lighthouse_locators";
-	
 	Locations[n].models.always.dooropen = "lighthouse_dooropen";
 	Locations[n].models.always.dooropen.tech = "DLightModel";	
-	
 	Locations[n].models.always.windows = "lighthouse_windows";
 	Locations[n].models.always.windows.tech = "LocationWindows";
 	Locations[n].models.always.windows.level = 66530;
-		
 	Locations[n].models.always.grassPatch = "lighthouse_grass";
 	Locations[n].models.always.grassPatch.texture = "grass\grassshore.tga.tx";
-	
 	Locations[n].models.always.l1 = "plan1";
 	Locations[n].models.always.l1.level = 9;
 	Locations[n].models.always.l1.tech = "LocationModelBlend";
@@ -1187,11 +1097,9 @@ int LocationInitBarbados(int n)
 	locations[n].models.day.fonar = "lighthouse_fd";
 	locations[n].models.day.charactersPatch = "lighthouse_patch";
 	Locations[n].models.day.jumpPatch = "lighthouse_jamp";
-	
 	locations[n].models.day.glassinday = "lighthouse_glassinday";
 	Locations[n].models.day.glassinday.tech = "LocationWindows";
 	locations[n].models.day.glassinday.level = 66531;
-	
 	locations[n].models.day.glassonday = "lighthouse_glassonday";
 	Locations[n].models.day.glassonday.tech = "LocationWindows";
 	locations[n].models.day.glassonday.level = 66532;	
@@ -1199,22 +1107,18 @@ int LocationInitBarbados(int n)
 	locations[n].models.night.volumeLight= "lighthouse_volumeLight";
 	locations[n].models.night.volumeLight.tech = "LighthouseLight";
 	locations[n].models.night.volumeLight.level = 66529;	
-	
 	locations[n].models.night.fonar = "lighthouse_fn";
 	locations[n].models.night.winnight = "lighthouse_winnight";
 	locations[n].models.night.winnight.tech = "LighthouseLight";
 	locations[n].models.night.winnight.level = 66529;
 	locations[n].models.night.charactersPatch = "lighthouse_patch";	
 	Locations[n].models.night.jumpPatch = "lighthouse_jamp";
-	
 	locations[n].models.night.glassinnight = "lighthouse_glassinnight";
 	Locations[n].models.night.glassinnight.tech = "LocationWindows";
 	locations[n].models.night.glassinnight.level = 66531;
-	
 	locations[n].models.night.glassonnight = "lighthouse_glassonnight";
 	Locations[n].models.night.glassonnight.tech = "LocationWindows";
 	locations[n].models.night.glassonnight.level = 66532;
-	
 	locations[n].models.night.fonaronnight = "lighthouse_fonaronnight";		
 	//Environment
 	locations[n].environment.weather = "true";
@@ -1226,24 +1130,20 @@ int LocationInitBarbados(int n)
 	locations[n].reload.l1.autoreload = "1";
 	locations[n].reload.l1.label = "Jungle";
 	locations[n].locators_radius.reload.reload1_back = 3.0;
-
 	locations[n].reload.l2.name = "boat";
 	locations[n].reload.l2.go = "Barbados";
 	locations[n].reload.l2.emerge = "reload_2";
 	locations[n].reload.l2.label = "Sea";
 	locations[n].locators_radius.reload.boat = 12.0;
-	
 	locations[n].reload.l3.name = "reload2";
 	locations[n].reload.l3.go = "Mayak2_Lighthouseroom";
 	locations[n].reload.l3.emerge = "reload1";
 	locations[n].reload.l3.label = "room";
 	locations[n].locators_radius.reload.reload2 = 1.0;
 	n = n + 1;
-	
 	////////////////////////////////////////////////////////////////////////////////
 	//////////комната на маяке
 	////////////////////////////////////////////////////////////////////////////////
-	
 	locations[n].id = "Mayak2_Lighthouseroom";
 	locations[n].id.label = "House";
 	locations[n].image = "loading\inside\mediumhouse10.tga";
@@ -1259,11 +1159,9 @@ int LocationInitBarbados(int n)
 	locations[n].models.always.mediumhouse05.level = 65538;
 	locations[n].models.day.locators = "mediumhouse05_locators";
 	locations[n].models.night.locators = "mediumhouse05_Nlocators";
-
 	Locations[n].models.always.mediumhouse05windows = "mediumhouse05_windows";
 	Locations[n].models.always.mediumhouse05windows.tech = "LocationWindows";
 	locations[n].models.always.mediumhouse05windows.level = 65539;
-
 	locations[n].models.always.back = "..\inside_back2";
 	locations[n].models.always.back.level = 65529;
 	//Day
@@ -1281,7 +1179,6 @@ int LocationInitBarbados(int n)
 	locations[n].reload.l1.autoreload = "0";
 	locations[n].reload.l1.label = "Mayak2";
 	n = n + 1;
-
 	//////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 	// Джунгли
 	//////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
@@ -1321,14 +1218,12 @@ int LocationInitBarbados(int n)
 	locations[n].reload.l1.autoreload = "1";
 	locations[n].reload.l1.label = "Jungle";
 	locations[n].locators_radius.reload.reload1_back = 2.0;
-
 	locations[n].reload.l2.name = "reload2_back";
 	locations[n].reload.l2.go = "Shore4";
 	locations[n].reload.l2.emerge = "reload1";
 	locations[n].reload.l2.autoreload = "1";
 	locations[n].reload.l2.label = "Shore4";
 	locations[n].locators_radius.reload.reload2_back = 2.0;
-
 	locations[n].reload.l3.name = "reload3_back";
 	locations[n].reload.l3.go = "Barbados_jungle_03";
 	locations[n].reload.l3.emerge = "reload1";
@@ -1336,7 +1231,6 @@ int LocationInitBarbados(int n)
 	locations[n].reload.l3.label = "Jungle";
 	locations[n].locators_radius.reload.reload3_back = 2.0;
 	n = n + 1;
-
 	//////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 	// Мыс Гаррисон
 	//////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
@@ -1354,10 +1248,8 @@ int LocationInitBarbados(int n)
 	locations[n].models.always.shore05.sea_reflection = 1;
 	Locations[n].models.always.shore05seabed = "shore05_sb";
 	Locations[n].models.always.locators = "shore05_locators"; 
-		
 	Locations[n].models.always.grassPatch = "shore05_grass";
 	Locations[n].models.always.grassPatch.texture = "grass\grassshore.tga.tx";
-	
 	Locations[n].models.always.l1 = "plan1";
 	Locations[n].models.always.l1.level = 9;
 	Locations[n].models.always.l1.tech = "LocationModelBlend";
@@ -1381,7 +1273,6 @@ int LocationInitBarbados(int n)
 	locations[n].reload.l1.autoreload = "1";
 	locations[n].reload.l1.label = "Jungle";
 	locations[n].locators_radius.reload.reload1_back = 2.0;
-
 	locations[n].reload.l2.name = "boat";
 	locations[n].reload.l2.go = "Barbados";
 	locations[n].reload.l2.emerge = "reload_3";
@@ -1389,7 +1280,6 @@ int LocationInitBarbados(int n)
 	locations[n].reload.l2.label = "Sea";
     locations[n].locators_radius.reload.boat = 9.0;
 	n = n + 1;
-
 	//////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 	// Джунгли
 	//////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
@@ -1429,14 +1319,12 @@ int LocationInitBarbados(int n)
 	locations[n].reload.l1.autoreload = "1";
 	locations[n].reload.l1.label = "Jungle";
 	locations[n].locators_radius.reload.reload1_back = 2.0;
-
 	locations[n].reload.l2.name = "reload2_back";
 	locations[n].reload.l2.go = "Shore5";
 	locations[n].reload.l2.emerge = "reload1";
 	locations[n].reload.l2.autoreload = "1";
 	locations[n].reload.l2.label = "Shore5";
 	locations[n].locators_radius.reload.reload2_back = 2.0;
-
 	locations[n].reload.l3.name = "reload3_back";
 	locations[n].reload.l3.go = "Barbados_CaveEntrance";
 	locations[n].reload.l3.emerge = "reload2";
@@ -1444,7 +1332,6 @@ int LocationInitBarbados(int n)
 	locations[n].reload.l3.label = "Jungle";
 	locations[n].locators_radius.reload.reload3_back = 2.0;
 	n = n + 1;
-
 	//////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 	// Вход в шахту
 	//////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
@@ -1487,7 +1374,6 @@ int LocationInitBarbados(int n)
 	locations[n].reload.l1.autoreload = "0";
 	locations[n].reload.l1.label = "Grot";
 	locations[n].locators_radius.reload.reload1_back = 1.3;
-
 	locations[n].reload.l2.name = "reload2_back";
 	locations[n].reload.l2.go = "Barbados_jungle_03";
 	locations[n].reload.l2.emerge = "reload3";
@@ -1495,7 +1381,6 @@ int LocationInitBarbados(int n)
 	locations[n].reload.l2.label = "Jungle";
 	locations[n].locators_radius.reload.reload2_back = 2.0;
 	n = n + 1;
-
 	//////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 	// Шахта
 	//////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
@@ -1511,7 +1396,6 @@ int LocationInitBarbados(int n)
 	locations[n].filespath.models = "locations\inside\DungeonDuffer2";
 	locations[n].models.always.DungeonDuffer2 = "DungeonDuffer2";
 	locations[n].models.always.locators = "DungeonDuffer2_locators";
-
 	locations[n].locators_radius.item.duhi1 = 0.0;
 /*	
 	Locations[n].models.always.rays = "DungeonDuffer2_rays";
@@ -1537,7 +1421,6 @@ int LocationInitBarbados(int n)
 	locations[n].reload.l1.label = "ExitTown";
 	locations[n].locators_radius.reload.reload1_back = 2;
 	n = n + 1;
-
 	//////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 	// мыс Раггед Пойнт
 	//////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
@@ -1555,10 +1438,8 @@ int LocationInitBarbados(int n)
 	locations[n].models.always.shore09.sea_reflection = 1;
 	Locations[n].models.always.shore09seabed = "shore09_sb";
 	Locations[n].models.always.locators = "shore09_locators";
-		
 	Locations[n].models.always.grassPatch = "shore09_grass";
 	Locations[n].models.always.grassPatch.texture = "grass\grassshore.tga.tx";
-	
 	Locations[n].models.always.l1 = "plan1";
 	Locations[n].models.always.l1.level = 9;
 	Locations[n].models.always.l1.tech = "LocationModelBlend";
@@ -1582,7 +1463,6 @@ int LocationInitBarbados(int n)
 	locations[n].reload.l1.autoreload = "1";
 	locations[n].reload.l1.label = "Jungle";
 	locations[n].locators_radius.reload.reload1_back = 2;
-
 	locations[n].reload.l2.name = "boat";
 	locations[n].reload.l2.go = "Barbados";
 	locations[n].reload.l2.emerge = "reload_4";
@@ -1590,6 +1470,5 @@ int LocationInitBarbados(int n)
 	locations[n].reload.l2.label = "Sea";
     locations[n].locators_radius.reload.boat = 9.0;
 	n = n + 1;
-
 	return n;
 }

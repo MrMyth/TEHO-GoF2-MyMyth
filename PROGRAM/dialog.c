@@ -1,28 +1,18 @@
-
 #include "dialog_func.c"
-
-
 #define EVENT_DIALOG_START		"evntDialogStart"
 #define EVENT_DIALOG_EXIT		"evntDialogExit"
-
 #event_handler("dlgReady", "StartDialogWithMainCharacter");
 #event_handler("EmergencyDialogExit","DialogExit");
-
 extern void ProcessDialogEvent();
 extern void ProcessCommonDialogEvent(ref NPChar, aref Link, aref NextDiag); // метод, содержащий ветку квест и др ветки конкрентого НПС
-
 bool dialogDisable = false;
 object	Dialog;
 ref		CharacterRef;
 bool	dialogRun = false;
-
 bool	dialogSelf = false;
-
 string  FullDialogPath;
 string	PathDlgLngExtn = "";//fix
-
 string dialogEditStrings[10];
-
 void  ProcessCommonDialog(ref NPChar, aref Link, aref NextDiag)
 {
     ProcessCommonDialogEvent(NPChar, Link, NextDiag);
@@ -33,7 +23,6 @@ void DialogsInit()
 	//Quest_Init();				//Инициализация начального состояния слухов и информации об NPC ------- Ренат
 	Set_inDialog_Attributes(); // boal
 }
-
 //Начать диалог
 bool DialogMain(ref Character)
 {
@@ -88,25 +77,19 @@ bool DialogMain(ref Character)
 	}
 	return true;	
 }
-
 int startDialogMainCounter = 0;
 int dialogWaitGreetingSound = 0;
 string dialogGreetingSound = "";
-
 void StartDialogMain()
 {
 	startDialogMainCounter++;
 	if(startDialogMainCounter < 3) return;
-	
 	DelEventHandler("frame", "StartDialogMain");
-
 	CreateEntity(&Dialog, "dialog");
 	Dialog.headModel = CharacterRef.headModel;
 	Dialog.gender = CharacterRef.sex;
-
 	DeleteAttribute(&Dialog,"Links");
 	DeleteAttribute(&Dialog,"Text");
-
 	if(CheckAttribute(CharacterRef, "greeting"))
 	{
 		if(CharacterRef.greeting != "")
@@ -128,24 +111,18 @@ void StartDialogMain()
 			}
 		}
 	}
-
 	object persRef = GetCharacterModel(Characters[GetMainCharacterIndex()]);
 	SendMessage(&Dialog, "lii", 0, &Characters[GetMainCharacterIndex()], &persRef);
-
 	object charRef = GetCharacterModel(Characters[makeint(CharacterRef.index)]);
 	SendMessage(&Dialog, "lii", 1, &Characters[makeint(CharacterRef.index)], &charRef);
-
 	LayerSetRealize(REALIZE);
 	LayerAddObject(REALIZE,Dialog,-256);
 	Set_inDialog_Attributes();
 	ProcessDialogEvent();
-
 	SetEventHandler("DialogEvent","ProcessDialogEvent",0);
 	//SetEventHandler("DialogCancel","DialogExit",0);
-
 	Event(EVENT_DIALOG_START,"");
 }
-
 void DialogPlayGreeting()
 {
 	dialogWaitGreetingSound++;
@@ -157,7 +134,6 @@ void DialogPlayGreeting()
 	CharacterRef.greeting.minute = GetMinute();
 	//Dialog.greeting = "Gr_Barmen";
 }
-
 //Начать диалог с самим собой
 void SelfDialog(ref Character)
 {
@@ -192,22 +168,17 @@ void SelfDialog(ref Character)
 	CreateEntity(&Dialog, "dialog");
 	Dialog.headModel = Character.headModel;
 	Dialog.gender = Character.sex;
-
 	object persRef = GetCharacterModel(Characters[GetMainCharacterIndex()]);
 	SendMessage(&Dialog, "lii", 0, Character, &persRef);
 	SendMessage(&Dialog, "lii", 1, Character, &persRef);
-	
 	LayerSetRealize(REALIZE);
 	LayerAddObject(REALIZE,Dialog,-256);
 	Set_inDialog_Attributes();
 	ProcessDialogEvent();
-
 	SetEventHandler("DialogEvent","ProcessDialogEvent",0);
 	//SetEventHandler("DialogCancel","DialogExit",0);	
-
 	Event(EVENT_DIALOG_START,"");
 }
-
 //Закончить диалог
 void DialogExit()
 {
@@ -255,7 +226,6 @@ void DialogExit()
 	//Сообщим об окончании диалога
 	PostEvent(EVENT_DIALOG_EXIT, 1, "l", sti(CharacterRef.index));
 }
-
 //Это событие приходит от Player
 void StartDialogWithMainCharacter()
 {
@@ -272,12 +242,10 @@ void StartDialogWithMainCharacter()
 	DialogMain(&Characters[person]);	
 	//Trace("Dialog: start dialog " + person + " whith main character");
 }
-
 bool LoadDialogFiles(string dialogPath)
 {
 	//FullDialogPath = "dialogs/" + dialogPath;
 	FullDialogPath = "dialogs\russian\" + dialogPath;
-
 	// Выбор директории с языковыми файлами
 	//string sLanguageDir = "dialogs\" + LanguageGetLanguage() + "\";
 	//Путь до текста диалога
@@ -288,10 +256,8 @@ bool LoadDialogFiles(string dialogPath)
 		return false;
 	}*/
 	//PathDlgLngExtn = strcut(dialogPath,0,iTmp-2) + "h";
-
 	//bool retVal = LoadSegment(PathDlgLngExtn);
 	bool retVal;
-	
 	if( !LoadSegment(FullDialogPath) )
 	{
 		Trace("Dialog: Missing dialog file: " + FullDialogPath);
@@ -303,23 +269,18 @@ bool LoadDialogFiles(string dialogPath)
 			PathDlgLngExtn = "";
 		}
 	}
-
 	return retVal;
 }
-
-
 string DText(string sString)
 {
 	return sString;
 }
-
 // boal -->
 bool SetCameraDialogMode(ref chrRef)
 {
 	float x1,y1,z1, x2, y2, z2;
 	if( false==GetCharacterPos(pchar,&x1,&y1,&z1) ) return false;
     if( false==GetCharacterPos(chrRef,&x2,&y2,&z2) ) return false;
-
     float a = 0.1;
     float len = GetDistance2D(x1,z1, x2,z2);
 	float dx = x1*(1-a)+x2*a;
@@ -327,7 +288,6 @@ bool SetCameraDialogMode(ref chrRef)
 	len = 1;
 	float s1 = (dx-x1)*len;
 	float s2 = (dz-z1)*len;
-
     float xcam;
 	float zcam;
 	if (rand(1) == 0)

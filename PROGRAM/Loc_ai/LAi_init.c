@@ -1,4 +1,3 @@
-
 #include "Loc_ai\LAi_defines.c"
 #include "Loc_ai\LAi_events.c"
 #include "Loc_ai\LAi_utils.c"
@@ -15,12 +14,10 @@
 #include "Loc_ai\LAi_sounds.c"
 #include "Loc_ai\LAi_utilites.c"
 #include "Loc_ai\LAi_zLoadUtils.c" 
-
 bool LAi_IsInitedAI = false;
 bool LAi_IsCapturedLocation = false;
 bool LAi_restoreStates = false;
 bool LAi_IsBoarding = false;
-
 //Инициализация интелекта
 void LocAi_Init(ref loc)
 {
@@ -78,13 +75,11 @@ void LocAi_Init(ref loc)
 					LAi_SetCurHPMax(&Characters[idx]);
 					LAi_UseAtidoteBottle(&Characters[idx]);
 				}
-
 				if (Characters[idx].location == pchar.location)) continue; // fix
 				DeleteAttribute(&Characters[idx], "location");
 				Characters[idx].location = pchar.location;
 				Characters[idx].location.group = "officers";
 				Characters[idx].location.locator = pchar.location.locator + "_" + locIndex;
-
 				if(CheckAttribute(loc, "locators.officers"))
 				{
 	    			locIndex = locIndex + 1;
@@ -101,7 +96,6 @@ void LocAi_Init(ref loc)
 			{
 				idx = GetOfficersIndex(pchar, i);
 				if(idx < 0) continue;
-
 				Characters[idx].location = "none";
 				Characters[idx].location.group = "";
 				Characters[idx].location.locator = "";
@@ -112,7 +106,6 @@ void LocAi_Init(ref loc)
 	}
 	LAi_IsCapturedLocation = IsLocationCaptured(loc.id);
 }
-
 //Инициализация интелекта
 void LocAi_Release()
 {
@@ -145,8 +138,6 @@ void LocAi_Release()
 	DelEventHandler("Location_Character_EndAction", "LAi_Character_EndAction");	
 	DelEventHandler("Location_CharacterItemAction", "LAi_CharacterItemAction");
 }
-
-
 void LocAi_PostInit(ref loc)
 {
 	if(!LAi_IsBoarding) LAi_CharacterPostLogin(loc);
@@ -160,13 +151,11 @@ void LocAi_PostInit(ref loc)
 	}
 	LAi_restoreStates = false;
 }
-
 //Сохранение информации
 void LAi_SaveInfo()
 {
 	LAi_group_SaveInfo();
 }
-
 //Инициализация перед новой игрой
 void LAi_NewGame()
 {

@@ -1,8 +1,6 @@
 // 11.08.05 Boal Модуль для новой РПГ системы S.P.E.C.I.A.L
 // метод для совместимости с .ИНИ файлом (секция SKILLCHANGER)
-
 #define MAX_ACHIEVMENTS		73
-
 // порог ранга
 int GetCharacterRankRate(ref _refCharacter)
 {
@@ -26,10 +24,8 @@ int GetCharacterAddHPValue(ref _refCharacter)
 	if (GetCharacterEquipByGroup(_refCharacter, CIRASS_ITEM_TYPE) == "cirass2") Ers = Ers+1;
 	if (GetCharacterEquipByGroup(_refCharacter, CIRASS_ITEM_TYPE) == "cirass4") Ers = Ers+1;
 	// <-- убрать влияние кирас
-
 	int ret = makeint(2 + Ers * 0.55 + 0.5);
   //  int ret = makeint(2 + GetCharacterSPECIALSimple(_refCharacter, SPECIAL_E) * 0.55 + 0.5);
-
 	if (CheckCharacterPerk(_refCharacter, "HPPlus"))
 	{
 		ret = ret + 1;
@@ -47,13 +43,11 @@ int GetCharacterAddHPValue(ref _refCharacter)
 	}
 	return ret;
 }
-
 int GetCharacterBaseHPValue(ref _refCharacter)
 {
 	int ret = makeint(30.0 + GetCharacterSPECIALSimple(_refCharacter, SPECIAL_S)*GetCharacterSPECIALSimple(_refCharacter, SPECIAL_E)*0.5);
 	return ret;
 }
-
 float GetCharacterMaxEnergyValue(ref _refCharacter)
 {
     float ret = (30.0 + GetCharacterSPECIAL(_refCharacter, SPECIAL_A)*10);
@@ -67,7 +61,6 @@ float GetCharacterMaxEnergyValue(ref _refCharacter)
 	}
 	return ret;
 }
-
 float GetCharacterMaxEnergyABSValue(ref _refCharacter)
 {
     // проверки перков to_do
@@ -78,7 +71,6 @@ float GetCharacterMaxEnergyABSValue(ref _refCharacter)
 	}
 	return ret;
 }
-
 void SetEnergyToCharacter(ref _refCharacter)
 {
 	_refCharacter.chr_ai.energyMax = GetCharacterMaxEnergyValue(_refCharacter);
@@ -94,36 +86,30 @@ void SetEnergyToCharacter(ref _refCharacter)
 	    }
 	}
 }
-
 int GetCharacterMaxOfficersQty(ref _refCharacter)
 {
     return GetCharacterSPECIAL(_refCharacter, SPECIAL_C)*2;
 }
-
 int AddCharacterExp(ref _refCharacter,int _exp)
 {
 	int retVal = false;
 	return retVal;
 }
-
 int CalculateExperienceFromRank(int _Rank)
 {
 	if(_Rank<2) return 0;
 	int retVal = 100;
 	return retVal;
 }
-
 int GetFreePoints_SelfRate(ref _chref)
 {
     return 40 - GetCharacterSPECIALSimple(_chref, SPECIAL_I);
 }
-
 int GetFreePoints_ShipRate(ref _chref)
 {
     return 40 - GetCharacterSPECIALSimple(_chref, SPECIAL_I);
 }
 /////////////////////////////////////////////////////////////////////////
-
 void SetSelfSkill(ref _refCharacter, int _fl, int _f, int _fh, int _p, int _fr)
 {
     _refCharacter.Skill.FencingL      = _fl;
@@ -134,7 +120,6 @@ void SetSelfSkill(ref _refCharacter, int _fl, int _f, int _fh, int _p, int _fr)
 //    _refCharacter.Skill.Leadership = _ld;
 //    _refCharacter.Skill.Sneak      = _sn;
 }
-
 void SetShipSkill(ref _refCharacter, int _ld, int _cr, int _ac, int _cn, int _sl, int _re, int _gr, int _de, int _sn)
 {
     _refCharacter.Skill.Leadership = _ld;
@@ -147,7 +132,6 @@ void SetShipSkill(ref _refCharacter, int _ld, int _cr, int _ac, int _cn, int _sl
     _refCharacter.Skill.Defence    = _de;
     _refCharacter.Skill.Sneak      = _sn;
 }
-
 void SetSPECIAL(ref _refCharacter, int _s, int _p, int _e, int _c, int _i, int _a, int _l)
 {
     _refCharacter.SPECIAL.Strength   = _s;
@@ -158,7 +142,6 @@ void SetSPECIAL(ref _refCharacter, int _s, int _p, int _e, int _c, int _i, int _
     _refCharacter.SPECIAL.Agility    = _a;
     _refCharacter.SPECIAL.Luck       = _l;
 }
-
 void SetRandSPECIAL(ref _refCharacter)
 {
     SetSPECIAL(_refCharacter,
@@ -170,7 +153,6 @@ void SetRandSPECIAL(ref _refCharacter)
                (4 + rand(6)),
                (2 + rand(8)));
 }
-
 /// влияет только на СПЕЦИАЛ
 int ApplayNavyPenalty(ref _refCharacter, string skillName, int sumSkill)
 {
@@ -179,11 +161,9 @@ int ApplayNavyPenalty(ref _refCharacter, string skillName, int sumSkill)
         int sailSkill;
         // общее умение навигации
         sailSkill = GetSummonSkillFromNameSimple(_refCharacter, SKILL_SAILING);
-        
         int shipClass = GetCharacterShipClass(_refCharacter);
         int needSkill = GetShipClassNavySkill(shipClass);
 		if (CheckAttribute(_refCharacter, "NoNavyPenalty")) needSkill = 1;
-
         if (sailSkill < needSkill)
         {
 			sailSkill = makeint((needSkill - sailSkill)/10.0 + 0.9); // округление до мах всегда
@@ -199,13 +179,11 @@ int ApplayNavyPenaltyToSkill(ref _refCharacter, string skillName, int sumSkill)
     if (IsCompanion(_refCharacter) && GetRemovable(_refCharacter))//пусть будет для компаньонов тоже sti(_refCharacter.index) == GetMainCharacterIndex()) // только для главного, чтоб не тормозить всю игру
     {
         int sailSkill;
-
         // общее умение навигации
         sailSkill = GetSummonSkillFromNameSimple(_refCharacter, SKILL_SAILING);
         int shipClass = GetCharacterShipClass(_refCharacter);
         int needSkill = GetShipClassNavySkill(shipClass);
 		if (CheckAttribute(_refCharacter, "NoNavyPenalty")) needSkill = 1;
-
         if (sailSkill < needSkill)
         {
 			sailSkill = needSkill - sailSkill;
@@ -219,14 +197,10 @@ int ApplayNavyPenaltyToSkill(ref _refCharacter, string skillName, int sumSkill)
 int GetCharacterSPECIAL(ref _refCharacter, string skillName)
 {
     int skillN;
-
 	skillN = GetCharacterSPECIALSimple(_refCharacter, skillName);
-
  	skillN = ApplayNavyPenalty(_refCharacter, skillName, skillN);
-	
     return skillN;
 }
-
 int GetCharacterSPECIALSimple(ref _refCharacter, string skillName)
 {
 	if (!CheckAttribute(_refCharacter,"SPECIAL."+skillName) )
@@ -239,22 +213,16 @@ int GetCharacterSPECIALSimple(ref _refCharacter, string skillName)
     {
         skillN = skillN + GetHealthNum(_refCharacter) - 6; // max -5
     }
-    
 	skillN += ApplySPECIALCirassPenalty(_refCharacter, skillName);
 	skillN += ApplySPECIALMangarosaPotion(_refCharacter, skillName); // Jason
-	
 	if(CheckAttribute(_refCharacter, "GenQuest.EnergyPenalty")) 
 	{
 		skillN += ApplySPECIALQuestPenalty(_refCharacter, skillName); // Jason
 	}
-	
 	if (skillN <= 1) skillN = 1;
 	if( skillN > SPECIAL_MAX ) skillN = SPECIAL_MAX;
-
 	return skillN;
 }
-
-
 void InitRPGType()
 {
     NullCharacter.SPECIALType.Strength = true;
@@ -264,7 +232,6 @@ void InitRPGType()
     NullCharacter.SPECIALType.Intellect = true;
     NullCharacter.SPECIALType.Agility = true;
     NullCharacter.SPECIALType.Luck = true;
-    
     NullCharacter.SelfType.Leadership = true;
 	NullCharacter.SelfType.FencingL = true;
     NullCharacter.SelfType.FencingS = true;
@@ -280,14 +247,11 @@ void InitRPGType()
     NullCharacter.ShipType.Repair = true;
     NullCharacter.ShipType.Grappling = true;
     NullCharacter.ShipType.Defence = true;
-
 }
-
 bool isSPECIALTypeSkill(string _param)
 {
     return CheckAttribute(&NullCharacter, "SPECIALType." + _param);
 }
-
 bool isShipTypeSkill(string _param)
 {
     return CheckAttribute(&NullCharacter, "ShipType." + _param);
@@ -296,23 +260,18 @@ bool isSelfTypeSkill(string _param)
 {
     return CheckAttribute(&NullCharacter, "SelfType." + _param);
 }
-
 string GetRPGText(string _param)
 {
     int    idLngFile = -1;
     string totalInfo;
-
     idLngFile = LanguageOpenFile("RPGDescribe.txt");
     totalInfo = LanguageConvertString(idLngFile, _param);
     LanguageCloseFile(idLngFile);
-
     return totalInfo;
 }
-
 string GetSkillNameByIdx(int idx)
 {
     string ret = "";
-    
     switch (idx)
     {
         case 1:    ret = SKILL_F_LIGHT;   break;
@@ -320,7 +279,6 @@ string GetSkillNameByIdx(int idx)
         case 3:    ret = SKILL_F_HEAVY;   break;
         case 4:    ret = SKILL_PISTOL;    break;
         case 5:    ret = SKILL_FORTUNE;   break;
-        
         case 6:    ret = SKILL_LEADERSHIP; break;
         case 7:    ret = SKILL_COMMERCE;   break;
         case 8:    ret = SKILL_ACCURACY;   break;
@@ -330,7 +288,6 @@ string GetSkillNameByIdx(int idx)
         case 12:   ret = SKILL_GRAPPLING;  break;
         case 13:   ret = SKILL_DEFENCE;    break;
         case 14:   ret = SKILL_SNEAK;      break;
-        
         case 15:   ret = SPECIAL_S;   break;
         case 16:   ret = SPECIAL_P;   break;
         case 17:   ret = SPECIAL_A;   break;
@@ -345,7 +302,6 @@ string GetSkillNameByIdx(int idx)
 string GetSkillNameByTRIdx(string _type, int idx)
 {
     string ret = "";
-
 	switch (_type)
 	{
 		case "SelfType" :
@@ -360,7 +316,6 @@ string GetSkillNameByTRIdx(string _type, int idx)
                 case 7:    ret = SKILL_SNEAK;      break;
 		    }
 		break;
-		
 		case "ShipType" :
 		    switch (idx)
 		    {
@@ -373,7 +328,6 @@ string GetSkillNameByTRIdx(string _type, int idx)
                 case 7:    ret = SKILL_COMMERCE;      break;
 		    }
 		break;
-		
 		case "SPECIALType" :
 		    switch (idx)
 		    {
@@ -398,7 +352,6 @@ int GetSkillValue(ref _refCharacter, string _type, string _skillName)
     }
     return 0;
 }
-
 float GetSkillValueExp(ref _refCharacter, string _skillName)
 {
     string skillName_exp = _skillName + "_exp";
@@ -411,7 +364,6 @@ float GetSkillValueExp(ref _refCharacter, string _skillName)
 int AddSPECIALValue(ref _refCharacter, string _skillName, int _add)
 {
     string _type = SPECIAL_TYPE;
-    
     if (CheckAttribute(_refCharacter, _type + "." + _skillName))
     {
         _refCharacter.(_type).(_skillName) = sti(_refCharacter.(_type).(_skillName)) + _add;
@@ -422,14 +374,11 @@ int AddSPECIALValue(ref _refCharacter, string _skillName, int _add)
     }
     if (sti(_refCharacter.(_type).(_skillName)) < 1) {_refCharacter.(_type).(_skillName) = 1;}
     if (sti(_refCharacter.(_type).(_skillName)) > SPECIAL_MAX) {_refCharacter.(_type).(_skillName) = SPECIAL_MAX;}
-    
     return sti(_refCharacter.(_type).(_skillName));
 }
-
 int AddCharacterSkill(ref _chref, string _skill, int _addValue)
 {
     string  _skill_exp = _skill + "_exp";
-
     if (_addValue > 0)
 	{
 	    if ((sti(_chref.skill.(_skill)) + _addValue) > SKILL_MAX)
@@ -438,7 +387,6 @@ int AddCharacterSkill(ref _chref, string _skill, int _addValue)
 	    }
 	}
     _chref.skill.(_skill) = sti(_chref.skill.(_skill)) + _addValue;
-
 	if (sti(_chref.skill.(_skill)) < 1)
 	{
         _chref.skill.(_skill) = 1;
@@ -454,7 +402,6 @@ int AddCharacterSkill(ref _chref, string _skill, int _addValue)
 	}
 	return sti(_chref.skill.(_skill));
 }
-
 void AddCharacterSkillDontClearExp(ref _chref, string _skill, int _addValue)
 {
     /*if (_addValue > 0)
@@ -465,7 +412,6 @@ void AddCharacterSkillDontClearExp(ref _chref, string _skill, int _addValue)
 	    }
 	} */
 	_chref.skill.(_skill) = sti(_chref.skill.(_skill)) + _addValue;
-
 	if (sti(_chref.skill.(_skill)) < 1)
 	{
         _chref.skill.(_skill) = 1;
@@ -479,12 +425,10 @@ void AddCharacterSkillDontClearExp(ref _chref, string _skill, int _addValue)
 	   ApplayNewSkill(_chref, _skill, _addValue);
 	}
 }
-
 void ApplayNewSkill(ref _chref, string _skill, int _addValue)
 {
     // трем кэш
     CheckAttribute(_chref, "BakSkill." + _skill);
-    
 	// boal 05.05.04 разделение по группам -->
     if (isSelfTypeSkill(_skill))
     {
@@ -537,21 +481,17 @@ void ApplayNewSkill(ref _chref, string _skill, int _addValue)
        }
     }
     // boal 05.05.04 разделение по группам <--
-
-
     if(!CheckAttribute(_chref, "rank_exp"))
     {
       _chref.rank_exp = 0;
     }
     _chref.rank_exp = sti(_chref.rank_exp) + _addValue;
-
     if (sti(_chref.rank_exp) >= GetCharacterRankRate(_chref)) // use classic mode - 2 skill = 1 rank
     {
         _chref.rank_exp = 0;
         _chref.rank = sti(_chref.rank) + 1;
         float mhp = LAi_GetCharacterMaxHP(_chref) + GetCharacterAddHPValue(_chref);
         LAi_SetHP(_chref,mhp,mhp);
-
         if (CheckCharacterPerk(_chref, "EnergyPlus"))
 		{
 		    if (!CheckAttribute(_chref, "PerkValue.EnergyPlus"))
@@ -561,7 +501,6 @@ void ApplayNewSkill(ref _chref, string _skill, int _addValue)
 			_chref.PerkValue.EnergyPlus = sti(_chref.PerkValue.EnergyPlus) + 1;
 			SetEnergyToCharacter(_chref);
 		}
-
         // сообщение в лог
         if(IsOfficer(_chref) || IsCompanion(_chref))
         {
@@ -576,9 +515,7 @@ void InitStartParam(ref _chref)
 {
     int i;
     string  skillName;
-    
     ClearCharacterExpRate(_chref);
-    
     for (i=1; i<15; i++)
     {
         skillName = GetSkillNameByIdx(i);
@@ -590,11 +527,9 @@ void InitStartParam(ref _chref)
 float GetCharacterExpRate(ref _chref, string _skill)
 {
     string  skill_rate = _skill + "_rate";
-
     if (!CheckAttribute(_chref, "skill." + skill_rate))
     {
         float  divBy = 1.0;
-
         switch (_skill)
         {
             case SKILL_F_LIGHT:
@@ -612,7 +547,6 @@ float GetCharacterExpRate(ref _chref, string _skill)
             case SKILL_FORTUNE:
                 divBy = GetCharacterSPECIAL(_chref, SPECIAL_L);
             break;
-            
             case SKILL_LEADERSHIP:
                 divBy = GetCharacterSPECIAL(_chref, SPECIAL_I)*0.1 + GetCharacterSPECIAL(_chref, SPECIAL_C)*0.9;
             break;
@@ -645,7 +579,6 @@ float GetCharacterExpRate(ref _chref, string _skill)
     }
     return  stf(_chref.skill.(skill_rate));
 }
-
 // table service
 string GetReputationComplexName(int reputation, string repName)
 {	
@@ -658,7 +591,6 @@ string GetReputationComplexName(int reputation, string repName)
 			if(reputation < 81)  return "REPUTATION_FAME_4";
 			return "REPUTATION_FAME_5";
 		break;
-		
 		case "nobility" :
 			if(reputation < 6)   return "REPUTATION_NOBILITY_1";
 			if(reputation < 16)  return "REPUTATION_NOBILITY_2";
@@ -672,11 +604,9 @@ string GetReputationComplexName(int reputation, string repName)
 		break;
 	}
 }
-
 string GetFullReputationComplexName(ref chref)
 {
 	string sReputation, sFame, sNobility;
-	
 	if(CheckAttribute(chref,"reputation.fame")) 
 	{
 		sFame = GetReputationComplexName(sti(chref.reputation.fame), "fame");
@@ -685,7 +615,6 @@ string GetFullReputationComplexName(ref chref)
 	{
 		sFame = "REPUTATION_FAME_1";	
 	}	
-	
 	if(CheckAttribute(chref,"reputation.nobility")) 
 	{
 		sNobility = GetReputationComplexName(sti(chref.reputation.nobility), "nobility");
@@ -695,10 +624,8 @@ string GetFullReputationComplexName(ref chref)
 		sNobility = "REPUTATION_NOBILITY_5";	
 	}	
 	sReputation = XI_ConvertString(sFame) + " " + XI_ConvertString(sNobility);
-	
 	return sReputation;
 }
-
 // table service
 string GetReputationName(int reputation)
 {
@@ -720,7 +647,6 @@ string GetReputationName(int reputation)
         return "REPUTATIONT_GOOD_3";
     if(reputation<=90)
         return "REPUTATIONT_GOOD_4";
-
 	return "REPUTATIONT_GOOD_4";
 }
 // to_do  del
@@ -728,7 +654,6 @@ string GetFameName(int fame)
 {
    return "TO_DO for del";
 }
-
 string GetMoraleName(int morale)
 {
 	if(morale<10)
@@ -753,7 +678,6 @@ string GetMoraleName(int morale)
 		return MoraleTable[MORALET_HEROIC];
 	return "";
 }
-
 string GetLoyalityName(int iLoyality)
 {
 	if(iLoyality<10)
@@ -778,117 +702,90 @@ string GetLoyalityName(int iLoyality)
 		return LoyalityTable[MORALET_HEROIC];
 	return "";
 }
-
 // boal 15/01/04 учет вещей выношу в спец метод для простоты работы далее -->
 int SetCharacterSkillByItem(ref _refCharacter, string _skillName, string _itemSkillName, string _item, int _addValue)
 {
 	int iRetValue = 0;
-
 	if(_skillName == _itemSkillName && GetCharacterItem(_refCharacter, _item) > 0)
 	{
 		iRetValue = _addValue;
 	}
-
 	return iRetValue;
 }
-
 int SetCharacterSkillByEquippedItem(ref _refCharacter, string _skillName, string _itemSkillName, string _item, int _addValue)
 {
 	int iRetValue = 0;
-	
 	if(_skillName == _itemSkillName && IsEquipCharacterByArtefact(_refCharacter, _item))
 	{
 		iRetValue = _addValue;
 	}
-	
 	return iRetValue;
 }
-
 float AddMultiplySkillByEquippedItem(ref _refCharacter, string _skillName, string _itemSkillName, string _item, float _addValue)
 {
 	float fRetValue = 1.0;
-	
 	if(_skillName == _itemSkillName && IsEquipCharacterByArtefact(_refCharacter, _item))
 	{
 		fRetValue = _addValue;
 	}
-	
 	return fRetValue;
 }
-
 int ApplySPECIALCirassPenalty(ref rChar, String sSkillName)
 {
 	int iValue = 0;
 	String sSuit = GetCharacterEquipSuitID(rChar);
-	
 	if(sSuit == INVALID_SUIT) return 0;
-
 	switch(sSuit)
 	{	
 		case "cirass1"	:
 			if(sSkillName == SPECIAL_E)			iValue = -1;			
 			if(sSkillName == SPECIAL_A)			iValue = -2;			
 		break;
-				
 		case "cirass2"	:
 			if(sSkillName == SPECIAL_E)			iValue = -1;
 			if(sSkillName == SPECIAL_A)			iValue = -1;
 		break;
-				
 		case "cirass3"	:
 			if(sSkillName == SPECIAL_A)			iValue = -1;
 		break;
-		
 		case "cirass4"	:
 			if(sSkillName == SPECIAL_E)			iValue = -1;
 		break;
-		
 		case "cirass6"	:
 			if(sSkillName == SPECIAL_P)			iValue = -1;
 		break;
-		
 		case "cirass7"	:
 			if(sSkillName == SPECIAL_A)			iValue = -1;
 			if(sSkillName == SPECIAL_P)			iValue = -1;
 		break;
-		
 		case "cirass8"	:
 			if(sSkillName == SPECIAL_P)			iValue = -1;
 		break;
-		
 		case "suit1"	:
 			if(sSkillName == SPECIAL_A)			iValue = -1;
 		break;
-		
 		case "suit2"	:
 			if(sSkillName == SPECIAL_A)			iValue = -1;
 		break;
-		
 		case "suit3"	:
 			if(sSkillName == SPECIAL_A)			iValue = -1;
 		break;
-		
 		case "suit4"	:
 			if(sSkillName == SPECIAL_P)			iValue = -1; // калеуче
 		break;
-		
 		case "underwater"	: //Jason: водолаз
 			if(sSkillName == SPECIAL_P)			iValue = -2;
 			if(sSkillName == SPECIAL_E)			iValue = -2;
 			if(sSkillName == SPECIAL_A)			iValue = -1;
 		break;
 	}
-		
 	return iValue;
 }
-
 int GetCharacterSuitType(ref rChar)
 {
 	int iValue = 0;
 	String sSuit = GetCharacterEquipSuitID(rChar);
-	
 	if(sSuit == INVALID_SUIT) return -1;
-
 	switch(sSuit)
 	{	
 		// тяжелые доспехи
@@ -904,7 +801,6 @@ int GetCharacterSuitType(ref rChar)
 		case "cirass4"	:
 			iValue = 2;
 		break;
-		
 		// легкие доспехи
 		case "cirass5"	:
 			iValue = 1;
@@ -918,7 +814,6 @@ int GetCharacterSuitType(ref rChar)
 		case "cirass8"	:
 			iValue = 1;
 		break;		
-		
 		// прочее
 		case "underwater":
 			iValue = 0;
@@ -933,73 +828,58 @@ int GetCharacterSuitType(ref rChar)
 			iValue = 0;
 		break;				
 	}
-		
 	return iValue;
 }
-
 // Warship 25.10.08 Учет одежды
 int SetCharacterSkillBySuit(ref rChar, String sSkillName)
 {
 	int iValue = 0;
 	String sSuit = GetCharacterEquipSuitID(rChar);
-	
 	if(sSuit == INVALID_SUIT) return 0;
-	
 	switch(sSuit)
 	{	
 		case "cirass1"	:
 			if(sSkillName == SKILL_SNEAK)		iValue = -5;
 		break;
-
 		case "cirass2"	:
 			if(sSkillName == SKILL_SNEAK)		iValue = -10;
 		break;
-
 		case "cirass3"	:
 			if(sSkillName == SKILL_LEADERSHIP)	iValue = 5;
 			if(sSkillName == SKILL_SNEAK)		iValue = -15;
 		break;
-		
 		case "cirass4"	:
 			if(sSkillName == SKILL_LEADERSHIP)	iValue = 10;
 			if(sSkillName == SKILL_SNEAK)		iValue = -20;
 		break;
-		
 		case "cirass6"	:
 			if(sSkillName == SKILL_LEADERSHIP)	iValue = -5;
 			if(sSkillName == SKILL_SNEAK)		iValue = -5;
 		break;
-		
 		case "cirass7"	:
 			if(sSkillName == SKILL_LEADERSHIP)	iValue = -10;
 			if(sSkillName == SKILL_SNEAK)		iValue = -10;
 		break;
-		
 		case "cirass8"	:
 			if(sSkillName == SKILL_LEADERSHIP)	iValue = -15;
 			if(sSkillName == SKILL_SNEAK)		iValue = 15;
 		break;
-		
 		case "suit1"	: // Французский офицерский мундир
 			if(sSkillName == SKILL_LEADERSHIP)	iValue = 15;
 			if(sSkillName == SKILL_SNEAK)		iValue = -15;
 		break;
-		
 		case "suit2"	: // Английский офицерский мундир
 			if(sSkillName == SKILL_LEADERSHIP)	iValue = 15;
 			if(sSkillName == SKILL_SNEAK)		iValue = -15;
 		break;
-		
 		case "suit3"	: // Испанский офицерский мундир
 			if(sSkillName == SKILL_LEADERSHIP)	iValue = 15;
 			if(sSkillName == SKILL_SNEAK)		iValue = -15;
 		break;
-		
 		case "suit4"	: // костюм Лампорта (Калеуче)
 			if(sSkillName == SKILL_LEADERSHIP)	iValue = -25;
 			if(sSkillName == SKILL_SNEAK)		iValue = 30;
 		break;
-		
 		case "underwater"	: // Jason: водолаз
 			if(sSkillName == SKILL_LEADERSHIP)	iValue = -20;
 			if(sSkillName == SKILL_SNEAK)		iValue = -100;
@@ -1009,7 +889,6 @@ int SetCharacterSkillBySuit(ref rChar, String sSkillName)
 			if(sSkillName == SKILL_PISTOL)		iValue = -50;
 		break;
 	}
-	
 	return iValue;
 }
 // Jason: учет негенерируемых клинков
@@ -1017,69 +896,53 @@ int SetCharacterSkillByQuestBlade(ref rChar, String sSkillName)
 {
 	int iValue = 0;
 	String sBlade = GetCharacterEquipByGroup(rChar, BLADE_ITEM_TYPE);
-	
 	switch(sBlade)
 	{	
 		case "knife_01"	:
 			if(sSkillName == SKILL_F_LIGHT)		iValue = 5;
 		break;
-		
 		case "q_blade_10"	:
 			if(sSkillName == SKILL_FENCING)		iValue = 10;
 		break;
-		
 		case "q_blade_13"	:
 			if(sSkillName == SKILL_F_HEAVY)		iValue = 10;
 		break;
-		
 			case "q_blade_16"	:
 			if(sSkillName == SKILL_F_LIGHT)		iValue = 10;
 		break;
-		
 			case "q_blade_18"	:
 			if(sSkillName == SKILL_F_LIGHT)		iValue = 12;
 		break;
-		
 			case "q_blade_19"	:
 			if(sSkillName == SKILL_FENCING)		iValue = 12;
 		break;
-		
 			case "q_blade_21"	:
 			if(sSkillName == SKILL_F_HEAVY)		iValue = 12;
 		break;
-		
 		case "topor_06"	: // Addon 2016-1 Jason Пиратская линейка
 			if(sSkillName == SKILL_F_HEAVY)		iValue = 5;
 		break;
 	}
-	
 	return iValue;
 }
-
 // Jason: спец.атрибут
 int SetCharacterSkillByPenalty(ref rChar, String sSkillName)
 {
 	int iValue = 0;
 	int iPenalty = sti(rChar.GenQuest.BladePenalty);
-	
 	if(sSkillName == SKILL_F_LIGHT)		iValue = -iPenalty;
 	if(sSkillName == SKILL_FENCING)		iValue = -iPenalty;
 	if(sSkillName == SKILL_F_HEAVY)		iValue = -iPenalty;
-	
 	return iValue;
 }
-
 // Jason: спец.атрибут
 int ApplySPECIALQuestPenalty(ref rChar, String sSkillName)
 {
 	int iValue = 0;
 	int iPenalty = sti(rChar.GenQuest.EnergyPenalty);
-	
 	if(sSkillName == SPECIAL_A)			iValue = -iPenalty;
-	
 	return iValue;
 }
-
 // Jason: зелья мангаросы
 int ApplySPECIALMangarosaPotion(ref rChar, String sSkillName) // 280313
 {
@@ -1108,7 +971,6 @@ int ApplySPECIALMangarosaPotion(ref rChar, String sSkillName) // 280313
 	}
 	return iValue;
 }
-
 int SetCharacterSkillByMangarosa(ref rChar, String sSkillName) // 280313
 {
 	int iValue = 0;
@@ -1133,23 +995,18 @@ int SetCharacterSkillByMangarosa(ref rChar, String sSkillName) // 280313
 			if(sSkillName == SKILL_FORTUNE)		iValue = 5;
 		}
 	}
-	
 	return iValue;
 }
-
 // Jason: Калеуче - амулеты Туттуатхапака
 int SetCharacterSkillByTuttuat(ref rChar, String sSkillName)
 {
 	int iValue = 0;
-	
 	if(sSkillName == SKILL_F_LIGHT)		iValue = 25;
 	if(sSkillName == SKILL_FENCING)		iValue = 25;
 	if(sSkillName == SKILL_F_HEAVY)		iValue = 25;
 	if(sSkillName == SKILL_PISTOL)		iValue = 25;
-	
 	return iValue;
 }
-
 // boal 15/01/04 учет вещей выношу в спец метод для простоты работы далее <--
 float GetCharacterSkillToOld(ref _refCharacter, string skillName)
 {
@@ -1158,7 +1015,6 @@ float GetCharacterSkillToOld(ref _refCharacter, string skillName)
 int GetCharacterSkill(ref _refCharacter, string skillName)
 {
     int skillN;
-
     // boal 051104 метод тормозит страшно - проверка +1 вещей, будет опрос раз в 10
     if (CheckAttribute(_refCharacter, "BakSkill." + skillName))
     {
@@ -1168,27 +1024,19 @@ int GetCharacterSkill(ref _refCharacter, string skillName)
             return sti(_refCharacter.BakSkill.(skillName));
         }
     }
-
 	skillN = GetCharacterSkillSimple(_refCharacter, skillName);
-
-
     // 14.03.05 пенальти от класса корабля -->
  	skillN = ApplayNavyPenaltyToSkill(_refCharacter, skillName, skillN);
 	// 14.03.05 пенальти от класса корабля <--
-
 	_refCharacter.BakSkill.(skillName)      =  skillN; // значение
     _refCharacter.BakSkillCount.(skillName) = rand(5); // счетчик немного размажем пересчет
-
     return skillN;
 }
-
 int GetCharacterSkillSimple(ref _refCharacter, string skillName)
 {
 	if( !CheckAttribute(_refCharacter,"Skill."+skillName) ) return 1;
 	int skillN = sti(_refCharacter.Skill.(skillName));
-
 	bool   bHero = (sti(_refCharacter.index) == GetMainCharacterIndex());
-	
     // boal учет вещей -->
     if (bHero || CheckAttribute(_refCharacter, "Payment")) //IsCompanion(_refCharacter) || IsOfficer(_refCharacter))
     {
@@ -1200,7 +1048,6 @@ int GetCharacterSkillSimple(ref _refCharacter, string skillName)
                 skillN = skillN + 5*(GetHealthNum(_refCharacter) - 6); // max -5
             }
         }
-		
 		skillN += SetCharacterSkillByItem(_refCharacter, skillName, SKILL_FORTUNE, 		"SkullAztec", 	-20);
 		skillN += SetCharacterSkillByItem(_refCharacter, skillName, SKILL_LEADERSHIP, 	"SkullAztec", 	 10);
 		skillN += SetCharacterSkillByItem(_refCharacter, skillName, SKILL_PISTOL, 		"KnifeAztec", 	-30);
@@ -1213,16 +1060,12 @@ int GetCharacterSkillSimple(ref _refCharacter, string skillName)
 		skillN += SetCharacterSkillByItem(_refCharacter, skillName, SKILL_LEADERSHIP, 	 "mineral30",   -10);
 		skillN += SetCharacterSkillByItem(_refCharacter, skillName, SKILL_LEADERSHIP, 	 "mineral31", 	-10);
     	skillN += SetCharacterSkillByItem(_refCharacter, skillName, SKILL_FORTUNE,       "mineral31", 	-10);
-		
 		skillN += SetCharacterSkillByEquippedItem(_refCharacter, skillName, SKILL_SAILING, "obereg_7", 10);
-
 		// Warship 25.10.08 Новый учет одежды
 		skillN += SetCharacterSkillBySuit(_refCharacter, skillName);
-	
 		//Jason: учет негенерируемых клинков
 		skillN += SetCharacterSkillByQuestBlade(_refCharacter, skillName);
 		skillN += SetCharacterSkillByMangarosa(_refCharacter, skillName);
-	
 		//Jason: учет специальных атрибутов
 		if(CheckAttribute(_refCharacter, "GenQuest.BladePenalty")) 
 			{
@@ -1247,7 +1090,6 @@ int GetCharacterSkillSimple(ref _refCharacter, string skillName)
 		skillN = makeint(skillN * AddMultiplySkillByEquippedItem(_refCharacter, skillName,   SKILL_COMMERCE, "obereg_8", 1.15));
 		skillN = makeint(skillN * AddMultiplySkillByEquippedItem(_refCharacter, skillName,    SKILL_FORTUNE, "amulet_7", 0.50));
 		skillN = makeint(skillN * AddMultiplySkillByEquippedItem(_refCharacter, skillName,      SKILL_SNEAK, "amulet_6", 0.50));
-		
 		if(!IsDay())
 		{
 			if(IsCharacterEquippedArtefact(_refCharacter, "totem_12") && skillName == SKILL_ACCURACY) 
@@ -1255,7 +1097,6 @@ int GetCharacterSkillSimple(ref _refCharacter, string skillName)
 				skillN = skillN * 2; // получи фашист гранату по ночам !!!!
 			}
 		}
-		
     	// boal учет перегруза 19.01.2004 -->
     	if ( GetItemsWeight(_refCharacter) > GetMaxItemsWeight(_refCharacter) && !IsEquipCharacterByArtefact(_refCharacter, "totem_06"))
     	{
@@ -1266,14 +1107,12 @@ int GetCharacterSkillSimple(ref _refCharacter, string skillName)
 	// boal <--
 	if (skillN <= 1) skillN = 1;
 	if( skillN > SKILL_MAX ) skillN = SKILL_MAX;
-
 	return skillN;
 }
 // boal 20.03.2004 -->
 int GetShipClassNavySkill(int shipClass)
 {
     int needSkill = 0;
-
     switch (shipClass)
     {
             case 1 : needSkill = 95; break;
@@ -1296,7 +1135,6 @@ void ClearCharacterExpRate(ref _chref)
 {
     int    i;
     string name;
-
     for (i=1; i<15; i++)
     {
         name = GetSkillNameByIdx(i);
@@ -1308,7 +1146,6 @@ void RefreshCharacterSkillExpRate(ref _chref)
 {
     int    i;
     string name;
-
     for (i=1; i<15; i++)
     {
         name = GetSkillNameByIdx(i);
@@ -1316,7 +1153,6 @@ void RefreshCharacterSkillExpRate(ref _chref)
         ApplayNewSkill(_chref, name, 0); // иначе перки  будут 23/22
     }
 }
-
 float GetSummonSkillFromNameToOld(ref _refCharacter, string skillName)
 {
     return (GetSummonSkillFromName(_refCharacter, skillName) / SKILL_TO_OLD);
@@ -1324,7 +1160,6 @@ float GetSummonSkillFromNameToOld(ref _refCharacter, string skillName)
 int GetSummonSkillFromName(ref _refCharacter, string skillName)
 {
     int sumSkill;
-
     // boal 051104 метод тормозит страшно - проверка +1 вещей, будет опрос раз в 10
     if (CheckAttribute(_refCharacter, "BakSkill." + skillName))
     {
@@ -1334,23 +1169,17 @@ int GetSummonSkillFromName(ref _refCharacter, string skillName)
             return sti(_refCharacter.BakSkill.(skillName));
         }
     }
-
     sumSkill = GetSummonSkillFromNameSimple(_refCharacter, skillName);
-
     // boal 27.01.2004 пенальти за крутой корабль -->
  	sumSkill = ApplayNavyPenaltyToSkill(_refCharacter, skillName, sumSkill);
     // boal 27.01.2004 <--
-
     _refCharacter.BakSkill.(skillName)      =  sumSkill; // значение
     _refCharacter.BakSkillCount.(skillName) = rand(5); // счетчик немного размажем пересчет
-
     return sumSkill;
 }
-
 int GetSummonSkillFromNameSimple(ref _refCharacter, string skillName)
 {
     int sumSkill = GetCharacterSkillSimple(_refCharacter,skillName);
-
 	if (sti(_refCharacter.index) == sti(pchar.index))
 	{
 	    int iOfficer = -1;
@@ -1360,36 +1189,28 @@ int GetSummonSkillFromNameSimple(ref _refCharacter, string skillName)
 			/*case SKILL_LEADERSHIP:
 				iOfficer = sti(pchar.Fellows.Passengers.boatswain);
 			break;*/
-
 			case SKILL_SAILING:
 				iOfficer = sti(pchar.Fellows.Passengers.navigator);
 			break;
-
 			case SKILL_CANNONS:
 				iOfficer = sti(pchar.Fellows.Passengers.cannoner);
 			break;
-
 			case SKILL_ACCURACY:
 				iOfficer = sti(pchar.Fellows.Passengers.cannoner);
 			break;
-
 			case SKILL_GRAPPLING:
 				iOfficer = sti(pchar.Fellows.Passengers.boatswain);
 			break;
-
 			case SKILL_DEFENCE:
 				iOfficer = sti(pchar.Fellows.Passengers.doctor);
 			break;
-
 			case SKILL_REPAIR:
 				iOfficer = sti(pchar.Fellows.Passengers.carpenter);
 			break;
-
 			case SKILL_COMMERCE:
 				iOfficer = sti(pchar.Fellows.Passengers.treasurer);
 			break;
 		}
-
 		if(iOfficer != -1)
 		{
 			iOffSkill = GetCharacterSkillSimple(&characters[iOfficer], skillName);
@@ -1401,7 +1222,6 @@ int GetSummonSkillFromNameSimple(ref _refCharacter, string skillName)
 	}
 	return sumSkill;
 }
-
 void AddPartyExp(ref _refCharacter,int _exp)
 {
 	/*int cn,i;
@@ -1416,20 +1236,16 @@ void AddPartyExp(ref _refCharacter,int _exp)
 		}
 	}*/
 }
-
 void AddExpAndShow(ref chref, int _exp)
 {
 	// boal Log_SetStringToLog("+" + _exp + XI_ConvertString("add experience"));
 	//AddCharacterExp(chref, _exp);
 }
 // boal -->
-
-
 void AddCharacterExpToSkillSquadron(ref _refCharacter, string _skill, float _addValue)
 {
     int cn,i;
 	ref chref;
-
 	for(i=0; i<4; i++)
 	{
 		cn = GetCompanionIndex(_refCharacter,i);
@@ -1447,7 +1263,6 @@ void AddCharacterExpToSkill(ref _chref, string _skill, float _addValue)
     {
         _chref.skill.(_skill_exp) = 0;
     }
-	
     if (bExpLogShow && _addValue > 0)
     {
 	   if (IsOfficer(_chref))  Log_Info(_chref.id + " take " + FloatToString(_addValue, 2) + " exp to " + _skill);
@@ -1469,7 +1284,6 @@ void AddCharacterExpToSkill(ref _chref, string _skill, float _addValue)
     if (CheckAttribute(_chref, "skill." + _skill) && sti(_chref.skill.(_skill)) < SKILL_MAX)// && sti(_chref.skill.(_skill)) > 0)
     { // if skill = 0 then it is great loser
         _chref.skill.(_skill_exp) = stf(_chref.skill.(_skill_exp)) + _addValue;
-
         while ( makeint(sti(_chref.skill.(_skill)) * GetCharacterExpRate(_chref, _skill)) <= stf(_chref.skill.(_skill_exp))
                 && sti(_chref.skill.(_skill)) < SKILL_MAX )
         {
@@ -1543,7 +1357,6 @@ void AddCharacterExpToSkill(ref _chref, string _skill, float _addValue)
 		}
     }
 }
-
 string GetPerkListText(ref _chref, string _type)
 {
     int    perksQ,i;
@@ -1551,7 +1364,6 @@ string GetPerkListText(ref _chref, string _type)
 	string perkName;
 	string ret;
 	aref   arPerksRoot;
-
     lngFilePerkID = LanguageOpenFile("AbilityDescribe.txt");
 	// Варианты перков, которые можно добавить
 	makearef(arPerksRoot, _chref.perks.list);
@@ -1560,7 +1372,6 @@ string GetPerkListText(ref _chref, string _type)
 	for(i=0; i<perksQ; i++)
 	{
 		perkName = GetAttributeName(GetAttributeN(arPerksRoot,i));
-
         if (CheckAttribute(&ChrPerksList, "list." + perkName) && CheckAttribute(&ChrPerksList, "list." + perkName + ".BaseType"))
         {
             if (ChrPerksList.list.(perkName).BaseType == _type)
@@ -1579,13 +1390,11 @@ float GetItemsWeight(ref _chref)
     int     j;
     string  itemID;
     ref     itm;
-
     if (bCabinStarted || bAbordageStarted || !bSeaActive || !CheckAttribute(_chref, "ItemsWeight"))
     {
         for (j=0; j<TOTAL_ITEMS; j++)
     	{
     		makeref(itm,Items[j]);
-			
 			if(CheckAttribute(itm, "ID"))
 			{
 				itemID = itm.id;
@@ -1621,7 +1430,6 @@ int GetMaxItemsWeight(ref _chref)
     }
 }
 // boal 19.01.2004 <--
-
 // boal -->
 int Statistic_AddValue(ref _chref, string _attrName, int _add) // set and get(_add==0) value
 {
@@ -1633,17 +1441,13 @@ int Statistic_AddValue(ref _chref, string _attrName, int _add) // set and get(_a
     // Monster_s Monster_g
     // Warrior_s  Warrior_g
     // Fort
-	
 	if(!CheckAttribute(_chref, "index")) return 0;
-	
     if (sti(_chref.index) != GetMainCharacterIndex()) return 0; // оптимизация
-    
     if( !CheckAttribute(_chref,"Statistic." + _attrName) )
     {
         _chref.Statistic.(_attrName) = 0;
     }
     _chref.Statistic.(_attrName) = sti(_chref.Statistic.(_attrName)) + _add;
-
     if (sti(_chref.Statistic.(_attrName)) < 0)
     {
         _chref.Statistic.(_attrName) = 0;
@@ -1654,7 +1458,6 @@ void Statistic_KillChar(aref _attack, aref _enemy, string _attrName)
 {
 	if (sti(_attack.index) != GetMainCharacterIndex()) return; // оптимизация
 	string  name = GetCharType(_enemy);
-
 	if(GetSteamEnabled()) 
 	{	
 		switch (name)
@@ -1682,12 +1485,9 @@ void Statistic_KillChar(aref _attack, aref _enemy, string _attrName)
 			break;
 		}	
 	}	
-	
 	name = name + _attrName;
-
 	Statistic_AddValue(_attack, name, 1);
 }
-
 // --> ачивки 
 // -->> сервисные функции
 string Achievment_GetID(int achievNum)
@@ -1777,7 +1577,6 @@ string Achievment_GetID(int achievNum)
 	}
 	return id;
 }
-
 string Stat_GetID(int achievNum)
 {
 	string id = "";
@@ -1881,7 +1680,6 @@ void AchievmentsDayUpdateStart()
 		PostEvent("EvAchievmentsDayUpdate", 500);	
 	}	
 }
-
 void AchievmentsDayUpdate()
 {
 	if(AchievmentsDayUpdateCnt > 0)
@@ -1897,18 +1695,13 @@ void AchievmentsDayUpdate()
 		else PostEvent("EvAchievmentsDayUpdate", 500);
 	}
 }
-
 void CheckAchievments(ref _chref, int achievNum)
 {
 	int 	iTmp, achState;
 	bool 	bOk = false;
-
 	if(!CheckAttribute(_chref, "index")) return;
-	
     if (sti(_chref.index) != GetMainCharacterIndex()) return; // оптимизация, выходим если не ГГ
-	
 	if(!bSteamAchievements || !GetSteamEnabled()) return;	
-	
 	switch (achievNum)
 	{		
 		case 5 :	// Легендарный :  уровень >= 40
@@ -1983,7 +1776,6 @@ void CheckAchievments(ref _chref, int achievNum)
 		case 55  :  // "Команда профессионалов" - нанять офицеров на все должности
 		    if(CheckForAllOfficers()) Achievment_SetStat(_chref, 55, 1);
 		break;
-	
 		case 62  :  // за три приготовленных зелья из Мангаросы
 			if(CheckAttribute(_chref, "Mangarosa.Alchemy.MP") && CheckAttribute(_chref, "Mangarosa.Alchemy.MF") && CheckAttribute(_chref, "Mangarosa.Alchemy.MT")) Achievment_SetStat(_chref, 62, 1);
 		break;
@@ -2006,7 +1798,6 @@ void CheckAchievments(ref _chref, int achievNum)
 */		
 	}	
 }
-
 void Achievment_SetStat(ref _chref, int achievNum, int _add)
 {
 	string sAchiev, sStat;
@@ -2016,15 +1807,10 @@ void Achievment_SetStat(ref _chref, int achievNum, int _add)
 	int	   iOk;
 	bool   bOk = false;
 	bool   bSuccess;
-
 	if(!CheckAttribute(_chref, "index")) return;
-	
 	if(_add <= 0) return;
-	
     if(sti(_chref.index) != GetMainCharacterIndex()) return;
-	
 	if(!bSteamAchievements || !GetSteamEnabled()) return;
-	
 	sAchiev = Achievment_GetID(achievNum);
 	achState = GetAchievement(sAchiev);
 	trace("Check Achievment :" + achievNum + " state :" + achState);
@@ -2032,13 +1818,10 @@ void Achievment_SetStat(ref _chref, int achievNum, int _add)
 	{
 		return;  // ачива уже получена, ничего не делаем, всем спасибо - все свободны
 	}
-
 	sStat = Stat_GetID(achievNum);
 	curState = GetStat(sStat);			// получаем текущее значение статистики для текущей незакрытой ачивы achievNum
-
 	SetStat(sStat, curState + _add); 	// добавляем в статистику значение
 	curState = curState + _add;
-	
 	bSuccess = StoreStats();			// записываем в стим!!
 	if(bSuccess) 	trace("StoreStats() ok !!");
 	else
@@ -2046,7 +1829,6 @@ void Achievment_SetStat(ref _chref, int achievNum, int _add)
 		trace("StoreStats() error !!");
 		return;
 	}	
-	
 	switch (achievNum)
 	{
 		case 1  :	// Боевое крещение : первая морская победа в игре
@@ -2571,7 +2353,6 @@ void Achievment_SetStat(ref _chref, int achievNum, int _add)
 				bOk = true;
 			}				
 		break;
-		
 		case 80  :  // "Долго и счастливо" - спецачива DLC #5
 			if(curState >= 1)			
 			{
@@ -2579,7 +2360,6 @@ void Achievment_SetStat(ref _chref, int achievNum, int _add)
 				bOk = true;
 			}				
 		break;
-
 		case 81  :  // "Долго и счастливо" - спецачива DLC #5
 			if(curState >= 1)			
 			{
@@ -2588,7 +2368,6 @@ void Achievment_SetStat(ref _chref, int achievNum, int _add)
 			}				
 		break;
 	}
-		
 	if(bOk)
 	{	
 		achState = SetAchievement(sAchiev); // устанавливаем ачивку в стим
@@ -2600,7 +2379,6 @@ void Achievment_SetStat(ref _chref, int achievNum, int _add)
 	return;		
 }
 // <-- ачивки 
-
 string GetCharType(aref _enemy)  //TO_DO переделать на тип в НПС
 {
     string  name  = "Warrior"; // define
@@ -2655,7 +2433,6 @@ string GetCharType(aref _enemy)  //TO_DO переделать на тип в Н�
 		case LAI_TYPE_OWNER :
 		    name = "Citizen";
 		break;
-
 		case LAI_TYPE_WARRIOR : // to_do преверить тип
 			if (findsubstr(model, "canib_" , 0) != -1 || findsubstr(model, "itza_" , 0) != -1 || findsubstr(model, "miskito_" , 0) != -1)
 			{
@@ -2671,8 +2448,6 @@ string GetCharType(aref _enemy)  //TO_DO переделать на тип в Н�
 				{
 					name = "Crab";
 				}
-				
-				
                 if (findsubstr(model, "off_" , 0) != -1)
                 {
                     name = "Solder";
@@ -2684,10 +2459,8 @@ string GetCharType(aref _enemy)  //TO_DO переделать на тип в Н�
 	                    name = "Solder";
 	                }
                 }
-				
 				if (findsubstr(model, "pirate_" , 0) != -1 || findsubstr(model, "citiz_" , 0) != -1 || findsubstr(model, "mercen_" , 0) != -1 ) // ugeen 2016
 				{
-				
 					if(CheckAttribute(_enemy,"PhantomType")) 
 					{
 						_type = _enemy.PhantomType;
@@ -2707,11 +2480,9 @@ string GetCharType(aref _enemy)  //TO_DO переделать на тип в Н�
 		    }
 		break;
 	}
-
 	return  name;
 }
 // boal statistic info 17.12.2003 <--
-
 // boal Блок здоровье ГГ -->
 int GetHealthNum(ref ch)
 {
@@ -2720,12 +2491,9 @@ int GetHealthNum(ref ch)
         return 0;
 	}
     int i;
-
     i = makeint((stf(ch.Health.HP) + 9) / 10.0); // до целого
-
     return i;
 }
-
 int GetHealthMaxNum(ref ch)
 {
     if (!CheckAttribute(ch, "Health"))
@@ -2733,16 +2501,12 @@ int GetHealthMaxNum(ref ch)
         return 0;
 	}
     int i;
-
     i = makeint((stf(ch.Health.maxHP) + 9) / 10.0); // до целого
-
     return i;
 }
-
 string GetHealthName(ref ch)
 {
     string name = "";
-
     switch (GetHealthNum(ch))
     {
         case 1:
@@ -2766,11 +2530,9 @@ string GetHealthName(ref ch)
     }
     return name;
 }
-
 string GetHealthNameMaxSmall(ref ch)
 {
     string name = "";
-
     switch (GetHealthMaxNum(ch))
     {
         case 1:
@@ -2794,17 +2556,13 @@ string GetHealthNameMaxSmall(ref ch)
     }
     return name;
 }
-
 void SetNewDayHealth()
 {
     ref mainChr = GetMainCharacter();
-
     float maxhp = stf(mainChr.chr_ai.hp_max);
     float damg  = stf(mainChr.Health.Damg);
     int   add   = 0;
-
     mainChr.Health.Damg = 0.0;
-
     if (IsCharacterPerkOn(mainChr, "Medic"))
     {
         add = 1;
@@ -2832,96 +2590,74 @@ void SetNewDayHealth()
         }
     }
 }
-
 void SetNewDayHealthMax()
 {
     ref mainChr = GetMainCharacter();
-
     float maxhp = stf(mainChr.chr_ai.hp_max);
     float damg  = stf(mainChr.Health.weekDamg);
-
     mainChr.Health.weekDamg = 0.0;
-
     if (damg > (maxhp * 3.5 * isEquippedAmuletUse(mainChr, "amulet_6", 1.0, 1.15)))
     {
         AddCharacterMaxHealth(mainChr, -1);
     }
 }
-
 void AddCharacterHealth(ref mainChr, float add)
 {
     float maxhp = stf(mainChr.chr_ai.hp_max);
     int   remHP = GetHealthNum(mainChr);
-
     mainChr.Health.HP = makefloat(stf(mainChr.Health.HP) + add);
-
     if (stf(mainChr.Health.HP) < 1)
     {
         mainChr.Health.HP = 1.0;
     }
-
     if (stf(mainChr.Health.HP) > stf(mainChr.Health.maxHP))
     {
         mainChr.Health.HP = stf(mainChr.Health.maxHP);
     }
-
     if (GetHealthNum(mainChr) > remHP)
     {
         Log_Info("Health got better");
     }
-
     if (GetHealthNum(mainChr) < remHP)
     {
         Log_Info("Health got worse");
     }
 }
-
 void AddCharacterMaxHealth(ref mainChr, float add)
 {
     mainChr.Health.maxHP = makefloat(stf(mainChr.Health.maxHP) + add);
-
     if (stf(mainChr.Health.maxHP) < 1)
     {
         mainChr.Health.maxHP = 1.0;
     }
-
     if (stf(mainChr.Health.maxHP) > 60)
     {
         mainChr.Health.maxHP = 60.0;
     }
-
     if (stf(mainChr.Health.HP) > stf(mainChr.Health.maxHP))
     {
         mainChr.Health.HP = stf(mainChr.Health.maxHP);
     }
 }
 // boal Блок здоровье ГГ <--
-
 // увеличение счетчика награды за голову -->
 int ChangeCharacterHunterScore(ref chref, string _huntName, int incr)
 {
 	int prevVal = -5; // мин набор
-
 	if (_huntName == "pirhunter") return 0;
 	if (CheckAttribute(chref, "GenQuest.HunterScore2Pause")) incr = 0;
-
 	if (CheckAttribute(chref, "reputation." + _huntName) )	prevVal = sti(chref.reputation.(_huntName));
-
 	int newVal = prevVal + incr;
 	if (newVal < -100)  newVal = -100;
 	if (newVal > 100)   newVal = 100;
-
 	chref.reputation.(_huntName) = newVal;
-
 	if( sti(chref.index) != GetMainCharacterIndex() ) return newVal;
-
 	if (newVal >= 10)
 	{
 	 	if (prevVal < newVal)
 		{
 			Log_SetStringToLog(XI_ConvertString(_huntName) + "  has increased a price for your head");
 		}
-
 	    if (prevVal > newVal)
 		{
 	        Log_SetStringToLog(XI_ConvertString(_huntName) + "  has lowered a price for your head");
@@ -2950,17 +2686,14 @@ int ChangeCharacterHunterScore(ref chref, string _huntName, int incr)
 	}
 	return newVal;
 }
-
 int ChangeCharacterNationReputation(ref chref, int _Nation, int incr)
 {
 	return -ChangeCharacterHunterScore(chref, NationShortName(_Nation) + "hunter", -incr); // все наоборот, - это хорошо, + есть НЗГ
 }
-
 string GetNationReputation(ref chref, int _Nation)
 {
     return GetNationReputationName(_Nation, ChangeCharacterNationReputation(chref, _Nation, 0));
 }
-
 string GetNationReputationName(int _Nation, int i)
 {
 	if (i <= -10)  return "The reward for the head " + (-i*1000);
@@ -2969,7 +2702,6 @@ string GetNationReputationName(int _Nation, int i)
     if (i <= 50 )  return "Good";
     if (i <= 80 )  return "Exellent";
     if (i <= 100 ) return "Admiration";
-
     return "Exellent";
 }
 // boal 04.04.04
@@ -2996,14 +2728,11 @@ string NationShortName(int iNation)
 	return "eng";
 }
 // увеличение счетчика награды за голову <--
-
-
 void setWDMPointXZ(string _location)
 {
     // координаты на гловал карте -->
     int n;
 	string sTemp;
-
     n = FindIslandBySeaLocation(_location);
 	if(n!=-1)
 	{
@@ -3029,29 +2758,22 @@ void setWDMPointXZ(string _location)
 	}
 	// координаты на гловал карте <--
 }
-
-
 // нужно не перекрывать еще и признаки фантома
 void ChangeAttributesFromCharacter(ref CopyChref, ref PastChref, bool _dialogCopy)
 {
     aref arToChar;
     aref arFromChar;
-
     CopyChref.model            = PastChref.model;
     CopyChref.model.animation  = PastChref.model.animation;
     CopyChref.sex              = CopyChref.sex;
     CopyChref.headModel        = PastChref.headModel;
     CopyChref.FaceId           = PastChref.FaceId;
     CopyChref.nation           = PastChref.nation;
-
 	CopyChref.name             = PastChref.name;
     CopyChref.lastname         = PastChref.lastname;
-
     CopyChref.rank             = PastChref.rank;
     CopyChref.reputation       = makeint(PastChref.reputation);
-	
 	CopyChref.baseCapIdx       = PastChref.index; //Id оригинального в структуру клона
-
     if (CheckAttribute(PastChref, "loyality"))
     {
     	CopyChref.loyality         = PastChref.loyality;
@@ -3062,15 +2784,11 @@ void ChangeAttributesFromCharacter(ref CopyChref, ref PastChref, bool _dialogCop
     	CopyChref.alignment        = PastChref.alignment;
     }
     else DeleteAttribute(CopyChref, "alignment");
-
     CopyChref.Money            = PastChref.Money;
-
     CopyChref.chr_ai.hp         = makeint(PastChref.chr_ai.hp);
     CopyChref.chr.chr_ai.hp_max = makeint(PastChref.chr_ai.hp_max);
-
     LAi_SetHP(CopyChref, makeint(PastChref.chr_ai.hp_max), makeint(PastChref.chr_ai.hp_max));
 	LAi_SetCurHPMax(CopyChref);
-	
 	//копируем структуру quest от оригинального кэпа, очень нужно по квестам :)
 	if (CheckAttribute(PastChref, "quest"))
     {
@@ -3080,7 +2798,6 @@ void ChangeAttributesFromCharacter(ref CopyChref, ref PastChref, bool _dialogCop
 		DeleteAttribute(arToCharQuest, "");
 		CopyAttributes(arToCharQuest, arFromCharQuest);
 	}
-	
 	if (CheckAttribute(PastChref, "quest.officertype"))
     {
         CopyChref.quest.officertype     =   PastChref.quest.officertype;
@@ -3089,7 +2806,6 @@ void ChangeAttributesFromCharacter(ref CopyChref, ref PastChref, bool _dialogCop
     {
         DeleteAttribute(CopyChref, "quest.officertype");
     }
-
     if (CheckAttribute(PastChref, "Payment"))
     {
         CopyChref.Payment     =   PastChref.Payment; // платить ЗП
@@ -3133,56 +2849,39 @@ void ChangeAttributesFromCharacter(ref CopyChref, ref PastChref, bool _dialogCop
     // skill
     DeleteAttribute(CopyChref, "skill");
     CopyChref.skill = "";
-
     makearef(arToChar, CopyChref.skill);
     makearef(arFromChar, PastChref.skill);
-
     CopyAttributes(arToChar,arFromChar);
-
     // SPECIAL
     DeleteAttribute(CopyChref, "SPECIAL");
     CopyChref.SPECIAL = "";
-
     makearef(arToChar, CopyChref.SPECIAL);
     makearef(arFromChar, PastChref.SPECIAL);
-
     CopyAttributes(arToChar,arFromChar);
-
     // Statistic
     DeleteAttribute(CopyChref, "Statistic");
     CopyChref.Statistic = "";
-
     makearef(arToChar, CopyChref.Statistic);
     makearef(arFromChar, PastChref.Statistic);
-
     CopyAttributes(arToChar,arFromChar);
-
     // perks
     DeleteAttribute(CopyChref, "perks");
     CopyChref.perks = "";
-
     makearef(arToChar, CopyChref.perks);
     makearef(arFromChar, PastChref.perks);
-
     CopyAttributes(arToChar,arFromChar);
     // items
     DeleteAttribute(CopyChref, "Items");
     CopyChref.Items = "";
-
     makearef(arToChar, CopyChref.Items);
     makearef(arFromChar, PastChref.Items);
-
     CopyAttributes(arToChar,arFromChar);
-	
 	// equipped items
 	DeleteAttribute(CopyChref, "equip_item");
 	CopyChref.equip_item = "";
 	makearef(arToChar, CopyChref.equip_item);
     makearef(arFromChar, PastChref.equip_item);
-
     CopyAttributes(arToChar,arFromChar);
-	
-
     if (CheckAttribute(PastChref, "equip.blade"))
     {
 		CopyChref.equip.blade =   PastChref.equip.blade;
@@ -3200,29 +2899,24 @@ void ChangeAttributesFromCharacter(ref CopyChref, ref PastChref, bool _dialogCop
 	{
         CopyChref.Health.TotalDamg = 0;
 	}
-	
 	if (CheckAttribute(PastChref, "PerkValue.EnergyPlus"))
 	{
 		CopyChref.PerkValue.EnergyPlus =   PastChref.PerkValue.EnergyPlus;
 	}
-
 	// ugeen --> нужно для генерации различных ситуации в каюте абордированного кэпа
 	if (CheckAttribute(PastChref,"Situation")) // если в каюте кэпа возникла ситуация 
 	{
 		CopyChref.Situation = PastChref.Situation;
 		CopyChref.Situation.type = PastChref.Situation.type;
 	}
-	
 	if (CheckAttribute(PastChref,"EncType"))
 	{
 		CopyChref.EncType = PastChref.EncType;
 	}
-	
 	if (CheckAttribute(PastChref,"RealEncounterType"))
 	{
 		CopyChref.RealEncounterType = PastChref.RealEncounterType;
 	}
-
 	if (CheckAttribute(PastChref,"Ship"))
 	{
 		makearef(arToChar, CopyChref.Back.Ship);
@@ -3230,7 +2924,6 @@ void ChangeAttributesFromCharacter(ref CopyChref, ref PastChref, bool _dialogCop
 		CopyAttributes(arToChar, arFromChar);		
 	}	
 	// <-- ugeen
-	
 	if (_dialogCopy && CheckAttribute(PastChref, "Dialog.Filename"))
 	{
 	    CopyChref.Dialog.Filename    = PastChref.Dialog.Filename;
@@ -3244,7 +2937,6 @@ void ChangeAttributesFromCharacter(ref CopyChref, ref PastChref, bool _dialogCop
 	SetEnergyToCharacter(CopyChref);
 	//SetNewModelToChar(CopyChref);  // чтоб сабли были правильные
 }
-
 int GetCharacterLoyality(ref chr)
 {
     if (CheckAttribute(chr, "loyality"))
@@ -3264,7 +2956,6 @@ int GetCharacterLoyality(ref chr)
         return  0; // для пленных и гг
     }
 }
-
 void CCS_SetNewMainCharacter(ref ch, int num)
 {
 	if(num < 1) num = 1;
@@ -3289,11 +2980,9 @@ void CCS_SetNewMainCharacter(ref ch, int num)
                                       "Morals, society, titles and privileges do not mean much to Charles. He knows the price of man's vice, he never has experience of the bitter taste of defeat or a fight to the death. And how could he possibly gain such experience in the bright and gorgeous salons of Paris? " + 
 									  "He absolutely doesn't brag neither title nor privileges. Charles was wise enough to understand that his home education couldn't prepare him for real life, so he was taking extra classes." + NewStr() +
 									  "What activities did he find most interesting and promising? ";
-									  
 		break;
 		case 2: // Диего  де Монтойя
 //			return;			
-			
 			ch.FaceId 				= 203;
 			ch.HeroModel 			= "Diego_1,Diego_1,Diego_1,Diego_1,Diego_1,protocusto,Diego_6";
 			ch.name 				= "Diego";
@@ -3308,11 +2997,9 @@ void CCS_SetNewMainCharacter(ref ch, int num)
 			ch.nation				= SPAIN;
 			ch.BaseNation			= SPAIN;
 			ch.info					= "Здесь будет описание Главного Героя Диего де Монтойя.";
-			
 		break;		
 		case 3: // Паттерсон
 //			return;
-			
 			ch.FaceId 				= 202;
 			ch.HeroModel 			= "Willy_1,Willy_1,Willy_1,Willy_1,Willy_1,protocusto,Willy_6";
 			ch.name 				= "William";
@@ -3328,11 +3015,9 @@ void CCS_SetNewMainCharacter(ref ch, int num)
 			ch.BaseNation			= ENGLAND;
 			ch.info 				= "Благородные намерения этого молодого дворянина о честной торговле на благо нации и собственного кошелька разбились о реалии жестокой действительности." + 
 			                          " Пришлось обзаводиться каперским патентом и прокладывать себе путь к благосостоянию пушками и клинком, забыв о чванливых манерах Старого Света...";
-									  
 		break;
 		case 4: 
 //			return;
-			
 			ch.FaceId 				= 214;
 			ch.HeroModel 			= "Espinosa,Espinosa_Cirass,Espinosa_Cirass1,Espinosa_Cirass2,Espinosa_Cirass3,Espinosa,Espinosa";
 			ch.name 				= "Диего";
@@ -3348,14 +3033,10 @@ void CCS_SetNewMainCharacter(ref ch, int num)
 			ch.BaseNation			= SPAIN;
 			ch.info 				= "Благородные намерения этого молодого дворянина о честной торговле на благо нации и собственного кошелька разбились о реалии жестокой действительности." + 
 			                          " Пришлось обзаводиться каперским патентом и прокладывать себе путь к благосостоянию пушками и клинком, забыв о чванливых манерах Старого Света...";
-									  
 		break;
-
 	}	
-	
 	ch.model = GetSubStringByNum(ch.HeroModel, 0);
 	ch.cirassIDX = 0;
-	
 	if(ch.sex == "woman")
 	{
 		ch.model.height = 1.75;
@@ -3365,12 +3046,10 @@ void CCS_SetNewMainCharacter(ref ch, int num)
 		ch.model.height = 1.8;
 	}
 }
-
 int CCS_GetNewMainCharacterFace(ref ch)
 {
     return sti(ch.FaceId);
 }
-
 // boal 091004 много героев  -->
 // boal 23.01.2004 выбор персонажа-->
 void setNewMainCharacter(ref ch, int num)
@@ -3378,44 +3057,31 @@ void setNewMainCharacter(ref ch, int num)
 	string heroModel, heroFaceId;
 	int    idLngFile = -1;
     string totalInfo;
-
     idLngFile = LanguageOpenFile("HeroDescribe.txt");
-
     totalInfo = LanguageConvertString(idLngFile, "heroFace_" + num);
     heroFaceId  = sti(totalInfo);
     ch.FaceId   = heroFaceId;
-
     totalInfo = LanguageConvertString(idLngFile, "heroModel_" + num);
     ch.HeroModel = totalInfo;
 	ch.model = GetSubStringByNum(ch.HeroModel, 0);
-
     totalInfo = LanguageConvertString(idLngFile, "heroName_" + num);
     ch.name 	=  totalInfo;
-
     totalInfo = LanguageConvertString(idLngFile, "heroLastname_" + num);
     ch.lastname = totalInfo;
-
 	totalInfo = LanguageConvertString(idLngFile, "heroNameGen_" + num);
 	ch.nameGen = totalInfo;
-
 	totalInfo = LanguageConvertString(idLngFile, "heroLastnameGen_" + num);
 	ch.lastnameGen = totalInfo;
-
 	totalInfo = LanguageConvertString(idLngFile, "heroNameDat_" + num);
 	ch.nameDat = totalInfo;
-
 	totalInfo = LanguageConvertString(idLngFile, "heroLastnameDat_" + num);
 	ch.lastnameDat = totalInfo;
-
     totalInfo = LanguageConvertString(idLngFile, "sex_" + num);
     ch.sex = totalInfo;
-
 	totalInfo = LanguageConvertString(idLngFile, "animation_" + num);
 	ch.model.animation = totalInfo;
-
 	totalInfo = LanguageConvertString(idLngFile, "heroInfo_" + num);
 	ch.info = totalInfo;
-
 	if(ch.sex == "woman")
 	{
 		ch.model.height = 1.75;
@@ -3424,20 +3090,13 @@ void setNewMainCharacter(ref ch, int num)
     {
 		ch.model.height = 1.8;
 	}
-
 	totalInfo = LanguageConvertString(idLngFile, "heroType_" + num);
 	ch.HeroParam.HeroType = totalInfo;
-
-
-
     LanguageCloseFile(idLngFile);
-
     ch.nation = GetNewMainCharacterNation(num);
 	ch.BaseNation = GetNewMainCharacterBaseNation(num);
-
 	ch.cirassIDX = 0;
 }
-
 string GetNewMainCharacterType(int _startHeroType)
 {
 	string ret;
@@ -3458,53 +3117,38 @@ string GetNewMainCharacterType(int _startHeroType)
 	}
 	return ret;
 }
-
-
 void initNewMainCharacter()//инициализация главного героя
 {
 	ref ch = GetMainCharacter();
 	string sTemp;
 	int    iTmp, i;
-
     setNewMainCharacter(ch, startHeroType);
     // контроль версий -->
     InitMigrations();
     // контроль версий <--
-    
     MOD_EXP_RATE =  makeint(MOD_EXP_RATE + MOD_SKILL_ENEMY_RATE * MOD_EXP_RATE / 1.666666666); // разные уровни для всех
     if (MOD_EXP_RATE < 10) MOD_EXP_RATE = 10; // иначе будет развал целостности данных, порог релиховой версии бля всех сложностей.
-    
 	// куда плывем	
 	ch.HeroParam.ToCityId     = FindAlliedColonyForNation(sti(ch.nation), true);
-
 	// откуда плывем
     ch.HeroParam.FromCityId  = Colonies[FindNonEnemyColonyForAdventure(sti(ch.nation), ch.HeroParam.ToCityId, true)].id;
-
 	// где появимся	
 	ch.HeroParam.Location = ch.HeroParam.ToCityId + "_town";
 	ch.HeroParam.Group    = "reload";
 	ch.HeroParam.Locator  = "reload1";
-	
 	setCharacterShipLocation(ch, ch.HeroParam.Location);
     setWDMPointXZ(ch.HeroParam.Location);  // коорд на карте
-    
 	// а надо ли нам это ?
 	SetTimerCondition("Move_Govenour", 0, 0, 25 + rand(10), true); // to_do перенести в один метод инициации
-	
 	//Запускаем проверку на падение здоровья раз в 5 дней
     SetTimerCondition("CheckMaxHealthQuest", 0, 0, 5, true);
-    
     SetTimerCondition("Nation_Legend", 0, 0, 25 + rand(10), true);
-
 	// Jason: новая усадка генерал-губернаторов. На постоянке - Пуанси, Виндзор, Фокс, де Кордова
 	SetGovenoursToResidence();
-
 	ReloadProgressUpdate();
-
  	SetNationRelations();
  	// от кого драпаем
 	ch.HeroParam.EnemyNation  = FindEnemyNation2Nation(sti(ch.nation));
-	
     // boal вешаем прерывание на охотников навечно (для моря и земли) -->
     SetTimerCondition("SeaHunterCheck", 0, 0, 6, true);
     SaveCurrentQuestDateParam("Land_HunterTimerEng");
@@ -3513,9 +3157,7 @@ void initNewMainCharacter()//инициализация главного гер�
     SaveCurrentQuestDateParam("Land_HunterTimerHol");
     // boal вешаем прерывание на охотников навечно (для моря и земли) <--
     LAi_SetHP(ch, LAI_DEFAULT_HP, LAI_DEFAULT_HP);
-
     ch.HeroParam.HeroType = NullCharacter.HeroParam.HeroType;
-
 	SetSPECIAL(ch, 4,4,4,4,4,4,4);
 	switch (ch.HeroParam.HeroType)
 	{        
@@ -3526,7 +3168,6 @@ void initNewMainCharacter()//инициализация главного гер�
 			SetCharacterPerk(ch, "HPPlus");
 			SetCharacterPerk(ch, "HT1");
 		break;
-		
 		case "HeroType_2":
 			SetSPECIAL(ch, 7, 4, 7, 6, 6, 7, 5);
 			SetSelfSkill(ch, 4, 15, 4, 5, 8);
@@ -3534,7 +3175,6 @@ void initNewMainCharacter()//инициализация главного гер�
 			SetCharacterPerk(ch, "Trustworthy");
 			SetCharacterPerk(ch, "HT2");
 		break;
-		
 		case "HeroType_3":
 			SetSPECIAL(ch, 10, 3, 8, 5, 4, 8, 4);
 			SetSelfSkill(ch, 3, 5, 15, 5, 7);
@@ -3542,7 +3182,6 @@ void initNewMainCharacter()//инициализация главного гер�
 			SetCharacterPerk(ch, "Medic");
 			SetCharacterPerk(ch, "HT3");
 		break;
-		
 		case "HeroType_4":
 			SetSPECIAL(ch, 4, 9, 6, 4, 5, 5, 9);
 			SetSelfSkill(ch, 5, 5, 5, 15, 20);
@@ -3551,7 +3190,6 @@ void initNewMainCharacter()//инициализация главного гер�
 			SetCharacterPerk(ch, "HT4");
 		break;
 	}
-	
 	ch.skill.freeskill   = 0;
 	ch.Skill.FreeSPECIAL = 0;
 	sGlobalTemp   = "Flag" + NationShortName(sti(ch.nation));
@@ -3564,10 +3202,8 @@ void initNewMainCharacter()//инициализация главного гер�
 	LAi_SetHP(ch, GetCharacterBaseHPValue(ch), GetCharacterBaseHPValue(ch));
     SetEnergyToCharacter(ch);
     initMainCharacterItem();
-	
 	ReloadProgressUpdate();	
     DeleteAttribute(ch, "Ship");
-    
 	/*
 	if (startHeroType == 1)	// Шарль
 	{
@@ -3591,7 +3227,6 @@ void initNewMainCharacter()//инициализация главного гер�
 	    ch.quest.Tut_start.function                  = "Tut_StartGame";
 	}	
 	*/
-
 	ch.Ship.Type = GenerateShipExt((SHIP_CAREERLUGGER + rand(2)), 0, ch);
 	SetBaseShipData(ch);
 	ch.Ship.Name = "Quicksilver";
@@ -3609,7 +3244,6 @@ void initNewMainCharacter()//инициализация главного гер�
     }
     else
     {
-
 		bool bSharp1 = ch.name == "Blaze" && ch.lastname == "Sharp";
 		bool bSharp2 = ch.name == "Beatrice" && ch.lastname == "Sharp";
 		if(bSharp1 || bSharp2)
@@ -3621,7 +3255,6 @@ void initNewMainCharacter()//инициализация главного гер�
     	pchar.quest.Tut_start.function                  = "Tut_StartGame";
         Pchar.questTemp.CapBloodLine = false;
     }
-
 	// Warship Для разных квестов
 	// Важно: функция MaryCelesteInit() должна быть тут, а не в initStartState2Character()
 	// т.к. в ней идет выборка колоний, которые в функции initStartState2Character() еще не инитились
@@ -3633,12 +3266,10 @@ void initNewMainCharacter()//инициализация главного гер�
 	DeleteClass(&sound);
 	ResumeAllSounds();
 }
-
 void initMainCharacterItem()
 {
     ref ch = GetMainCharacter();
 	String itemID;
-	
 	switch (ch.HeroParam.HeroType)
 	{
 		case "HeroType_1":
@@ -3651,7 +3282,6 @@ void initMainCharacterItem()
 			TakenItems(ch, "jewelry46", 3);
          	ch.money = 500;		
 		break;
-		
 		case "HeroType_2":
 			itemID = GetGeneratedItem("blade_12");	// полусабля
             GiveItem2Character(ch, itemID);
@@ -3662,7 +3292,6 @@ void initMainCharacterItem()
 			TakenItems(ch, "jewelry46", 3);
          	ch.money = 500;				
 		break;
-		
 		case "HeroType_3":
 			itemID = GetGeneratedItem("blade_14");	// валлонская шпага
             GiveItem2Character(ch, itemID);
@@ -3673,7 +3302,6 @@ void initMainCharacterItem()
 			TakenItems(ch, "jewelry46", 3);
          	ch.money = 500;				
 		break;
-		
 		case "HeroType_4":
 			itemID = GetGeneratedItem("blade_08");	// бильбо
             GiveItem2Character(ch, itemID);
@@ -3691,66 +3319,50 @@ void initMainCharacterItem()
 		break;
 	}
 }
-
 int GetNewMainCharacterFace()
 {
     return sti(GetNewMainCharacterParam("heroFace_" + startHeroType));
 }
-
 string GetNewMainCharacterName()
 {
     return GetHeroName(startHeroType);
 }
-
 string GetMainCharacterNameGen()  // ==> eddy. родительный падеж полного имени ГГ
 {
     return GetHeroNameGen(startHeroType);
 }
-
 string GetMainCharacterNameDat()  // ==> eddy. дательный падеж полного имени ГГ
 {
     return GetHeroNameDat(startHeroType);
 }
-
 string GetHeroName(int _n)
 {
     string totalInfo;
-
     totalInfo = GetNewMainCharacterParam("heroName_" + _n);
     totalInfo = totalInfo + " " + GetNewMainCharacterParam("heroLastname_" + _n);
-
     return totalInfo;
 }
-
 string GetHeroNameGen(int _n)
 {
     string totalInfo;
-
     totalInfo = GetNewMainCharacterParam("heroNameGen_" + _n);
     totalInfo = totalInfo + " " + GetNewMainCharacterParam("heroLastnameGen_" + _n);
-
     return totalInfo;
 }
-
 string GetHeroNameDat(int _n)
 {
     string totalInfo;
-
     totalInfo = GetNewMainCharacterParam("heroNameDat_" + _n);
     totalInfo = totalInfo + " " + GetNewMainCharacterParam("heroLastnameDat_" + _n);
-
     return totalInfo;
 }
-
 int GetNewMainCharacterNation(int _startHeroType)
 {
     int    idLngFile = -1;
     string totalInfo;
-
     idLngFile = LanguageOpenFile("HeroDescribe.txt");
     totalInfo = LanguageConvertString(idLngFile, "heroNation_" + _startHeroType);
     LanguageCloseFile(idLngFile);
-
     switch(totalInfo)
 	{
 		case "Англия":
@@ -3768,7 +3380,6 @@ int GetNewMainCharacterNation(int _startHeroType)
 		case "Береговое братство":
 			return PIRATE;
 		break;
-
 		case "ENGLAND":
             return ENGLAND;
 		break;
@@ -3787,16 +3398,13 @@ int GetNewMainCharacterNation(int _startHeroType)
 	}
 	return PIRATE;
 }
-
 int GetNewMainCharacterBaseNation(int _startHeroType)
 {
     int    idLngFile = -1;
     string totalInfo;
-
     idLngFile = LanguageOpenFile("HeroDescribe.txt");
     totalInfo = LanguageConvertString(idLngFile, "heroBaseNation_" + _startHeroType);
     LanguageCloseFile(idLngFile);
-
     switch(totalInfo)
 	{
 		case "Англия":
@@ -3814,7 +3422,6 @@ int GetNewMainCharacterBaseNation(int _startHeroType)
 		case "Береговое братство":
 			return PIRATE;
 		break;
-
 		case "ENGLAND":
             return ENGLAND;
 		break;
@@ -3833,19 +3440,15 @@ int GetNewMainCharacterBaseNation(int _startHeroType)
 	}
 	return PIRATE;
 }
-
 string GetNewMainCharacterParam(string _param)
 {
     int    idLngFile = -1;
     string totalInfo;
-
     idLngFile = LanguageOpenFile("HeroDescribe.txt");
     totalInfo = LanguageConvertString(idLngFile, _param);
     LanguageCloseFile(idLngFile);
-
     return totalInfo;
 }
-
 // вернуть базовую нацию ГГ или патент
 int GetBaseHeroNation()
 {

@@ -1,7 +1,6 @@
 // диалог по городам
 void ProcessCommonDialogEvent(ref NPChar, aref Link, aref NextDiag)
 {
-
 	switch (Dialog.CurrentNode)
 	{
 		case "quests":
@@ -16,19 +15,16 @@ void ProcessCommonDialogEvent(ref NPChar, aref Link, aref NextDiag)
                 link.l1.go = "guardoftruth";
 			}
 		break;
-		
 		case "guardoftruth":
 			dialog.text = "Gaius Marchais? Oh yes, of course I remember him! But he didn't purchase anything. He offered his ship for freight. I just happened to need a ship with a spacious hold - a large batch of raw skins.";
 			link.l1 = "And what was the unloading point?";
 			link.l1.go = "guardoftruth_1";
 		break;
-		
 		case "guardoftruth_1":
 			dialog.text = "Philipsburg, Saint Maarten.";
 			link.l1 = "Okay. Thank you, you've helped me so much!";
 			link.l1.go = "guardoftruth_2";
 		break;
-		
 		case "guardoftruth_2":
 			dialog.text = "Anytime, captain. Stop by my store anytime you like!";
 			link.l1 = "...";
@@ -39,4 +35,3 @@ void ProcessCommonDialogEvent(ref NPChar, aref Link, aref NextDiag)
 	}
 	UnloadSegment(NPChar.FileDialog2);
 }
-

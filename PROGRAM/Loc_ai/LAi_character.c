@@ -1,8 +1,6 @@
-
 //------------------------------------------------------------------------------------------
 //Login
 //------------------------------------------------------------------------------------------
-
 //Установить время загрузки персонажа
 void LAi_SetLoginTime(aref chr, float start, float end)
 {
@@ -13,7 +11,6 @@ void LAi_SetLoginTime(aref chr, float start, float end)
 	chr.location.stime = start;
 	chr.location.etime = end;
 }
-
 //Удалить время загрузки персонажа
 void LAi_RemoveLoginTime(aref chr)
 {
@@ -22,7 +19,6 @@ void LAi_RemoveLoginTime(aref chr)
 	DeleteAttribute(loc, "stime");
 	DeleteAttribute(loc, "etime");
 }
-
 //Данный персонаж является верующим, и в определённое время находиться в церкви
 void LAi_SetFanatic(aref chr, string churchID, string group, string locator, float start, float end)
 {
@@ -32,7 +28,6 @@ void LAi_SetFanatic(aref chr, string churchID, string group, string locator, flo
 	chr.location.church.stime = start;
 	chr.location.church.etime = end;
 }
-
 //Сделать обычным персонаж
 void LAi_RemoveFanatic(aref chr)
 {
@@ -40,13 +35,11 @@ void LAi_RemoveFanatic(aref chr)
 	makearef(loc, chr.location);
 	DeleteAttribute(loc, "church");
 }
-
 //Запретить перерождение персонажа после убийства
 void LAi_NoRebirthEnable(aref chr)
 {
 	chr.location.norebirth = "1";
 }
-
 //Разрешить перерождение персонажа после убийства
 void LAi_NoRebirthDisable(aref chr)
 {
@@ -54,13 +47,11 @@ void LAi_NoRebirthDisable(aref chr)
 	makearef(loc, chr.location);
 	DeleteAttribute(loc, "norebirth");
 }
-
 //Перерождение нпс со старым именем
 void LAi_RebirthOldName(aref chr)
 {
 	chr.location.rebirthOldName = true;
 }
-
 //Разрешить/запретить персонажу загружаться в захваченную локацию
 void LAi_LoginInCaptureTown(aref chr, bool isEnable)
 {
@@ -73,11 +64,9 @@ void LAi_LoginInCaptureTown(aref chr, bool isEnable)
 		DeleteAttribute(loc, "loadcapture");
 	}
 }
-
 //------------------------------------------------------------------------------------------
 //Fight, hp
 //------------------------------------------------------------------------------------------
-
 //Установить хитпойнты
 void LAi_SetHP(aref chr, float cur, float max)
 {
@@ -87,7 +76,6 @@ void LAi_SetHP(aref chr, float cur, float max)
 	chr.chr_ai.hp = cur;
 	chr.chr_ai.hp_max = max;
 }
-
 //Установить текущии хитпойнты
 void LAi_SetCurHP(aref chr, float cur)
 {
@@ -106,7 +94,6 @@ void LAi_SetCurHP(aref chr, float cur)
 		PGG_CheckDead(chr);
 	}
 }
-
 //Установить текущии хитпойнты и энергию максимальными
 void LAi_SetCurHPMax(aref chr)
 {
@@ -118,17 +105,14 @@ void LAi_SetCurHPMax(aref chr)
 	}
 	chr.chr_ai.hp_max = maxHP;
 	chr.chr_ai.hp = maxHP;
-
 	chr.chr_ai.energy    = LAi_GetCharacterMaxEnergy(chr); // восстановление там, где мах НР
 }
-
 //Скорость изменения хп в секунду
 void LAi_SetDltHealth(aref chr, float healthPerSec)
 {
 	//if(healthPerSec < 0) healthPerSec = 0;
 	chr.chr_ai.hp_dlt = healthPerSec;
 }
-
 //Использовать бутылочку-лечилку
 void LAi_UseHealthBottle(aref chr, float healthInBottle)
 {
@@ -143,17 +127,14 @@ void LAi_UseHealthBottle(aref chr, float healthInBottle)
 void LAi_UseHealthBottleSpeed(aref chr, float healthSpeed)
 {
 	if (healthSpeed <= 0) return;
-	
 	chr.chr_ai.hp_dlt_bottle = healthSpeed;
 }
-
 //navy -->
 void LAi_AlcoholSetDrunk(aref chr, float alcoholDegree, float time)
 {
 	//эффекты не суммируются.
 	if (CheckAttribute(chr, "chr_ai.drunk")) return;
 	//float energyMax;
-
 	chr.chr_ai.drunk = time;
 	//много рома в таверне
 	if (alcoholDegree > 70)
@@ -183,7 +164,6 @@ void LAi_AlcoholSetDrunk(aref chr, float alcoholDegree, float time)
 		chr.chr_ai.drunk.skill.Fortune = 5;
 		chr.chr_ai.drunk.skill.Pistol = -20;
 	}
-
 	//думал бонус к макс энергии сделать, но оно по другому работает :) пока так.. а там видно будет.
 	if(CheckAttribute(chr, "chr_ai.energy"))
 	{
@@ -196,7 +176,6 @@ void LAi_AlcoholSetDrunk(aref chr, float alcoholDegree, float time)
 		chr.chr_ai.energy = stf(chr.chr_ai.energy) + 20;
 	}
 }
-
 void LAi_SetAlcoholNormal(aref chr)
 {
 	/*
@@ -207,24 +186,20 @@ void LAi_SetAlcoholNormal(aref chr)
 	*/
 	if (CheckAttribute(pchar, "questTemp.Rum")) DeleteAttribute(pchar, "questTemp.Rum");
 	if (CheckAttribute(pchar, "GenQuest.CamShuttle")) DeleteAttribute(pchar, "GenQuest.CamShuttle");
-
 	DeleteAttribute(chr, "chr_ai.drunk");
 }
 //<--
-
 //Использовать бутылочку-противоядие
 void LAi_UseAtidoteBottle(aref chr)
 {
 	DeleteAttribute(chr, "chr_ai.poison");
 }
-
 //Отравлен
 bool LAi_IsPoison(aref chr)
 {
 	if(CheckAttribute(chr, "chr_ai.poison")) return true;
 	return false;
 }
-
 //Сделать персонажа бессмертным
 void LAi_SetImmortal(aref chr, bool isImmortal)
 {
@@ -237,7 +212,6 @@ void LAi_SetImmortal(aref chr, bool isImmortal)
 		DeleteAttribute(chr_ai, "immortal");
 	}
 }
-
 //Узнать отношение персонажа к бессмертию
 bool LAi_IsImmortal(aref chr)
 {
@@ -250,8 +224,6 @@ bool LAi_IsImmortal(aref chr)
 	}
 	return false;
 }
-
-
 //Получить хп персонажа
 float LAi_GetCharacterHP(aref chr)
 {
@@ -266,7 +238,6 @@ float LAi_GetCharacterHP(aref chr)
 	chr.chr_ai.hp_max = maxHp;
 	return curHp;
 }
-
 //Получить максимальные хп персонажа
 float LAi_GetCharacterMaxHP(aref chr)
 {
@@ -276,7 +247,6 @@ float LAi_GetCharacterMaxHP(aref chr)
 		max_hp = stf(chr.chr_ai.hp_max);
 	}
 	if(max_hp < 0.0) max_hp = 0.0;
-	
 	if(IsEquipCharacterByArtefact(chr, "amulet_7"))
 	{
 		if(!CheckAttribute(chr, "chr_ai.hp_max_back"))
@@ -293,11 +263,9 @@ float LAi_GetCharacterMaxHP(aref chr)
 			DeleteAttribute(chr, "chr_ai.hp_max_back");
 		}
 	}
-	
 	chr.chr_ai.hp_max = max_hp;
 	return max_hp;
 }
-
 //Получить относительные хп персонажа 0..1
 float LAi_GetCharacterRelHP(aref chr)
 {
@@ -310,7 +278,6 @@ float LAi_GetCharacterRelHP(aref chr)
 	}
 	return 0.0;
 }
-
 //Получить относительную энергию персонажа 0..1
 float LAi_GetCharacterRelEnergy(aref chr)
 {
@@ -331,7 +298,6 @@ float LAi_GetCharacterMaxEnergy(aref chr)
 	}
 	return LAI_DEFAULT_ENERGY_MAX;
 }
-
 //Установить проверяльщик хп, если их становиться меньше чем, вызвать квест
 void LAi_SetCheckMinHP(aref chr, float min, bool immortal, string quest)
 {
@@ -340,7 +306,6 @@ void LAi_SetCheckMinHP(aref chr, float min, bool immortal, string quest)
 	chr.chr_ai.hpchecker.quest = quest;
 	chr.chr_ai.hpchecker.immortal = immortal;
 }
-
 //Удалить проверяльщик хп
 void LAi_RemoveCheckMinHP(aref chr)
 {
@@ -348,7 +313,6 @@ void LAi_RemoveCheckMinHP(aref chr)
 	makearef(chr_ai, chr.chr_ai);
 	DeleteAttribute(chr_ai, "hpchecker");	
 }
-
 //Убить персонажа
 void LAi_KillCharacter(aref chr)
 {
@@ -363,7 +327,6 @@ void LAi_KillCharacter(aref chr)
 		LAi_CheckKillCharacter(chr);
 	}
 }
-
 //Убит ли персонаж
 bool LAi_IsDead(aref chr)
 {
@@ -372,12 +335,9 @@ bool LAi_IsDead(aref chr)
 	if(stf(chr.chr_ai.hp) < 1.0) return true;
 	return false;
 }
-
-
 //------------------------------------------------------------------------------------------
 //Other
 //------------------------------------------------------------------------------------------
-
 //Является ли персонаж управляемым
 bool LAi_IsCharacterControl(aref chr)
 {
@@ -387,25 +347,21 @@ bool LAi_IsCharacterControl(aref chr)
 	}
 	return false;
 }
-
 //Запретить диалог с персонажем
 void LAi_CharacterDisableDialog(aref chr)
 {
 	chr.chr_ai.disableDlg = "1";
 }
-
 //Разрешить диалог с персонажем
 void LAi_CharacterEnableDialog(aref chr)
 {
 	chr.chr_ai.disableDlg = "0";
 }
-
 //Разрешить при смерти порождить фантома
 void LAi_CharacterReincarnation(aref chr, bool isEnable, bool isUseCurModel)
 {
 	LAi_CharacterReincarnationEx(chr, isEnable, isUseCurModel, "");
 }
-
 //Разрешить при смерти порождить фантома
 void LAi_CharacterReincarnationEx(aref chr, bool isEnable, bool isUseCurModel, string locgroup)
 {
@@ -428,13 +384,11 @@ void LAi_CharacterReincarnationEx(aref chr, bool isEnable, bool isUseCurModel, s
 		DeleteAttribute(chr_ai, "reincarnation");
 	}	
 }
-
 bool LAi_CharacterIsReincarnation(aref chr)
 {
 	if(CheckAttribute(chr, "chr_ai.reincarnation") == false) return false;
 	return true;
 }
-
 bool LAi_CharacterReincarnationMode(aref chr)
 {
 	if(CheckAttribute(chr, "chr_ai.reincarnation") == false)
@@ -445,7 +399,6 @@ bool LAi_CharacterReincarnationMode(aref chr)
 	if(sti(chr.chr_ai.reincarnation) != 0) return true;
 	return false;
 }
-
 string LAi_CharacterReincarnationGroup(aref chr)
 {
 	if(CheckAttribute(chr, "chr_ai.reincarnation.group") == false)
@@ -456,7 +409,6 @@ string LAi_CharacterReincarnationGroup(aref chr)
 	if(chr.chr_ai.reincarnation.group != "") return chr.chr_ai.reincarnation.group;
 	return "goto";
 }
-
 //eddy. установить установить шаг повышения ранга фантома при реинкарнации.
 bool LAi_SetReincarnationRankStep(aref _chr, int _step) 
 {
@@ -469,17 +421,14 @@ bool LAi_SetReincarnationRankStep(aref _chr, int _step)
 	else Trace("LAi_SetReincarnationRankStep -> no field chr.chr_ai.reincarnation");
 	return false;
 }
-
 //------------------------------------------------------------------------------------------
 //Other
 //------------------------------------------------------------------------------------------
-
 //Проиграть звук
 void LAi_CharacterPlaySound(aref chr, string soundname)
 {
 	SendMessage(chr, "s", soundname);
 }
-
 //Переключиться в режим боя и обратно
 void LAi_SetFightMode(aref chr, bool isFightMode)
 {
@@ -502,24 +451,19 @@ void LAi_SetFightModeForOfficers(bool isFightMode)
 	    }
 	}
 }
-
 //Заблокировать текущий режим (!!! сбрасывается при смене шаблона !!!)
 void LAi_LockFightMode(aref chr, bool isLockFightMode)
 {
 	SendMessage(&chr, "lsl", MSG_CHARACTER_EX_MSG, "LockFightMode", isLockFightMode);
 }
-
 //Получить режим боя (вытащена ли сабля)
 bool LAi_CheckFightMode(aref chr)
 {
 	return SendMessage(&chr, "ls", MSG_CHARACTER_EX_MSG, "CheckFightMode");
 }
-
 //------------------------------------------------------------------------------------------
 //Weapons
 //------------------------------------------------------------------------------------------
-
-
 //Получить относительный заряд пистолета
 float LAi_GetCharacterRelCharge(aref chr)
 {
@@ -547,7 +491,6 @@ float LAi_GetCharacterRelCharge(aref chr)
 	}
 	return 0.0;
 }
-
 //Получить максимальное количество зарядов пистолета
 int LAi_GetCharacterChargeQuant(aref chr)
 {
@@ -557,7 +500,6 @@ int LAi_GetCharacterChargeQuant(aref chr)
 	}
 	return 0;
 }
-
 //Получить текущее количество зарядов пистолета
 int LAi_GetCharacterChargeCur(aref chr)
 {
@@ -568,21 +510,17 @@ int LAi_GetCharacterChargeCur(aref chr)
 	}
 	return 0;
 }
-
 //Установить количество зарядов
 void LAi_GunSetChargeQuant(aref chr, int quant)
 {
 	if(quant < 0) quant = 0;
 	if(quant > 5) quant = 5;
 	chr.chr_ai.charge_max = quant;
-	
 	// Warship. Переделка	
 	int iCharge = iGetPistolChargeNum(chr, quant);
 	chr.chr_ai.charge = iCharge;
-	
 	chr.chr_ai.chargeprc = "1";
 }
-
 void LAi_SetCharacterBulletType(ref rChar, string sBullet)
 {
 	switch(sBullet)
@@ -610,7 +548,6 @@ void LAi_SetCharacterBulletType(ref rChar, string sBullet)
 		break;
 	}
 }
-
 // ugeen --> получим тип пуль на одетом огнестрельном оружии
 string LAi_GetCharacterBulletType(ref rChar)
 {
@@ -625,7 +562,6 @@ string LAi_GetCharacterBulletType(ref rChar)
 	}			
 	return sBulletType;
 }
-
 // ugeen --> получим тип пороха на одетом огнестрельном оружии и известном типе пуль
 string LAi_GetCharacterGunpowderType(ref rChar)
 {
@@ -640,7 +576,6 @@ string LAi_GetCharacterGunpowderType(ref rChar)
 	}			
 	return sGunpowderType;
 }
-
 string LAi_SetCharacterDefaultBulletType(ref rChar)
 {
 	string sAttr;
@@ -667,14 +602,12 @@ string LAi_SetCharacterDefaultBulletType(ref rChar)
 	}			
 	return sBulletType;
 }
-
 bool LAi_SetCharacterUseBullet(ref rChar, string sBullet)
 {
 	string 	sAttr;
 	string 	sBulletType = "";
 	int 	iNum;
 	aref 	rType;
-	
 	string sGun = GetCharacterEquipByGroup(rChar, GUN_ITEM_TYPE);
 	if(sGun != "") 
 	{
@@ -706,14 +639,12 @@ bool LAi_SetCharacterUseBullet(ref rChar, string sBullet)
 				rChar.chr_ai.MisFire		= rItm.type.(sAttr).misfire;
 				rChar.chr_ai.SelfDamage		= rItm.type.(sAttr).SelfDamage;
 				rChar.chr_ai.Explosion		= rItm.type.(sAttr).Explosion;
-				
 				rItm.ChargeSpeed			= rItm.type.(sAttr).ChargeSpeed;
 				rItm.Accuracy				= rItm.type.(sAttr).Accuracy;
 				rItm.DmgMin					= rItm.type.(sAttr).DmgMin_NC;
 				rItm.DmgMax					= rItm.type.(sAttr).DmgMax_NC;
 				rItm.dmg_min 				= rItm.type.(sAttr).DmgMin_NC;
 				rItm.dmg_max				= rItm.type.(sAttr).DmgMax_NC;
-								
 				if(CheckAttribute(rItm,"chargeQ"))										LAi_GunSetChargeQuant(rChar,sti(rItm.chargeQ));
 				else																	LAi_GunSetChargeQuant(rChar, 0);						
 				if(CheckAttribute(rItm,"chargespeed") && stf(rItm.chargespeed) > 0.0)	LAi_GunSetChargeSpeed(rChar, 1.0/stf(rItm.chargespeed));
@@ -724,14 +655,12 @@ bool LAi_SetCharacterUseBullet(ref rChar, string sBullet)
 				else																	LAi_GunSetDamageMax(rChar, 0.0);				
 				if(CheckAttribute(rItm,"accuracy"))										LAi_GunSetAccuracy(rChar,stf(rItm.accuracy)*0.01);
 				else																	LAi_GunSetAccuracy(rChar,0.0);
-			
 				return true;	
 			}
 		}
 	}			
 	return false;
 }
-
 // Warship. Методы по зарядке пистоля -->
 // Ugeen --> переработка с учетом нескольких типов пуль и пороха на одетом огнестреле
 int iGetMinPistolChargeNum(ref rChar) // Чего меньше, пороха или пуль?
@@ -747,24 +676,20 @@ int iGetMinPistolChargeNum(ref rChar) // Чего меньше, пороха и�
 	}		
 	return iBulletQty;
 }
-
 int iGetPistolChargeNum(ref rChar, int iQuant) // Скока можем зарядить
 {
 	int iChargeQty = iGetMinPistolChargeNum(rChar);
-
 	if(iChargeQty == 0) return 0;
 	if(iChargeQty >= iQuant) return iQuant;
 	if(iChargeQty < iQuant) return iChargeQty;
 }
 // <-- Методы по зарядке пистоля
-
 //Разрядить пистолет
 void LAi_GunSetUnload(aref chr)
 {
 	chr.chr_ai.charge = "0";
 	chr.chr_ai.chargeprc = "1";
 }
-
 //Установить скорость заряда пистолета
 void LAi_GunSetChargeSpeed(aref chr, float speed)
 {
@@ -772,19 +697,16 @@ void LAi_GunSetChargeSpeed(aref chr, float speed)
 	if(speed > 5.0) speed = 5.0;
 	chr.chr_ai.charge_dlt = speed;
 }
-
 //Установить минимальный урон от пистолета
 void LAi_GunSetDamageMin(aref chr, float min)
 {
 	chr.chr_ai.dmggunmin = min;
 }
-
 //Установить максимальный урон от пистолета
 void LAi_GunSetDamageMax(aref chr, float max)
 {
 	chr.chr_ai.dmggunmax = max;
 }
-
 //Установить вероятность попадания на максимальной дальности стрельбы
 void LAi_GunSetAccuracy(aref chr, float accuracy)
 {
@@ -792,25 +714,21 @@ void LAi_GunSetAccuracy(aref chr, float accuracy)
 	if(accuracy > 1.0) accuracy = 1.0;
 	chr.chr_ai.accuracy = accuracy;
 }
-
 //Установить минимальный урон от сабли
 void LAi_BladeSetDamageMin(aref chr, float min)
 {
 	chr.chr_ai.dmgbldmin = min;
 }
-
 //Установить максимальный урон от сабли
 void LAi_BladeSetDamageMax(aref chr, float max)
 {
 	chr.chr_ai.dmgbldmax = max;
 }
-
 //Установить минимальный и максимальный урон от удара мушкетом (приклад или штык)
 void LAi_MushketSetDamageMaxMin(aref chr, ref rItm, string attackType)
 {
 	float min = 0.0;
 	float max = 0.0;
-	
 	switch(attackType)
 	{
 		case "fast": 
@@ -818,31 +736,26 @@ void LAi_MushketSetDamageMaxMin(aref chr, ref rItm, string attackType)
 			max = rItm.DmgMax_butt;
 			chr.chr_ai.MushketFencingType = rItm.sAttack_butt;
 		break;
-		
 		case "force": 
 			min = rItm.DmgMin_bayonet;
 			max = rItm.DmgMax_bayonet;			
 			chr.chr_ai.MushketFencingType = rItm.sAttack_bayonet;
 		break;
-		
 		case "round": 
 			min = rItm.DmgMin_butt;
 			max = rItm.DmgMax_butt;
 			chr.chr_ai.MushketFencingType = rItm.sAttack_butt;
 		break;
-		
 		case "break": 
 			min = rItm.DmgMin_butt;
 			max = rItm.DmgMax_butt;
 			chr.chr_ai.MushketFencingType = rItm.sAttack_butt;
 		break;
-		
 		case "feintc":  
 			min = rItm.DmgMin_butt;
 			max = rItm.DmgMax_butt;
 			chr.chr_ai.MushketFencingType = rItm.sAttack_butt;
 		break;
-		
 		case "feint": 
 			min = rItm.DmgMin_butt;
 			max = rItm.DmgMax_butt;
@@ -852,7 +765,6 @@ void LAi_MushketSetDamageMaxMin(aref chr, ref rItm, string attackType)
 	chr.chr_ai.dmgbldmin = min;
 	chr.chr_ai.dmgbldmax = max;
 }
-
 //Установить вероятность пробивки
 void LAi_BladeSetPiercing(aref chr, float piercing)
 {
@@ -860,7 +772,6 @@ void LAi_BladeSetPiercing(aref chr, float piercing)
 	if(piercing > 1.0) piercing = 1.0;
 	chr.chr_ai.piercing = piercing;
 }
-
 //Установить вероятность неблокирования
 void LAi_BladeSetBlock(aref chr, float block)
 {
@@ -873,7 +784,6 @@ void LAi_BladeFencingType(aref chr, string FencingType)
 {
 	chr.chr_ai.FencingType = FencingType;
 }
-
 string LAi_GetBladeFencingType(aref chr)
 {
     if(CheckAttribute(chr, "chr_ai.FencingType"))
@@ -882,13 +792,11 @@ string LAi_GetBladeFencingType(aref chr)
     }
     return SKILL_FENCING;
 }
-
 // тип мушкета
 void LAi_MushketFencingType(aref chr, string FencingType)
 {
 	chr.chr_ai.MushketFencingType = FencingType;
 }
-
 string LAi_GetMushketFencingType(aref chr)
 {
     if(CheckAttribute(chr, "chr_ai.MushketFencingType"))
@@ -897,12 +805,10 @@ string LAi_GetMushketFencingType(aref chr)
     }
     return SKILL_FENCING;
 }
-
 void LAi_BladeEnergyType(aref chr, float fEnergyType)
 {
 	chr.chr_ai.EnergyType = fEnergyType;
 }
-
 float LAi_GetBladeEnergyType(aref chr)
 {
     if (CheckAttribute(chr, "chr_ai.EnergyType"))
@@ -911,12 +817,10 @@ float LAi_GetBladeEnergyType(aref chr)
     }
     return 1.0;
 }
-
 void LAi_MushketEnergyType(aref chr, float fEnergyType)
 {
 	chr.chr_ai.EnergyType = fEnergyType;
 }
-
 float LAi_GetMushketEnergyType(aref chr)
 {
     if (CheckAttribute(chr, "chr_ai.EnergyType"))
@@ -925,12 +829,9 @@ float LAi_GetMushketEnergyType(aref chr)
     }
     return 1.0;
 }
-
-
 //------------------------------------------------------------------------------------------
 //Internal
 //------------------------------------------------------------------------------------------
-
 //Процессируем всех загруженных персонажей
 void LAi_AllCharactersUpdate(float dltTime)
 {
@@ -1018,7 +919,6 @@ void LAi_AllCharactersUpdate(float dltTime)
 			{
 				chargemax = stf(chr_ai.charge_max);
 			}
-
 			//if(!CheckAttribute(chr_ai, "chargeprc")) chr_ai.chargeprc = "1";
 			if(chargemax > 0.0)
 			{
@@ -1037,9 +937,7 @@ void LAi_AllCharactersUpdate(float dltTime)
 								//Скорость зарядки
 								chr_ai.charge_pSkill = LAi_GunReloadSpeed(chr);
 							}
-
 							float dltcharge = stf(chr_ai.charge_pSkill);
-
 							//Подзаряжаем пистолет
 							charge = charge + dltcharge*dltTime;
 							if(charge >= chargemax)
@@ -1047,7 +945,6 @@ void LAi_AllCharactersUpdate(float dltTime)
 								charge = chargemax;
 								chr_ai.chargeprc = "0";
 								DeleteAttribute(chr_ai, "charge_pSkill");
-
 								// boal 24.04.04 озвучка зарядки пистоля -->
 								if (Characters[idx].index == GetMainCharacterIndex() && LAi_IsFightMode(pchar))
 								{
@@ -1064,7 +961,6 @@ void LAi_AllCharactersUpdate(float dltTime)
 			{
 				chr_ai.charge = "0";
 			}
-
 			//Востоновление энергии
 			if(CheckAttribute(chr_ai, "energy"))
 			{
@@ -1082,7 +978,6 @@ void LAi_AllCharactersUpdate(float dltTime)
 		}
 	}
 }
-
 void LAi_ProcessCheckMinHP(aref chr)
 {
 	if(CheckAttribute(chr, "chr_ai.hpchecker"))
@@ -1104,14 +999,12 @@ void LAi_ProcessCheckMinHP(aref chr)
 		}
 	}
 }
-
 void LAi_CharacterSaveAy(aref chr)
 {
 	float ay = 0.0;
 	if(GetCharacterAy(chr, &ay) == false) ay = 0.0;
 	chr.chr_ai.type.ay = ay;	
 }
-
 void LAi_CharacterRestoreAy(aref chr)
 {
 	if(CheckAttribute(chr, "chr_ai.type.ay"))

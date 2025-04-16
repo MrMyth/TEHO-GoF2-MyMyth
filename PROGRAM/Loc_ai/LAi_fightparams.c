@@ -1,36 +1,26 @@
 /*
-
 	Возможные типы атаки attackType:
 	"fast" быстрая атака
 	"force" обычная
 	"round" круговая
 	"break" пробивающая блок
 	"feint" атака после финта
-
-
 */
-
 //--------------------------------------------------------------------------------
 //Blade parameters
 //--------------------------------------------------------------------------------
-
 //Расчитать повреждение для персонажа при ударе клинком
 float LAi_CalcDamageForBlade(aref attack, aref enemy, string attackType, bool isBlocked)
 {
 	ref rItm; // оружие атакующего
-	
 	float aSkill = LAi_GetCharacterFightLevel(attack);
 	float eSkill = LAi_GetCharacterFightLevel(enemy);
-	
 	rItm = ItemsFromID(GetCharacterEquipByGroup(attack, BLADE_ITEM_TYPE));
-	
 	float bladeDmg = 0.1 * stf(rItm.Attack) + 0.4 * stf(rItm.Attack) * aSkill + stf(rItm.Attack) * fRandSmall(aSkill); 
-
 	if(aSkill < eSkill)
 	{
 		bladeDmg = bladeDmg * (1.0 + 0.7 * (aSkill - eSkill));
 	}
-	
 	// Warship 27.08.09 Для сильных противников
 	// Если долбить совсем сильных (хардкорные абордажи), то шансов взять шип будет меньше
 	if(sti(enemy.Rank) > 50)
@@ -43,22 +33,18 @@ float LAi_CalcDamageForBlade(aref attack, aref enemy, string attackType, bool is
 	}
 	//Коэфициент в зависимости от удара
 	float kAttackDmg = LAi_GetDamageAttackType(attack, enemy, attackType, rItm, isBlocked);
-		
 	if(kAttackDmg > 0)  // оптимизация boal
 	{
 		//Результирующий демедж
 		float dmg = bladeDmg * kAttackDmg;
-
 		if(MOD_SKILL_ENEMY_RATE < 5 && sti(enemy.index) == GetMainCharacterIndex())	
 		{
 			dmg = dmg * (4.0 + MOD_SKILL_ENEMY_RATE) / 10.0;
 		}				
 		return dmg;
 	}
-	
 	return 0.0;
 }
-
 // Ugeen --> расчет множителя повреждения при разных типах атаки
 float LAi_GetDamageAttackType(aref attack, aref enemy, string attackType, ref aBlade, bool isBlocked)
 {
@@ -68,7 +54,6 @@ float LAi_GetDamageAttackType(aref attack, aref enemy, string attackType, ref aB
 	float bCurv  = stf(aBlade.curve);   // кривизна
 	float bBlnce = stf(aBlade.Balance); // баланс
 	string sFencingType = aBlade.FencingType;
-
 	switch(attackType)
 	{
 		case "fast": 
@@ -97,7 +82,6 @@ float LAi_GetDamageAttackType(aref attack, aref enemy, string attackType, ref aB
 				}
 			}
 		break;
-		
 		case "force": 
 			if(isBlocked && !CheckAttribute(attack, "animal")) { kAttackDmg = 0.0; }
 			else
@@ -124,7 +108,6 @@ float LAi_GetDamageAttackType(aref attack, aref enemy, string attackType, ref aB
 				}				
 			}
 		break;
-
 		case "round": 
 			if(isBlocked) { kAttackDmg = 0.0; }
 			else
@@ -151,7 +134,6 @@ float LAi_GetDamageAttackType(aref attack, aref enemy, string attackType, ref aB
 				kAttackDmg = kAttackDmg * 1.3;
 			}
 		break;
-		
 		case "break": 
 			if(isBlocked && !CheckAttribute(attack, "animal")) { kAttackDmg = 1.0; }
 			else
@@ -202,7 +184,6 @@ float LAi_GetDamageAttackType(aref attack, aref enemy, string attackType, ref aB
 				}
 			}
 		break;
-		
 		case "feintc":  // фикс после изучения ядра //Атакующие продолжение финта
 			if(isBlocked) { kAttackDmg = 0.0; }
 			else
@@ -225,7 +206,6 @@ float LAi_GetDamageAttackType(aref attack, aref enemy, string attackType, ref aB
 				}							
 			}
 		break;
-	
 		case "feint": 
 			if(isBlocked) { kAttackDmg = 0.0; }
 			else
@@ -249,59 +229,47 @@ float LAi_GetDamageAttackType(aref attack, aref enemy, string attackType, ref aB
 			}
 		break;
 	}	
-	
 	if( !CheckCharacterPerk(enemy, "HT1"))
 	{
 		enemy.chr_ai.energy = stf(enemy.chr_ai.energy) * isEquippedArtefactUse(attack, "totem_11", 1.0, 0.9); // крадем энергию
 	}	
-	
 	return kAttackDmg;
 }
 // Ugeen <-- расчет множителя повреждения при разных типах атаки
-
 //Расчитать повреждение для персонажа при атаке мушкетом (приклад или штык)
 float LAi_CalcDamageForMushket(aref attack, aref enemy, string attackType, bool isBlocked)
 {
 	float min = 10.0;
 	float max = 10.0;
-			
 	LAi_MushketSetDamageMaxMin(attack, ItemsFromID(GetCharacterEquipByGroup(attack, GUN_ITEM_TYPE)), attackType);
-		
 	if(CheckAttribute(attack, "chr_ai.dmgbldmin"))
 	{
 		min = stf(attack.chr_ai.dmgbldmin);
 	}
-	
 	if(CheckAttribute(attack, "chr_ai.dmgbldmax"))
 	{
 		max = stf(attack.chr_ai.dmgbldmax);
 	}
-	
 	float bladeDmg = min + (max - min)*frandSmall(LAi_GetCharacterFightLevel(attack));
 	//Коэфициент в зависимости от скилов
 	float aSkill = LAi_GetCharacterFightLevel(attack);
 	float eSkill = LAi_GetCharacterFightLevel(enemy);
-	
     if(aSkill < eSkill)
 	{
 		bladeDmg = bladeDmg * (1.0 + 0.7 * (aSkill - eSkill));
 	}
-	
 	// Warship 27.08.09 Для сильных противников
 	// Если долбить совсем сильных (хардкорные абордажи), то шансов взять шип будет меньше
 	if(sti(enemy.Rank) > 50)
 	{
 		bladeDmg = bladeDmg * 45 / sti(enemy.Rank);
 	}
-	
 	if(CheckAttribute(loadedLocation, "CabinType") && sti(enemy.index) == GetMainCharacterIndex())
 	{
 		bladeDmg = bladeDmg * (1.0 + stf(attack.rank)/100);
 	}
-	
 	//Коэфициент в зависимости от удара
 	float kAttackDmg = 1.0;
-	
 	// TO_DO оптимизация на ветку параметров
 	switch(attackType)
 	{
@@ -349,7 +317,6 @@ float LAi_CalcDamageForMushket(aref attack, aref enemy, string attackType, bool 
 				kAttackDmg = 3.0 * isEquippedAmuletUse(attack, "indian_4", 1.0, 1.25);
 			}
 		break;
-		
 		case "feintc":  // фикс после изучения ядра //Атакующие продолжение финта
 			if(isBlocked)
 			{
@@ -360,7 +327,6 @@ float LAi_CalcDamageForMushket(aref attack, aref enemy, string attackType, bool 
 				kAttackDmg = 0.8;
 			}
 		break;
-		
 		case "feint": // для мушкетера  - приклад
 			if(isBlocked)
 			{
@@ -372,12 +338,10 @@ float LAi_CalcDamageForMushket(aref attack, aref enemy, string attackType, bool 
 			}
 		break;
 	}
-	
 	if(kAttackDmg > 0)  // оптимизация boal
 	{
 		//Результирующий демедж
 		float dmg = bladeDmg * kAttackDmg;
-		
 		if(CheckCharacterPerk(attack, "HardHitter") && !CheckCharacterPerk(enemy, "HT1"))  
 		{
 			if(CheckAttribute(enemy, "chr_ai.energy"))
@@ -385,23 +349,18 @@ float LAi_CalcDamageForMushket(aref attack, aref enemy, string attackType, bool 
 				enemy.chr_ai.energy = (stf(enemy.chr_ai.energy) * 0.9); //fix
 			}
 		}
-		
 		if(!CheckCharacterPerk(enemy, "HT1"))
 		{
 			enemy.chr_ai.energy = stf(enemy.chr_ai.energy) * isEquippedArtefactUse(attack, "totem_11", 1.0, 0.9); // крадем энергию
 		}	
-		
 		if(MOD_SKILL_ENEMY_RATE < 5 && sti(enemy.index) == GetMainCharacterIndex())	
 		{
 			dmg = dmg * (4.0 + MOD_SKILL_ENEMY_RATE) / 10.0;
 		}				
 		return dmg;
 	}
-	
 	return 0.0;
 }
-
-
 //Расчитать полученный опыт при ударе саблей
 float LAi_CalcExperienceForBlade(aref attack, aref enemy, string attackType, bool isBlocked, float dmg)
 {
@@ -419,7 +378,6 @@ float LAi_CalcExperienceForBlade(aref attack, aref enemy, string attackType, boo
 	if(ra < 1.0) ra = 1.0;
 	if(re < 1.0) re = 1.0;
 	dmg = dmg*((1.0 + re*0.5)/(1.0 + ra*0.5));
-
 	switch(attackType)
 	{
 		case "break":
@@ -443,12 +401,10 @@ float LAi_CalcExperienceForBlade(aref attack, aref enemy, string attackType, boo
 	}
 	return dmg;
 }
-
 //Энергия, необходимая для запуска действия
 float LAi_CalcUseEnergyForBlade(aref character, string actionType)
 {
 	float energy = 0.0;
-	
 	switch(actionType)
 	{
 		case "fast":
@@ -471,7 +427,6 @@ float LAi_CalcUseEnergyForBlade(aref character, string actionType)
 			energy = 7.0; // расход при успехе финта
 		break;
 	}
-	
 	if(energy > 0)  // оптимизация
 	{
 		float fSkill = LAi_GetCharacterFightLevel(character);  
@@ -491,14 +446,11 @@ float LAi_CalcUseEnergyForBlade(aref character, string actionType)
 			energy = energy * fSkill * LAi_GetBladeEnergyType(character);  
 		}	
 	}
-	
 	return energy;
 }
-
 float Lai_UpdateEnergyPerDltTime(aref chr, float curEnergy, float dltTime)
 {
 	float fMultiplier = 1.6666667;
-
 	if(CheckCharacterPerk(chr, "Energaiser")) // скрытый перк боссов и ГГ
 	{
 		fMultiplier = fMultiplier * 1.5;
@@ -513,15 +465,11 @@ float Lai_UpdateEnergyPerDltTime(aref chr, float curEnergy, float dltTime)
 	}	
 	float fEnergy;
 	fEnergy = curEnergy + dltTime * fMultiplier; 
-
 	return fEnergy;
 }
-
-
 //--------------------------------------------------------------------------------
 //Gun parameters
 //--------------------------------------------------------------------------------
-
 //Расчитаем вероятность попадания
 float LAi_GunCalcProbability(aref attack, aref enemy, float kDist)
 {
@@ -537,9 +485,7 @@ float LAi_GunCalcProbability(aref attack, aref enemy, float kDist)
 	// boal -->
 	float aSkill = LAi_GetCharacterGunLevel(attack);
 	// boal <--
-
 	pmin = pmin + 0.3*aSkill;
-
 	//Вероятность попадания в текущей позиции
 	float p = pmin + (1.0 - pmin)*(kDist/0.9);
  	//Учесть абилити
@@ -555,35 +501,28 @@ float LAi_GunCalcProbability(aref attack, aref enemy, float kDist)
 		}
 	}
 	if(!IsDay() && IsEquipCharacterByArtefact(attack, "totem_12")) p = p * 2;
-	
 	if(IsEquipCharacterByArtefact(attack, "indian_2")) p = p * 1.15;
 	if(IsEquipCharacterByArtefact(enemy,  "indian_1")) p = p * 1.10;
 	if(IsEquipCharacterByArtefact(attack, "amulet_1")) p = p * 0.90;
 	if(IsEquipCharacterByArtefact(enemy,  "amulet_2")) p = p * 0.85;
-	
 	// путь будет больше 1 - тогда 100% попал
 	return p;
 }
-
 //Получить повреждение от пистолета
 float LAi_GunCalcDamage(aref attack, aref enemy)
 {
 	//Расчитываем повреждение
 	float min = 10.0;
 	float max = 10.0;
-	
 	//string sGun = GetCharacterEquipByGroup(attack, GUN_ITEM_TYPE);
 	//ref rItm = ItemsFromID(sGun);
 	string sBullet = LAi_GetCharacterBulletType(attack);
-	
 	if(sBullet == "powder_pellet") LaunchBlastPellet(enemy);
 	if(sBullet == "grenade") LaunchBlastGrenade(enemy);
-	
 	if(CheckAttribute(enemy, "cirassId"))
 	{
 		min = stf(attack.chr_ai.DmgMin_C);
 		max = stf(attack.chr_ai.DmgMax_C);
-		
 		if(stf(attack.chr_ai.EnergyP_C) > 0.0 )
 		{
 			if(sBullet != "powder_pellet")	Lai_CharacterChangeEnergy(enemy, -stf(attack.chr_ai.EnergyP_C));
@@ -597,7 +536,6 @@ float LAi_GunCalcDamage(aref attack, aref enemy)
 	{
 		min = stf(attack.chr_ai.DmgMin_NC);
 		max = stf(attack.chr_ai.DmgMax_NC);
-		
 		if(stf(attack.chr_ai.EnergyP_NC) > 0.0)
 		{
 			if(sBullet != "powder_pellet") Lai_CharacterChangeEnergy(enemy, -stf(attack.chr_ai.EnergyP_NC));
@@ -607,34 +545,27 @@ float LAi_GunCalcDamage(aref attack, aref enemy)
 			}
 		}	
 	}
-
 	if (IsCharacterPerkOn(attack, "HT4") && enemy.chr_ai.group != LAI_GROUP_PLAYER) 
 	{
 		Lai_CharacterChangeEnergy(enemy, -(rand(20) + 20));
 	}	
-	
 	//Учитываем скилы
 	float aSkill = LAi_GetCharacterGunLevel(attack);
 	float eSkill = LAi_GetCharacterLuckLevel(enemy); // good luck
-	
 	float dmg = min + (max - min)*frandSmall(aSkill);
-
 	if (MOD_SKILL_ENEMY_RATE < 5 && sti(enemy.index) == GetMainCharacterIndex())	
 	{
 		dmg = dmg * (4.0 + MOD_SKILL_ENEMY_RATE) / 10.0;
 	}
-	
 	if(IsEquipCharacterByArtefact(attack, "indian_1")) dmg += 15;
 	if(IsEquipCharacterByArtefact(enemy,  "indian_2")) dmg *= 1.1;
 	if(IsEquipCharacterByArtefact(enemy,  "amulet_1")) dmg -= 15;
 	if(IsEquipCharacterByArtefact(attack, "amulet_2")) dmg *= 0.9;
 	if(IsEquipCharacterByArtefact(attack, "KhaelRoa_item")) dmg = dmg*10; // калеуче
-	
 	if (CheckAttribute(attack, "MultiShooter")) // мультишутер // Addon-2016 Jason
 	{
 		dmg = dmg*stf(attack.MultiShooter);
 	}
-		
 	// группа монстров Ксочитэма - плохо бьются из пистолей и мушкетов 210712
 	if (enemy.chr_ai.group == "KSOCHITAM_MONSTERS")
 	{
@@ -656,10 +587,8 @@ float LAi_GunCalcDamage(aref attack, aref enemy)
 	{
 		dmg = dmg*5;
 	}
-		
 	return dmg;
 }
-
 //Расчитать полученный опыт при попадании из пистолета
 float LAi_GunCalcExperience(aref attack, aref enemy, float dmg)
 {
@@ -683,7 +612,6 @@ float LAi_GunCalcExperience(aref attack, aref enemy, float dmg)
 	}
     return dmg;
 }
-
 //Расчитаем текущую скорость перезарядки пистолета
 float LAi_GunReloadSpeed(aref chr)
 {
@@ -697,7 +625,6 @@ float LAi_GunReloadSpeed(aref chr)
 	// boal -->
 	float skill = LAi_GetCharacterGunLevel(chr);
 	// boal <--
-
 	charge_dlt = charge_dlt*(1.0 + 0.3*skill);//boal
 	//Учтем абилити
 	if (CheckAttribute(chr, "MultiShooter")) charge_dlt = charge_dlt*2.00; // may-16
@@ -713,12 +640,9 @@ float LAi_GunReloadSpeed(aref chr)
 	}
 	return charge_dlt;
 }
-
-
 //--------------------------------------------------------------------------------
 //Calculate total
 //--------------------------------------------------------------------------------
-
 //Начисление повреждений при атаке мечём
 void LAi_ApplyCharacterAttackDamage(aref attack, aref enemy, string attackType, bool isBlocked)
 {
@@ -732,9 +656,6 @@ void LAi_ApplyCharacterAttackDamage(aref attack, aref enemy, string attackType, 
 	}
 	//Вычисляем повреждение
 	float dmg;
-
-
-
 	if (attack.model.animation == "mushketer")
 	{
 		dmg = LAi_CalcDamageForMushket(attack, enemy, attackType, isBlocked);
@@ -743,19 +664,15 @@ void LAi_ApplyCharacterAttackDamage(aref attack, aref enemy, string attackType, 
 	{
 		dmg = LAi_CalcDamageForBlade(attack, enemy, attackType, isBlocked);
 	}
-
 	if(CheckAttribute(attack, "herculesmode")){
 		dmg = 100000.0; 
 	}
-
 	float critical 	= 0.0;
 	float chance 	= 1.0;
-	
 	if(IsEquipCharacterByArtefact(attack, "indian_3")) chance = 1.15;
 	if(IsEquipCharacterByArtefact(enemy,  "indian_4")) chance = 1.10;
 	if(IsEquipCharacterByArtefact(enemy,  "amulet_3")) chance = 0.85;
 	if(IsEquipCharacterByArtefact(attack, "amulet_4")) chance = 0.90;
-	
 	// ГПК 1.2.3
 	if(IsCharacterPerkOn(attack, "SwordplayProfessional"))
 	{
@@ -773,7 +690,6 @@ void LAi_ApplyCharacterAttackDamage(aref attack, aref enemy, string attackType, 
 			}
 		}
 	}
-
 	float kDmg = 1.0;
 	if(IsCharacterPerkOn(attack, "Rush"))
 	{
@@ -873,7 +789,6 @@ void LAi_ApplyCharacterAttackDamage(aref attack, aref enemy, string attackType, 
 		if(makeint(stf(fCritical) * 1000) <= rand(999)) critical = 0.0;
 	}
     //<-- фикс кирас
-	
 	if(critical > 0.0)
 	{
         AddCharacterExpToSkill(attack, SKILL_FORTUNE, 5);
@@ -887,14 +802,12 @@ void LAi_ApplyCharacterAttackDamage(aref attack, aref enemy, string attackType, 
 	if(IsCharacterPerkOn(enemy, "BasicDefense")) kDmg = 0.9;
 	if(IsCharacterPerkOn(enemy, "AdvancedDefense")) kDmg = 0.8;
 	if(IsCharacterPerkOn(enemy, "SwordplayProfessional")) kDmg = 0.7;
-
 	// ГПК 1.2.3
 	dmg = dmg*kDmg;
 	dmg = dmg *(1 + critical);//dmg + critical;
 	if(CheckAttribute(enemy, "cirassId"))
 	{
 		dmg = dmg * (1.0 - stf(Items[sti(enemy.cirassId)].B_CirassLevel));
-		
 		if(CheckCharacterPerk(enemy, "HT3") && GetCharacterSuitType(enemy) == 2)
 		{
 			dmg = dmg * 0.85;
@@ -960,7 +873,6 @@ void LAi_ApplyCharacterAttackDamage(aref attack, aref enemy, string attackType, 
 	{
 		exp = 0.0;
 	}
-	
 	if (!noExp)
     {
         //AddCharacterExp(attack, MakeInt(exp*0.5 + 0.5));
@@ -975,7 +887,6 @@ void LAi_ApplyCharacterAttackDamage(aref attack, aref enemy, string attackType, 
 			else AddCharacterExpToSkill(attack, LAi_GetBladeFencingType(attack), Makefloat(exp*0.2));
 		}	
     }
-	
 }
 //boal 19.09.05 -->
 void LAi_SetResultOfDeath(ref attack, ref enemy, bool isSetBalde)
@@ -1038,7 +949,6 @@ void LAi_SetResultOfDeath(ref attack, ref enemy, bool isSetBalde)
 	}
 }
 // boal <--
-
 //Начисление повреждений при попадании
 void LAi_ApplyCharacterFireDamage(aref attack, aref enemy, float kDist)
 {
@@ -1058,7 +968,6 @@ void LAi_ApplyCharacterFireDamage(aref attack, aref enemy, float kDist)
 	// boal 23.05.2004 <--
 	//Начисляем повреждение
 	float damage = LAi_GunCalcDamage(attack, enemy);
-
 	//Аттака своей группы
 	bool noExp = false;
 	if(CheckAttribute(attack, "chr_ai.group"))
@@ -1118,7 +1027,6 @@ void LAi_ApplyCharacterFireDamage(aref attack, aref enemy, float kDist)
 	bool isSetBalde = (CheckAttribute(enemy, "equip.blade") == true);//(SendMessage(enemy, "ls", MSG_CHARACTER_EX_MSG, "IsSetBalde") != 0);
 	//Начисляем опыт
 	float exp = LAi_GunCalcExperience(attack, enemy, damage);
-	
 	if(LAi_IsDead(enemy))
 	{
 		// boal skill -->
@@ -1161,20 +1069,16 @@ void LAi_ApplyCharacterFireDamage(aref attack, aref enemy, float kDist)
         else AddCharacterExpToSkill(attack, SKILL_PISTOL, Makefloat(exp*0.85));
     }
 }
-
 float LAi_NPC_GetAttackPreferenceWeight(aref chr, string attackType, float fOff, float fOn)
 {
 	if(LAi_GetBladeFencingType(chr) == attackType) return fOn; 
 	return fOff;
 }
-
 //--------------------------------------------------------------------------------
 //Параметры NPC
 //--------------------------------------------------------------------------------
-
 float npc_return_tmp;
 bool npc_return_tmpb;
-
 //Атаки
 //Скорость нарастания вероятности атаки в секунду  p > 0
 #event_handler("NPC_Event_GetAttackActive","LAi_NPC_GetAttackActive");
@@ -1186,7 +1090,6 @@ float LAi_NPC_GetAttackActive()
 	npc_return_tmp = npc_return_tmp + 0.1;
 	return npc_return_tmp;
 }
-
 //Вес выбора удара "fast", 0 - никогда не выбирать
 #event_handler("NPC_Event_GetAttackWeightFast","LAi_NPC_GetAttackWeightFast");
 float LAi_NPC_GetAttackWeightFast()
@@ -1197,7 +1100,6 @@ float LAi_NPC_GetAttackWeightFast()
 	npc_return_tmp = npc_return_tmp * (0.8 + (0.1 * MOD_SKILL_ENEMY_RATE));
 	return npc_return_tmp;
 }
-
 //Вес выбора удара "force", 0 - никогда не выбирать
 #event_handler("NPC_Event_GetAttackWeightForce","LAi_NPC_GetAttackWeightForce");
 float LAi_NPC_GetAttackWeightForce()
@@ -1207,7 +1109,6 @@ float LAi_NPC_GetAttackWeightForce()
 	npc_return_tmp = npc_return_tmp * (0.8 + (0.1 * MOD_SKILL_ENEMY_RATE));
 	return npc_return_tmp;
 }
-
 //Вес выбора удара "round", 0 - никогда не выбирать, если врагов <3 то удар не выбирается
 #event_handler("NPC_Event_GetAttackWeightRound","LAi_NPC_GetAttackWeightRound");
 float LAi_NPC_GetAttackWeightRound()
@@ -1217,7 +1118,6 @@ float LAi_NPC_GetAttackWeightRound()
 	npc_return_tmp = npc_return_tmp * (0.8 + (0.1 * MOD_SKILL_ENEMY_RATE));
 	return npc_return_tmp;
 }
-
 //Вес выбора удара "break", 0 - никогда не выбирать
 #event_handler("NPC_Event_GetAttackWeightBreak","LAi_NPC_GetAttackWeightBreak");
 float LAi_NPC_GetAttackWeightBreak()
@@ -1228,7 +1128,6 @@ float LAi_NPC_GetAttackWeightBreak()
 	npc_return_tmp = npc_return_tmp * (0.6 + (0.1 * MOD_SKILL_ENEMY_RATE));
 	return npc_return_tmp;
 }
-
 //Вес выбора удара "feint", 0 - никогда не выбирать
 #event_handler("NPC_Event_GetAttackWeightFeint","LAi_NPC_GetAttackWeightFeint");
 float LAi_NPC_GetAttackWeightFeint()
@@ -1238,7 +1137,6 @@ float LAi_NPC_GetAttackWeightFeint()
 	npc_return_tmp = npc_return_tmp * (0.6 + (0.1 * MOD_SKILL_ENEMY_RATE));
 	return npc_return_tmp;
 }
-
 //Прараметры защиты
 //Вероятность желания защитится - кубик с такой вероятностью кидается 2 раза в секунду
 #event_handler("NPC_Event_GetDefenceActive","LAi_NPC_GetAttackDefence");
@@ -1254,7 +1152,6 @@ float LAi_NPC_GetAttackDefence()
 	}*/
 	return npc_return_tmp;
 }
-
 // boal 20.01.08 коммент - забавно, что спустя два года, понал как и что с вероятностями. Они все приводятся к 0-1 от веса общей суммы, то есть фактически умножение на сложность или цифры распределяют сумму по другим акшенам, а не усиливают этот
 // Экшены идут парами - все атаки и защита (блок + пари)
 //Вес выбора блока, 0 - никогда не выбирать
@@ -1266,7 +1163,6 @@ float LAi_NPC_GetDefenceWeightBlock()
 	npc_return_tmp = npc_return_tmp * (0.5 + (0.05 * MOD_SKILL_ENEMY_RATE));   // boal
 	return npc_return_tmp;
 }
-
 //Вес выбора  паррирования, 0 - никогда не выбирать
 //кубик с такой вероятностью кидается 2 раза в секунду
 #event_handler("NPC_Event_GetDefenceWeightParry","LAi_NPC_GetDefenceWeightParry");
@@ -1277,7 +1173,6 @@ float LAi_NPC_GetDefenceWeightParry()
 	npc_return_tmp = npc_return_tmp * (0.6 + (0.1 * MOD_SKILL_ENEMY_RATE));
 	return npc_return_tmp;
 }
-
 //Разрешён ли отскок
 #event_handler("NPC_Event_EnableRecoil","LAi_NPC_EnableRecoil");
 bool LAi_NPC_EnableRecoil()
@@ -1286,8 +1181,6 @@ bool LAi_NPC_EnableRecoil()
 	npc_return_tmpb = true;
 	return npc_return_tmpb;
 }
-
-
 //Параметры стрельбы
 //Вероятность желания выстрелить - кубик с такой вероятностью кидается 2 раза в секунду
 #event_handler("NPC_Event_GetFireActive","LAi_NPC_GetFireActive");
@@ -1314,10 +1207,8 @@ float LAi_NPC_GetFireActive()
 		}
 	}
 	//if (npc_return_tmp > 0.5) npc_return_tmp = 0.5;
-	
 	return npc_return_tmp;
 }
-
 //Разрешён ли выстрел
 #event_handler("NPC_Event_EnableFire","LAi_NPC_EnableFire");
 bool LAi_NPC_EnableFire()
@@ -1337,7 +1228,6 @@ bool LAi_NPC_EnableFire()
 	if(level > 0.1) npc_return_tmpb = true;
 	return npc_return_tmpb;    */
 }
-
 //Разрещён ли временный перевыбор цели среди ближних - опрашивается постоянно
 #event_handler("NPC_Event_AdaptiveTargetSelect","LAi_NPC_AdaptiveTargetSelect");
 bool LAi_NPC_AdaptiveTargetSelect()
@@ -1351,7 +1241,6 @@ bool LAi_NPC_AdaptiveTargetSelect()
 	}
 	return npc_return_tmpb;
 }
-
 //Вероятность стана после удара, опрашивается единожды при загрузке персонажа
 #event_handler("NPC_Event_StunChance","LAi_NPC_StunChance");
 int LAi_NPC_StunChance()
@@ -1389,11 +1278,9 @@ int LAi_NPC_StunChance()
 	}		
 	return npc_return_tmpi;
 }
-
 //--------------------------------------------------------------------------------
 //Work
 //--------------------------------------------------------------------------------
-
 #event_handler("Location_CharacterSGFire","LAi_Location_CharacterSGFire");
 void LAi_Location_CharacterSGFire()
 {
@@ -1409,7 +1296,6 @@ void LAi_Location_CharacterSGFire()
 	//Проверим на смерть
 	LAi_CheckKillCharacter(enemy);
 }
-
 #event_handler("ChrAttackAction", "LAi_ChrAttackAction");
 bool LAi_ChrAttackAction()
 {
@@ -1427,7 +1313,6 @@ bool LAi_ChrAttackAction()
 	}
 	return npc_return_tmpb;
 }
-
 #event_handler("ChrFgtActApply", "LAi_ChrFightActionApply");
 void LAi_ChrFightActionApply()
 {
@@ -1436,7 +1321,6 @@ void LAi_ChrFightActionApply()
 	float needEnergy = LAi_CalcUseEnergyForBlade(attack, attackType);
 	Lai_CharacterChangeEnergy(attack, -needEnergy);
 }
-
 //Получить относительную затрачиваемую энергию
 #event_handler("NPC_Event_GetActionEnergy","LAi_NPC_GetActionEnergy");
 float LAi_NPC_GetActionEnergy()
@@ -1446,7 +1330,6 @@ float LAi_NPC_GetActionEnergy()
 	npc_return_tmp = LAi_CalcUseEnergyForBlade(chr, act) / LAi_GetCharacterMaxEnergy(chr);  // boal
 	return npc_return_tmp;
 }
-
 //Необходимо вернуть максимально быстро нормализованое значение жизни
 #event_handler("NpcEvtHP", "LAi_NPC_EvtGetHP");
 float LAi_NPC_EvtGetHP()
@@ -1455,7 +1338,6 @@ float LAi_NPC_EvtGetHP()
 	npc_return_tmp = LAi_GetCharacterRelHP(chr);
 	return npc_return_tmp;
 }
-
 //Необходимо вернуть максимально быстро нормализованое значение энергии
 #event_handler("NpcEvtEny", "LAi_NPC_EvtGetEny");
 float LAi_NPC_EvtGetEny()

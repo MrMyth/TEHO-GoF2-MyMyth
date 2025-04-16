@@ -19,7 +19,6 @@ void ProcessCommonDialogEvent(ref NPChar, aref Link, aref NextDiag)
 				link.l1.go = "guardoftruth";
 			}
 		break;
-		
 		case "info":
         // заменить на описание неких НПС, по квестам
 			dialog.text = "Do you think I work for the secret service of "+NationNameGenitive(sti(NPChar.nation))+"?";
@@ -28,17 +27,14 @@ void ProcessCommonDialogEvent(ref NPChar, aref Link, aref NextDiag)
 			link.l2 = "Another question then";
 			link.l2.go = "new question";
 		break;
-		
 		case "town":
         // заменить на описание как пройти, по квестам
 			dialog.text = "Am I the information bureau for you? Don't know. Don't know a thing.";
-
             link.l1 = "You're such a muddle-headed! Bye.";
 			link.l1.go = "exit";
 			link.l2 = "Another question then";
 			link.l2.go = "new question";
 		break;
-		
 		//Цена чахотки
 		case "Consumption":
 			dialog.text = "Are you kidding me?! There are tens of Juans in every colony...";
@@ -46,7 +42,6 @@ void ProcessCommonDialogEvent(ref NPChar, aref Link, aref NextDiag)
 			link.l1.go = "exit";
 			npchar.quest.Consumption = "true";
 		break;
-		
 		// Страж Истины
 		case "guardoftruth":
 			dialog.text = LinkRandPhrase("Come on, captain! Do you think that I remember such things?","Forgive me, senor, I can't help you.","Senor, do you really think that I remember such a rubbish? I've got enough of my own problems.");
@@ -57,4 +52,3 @@ void ProcessCommonDialogEvent(ref NPChar, aref Link, aref NextDiag)
 	}
 	UnloadSegment(NPChar.FileDialog2);  // если где-то выход внутри switch  по return не забыть сделать анлод
 }
-

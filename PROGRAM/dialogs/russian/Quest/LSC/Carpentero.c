@@ -4,15 +4,11 @@ void ProcessDialogEvent()
 {
 	ref NPChar, sld;
 	aref Link, NextDiag;
-
 	DeleteAttribute(&Dialog,"Links");
-
 	makeref(NPChar,CharacterRef);
 	makearef(Link, Dialog.Links);
 	makearef(NextDiag, NPChar.Dialog);
-	
 	ProcessCommonDialogRumors(NPChar, Link, NextDiag);
-	
 	switch(Dialog.CurrentNode)
 	{
 		case "First time":
@@ -114,7 +110,6 @@ void ProcessDialogEvent()
 			}
 			NextDiag.TempNode = "First time";
 		break;
-		
 		case "meeting":
 			dialog.text = "So am I. I hope to see you here at least every second day or even every evening, ha-ha! I am sincerely happy to have any visitor in my tavern.";
 			if (makeint(pchar.money) >= 25)
@@ -133,81 +128,68 @@ void ProcessDialogEvent()
 			link.l4.go = "exit";
 			NextDiag.TempNode = "First time";
 		break;
-		
 		case "mushket":
 			dialog.text = "No, friend, I can't help you. You know, I am a specialist in beer glasses and wine bottles - but not in muskets, ha-ha! Go to the shop, I heard that Yost sells interesting weapons sometimes. You may find what you need there.";
 			link.l1 = "Thank you for an advice.";
 			link.l1.go = "exit";
 			npchar.quest.mushket = "true";
 		break;
-		
 		case "adolf":
 			dialog.text = "Adolf? Yes, he visits me occasionally, though I have not seen him for the last few days. He has been missed since he was talking with that fat man Giuseppe.";
 			link.l1 = "Giuseppe? You mean Giuseppe Fazio?";
 			link.l1.go = "adolf_1";
 		break;
-		
 		case "adolf_1":
 			dialog.text = "Ha, pal, there is the only one Giuseppe on the Island - Giuseppe Fazio. Yes, that was him. They had been sitting for a few hours here drinking rum and they had a very lively conversation.";
 			link.l1 = "Were they arguing?";
 			link.l1.go = "adolf_2";
 		break;
-		
 		case "adolf_2":
 			dialog.text = "No. They behaved like old buddies. Look, just visit Fazio at the 'Caroline' and ask him about Adolf.";
 			link.l1 = "Fine, I'll do that.";
 			link.l1.go = "adolf_3";
 		break;
-		
 		case "adolf_3":
 			dialog.text = "Is that all? You said that you had a few questions...";
 			link.l1 = "Yes. Tell me, who is Red Mary and Cyclops Marcello?";
 			link.l1.go = "adolf_4";
 		break;
-		
 		case "adolf_4":
 			dialog.text = "Red Mary is one of Narwhals. Young and beautiful girl, but she is completely wild, yes. She knows how use her blade and a handgun as good as any man. Used to be a girlfriend of Alan Milrow, an ex leader of Narwhal clan, before the admiral killed him\nAlan's death hit her hard, most of the time she is crying and cursing Shark in her cabin on the 'Ceres Smithy'... But she will make through it, life is moving on after all\nI don't know much about Marcello, saw him only couple of times. Suspicious guy. They say that he used to be a royal hunter, lost an eye in a fight and went sailing as a boarding officer\nHates all pirates, looks like he is holding grudges on them. Not much of surprise, though, considering his previous service in boarding parties of trade ships.";
 			link.l1 = "I see. Thanks a lot, Sancho, you have helped me a lot!";
 			link.l1.go = "adolf_5";
 		break;
-		
 		case "adolf_5":
 			dialog.text = "You are welcome, pal, come see me again, and we will have some ale together...";
 			link.l1 = "Sure!";
 			link.l1.go = "adolf_6";
 		break;
-		
 		case "adolf_6":
 			DialogExit();
 			pchar.questTemp.Saga.SharkHunt = "search_mush_3"; //флаг на Джузеппе
 			AddQuestRecord("SharkHunt", "13");
 		break;
-		
 		// виски для Акулы
 		case "whiskey":
 			dialog.text = "Kapper? No. He even haven't visited me recently. Marcello Cyclops bought a flask of arsenic just fifteen minutes ago - he is also plagued by rats. I perfectly understand him... Damn rats.";
 			link.l1 = "Marcello Cyclops?!";
 			link.l1.go = "whiskey_1";
 		break;
-		
 		case "whiskey_1":
 			dialog.text = "Well, yes. Is that strange?";
 			link.l1 = "No, of course not! I have been looking for him for a few days and turns out that he has been here recently. Could you tell me where he went?";
 			link.l1.go = "whiskey_2";
 		break;
-		
 		case "whiskey_2":
 			dialog.text = "He was with Adolf Barbier who lives at the 'Santa Florentina'. Perhaps, they were heading there.";
 			link.l1 = "Thanks!";
 			link.l1.go = "whiskey_3";
 		break;
-		
 		case "whiskey_3":
 			dialog.text = "If you need some arsenic, then I can sell a flask for twenty doubloons.";
 			link.l1 = "Fine. We'll talk about it later, Sancho. See you!";
 			link.l1.go = "whiskey_4";
 		break;
-		
 		case "whiskey_4":
 			DialogExit();
 			pchar.questTemp.Saga.SharkHunt = "whiskey_poison"; // флаг - виски травят
@@ -231,7 +213,6 @@ void ProcessDialogEvent()
 			LocatorReloadEnterDisable("LostShipsCity_town", "reload20", true);
 			LocatorReloadEnterDisable("LostShipsCity_town", "reload24", true);
 		break;
-		
 		// пей до дна
 		case "drunk_fail":
 			dialog.text = "Come on, pal! You don't owe me a thing.  You've already lost a hundred doubloons. It was a mistake to deal with Fazio...";
@@ -244,7 +225,6 @@ void ProcessDialogEvent()
 			link.l1.go = "exit";
 			DeleteAttribute(npchar, "quest.drink");
 		break;
-		
 		case "drunk_win":
 			DialogExit();
 			TakeNItems(pchar, "gold_dublon", 200);
@@ -252,44 +232,37 @@ void ProcessDialogEvent()
 			PlaySound("interface\important_item.wav");
 			DeleteAttribute(npchar, "quest.drink");
 		break;
-		
 		// крабовый салат
 		case "crab":
 			dialog.text = "Hm... then I have a proposal for you. Have you seen giant crabs there?";
 			link.l1 = "Have I seen crabs? There were hordes of them! And what proposal are you talking about?";
 			link.l1.go = "crab_1";
 		break;
-		
 		case "crab_1":
 			dialog.text = "If you kill a crab then you will be able to cut its claws and bring them to me. I will pay you well in doubloons - five coins for each. Axel Yost won't pay that much, trust me. No, I am not asking you to hunt crabs specifically - but if you will have an opportunity...";
 			link.l1 = "And why claws? What about the other parts of a crab? What do you do with them?";
 			link.l1.go = "crab_2";
 		break;
-		
 		case "crab_2":
 			dialog.text = "Why claws? Because the most of meat are on them. Crabs don't have meat on legs and their bodies are covered with a solid shell. Crab meat is a delicacy here, it is very tasty and nourishing\nI also has a unique recipe for it, so I will pay you five doubloons for each nipper.";
 			link.l1 = "Fine. I will keep that in mind.";
 			link.l1.go = "crab_3";
 		break;
-		
 		case "crab_3":
 			DialogExit();
 			npchar.quest.crab = "current";
 		break;
-		
 		case "crab_trade":
 			iTotalTemp = GetCharacterItem(pchar, "crab_pincers")
 			dialog.text = "Splendid! How many do you have?";
 			link.l1 = ""+FindRussianQtyString(iTotalTemp)+".";
 			link.l1.go = "crab_trade_1";
 		break;
-		
 		case "crab_trade_1":
 			dialog.text = "Deal. Here, take your doubloons - "+FindRussianQtyString(iTotalTemp*5)+". Thanks, pal, if you get more, then bring them to me.";
 			link.l1 = "Sure, friend.";
 			link.l1.go = "crab_trade_2";
 		break;
-		
 		case "crab_trade_2":
 			DialogExit();
 			RemoveItems(pchar, "crab_pincers", iTotalTemp);
@@ -297,14 +270,12 @@ void ProcessDialogEvent()
 			PlaySound("interface\important_item.wav");
 			Log_Info("You have received "+iTotalTemp*5+" doubloons");
 		break;
-		
 		// крыс
 		case "rat":
 			dialog.text = "What?! Show me! Let me see it!";
 			link.l1 = "Sure.";
 			link.l1.go = "rat_1";
 		break;
-		
 		case "rat_1":
 			PlaySound("interface\important_item.wav");
 			dialog.text = "It is... It really is! It is exactly the same as the picture, which one sailor had drawn for me! Friend, you have brought it to me for some purpose, am I right? What do you want for it? How much?";
@@ -313,7 +284,6 @@ void ProcessDialogEvent()
 			link.l2 = "Sorry, pal, it's not for sale. I need it for myself. Just wanted to make sure that this is the talisman you've been talking about.";
 			link.l2.go = "rat_exit";
 		break;
-		
 		case "rat_exit":
 			PlaySound("interface\important_item.wav");
 			dialog.text = "Eh, what a shame... Yes, lad, this is exactly that talisman. Lucky devil! Now the rats will cause you no trouble any more. And I will have to keep exterminating them with arsenic...";
@@ -321,19 +291,16 @@ void ProcessDialogEvent()
 			link.l1.go = "exit";
 			DeleteAttribute(npchar, "quest.rat");
 		break;
-		
 		case "rat_2":
 			dialog.text = ""+pchar.name+", I will give you the best and the most valuable item I posses. I don't need it, but such an excellent warrior like you will find it very useful\nTake a look: a unique, amazing Milanese cuirass! Prefect protection, light, comfortable. It is a rare piece of armor, even in Europe\nI have found it in a captain's cabin of one Spanish warship. Take the cuirass in exchange for the Rat God!";
 			link.l1 = "Hm... That is a great cuirass! I think that this exchange will work for me. I will deal with rats anyway and I won't find a second cuirass like this one anywhere. It's the first time I see anything like it. That's is a unique armor for sure.";
 			link.l1.go = "rat_3";
 		break;
-		
 		case "rat_3":
 			dialog.text = "I am glad that you have agreed, buddy. Thank you for not forgetting about my trouble! Take this cuirass - I hope that it protects you well in a fight.";
 			link.l1 = "Take your talisman - it seems that your tavern rats are in trouble now!";
 			link.l1.go = "rat_4";
 		break;
-		
 		case "rat_4":
 			DialogExit();
 			GiveItem2Character(pchar, "cirass4");
@@ -343,7 +310,6 @@ void ProcessDialogEvent()
 			PlaySound("interface\important_item.wav");
 			DeleteAttribute(npchar, "quest.rat");
 		break;
-		
 		//--> информационный блок
 		case "int_quests":
 			dialog.text = "I am listening.";
@@ -370,34 +336,29 @@ void ProcessDialogEvent()
 			link.l10 = "No questions, never mind...";
 			link.l10.go = "exit";
 		break;
-		
 		case "ansewer_1":
 			dialog.text = "This place? Well, they call it the Justice Island, the Island of the Abandoned Ships or City of the Abandoned Ships - but we just call it the Island. It's made of ships' wrecks, which are stuck on a shoal among the reefs. The central part of the Island is a living area and the outer ring is uninhabited. There has been no connection with the outer world for ten years.";
 			link.l1 = "Got it...";
 			link.l1.go = "int_quests";
 			npchar.quest.answer_1 = "true";
 		break;
-		
 		case "ansewer_2":
 			dialog.text = "Build a long boat or a raft. But it won't end well for you. There is an anomaly storm area around the Island, you will not pass further the outer ring without risking to die in a second of strong gale. Plus, the Island is being circled by a strong current\nYou need a team in order to get even a slim chance of survival. And very few locals are willing to leave this place. Even fewer are willing to take any risks. People like the way of living here. Ask around if you don't believe me.";
 			link.l1 = "I see...";
 			link.l1.go = "int_quests";
 			npchar.quest.answer_2 = "true";
 		break;
-		
 		case "ansewer_3":
 			dialog.text = "First, you should remember that there are several restricted areas on the Island. Two clans - Narwhals and Rivados, they have been living here for a long time, fighting each other and fearlessly protecting territories they consider their own. Try to pay them an unwanted visit and you are dead\nYou must know a current password if you want to enter their ships. Don't be afraid to get there by accident, guards will give you several warnings before they start shooting.";
 			link.l1 = "I'll keep that in mind...";
 			link.l1.go = "int_quests";
 			npchar.quest.answer_3 = "true";
 		break;
-		
 		case "ansewer_4":
 			dialog.text = "You know, my friend, it's fine. I used to work with food and drinks: I worked as a cook long time ago in Europe, as an intendant in a garrison, a tavern keeper, and a cook on a ship; so the first thing I did here was establishing a tavern\nI like my job and my life is oddly satisfying. Folks are friendly here, mostly. At least they don't kill each other frequently. Clans don't interfere with my activities. All in all, this the best place I had in my life. I'm free here and no one tells me what to do\nThe only thing driving me mad is rats. They are torturing me, eating my provisions and ruining my tableware. I fail to get rid of them.";
 			link.l1 = "Rats? Yeah, they are everyone's trouble...";
 			link.l1.go = "ansewer_4_1";
 		break;
-		
 		case "ansewer_4_1":
 			dialog.text = "Alas, I am the most unfortunate person here when it comes up to rats. Other ships are not so terrorized by rats and Axel Yost somehow managed to deal with them once and for all. As for me, I have got armies of rats crawling here. Eh, they told me that there is a special amulet called the Rat God.\nIt looks like a mask of the bat's face. They say that this amulet scares rats shitless. I guess someone has sold Axel this amulet, he buys and re-sells every piece of garbage they find on the outer ring\nI wish someone brought the amulet to me, I would give such person a royal reward!";
 			link.l1 = "Interesting...";
@@ -406,7 +367,6 @@ void ProcessDialogEvent()
 			npchar.quest.rat = "true";
 		break;
 		//<-- информационный блок
-		
 		//--> выпивка
 		case "drink":
 			if (CheckAttribute(pchar, "questTemp.Rum") && sti(pchar.questTemp.Rum) > 4)
@@ -431,13 +391,11 @@ void ProcessDialogEvent()
 					if(CheckAttribute(pchar, "questTemp.Rum")) DeleteAttribute(pchar, "questTemp.Rum");
 				}				
 				WaitDate("",0,0,0, 0, 30);
-				
 				dialog.text = "You are welcome, pal. Only twenty five pesos for the pint of my best rum!";
 				link.l1 = RandPhraseSimple(LinkRandPhrase("Well, to your health and to your tavern's prosperity, pal!","Well, to those who are at sea!","Well, to inhabitants of your Island!"), LinkRandPhrase("Well, to the Island, and may it stay around forever!","Well, may the wind always be favorable in all our deeds!","Well, to luck, happiness and... women!"));		
 				link.l1.go = "drink_1";
 			}
 		break;
-		
 		case "drink_1":
 			DialogExit();
 			LAi_Fade("", "");
@@ -447,7 +405,6 @@ void ProcessDialogEvent()
 				else LAi_AlcoholSetDrunk(pchar, 71, sti(pchar.questTemp.Rum)*2800);
 			}
 		break;
-		
 		case "drink_sit":
 			if (chrDisableReloadToLocation || pchar.questTemp.Saga.SharkHunt == "barmen_whiskey" || pchar.questTemp.Saga.SharkHunt == "whiskey_poison") //идет квест
 			{
@@ -469,7 +426,6 @@ void ProcessDialogEvent()
 				link.l1.go = "drink_sit_1";
 			}
 		break;
-		
 		case "drink_sit_1":
 			DialogExit();
 			sld = ItemsFromID("potionrum");
@@ -479,7 +435,6 @@ void ProcessDialogEvent()
 			DoQuestReloadToLocation("FleuronTavern", "quest", "sit2", "LSC_DrinkSit");
 		break;
 		//<-- выпивка
-		
 		//--> сон в таверне
 		case "room":
    			if (chrDisableReloadToLocation || pchar.questTemp.Saga.SharkHunt == "barmen_whiskey" || pchar.questTemp.Saga.SharkHunt == "whiskey_poison") //идет квест
@@ -523,14 +478,12 @@ void ProcessDialogEvent()
 			link.l3 = "I have changed my mind. I don't want to sleep.";
 			link.l3.go = "exit";
 		break;
-		
 		case "hall_night_wait":
 			AddMoneyToCharacter(pchar, -20);
 			DialogExit();
 			NextDiag.CurrentNode = NextDiag.TempNode;
 			TavernWaitDate_LSC("wait_night");
 		break;
-		
 		case "hall_day_wait":
 			AddMoneyToCharacter(pchar, -20);
 			DialogExit();
@@ -538,11 +491,9 @@ void ProcessDialogEvent()
 			TavernWaitDate_LSC("wait_day");
 		break;
 		//<-- сон в таверне
-		
 		case "Exit":
 			NextDiag.CurrentNode = NextDiag.TempNode;
 			DialogExit();
 		break;
-		
 	}
 }

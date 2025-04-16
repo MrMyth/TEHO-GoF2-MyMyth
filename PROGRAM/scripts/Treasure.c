@@ -1,5 +1,4 @@
 // клады из ВМЛ
-
 //  Карты сокровищ  ГЕНЕРАТОР -->
 string GetIslandForTreasure()
 {
@@ -7,12 +6,10 @@ string GetIslandForTreasure()
 	ref Itm;
 	aref arDest, arImt;
 	string sAttr;
-	
 	m = 0;
 	string sCurIsland = GetCharacterCurrentIslandId(pchar);
 	makearef(arDest, NullCharacter.TravelMap.Islands);
 	iNum = GetAttributesNum(arDest);
-	
 	string sArray[50]; // динамические массивы в Шторме не организуешь :(
 	for (int i = 0; i<iNum; i++)
 	{
@@ -31,11 +28,9 @@ string GetIslandForTreasure()
 	m = rand(m-1);
 	return sArray[m];
 }
-
 bool CheckTreasureMaps(string sIsland)
 {
 	ref Itm;
-	
 	if(GetCharacterItem(pchar,"mapQuest") > 0)
 	{
 		itm = ItemsFromID("mapQuest");
@@ -48,35 +43,28 @@ bool CheckTreasureMaps(string sIsland)
 	}	
 	return false;
 }
-
 string GetLocationForTreasure(string island)
 {
     int iNum;
 	aref arDest, arImt;
 	string sAttr;
-
 	makearef(arDest, NullCharacter.TravelMap.Islands.(island).Treasure);
 	iNum = GetAttributesNum(arDest);
     iNum = rand(iNum-1);
-    
     arImt = GetAttributeN(arDest, iNum);
 	return GetAttributeName(arImt);
 }
-
 string GetBoxForTreasure(string island, string location)
 {
     int iNum;
 	aref arDest, arImt;
 	string sAttr;
-
 	makearef(arDest, NullCharacter.TravelMap.Islands.(island).Treasure.(location));
 	iNum = GetAttributesNum(arDest);
     iNum = rand(iNum-1);
-    
     arImt = GetAttributeN(arDest, iNum);
 	return GetAttributeValue(arImt);  // тут не атрибут, а значеие
 }
-
 void GenerateMapsTreasure(ref item, int iProbability1, int iProbability2)
 {		
 	if(rand(iProbability1) == 1 && !CheckMainHeroMap("map_jam")) 		item.BoxTreasure.map_jam 		= 1;
@@ -105,7 +93,6 @@ void GenerateMapsTreasure(ref item, int iProbability1, int iProbability2)
 	if(rand(iProbability1) == 1 && !CheckMainHeroMap("map_maracaibo")) 	item.BoxTreasure.map_maracaibo 	= 1;
 	if(rand(iProbability1) == 1 && !CheckMainHeroMap("map_cumana")) 	item.BoxTreasure.map_cumana 	= 1;
 }
-
 void GenerateAdmiralMapsTreasure(ref item, int abl) // Jason, адмиральские карты по 1 шт 240912
 {
 	if (!CheckAttribute(pchar, "questTemp.AdmiralMap")) return;
@@ -115,20 +102,16 @@ void GenerateAdmiralMapsTreasure(ref item, int abl) // Jason, адмиральс
 		if (amap != "") item.BoxTreasure.(amap)	= 1;
 	}
 }
-
-
 void FillMapForTreasure(ref item)
 {
     item.MapIslId   = GetIslandForTreasure();
     item.MapLocId   = GetLocationForTreasure(item.MapIslId);
     item.MapBoxId   = GetBoxForTreasure(item.MapIslId, item.MapLocId);
     item.MapTypeIdx = rand(2);
-
     // генерим клад
     DeleteAttribute(item, "BoxTreasure");
     FillBoxForTreasure(item, rand(3));
     FillBoxForTreasureAddition(item);
-
     if (!CheckAttribute(Pchar, "GenQuest.TreasureBuild"))
     {
         if (rand(15) == 1) item.MapTypeIdx = -1;
@@ -138,13 +121,11 @@ void FillMapForTreasure(ref item)
        FillBoxForTreasureSuper(item);
     }
     DeleteAttribute(Pchar, "GenQuest.TreasureBuild"); //сборный
-
     if (sti(item.MapTypeIdx) != -1)
     {
         Pchar.quest.SetTreasureFromMap.win_condition.l1          = "location";
         Pchar.quest.SetTreasureFromMap.win_condition.l1.location = item.MapLocId;
         Pchar.quest.SetTreasureFromMap.win_condition             = "SetTreasureFromMap";
-		
 		pchar.GenQuest.Treasure.Vario = rand(5); // определяем событие
 		locations[FindLocation(item.MapLocId)].DisableEncounters = true; //энкаутеры закрыть
     }
@@ -351,17 +332,14 @@ void FillBoxForTreasure(ref item, int i)
             	item.BoxTreasure.Chest_open = 3;
 	        }
 	    break;
-
 	    case 3:
 	        FillBoxForTreasure(item, 0);
 	    break;
 	}
 }
-
 void FillBoxForTreasureAddition(ref item)
 {
     float   nLuck   = GetCharacterSkillToOld(Pchar, SKILL_FORTUNE);
-
     if (5*nLuck > rand(55))
     {
 	    if (GetCharacterItem(Pchar, "map_part1") == 0)
@@ -465,15 +443,12 @@ void FillBoxForTreasureAddition(ref item)
 		break;
 	}
 	GenerateMapsTreasure(item, 10, 20);
-	
 }
-
 void FillBoxForTreasureSuper(ref item)
 {
     float     nLuck   = GetCharacterSkillToOld(Pchar, SKILL_FORTUNE);
 	int     i;
 	string  itmName;
-
     if (3*nLuck > rand(21))// еще поди найди 2 куска
     {
 		i = 0;
@@ -556,7 +531,6 @@ void FillBoxForTreasureSuper(ref item)
 		GenerateAdmiralMapsTreasure(item, 15); // 240912
 	}
 }
-
 void SetTreasureBoxFromMap()
 {
     aref   item;
@@ -564,7 +538,6 @@ void SetTreasureBoxFromMap()
     string box;
     aref   arToBox;
     aref   arFromBox;
-
     if (GetCharacterItem(Pchar, "map_full")>0 )
     {
         Log_Info("The treasures must be somewhere nearby!");
@@ -584,37 +557,28 @@ void SetTreasureBoxFromMap()
                 Pchar.quest.SetTreasureHunter.function    = "SetTreasureHunter";
             }
         }
-
         Items_FindItem("map_full", &item);
-
         box = item.MapBoxId;
-
         loc = &locations[FindLocation(item.MapLocId)];
         loc.(box).items = "";
-
         makearef(arToBox, loc.(box).items);
         makearef(arFromBox, item.BoxTreasure);
         CopyAttributes(arToBox, arFromBox);
-
         loc.(box) = Items_MakeTime(GetTime(), GetDataDay(), GetDataMonth(), GetDataYear());
         loc.(box).Treasure =  true; // признак сокровища в сундуке
-
         DeleteAttribute(item, "MapIslId");
         TakeNItems(Pchar, "map_full", -1);
     }
 }
 //  Карты сокровищ  ГЕНЕРАТОР <--
-
 // погодня за ГГ на карте
 void  TraderHunterOnMap()
 {
     // немного веселой жизни
     ref  sld;
     int  i;
-
     string sCapId = "Follower0";
     string sGroup = "Sea_" + sCapId + "1";
-
 	Group_DeleteGroup(sGroup);
 	Group_FindOrCreateGroup(sGroup);
     for (i = 1; i <= GetCompanionQuantity(pchar); i++)
@@ -630,21 +594,17 @@ void  TraderHunterOnMap()
 		sld.hunter = "pirate";
         Group_AddCharacter(sGroup, sCapId + i);
     }
-
     Group_SetGroupCommander(sGroup, sCapId+ "1");
     Group_SetTaskAttackInMap(sGroup, PLAYER_GROUP);
     Group_LockTask(sGroup);
     Map_CreateWarrior("", sCapId + "1", 8);
 }
-
 void CoolTraderHunterOnMap()//Jason, быстрые ДУ
 {
     ref  sld;
     int  i;
-
     string sCapId = "Follower0";
     string sGroup = "Sea_" + sCapId + "1";
-
 	Group_DeleteGroup(sGroup);
 	Group_FindOrCreateGroup(sGroup);
     for (i = 1; i <= GetCompanionQuantity(pchar); i++)
@@ -660,26 +620,20 @@ void CoolTraderHunterOnMap()//Jason, быстрые ДУ
 		sld.hunter = "pirate";
         Group_AddCharacter(sGroup, sCapId + i);
     }
-
     Group_SetGroupCommander(sGroup, sCapId+ "1");
     Group_SetTaskAttackInMap(sGroup, PLAYER_GROUP);
     Group_LockTask(sGroup);
     Map_CreateCoolWarrior("", sCapId + "1", 8);
 }
-
 void SetTreasureHunter(string temp)
 {
     int    j, i, k;
 	string sTemp, sCapId;
 	ref    sld;
 	bool   ok;
-
 	if (chrDisableReloadToLocation) return; // идет некий другой квест с запретом выхода
-	
     Pchar.GenQuest.Hunter2Pause            = true;
-    
     j = GetOfficersQuantity(Pchar) + 2;
-    
 	sCapId = "LandHunter0";
     sTemp = "LAND_HUNTER";
 	ok = true;
@@ -692,7 +646,6 @@ void SetTreasureHunter(string temp)
         sld.dialog.filename = "Hunter_dialog.c";
         sld.greeting = "hunter";
         sld.location = "none"; // вот где порылась собака!!!!!!!!!!!
-
         SetModelPirate(sld);
         k = 0;
 		while (!CheckNPCModelUniq(sld) && k < 10)
@@ -702,7 +655,6 @@ void SetTreasureHunter(string temp)
 		}
 		arrayNPCModel[arrayNPCModelHow] = sld.model;
 		arrayNPCModelHow++;
-		
         LAi_SetActorTypeNoGroup(sld);
         LAi_SetCheckMinHP(sld, (LAi_GetCharacterHP(sld) - 1), false, "Battle_Hunters_Land");
         if (PlaceCharacter(sld, "goto", "random_must_be_near") == "" && i == 1) // fix если вдруг нет в локации
@@ -714,10 +666,8 @@ void SetTreasureHunter(string temp)
         //LAi_Actor2WaitDialog(sld, pchar); // ждать диалог, но бежать
         LAi_group_MoveCharacter(sld, sTemp);
     }
-
 	LAi_group_SetRelation(sTemp, LAI_GROUP_PLAYER, LAI_GROUP_NEITRAL);
 	LAi_group_SetRelation(sTemp, LAI_GROUP_PLAYER_OWN, LAI_GROUP_NEITRAL);
-
 	LAi_group_ClearAllTargets();
 	LAi_SetFightModeForOfficers(false);
 	if (ok)
@@ -732,17 +682,13 @@ void SetTreasureHunter(string temp)
 		DoQuestCheckDelay("OpenTheDoors", 5.0);
     }
 }
-
 ref SetFantomSkeletForts(string group, string locator, string enemygroup, string _type)
 // _type = "GhostShipCrew"   _type = "ParamHunter"  _type = "none"
 {
     string emodel;
     ref    Cr;
-
     emodel = GetRandSkelModel();
-
     Cr = LAi_CreateFantomCharacterEx(emodel, "man", group, locator);
-
     if (Cr.location.locator != "")
     {
 		if (_type == "GhostShipCrew" || _type == "ParamHunter")

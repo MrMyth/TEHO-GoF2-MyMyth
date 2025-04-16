@@ -1,10 +1,8 @@
-
 int LocationInitRockIsland(int n)
 {
 	//////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 	// Северные рифы
 	//////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
-
 	//////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 	// Риф67
 	//////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
@@ -27,22 +25,18 @@ int LocationInitRockIsland(int n)
 	locations[n].models.always.shore.sea_reflection = 1;
 	Locations[n].models.always.seabed = "MountainPathDMChest_sb";
 	Locations[n].models.always.locators = "MountainPathDMChest_locators"; 
-		
 	Locations[n].models.always.grassPatch = "MountainPath_grass";
 	Locations[n].models.always.grassPatch.texture = "grass\grassshore.tga.tx";
-	
 	Locations[n].models.always.Waterfall1 = "WaterFall1";
 	Locations[n].models.always.Waterfall1.uvslide.v0 = 0.6;
     Locations[n].models.always.Waterfall1.uvslide.v1 = 0.0;
 	Locations[n].models.always.Waterfall1.tech = "LocationWaterFall";
 	Locations[n].models.always.Waterfall1.level = 50;
-	
 	Locations[n].models.always.Waterfall2 = "WaterFall2";
 	Locations[n].models.always.Waterfall2.uvslide.v0 = 0.3;
     Locations[n].models.always.Waterfall2.uvslide.v1 = 0.0;
 	Locations[n].models.always.Waterfall2.tech = "LocationWaterFall";
 	Locations[n].models.always.Waterfall2.level = 49;
-	
 	//Day
 	locations[n].models.day.charactersPatch = "MountainPathDMChest_patch_day";
 	//Night
@@ -57,14 +51,11 @@ int LocationInitRockIsland(int n)
     Locations[n].reload.l1.autoreload = "0";
     Locations[n].reload.l1.label = "Sea";
 	Locations[n].locators_radius.reload.reload1 = 2.5;
-	
 	Locations[n].locators_radius.item.splash1 = 1.0;
 	Locations[n].locators_radius.item.splash2 = 1.0;
 	Locations[n].locators_radius.item.splash3 = 1.0;
 	Locations[n].locators_radius.item.splash4 = 1.0;
 	Locations[n].locators_radius.item.splash5 = 1.0;
-
 	n = n + 1;
-
 	return n;
 }

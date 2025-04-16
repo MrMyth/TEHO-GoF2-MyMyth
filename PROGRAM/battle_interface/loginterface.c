@@ -1,18 +1,13 @@
 #include "storm-engine\battle_interface\log_msg.h"
-
 #define LOG_FOR_SEA			1
 #define LOG_FOR_LAND		2
 #define LOG_FOR_WORLDMAP	3
-
 object showWindow;
-
 object ILogAndActions;
 object IBoardingStatus;
 bool   bYesBoardStatus;
 string g_ActiveActionName;
-
 #event_handler("blieGetMsgIconRoot","BI_GetMsgIconRoot");
-
 void InitLogInterface()
 {
 	SetEventHandler("SetWindowSize","LI_SetWindowSize",0);
@@ -29,10 +24,8 @@ void InitLogInterface()
 	LayerAddObject(REALIZE,&ILogAndActions,-1);
 	LayerAddObject(SEA_EXECUTE,&ILogAndActions,-257);
 	LayerAddObject(SEA_REALIZE,&ILogAndActions,-1);
-
 	InitActivePerkShower();
 }
-
 void Log_RemoveFromSingleLayers()
 {
 	LayerDelObject(EXECUTE,&ILogAndActions);
@@ -40,7 +33,6 @@ void Log_RemoveFromSingleLayers()
 	LayerDelObject(SEA_EXECUTE,&ILogAndActions);
 	LayerDelObject(SEA_REALIZE,&ILogAndActions);
 }
-
 void Log_MoveToSingleLayers()
 {
 	LayerAddObject(EXECUTE,&ILogAndActions,-257);
@@ -48,7 +40,6 @@ void Log_MoveToSingleLayers()
 	LayerAddObject(SEA_EXECUTE,&ILogAndActions,-257);
 	LayerAddObject(SEA_REALIZE,&ILogAndActions,-1);
 }
-
 void LI_SetWindowSize()
 {
 	int w = GetEventData();
@@ -57,25 +48,21 @@ void LI_SetWindowSize()
 	if(bTVused)	SetShowWindowParameters(bTVused,w,h,40,24,w-40,h-24);
 	else	SetShowWindowParameters(bTVused,w,h,0,0,w,h);
 }
-
 void SetLogInterfaceVisible()
 {
 	int visibleFlag = GetEventData();
 	SendMessage(&ILogAndActions,"ll",LI_SET_VISIBLE,visibleFlag);
 }
-
 void LI_LocationLoad()
 {
 	CreateILogAndActions(LOG_FOR_LAND);
 }
-
 void InitBattleInterfacesParameters()
 {
 	DeleteClass(&IBoardingStatus);
 	DeleteAttribute(&IBoardingStatus,"");
 	bYesBoardStatus = false;
 }
-
 void CreateILogAndActions(int loadType)
 {
 	DeleteAttribute(&IBoardingStatus,"ActiveActions");
@@ -94,15 +81,12 @@ void CreateILogAndActions(int loadType)
 	SendMessage(&ILogAndActions,"lll",LOG_AND_ACTIONS_CHANGE,sti(InterfaceStates.BattleShow.FastCommand),sti(InterfaceStates.BattleShow.LogString));
 	Log_SetActiveAction(g_ActiveActionName);
 }
-
 void Log_SetActiveAction(string actionName)
 {
 	if( ILogAndActions.type=="sea" && g_ActiveActionName!=actionName ) {
-
 		// LDH 13Feb17 clear MoorName when leave moor location
 		if (actionName != "Moor")
 			pchar.MoorName = " ";
-
 		RefreshBattleInterface();
 	}
 	g_ActiveActionName = actionName;
@@ -114,17 +98,14 @@ void Log_SetActiveAction(string actionName)
 	}
 	SendMessage(&ILogAndActions,"ls",LOG_SET_ACTIVE_ACTION,actionName);
 }
-
 void Log_SetStringToLog(string strLog)
 {
 	SendMessage(&ILogAndActions,"lls",LOG_ADD_STRING, false, strLog);
 }
-
 void Log_SetEternalString(string strLog)
 {
 	SendMessage(&ILogAndActions,"lls",LOG_ADD_STRING, true, strLog);
 }
-
 void CreateLogEnvironment()
 {
 	float fHtRatio = stf(Render.screen_y) / iGlobalVar1;
@@ -141,11 +122,9 @@ void CreateLogEnvironment()
 	ILogAndActions.Log.speed = 0.05;
 	ILogAndActions.Log.color_speed = 0.02;
 }
-
 void CreateSeaActionsEnvironment()
 {
 	float fHtRatio = stf(Render.screen_y) / iGlobalVar1;
-
 	ILogAndActions.type = "sea";
 	ILogAndActions.ActiveActions.TextureName = "battle_interface\list_icons.tga";
 	ILogAndActions.ActiveActions.horzQ = 16;
@@ -154,7 +133,6 @@ void CreateSeaActionsEnvironment()
 	ILogAndActions.ActiveActions.height = RecalculateHIcon(makeint(48 * fHtRatio));
 	ILogAndActions.ActiveActions.left = sti(showWindow.right) - RecalculateHIcon(makeint(296 * fHtRatio));
 	ILogAndActions.ActiveActions.top = sti(showWindow.top) + RecalculateVIcon(makeint(32 * fHtRatio));
-
 	ILogAndActions.ActiveActions.text1.font = "interface_normal";
 	ILogAndActions.ActiveActions.text1.scale = 1.0 * fHtRatio;
 	ILogAndActions.ActiveActions.text1.pos.x = sti(showWindow.right) - RecalculateHIcon(makeint(272 * fHtRatio));
@@ -165,7 +143,6 @@ void CreateSeaActionsEnvironment()
 	ILogAndActions.ActiveActions.text2.pos.x = sti(showWindow.right) - RecalculateHIcon(makeint(272 * fHtRatio));
 	ILogAndActions.ActiveActions.text2.pos.y = sti(showWindow.top) + RecalculateVIcon(makeint(86 * fHtRatio));//RecalculateVIcon(102);
 	ILogAndActions.ActiveActions.text2.text = XI_ConvertString("for_quick_action");
-
 	ILogAndActions.ActiveActions.Moor.IconNum		= 29;
 	ILogAndActions.ActiveActions.Moor.Text			= XI_ConvertString("for_quick_action_Moor");
 	ILogAndActions.ActiveActions.Board.IconNum		= 30;
@@ -179,12 +156,10 @@ void CreateSeaActionsEnvironment()
 	ILogAndActions.ActiveActions.Nothing.IconNum	= -1;
 	ILogAndActions.ActiveActions.Nothing.Text		= XI_ConvertString("for_quick_action");
 }
-
 void CreateLandActionsEnvironment()
 {
         float fHtRatio = stf(Render.screen_y) / iGlobalVar1;
 	ILogAndActions.type = "land";
-
 	ILogAndActions.ActiveActions.TextureName = "battle_interface\LandCommands.tga";
 	ILogAndActions.ActiveActions.horzQ = 16;
 	ILogAndActions.ActiveActions.vertQ = 4;
@@ -193,7 +168,6 @@ void CreateLandActionsEnvironment()
 //	ILogAndActions.ActiveActions.left = sti(showWindow.right) - RecalculateHIcon(makeint(284 * fHtRatio));
 	ILogAndActions.ActiveActions.left = sti(showWindow.right) - RecalculateHIcon(210 + 74*fHtRatio); // LDH 04Feb17
 	ILogAndActions.ActiveActions.top = sti(showWindow.top) + RecalculateVIcon(makeint(32 * fHtRatio));
-
 	ILogAndActions.ActiveActions.text1.font = "interface_normal";
 	ILogAndActions.ActiveActions.text1.scale = 1.0 * fHtRatio;     
 	ILogAndActions.ActiveActions.text1.pos.x = sti(showWindow.right) - RecalculateHIcon(makeint(260 * fHtRatio));
@@ -204,7 +178,6 @@ void CreateLandActionsEnvironment()
 	ILogAndActions.ActiveActions.text2.pos.x = sti(showWindow.right) - RecalculateHIcon(makeint(260 * fHtRatio));
 	ILogAndActions.ActiveActions.text2.pos.y = sti(showWindow.top) + RecalculateVIcon(makeint(86 * fHtRatio));//RecalculateVIcon(102);
 	ILogAndActions.ActiveActions.text2.text = XI_ConvertString("for_quick_action");
-
 	ILogAndActions.ActiveActions.ToSea.IconNum		= 13;
 	ILogAndActions.ActiveActions.ToSea.Text			= XI_ConvertString("for_quick_action_ToSea");
 	ILogAndActions.ActiveActions.Talk.IconNum		= 17;
@@ -224,12 +197,10 @@ void CreateLandActionsEnvironment()
 	ILogAndActions.ActiveActions.Nothing.IconNum	= -1;
 	ILogAndActions.ActiveActions.Nothing.Text		= XI_ConvertString("for_quick_action");
 }
-
 void CreateWorldMapActionsEnvironment()
 {
     float fHtRatio = stf(Render.screen_y) / iGlobalVar1;
 	ILogAndActions.type = "map";
-
 	ILogAndActions.ActiveActions.TextureName = "battle_interface\WorldMapCommands.tga";
 	ILogAndActions.ActiveActions.horzQ = 8;
 	ILogAndActions.ActiveActions.vertQ = 2;
@@ -237,7 +208,6 @@ void CreateWorldMapActionsEnvironment()
 	ILogAndActions.ActiveActions.height = RecalculateVIcon(makeint(48 * fHtRatio));
 	ILogAndActions.ActiveActions.left = sti(showWindow.right) - RecalculateHIcon(makeint(284 * fHtRatio));
 	ILogAndActions.ActiveActions.top = sti(showWindow.top) + RecalculateVIcon(makeint(32 * fHtRatio));
-
 	ILogAndActions.ActiveActions.text1.font = "interface_normal";
 	ILogAndActions.ActiveActions.text1.scale = 1.0 * fHtRatio;
 	ILogAndActions.ActiveActions.text1.pos.x = sti(showWindow.right) - RecalculateHIcon(makeint(260 * fHtRatio));
@@ -248,7 +218,6 @@ void CreateWorldMapActionsEnvironment()
 	ILogAndActions.ActiveActions.text2.pos.x = sti(showWindow.right) - RecalculateHIcon(makeint(260 * fHtRatio));
 	ILogAndActions.ActiveActions.text2.pos.y = sti(showWindow.top) + RecalculateVIcon(makeint(86 * fHtRatio));//RecalculateVIcon(102);
 	ILogAndActions.ActiveActions.text2.text = XI_ConvertString("for_quick_action");
-
 	ILogAndActions.ActiveActions.EnterToSea.IconNum	= 1;
 	ILogAndActions.ActiveActions.EnterToSea.Text = XI_ConvertString("for_quick_action_EnterToSea");
 	ILogAndActions.ActiveActions.EnterToIsland.IconNum = 0;
@@ -262,7 +231,6 @@ void CreateWorldMapActionsEnvironment()
 	ILogAndActions.ActiveActions.EnterToEnemy.IconNum	= 3;
 	ILogAndActions.ActiveActions.EnterToEnemy.Text = XI_ConvertString("for_quick_action_EnterToEnemy");
 }
-
 void DrawCharacterHP(float myHP,float enemyHP)
 {
 	if(bYesBoardStatus==false)
@@ -293,19 +261,14 @@ void DrawCharacterHP(float myHP,float enemyHP)
 	}
 	SendMessage(&IBoardingStatus,"lff",LOG_SET_CHARCTER_HP,myHP,enemyHP);
 }
-
 void BI_FastCommand()
 {
 	int tmpi;
 	string FComName = GetEventData();
-
 	if( LAi_IsDead(pchar) ) {return;}
-
 	aref arFader;
 	if( GetEntity(arFader,"fader") ) {return;}
-
 	bool bEC = false;
-
 	if( ILogAndActions.type == "sea" )
 	{
 		switch(FComName)
@@ -339,7 +302,6 @@ void BI_FastCommand()
 					OpenBoxProcedure();	
 				}
 			break;
-				
 			case "Pick": bEC = true; Item_OnPickItem(); break;
 			case "Action": bEC = true; Item_OnUseItem(); break;
 			case "Talk":
@@ -390,26 +352,22 @@ void BI_FastCommand()
 			break;
 		}
 	}
-
 	if( bEC )
 	{
 		g_ActiveActionName = "";
 		SendMessage(&ILogAndActions,"ls",LOG_SET_ACTIVE_ACTION,"");
 	}
 }
-
 void ClearAllLogStrings()
 {
 	SendMessage(&ILogAndActions,"l",LI_CLEAR_STRINGS);
 }
-
 void BI_GetMsgIconRoot()
 {
 	aref arTmp;
 	aref pARef[4];
 	int i,idx,cn;
 	idx = 0;
-
 	if(bSeaActive && !bAbordageStarted)
 	{
 		for(i=0; i<COMPANION_MAX; i++)
@@ -423,8 +381,6 @@ void BI_GetMsgIconRoot()
 		}
 		SendMessage(&BattleInterface,"le", BI_MSG_SET_MSG_ICONS, &pARef);
 	}
-
-
 	else
 	{
 		for(i=0; i<4; i++)
@@ -439,14 +395,12 @@ void BI_GetMsgIconRoot()
 		SendMessage(&objLandInterface,"le", MSG_BATTLE_LAND_SET_MSGICONS, &pARef);
 	}
 }
-
 void LoadLIStates()
 {
 	pchar = GetMainCharacter();//нужно, чтобы не ругалось
 	if(!CheckAttribute(pchar, "id")) return;
 	int i,cn;
 	ref chref;
-
 	DeleteAttribute(pchar,"MessageIcons");
 	for(i=1; i<COMPANION_MAX; i++)
 	{

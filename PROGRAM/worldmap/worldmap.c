@@ -1,27 +1,22 @@
 /*
 	Programm interface:
-
 	Init world map in start
 		void wdmInitWorldMap();
 	Create world map object
 		void wdmCreateMap();
 	Release world map object
 		void wdmReleaseMap();
-
-
 	SPI (Script program interface):
 	Получение данных от карты
 	(const) поля только для прочтения
 	(var) поля только для записи и прочтения, запись в них приводит к обновления остальных полей,
 	      принадлежащих этой группе
-
 	Шторма
 	worldMap.storm.num - текущие количество штормов в карте (const)
 	worldMap.storm.cur - индекс текущего шторма 0..num-1, надо перезаписывать для обновления полей (var)
 	worldMap.storm.x - позиция шторма по x (const)
 	worldMap.storm.z - позиция шторма по z (const)
 	worldMap.storm.time - оставшееся время жизни в секундах (const)
-
 	Кораблики событий
 	worldMap.encounter.num - текущие количество корабликов в карте (const)
 	worldMap.encounter.cur - индекс текущего кораблика в карте (var)
@@ -31,52 +26,37 @@
 	worldMap.encounter.type - тип события, обозначаемый этим корабликом (define в таблице типов энкоунтеров)
 	worldMap.encounter.attack - индекс кораблика, который атакуем (стоя на месте)
 	worldMap.encounter.id - название описания энкоунтера: worldMap.encounters.(worldMap.encounter.id)...
-
 	Разная информация
 	worldMap.info.playerInStorm - если 1 то плеер находиться в шторме
 	worldMap.info.updateinfo - апдейт информации
-
-
 	//Внутреняя информация - !!!Осторожно, ни каких проверок!!!
 	worldMap.enemyshipViewDistMin;		//Растояние на котором корабль начинает исчезать
 	worldMap.enemyshipViewDistMax;		//Растояние на котором корабль исчезает полностью
 	worldMap.enemyshipDistKill;			//Расстояние на котором убиваем корабль
 	worldMap.enemyshipBrnDistMin;		//Минимальное растояние на котором рожается корабль
 	worldMap.enemyshipBrnDistMax;		//Максимальное растояние на котором рожается корабль
-
 	worldMap.stormViewDistMin;			//Растояние на котором шторм начинает исчезать
 	worldMap.stormViewDistMax;			//Растояние на котором шторм исчезает полностью
 	worldMap.stormDistKill;				//Расстояние на котором убиваем шторм
 	worldMap.stormBrnDistMin;			//Минимальное растояние на котором рожается шторм
 	worldMap.stormBrnDistMax;			//Максимальное растояние на котором рожается шторм
-
 */
-
 #include "worldmap\worldmap_globals.c"
 #include "worldmap\worldmap_events.c"
 #include "worldmap\worldmap_reload.c"
 #include "worldmap\worldmap_encgen.c"
 #include "worldmap\worldmap_coords.c"
-
-
 //=========================================================================================
-
-
 #event_handler("WorldMap_EncounterCreate", "wdmEvent_EncounterCreate");
 #event_handler("WorldMap_PlayerInStorm", "wdmEvent_PlayerInStorm");
 #event_handler("WorldMap_ShipEncounter", "wdmEvent_ShipEncounter");
 #event_handler("WorldMap_UpdateDate", "wdmEvent_UpdateDate");
 #event_handler("ExitFromWorldMap", "wdmReloadToSea");
 //#event_handler("NextDay", "wdmNextDayUpdate");
-
 #event_handler("EventTimeUpdate", "wdmTimeUpdate");
-
-
 //=========================================================================================
 // Programm interface
 //=========================================================================================
-
-
 void wdmCreateMap(float x, float z, float ay)
 {
 	//Координаты острова с которого уплыли
@@ -100,7 +80,6 @@ void wdmCreateMap(float x, float z, float ay)
 	//Загружаем карту
 	wdmCreateWorldMap();
 }
-
 void wdmTimeUpdate()
 {
 	//QuestsTimeCheck();
@@ -109,7 +88,6 @@ void wdmTimeUpdate()
 	PostEvent("EventTimeUpdate", 5000);
 	// boal <--
 }
-
 void wdmCreateWorldMap()
 {
     float fHtRatio = stf(Render.screen_y) / iGlobalVar1;
@@ -166,13 +144,11 @@ void wdmCreateWorldMap()
 	wdmSetNationFlag(sti(pchar.nation));
 	InitWmInterface();
 }
-
 void wdmLoadSavedMap()
 {
 	//Загружаем карту
 	wdmCreateWorldMap();
 }
-
 void wdmRemoveOldEncounters()
 {
 	//Пометим протухшие энкаунтеры
@@ -201,7 +177,6 @@ void wdmRemoveOldEncounters()
 		DeleteAttribute(&worldMap, encID);
 	}
 }
-
 float wdmGetDays(int year, int month, int day, int hour)
 {
 	//Считаем дни по годам
@@ -217,7 +192,6 @@ float wdmGetDays(int year, int month, int day, int hour)
 	float days = year + day + (hour/24.0);
 	return days;
 }
-
 void wdmSetNationFlag(int iNation)
 {
 	int Nation;
@@ -234,7 +208,6 @@ void wdmSetNationFlag(int iNation)
 		SendMessage(&worldMap, "ll", MSG_WORLDMAP_SET_NATION_FLAG, Nation);
 	}
 }
-
 void wdmMarkDeleteEncounters()
 {
 	//Получаем дату

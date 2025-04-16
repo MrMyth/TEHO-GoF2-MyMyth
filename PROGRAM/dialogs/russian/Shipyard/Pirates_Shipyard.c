@@ -7,20 +7,17 @@ void ProcessCommonDialogEvent(ref NPChar, aref Link, aref NextDiag)
 	int iTemp, iSum; // 280912
 	ref 	shTo;
 	string 	s1;
-	
 	int     Matherial1;
 	int     Matherial2;
 	int     Matherial3;
 	int     Matherial4;
 	int		HPPrice; 
-	
 	if ( sti(pchar.Ship.Type) != SHIP_NOTUSED)
 	{
 		int   	shipCurHP   = sti(RealShips[sti(pchar.Ship.Type)].HP);
 		int   	shipBaseHP	= sti(RealShips[sti(pchar.Ship.Type)].BaseHP);
 		int   	shipClass   = sti(RealShips[sti(pchar.Ship.Type)].Class);
 	}	
- 
 	switch (Dialog.CurrentNode)
 	{		
 		// -----------------------------------Диалог первый - первая встреча
@@ -46,7 +43,6 @@ void ProcessCommonDialogEvent(ref NPChar, aref Link, aref NextDiag)
 			NextDiag.TempNode = "Master_Ship";
 			Dialog.CurrentNode = "Master_Ship";
 		break;
-		
 		case "Master_Ship":
 		//Jason ----------------------------------- Хронометр Алекса ------------------------------------------
 			if (CheckAttribute(npchar, "quest.sextant") && CheckAttribute(pchar, "questTemp.AlexClock") && pchar.location == "Pirates_shipyard" && !CheckAttribute(npchar, "quest.clock"))
@@ -73,14 +69,12 @@ void ProcessCommonDialogEvent(ref NPChar, aref Link, aref NextDiag)
 			link.l2.go = "exit";
 			NextDiag.TempNode = "Master_Ship";
 		break;
-
 		case "node_1":
 			dialog.text = "Young people these days... You never have any respect. Hot heads, hard hands, what do you need?";
 			link.l1 = pcharrepphrase("That's right. But sooner or later an ends comes to everything and looks like your time is near...",
 				"Something tells me that during your young years, you didn't necessarily have much respect for elders too. Am I correct?");
 			link.l1.go = "node_2";
 		break;
-
 		case "node_2":
 			dialog.text = "Don't argue with olders, puppy";
 			link.l1 = pcharrepphrase("Easy, now. Calm down. Don't overexert yourself otherwise you can get a heart attack. I don't want to be accused for the death of the best shipwright on the Caribbean. Let's get down to business.",
@@ -90,7 +84,6 @@ void ProcessCommonDialogEvent(ref NPChar, aref Link, aref NextDiag)
 				"I see we're not going to see eye to eye. Farewell.");
 			link.l2.go = "exit";
 		break;
-
 		case "node_3":
 			dialog.text = "(coughing)... People won't leave an elder be. What do you need from me this time, " + GetAddress_Form(NPChar) + "? ";
 			link.l1 = pcharrepphrase("I need to use the services of the shipyard.","I want to use the services of the shipyard.");
@@ -107,7 +100,6 @@ void ProcessCommonDialogEvent(ref NPChar, aref Link, aref NextDiag)
 			link.l9.go = "exit";
 			NextDiag.TempNode = "Master_Ship";
 		break;
-		
 		case "shipyard_dlg":			
 			if((shipBaseHP - shipCurHP > 0) && (shipClass < 6))
 			{
@@ -141,7 +133,6 @@ void ProcessCommonDialogEvent(ref NPChar, aref Link, aref NextDiag)
 			link.l9 = pcharrepphrase("Shit, I have a couple of urgent matters to attend to, goodbye.", "It's time for me to go. Sorry.");
 			Link.l9.go = "ship_tunning_not_now";
 		break;
-		
 		case "ship_repair_again":
 			if((shipBaseHP - shipCurHP > 0) && (shipClass < 6))
 			{
@@ -185,13 +176,11 @@ void ProcessCommonDialogEvent(ref NPChar, aref Link, aref NextDiag)
 			Link.l9 = "No. I'm happy with what I have.";
 			Link.l9.go = "ship_tunning_not_now_2";
 		break;
-		
 		case "ship_tunning_not_now_2":
 			dialog.Text = "Oh, I see you're still thinking! You'll go far! Come back when you decide what you want and don't bother me with trifling nonsense.";
 			Link.l1 = RandPhraseSimple("Thank you! All the best.", "Bye, master. And less sarcasm.");
 			Link.l1.go = "ship_tunning_not_now";
 		break;
-		
 		case "ship_repair_start":
             if ( sti(Pchar.Ship.Type) == SHIP_NOTUSED || Pchar.location.from_sea != "Pirates_town")
             {
@@ -236,14 +225,12 @@ void ProcessCommonDialogEvent(ref NPChar, aref Link, aref NextDiag)
 			    }
 			}
 		break;
-		
 		case "ship_repair_HP":
 			HPPrice 	= GetMaterialQtyRepair( pchar, 0 ); 
 			Matherial1	= GetMaterialQtyRepair( pchar, 1 );
 			Matherial2	= GetMaterialQtyRepair( pchar, 2 );
 			Matherial3	= GetMaterialQtyRepair( pchar, 3 );
 			Matherial4	= GetMaterialQtyRepair( pchar, 4 );
-			
 			s1 = "Let's have a look here at what we can do. At the moment, the ship's frame is " + shipCurHP + ". . The highest possible value is " + shipBaseHP;			
 			s1 = s1 + ". In order to make a full repair, I need: ironwood - "+ Matherial1 + ", resin - " + Matherial2 + ", ship silk - " + Matherial3 + " ropes - " + Matherial4 + ".";
 			s1 = s1 + " For this work I will charge: "+ HPPrice + " doubloons for the labor... My grandchildren have been calling me back to Europe for a long time. I don't want to come back empty-handed you know... So, that'll be all. And oh yes - the money up front.";
@@ -260,7 +247,6 @@ void ProcessCommonDialogEvent(ref NPChar, aref Link, aref NextDiag)
 			Link.l2 = "No. I'm not satisfied with that.";
 			Link.l2.go = "ship_tunning_not_now";
 		break;
-		
 		case "ship_repair_HP_start_0":
 			dialog.Text = "Yes... The payment... You can pay right now or you can send an errand boy to the ship for the necessary amount... What would you like to do?";
 			link.l1 = "I'll pay right now.";
@@ -268,7 +254,6 @@ void ProcessCommonDialogEvent(ref NPChar, aref Link, aref NextDiag)
 			link.l2 = "I'll send an errand boy. I believe I had a little bit of gold lying in my chests...";
 			link.l2.go = "ship_repair_HP_start_1";
 		break;
-		
 		case "ship_repair_HP_start":
 		    amount = HPPrice;
 		    if(GetCharacterItem(pchar,"gold_dublon") >= amount)
@@ -282,12 +267,10 @@ void ProcessCommonDialogEvent(ref NPChar, aref Link, aref NextDiag)
 			    NPChar.Repair.ShipType      = Pchar.Ship.Type;
 			    NPChar.Repair.ShipName      = RealShips[sti(Pchar.Ship.Type)].BaseName;
 				NPChar.Repair.Delta         = shipBaseHP - shipCurHP;
-			    			
 				NextDiag.TempNode = "ship_repair_HP_again";
                 dialog.text = "Splendid. I'll be waiting for the materials.";
 			    link.l1 = "Going to gather 'em...";
 			    link.l1.go = "Exit";
-			    
 			    ReOpenQuestHeader("ShipRepair");
 			    AddQuestRecord("ShipRepair", "t1");
 				AddQuestUserData("ShipRepair", "sText",  "For capital repairing measures of  " + XI_ConvertString(RealShips[sti(Pchar.Ship.Type)].BaseName) +
@@ -302,12 +285,10 @@ void ProcessCommonDialogEvent(ref NPChar, aref Link, aref NextDiag)
 				link.l1.go = "Exit";								
 			}
 		break;
-		
 		case "ship_repair_HP_start_1":
 			AddTimeToCurrent(0, 30);
 		    amount = HPPrice;
 			GetItemMyCabin("gold_dublon", amount);
-		    
 			NPChar.Repair.Money  		= amount;
 			NPChar.Repair.Matherial1 	= Matherial1; 
 			NPChar.Repair.Matherial2    = Matherial2; 
@@ -316,20 +297,16 @@ void ProcessCommonDialogEvent(ref NPChar, aref Link, aref NextDiag)
 			NPChar.Repair.ShipType      = Pchar.Ship.Type;
 			NPChar.Repair.ShipName      = RealShips[sti(Pchar.Ship.Type)].BaseName;
 			NPChar.Repair.Delta         = shipBaseHP - shipCurHP;
-			    			
 			NextDiag.TempNode = "ship_repair_HP_again";
 			dialog.text = "Splendid. I'll be waiting for the material.";
 			link.l1 = "Off I go...";
 			link.l1.go = "Exit";
-			
 			ReOpenQuestHeader("ShipRepair");
 			AddQuestRecord("ShipRepair", "t1");
 			AddQuestUserData("ShipRepair", "sText",  "For capital repairing measures of  " + XI_ConvertString(RealShips[sti(Pchar.Ship.Type)].BaseName) +
     " the shipmaster requires: ironwood - " + NPChar.Repair.Matherial1 + ", resin - "+ NPChar.Repair.Matherial2 + ", ship silk - " + NPChar.Repair.Matherial3 + " ropes - " + NPChar.Repair.Matherial4 + 
 				". As a deposit we handed in " + NPChar.Repair.Money + " doubloons... He says he's about to take off to Europe. I think that old devil's lying.");
-			
 		break;
-		
 		case "ship_repair_HP_again":
 		    if (sti(NPChar.Repair.ShipType) == sti(Pchar.Ship.Type) && NPChar.Repair.ShipName == RealShips[sti(Pchar.Ship.Type)].BaseName)
 		    {
@@ -351,7 +328,6 @@ void ProcessCommonDialogEvent(ref NPChar, aref Link, aref NextDiag)
 			    CloseQuestHeader("ShipRepair");
 			}
 		break;
-		
 		case "ship_repair_HP_again_2":
 			checkMatherial_repair(Pchar, NPChar, GOOD_SANDAL, 	1);
 			checkMatherial_repair(Pchar, NPChar, GOOD_OIL, 		2);
@@ -373,22 +349,18 @@ void ProcessCommonDialogEvent(ref NPChar, aref Link, aref NextDiag)
 				dialog.Text = "Now what you still have left to bring me is: "+ sti(NPChar.Repair.Matherial1) + " of ironwood, "+ sti(NPChar.Repair.Matherial2) + " resin, " + NPChar.Repair.Matherial3 + " of ship silk, " + NPChar.Repair.Matherial4 + "ropes.";
 				link.l1 = "All right.";
 				link.l1.go = "Exit";
-
                 AddQuestRecord("ShipRepair", "t1");
 				AddQuestUserData("ShipRepair", "sText", "Materials left: ironwood - "+ NPChar.Repair.Matherial1 + ", resin - "+ NPChar.Repair.Matherial2 + ", ship silk - " + NPChar.Repair.Matherial3 + " ropes - " + NPChar.Repair.Matherial4 + ".");
 			}
 		break;
-		
 		case "ship_repair_HP_complite":
 		    AddTimeToCurrent(6, 30);
 		    shTo = &RealShips[sti(Pchar.Ship.Type)];
 			shTo.HP = sti(shTo.HP) + sti(NPChar.Repair.Delta);
 		    DeleteAttribute(NPChar, "Repair");
-			
 			pchar.ship.hp = GetCharacterShipHP(pchar);
 			DeleteAttribute(pchar, "ship.hulls");
 			DeleteAttribute(pchar, "ship.blots");		
-			
             NextDiag.TempNode = "node_3";
 			dialog.Text = "... Well, that's all... I guarantee you it will be pretty hard to wreck this ship now!";
 			Link.l1 = "Thank you! I'd rather not experiment with that.";
@@ -396,7 +368,6 @@ void ProcessCommonDialogEvent(ref NPChar, aref Link, aref NextDiag)
 			AddQuestRecord("ShipRepair", "End");
 			CloseQuestHeader("ShipRepair");
 		break;		
-		
 		///////////////////////////////  квестовые ветки
 		case "quests":
 			dialog.text = NPCStringReactionRepeat(RandPhraseSimple("What questions do you have?", "How can I help you?"), "You tried to ask me a question a little while ago...", "I have never met people with such one-sided curiosity in my shipyard or anywhere else in this town.",
@@ -431,7 +402,6 @@ void ProcessCommonDialogEvent(ref NPChar, aref Link, aref NextDiag)
 				link.l1.go = "tieyasal";
 			}
 		break;
-		
 				case "BlueBird_1":
 			dialog.text = "It's not mine. On the contrary, I try not to let anyone in there for their own sake.";
 			link.l1 = "Ah, well alright. Actually, here's the question I have. Is anyone carrying any goods into the city through this dungeon?";
@@ -462,7 +432,6 @@ void ProcessCommonDialogEvent(ref NPChar, aref Link, aref NextDiag)
 			LAi_LocationDisableOfficersGen("Bermudes_Cavern", true); //офицеров не пускать
 		break;
 //*************************** Генератор - "Найденные судовые документы" **************
-		
 		case "Al_ShipLetters_1":
 			dialog.text = "State you terms.";
 			s1 = "I lucked into finding an absolutely legal ship's documents packet that hasn't been called for search yet.";
@@ -492,8 +461,6 @@ void ProcessCommonDialogEvent(ref NPChar, aref Link, aref NextDiag)
 			NextDiag.CurrentNode = NextDiag.TempNode;
 			DialogExit(); 
 		break;
-		
-
 //*************************** Открывание двери ***************************
  		case "Step_Door_1":
 			dialog.text = "That's correct. If you wanna pass through this door, you have to pay me 20000 pesos. If you don't pay, I won't open. This isn't a soup kitchen. And I don't advise you to go there anyway. It will be better for you if you don't...";
@@ -510,7 +477,6 @@ void ProcessCommonDialogEvent(ref NPChar, aref Link, aref NextDiag)
             link.l2 = "No way! I'd never pay for some door.";
     		link.l2.go = "exit";
 		break;
-		
  		case "Step_Door_2":
 			npchar.Step_Door = true; // fix
 			dialog.text = "Go in. The door is open. Don't worry about thanking me!";
@@ -521,20 +487,17 @@ void ProcessCommonDialogEvent(ref NPChar, aref Link, aref NextDiag)
 			pchar.quest.CloseBermudesDungeonDoor.win_condition.l1 = "MapEnter";
             pchar.quest.CloseBermudesDungeonDoor.win_condition = "CloseBermudesDungeonDoor";
 		break;
-		
  		case "Step_Door_3":
 			dialog.text = "Well, when you have it, come back. Otherwise, don't try to convince me. It's useless...";
 			link.l1 = "Argh, I'm completely speechless!";
 			link.l1.go = "exit";
 		break;
-		
 	// ------------------------------------------- хронометр Ђлекса ----------------------------------------------// Addon-2016 Jason замена дублонов на песо везде
 		case "clock_begin":
 			dialog.text = "Come on, don't be so strict with an old man... I really need your help, captain.";
 			link.l1 = "Tell me, master. What happened to you?";
 			link.l1.go = "clock_begin_1";
 		break;
-		
 		case "clock_begin_1":
 			sTotalTemp = "Steven Dodson";
 			if (pchar.questTemp.Alex.Clock == "terrax") sTotalTemp = "Marcus Tyrex";
@@ -542,13 +505,11 @@ void ProcessCommonDialogEvent(ref NPChar, aref Link, aref NextDiag)
 			link.l1 = "So tell about this the leader of the Brethren. Or are you leery that "+sTotalTemp+" will cut off your head for it?";
 			link.l1.go = "clock_begin_2";
 		break;
-		
 		case "clock_begin_2":
 			dialog.text = "I told him... The thing is our new leader has not that time nor the opportunity to find and bring these materials. You have to know what kind of a rarity it is. And there's no way I'll be able to build a frigate with the known characteristics without them.";
 			link.l1 = "And you probably propose that I have to find materials for the ship?";
 			link.l1.go = "clock_begin_3";
 		break;
-		
 		case "clock_begin_3":
 			dialog.text = "Well, yes. You are a good friend of our leader. "+sTotalTemp+" says himself that he owes you a lot and that he demands all kind of respect for you... So I thought: since you're his friend, then maybe you wouldn't be against helping him? And that at the same time: you do realize what kind of an awkward position I'm in? All materials will be paid for, "+sTotalTemp+" isn't tight with his gold.";
 			link.l1 = "I'm quite sorry, master, but I'm no less busy than "+sTotalTemp+". I'm afraid that collecting materials may take a whole eternity. So, you'd better ask somebody else.";
@@ -556,38 +517,32 @@ void ProcessCommonDialogEvent(ref NPChar, aref Link, aref NextDiag)
 			link.l2 = "Well, if you're the ship orderer "+sTotalTemp+" - then of course I'll try to help. We are really friends, and friends have to help each other. How many materials do you need?";
 			link.l2.go = "clock_begin_4";
 		break;
-		
 		case "clock_exit":
 			dialog.text = "That's too bad. That's really too bad. I was depending on you. Well, as they say, no means no...";
 			link.l1 = "...";
 			link.l1.go = "exit";
 			DeleteAttribute(pchar, "questTemp.AlexClock");
 		break;
-		
 		case "clock_begin_4":
 			dialog.text = "I'm missing 100 unites of ironwood, 150 containers of resin, 110 rolls of ship silk, and 90 coils of hemp ropes. How do you think you, could you find me all of that in the course of four months? I don't think I have more time.";
 			link.l1 = "I can at least try. And as for the payment?";
 			link.l1.go = "clock_begin_5";
 		break;
-		
 		case "clock_begin_5":
 			dialog.text = "Here are my rates: ironwood at 4000 pesos per a piece, resins at 1400 pesos per a container, silk at 2500 pesos per roll, and ropes at 1500 pesos per coil. And if you bring all of that to me, you'll receive a useful gift from me.";
 			link.l1 = "What is it, I wonder?";
 			link.l1.go = "clock_begin_6";
 		break;
-		
 		case "clock_begin_6":
 			dialog.text = "Bring me the materials first. But I assure you: it'll come well in handy for you, and the thing is unique. there isn't another on the Caribbean, or in the whole world. I hope that little spark of curiosity fired your interest into gathering the materials for me.";
 			link.l1 = "Well, you're slick as a leprechaun, master! All right, you've got yourself a deal.";
 			link.l1.go = "clock_begin_7";
 		break;
-		
 		case "clock_begin_7":
 			dialog.text = "I'm very happy. I'll be looking forward to your return.";
 			link.l1 = "I hope it won't take you too long...";
 			link.l1.go = "clock_begin_8";
 		break;
-		
 		case "clock_begin_8":
 			DialogExit();
 			pchar.questTemp.AlexClock = "go";
@@ -600,7 +555,6 @@ void ProcessCommonDialogEvent(ref NPChar, aref Link, aref NextDiag)
 			pchar.questTemp.AlexClock.Shipsilk = 110;
 			pchar.questTemp.AlexClock.Ropes = 90;
 		break;
-		
 		case "clock":
 			dialog.text = "Excellent! What have you brought me today?";
 			if (GetSquadronGoods(pchar, GOOD_SANDAL) > 0 && !CheckAttribute(npchar, "quest.sandal"))
@@ -630,7 +584,6 @@ void ProcessCommonDialogEvent(ref NPChar, aref Link, aref NextDiag)
 			link.l5 = "Nothing at the moment. I just wanted to make sure that we still have an agreement.";
 			link.l5.go = "exit";
 		break;
-		
 		case "clock_1":
 			if (CheckAttribute(npchar, "quest.sandal") && CheckAttribute(npchar, "quest.oil") && CheckAttribute(npchar, "quest.shipsilk") && CheckAttribute(npchar, "quest.ropes")) // все привез
 			{
@@ -647,7 +600,6 @@ void ProcessCommonDialogEvent(ref NPChar, aref Link, aref NextDiag)
 				link.l2.go = "clock";
 			}
 		break;
-		
 		case "sandal": // бакаут
 			amount = sti(pchar.questTemp.AlexClock.Sandal);
 			iTemp = amount-iSan;
@@ -676,7 +628,6 @@ void ProcessCommonDialogEvent(ref NPChar, aref Link, aref NextDiag)
 			}
 			AddMoneyToCharacter(pchar, iSum);
 		break;
-		
 		case "oil": // смолы
 			amount = sti(pchar.questTemp.AlexClock.Oil);
 			iTemp = amount-iOil;
@@ -705,7 +656,6 @@ void ProcessCommonDialogEvent(ref NPChar, aref Link, aref NextDiag)
 			}
 			AddMoneyToCharacter(pchar, iSum);
 		break;
-		
 		case "shipsilk": // шёлк
 			amount = sti(pchar.questTemp.AlexClock.Shipsilk);
 			iTemp = amount-iSil;
@@ -734,7 +684,6 @@ void ProcessCommonDialogEvent(ref NPChar, aref Link, aref NextDiag)
 			}
 			AddMoneyToCharacter(pchar, iSum);
 		break;
-		
 		case "ropes": // канаты
 			amount = sti(pchar.questTemp.AlexClock.Ropes);
 			iTemp = amount-iRop;
@@ -763,43 +712,36 @@ void ProcessCommonDialogEvent(ref NPChar, aref Link, aref NextDiag)
 			}
 			AddMoneyToCharacter(pchar, iSum);
 		break;
-		
 		case "clock_2":
 			dialog.text = "Yes, yes... about my thing, of course. M-m-mmm...";
 			link.l1 = "What is it master? You look quite worried. Is anything wrong? Some kind of problems?";
 			link.l1.go = "clock_3";
 		break;
-		
 		case "clock_3":
 			dialog.text = "Precisely. Problems. Recent ones. Damn those treasure hunters...";
 			link.l1 = "Calm down, calm down. It's not good at your age to be worrying like that. God forbid, you could be one beat away. Who would build the frigate for the head of the Brethren then? Calm down and explain to me who are these treasure hunters?";
 			link.l1.go = "clock_4";
 		break;
-		
 		case "clock_4":
 			dialog.text = "Over there by my table is a door. It leads directly into an old vault. In this vault in one of the treasure chests, I keep my metal box with objects that were with me when I was pulled through that damn funnel twenty years ago and I ended up here...";
 			link.l1 = "What funnel? What are you talking about?";
 			link.l1.go = "clock_5";
 		break;
-		
 		case "clock_5":
 			dialog.text = "Ah, sorry for my fantasies. Being old is not easy, young man. Pardon. But it's irrelevant. What's relevant is that a box with a gift for you is in the chest which is lying in the dungeon currently occupied by some scums. They are not of us, not from Isla Tesoro\nTreasure hunters, someone must had told them that this place is full of treasures. They won't dare to show themselves right here, however I am too scared to visit them, see? Their faces...";
 			link.l1 = "I see. Open your door. I'll beat out your uninvited guests.";
 			link.l1.go = "clock_6";
 		break;
-		
 		case "clock_6":
 			dialog.text = "Just like that? You'll beat them out? Alone? Aren't you scared?";
 			link.l1 = "Less talk, more action, master. Open this door and leave the rest to me. In what chest are you keeping your things?";
 			link.l1.go = "clock_7";
 		break;
-		
 		case "clock_7":
 			dialog.text = "Right down the hallway is a whole collection of empty wooden barrels. Behind them on the floor in a secluded place is a small chest. I've pounded a lock on it, so I doubt those intruders would manage to get their dirty hands inside it even if they found it. Here, take the key.";
 			link.l1 = "I'm glad you  think ahead. Wait here and don't go anywhere.";
 			link.l1.go = "clock_8";
 		break;
-		
 		case "clock_8":
 			DialogExit();
 			GiveItem2Character(pchar, "key3"); 
@@ -814,26 +756,22 @@ void ProcessCommonDialogEvent(ref NPChar, aref Link, aref NextDiag)
 			pchar.questTemp.AlexClock = "chest";
 			AddQuestRecord("alex_clock", "3");
 		break;
-		
 		case "clock_complete":
 			dialog.text = "They just listened to you and left?";
 			link.l1 = "That's right. They ended up being some polite guys. I explained to them that their presence is scaring the old famous shipwright and out of respect to you old age, they left the premises. You can come down without a fret.";
 			link.l1.go = "clock_complete_1";
 		break;
-		
 		case "clock_complete_1":
 			dialog.text = "Oh, you're mocking an old man! All right. Give me my box and I'll open it up and give you the device you've earned fair and square.";
 			link.l1 = "Please, take it...";
 			link.l1.go = "clock_complete_2";
 		break;
-		
 		case "clock_complete_2":
 			RemoveItems(pchar, "alexs_chest", 1);
 			dialog.text = "Gratitude! Let's open it. Here, take this. Automatic mechanical timer, no one makes such devices here and no one will for next three hundred years... huh, apologies, please forgive the old man. All I am saying that this thing is unique\nIt does all work itself, you won't need stupid sand clocks and so on. No errors! Just keep it safe from direct blows and water otherwise you will loose it. Even an ape can use this timer.";
 			link.l1 = "Get a load of this! I've never seen anything so miraculous in my life! Thanks, master.";
 			link.l1.go = "clock_complete_3";
 		break;
-		
 		case "clock_complete_3":
 			GiveItem2Character(pchar, "clock3");
 			Log_Info("You've received an automatic mechanical timer");
@@ -843,13 +781,11 @@ void ProcessCommonDialogEvent(ref NPChar, aref Link, aref NextDiag)
 			link.l1 = "Everyone has their secrets, don't they master? Keep your secret and I won't bud into your business. Thanks for the gift!";
 			link.l1.go = "clock_complete_4";
 		break;
-		
 		case "clock_complete_4":
 			dialog.text = "And thank you for your help, captain. Visit me sometimes. Don't forget an old shipwright.";
 			link.l1 = "Like I could forget you... Anyway, I'll definitely do that, Alexus the Master. Goodbye!";
 			link.l1.go = "clock_complete_5";
 		break;
-		
 		case "clock_complete_5":
 			DialogExit();
 			bDisableFastReload = false;
@@ -862,31 +798,26 @@ void ProcessCommonDialogEvent(ref NPChar, aref Link, aref NextDiag)
 			DeleteAttribute(pchar, "questTemp.AlexClock");
 		break;
 	// <-- хронометр Алекса
-		
 		// город майя
 		case "tieyasal":
 			dialog.text = "Aha, Miguel! My old acquaintance. I remember him. He asked me about every little detail over and over. But how was I going to explain to him how a radio was constructed inside when he hadn't even see a simple telegraph?";
 			link.l1 = "What?.. What are you talking about, master?";
 			link.l1.go = "tieyasal_1";
 		break;
-		
 		case "tieyasal_1":
 			dialog.text = "Oh, sorry, young man. Don't pay much attention to my talking... Our curious Michelle had satisfied his curiosity and disappeared. Only three days ago we had a chat.";
 			link.l1 = "Where's Miguel right now if you don't mind my asking?";
 			link.l1.go = "tieyasal_2";
 		break;
-		
 		case "tieyasal_2":
 			dialog.text = "Who knows. Maybe he's doing his business in Sharptown or maybe he's already departed from Isla Tesoro.";
 			link.l1 = "I see. Thanks, master!";
 			link.l1.go = "tieyasal_3";
 		break;
-		
 		case "tieyasal_3":
 			DialogExit();
 			npchar.quest.tieyasal = "true";
 		break;
-		
 		// Калеуче
 		case "FDM":
 			dialog.text = "A-ha, the ghost ship! Moms scares their bad kids with it. Why would you need this damned vessel! Sailors get frightened when they see her at the horizon... What do you want to do with her?";
@@ -901,7 +832,6 @@ void ProcessCommonDialogEvent(ref NPChar, aref Link, aref NextDiag)
 				link.l2.go = "FDM_sails";
 			}
 		break;
-		
 		case "FDM_cabin":
 			dialog.text = "Why not? My hands are still straight. Your galleon is huge, so I can even make a royal cabin like they build in battleships and man-of-wars. Or we can keep a standard cabin. The choice is yours?";
 			link.l1 = "Build the cabin of the line ship! They all will die of envy...";
@@ -909,7 +839,6 @@ void ProcessCommonDialogEvent(ref NPChar, aref Link, aref NextDiag)
 			link.l2 = "No point in excessive luxuries. Keep the standard.";
 			link.l2.go = "FDM_cabin_s";
 		break;
-		
 		case "FDM_cabin_m":
 			dialog.text = "Fine. Ten chests of doubloons and it will be done in five days.";
 			link.l1 = "Deal!";
@@ -917,7 +846,6 @@ void ProcessCommonDialogEvent(ref NPChar, aref Link, aref NextDiag)
 			link.l2 = "Ten chests? Thousand and a half doubloons? Hm, I need time to consider such expenses...";
 			link.l2.go = "exit";
 		break;
-		
 		case "FDM_cabin_s":
 			dialog.text = "Fine. Seven chests of doubloons and it will be done in five days.";
 			link.l1 = "Deal!";
@@ -925,7 +853,6 @@ void ProcessCommonDialogEvent(ref NPChar, aref Link, aref NextDiag)
 			link.l2 = "Seven chests? More than a thousand doubloons? Hm, I need time to consider such expenses...";
 			link.l2.go = "exit";
 		break;
-		
 		case "FDM_cabin_m1":
 			iTemp = GetCharacterItem(pchar, "Chest");
 			npchar.quest.FDM_cabin = 10;
@@ -942,7 +869,6 @@ void ProcessCommonDialogEvent(ref NPChar, aref Link, aref NextDiag)
 				link.l1.go = "FDM_cabin_wait";
 			}
 		break;
-		
 		case "FDM_cabin_s1":
 			iTemp = GetCharacterItem(pchar, "Chest");
 			npchar.quest.FDM_cabin = 7;
@@ -959,12 +885,10 @@ void ProcessCommonDialogEvent(ref NPChar, aref Link, aref NextDiag)
 				link.l1.go = "FDM_cabin_wait";
 			}
 		break;
-		
 		case "FDM_cabin_wait":
 			DialogExit();
 			npchar.quest.FDM_full = "cabin";
 		break;
-		
 		case "FDM_cabin_pay":
 			iTemp = GetCharacterItem(pchar, "Chest");
 			amount = sti(npchar.quest.FDM_cabin)-iTemp;
@@ -986,7 +910,6 @@ void ProcessCommonDialogEvent(ref NPChar, aref Link, aref NextDiag)
 				npchar.quest.FDM_cabin = amount;
 			}
 		break;
-		
 		case "FDM_cabin_do":
 			DialogExit();
 			SetLaunchFrameFormParam("Five days later..."+ NewStr() +"Master Alexus has done his job", "", 0, 5);
@@ -1000,7 +923,6 @@ void ProcessCommonDialogEvent(ref NPChar, aref Link, aref NextDiag)
 			if (CheckAttribute(npchar, "quest.FDM_sails")) npchar.quest.FDM_full = "done";
 			else DeleteAttribute(npchar, "quest.FDM_full");
 		break;
-		
 		case "FDM_sails":
 			dialog.text = "Sure, I can do that! Well-well... This means that we have to throw away every dirty old rag and place new and clear sails made of cotton. A lot of work to be done here. Hundred thousand pesos for work and materials. Deal?";
 			if (sti(Pchar.money) >= 100000)
@@ -1011,14 +933,12 @@ void ProcessCommonDialogEvent(ref NPChar, aref Link, aref NextDiag)
 			link.l2 = "Hm. I suppose I need to think about it...";
 			link.l2.go = "exit";
 		break;
-		
 		case "FDM_sails_do":
 			AddMoneyToCharacter(pchar, -100000);
 			dialog.text = "Good. I have the coins, time to do my job. Walk around until it's done and don't worry.";
 			link.l1 = "Good...";
 			link.l1.go = "FDM_sails_done";
 		break;
-		
 		case "FDM_sails_done":
 			DialogExit();
 			SetLaunchFrameFormParam("Two days later..."+ NewStr() +"Master Alexus has done his job", "", 0, 5);
@@ -1035,13 +955,11 @@ void ProcessCommonDialogEvent(ref NPChar, aref Link, aref NextDiag)
 	}
 	UnloadSegment(NPChar.FileDialog2);  // если где-то выход внутри switch  по return не забыть сделать анлод
 }
-
 void checkMatherial_repair(ref Pchar, ref NPChar, int good, int goodType)
 {
 	int amount;
 	string Matherial = "Matherial" + goodType;
 	amount = GetSquadronGoods(Pchar, good) - sti(NPChar.Repair.(Matherial));
-	
 	if (amount < 0)
     {
 		amount = amount + sti(NPChar.Repair.(Matherial));
@@ -1053,35 +971,29 @@ void checkMatherial_repair(ref Pchar, ref NPChar, int good, int goodType)
     RemoveCharacterGoods(Pchar, good, amount);
     NPChar.Repair.(Matherial) = sti(NPChar.Repair.(Matherial)) - amount;
 }
-
 int GetMaterialQtyRepair( ref _chr, int MaterialNum )
 {
 	if ( sti(_chr.Ship.Type) == SHIP_NOTUSED) return 0;
-	
 	int   	shipCurHP   = sti(RealShips[sti(_chr.Ship.Type)].HP);
 	int   	shipBaseHP	= sti(RealShips[sti(_chr.Ship.Type)].BaseHP);	
 	int   	shipClass   = sti(RealShips[sti(_chr.Ship.Type)].Class);
 	int     shipWeight  = CWT2Tonnes(sti(RealShips[sti(_chr.Ship.Type)].Weight));
 	int     HPPrice     = shipWeight * (1.2 - makefloat(shipCurHP)/makefloat(shipBaseHP));
 	int     modifier    = (2 * MOD_SKILL_ENEMY_RATE) + sti(RealShips[sti(_chr.Ship.Type)].MinCrew)/2 + 1;	
-
 	float   fQuest 	= 1.0;
 	if(CheckAttribute(&RealShips[sti(_chr.Ship.Type)], "QuestShip")) 
 	{
 		fQuest  = 1.3;
 		HPPrice = HPPrice * 2;
 	}					
-	
 	int     Matherial1 = makeint(fQuest * (10 + MOD_SKILL_ENEMY_RATE) * (6 - shipClass) / 2) + rand(modifier);
 	int     Matherial2 = makeint(fQuest * (10 + MOD_SKILL_ENEMY_RATE) * (6 - shipClass) / 2) + rand(modifier);
 	int     Matherial3 = makeint(fQuest * (10 + MOD_SKILL_ENEMY_RATE) * (6 - shipClass) / 2) + rand(modifier);
 	int     Matherial4 = makeint(fQuest * (10 + MOD_SKILL_ENEMY_RATE) * (6 - shipClass) / 2) + rand(modifier);
-		
 	if(MaterialNum == 0) return HPPrice;	
 	if(MaterialNum == 1) return Matherial1;
 	if(MaterialNum == 2) return Matherial2;
 	if(MaterialNum == 3) return Matherial3;
 	if(MaterialNum == 4) return Matherial4;
-	
 	return 0;
 }

@@ -1,4 +1,3 @@
-
 #define UPGRADE_WHEAT			0
 #define UPGRADE_PIER			1
 #define	UPGRADE_MILL			2
@@ -6,14 +5,11 @@
 #define	UPGRADE_ACADEMY			4
 #define	UPGRADE_HUTS			5
 #define	UPGRADE_STOREHOUSE		6
-
 #define	UPGRADE_FORT			7
 #define	UPGRADE_CHURCH			8
 #define	UPGRADE_EXPEDITION		9
 #define	UPGRADE_GOLDMINES		10
 #define	UPGRADE_SILVERMINES		11
-
-
 void ColonyUpgradesInit()
 {
 	ColonyUpgrades[UPGRADE_WHEAT].id = "Wheatfield";
@@ -29,7 +25,6 @@ void ColonyUpgradesInit()
 	ColonyUpgrades[UPGRADE_WHEAT].days = 3;
 	ColonyUpgrades[UPGRADE_WHEAT].requred.l1.population = 200;
 	ColonyUpgrades[UPGRADE_WHEAT].l1.text = "ѕшеничные пол€ увеличивают прирост продовольстви€ в колонии.";
-
 	ColonyUpgrades[UPGRADE_PIER].id = "Fishingpier";
 	ColonyUpgrades[UPGRADE_PIER].l1.name = "Fishingpier";
 	ColonyUpgrades[UPGRADE_PIER].level = 1;
@@ -43,7 +38,6 @@ void ColonyUpgradesInit()
 	ColonyUpgrades[UPGRADE_PIER].days = 3;
 	ColonyUpgrades[UPGRADE_PIER].requred.l1.population = 100;
 	ColonyUpgrades[UPGRADE_PIER].l1.text = "–ыболовецкие причалы увеличивают прирост продовольстви€ в колонии.";
-
 	ColonyUpgrades[UPGRADE_MILL].id = "Mill";
 	ColonyUpgrades[UPGRADE_MILL].l1.name = "Mill";
 	ColonyUpgrades[UPGRADE_MILL].level = 1;
@@ -58,7 +52,6 @@ void ColonyUpgradesInit()
 	ColonyUpgrades[UPGRADE_MILL].requred.l1.wheatfield = 1;
 	ColonyUpgrades[UPGRADE_MILL].requred.l1.population = 200;
 	ColonyUpgrades[UPGRADE_MILL].l1.text = "ћельница увеличивает прирост продовольстви€ в колонии.";
-
 	ColonyUpgrades[UPGRADE_SHIPYARD].id = "Shipyard";
 	ColonyUpgrades[UPGRADE_SHIPYARD].l1.name = "Low Shipyard";
 	ColonyUpgrades[UPGRADE_SHIPYARD].l2.name = "Middle Shipyard";
@@ -82,7 +75,6 @@ void ColonyUpgradesInit()
 	ColonyUpgrades[UPGRADE_SHIPYARD].l1.text = "ѕозвол€ет строить на колонии корабли вплоть до 5-го класса.";
 	ColonyUpgrades[UPGRADE_SHIPYARD].l2.text = "ѕозвол€ет строить на колонии корабли вплоть до 4-го класса.";
 	ColonyUpgrades[UPGRADE_SHIPYARD].l3.text = "ѕозвол€ет строить на колонии корабли вплоть до 3-го класса.";
-
 	ColonyUpgrades[UPGRADE_ACADEMY].id = "Academy";
 	ColonyUpgrades[UPGRADE_ACADEMY].l1.name = "Academy";
 	ColonyUpgrades[UPGRADE_ACADEMY].level = 1;
@@ -95,7 +87,6 @@ void ColonyUpgradesInit()
 	ColonyUpgrades[UPGRADE_ACADEMY].days = 10;
 	ColonyUpgrades[UPGRADE_ACADEMY].requred.l1.population = 1000;
 	ColonyUpgrades[UPGRADE_ACADEMY].l1.text = "јкадеми€ позвол€ет тренировать матросов и офицеров.";
-
 	ColonyUpgrades[UPGRADE_HUTS].id = "Huts";
 	ColonyUpgrades[UPGRADE_HUTS].l1.name = "Huts";
 	ColonyUpgrades[UPGRADE_HUTS].level = 1;
@@ -109,7 +100,6 @@ void ColonyUpgradesInit()
 	ColonyUpgrades[UPGRADE_HUTS].loyality = 0.2;//увеличение loyality в день
 	ColonyUpgrades[UPGRADE_HUTS].requred.l1.population = 750;
 	ColonyUpgrades[UPGRADE_HUTS].l1.text = "Ѕараки позвол€ют тренировать матросов и офицеров, а так же увеличивают ло€льность населени€.";
-
 	ColonyUpgrades[UPGRADE_STOREHOUSE].id = "Storehouse";
 	ColonyUpgrades[UPGRADE_STOREHOUSE].l1.name = "Storehouse";
 	ColonyUpgrades[UPGRADE_STOREHOUSE].level = 1;
@@ -122,7 +112,6 @@ void ColonyUpgradesInit()
 	ColonyUpgrades[UPGRADE_STOREHOUSE].requred.l1.loyality = 40;
 	ColonyUpgrades[UPGRADE_STOREHOUSE].requred.l1.population = 500;
 	ColonyUpgrades[UPGRADE_STOREHOUSE].l1.text = "—клады позвол€ют хранить большее количества товара в колонии.";
-
 	ColonyUpgrades[UPGRADE_FORT].id = "Fort";
 	ColonyUpgrades[UPGRADE_FORT].l1.name = "Low Fort";
 	ColonyUpgrades[UPGRADE_FORT].l2.name = "Middle Fort";
@@ -149,7 +138,6 @@ void ColonyUpgradesInit()
 	ColonyUpgrades[UPGRADE_FORT].l2.text = "ѕозвол€ет устанавливать на защитных укреплени€х колонии кульверины и пушки калибром до 36 фунтов.";
 	ColonyUpgrades[UPGRADE_FORT].l3.text = "ѕозвол€ет устанавливать на защитных укреплени€х колонии кульверины, мортиры и пушки калибром до 42 фунтов.";
 	ColonyUpgrades[UPGRADE_FORT].l4.text = "ѕозвол€ет устанавливать на защитных укреплени€х колонии кульверины, мортиры и пушки калибром до 48 фунтов.";
-
 	ColonyUpgrades[UPGRADE_CHURCH].id = "Church";
 	ColonyUpgrades[UPGRADE_CHURCH].l1.name = "Church";
 	ColonyUpgrades[UPGRADE_CHURCH].level = 1;
@@ -163,7 +151,6 @@ void ColonyUpgradesInit()
 	ColonyUpgrades[UPGRADE_CHURCH].requred.l1.loyality = 60;
 	ColonyUpgrades[UPGRADE_CHURCH].requred.l1.population = 800;
 	ColonyUpgrades[UPGRADE_CHURCH].l1.text = "÷ерковь увеличивает ло€льность населени€ колонии.";
-
 	ColonyUpgrades[UPGRADE_EXPEDITION].id = "Expedition";
 	ColonyUpgrades[UPGRADE_EXPEDITION].l1.name = "Expedition";
 	ColonyUpgrades[UPGRADE_EXPEDITION].level = 1;
@@ -175,7 +162,6 @@ void ColonyUpgradesInit()
 	ColonyUpgrades[UPGRADE_EXPEDITION].days = 10;
 	ColonyUpgrades[UPGRADE_EXPEDITION].requred.l1.population = 600;
 	ColonyUpgrades[UPGRADE_EXPEDITION].l1.text = "Ёкспедици€ позвол€ет определить есть ли на острове залежи золота или серебра.";
-
 	ColonyUpgrades[UPGRADE_GOLDMINES].id = "Goldmines";
 	ColonyUpgrades[UPGRADE_GOLDMINES].l1.name = "Goldmines";
 	ColonyUpgrades[UPGRADE_GOLDMINES].level = 1;
@@ -190,7 +176,6 @@ void ColonyUpgradesInit()
 	ColonyUpgrades[UPGRADE_GOLDMINES].requred.l1.population = 1000;
 	ColonyUpgrades[UPGRADE_GOLDMINES].requred.l1.loyality = 80;
 	ColonyUpgrades[UPGRADE_GOLDMINES].l1.text = "«олотые шахты позвол€ют колонии получать дополнительную прибыль.";
-
 	ColonyUpgrades[UPGRADE_SILVERMINES].id = "Silvermines";
 	ColonyUpgrades[UPGRADE_SILVERMINES].l1.name = "Silvermines";
 	ColonyUpgrades[UPGRADE_SILVERMINES].level = 1;
@@ -206,4 +191,3 @@ void ColonyUpgradesInit()
 	ColonyUpgrades[UPGRADE_SILVERMINES].requred.l1.loyality = 70;
 	ColonyUpgrades[UPGRADE_SILVERMINES].l1.text = "—еребр€нные шахты позвол€ют колонии получать дополнительную прибыль.";
 }
-

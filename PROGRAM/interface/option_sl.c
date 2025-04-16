@@ -1,4 +1,3 @@
-
 void OSL_WriteGameOption()
 {
 	object gopt;
@@ -6,7 +5,6 @@ void OSL_WriteGameOption()
 	GetRealOptions(&gopt);
 	SaveSavedOptions(&gopt);
 }
-
 void OSL_ReadGameOption()
 {
 	object gopt;
@@ -14,7 +12,6 @@ void OSL_ReadGameOption()
 	ReadSavedOptions(&gopt);
 	SetCurentOptions(&gopt);
 }
-
 void PrepareDefaultOption(ref optref)
 {   // belamour побережем уши )))
 	optref.volume.music = 0.1;
@@ -34,7 +31,6 @@ void PrepareDefaultOption(ref optref)
 	optref.alwaysrun = true;
 	optref.video.grassquantity = 0;
 	optref.seadetails = 1.0;
-	
 	SeaParametrs.MaxVertices = MaxVertices;
 	SeaParametrs.MaxIndices = MaxIndices;
 	SeaParametrs.GridStepX = GridStepX;
@@ -42,11 +38,9 @@ void PrepareDefaultOption(ref optref)
 	SeaParametrs.LodScale = LodScale;
 	SeaParametrs.MaxWaveDistance = MaxWaveDistance;
 }
-
 void GetRealOptions(ref optref)
 {
 	float ftmp1,ftmp2,ftmp3;
-
 	ftmp1 = stf(optref.volume.sound);
 	ftmp2 = stf(optref.volume.music);
 	ftmp3 = stf(optref.volume.dialog);
@@ -54,7 +48,6 @@ void GetRealOptions(ref optref)
 	optref.volume.sound = ftmp1;
 	optref.volume.music = ftmp2;
 	optref.volume.dialog = ftmp3;
-
 	/*
 	optref.arcademode.bArcadeSails = bArcadeSails;
 	optref.arcademode.bArcadeShipSpeed = bArcadeShipSpeed;
@@ -65,45 +58,37 @@ void GetRealOptions(ref optref)
 	optref.arcademode.bArcadeFencingEquip = bArcadeFencingEquip;
 	optref.arcademode.bArcadeSailTo = bArcadeSailTo;
 	*/
-
 	optref.cameramode.follow_on = !locCameraEnableSpecialMode;
-
 	optref.video.grassquantity = iGrassQuality;
 	if( CheckAttribute(&InterfaceStates,"SeaDetails") ) {
 		optref.seadetails = stf(InterfaceStates.SeaDetails);
 	}
-
 	if( CheckAttribute(&InterfaceStates,"InvertCameras") ) {
 		optref.cameramode.InvertCameras = sti(InterfaceStates.InvertCameras);
 	} else {
 		optref.cameramode.InvertCameras = false;
 	}
-
 	if( CheckAttribute(&InterfaceStates,"ShowBattleMode") ) {
 		optref.cameramode.ShowBattleMode = sti(InterfaceStates.ShowBattleMode);
 	} else {
 		optref.cameramode.ShowBattleMode = false;
 	}
-
 	if( CheckAttribute(&InterfaceStates,"EnabledAutoSaveMode") ) {
 		optref.cameramode.EnabledAutoSaveMode = sti(InterfaceStates.EnabledAutoSaveMode);
 	} else {
 		optref.cameramode.EnabledAutoSaveMode = true;
 	}
-
 	if( CheckAttribute(&InterfaceStates,"EnabledQuestsMarks") ) {
 		optref.cameramode.EnabledQuestsMarks = sti(InterfaceStates.EnabledQuestsMarks);
 	} else {
 		optref.cameramode.EnabledQuestsMarks = true;
 	}
-
 	if( CheckAttribute(&InterfaceStates,"EnabledShipMarks") ) {
 		optref.cameramode.EnabledShipMarks = sti(InterfaceStates.EnabledShipMarks);
 	} else {
 		optref.cameramode.EnabledShipMarks = true;
 	}
 	bDrawBars = sti(optref.cameramode.EnabledShipMarks);
-
 	if( CheckAttribute(&InterfaceStates,"SimpleSea") ) {
 		optref.cameramode.SimpleSeaMode = sti(InterfaceStates.SimpleSea);
 	} else {
@@ -115,25 +100,21 @@ void GetRealOptions(ref optref)
 	} else {
 		optref.cameramode.DIRECTSAILMode = false;
 	}
-	
 	if( CheckAttribute(&InterfaceStates,"CREWONDECK") ) {
 		optref.cameramode.CREWONDECKMode = sti(InterfaceStates.CREWONDECK);
 	} else {
 		optref.cameramode.CREWONDECKMode = true;
 	}
-	
 	if( CheckAttribute(&InterfaceStates,"CAMERASWING") ) {
 		optref.cameramode.CAMERASWINGMode = sti(InterfaceStates.CAMERASWING);
 	} else {
 		optref.cameramode.CAMERASWINGMode = true;
 	}
-	
 	if( CheckAttribute(&InterfaceStates,"ENHANCEDSAILING") ) {
 		optref.cameramode.ENHANCEDSAILINGMode = sti(InterfaceStates.ENHANCEDSAILING);
 	} else {
 		optref.cameramode.ENHANCEDSAILINGMode = false;
 	}
-	
 	if( CheckAttribute(&InterfaceStates,"ROTATESKY") ) {
 		optref.cameramode.ROTATESKYMode = sti(InterfaceStates.ROTATESKY);
 	} else {
@@ -146,7 +127,6 @@ void GetRealOptions(ref optref)
 	}
 	// <-- belamour
 	GetControlsOptions(optref);
-
 	// mouse
 	if( CheckAttribute(&InterfaceStates,"mouse.x_sens") ) {
 		optref.mouse.x_sensitivity = InterfaceStates.mouse.x_sens;
@@ -174,7 +154,6 @@ void GetRealOptions(ref optref)
 	} else {
 		optref.video.brightness = 0.0;
 	}
-	
 	// Warship 07.07.09 Эффект свечения
 	if(CheckAttribute(&InterfaceStates, "GlowEffect"))
 	{
@@ -184,14 +163,12 @@ void GetRealOptions(ref optref)
 	{
 		optref.GlowEffect = 50;
 	}
-	
 	SeaParametrs.MaxVertices = MaxVertices;
 	SeaParametrs.MaxIndices = MaxIndices;
 	SeaParametrs.GridStepX = GridStepX;
 	SeaParametrs.GridStepPC = GridStepPC;
 	SeaParametrs.MaxWaveDistance = MaxWaveDistance;
 	SeaParametrs.LodScale = LodScale;
-
 	// always run
 	if( CheckAttribute(&InterfaceStates,"alwaysrun") ) {
 		optref.alwaysrun = InterfaceStates.alwaysrun;
@@ -208,11 +185,9 @@ void GetRealOptions(ref optref)
 		optref.SEACAMPERSP = 25;
 	}
 }
-
 void SetCurentOptions(ref optref)
 {
 	SendMessage(&sound,"lfff", MSG_SOUND_SET_MASTER_VOLUME, stf(optref.volume.sound),	stf(optref.volume.music),	stf(optref.volume.dialog));
-
 	/*bArcadeSails = sti(optref.arcademode.bArcadeSails);
 	bArcadeShipSpeed = sti(optref.arcademode.bArcadeShipSpeed);
 	bArcadeCannonsReload = sti(optref.arcademode.bArcadeCannonsReload);
@@ -223,38 +198,32 @@ void SetCurentOptions(ref optref)
 	bArcadeSailTo = sti(optref.arcademode.bArcadeSailTo);
 	*/
 	locCameraEnableSpecialMode = !sti(optref.cameramode.follow_on);
-	
 	/*
 	SeaMaxVertices
 	SeaMaxIndices
 	SeaGridStep
 	SeaMaxWaveDistance
 	*/
-
 	if( CheckAttribute(optref,"cameramode.ShowBattleMode") ) {
 		InterfaceStates.ShowBattleMode = optref.cameramode.ShowBattleMode;
 	} else {
 		InterfaceStates.ShowBattleMode = false;
 	}
-
 	if( CheckAttribute(optref,"cameramode.EnabledAutoSaveMode") ) {
 		InterfaceStates.EnabledAutoSaveMode = optref.cameramode.EnabledAutoSaveMode;
 	} else {
 		InterfaceStates.EnabledAutoSaveMode = true;
 	}
-
 	if( CheckAttribute(optref,"cameramode.EnabledQuestsMarks") ) {
 		InterfaceStates.EnabledQuestsMarks = optref.cameramode.EnabledQuestsMarks;
 	} else {
 		InterfaceStates.EnabledQuestsMarks = true;
 	}
-
 	if( CheckAttribute(optref,"cameramode.EnabledShipMarks") ) {
 		InterfaceStates.EnabledShipMarks = optref.cameramode.EnabledShipMarks;
 	} else {
 		InterfaceStates.EnabledShipMarks = true;
 	}
-
 	if( CheckAttribute(optref,"cameramode.SimpleSeaMode") ) {
 		InterfaceStates.SimpleSea = optref.cameramode.SimpleSeaMode;
 	} else {
@@ -266,25 +235,21 @@ void SetCurentOptions(ref optref)
 	} else {
 		InterfaceStates.DIRECTSAIL = false;
 	}
-	
 	if( CheckAttribute(optref,"cameramode.CREWONDECKMode") ) {
 		InterfaceStates.CREWONDECK = optref.cameramode.CREWONDECKMode;
 	} else {
 		InterfaceStates.CREWONDECK = true; // заполнить чекбокс
 	}
-	
 	if( CheckAttribute(optref,"cameramode.CAMERASWINGMode") ) {
 		InterfaceStates.CAMERASWING = optref.cameramode.CAMERASWINGMode;
 	} else {
 		InterfaceStates.CAMERASWING = true;
 	}
-	
 	if( CheckAttribute(optref,"cameramode.ENHANCEDSAILINGMode") ) {
 		InterfaceStates.ENHANCEDSAILING = optref.cameramode.ENHANCEDSAILINGMode;
 	} else {
 		InterfaceStates.ENHANCEDSAILING = false;
 	}
-	
 	if( CheckAttribute(optref,"cameramode.ROTATESKYMode") ) {
 		InterfaceStates.ROTATESKY = optref.cameramode.ROTATESKYMode;
 	} else {
@@ -295,7 +260,6 @@ void SetCurentOptions(ref optref)
 	} else {
 		InterfaceStates.DYNAMICLIGHTS = false;
 	}
-
 	// mouse
 	if( CheckAttribute(optref,"cameramode.InvertCameras") ) {
 		InterfaceStates.InvertCameras = optref.cameramode.InvertCameras;
@@ -328,7 +292,6 @@ void SetCurentOptions(ref optref)
 	} else {
 		InterfaceStates.video.brightness = 0.0;
 	}
-	
 	// Warship 07.07.09 Эффект свечения
 	if(CheckAttribute(optref, "GlowEffect"))
 	{
@@ -338,29 +301,23 @@ void SetCurentOptions(ref optref)
 	{
 		InterfaceStates.GlowEffect = 50;
 	}
-	
 	SetGlowParams(1.0, sti(InterfaceStates.GlowEffect), 2);
-	
 	if( CheckAttribute(optref,"video.grassquantity") ) {
 		iGrassQuality = sti(optref.video.grassquantity);
 	}
 	if( CheckAttribute(optref,"seadetails") ) {
 		InterfaceStates.SeaDetails = stf(optref.seadetails);
 	}
-
 	XI_SetColorCorrection(stf(InterfaceStates.video.contrast),stf(InterfaceStates.video.gamma),stf(InterfaceStates.video.brightness));
-
 	aref arControls;
 	makearef(arControls,optref.controls);
 	RestoreKeysFromOptions(arControls);
-
 	// always run
 	if( CheckAttribute(&optref,"alwaysrun") ) {
 		InterfaceStates.alwaysrun = optref.alwaysrun;
 	} else {
 		InterfaceStates.alwaysrun = false;
 	}
-
 	ControlsMakeInvert();
 	SetRealMouseSensitivity();
 	// belamour перспектива морской камеры
@@ -373,7 +330,6 @@ void SetCurentOptions(ref optref)
 		InterfaceStates.SEACAMPERSP = 25;
 	}
 }
-
 void ReadSavedOptions(ref gopt)
 {
 	string sFileName = "options";
@@ -382,7 +338,6 @@ void ReadSavedOptions(ref gopt)
 	}
 	SendMessage(&GameInterface, "lsa", MSG_INTERFACE_LOADOPTIONS, sFileName, gopt);
 }
-
 void SaveSavedOptions(ref gopt)
 {
 	string sFileName = "options";
@@ -391,17 +346,14 @@ void SaveSavedOptions(ref gopt)
 	}
 	SendMessage(&GameInterface, "lsa", MSG_INTERFACE_SAVEOPTIONS, sFileName, gopt);
 }
-
 void GetControlsOptions(ref optref)
 {
 	int ng,qg, nc,qc;
 	aref arIn, arOut, arGrp, arCntrl;
 	string grName, cntrlName;
-
 	makearef(arOut,objControlsState.keygroups);
 	optref.controls = true;
 	makearef(arIn,optref.controls);
-
 	qg = GetAttributesNum(arOut);
 	for(ng=0; ng<qg; ng++)
 	{

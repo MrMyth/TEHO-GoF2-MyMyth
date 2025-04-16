@@ -8,7 +8,6 @@ void ProcessCommonDialogEvent(ref NPChar, aref Link, aref NextDiag)
                           "Look, if you have nothing to tell me about the port's matters then don't bother me with your questions.", "block", 1, npchar, Dialog.CurrentNode);
 			link.l1 = HeroStringReactionRepeat(RandPhraseSimple("I have changed my mind.", "I've got nothing to talk about."), "Nevermind.", "Indeed, the third time already...", "Sorry, but I'm not interested in the port's matters for now.", npchar, Dialog.CurrentNode);
 			link.l1.go = "exit";
-
 			//работорговец
 			if (pchar.questTemp.Slavetrader == "EscapeSlaveVillemstad_P")
             {
@@ -22,14 +21,12 @@ void ProcessCommonDialogEvent(ref NPChar, aref Link, aref NextDiag)
     			link.l1.go = "SeekTradeFleut";
             }
 		break;
-
 		//работорговец
 		case "EscapeSlave_Villemstad_P1":
 				dialog.text = "Hm... And why are you interested in that?";
 				link.l1 = "I am here by the order of Mathias Beck, the governor. I have all reasons to suspect runaway slaves for disappearing of the ship. So I ask you to assist me in every possible way in my searches.";
 				link.l1.go = "EscapeSlave_Villemstad_P2";
 		break;
-		
 		case "EscapeSlave_Villemstad_P2":
 				dialog.text = "I see. But unfortunately, I can't help you. Bark named '" + pchar.questTemp.Slavetrader.ShipName + "' disappeared at night, no one saw anything. The watchman disappeared too and left no trail.\nThe authorities tried to find it while the trail was still warm, but they've failed, to be honest, there wasn't any trail left. The city was in panic, people expected the slaves' attack...";
 				link.l1 = "Well, there are really not much information... But thanks for that anyway. Goodbye.";
@@ -44,7 +41,6 @@ void ProcessCommonDialogEvent(ref NPChar, aref Link, aref NextDiag)
 			link.l1 = "Thanks!";
 			link.l1.go = "SeekTradeFleut_1";
 		break;
-		
 		case "SeekTradeFleut_1":
 			DialogExit();
 			pchar.questTemp.HWIC.Self = "FleutOnTrinidad";
@@ -56,4 +52,3 @@ void ProcessCommonDialogEvent(ref NPChar, aref Link, aref NextDiag)
 	}
 	UnloadSegment(NPChar.FileDialog2);  // если где-то выход внутри switch  по return не забыть сделать анлод
 }
-

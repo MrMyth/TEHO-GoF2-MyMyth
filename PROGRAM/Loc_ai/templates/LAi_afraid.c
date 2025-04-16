@@ -1,7 +1,4 @@
-
-
 #define LAI_TMPL_AFRAID	"afraid"
-
 void LAi_tmpl_afraid_SetAfraidCharacter(aref chr, aref afraid, bool canMove)
 {
 	DeleteAttribute(chr, "chr_ai.tmpl");
@@ -10,14 +7,12 @@ void LAi_tmpl_afraid_SetAfraidCharacter(aref chr, aref afraid, bool canMove)
 	chr.chr_ai.tmpl.canmove = canMove;
 	LAi_tmpl_afraid_updatetemplate(chr);
 }
-
 bool LAi_tmpl_afraid_IsNoActive(aref chr)
 {
 	if(chr.chr_ai.tmpl.state == "wait") return true;
 	if(chr.chr_ai.tmpl.state == "stay") return true;
 	return false;
 }
-
 bool LAi_tmpl_afraid_InitTemplate(aref chr)
 {
 	SendMessage(&chr, "lsl", MSG_CHARACTER_EX_MSG, "LockFightMode", false);
@@ -53,7 +48,6 @@ bool LAi_tmpl_afraid_InitTemplate(aref chr)
 	}
 	return true;
 }
-
 //Процессирование шаблона персонажа
 void LAi_tmpl_afraid_CharacterUpdate(aref chr, float dltTime)
 {
@@ -201,100 +195,82 @@ void LAi_tmpl_afraid_CharacterUpdate(aref chr, float dltTime)
 		CharacterTurnByChr(chr, &Characters[idx]);
 	}
 }
-
 //Персонаж выполнил команду  go to point
 void LAi_tmpl_afraid_EndGoToPoint(aref chr)
 {
 	chr.chr_ai.tmpl.state = "stay";
 	LAi_tmpl_afraid_updatetemplate(chr);
 }
-
 //Персонаж провалил команду  go to point
 void LAi_tmpl_afraid_FailureGoToPoint(aref chr)
 {
 	chr.chr_ai.tmpl.state = "stay";
 	LAi_tmpl_afraid_updatetemplate(chr);
 }
-
-
 //Персонаж выполнил команду  run to point
 void LAi_tmpl_afraid_EndRunToPoint(aref chr)
 {
 	chr.chr_ai.tmpl.state = "stay";
 	LAi_tmpl_afraid_updatetemplate(chr);
 }
-
 //Персонаж провалил команду  run to point
 void LAi_tmpl_afraid_FailureRunToPoint(aref chr)
 {
 	chr.chr_ai.tmpl.state = "stay";
 	LAi_tmpl_afraid_updatetemplate(chr);
 }
-
 //Персонаж не может добраться до точки назначения
 void LAi_tmpl_afraid_BusyPos(aref chr, float x, float y, float z)
 {
 	chr.chr_ai.tmpl.state = "stay";
 	LAi_tmpl_afraid_updatetemplate(chr);
 }
-
 //Персонаж начал перемещение за другим
 void LAi_tmpl_afraid_FollowGo(aref chr)
 {
 	LAi_tmpl_afraid_updatetemplate(chr);
 }
-
 //Персонаж начал дошёл до другого персонажа
 void LAi_tmpl_afraid_FollowStay(aref chr)
 {
 	LAi_tmpl_afraid_updatetemplate(chr);
 }
-
 //Персонаж провалил команду  follow character
 void LAi_tmpl_afraid_FailureFollow(aref chr)
 {
 	LAi_tmpl_afraid_updatetemplate(chr);
 }
-
-
 //Персонаж начал перемещение за другим
 void LAi_tmpl_afraid_FightGo(aref chr)
 {
 	LAi_tmpl_afraid_updatetemplate(chr);
 }
-
 //Персонаж начал дошёл до другого персонажа
 void LAi_tmpl_afraid_FightStay(aref chr)
 {
 	LAi_tmpl_afraid_updatetemplate(chr);
 }
-
 //Персонаж провалил команду  Fight
 void LAi_tmpl_afraid_FailureFight(aref chr)
 {
 	LAi_tmpl_afraid_updatetemplate(chr);
 }
-
 //Можно ли стрелять
 bool LAi_tmpl_afraid_IsFire(aref chr)
 {	
 	return false;
 }
-
 //Можно ли использовать оружие
 bool LAi_tmpl_afraid_IsFight(aref chr)
 {
 	return false;
 }
-
-
 //Персонаж выполнил команду  escape
 void LAi_tmpl_afraid_EndEscape(aref chr)
 {
 	chr.chr_ai.tmpl.state = "stay";
 	LAi_tmpl_afraid_updatetemplate(chr);
 }
-
 //Персонаж скользит вдоль патча
 void LAi_tmpl_afraid_EscapeSlide(aref chr)
 {
@@ -313,36 +289,27 @@ void LAi_tmpl_afraid_EscapeSlide(aref chr)
 	}
 	LAi_tmpl_afraid_updatetemplate(chr);
 }
-
 //Персонаж провалил команду  escape
 void LAi_tmpl_afraid_FailureEscape(aref chr)
 {
 	chr.chr_ai.tmpl.state = "stay";
 	LAi_tmpl_afraid_updatetemplate(chr);
 }
-
-
 //Персонаж толкается с другими персонажами
 void LAi_tmpl_afraid_ColThreshold(aref chr)
 {
 	LAi_tmpl_afraid_updatetemplate(chr);
 }
-
-
 //Персонаж закончил проигрывать анимацию
 void LAi_tmpl_afraid_EndAction(aref chr)
 {
 	LAi_tmpl_afraid_updatetemplate(chr);
 }
-
-
 //Персонажа просят освободить место
 void LAi_tmpl_afraid_FreePos(aref chr, aref who)
 {
 	LAi_tmpl_afraid_updatetemplate(chr);
 }
-
-
 void LAi_tmpl_afraid_updatetemplate(aref chr)
 {
 	if(sti(chr.chr_ai.tmpl.canmove))
@@ -391,7 +358,6 @@ void LAi_tmpl_afraid_updatetemplate(aref chr)
 		}
 	}
 }
-
 //Найти дистанцию до преследующего персонажа
 float LAi_tmpl_afraid_DistByChr(aref chr)
 {
@@ -402,5 +368,3 @@ float LAi_tmpl_afraid_DistByChr(aref chr)
 	if(!GetCharacterDistByChr3D(chr, &Characters[idx], &dist)) dist = -1.0;
 	return dist;
 }
-
-

@@ -5,13 +5,11 @@ bool IsQuestUsedItem(string itmID)
 	if( CheckAttribute(arItm,"price") && sti(arItm.price)>0 ) return false;
 	return true;
 }
-
 void DoCharacterUsedItem(ref chref, string itmID)
 {
 	aref arItm;
 	if( Items_FindItem(itmID,&arItm)<0 ) return;
 	TakeItemFromCharacter(chref,itmID);
-
 	 // Warship 13.06.09 fix - если только отравлен, а жизни полные (а такое бывает), то нечего и строку в лог выводить об прибавлении жизней
 	if(CheckAttribute(arItm,"potion.health") && LAi_GetCharacterHP(chref) < LAi_GetCharacterMaxHP(chref))
 	{
@@ -25,7 +23,6 @@ void DoCharacterUsedItem(ref chref, string itmID)
 			LAi_UseHealthBottleSpeed(chref, stf(arItm.potion.health.speed));
 		}
 	}
-	
 	// Warship 13.06.09 fix - если не отравлен, то нечего и строку в лог выводить
 	if(CheckAttribute(arItm,"potion.antidote") && LAi_IsPoison(chref) && !CheckAttribute(chref, "GenQuest.Hotwater")) // Addon 2016-1 Jason Пиратская линейка
 	{
@@ -37,13 +34,11 @@ void DoCharacterUsedItem(ref chref, string itmID)
 			Log_SetStringToLog(GetFullName(chref) + XI_ConvertString("are cured from poison") );
 		}
 	}
-	
 	// ugeen --> плата в здоровье за пользование лечилками
 	if(CheckAttribute(arItm,"potion.penalty") && sti(chref.index) == GetMainCharacterIndex())
 	{
 		AddCharacterHealth(chref, -stf(arItm.potion.penalty));
 	}
-	
 	//navy --> алкоголь
 	if (CheckAttribute(arItm, "potion.drunk"))
 	{
@@ -60,12 +55,10 @@ void DoCharacterUsedItem(ref chref, string itmID)
 		PlaySound(arItm.potion.sound);
 	}
 }
-
 float MinHealthPotionForCharacter(ref chref)
 {
 	float ftmp;
 	bool isFinded = false;
-
 	for(int n=0; n<ITEMS_QUANTITY; n++)
 	{
 		if( CheckAttribute(&Items[n],"potion") )
@@ -91,13 +84,11 @@ float MinHealthPotionForCharacter(ref chref)
 	if(!isFinded) return 0.0;
 	return ftmp;
 }
-
 string FindHealthForCharacter(ref chref,float fHealth)
 {
 	string sret = "";
 	float fdelta = fHealth + 100.0;
 	float ftmp;
-
 	for(int n=0; n<ITEMS_QUANTITY; n++)
 	{
 		if( CheckAttribute(&Items[n],"potion") )
@@ -118,10 +109,8 @@ string FindHealthForCharacter(ref chref,float fHealth)
 			}
 		}
 	}
-
 	return sret;
 }
-
 int FindPotionFromChr(ref chref, ref arFind, int startIdx)
 {
 	int i;
@@ -137,7 +126,6 @@ int FindPotionFromChr(ref chref, ref arFind, int startIdx)
 	}
 	return -1;
 }
-
 int UseBestPotion(ref chref, bool needAntidote)
 {
 	int i;
@@ -152,13 +140,11 @@ int UseBestPotion(ref chref, bool needAntidote)
 	{
 		return -1;
 	}
-	
 	aref arItm;
 	for(i=1; i<ITEMS_QUANTITY; i++)
 	{
 		makearef(arItm,Items[i]);
 		bValidPot = false;
-
 		if (!needAntidote && CheckAttribute(arItm,"potion.health") && !CheckAttribute(arItm,"potion.antidote")) 
 		{
 			bValidPot = true;
@@ -176,7 +162,6 @@ int UseBestPotion(ref chref, bool needAntidote)
 				newPotionHealAmt = arItm.potion.health;
 			else
 				newPotionHealAmt = 0;
-								
 			if (potionTooGood) 
 			{
 				if (newPotionHealAmt < curPotionHealAmt) 
@@ -228,13 +213,11 @@ int UseBestPotion(ref chref, bool needAntidote)
 		else return 0;
 	}
 }
-
 int FindQuestUsableItem(ref arFind, int startIdx)
 {
 	int i;
 	aref arItm;
 	bool bSeaInterface = bSeaActive && !bAbordageStarted;
-
 	if(startIdx<0) startIdx=0;
 	for(i=startIdx; i<ITEMS_QUANTITY; i++)
 	{
@@ -248,10 +231,8 @@ int FindQuestUsableItem(ref arFind, int startIdx)
 			}
 		}
 	}
-
 	return -1;
 }
-
 bool EnablePotionUsing(ref mc, aref arItm)
 {
 	if( CheckAttribute(arItm,"potion.health") ) {
@@ -259,10 +240,8 @@ bool EnablePotionUsing(ref mc, aref arItm)
 			return true;
 		}
 	}
-	
 	return false;
 }
-
 // Warship 13.06.09 Для противоядий
 bool EnableAntidoteUsing(ref _char, aref _item)
 {
@@ -270,29 +249,23 @@ bool EnableAntidoteUsing(ref _char, aref _item)
 	{
 		return true;
 	}
-	
 	return false;
 }
-
 bool FindCharacterAntidote(ref _char, ref _itemId)
 {
 	int itemIndex;
 	ref item;
-	
 	for(itemIndex = 0; itemIndex < ITEMS_QUANTITY; itemIndex++)
 	{
 		item = &Items[itemIndex];
-		
 		if(EnableAntidoteUsing(_char, item))
 		{
 			_itemID = item.ID;
 			return true;
 		}
 	}
-	
 	return false;
 }
-
 int FindItem(string sItemID)
 {
 /*
@@ -308,7 +281,6 @@ int FindItem(string sItemID)
 	// Warship 07.07.09 Перевел на движковую функцию - по-идее, так должно работать быстрее
 	return NativeFindCharacter(&Items, sItemID);
 }
-
 /////////////////////////////////////////////////////////////////////////////////////////////////////////////
 //	Warship 08.05.09 НОВАЯ СИСТЕМА ПРЕДМЕТОВ -->
 //      Ugeen --> 10.02.10 добавлена первичная генерация предметов и выбор из массива сгенерированных предметов
@@ -317,7 +289,6 @@ int FindItem(string sItemID)
 void GenerateGenerableItems()
 {
 	ref itemRef;
-
 	for(int i = 0; i < ITEMS_QUANTITY; i++)
 	{
 		itemRef = &Items[i];	
@@ -332,18 +303,15 @@ void GenerateGenerableItems()
 		}		
 	}
 }
-
 //ugeen --> вернем случайный ID сгенерированного зараннее предмета
 string GetGeneratedItem(string _itemId)
 {
 	int itemsQty = 0;
 	String generatedItems[TOTAL_ITEMS];
-	
 	if(!IsGenerableItem(_itemId)) // Генерящийся ли предмет
 	{
 		return _itemID;
 	}
-	
 	for(int i = ITEMS_QUANTITY; i < TOTAL_ITEMS; i++)
 	{
 		if(CheckAttribute(&Items[i], "DefItemID") && Items[i].DefItemID == _itemId)
@@ -352,15 +320,12 @@ string GetGeneratedItem(string _itemId)
 			itemsQty++;
 		}
 	}
-		
 	if(itemsQty == 0)
 	{
 		return _itemId; // Ничего не нашлось
 	}
-		
 	return generatedItems[rand(itemsQty - 1)];
 }
-
 //ugeen --> вернем  ID сгенерированного зараннее предмета с наилучшими характеристиками
 string GetBestGeneratedItem(string _itemId)
 {
@@ -370,30 +335,25 @@ string GetBestGeneratedItem(string _itemId)
 	bool bOk;
 	int itemIndex1, itemIndex2; 
 	ref rItem1, rItem2;
-
 	if(!IsGenerableItem(_itemId)) // Генерящийся ли предмет
 	{
 		return _itemID;
 	}	
-
 	for(int i = ITEMS_QUANTITY; i < TOTAL_ITEMS; i++)
 	{
 		if(CheckAttribute(&Items[i], "DefItemID") && Items[i].DefItemID == _itemId && Items[i].groupID == BLADE_ITEM_TYPE)
 		{
 			generatedItems[itemsQty] = Items[i].ID;
-			
 			itemIndex1 = GetItemIndex(generatedItems[itemsQty]);
 			rItem1 = &Items[itemIndex1];			
 //			trace("unsorted : blade.id : " + rItem1.id + " blade.Attack : " + rItem1.Attack + " blade.balance : " + rItem1.balance + " blade.Weight : " + rItem1.Weight);			
 			itemsQty++;					
 		}
 	}
-	
 	if(itemsQty == 0)
 	{
 		return _itemId; // Ничего не нашлось
 	}
-
 	// сортируем элементы массива
 	bOk = true;
 	while (bOk)
@@ -403,10 +363,8 @@ string GetBestGeneratedItem(string _itemId)
 		{
 			itemIndex1 = GetItemIndex(generatedItems[j]);
 			itemIndex2 = GetItemIndex(generatedItems[j + 1]);
-		
 			rItem1 = &Items[itemIndex1];
 			rItem2 = &Items[itemIndex2];
-		
 			if( stf(rItem1.Attack) > stf(rItem2.Attack) )
 			{
 				tmpItem = generatedItems[j];
@@ -439,18 +397,15 @@ string GetBestGeneratedItem(string _itemId)
 */	
 	return generatedItems[itemsQty - 1];
 }
-
 //  вернем определенный ID сгенерированного предмета
 string GetGeneratedItemNum(string _itemId, int Num)
 {
 	int itemsQty = 0;
 	String generatedItems[TOTAL_ITEMS];
-	
 	if(!IsGenerableItem(_itemId)) // Генерящийся ли предмет
 	{
 		return _itemID;
 	}
-	
 	for(int i = ITEMS_QUANTITY; i < TOTAL_ITEMS; i++)
 	{
 		if(CheckAttribute(&Items[i], "DefItemID") && Items[i].DefItemID == _itemId)
@@ -459,31 +414,25 @@ string GetGeneratedItemNum(string _itemId, int Num)
 			itemsQty++;
 		}
 	}
-		
 	if(itemsQty == 0 || itemsQty < Num)
 	{
 		return _itemId; // Ничего не нашлось
 	}
-				
 	return generatedItems[itemsQty + Num];
 }
-
 /*
 void SetItemPrice(String _itemId)
 {
 	int priceMod;
 	ref item = &Items[GetItemIndex(_itemId)];
-	
 	switch(item.FencingType)
 	{
 		case "FencingLight": // Легкое оружие
 			priceMod = 4;
 		break;
-		
 		case "Fencing": // Среднее оружие
 			priceMod = 5;
 		break;
-		
 		case "FencingHeavy": // Тяжелое оружие
 			priceMod = 7;
 		break;
@@ -494,7 +443,6 @@ void SetItemPrice(String _itemId)
 	}	
 }
 */
-
 // Создадим предмет, вернет АйДи нового предмета
 String GenerateItem(String _itemId)
 {
@@ -504,12 +452,10 @@ String GenerateItem(String _itemId)
 	float MaxAttack = 0.0;
 	ref item, realItem;
 	String generatedItems[TOTAL_ITEMS];
-	
 	if(!IsGenerableItem(_itemId)) // Генерящийся ли предмет
 	{
 		return _itemID;
 	}
-	
 	if(itemIndex == -1) // Нету свободных слотов - вернем случайный существующий
 	{
 		for(i = ITEMS_QUANTITY; i < TOTAL_ITEMS; i++)
@@ -520,21 +466,16 @@ String GenerateItem(String _itemId)
 				itemsQty++;
 			}
 		}
-		
 		if(itemsQty == 0)
 		{
 			return _itemId; // Ничего не нашлось
 		}
-		
 		return generatedItems[rand(itemsQty - 1)];
 	}
-	
 	defItemIndex = GetItemIndex(_itemId);
 	item = &Items[defItemIndex];
 	realItem = &Items[itemIndex];
-	
 	CopyAttributes(realItem, item); // Копируем аттрибуты
-	
 	switch (realItem.FencingType) 
 	{
 		case "FencingL" :
@@ -550,9 +491,7 @@ String GenerateItem(String _itemId)
 			MaxAttack			= FencingH_MaxAttack;
 		break;
 	}
-	
 	realItem.Balance = fRandSmall(2.0);
-	
 	switch (sti(realItem.quality))
 	{
 		case B_POOR :
@@ -576,7 +515,6 @@ String GenerateItem(String _itemId)
 			}
 		break;
 	}
-	
 	switch (realItem.FencingType) 
 	{
 		case "FencingL" :
@@ -598,16 +536,13 @@ String GenerateItem(String _itemId)
 			}	
 		break;
 	}	
-
 	realItem.ID = _itemId + "_" + itemIndex; // Новый АйДи предмету
 	realItem.Index = itemIndex; // Новый индекс
 	realItem.Generated = true; // Сгенерированный предмет
 	realItem.DefItemID = _itemId; // Запомним АйДи и индекс начального предмета
 	realItem.DefItemIndex = defItemIndex;
-	
 	return realItem.ID;
 }
-
 // Найдем первый пустой слот для предмета
 int FindFirstEmptyItem()
 {
@@ -620,27 +555,21 @@ int FindFirstEmptyItem()
 	}	
 	return -1;
 }
-
 // Проверим на пустые предметы и удалим их
 // Метод выполняется долго - лучше вызывать его при переходах между локациями (как щас и сделано)
 void RefreshGeneratedItems()
 {
 	ref item;
 	int curLastIndex = FindFirstEmptyItem();
-
 	for(int i = ITEMS_QUANTITY; i < TOTAL_ITEMS; i++)
 	{
 		item = &Items[i];
-		
 		if(!CheckAttribute(item, "ID")) continue; // Пустой слот
-		
 		RefreshGeneratedItem(item.ID);
 	}
-	
 	trace("Произведено удаление пустых предметов");
 	trace("Первый свободный элемент (было/стало) == (" + curLastIndex + "/"+ FindFirstEmptyItem() + ")");
 }
-
 // Метод рефреша для конкретного предмета. Вернет булево значение - удалился предмет или нет
 bool RefreshGeneratedItem(String _itemID)
 {
@@ -648,26 +577,20 @@ bool RefreshGeneratedItem(String _itemID)
 	int itemIndex = GetItemIndex(_itemID);
 	String curSimpleBox, curPrivateBox;
 	ref reference;
-	
 	if(itemIndex == -1) return false;
-
 	for(i = 0; i < nLocationsNum; i++)
 	{
 		reference = &Locations[i];
-		
 		for(j = 1; j < MAX_HANDLED_BOXES; j++)
 		{
 			curSimpleBox = "box" + j;
 			curPrivateBox = "private" + j;
-			
 			if(!CheckAttribute(reference, curSimpleBox) && !CheckAttribute(reference, curPrivateBox)) break;
-			
 			// Симпл боксы
 			if(CheckAttribute(reference, curSimpleBox + ".Items." + _itemID))
 			{
 				return false;
 			}
-			
 			// Приваты
 			if(CheckAttribute(reference, curPrivateBox + ".Items." + _itemID))
 			{
@@ -675,58 +598,46 @@ bool RefreshGeneratedItem(String _itemID)
 			}
 		}
 	}
-	
 	for(i = 0; i < MAX_CHARACTERS; i++)
 	{
 		reference = &Characters[i];
-			
 		// Проверка на торговца, у которого уже можно отобрать предметы
 		if(CheckAttribute(reference, "Merchant") && CheckNPCQuestDate(reference, "Item_date"))
 		{
 			DeleteAttribute(reference, "items");
 			continue;
 		}
-		
 		if(CheckAttribute(reference, "Items." + _itemID))
 		{
 			return false;
 		}
 	}
-		
 //	DeleteAttribute(&Items[itemIndex], ""); // Потрем все аттрибуты
 	return true;
 }
-
 // Проверка, уникален ли каждый предмет "серии", или же идентичен
 bool IsGenerableItem(String _itemID)
 {
 	int itemIndex = GetItemIndex(_itemID);
 	ref itemRef;
-	
 	if(itemIndex == -1)
 	{
 		return false;
 	}
-	
 	itemRef = &Items[itemIndex];
-	
 	if(CheckAttribute(itemRef, "Generation") && !CheckAttribute(itemRef, "Generated"))
 	{
 		return true;
 	}
-	
 	return false;
 }
-
 string SelectGeneratedItem(string TargetGroup, string Quality, string BladeType)
 {
 	ref item;
 	int itemsQty = 0;
 	string generatedItems[TOTAL_ITEMS];
 	bool bOk1, bOk2, bOk3;
-	
 	if(TargetGroup == "" && Quality == "" && BladeType == "") return "";
-	
 	for(int i = 0; i < ITEMS_QUANTITY; i++)
 	{
 		item = &Items[i];
@@ -735,7 +646,6 @@ string SelectGeneratedItem(string TargetGroup, string Quality, string BladeType)
 			bOk1 = item.target == TargetGroup || TargetGroup == "";
 			bOk2 = item.quality == Quality || Quality == "";
 			bOk3 = item.FencingType == BladeType || BladeType == "";
-		
 			if(bOk1 && bOk2 && bOk3)
 			{
 				generatedItems[itemsQty] = Items[i].ID;
@@ -743,32 +653,25 @@ string SelectGeneratedItem(string TargetGroup, string Quality, string BladeType)
 			}
 		}	
 	}
-
 	if(itemsQty == 0)
 	{
 		return ""; // Ничего не нашлось
 	}
-		
 	return generatedItems[rand(itemsQty - 1)];
 }
-
 /////////////////////////////////////////////////////////////////////////////////////////////////////////////
 //										<-- Warship НОВАЯ СИСТЕМА ПРЕДМЕТОВ
 /////////////////////////////////////////////////////////////////////////////////////////////////////////////
-
 // Warship Проверка на оружие
 bool IsBlade(String _itemID)
 {
 	int itemIndex = GetItemIndex(_itemID);
 	ref item;
-	
 	if(itemIndex == -1)
 	{
 		return false;
 	}
-	
 	item = &Items[itemIndex];
-
 	if(CheckAttribute(&item, "groupID"))
 	{
 		if(item.groupID == BLADE_ITEM_TYPE)
@@ -776,17 +679,14 @@ bool IsBlade(String _itemID)
 			return true;
 		}
 	}
-	
 	return false;
 }
-
 // eddy -->
 /////////////////////// ==> Items-методы
 int GetItemIndex(string _ItemID)
 {
 	return FindItem(_ItemID);
 }
-
 ref ItemsFromID(string _Items)
 {
 	if(GetItemIndex(_Items) == -1) 
@@ -795,36 +695,29 @@ ref ItemsFromID(string _Items)
 	}
 	return &items[GetItemIndex(_Items)];
 }
-
 void ChangeItemDescribe(string _Items, string _Describe)
 {
     Items[GetItemIndex(_Items)].describe = _Describe;
 }
-
 void BackItemDescribe(string _Items)
 {
     ref ItemAR = ItemsFromID(_Items);
     ItemAR.describe = "itmdescr_" + ItemAR.id;
 }
-
 void ChangeItemName(string _Items, string _Name)
 {
     Items[GetItemIndex(_Items)].name = _Name;
 }
-
 void BackItemName(string _Items)
 {
     ref ItemAR = ItemsFromID(_Items);
     ItemAR.name = "itmname_" + ItemAR.id;
 }
 ///////////////////////  Items-методы <--
-
-
 void QuestCheckEnterLocItem(aref _location, string _locator) /// <<<проверка вхождения ГГ в локаторы группы Item.<<<
 {
 	ref sld;
 	int i;
-	
 		//=======> Квест Изабеллы, детектор на скрипт базара Сальватора с братом
 	if (_location.id == "SanJuan_town" && pchar.RomanticQuest == "SeeTalkNearHouse") 
 	{
@@ -860,7 +753,6 @@ void QuestCheckEnterLocItem(aref _location, string _locator) /// <<<провер
 		pchar.RomanticQuest.HorseCheck = -1;
 		AddQuestRecord("Romantic_Line", "29");
 	}
-
 	//======> Генератор маяка Порт Рояля.
 	if (_location.id == "Mayak3") 	
 	{
@@ -1150,7 +1042,6 @@ void QuestCheckEnterLocItem(aref _location, string _locator) /// <<<провер
 		}
 	}
 }
-
 void QuestCheckExitLocItem(aref _location, string _locator) /// <<<проверка выхода ГГ из локаторов группы Item.<<<
 {
 	//=======> Энкаунтеры заманухи в пещеру, открываем закрытый релоад на колодце.
@@ -1191,7 +1082,6 @@ void QuestCheckExitLocItem(aref _location, string _locator) /// <<<провер�
 		LAi_ActorFollow(PChar, CharacterFromID("Rosita"), "ActorDialog_Any2Pchar", 0.0);
 	}
 }
-
 void QuestCheckUseButton(aref _location, string _locator, string _itemId) /// <<< квестовые действия при установке предметов в button <<<
 {
 	// календарь майя 270812
@@ -1296,7 +1186,6 @@ void QuestCheckTakeItem(aref _location, string _itemId)
 		Mtraxx_RetributionLocatorRadius();
 	}
 }
-
 void SetItemModelOnLocation(ref loc, string model, string locator)
 {
 	loc.models.always.totem = model;

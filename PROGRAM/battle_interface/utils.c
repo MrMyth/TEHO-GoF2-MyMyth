@@ -1,12 +1,9 @@
-
 native float funcGetSailSpeed(int holeQ,int holeMax,float sailPow);
 native int RandomHole2Sail(int chrIdx, string reyName, int groupNum, int maxHole, int holeData, int addHoleQ);
 native int DeleteOneSailHole(int chrIdx, string groupName, string reyName, int holeMask, int deleteHoleQ );
 native string GetAssembledString(string formatStr, aref arDataBase);
 native int ShipSailState(int chrIdx);
-
 #libriary "script_rigging_files"
-
 //==========================================================
 //   Секция починки при использовании специальных умений.
 //
@@ -15,9 +12,7 @@ native int ShipSailState(int chrIdx);
 #define BI_SLOW_REPAIR_PERIOD	1000
 #define BI_FAST_REPAIR_PERCENT	5.0
 #define BI_FAST_REPAIR_PERIOD	1000
-
 #event_handler("evntActionRepair","procActionRepair");
-
 void ActivateSpecRepair(ref chref,int repairType)
 {
 	if(repairType==0)
@@ -27,18 +22,15 @@ void ActivateSpecRepair(ref chref,int repairType)
 	{	PostEvent("evntActionRepair",BI_FAST_REPAIR_PERIOD,"llff",sti(chref.index),1, 0.0,0.0);
 	}
 }
-
 void procActionRepair()
 {
 	int chrIdx = GetEventData();
 	int eRepType = GetEventData();
-	
 	if(eRepType!=0) // fix
 	{
 		float fMaterialH = GetEventData();
 		float fMaterialS = GetEventData();
 	}
-	
 	if(chrIdx<0) return;
 	if(!bSeaActive)	return;
 	ref chref = GetCharacter(chrIdx);
@@ -46,7 +38,6 @@ void procActionRepair()
 	if (!IsCompanion(chref)) return;
 	// boal 29.02.2004 <--
 	if( LAi_IsDead(chref) ) return;
-
 	if(bAbordageStarted)
 	{
 		if(eRepType==0)
@@ -59,11 +50,9 @@ void procActionRepair()
 		}
 		return;
 	}
-
 	float hpp = GetHullPercent(chref);
 	float spp = GetSailPercent(chref);
 	float fRepairH,fRepairS;
-
 	if(eRepType==0)
 	//=====================================================
 	// Slow repair
@@ -158,7 +147,6 @@ void procActionRepair()
 			chref.Ship.Cargo.Goods.(goodsName) = nMaterialS;
 			chref.Ship.Cargo.Load = sti(chref.Ship.Cargo.Load) - sti(Goods[GOOD_SAILCLOTH].Weight)*nMatDeltaS;
 		}
-
 		if(hpp < InstantRepairRATE && nMaterialH>0) // boal 23.01.2004
 		{	PostEvent("evntActionRepair",BI_FAST_REPAIR_PERIOD,"llff",chrIdx,1, fMaterialH,fMaterialS);
 		}
@@ -174,7 +162,6 @@ void procActionRepair()
 	}
 }
 //============================================================
-
 //============================================================
 //	Починка заданного количества процентов повреждения корпуса
 // (возвращает число реально починеных процентов,
@@ -199,7 +186,6 @@ float ProcessHullRepair(ref chref,float repPercent)
 	}
 	return repPercent;
 }
-
 //============================================================
 //	Починка заданного количества процентов повреждения парусов
 // (возвращает число реально починеных процентов,
@@ -210,7 +196,6 @@ float ProcessSailRepair(ref chref, float repPercent)
 	float dmg = 100.0-GetSailPercent(chref);
 	if(dmg==0.0) return 0.0;
 	if(repPercent>dmg) repPercent=dmg;
-
 	float fMakeRepair = repPercent;
 	int i,j,rq,gq;
 	aref arRoot,arGroup,arSail;
@@ -224,7 +209,6 @@ float ProcessSailRepair(ref chref, float repPercent)
 		for(j=0; j<gq; j++)
 		{
 			arSail = GetAttributeN(arGroup, j);
-			
 			if( CheckAttribute(arSail,"mastFall") )
 			{
 				tmpstr = "ship.masts."+arSail.mastFall;
@@ -251,7 +235,6 @@ float ProcessSailRepair(ref chref, float repPercent)
 	repPercent -= fMakeRepair;
 	return repPercent;
 }
-
 //=========================================================================
 //	Починка заданного количества процентов повреждения конкретного паруса
 //=========================================================================
@@ -260,9 +243,7 @@ float OneSailDmgRepair(ref chref, aref arSailNode, aref arSail, float fDmgRepair
 	if(fDmgRepair<=0.0) return 0.0;
 	if (!CheckAttribute(arSail, "dmg")) return 0.0; // fix boal 18.08.06
 	float fSailDmg = stf(arSail.dmg);
-	
 	if (fSailDmg <= 0.0 || !CheckAttribute(arSail, "hd"))  return 0.0;  // fix boal 14.09.06
-	
 	if (fDmgRepair>=fSailDmg)
 	{
 		DeleteOneSailHole( sti(chref.index), GetAttributeName(arSail), GetAttributeName(arSailNode), sti(arSail.hd), sti(arSail.hc) );
@@ -273,7 +254,6 @@ float OneSailDmgRepair(ref chref, aref arSailNode, aref arSail, float fDmgRepair
 		}
 		return fSailDmg;
 	}
-
 	fSailDmg -= fDmgRepair;
 	float sailDmgMax = GetCharacterShipSP(chref) * stf(arSail.sp);
 	int iAfterHole = GetNeedHoleFromDmg( fSailDmg, sailDmgMax, sti(arSail.mhc) );
@@ -285,7 +265,6 @@ float OneSailDmgRepair(ref chref, aref arSailNode, aref arSail, float fDmgRepair
 	arSail.dmg = fSailDmg;
 	return fDmgRepair;
 }
-
 //=======================================================================
 //  Расчет общего процента повреждения всех парусов с учетом ломаных мачт
 //=======================================================================
@@ -293,18 +272,14 @@ float GetAllSailsDamagePercent(ref chref)
 {
 	float SailPow = 0.0;
 	float SailDmg = 0.0;
-	
 	if(!IsEntity(&worldMap)) GetSailStatus(GetCharacterIndex(chref.id));
-	
 	aref arRoot, arGroup, arSail;
 	int i,j,rq,gq;
-	
 	if(IsEntity(&worldMap))
 	{
 		if(CheckAttribute(chref,"ship.sailstatus.sailpow")) return makefloat(chref.ship.sailstatus.sailpow);
 		else 												return 100.0;
 	}
-	
 	if(!CheckAttribute(chref,"ship.sailstatus")) 
 	{
 		SailPow = 100.0;
@@ -333,10 +308,8 @@ float GetAllSailsDamagePercent(ref chref)
 	if (SailPow > 100.0) SailPow = 100.0;
 	chref.ship.sailstatus.sailpow = SailPow;
 	chref.ship.sailstatus.saildmg = SailDmg;
-		
 	return SailPow;
 }
-
 //============================================================
 // Получить число дырок в корпусе корабля
 //============================================================
@@ -347,7 +320,6 @@ int GetBlotsQuantity(ref chref)
 	makearef(blref,chref.ship.blots);
 	return GetAttributesNum(blref);
 }
-
 //============================================================
 // Удалить заданное число дырок в корпусе корабля
 //============================================================
@@ -365,7 +337,6 @@ void DeleteBlots(ref chref, int repBlots)
 		DeleteAttribute(blref,GetAttributeName(curblots));
 	}
 }
-
 //============================================================
 // Получить число разрушенных элементов корпуса корабля
 //============================================================
@@ -376,7 +347,6 @@ int GetDestroyedHullElementsQuantity(ref chref)
 	makearef(hlref,chref.ship.hulls);
 	return GetAttributesNum(hlref);
 }
-
 //============================================================
 // Удалить заданное число разрушенных элементов корпуса корабля
 //============================================================
@@ -394,7 +364,6 @@ void DeleteDestroyedHullElements(ref chref, int repElements)
 		DeleteAttribute(hlref,GetAttributeName(curElements));
 	}
 }
-
 //================================================================
 // Получить число дырок в парусах исходя из имеющихся повреждений
 //================================================================
@@ -404,7 +373,6 @@ int GetNeedHoleFromDmg(float sailDmg, float sailDmgMax, int maxHoleCount)
 	int holeNeed = makeint(sailDmg/sailDmgMax*maxHoleCount);
 	return holeNeed;
 }
-
 //================================================================
 // Надырявить конкретный парус на заданное число дырок и получить
 // маску получившихся дырок
@@ -416,7 +384,6 @@ int GetNeedHoleFromDmg(float sailDmg, float sailDmgMax, int maxHoleCount)
 {
 	return holeData;
 }*/
-
 //================================================================
 // Получить повреждение в парусах исходя из имеющихся дырок
 //================================================================
@@ -425,7 +392,6 @@ float GetNeedDmgFromHole(int holeCount, float sailDmgMax, int maxHoleCount)
 	if(maxHoleCount<=0) return 0.0;
 	return sailDmgMax*holeCount/maxHoleCount;
 }
-
 //================================================================
 // Посчитать состояние парусов
 //================================================================
@@ -434,7 +400,6 @@ float CalculateShipSP(ref chref)
 	float fSP = GetCharacterShipSP(chref);
 	aref arRoot,arGroup,arSail;
 	int q,n,i,j;
-
 	makearef(arRoot, chref.ship.sails);
 	q = GetAttributesNum(arRoot);
 	for(i=0; i<q; i++)
@@ -454,7 +419,6 @@ float CalculateShipSP(ref chref)
 	if(fSP < 0.0) fSP = 0.0;
 	return fSP;
 }
-
 //===============================================
 // Заполнение 
 //===============================================
@@ -462,16 +426,13 @@ int AddTextureToList(ref rHostObj, string texName, int hSize, int vSize)
 {
 	return SendMessage(rHostObj, "lsll", BI_MSG_ADD_NEWTEXTURE, texName, hSize, vSize);
 }
-
 void GetTextureUVForShip(int nShipType, ref rLeft, ref rTop, ref rRight, ref rBottom)
 {
 	float fLeft = 0.0;
 	float fTop = 0.0;
 	float fRight = 0.0625;
 	float fBottom = 0.0625;//0.25;
-	
 //	Log_SetStringToLog("type " + nShipType);
-	
 	if( nShipType> -1 && nShipType<SHIP_TYPES_QUANTITY_WITH_FORT ) // <-- ugeen fix, для тартаны nShipType = 0 !!!!
 	{
 		ref rBaseShip = &ShipsTypes[nShipType];
@@ -484,13 +445,11 @@ void GetTextureUVForShip(int nShipType, ref rLeft, ref rTop, ref rRight, ref rBo
 		fBottom = fTop + 0.0625;//0.25;
 //		Log_SetStringToLog("name " + rBaseShip.name + " nV " + nV + " nH " + nH);
 	}
-
 	rLeft = fLeft;
 	rTop = fTop;
 	rRight = fRight;
 	rBottom = fBottom;
 }
-
 object objTimerInterface;
 #event_handler("evntTimerTimeOut","procTimerTimeOut");
 void InitTimerInterface()
@@ -509,19 +468,16 @@ void InitTimerInterface()
 	LayerAddObject(SEA_REALIZE,&objTimerInterface,-1);
 	LayerAddObject(REALIZE,&objTimerInterface,-1);
 }
-
 void LaunchTimerInterface(float fTime,string questtype,string questname)
 {
 	objTimerInterface.questname = questname;
 	objTimerInterface.questtype = questtype;
 	SendMessage(&objTimerInterface,"lfs",0,fTime,"evntTimerTimeOut");
 }
-
 void CloseTimerInterface()
 {
 	SendMessage(&objTimerInterface,"l",1);
 }
-
 void procTimerTimeOut()
 {
 	QuestComplete(objTimerInterface.questtype, objTimerInterface.questname);

@@ -7,21 +7,17 @@
 #define PERK_TEMPLATE_MELEE		    6	// 9 perks
 #define PERK_TEMPLATE_PERSONAL		7	// 6 perks
 #define PERK_TEMPLATE_LAST          8
-
 //Экипировать NPC оружием и перками (переделал полнсотью 11/11/04 boal)
 void LAi_NPC_Equip(ref chr, int rank, bool isWeapons, bool isGun)
 {
 	// boal не нужно - ранг и так точно расчитан r = rank + rand(3) - 1;
 	string sBullet = "bullet";
 	string sGunPowder;
-	
 	DeleteAttribute(chr, "equip");
 	DeleteAttribute(chr, "perks.list"); // FIX 101104 убрать накопивщиеся умения
 	DelBakSkillAttr(chr); // fix
-	
 	if (chr.model.animation == "mushketer") return;
 	if (chr.sex == "woman") return;
-	
 	if (CheckAttribute(chr, "quest.officertype"))
 	{
 		// наши офицеры
@@ -31,7 +27,6 @@ void LAi_NPC_Equip(ref chr, int rank, bool isWeapons, bool isGun)
 	{
 		LAi_NPC_EquipPerk(chr, "fantom");
 	}
-	
 	//Подберём саблю
 	if(isWeapons)
 	{
@@ -44,14 +39,11 @@ void LAi_NPC_Equip(ref chr, int rank, bool isWeapons, bool isGun)
 		{
             blade = LAi_NPC_EquipBladeSelection(chr);
 		}
-		
 		DeleteAttribute(chr, "items"); // это можно не делать, но так наверняка (идет проверка на колво предметов, и сабель может стать вагон)
 		//DeleteAttribute(chr, "cirassId"); // трем броню
-		
 		// Warship Нет, не генерим все-таки, с отображением жопа - ищет models/ammo/blade4_xxx :(
 		// Ugeen -- > и все-таки генерим !! :)
 		blade = GetGeneratedItem(blade); // Генерим оружие
-		
 		GiveItem2Character(chr, blade);
 		EquipCharacterByItem(chr, blade);
 		// boal -->
@@ -70,14 +62,12 @@ void LAi_NPC_Equip(ref chr, int rank, bool isWeapons, bool isGun)
 	{
 		if(CheckAttribute(chr, "PhantomType") && chr.PhantomType == "native") return; //Jason
 		if(CheckAttribute(chr, "PhantomType") && chr.PhantomType == "slave") return; //Jason
-		
 		if(rand(1000) < MOD_SKILL_ENEMY_RATE * sti(chr.rank) * 8)
 		{
 			int iRnd = rand(1);
 			if(sti(chr.rank) > 10) iRnd = rand(2);
 			if(sti(chr.rank) > 15) iRnd = rand(2) + 1;
 			if(sti(chr.rank) > 20) iRnd = rand(3) + 2;
-				
 			switch(iRnd)
 			{
 				case 0:
@@ -88,7 +78,6 @@ void LAi_NPC_Equip(ref chr, int rank, bool isWeapons, bool isGun)
 						sBullet = "bullet";
 					}	
 				break;
-				
 				case 1:
 					if(rand(100) < 75)
 					{
@@ -97,7 +86,6 @@ void LAi_NPC_Equip(ref chr, int rank, bool isWeapons, bool isGun)
 						sBullet = "grapeshot";
 					}	
 				break;
-				
 				case 2:
 					if(rand(100) < 80)
 					{
@@ -106,7 +94,6 @@ void LAi_NPC_Equip(ref chr, int rank, bool isWeapons, bool isGun)
 						sBullet = "bullet";
 					}	
 				break;
-				
 				case 3:
 					if(rand(100) < 85)
 					{
@@ -115,7 +102,6 @@ void LAi_NPC_Equip(ref chr, int rank, bool isWeapons, bool isGun)
 						sBullet = "grapeshot";
 					}	
 				break;
-				
 				case 4:
 					if(rand(100) < 90)
 					{
@@ -124,7 +110,6 @@ void LAi_NPC_Equip(ref chr, int rank, bool isWeapons, bool isGun)
 						sBullet = "bullet";
 					}	
 				break;
-				
 				case 5:
 					if(rand(100) < 95)
 					{
@@ -145,12 +130,10 @@ void LAi_NPC_Equip(ref chr, int rank, bool isWeapons, bool isGun)
 	}
 	// boal выдаем пистоль <--
 }
-
 void LAi_NPC_MushketerEquip(ref chr)
 {
 	string sMush 	= "mushket1";
 	string sBullet 	= "bullet";
-
 	while (FindCharacterItemByGroup(chr, BLADE_ITEM_TYPE) != "")
     {
         TakeItemFromCharacter(chr, FindCharacterItemByGroup(chr, BLADE_ITEM_TYPE));
@@ -161,7 +144,6 @@ void LAi_NPC_MushketerEquip(ref chr)
     }		
 	GiveItem2Character(chr, "unarmed");
 	EquipCharacterbyItem(chr, "unarmed");
-	
 	if(CheckAttribute(chr, "MushketBulletType"))	sBullet = chr.MushketBulletType;
 	if(CheckAttribute(chr, "MushketType")) 			sMush 	= chr.MushketType;
 	else
@@ -170,26 +152,21 @@ void LAi_NPC_MushketerEquip(ref chr)
 		{
 			if(HasSubStr(chr.model, "mush_eng_") || HasSubStr(chr.model, "mush_hol_")) sMush = "mushket2";
 			if(HasSubStr(chr.model, "mush_fra_") || HasSubStr(chr.model, "mush_spa_")) sMush = "mushket1";
-			
 			if(HasSubStr(chr.model, "mush_cnb_") || HasSubStr(chr.model, "mush_msk_") || HasSubStr(chr.model, "mush_itza_")) 
 			{
 				if(rand(1) == 0) sMush = "mushket1";
 				else			 sMush = "mushket3";
 			}	
-			
 			if(HasSubStr(chr.model, "mush_ctz_") || HasSubStr(chr.model, "mushketer_")) 
 			{
 				if(rand(1) == 0) sMush = "mushket1";
 				else			 sMush = "mushket3";
 			}	
-			
 			if(HasSubStr(chr.model, "mush_rvd_")) sMush = "mushket1";
 		}
 	}
-			
 	GiveItem2Character(chr, sMush);
 	EquipCharacterbyItem(chr, sMush);
-	
 	switch (sMush)
 	{
 		case "mushket1"		:
@@ -224,7 +201,6 @@ void LAi_NPC_MushketerEquip(ref chr)
 		case "mushket6"		:
 			AddItems(chr, "grapeshot", 	50);
 			AddItems(chr, "gunpowder", 	50);
-			
 			if(CheckAttribute(chr, "MushketType") && 
 			   CheckAttribute(chr, "MushketBulletType")) 
 			{
@@ -256,7 +232,6 @@ void LAi_NPC_MushketerEquip(ref chr)
 				}
 			}
 		break;
-		
 		case "mushket2x2"	:
 			AddItems(chr, "cartridge", 	50);
 			AddItems(chr, "bullet", 	50);
@@ -266,17 +241,14 @@ void LAi_NPC_MushketerEquip(ref chr)
 			else											LAi_SetCharacterDefaultBulletType(chr);		
 		break;
 	}
-			
 	chr.isMusketer = true;
 	chr.isMusketer.weapon = true; // Jason: а пули с порохом кто удалять будет? И вообще, что за муть - менять мушкет при каждой установке типа?
 	if (!CheckAttribute(chr, "MusketerDistance")) chr.MusketerDistance = 10.0 + frand(10.0);
 }
-
 string LAi_NPC_EquipBladeSelection(ref chr)
 {
 	string sType;
 	string blade;
-	
 	if(CheckAttribute(chr, "PhantomType"))
 	{
 		sType = chr.PhantomType;
@@ -336,7 +308,6 @@ string LAi_Soldier_EquipBlade()
 {	
 	return SelectGeneratedItem(TGT_SOLDIER, "", "");
 }
-
 // new perks generator, more specialized (Gray 12.11.2004)
 void LAi_NPC_EquipPerk(ref chr, string kind)
 {
@@ -346,12 +317,10 @@ void LAi_NPC_EquipPerk(ref chr, string kind)
     int  NumPerks[PERK_TEMPLATE_LAST];
     int  rank = sti(chr.rank);
     bool ok;
-
 	for (i = 0; i < PERK_TEMPLATE_LAST; i++)
 	{
 		PerkTemplates[i] = 0;
 	}
-
 	switch (kind)        // to_do
 	{
 		 case "boatswain" :
@@ -359,29 +328,24 @@ void LAi_NPC_EquipPerk(ref chr, string kind)
 			PerkTemplates[PERK_TEMPLATE_GRAPPLING]   = makeint((rank + rand(3)) / 6.0);
 			PerkTemplates[PERK_TEMPLATE_MELEE]       = makeint((rank + rand(3)) / 5.0);
 		break;
-
 		case "cannoner" :
 			PerkTemplates[PERK_TEMPLATE_CANNONS] = makeint((rank + rand(2)) / 3.0 + 1);
 			PerkTemplates[PERK_TEMPLATE_MELEE]   = makeint((rank + rand(3)) / 6.0);
 		break;
-
 		case "treasurer" :
 			PerkTemplates[PERK_TEMPLATE_COMMERCE] = makeint((rank + rand(1)) / 5.0 + 1);
 			PerkTemplates[PERK_TEMPLATE_REPAIR]   = makeint((rank + rand(3)) / 5.0);
 			PerkTemplates[PERK_TEMPLATE_MELEE]    = makeint((rank + rand(3)) / 6.0);
 			PerkTemplates[PERK_TEMPLATE_SHIPDEFENCE] = makeint((rank + rand(4)) / 7.0 + 1);
 		break;
-
 		case "navigator" :
 			PerkTemplates[PERK_TEMPLATE_SAILING]     = makeint((rank + rand(2)) / 4.0 + 1);
 			PerkTemplates[PERK_TEMPLATE_SHIPDEFENCE] = makeint((rank + rand(3)) / 6.0);
 			PerkTemplates[PERK_TEMPLATE_MELEE]       = makeint((rank + rand(3)) / 6.0);
 		break;
-
 		case "fighter" :
 			PerkTemplates[PERK_TEMPLATE_MELEE] = makeint((rank + rand(1)) / 2.0 + 1);
 		break;
-
 		case "fantom" : 
 			PerkTemplates[PERK_TEMPLATE_MELEE]       = makeint((rank + rand(4)) / 4.0);
 			PerkTemplates[PERK_TEMPLATE_SAILING]     = makeint((rank + rand(5)) / 8.0);
@@ -391,7 +355,6 @@ void LAi_NPC_EquipPerk(ref chr, string kind)
 			PerkTemplates[PERK_TEMPLATE_SHIPDEFENCE] = makeint((rank + rand(4)) / 7.0);
 		break;
     } 
-
 	NumPerks[PERK_TEMPLATE_SHIPDEFENCE] = 3;
 	NumPerks[PERK_TEMPLATE_REPAIR]      = 4;
 	NumPerks[PERK_TEMPLATE_CANNONS]     = 8;
@@ -400,7 +363,6 @@ void LAi_NPC_EquipPerk(ref chr, string kind)
 	NumPerks[PERK_TEMPLATE_GRAPPLING]   = 5;
 	NumPerks[PERK_TEMPLATE_MELEE]       = 11;
 	NumPerks[PERK_TEMPLATE_PERSONAL]    = 4;
-
 	rest = 0;
 	for (i = 0; i < PERK_TEMPLATE_LAST; i++)
 	{
@@ -410,7 +372,6 @@ void LAi_NPC_EquipPerk(ref chr, string kind)
 		}
 		rest += NumPerks[i];
 	}
-
 	if (rest > rank)
 	{
 		rest = rank;
@@ -419,7 +380,6 @@ void LAi_NPC_EquipPerk(ref chr, string kind)
 	{
 		rest = rest - PerkTemplates[i];
 	}
-
 	// the rest perks (like half usually) distributed randomly among templates
 	while (rest > 0)
 	{
@@ -430,8 +390,6 @@ void LAi_NPC_EquipPerk(ref chr, string kind)
 			rest--;
 		}
 	}
-
-
 	if (PerkTemplates[PERK_TEMPLATE_SHIPDEFENCE] >= 1)
 	{
 		if (kind == "boatswain" || kind == "navigator")
@@ -470,7 +428,6 @@ void LAi_NPC_EquipPerk(ref chr, string kind)
 			}
 		}
 	}
-
 	if (PerkTemplates[PERK_TEMPLATE_REPAIR] >= 1)
 	{
 		chr.perks.list.Carpenter = "1";
@@ -487,7 +444,6 @@ void LAi_NPC_EquipPerk(ref chr, string kind)
 			}
 		}
 	}
-
 	if (PerkTemplates[PERK_TEMPLATE_CANNONS] >= 1)
 	{
 		chr.perks.list.HullDamageUp = "1";
@@ -520,7 +476,6 @@ void LAi_NPC_EquipPerk(ref chr, string kind)
 			}
 		}
 	}
-
 	if (PerkTemplates[PERK_TEMPLATE_COMMERCE] >= 1)
 	{
 		chr.perks.list.BasicCommerce = "1";
@@ -533,7 +488,6 @@ void LAi_NPC_EquipPerk(ref chr, string kind)
 			chr.perks.list.ProfessionalCommerce = "1";
 		}
 	}
-
 	if (PerkTemplates[PERK_TEMPLATE_SAILING] >= 1)
 	{
 		chr.perks.list.ShipSpeedUp = "1";
@@ -562,7 +516,6 @@ void LAi_NPC_EquipPerk(ref chr, string kind)
 			}
 		}
 	}
-
     ok = true;
 	if (PerkTemplates[PERK_TEMPLATE_GRAPPLING] >= 1)
 	{
@@ -602,7 +555,6 @@ void LAi_NPC_EquipPerk(ref chr, string kind)
 			chr.perks.list.Troopers = "1";
 		}
 	}
-
 	if (PerkTemplates[PERK_TEMPLATE_MELEE] >= 1)
 	{
 		chr.perks.list.BasicDefense = "1";
@@ -647,7 +599,6 @@ void LAi_NPC_EquipPerk(ref chr, string kind)
 			}
 		}
 	}
-
 	if (PerkTemplates[PERK_TEMPLATE_PERSONAL] >= 1)
 	{
 		chr.perks.list.ByWorker = "1";

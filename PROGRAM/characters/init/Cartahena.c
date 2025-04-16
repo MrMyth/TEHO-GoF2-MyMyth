@@ -1,12 +1,9 @@
-
 int CreateCartahenaCharacters(int n)
 {
 	ref ch;
-	
 	///////////////////////////////////////////////////////////////////////////////
 	// ОСНОВНЫЕ ПЕРСОНАЖИ
 	///////////////////////////////////////////////////////////////////////////////
-
 	makeref(ch,Characters[n]);			//Губернатор
 	ch.id		= "Cartahena_Mayor";
 	ch.model	= "huber_22";
@@ -34,7 +31,6 @@ int CreateCartahenaCharacters(int n)
 	LAi_group_MoveCharacter(ch, "SPAIN_CITIZENS");
 	LAi_SetImmortal(ch, true);
 	n = n + 1;
-
 	makeref(ch,Characters[n]);			//Священик
 	ch.id		= "Cartahena_Priest";
 	ch.model	= "priest_1";
@@ -52,7 +48,6 @@ int CreateCartahenaCharacters(int n)
 	LAi_group_MoveCharacter(ch, "SPAIN_CITIZENS");
 	LAi_SetImmortal(ch, true);
 	n = n + 1;
-
 	makeref(ch,Characters[n]);		// ОФициантка
 	ch.id		= "Cartahena_waitress";
 	ch.model	= "women_15";
@@ -69,7 +64,6 @@ int CreateCartahenaCharacters(int n)
 	LAi_group_MoveCharacter(ch, "SPAIN_CITIZENS");
 	LAi_SetImmortal(ch, true);
 	n = n + 1;
-
 	makeref(ch,Characters[n]);			//Трактирщик
 	ch.id		= "Cartahena_tavernkeeper";
 	ch.model	= "barmen_6";
@@ -87,8 +81,6 @@ int CreateCartahenaCharacters(int n)
 	LAi_group_MoveCharacter(ch, "SPAIN_CITIZENS");
 	LAi_SetImmortal(ch, true);
 	n = n + 1;
-
-
 	makeref(ch,Characters[n]);			//Торговец
 	ch.id		= "Cartahena_trader";
 	ch.model	= "trader_6";
@@ -106,7 +98,6 @@ int CreateCartahenaCharacters(int n)
 	LAi_SetImmortal(ch, true);
 	ch.item_date = "";
 	n = n + 1;
-
 	makeref(ch,Characters[n]);			//Корабел
 	ch.id		= "Cartahena_shipyarder";
 	ch.model	= "shipowner_6";
@@ -131,7 +122,6 @@ int CreateCartahenaCharacters(int n)
 	LAi_group_MoveCharacter(ch, "SPAIN_CITIZENS");
 	LAi_SetImmortal(ch, true);
 	n = n + 1;
-
 	makeref(ch,Characters[n]);			//Банкир
 	ch.id		= "Cartahena_usurer";
 	ch.model	= "banker_6";
@@ -151,7 +141,6 @@ int CreateCartahenaCharacters(int n)
 	LAi_group_MoveCharacter(ch, "SPAIN_CITIZENS");
 	LAi_SetImmortal(ch, true);
 	n = n + 1;
-
 	makeref(ch,Characters[n]);			//Начальник порта
 	ch.id		= "Cartahena_PortMan";
 	ch.model	= "citiz_2";
@@ -168,7 +157,6 @@ int CreateCartahenaCharacters(int n)
 	LAi_SetImmortal(ch, true);
 	ch.item_date = "";
 	n = n + 1;
-	
 	makeref(ch,Characters[n]);
 	ch.name 	= "Smuggler";
 	ch.lastname = "";
@@ -185,7 +173,6 @@ int CreateCartahenaCharacters(int n)
 	LAi_SetHP(ch, 80.0, 80.0);
 	ch.greeting = "smuggler";
 	n = n + 1;
-
 	makeref(ch,Characters[n]);			//Смотритель маяка
 	ch.id		= "Cartahena_Lightman";
 	ch.model	= "keeper_1";
@@ -208,6 +195,5 @@ int CreateCartahenaCharacters(int n)
 	LAi_group_MoveCharacter(ch, "SPAIN_CITIZENS");
 	LAi_SetImmortal(ch, true);
 	n = n + 1;
-
 	return n;
 }

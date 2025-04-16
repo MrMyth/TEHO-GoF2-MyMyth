@@ -1,5 +1,4 @@
 #define CANNON_TYPES_QUANTITY		13
-
 #define CANNON_TYPE_CANNON_LBS3	    0
 #define CANNON_TYPE_CANNON_LBS6	    1
 #define CANNON_TYPE_CANNON_LBS12    2
@@ -10,26 +9,19 @@
 #define CANNON_TYPE_CANNON_LBS36	7
 #define CANNON_TYPE_CANNON_LBS42    8
 #define CANNON_TYPE_CANNON_LBS48    9
-
 #define CANNON_TYPE_CULVERINE_LBS8	10
 #define CANNON_TYPE_CULVERINE_LBS18 11
 #define CANNON_TYPE_CULVERINE_LBS36 12
-
 #define CANNON_TYPE_NONECANNON		1000
-
 #define CANNON_NAME_CANNON              1
 #define CANNON_NAME_CULVERINE           2
 #define CANNON_NAME_SPECIAL_CANNON		3
-
-
 object  Cannon[CANNON_TYPES_QUANTITY];
-
 ref GetCannonByType(int iCannonType) 
 { 
 	if (iCannonType == CANNON_TYPE_NONECANNON) return &NullCharacter; // fix для тартант boal
 	return &Cannon[iCannonType]; 
 }
-
 int GetCannonCaliber(int nCannon)
 {
     switch(nCannon)

@@ -1,7 +1,6 @@
 int Whr_GetRainRisk(int month)
 {
     int rainrisk = 100;
-
 	switch(month)
 	{
 		case 1:  rainrisk = 10; break;
@@ -19,14 +18,11 @@ int Whr_GetRainRisk(int month)
 	}
 	return rainrisk;
 }
-
 void Whr_GenerateValues(int fogCheck){
-
 // Screwface : Chance to have weather conditions degrade is according to the month and seasons in Caribbean
 	int month = GetDataMonth();
 	int rainrisk = Whr_GetRainRisk(month);
 // Screwface : end
-
 	if(rand(100) > (50 - windABallast)){
 		if(fWeatherAngleOld <= PIm2 - rWindA){fWindA = fWeatherAngleOld + rWindA;}
 		else{ fWindA = (fWeatherAngleOld + rWindA) - PIm2;}
@@ -36,9 +32,7 @@ void Whr_GenerateValues(int fogCheck){
 		if(fWeatherAngleOld >= rWindA){ fWindA = fWeatherAngleOld - rWindA; }
 		else{ fWindA = PIm2 - (rWindA - fWeatherAngleOld); }
 		windABallast -= (rWindA*5);
-
 	}
-
 	if(rand(100) > (50 - rainBallast) && RAND(100) <= rainrisk){
 		if(goldRain <= 100-rRain || (goldRain - rRain) < 0){wRain = goldRain + rRain; }
 		else{ wRain = 100; }
@@ -49,7 +43,6 @@ void Whr_GenerateValues(int fogCheck){
 		else{ wRain = 0; }
 		rainBallast -= rRain;
 	}
-
 	if(fogCheck != 0){
 		if(rand(100) > (50 - fogBallast)){
 			if(goldFog <= (20-rFog) || (goldFog - rFog) < 0){ fog = goldFog + rFog;}
@@ -71,7 +64,6 @@ void Whr_GenerateValues(int fogCheck){
 		}
 	}
 	else{ fog = 0; }
-
 	if(rand(100) > 50){
 		if(oldWind <= 30-rWind || (oldWind - rWind) < 0){winds = oldWind + rWind;}
 		else{ winds = 30; }
@@ -84,10 +76,8 @@ void Whr_GenerateValues(int fogCheck){
 	}
 	if (winds < 0) winds = 0;
 	if (winds < 5) winds = 15;	// LDH 12Feb09
-
 	//#20220311-01
     if (bWeatherIsRain || bWeatherIsStorm) return;
-
 	//wRain = wRain + 20; // to test the coming of a storm
 	//winds = 30;
 	// screwface

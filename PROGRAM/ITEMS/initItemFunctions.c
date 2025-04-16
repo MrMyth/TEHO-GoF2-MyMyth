@@ -12,10 +12,8 @@ int InitStdItem( 	int		ItemIndex,
 {
 	ref	rItem;
 	int	itmIndex;
-	
 	itmIndex = ItemIndex;
 	makeref(rItem, Items[itmIndex]);
-	
 	rItem.id				= id;		
 	rItem.model				= ModelID;
 	rItem.name				= "itmname_" + id;
@@ -27,17 +25,13 @@ int InitStdItem( 	int		ItemIndex,
 	rItem.minlevel 			= MinLevel;
 	rItem.Weight 			= Weight;
 	rItem.TradeType 		= TradeType;
-	
 	if(PriceDublon > 0) 
 	{
 		rItem.PriceDublon				= PriceDublon;	
 	}
-	
 	itmIndex++;
 	return itmIndex;
 }
-
-
 int InitStdBlade( 	int		ItemIndex, 
 					string 	ModelID, 
 					string 	picTexture,
@@ -56,10 +50,8 @@ int InitStdBlade( 	int		ItemIndex,
 	ref	blade;
 	int	bladeIndex;
 	float MaxAttack = 0.0;
-	
 	bladeIndex = ItemIndex;
 	makeref(blade, Items[bladeIndex]);
-	
 	blade.id				= ModelID;		
 	blade.groupID 			= BLADE_ITEM_TYPE;
 	blade.model				= ModelID;
@@ -78,14 +70,12 @@ int InitStdBlade( 	int		ItemIndex,
 	blade.quality			= Quality;
 	blade.target			= TargetGroup;
 	blade.TradeType 		= ITEM_TRADE_AMMUNITION;
-		
 	if(isGenerable)				blade.Generation.qty 	= GenerationQty;
 	if(isGenerablePrice)    	
 	{
 		blade.Generation.price 	= true; // Флаг "генерить цену"	
 	}
 	else blade.price 	= Price;	
-	
 	switch (BladeType) 
 	{
 		case "FencingL" :
@@ -101,10 +91,8 @@ int InitStdBlade( 	int		ItemIndex,
 			MaxAttack		= FencingH_MaxAttack;
 		break;
 	}
-	
 	blade.Balance = fRandSmall(2.0);
 	if(ModelID == "unarmed") blade.Balance = 1.0;
-	
 	switch (Quality)
 	{
 		case B_POOR :
@@ -137,7 +125,6 @@ int InitStdBlade( 	int		ItemIndex,
 			}
 		break;
 	}
-	
 	switch (BladeType) 
 	{
 		case "FencingL" :
@@ -162,13 +149,10 @@ int InitStdBlade( 	int		ItemIndex,
 			else blade.price = Price;			
 		break;
 	}
-	
 	//trace("blade.id : " + blade.id + " blade.price : " + blade.price + " blade.Attack : " + blade.Attack + " blade.Balance : " + blade.Balance + " blade.Weight : " + blade.Weight);
-	
 	bladeIndex++;
 	return bladeIndex;
 }
-
 int InitStdGun(	int		ItemIndex, 
 				string 	id, 
 				string 	ModelID, 
@@ -185,10 +169,8 @@ int InitStdGun(	int		ItemIndex,
 {
 	ref	gun;
 	int	gunIndex;
-	
 	gunIndex = ItemIndex;
 	makeref(gun, Items[gunIndex]);
-	
 	gun.id				= id;		
 	gun.groupID			= GUN_ITEM_TYPE;
 	gun.name			= "itmname_" + id;
@@ -209,11 +191,9 @@ int InitStdGun(	int		ItemIndex,
 	gun.ChargeSpeed 	= 10.0; // by default
 	gun.accuracy 		= 50.0; // by default
 	gun.TradeType 		= ITEM_TRADE_AMMUNITION;
-	
 	gunIndex++;
 	return gunIndex;
 }
-
 int InitStdTalisman(	int		ItemIndex, 
 						string 	id, 
 						string 	ModelID, 
@@ -225,10 +205,8 @@ int InitStdTalisman(	int		ItemIndex,
 {
 	ref	talisman;
 	int	talismanIndex;
-	
 	talismanIndex = ItemIndex;
 	makeref(talisman, Items[talismanIndex]);
-	
 	talisman.id				= id;		
 	talisman.groupID		= TALISMAN_ITEM_TYPE;
 	talisman.name			= "itmname_" + id;
@@ -244,11 +222,9 @@ int InitStdTalisman(	int		ItemIndex,
 	talisman.ItemType 		= "ARTEFACT";
 	talisman.kind			= kind;
 	talisman.TradeType 		= ITEM_TRADE_JEWELRY;
-	
 	talismanIndex++;
 	return talismanIndex;
 }
-
 int InitStdAmulet(	int		ItemIndex, 
 					string 	id, 
 					string 	ModelID, 
@@ -267,10 +243,8 @@ int InitStdAmulet(	int		ItemIndex,
 {
 	ref	amulet;
 	int	amuletIndex;
-	
 	amuletIndex = ItemIndex;
 	makeref(amulet, Items[amuletIndex]);
-	
 	amulet.id				= id;		
 	amulet.groupID			= ITEM_SLOT_TYPE;
 	amulet.name				= "itmname_" + id;
@@ -285,7 +259,6 @@ int InitStdAmulet(	int		ItemIndex,
 	amulet.time				= Time;
 	amulet.ItemType 		= "ARTEFACT";
 	amulet.Type				= Type;
-	
 	if(isMulti) 
 	{
 		amulet.multiobject		= true;
@@ -300,13 +273,10 @@ int InitStdAmulet(	int		ItemIndex,
 		amulet.Monster.max 		= 1;
 	}	
 	if(kind != "") amulet.kind	= kind;	
-	
 	amulet.TradeType 		= ITEM_TRADE_ARTEFACT;
-	
 	amuletIndex++;
 	return amuletIndex;
 }					
-
 int InitStdSuit(	int		ItemIndex, 
 					string 	id, 
 					string 	ModelID, 
@@ -323,10 +293,8 @@ int InitStdSuit(	int		ItemIndex,
 {
 	ref	suit;
 	int	suitIndex;
-	
 	suitIndex = ItemIndex;
 	makeref(suit, Items[suitIndex]);
-	
 	suit.id					= id;		
 	suit.groupID			= CIRASS_ITEM_TYPE;
 	suit.name				= "itmname_" + id;
@@ -342,19 +310,15 @@ int InitStdSuit(	int		ItemIndex,
 	suit.Clothes 			= isClothes;
 	suit.B_CirassLevel 		= CirassLevel_blade;
 	suit.G_CirassLevel 		= CirassLevel_gun;
-	
 	if(Critical > 0.0)
 	{
 		suit.critical			= Critical;
 	}	
-	
 	suit.ItemType 			= "SUPPORT";
 	suit.TradeType 			= ITEM_TRADE_AMMUNITION;
-	
 	suitIndex++;
 	return suitIndex;
 }					
-
 int InitStdMap(		int		ItemIndex, 
 					string 	id, 
 					string 	picTexture,
@@ -369,10 +333,8 @@ int InitStdMap(		int		ItemIndex,
 {
 	ref	map;
 	int	mapIndex;
-	
 	mapIndex = ItemIndex;
 	makeref(map, Items[mapIndex]);
-	
 	map.id					= id;		
 	map.groupID				= MAPS_ITEM_TYPE;
 	map.name				= "itmname_" + id;
@@ -388,24 +350,19 @@ int InitStdMap(		int		ItemIndex,
 	map.MapType 			= MapType;
 	map.ItemType 			= "MAP";
 	map.TradeType 			= ITEM_TRADE_MAP;
-	
 	if(Rare > 0.0) 
 	{
 		map.Rare			= Rare;
 	}	
-	
 	mapIndex++;
 	return mapIndex;
 }
-
 int InitStdRecipies(int ItemIndex, string id, string result, int Price)
 {
 	ref	recipe;
 	int	recipeIndex;
-	
 	recipeIndex = ItemIndex;
 	makeref(recipe, Items[recipeIndex]);
-	
 	recipe.id			= id;	
 	recipe.result 		= result;
 	recipe.groupID		= SPECIAL_ITEM_TYPE;
@@ -420,11 +377,9 @@ int InitStdRecipies(int ItemIndex, string id, string result, int Price)
 	recipe.Weight 		= 0.1;
 	recipe.ItemType 	= "SUPPORT";
 	//recipe.TradeType 	= ITEM_TRADE_POTION;
-	
 	recipeIndex++;
 	return recipeIndex;
 }
-
 void InitGunExt(string id,			
 				string sAttr,       
 				string sBullet,     
@@ -463,10 +418,8 @@ void InitGunExt(string id,
 	gun.type.(sAttr).Accuracy       = Accuracy;
 	gun.type.(sAttr).ChargeSpeed    = ChargeSpeed;
 	gun.type.(sAttr).Default        = isDefault;
-	
 	if(Stun_NC || Stun_C) gun.stun = true;
 }
-
 void InitMushketExt(string id, 
 					float  DmgMin_butt,  
 					float  DmgMax_butt, 
@@ -483,8 +436,6 @@ void InitMushketExt(string id,
 	gun.sAttack_butt 	= sAttack_butt;
 	gun.sAttack_bayonet = sAttack_bayonet;	
 }	
-
-
 void InitMultiObject(	string id,			
 						string sAttr,       
 						string component_id,
@@ -496,7 +447,6 @@ void InitMultiObject(	string id,
 	rItem.component.(sAttr).use =  component_use;
 	rItem.component.(sAttr).qty =  component_qty;
 }
-
 void InitStdItemRarity(	string id,			
 						string sAttr,
 						float  Rare,

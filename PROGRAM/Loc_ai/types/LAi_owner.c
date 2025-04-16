@@ -1,26 +1,16 @@
 /*
 Тип: стоячий, всегда стоит, отвечает на диалоги, боится если безоружен враг рядом,
 	 нападает на врага, если мужик и с оружием, проверяет лазы ГГ в сундуки
-
 	Используемые шаблоны:
 		stay
 		dialog
-
-
-
 	группа: owner
 		локаторы группы barmen
 		локатор основного стояния локатора: stay
 		локатор где смотреть: bar1
 		локатор где смотреть: bar2
-
 */
-
-
-
 #define LAI_TYPE_OWNER		"owner"
-
-
 //Инициализация
 void LAi_type_owner_Init(aref chr)
 {
@@ -38,7 +28,6 @@ void LAi_type_owner_Init(aref chr)
 	LAi_SetDefaultStayAnimation(chr);
 	SendMessage(&chr, "lsl", MSG_CHARACTER_EX_MSG, "SetFightWOWeapon", false);
 }
-
 //Процессирование типа персонажа
 void LAi_type_owner_CharacterUpdate(aref chr, float dltTime)
 {
@@ -199,13 +188,11 @@ bool LAi_type_owner_CharacterLogin(aref chr)
 {
 	return true;
 }
-
 //Выгрузка персонажа из локацию
 bool LAi_type_owner_CharacterLogoff(aref chr)
 {
 	return true;
 }
-
 //Завершение работы темплейта
 void LAi_type_owner_TemplateComplite(aref chr, string tmpl)
 {
@@ -227,12 +214,10 @@ void LAi_type_owner_TemplateComplite(aref chr, string tmpl)
 		break;
 	}
 }
-
 //Сообщить о желании завести диалог
 void LAi_type_owner_NeedDialog(aref chr, aref by)
 {
 }
-
 //Запрос на диалог, если возвратить true то в этот момент можно начать диалог
 bool LAi_type_owner_CanDialog(aref chr, aref by)
 {
@@ -241,7 +226,6 @@ bool LAi_type_owner_CanDialog(aref chr, aref by)
 	if(chr.chr_ai.tmpl == LAI_TMPL_STAY || chr.chr_ai.tmpl == LAI_TMPL_GOTO || chr.chr_ai.tmpl == LAI_TMPL_ANI) return true;
 	return false;
 }
-
 //Начать диалог
 void LAi_type_owner_StartDialog(aref chr, aref by)
 {
@@ -250,7 +234,6 @@ void LAi_type_owner_StartDialog(aref chr, aref by)
 	CharacterTurnByChr(chr, by);
 	LAi_tmpl_SetActivatedDialog(chr, by);
 }
-
 //Закончить диалог
 void LAi_type_owner_EndDialog(aref chr, aref by)
 {
@@ -263,14 +246,10 @@ void LAi_type_owner_EndDialog(aref chr, aref by)
 		LAi_CharacterRestoreAy(chr);
 	}
 }
-
 //Персонаж выстрелил
 void LAi_type_owner_Fire(aref attack, aref enemy, float kDist, bool isFindedEnemy)
 {
-
 }
-
-
 //Персонаж атакован
 void LAi_type_owner_Attacked(aref chr, aref by)
 {
@@ -282,13 +261,11 @@ void LAi_type_owner_Attacked(aref chr, aref by)
 		LAi_type_warrior_PlaySound(chr);
 	}
 }
-
 //Ориентироваться по текущему локатору
 void LAi_type_owner_RestoreAngle(aref chr)
 {
 	CharacterTurnByLoc(chr, "barmen", chr.chr_ai.type.locator);
 }
-
 //Найти врага
 int LAi_type_owner_FindEnemy(aref chr, int num)
 {
@@ -303,7 +280,6 @@ int LAi_type_owner_FindEnemy(aref chr, int num)
 	}
 	return -1;
 }
-
 //Отправить хозяина в другой локатор
 void LAi_type_owner_SetGoto(aref chr)
 {
@@ -318,7 +294,6 @@ void LAi_type_owner_SetGoto(aref chr)
 	LAi_tmpl_goto_SetLocator(chr, "barmen", chr.chr_ai.type.locator, 600.0);
 	chr.chr_ai.type.state = "goto";
 }
-
 //Установить задание после прихода в локатор
 void LAi_type_owner_SetAfterGoto(aref chr)
 {
@@ -338,7 +313,6 @@ void LAi_type_owner_SetAfterGoto(aref chr)
 		else chr.chr_ai.type.wait = stf(1.0 + frnd() * 4.0);
 	}
 }
-
 void LAi_type_owner_TestControl(aref chr)
 {	
 	if(LAi_Character_CanDialog(chr, pchar))

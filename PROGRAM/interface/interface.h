@@ -1,5 +1,4 @@
 #define INTERFACE_QUANTITY				58
-
 #define INTERFACE_STORE					0
 #define INTERFACE_SHIPYARD				1
 #define INTERFACE_CHARACTER				2  // просмотр НПС и выбор специал
@@ -62,9 +61,7 @@
 #define INTERFACE_DIRSAILENC			56
 // <-- Ugeen
 #define INTERFACE_COLONY_MANAGEMENT        57
-
 #define RC_INTERFACE_DO_NOTHING			-1
-
 // main menu exit codes
 #define RC_INTERFACE_MAIN_MENU_EXIT				45000
 #define RC_INTERFACE_DO_NEW_GAME				45001
@@ -152,20 +149,15 @@
 #define RC_INTERFACE_REPAIR						45083	// Интерфейс ремонта
 #define RC_INTERFACE_DIRSAILENC					45084
 // <-- Ugeen
-
 #define MAX_SAVE_STORE_BLOCKS	160
-
 int	interfaceResultCommand;
 object	GameInterface;
 object	LanguageObject;
 object  Interfaces[INTERFACE_QUANTITY];
-
-
 // состояние интерфейса
 object InterfaceStates;
 //профиль игрока
 object PlayerProfile;
-
 extern void InitBaseInterfaces();
 extern void InitBaseInterfaces_main();
 extern void InitInterfaceTables();

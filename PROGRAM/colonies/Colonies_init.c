@@ -1,12 +1,9 @@
-
 void InitColonies()
 {
 	int n, i;
-
 	for (i=0; i<MAX_COLONIES; i++)
 	{
 		DeleteAttribute(&Colonies[i], "");
-
         Colonies[i].index = i; // boal fix
 		Colonies[i].id = "";
         Colonies[i].nation = "none";
@@ -38,21 +35,17 @@ void InitColonies()
 		Colonies[i].loyality = "1";
 		Colonies[i].disease = "0";
 		Colonies[i].disease.time = "0";
-
 		Colonies[i].num = "1";
 		colonies[i].population = 0;
 		colonies[i].colonists = 0;
 		colonies[i].tax_rate = (MOD_SKILL_ENEMY_RATE);
-
 		colonies[i].isBuild = 0;
 		colonies[i].info.day = worldMap.date.day;
 		colonies[i].info.month = worldMap.date.month;
 		colonies[i].info.year = worldMap.date.year;
 		colonies[i].ismaincolony = 0;
-
 		colonies[i].fort = 3;
 		colonies[i].jail = rand(1); //где начальник тюрьмы мздоимец
-
 		// Vex: porting colony management -->
 		colonies[i].morale = 50;
 		colonies[i].colonists = 0;
@@ -69,11 +62,9 @@ void InitColonies()
 		colonies[i].goldmines = rand(1)-1;
 		colonies[i].silvermines = rand(1)-1;
 		// <-- Vex: porting colony management
-
 		//SetTradeRules(i);
 	}
 	//SetContrabandRules();
-		
 	///////////////////////////////////////////////////////////////////// 
 	/// Bridgetown
 	///////////////////////////////////////////////////////////////////// 
@@ -92,7 +83,6 @@ void InitColonies()
 		colonies[n].Default.BoardLocation = "Bridgetown_ExitTown";
 		colonies[n].FortValue = 60; // homo
 		colonies[n].mayak = 2;
-				
 	///////////////////////////////////////////////////////////////////// 
 	/// San Juan
 	///////////////////////////////////////////////////////////////////// 
@@ -110,7 +100,6 @@ void InitColonies()
 		colonies[n].from_sea   = "SanJuan_town";
 		colonies[n].Default.BoardLocation = "SanJuan_ExitTown";
 		colonies[n].FortValue = 75; // homo
-						
 	/////////////////////////////////////////////////////////////////////
 	/// PortRoyal
 	/////////////////////////////////////////////////////////////////////
@@ -130,7 +119,6 @@ void InitColonies()
 		colonies[n].Default.BoardLocation = "PortRoyal_ExitTown";
 		colonies[n].FortValue = 95; // homo	
 		colonies[n].mayak = 3;
-		
 	//////////////////////////////
 	/// FortOrange  (Jamaica)
 	//////////////////////////////
@@ -148,7 +136,6 @@ void InitColonies()
 		colonies[n].from_sea   = "Shore35";
 		colonies[n].HasNoFort = true;
 		colonies[n].Default.BoardLocation = "FortOrange_ExitTown";
-		
 	///////////////////////////////////////////////////////////////////// 
 	/// Santiago (Cuba)
 	///////////////////////////////////////////////////////////////////// 
@@ -167,7 +154,6 @@ void InitColonies()
 		colonies[n].Default.BoardLocation = "Santiago_ExitTown";
 		colonies[n].FortValue = 70; // homo
 		colonies[n].mayak = 9;
-				
 	/////////////////////////////////////////////////////////////////////
 	/// PuertoPrincipe (Cuba)
 	/////////////////////////////////////////////////////////////////////
@@ -184,7 +170,6 @@ void InitColonies()
 		colonies[n].HasNoFort = true;
 		colonies[n].StoreNum   = PuertoPrincipe_STORE;
 		colonies[n].from_sea   = "PuertoPrincipe_port";
-				
 	/////////////////////////////////////////////////////////////////////
 	/// Havana
 	/////////////////////////////////////////////////////////////////////
@@ -204,7 +189,6 @@ void InitColonies()
 		colonies[n].Default.BoardLocation = "Havana_ExitTown";
 		colonies[n].FortValue = 95; // homo
 		colonies[n].mayak = 10;
-				
 	///////////////////////////////////////////////////////////////////// 
 	/// Villemstad (Curacao)
 	///////////////////////////////////////////////////////////////////// 
@@ -224,7 +208,6 @@ void InitColonies()
 		colonies[n].Default.BoardLocation = "Villemstad_ExitTown";
 		colonies[n].FortValue = 95; // homo
 		colonies[n].notCaptured = true; //на давать захватывать город себе
-				
 	///////////////////////////////////////////////////////////////////// 
 	/// Tortuga
 	///////////////////////////////////////////////////////////////////// 
@@ -243,7 +226,6 @@ void InitColonies()
 		colonies[n].Default.BoardLocation = "Tortuga_ExitTown";
 		colonies[n].FortValue = 95; // homo
 		colonies[n].mayak = 6;
-				
 	///////////////////////////////////////////////////////////////////// 
 	/// Marigo (St. Martin)
 	///////////////////////////////////////////////////////////////////// 
@@ -261,7 +243,6 @@ void InitColonies()
 		colonies[n].from_sea   = "Marigo_town";
 		colonies[n].Default.BoardLocation = "Marigo_ExitTown";
 		colonies[n].FortValue = 80; // homo
-				
 	///////////////////////////////////////////////////////////////////// 
 	/// Port Spain  {Trinidad)
 	///////////////////////////////////////////////////////////////////// 
@@ -280,7 +261,6 @@ void InitColonies()
 		colonies[n].Default.BoardLocation = "PortSpein_ExitTown";
 		colonies[n].FortValue = 40; // homo
 		colonies[n].mayak = 1;
-		
 	///////////////////////////////////////////////////////////////////// 
 	/// Charles  (Nevis)
 	///////////////////////////////////////////////////////////////////// 
@@ -300,7 +280,6 @@ void InitColonies()
 		colonies[n].Default.BoardLocation = "Charles_ExitTown";
 		colonies[n].FortValue = 55; // homo
 		colonies[n].mayak = 5;
-				
 	/////////////////////////////////////////////////////////////////////
 	/// SentJons  (Antigua)
 	///////////////////////////////////////////////////////////////////// 
@@ -319,7 +298,6 @@ void InitColonies()
 		colonies[n].Default.BoardLocation = "SentJons_ExitTown";
 		colonies[n].FortValue = 75; // homo
 	    colonies[n].jail = 0; // тюрьма Сент-Джонса всегда образцовая. нужно по квестам.
-		
 	/////////////////////////////////////////////////////////////////////
 	/// Guadeloupe
 	///////////////////////////////////////////////////////////////////// 
@@ -338,7 +316,6 @@ void InitColonies()
 		colonies[n].Default.BoardLocation = "BasTer_ExitTown";
 		colonies[n].FortValue = 85; // homo
 		colonies[n].mayak = 4;
-		
 	///////////////////////////////////////////////////////////////////// 
 	/// FortFrance (Martinique)
 	///////////////////////////////////////////////////////////////////// 
@@ -357,7 +334,6 @@ void InitColonies()
 		colonies[n].Default.BoardLocation = "FortFrance_ExitTown";
 		colonies[n].FortValue = 80; // homo
 		colonies[n].jail = 0; // тюрьма Сен-Пьера всегда образцовая. нужно по квесту Шарля.
-		
     //////////////////////////
 	/// LeFransua (Martinique)
     //////////////////////////
@@ -374,7 +350,6 @@ void InitColonies()
 		colonies[n].StoreNum   = LeFransua_STORE;
 		colonies[n].from_sea   = "LeFransua_port";
 		colonies[n].HasNoFort = true;
-
 	///////////////////////////////////////////////////////////////////// 
 	/// La Vega
 	///////////////////////////////////////////////////////////////////// 
@@ -391,7 +366,6 @@ void InitColonies()
 		colonies[n].StoreNum   = LaVega_STORE;
 		colonies[n].from_sea   = "LaVega_port";
 		colonies[n].HasNoFort = true;
-        		
 	///////////////////////////////////////////////////////////////////// 
 	/// Santo Domingo
 	///////////////////////////////////////////////////////////////////// 
@@ -410,7 +384,6 @@ void InitColonies()
 		colonies[n].Default.BoardLocation = "SantoDomingo_ExitTown";
 		colonies[n].FortValue = 45; // homo
 		colonies[n].mayak = 8;
-		
 	///////////////////////////////////////////////////////////////////// 
 	/// Pirates
 	///////////////////////////////////////////////////////////////////// 
@@ -428,7 +401,6 @@ void InitColonies()
 		colonies[n].StoreNum   = Pirates_STORE;
 		colonies[n].from_sea   = "Pirates_town";
 		colonies[n].HasNoFort = true;
-				
 	/////////////////////////////////////////////////////////////////////
 	/// PortPax  (Hispaniola)
 	/////////////////////////////////////////////////////////////////////
@@ -447,7 +419,6 @@ void InitColonies()
 		colonies[n].Default.BoardLocation = "PortPax_ExitTown";
 		colonies[n].FortValue = 55; // homo
 		colonies[n].mayak = 7;
-		
 	/////////////////////////////////////////////////////////////////////
 	/// Panama  (Mein)
 	/////////////////////////////////////////////////////////////////////
@@ -466,7 +437,6 @@ void InitColonies()
 		colonies[n].Default.BoardLocation = "Panama_ExitTown";
 		// FortValue  нет, чтоб не брать осадами, город себе не забрать, тк форт будет жив
 		// для генерптора нужно исключать, но пока не ясно colonies[n].HasNoFort = true;
-						
 	/////////////////////////////////////////////////////////////////////
 	/// PortoBello (Mein)
 	/////////////////////////////////////////////////////////////////////
@@ -486,7 +456,6 @@ void InitColonies()
 		colonies[n].Default.BoardLocation = "PortoBello_ExitTown";
 		colonies[n].FortValue = 65; // homo
 		colonies[n].notCaptured = true; //на давать захватывать город себе
-				
 	/////////////////////////////////////////////////////////////////////
 	/// Cartahena (Mein)
 	/////////////////////////////////////////////////////////////////////
@@ -505,7 +474,6 @@ void InitColonies()
 		colonies[n].Default.BoardLocation = "Cartahena_ExitTown";
 		colonies[n].FortValue = 45; // homo
 		colonies[n].mayak = 11;
-				
 	/////////////////////////////////////////////////////////////////////
 	/// Maracaibo (Mein)
 	/////////////////////////////////////////////////////////////////////
@@ -523,7 +491,6 @@ void InitColonies()
 		colonies[n].from_sea   = "Maracaibo_town";
 		colonies[n].Default.BoardLocation = "Maracaibo_ExitTown";
 		colonies[n].FortValue = 90; // homo
-				
 	/////////////////////////////////////////////////////////////////////
 	/// Caracas (Mein)
 	/////////////////////////////////////////////////////////////////////
@@ -541,7 +508,6 @@ void InitColonies()
 		colonies[n].from_sea   = "Caracas_town";
 		colonies[n].Default.BoardLocation = "Caracas_ExitTown";
 		colonies[n].FortValue = 40; // homo
-		
 	/////////////////////////////////////////////////////////////////////
 	/// Cumana (Mein)
 	/////////////////////////////////////////////////////////////////////
@@ -559,7 +525,6 @@ void InitColonies()
 		colonies[n].from_sea   = "Cumana_town";
 		colonies[n].Default.BoardLocation = "Cumana_ExitTown";
 		colonies[n].FortValue = 75; // homo
-				
 	/////////////////////////////////////////////////////////////////////
 	/// SantaCatalina (Mein)
 	/////////////////////////////////////////////////////////////////////
@@ -577,7 +542,6 @@ void InitColonies()
 		colonies[n].from_sea   = "SantaCatalina_town";
 		colonies[n].Default.BoardLocation = "SantaCatalina_ExitTown";
 		colonies[n].FortValue = 65; // homo
-		
 	/////////////////////////////////////////////////////////////////////
 	/// Beliz (Mein)
 	/////////////////////////////////////////////////////////////////////
@@ -595,7 +559,6 @@ void InitColonies()
 		colonies[n].from_sea   = "Beliz_town";
 		colonies[n].Default.BoardLocation = "Beliz_ExitTown";
 		colonies[n].FortValue = 85; // homo
-		
 	/////////////////////////////////////////////////////////////////////
 	/// Pearl (Mein)
 	/////////////////////////////////////////////////////////////////////
@@ -612,7 +575,6 @@ void InitColonies()
 		colonies[n].StoreNum   = Pirates_STORE; // заглушка
 		colonies[n].from_sea   = "";
 		colonies[n].HasNoFort = true;
-
 	/////////////////////////////////////////////////////////////////////
 	/// Tenotchitlan (Mein)
 	/////////////////////////////////////////////////////////////////////
@@ -629,7 +591,6 @@ void InitColonies()
 		colonies[n].StoreNum   = Pirates_STORE; // заглушка
 		colonies[n].from_sea   = "";
 		colonies[n].HasNoFort = true;
-
 	/////////////////////////////////////////////////////////////////////
 	/// Minentown (Mein)
 	/////////////////////////////////////////////////////////////////////
@@ -646,9 +607,7 @@ void InitColonies()
 		colonies[n].StoreNum   = Pirates_STORE; // заглушка
 		colonies[n].from_sea   = "";
 		colonies[n].HasNoFort = true;
-
 //========================= необитайки ==================================
-
 	/////////////////////////////////////////////////////////////////////
 	/// Dominica
 	/////////////////////////////////////////////////////////////////////
@@ -665,7 +624,6 @@ void InitColonies()
 		colonies[n].StoreNum   = Pirates_STORE; // заглушка
 		colonies[n].from_sea   = "";
 		colonies[n].HasNoFort = true;
-
 	/////////////////////////////////////////////////////////////////////
 	/// Terks
 	/////////////////////////////////////////////////////////////////////
@@ -682,7 +640,6 @@ void InitColonies()
 		colonies[n].StoreNum   = Pirates_STORE; // заглушка
 		colonies[n].from_sea   = "";
 		colonies[n].HasNoFort = true;
-
 	/////////////////////////////////////////////////////////////////////
 	/// Caiman
 	/////////////////////////////////////////////////////////////////////
@@ -699,7 +656,6 @@ void InitColonies()
 		colonies[n].StoreNum   = Pirates_STORE; // заглушка
 		colonies[n].from_sea   = "";
 		colonies[n].HasNoFort = true;
-
 	/////////////////////////////////////////////////////////////////////
 	/// ГПК
 	/////////////////////////////////////////////////////////////////////
@@ -716,7 +672,6 @@ void InitColonies()
 		colonies[n].StoreNum   = Pirates_STORE; // заглушка
 		colonies[n].from_sea   = "LostShipsCity_town";
 		colonies[n].HasNoFort = true;
-				
 	/////////////////////////////////////////////////////////////////////
 	/// Исла де Муэрте
 	/////////////////////////////////////////////////////////////////////
@@ -734,7 +689,6 @@ void InitColonies()
 		colonies[n].StoreNum   = Pirates_STORE; // заглушка
 		colonies[n].from_sea   = "";
 		colonies[n].HasNoFort = true;		
-		
 	/////////////////////////////////////////////////////////////////////
 	/// Ксочитэм
 	/////////////////////////////////////////////////////////////////////
@@ -752,7 +706,6 @@ void InitColonies()
 		colonies[n].StoreNum   = Pirates_STORE; // заглушка
 		colonies[n].from_sea   = "";
 		colonies[n].HasNoFort = true;				
-		
 	/////////////////////////////////////////////////////////////////////
 	/// Северные рифы
 	/////////////////////////////////////////////////////////////////////
@@ -770,7 +723,6 @@ void InitColonies()
 		colonies[n].StoreNum   = Pirates_STORE; // заглушка
 		colonies[n].from_sea   = "";
 		colonies[n].HasNoFort = true;					
-		
 	/////////////////////////////////////////////////////////////////////
 	/// Санта-Квитерия
 	/////////////////////////////////////////////////////////////////////
@@ -788,7 +740,6 @@ void InitColonies()
 		colonies[n].StoreNum   = Pirates_STORE; // заглушка
 		colonies[n].from_sea   = "";
 		colonies[n].HasNoFort = true;			
-
 	/////////////////////////////////////////////////////////////////////
 	/// Крабовый остров
 	/////////////////////////////////////////////////////////////////////
@@ -806,7 +757,6 @@ void InitColonies()
 		colonies[n].StoreNum   = Pirates_STORE; // заглушка
 		colonies[n].from_sea   = "";
 		colonies[n].HasNoFort = true;			
-	
 	////////////////////////////////////////////////////////////////////
 	/// Исла-Мона
 	/////////////////////////////////////////////////////////////////////
@@ -824,7 +774,6 @@ void InitColonies()
 		colonies[n].StoreNum   = Pirates_STORE; // заглушка
 		colonies[n].from_sea   = "";
 		colonies[n].HasNoFort = true;				
-		
 	////////////////////////////////////////////////////////////////////
 	/// Исла-де-Коче
 	/////////////////////////////////////////////////////////////////////
@@ -842,7 +791,6 @@ void InitColonies()
 		colonies[n].StoreNum   = Pirates_STORE; // заглушка
 		colonies[n].from_sea   = "";
 		colonies[n].HasNoFort = true;
-
 	/////////////////////////////////////////////////////////////////////
 	/// Сан-Андрес
 	/////////////////////////////////////////////////////////////////////
@@ -861,8 +809,5 @@ void InitColonies()
 		colonies[n].Default.BoardLocation = "SanAndres_ExitTown";
 		colonies[n].FortValue = 80; 		
 		colonies[n].DontSetShipInPort = true; // 280313
-
-
-
 		CreateColonyPopulation();
 } 

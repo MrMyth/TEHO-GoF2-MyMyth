@@ -2,20 +2,16 @@ void ProcessDialogEvent()
 {
 	ref NPChar;
 	aref Link, NextDiag;
-
 	DeleteAttribute(&Dialog,"Links");
-
 	makeref(NPChar,CharacterRef);
 	makearef(Link, Dialog.Links);
 	makearef(NextDiag, NPChar.Dialog);
-
     ref chr, sld, rShip, rItm, rItem;
     float  fTemp;
     bool bOk;
 	int i, iTemp;
 	string sAttr, sGun, sBullet, attrL;
 	aref rType;
-    
 	// генератор ИДХ по кейсу -->
 	sAttr = Dialog.CurrentNode;
   	if (findsubstr(sAttr, "CabinCompanionTalk_" , 0) != -1)
@@ -24,7 +20,6 @@ void ProcessDialogEvent()
 	 	PChar.GenQuest.CabinCompanionNum = strcut(sAttr, i+1, strlen(sAttr)-1); // индекс в конце
  	    Dialog.CurrentNode = "Cabin_Companion_Talk";
  	}
-	
 	if (findsubstr(sAttr, "SetGunBullets1_" , 0) != -1)
  	{
         i = findsubstr(sAttr, "_" , 0);
@@ -32,17 +27,14 @@ void ProcessDialogEvent()
  	    Dialog.CurrentNode = "SetGunBullets2";
  	}
  	// генератор ИДХ по кейсу <--
-
 	switch(Dialog.CurrentNode)
 	{
         case "Exit":
 			NextDiag.CurrentNode = NextDiag.TempNode;
 			DialogExit_Self();
 		break;
-		
 		case "First time":
 	      	NextDiag.TempNode = "First time";
-
 	        Dialog.Text = "If you're reading this line, it's a bug in the code";
 			Link.l1 = "Exit";
 			Link.l1.go = "exit";
@@ -71,7 +63,6 @@ void ProcessDialogEvent()
     			link.l1.go = "exit";
 				pchar.RomanticQuest = "FoundServantGirl";
     		}
-			
 			//--> Ложный след
 			if(CheckAttribute(pchar, "questTemp.FalseTrace") && pchar.questTemp.FalseTrace == "TalkCabinWoman" && PChar.location == Get_My_Cabin()) 
 	        {
@@ -84,7 +75,6 @@ void ProcessDialogEvent()
 				AddDialogExitQuest("SetFalseTraceCharToCabin");
 	    	}
 			//<-- Ложный след
-			
 			//--> Португалец
 			if (CheckAttribute(pchar, "questTemp.Portugal") && pchar.questTemp.Portugal == "DigGems")
     		{
@@ -118,7 +108,6 @@ void ProcessDialogEvent()
     			link.l5.go = "knock_3_1";
     		}
 			//<-- приколы со стуком в дверь Диффиндура, LSC
-			
 			//--> напялили водолазный скафандр, для перехода в режим шага
 			if (pchar.model == "protocusto")
     		{
@@ -287,7 +276,6 @@ void ProcessDialogEvent()
 				AddDialogExitQuestFunction("BlueBird_endCaveDialog");
 			}
 		break;
-		
 		// boal -->
 		case "TalkSelf_Main":
 	   		NextDiag.TempNode = "First time";
@@ -344,14 +332,12 @@ void ProcessDialogEvent()
 	            Link.l6 = "Start capturing the nearest town.";
 	    		Link.l6.go = "TalkSelf_TownAttack";
 	        }
-	        
 			bool bSeaBattle = (bDisableMapEnter) && (bSeaActive) && (!CheckAttribute(pchar, "GenQuest.MapClosedNoBattle"));
 	        if(!bSeaBattle && PChar.location != "Deck_Near_Ship" && findsubstr(PChar.location, "_shipyard" , 0) == -1 && PChar.location != "CommonPackhouse_2" && !CheckAttribute(pchar, "GenQuest.CannotWait")) 
 	        {
 	        	Link.l7 = "It would surely not hurt to rest...";
 	    		Link.l7.go = "TalkSelf_StartWait";
 	    	}
-			
 			sGun = GetCharacterEquipByGroup(pchar, GUN_ITEM_TYPE);
 			if(sGun != "")
 			{
@@ -361,12 +347,8 @@ void ProcessDialogEvent()
 					Link.l8.go = "SetGunBullets";
 				}	
 			}
-			
 			Link.l14 = "I want to choose a potion for constant use.";
 			Link.l14.go = "ChoosePotion";
-			
-			
-			
 			//--> Голландский гамбит
 			if(CheckAttribute(pchar, "questTemp.HWIC_Coordinates") && PChar.location == Get_My_Cabin()) 
 	        {
@@ -374,7 +356,6 @@ void ProcessDialogEvent()
 	    		Link.l9.go = "Seek_AbyIsland";
 	    	}
 			//<-- Голландский гамбит
-			
 			//--> Ложный след
 			if(CheckAttribute(pchar, "questTemp.FalseTrace") && pchar.questTemp.FalseTrace == "TalkCabin" && PChar.location == Get_My_Cabin()) 
 	        {
@@ -440,11 +421,9 @@ void ProcessDialogEvent()
 			//<-- завершение игры
 			Link.l10 = RandPhraseSimple("Not now. There is no time.", "No time for that, too much to do.");
 			Link.l10.go = "exit";
-
 			Link.l69 = "[VEX DEBUG]";
 			Link.l69.go = "VEX_DEBUG";
 		break;
-
 		case "VEX_DEBUG":
 			Dialog.Text = "VEX DEBUG";
 			Link.l1 = "Trace all characters!";
@@ -453,45 +432,32 @@ void ProcessDialogEvent()
 			Link.l2.go = "VEX_DEBUG_LIST_ITEMS";
 			Link.l3 = "Item management";
 			Link.l3.go = "VEX_DEBUG_ITEM_MANAGEMENT";
-
 			Link.l4 = "Personal cheats!";
 			Link.l4.go = "VEX_DEBUG_PERSONAL";
-
 			Link.l7 = "Levels and skills!";
 			Link.l7.go = "VEX_DEBUG_LEVELS_AND_SKILLS";
-
 			Link.l10 = "Colony management.";
 			Link.l10.go = "VEX_DEBUG_COLONY_MANAGEMENT";
-
 			Link.l11 = "Ship management.";
 			Link.l11.go = "VEX_DEBUG_SHIP_MANAGEMENT";
-
 			Link.l20 = "RUN SCRIPT!";
 			Link.l20.go = "VEX_DEBUG_RUN_SCRIPT";
-
 			Link.l99 = "Exit";
 			Link.l99.go = "exit";
 		break;
-
 		case "VEX_DEBUG_RUN_SCRIPT":
 			Dialog.Text = "Refreshing weather.";
 			Whr_LoadNextWeather(0);
-
 			/*string sColony = "Tortuga";
 			int iColony = FindColony(sColony);
 			colonies[iColony].loyality = 99;
 			colonies[iColony].morale = 99;
 			colonies[iColony].population = 5000;*/
-
-
-
 			Link.l1 = "Exit";
 			Link.l1.go = "exit";
 		break;
-
 		case "VEX_DEBUG_PERSONAL":
 			Dialog.Text = "Personal cheats!";
-
 			if(CheckAttribute(pchar, "herculesmode")){
 				Link.l1 = "Disable Hercules mode!";
 			}
@@ -499,7 +465,6 @@ void ProcessDialogEvent()
 				Link.l1 = "Enable Hercules mode!";
 			}
 			Link.l1.go = "VEX_DEBUG_PERSONAL_HERCULES";
-
 			if(CheckAttribute(pchar, "godmode")){
 				Link.l2 = "Disable God mode!";
 			}
@@ -507,7 +472,6 @@ void ProcessDialogEvent()
 				Link.l2 = "Enable God mode!";
 			}
 			Link.l2.go = "VEX_DEBUG_PERSONAL_GOD";
-
 			if(CheckAttribute(pchar, "worldmapencountersoff") && pchar.worldmapencountersoff == 1){
 				Link.l3 = "Enable worldmap encounters!";
 			}
@@ -515,14 +479,11 @@ void ProcessDialogEvent()
 				Link.l3 = "Disable worldmap encounters!";
 			}
 			Link.l3.go = "VEX_DEBUG_PERSONAL_WORLDMAP_ENCOUNTERS";
-
 			Link.l4 = "Add 10,000,000 gold!";
 			Link.l4.go = "VEX_DEBUG_PERSONAL_GOLD";
-
 			Link.l99 = "Exit";
 			Link.l99.go = "exit";
 		break;
-
 		case "VEX_DEBUG_PERSONAL_WORLDMAP_ENCOUNTERS":
 			if(CheckAttribute(pchar, "worldmapencountersoff") && pchar.worldmapencountersoff == 1){
 				pchar.worldmapencountersoff = 0;
@@ -532,11 +493,9 @@ void ProcessDialogEvent()
 				pchar.worldmapencountersoff = 1;
 				Dialog.Text = "Worldmap encounters disabled!";
 			}
-
 			Link.l1 = "Exit";
 			Link.l1.go = "exit";
 		break;
-
 		case "VEX_DEBUG_PERSONAL_HERCULES":
 			if(CheckAttribute(pchar, "herculesmode")){
 				DeleteAttribute(pchar, "herculesmode");
@@ -546,11 +505,9 @@ void ProcessDialogEvent()
 				pchar.herculesmode = true;
 				Dialog.Text = "Hercules mode enabled!";
 			}
-
 			Link.l1 = "Exit";
 			Link.l1.go = "exit";
 		break;
-
 		case "VEX_DEBUG_PERSONAL_GOD":
 			if(CheckAttribute(pchar, "godmode")){
 				DeleteAttribute(pchar, "godmode");
@@ -562,115 +519,80 @@ void ProcessDialogEvent()
 				LAi_SetImmortal(pchar, true);
 				Dialog.Text = "God mode enabled!";
 			}
-
 			Link.l1 = "Exit";
 			Link.l1.go = "exit";
 		break;
-
 		case "VEX_DEBUG_PERSONAL_GOLD":
 			AddMoneyToCharacter(pchar, 10000000);
 			Dialog.Text = "10,000,000 gold added!";
 			Link.l1 = "Exit";
 			Link.l1.go = "exit";
 		break;
-
 		case "VEX_DEBUG_SHIP_MANAGEMENT":
 			Dialog.Text = "Ship management!";
 			Link.l1 = "Set Man o' War as player ship!";
 			Link.l1.go = "VEX_DEBUG_SHIP_ADD";
-
 			Link.l2 = "Add good officer!";
 			Link.l2.go = "VEX_DEBUG_SHIP_GOOD_OFFICER";
 			Link.l3 = "Add bad officer!";
 			Link.l3.go = "VEX_DEBUG_SHIP_BAD_OFFICER";
-
 			Link.l99 = "Exit";
 			Link.l99.go = "exit";
 		break;
-
 		case "VEX_DEBUG_SHIP_GOOD_OFFICER":
 			Dialog.Text = "Adding good officer!";
-
-
 			int iChar = NPC_GeneratePhantomCharacter("pofficer", pchar.nation, MAN, -1);
 			ref officer_chr = &characters[iChar];
 			SetNPCModelUniq(officer_chr, "pofficer", MAN);
 			SetOfficerParam(officer_chr, rand(4));
-
 			officer_chr.dialog.filename = "Enc_Officer_dialog.c";
 			officer_chr.dialog.currentnode = "hired";
 			officer_chr.greeting = "Gr_Officer";
-
 			LAi_group_MoveCharacter(officer_chr, LAI_GROUP_PLAYER_OWN);
-
 			officer_chr.loyality = 100.0;
 			officer_chr.reputation = 100;
 			officer_chr.alignment = "good";
-
 			AddPassenger(pchar, officer_chr, false);
-
-
 			Link.l1 = "Exit";
 			Link.l1.go = "exit";
 		break;
-
 		case "VEX_DEBUG_SHIP_BAD_OFFICER":
 			Dialog.Text = "Adding bad officer!";
-
-
 			iChar = NPC_GeneratePhantomCharacter("pofficer", pchar.nation, MAN, -1);
 			officer_chr = &characters[iChar];
 			SetNPCModelUniq(officer_chr, "pofficer", MAN);
 			SetOfficerParam(officer_chr, rand(4));
-
 			officer_chr.dialog.filename = "Enc_Officer_dialog.c";
 			officer_chr.dialog.currentnode = "hired";
 			officer_chr.greeting = "Gr_Officer";
-
 			LAi_group_MoveCharacter(officer_chr, LAI_GROUP_PLAYER_OWN);
-
 			officer_chr.loyality = 100.0;
 			officer_chr.reputation = 0;
 			officer_chr.alignment = "bad";
-
 			AddPassenger(pchar, officer_chr, false);
-
-
 			Link.l1 = "Exit";
 			Link.l1.go = "exit";
 		break;
-
 		case "VEX_DEBUG_SHIP_ADD":
 			Dialog.Text = "Setting best ship!";
-			
 			int shipToAdd = SHIP_LSHIP_ENG;
-
 			pchar.ship.type = GenerateShip(shipToAdd, 1);
 			SetBaseShipData(pchar);
-
 			ref shTo = &RealShips[sti(pchar.Ship.Type)];
 			ref refShip = &ShipsTypes[shipToAdd];
-
 			pchar.ship.crew.quantity = shTo.OptCrew;
-			
 			pchar.ship.cannons.type = refShip.Cannon;
-
 			SetShipCannonsDamagesNull(pchar);
-
 			pchar.ship.crew.exp.sailors = 100;
 			pchar.ship.crew.exp.soldiers = 100;
 			pchar.ship.crew.exp.cannoners = 100;
-
 			pchar.ship.crew.morale = 100;
-
 			SetCharacterGoods(pchar,GOOD_FOOD, 2000);
 			SetCharacterGoods(pchar,GOOD_BOMBS, 2000);
-
 			Dialog.Text = "Set best ship!";
 			Link.l1 = "Exit";
 			Link.l1.go = "exit";
 		break;
-
 		case "VEX_DEBUG_COLONY_MANAGEMENT":
 			Dialog.Text = "Colony management!";
 			Link.l1 = "Take over colony!";
@@ -682,10 +604,8 @@ void ProcessDialogEvent()
 			Link.l4 = "Take over all colonies!";
 			Link.l4.go = "VEX_DEBUG_COLONY_TAKEOVER_ALL";
 		break;
-
 		case "VEX_DEBUG_COLONY_TAKEOVER_ALL":
 			Dialog.Text = "Take over all colonies!";
-
 			/*string CONQUERABLE_COLONIES [28] = {
 				"SentJons",
 				"Bridgetown",
@@ -716,7 +636,6 @@ void ProcessDialogEvent()
 				"LeFransua",
 				"LaVega",
 			};*/ 
-
 			// Colonies that cause problems are commented out
 			string CONQUERABLE_COLONIES[50];
 			int n = 0;
@@ -775,7 +694,6 @@ void ProcessDialogEvent()
 			//CONQUERABLE_COLONIES[n] = "LeFransua";
 			//n = n + 1;
 			//CONQUERABLE_COLONIES[n] = "LaVega";
-
 			for(i=0; i<=n; i++){
 				PlayerCaptureColony(CONQUERABLE_COLONIES[i]);
 				Log_TestInfo("Conquered colony from self-dialogue: " + CONQUERABLE_COLONIES[i]);
@@ -784,7 +702,6 @@ void ProcessDialogEvent()
 			Link.l1 = "Exit";
 			Link.l1.go = "exit";
 		break;
-
 		case "VEX_DEBUG_COLONY_GET_DATA":
 			Dialog.Text = "Colony data!";
 			ref player_location = &Locations[FindLocation(pchar.location)];
@@ -803,20 +720,16 @@ void ProcessDialogEvent()
 			Link.l1 = "Exit";
 			Link.l1.go = "exit";
 		break;
-
 		case "VEX_DEBUG_COLONY_GET_LOCATION":
 			Dialog.Text = "Current location: " + pchar.location + "\nLocation type: " + Locations[FindLocation(pchar.location)].type;
 			Link.l1 = "Exit";
 			Link.l1.go = "exit";
 		break;
-
 		case "VEX_DEBUG_COLONY_TAKEOVER_1":
 			Dialog.Text = "Take over colony by ID:";
 			Link.l1.edit = 1;
 			Link.l1.go = "VEX_DEBUG_COLONY_TAKEOVER_2";
 		break;
-
-
 		case "VEX_DEBUG_COLONY_TAKEOVER_2":
 			Dialog.Text = "Take over colony by ID: ";
 			colonyId = dialogEditStrings[1];
@@ -828,12 +741,9 @@ void ProcessDialogEvent()
 				Dialog.Text = "Colony found: " + colonyId;
 				PlayerCaptureColony(colonyId);
 			}
-
 			Link.l1 = "Exit";
 			Link.l1.go = "exit";
-
 		break;
-
 		case "VEX_DEBUG_ITEM_MANAGEMENT":
 			Link.l1 = "Add item to player by ID!";
 			Link.l1.go = "VEX_DEBUG_ADD_ITEM";
@@ -845,18 +755,14 @@ void ProcessDialogEvent()
 			Link.l4.go = "VEX_DEBUG_ADD_GOF_GUNS";
 			Link.l5 = "Add all GoF items to player!";
 			Link.l5.go = "VEX_DEBUG_ADD_ALL_GOF_ITEMS";
-
 			Link.l99 = "Exit";
 			Link.l99.go = "exit";
 		break;
-
 		case "VEX_DEBUG_ADD_ALL_GOF_ITEMS":
 			Dialog.Text = "Adding GoF items...";
 			for(i=0; i<ITEMS_QUANTITY; i++){
-				
 				bool substrGof = (findSubStr(Items[i].id, "GOF_", 0) == 0);
 				bool emptyItem = (findSubStr(Items[i].id, "GOF_item", 0) == 0);
-
 				Trace("Check item number: " + (i) + " of " + ITEMS_QUANTITY);
 				if(substrGof == true && emptyItem==false){
 					Log_SetStringToLog("Adding item: " + Items[i].id);
@@ -867,60 +773,46 @@ void ProcessDialogEvent()
 			Link.l1 = "";
 			Link.l1.go = "exit";
 		break;
-
 		case "VEX_DEBUG_LEVELS_AND_SKILLS":
 			Dialog.Text = "Adding ranks and skill points.";
 			pchar.skill.freeskill = 100;
 			pchar.rank = 100;
 			pchar.perks.freepoints_self = 100;
 			pchar.perks.freepoints_ship = 100;
-
 			Link.l1 = "";
 			Link.l1.go = "exit";
 		break;
-
 		case "VEX_DEBUG_ADD_GOF_GUNS":
 			Dialog.Text = "Adding GoF guns...";
-
 			for(i=0; i<ITEMS_QUANTITY; i++){
 				Trace("Check item number: " + (i) + " of " + ITEMS_QUANTITY);
-
 				if(findSubStr(Items[i].id, "GOF_", 0) == 0){
 					if(Items[i].groupId == GUN_ITEM_TYPE){
 						items[i].minlevel = 1;
 						Log_SetStringToLog("Adding item: " + Items[i].id);
 						GiveItem2Character(pchar, Items[i].id);
 					}
-					
 				}
 			}
-
 			Dialog.Text = "GoF guns added.";
 			Link.l1 = "";
 			Link.l1.go = "exit";
 		break;
-
-
 		case "VEX_DEBUG_ADD_GOF_BLADES":
 			Dialog.Text = "Adding GoF blades...";
-
 			for(i=0; i<ITEMS_QUANTITY; i++){
 				Trace("Check item number: " + (i) + " of " + ITEMS_QUANTITY);
-
 				if(findSubStr(Items[i].id, "GOF_", 0) == 0){
 					if(Items[i].groupId == BLADE_ITEM_TYPE){
 						Log_SetStringToLog("Adding item: " + Items[i].id);
 						GiveItem2Character(pchar, Items[i].id);
 					}
-					
 				}
 			}
-
 			Dialog.Text = "GoF blades added.";
 			Link.l1 = "";
 			Link.l1.go = "exit";
 		break;
-
 		case "VEX_DEBUG_CLEAR_INVENTORY":
 			Dialog.Text = "Clearing inventory...";
 			RemoveAllCharacterItems(pchar, false);
@@ -928,7 +820,6 @@ void ProcessDialogEvent()
 			Link.l1 = "";
 			Link.l1.go = "exit";
 		break;
-
 		case "VEX_DEBUG_LIST_CHARS":
 			Dialog.Text = "Listing characters...";
 			for (i=0; i<MAX_CHARACTERS; i++)
@@ -941,7 +832,6 @@ void ProcessDialogEvent()
 			Link.l1 = "";
 			Link.l1.go = "exit";
 		break;
-
 		case "VEX_DEBUG_LIST_ITEMS":
 			Dialog.Text = "Listing items...";
 			int itmDesc = LanguageOpenFile("ItemsDescribe.txt");
@@ -965,14 +855,11 @@ void ProcessDialogEvent()
 			Link.l1 = "";
 			Link.l1.go = "exit";
 		break;
-
 		case "VEX_DEBUG_ADD_ITEM":
 			Dialog.Text = "Give the ID of the item to add:";
-
 			Link.l1.edit = 1;
 			Link.l1.go = "VEX_DEBUG_ADD_ITEM2";
 		break;
-
 		case "VEX_DEBUG_ADD_ITEM2":
 			Dialog.Text = "Adding item...";
 			string itemIdTemp = dialogEditStrings[1];
@@ -988,13 +875,11 @@ void ProcessDialogEvent()
 			Link.l1 = "Exit";
 			Link.l1.go = "exit";
 		break;
-
 		case "StartSelfRepair":
 			NextDiag.CurrentNode = NextDiag.TempNode;
 			DialogExit_Self();
 			LaunchRepair(pchar);
 		break;
-		
 		case "SetGunBullets":
 			Dialog.Text = "Select ammunition type:";
 			sGun = GetCharacterEquipByGroup(pchar, GUN_ITEM_TYPE);
@@ -1010,7 +895,6 @@ void ProcessDialogEvent()
 				Link.(attrL).go = "SetGunBullets1_" + i;
 			}
 		break;
-		
 		case "SetGunBullets2":
 			i = sti(PChar.GenQuest.SetGunBullets) + 1; 
 			sGun = GetCharacterEquipByGroup(pchar, GUN_ITEM_TYPE);
@@ -1023,7 +907,6 @@ void ProcessDialogEvent()
 			DeleteAttribute(pchar,"GenQuest.SetGunBullets");
 			DialogExit_Self();
 		break;
-		
 		case "ChoosePotion":
 			Dialog.Text = "";
 	    	Link.l1 = "Healing potion.";
@@ -1046,67 +929,56 @@ void ProcessDialogEvent()
 			Link.l8 = "Wait, I have changed my mind..";
 	    	Link.l8.go = "ChoosePotion8";
 		break;
-		
 		case "ChoosePotion1":
 			log_info("A healing essence will be used on default.");
 			pchar.GenQuest.Potion_choice = "potion1";
 			DialogExit_Self();
 		break;
-		
 		case "ChoosePotion2":
 			log_info("An elixir will be used on default.");
 			pchar.GenQuest.Potion_choice = "potion2";
 			DialogExit_Self();
 		break;
-		
 		case "ChoosePotion3":
 			log_info("A mixture will be used on default.");
 			pchar.GenQuest.Potion_choice = "potion4";
 			DialogExit_Self();
 		break;
-		
 		case "ChoosePotion4":
 			log_info("A ginger root will be used on default.");
 			pchar.GenQuest.Potion_choice = "potion5";
 			DialogExit_Self();
 		break;
-		
 		case "ChoosePotion5":
 			log_info("Rum will be used on default.");
 			pchar.GenQuest.Potion_choice = "potionrum";
 			DialogExit_Self();
 		break;
-		
 		case "ChoosePotion6":
 			log_info("Wine will be used on default.");
 			pchar.GenQuest.Potion_choice = "potionwine";
 			DialogExit_Self();
 		break;
-		
 		case "ChoosePotion7":
 			log_info("The potion will be chosen automatically.");
 			DeleteAttribute(pchar, "GenQuest.Potion_choice");
 			DialogExit_Self();
 		break;
-		
 		case "ChoosePotion8":
 			DialogExit_Self();
 		break;
-		
 		case "TalkSelf_StartWait":
 			NextDiag.CurrentNode = NextDiag.TempNode;
 			DialogExit_Self();
 			PChar.GenQuest.CallFunctionParam = "LaunchTavernWaitScreen";
 			DoQuestCheckDelay("CallFunctionParam", 0.1); // Нужно с задержкой, иначе - ГГ начинает крутиться
 		break;
-		
 		case "TalkSelf_room_night":
 			NextDiag.CurrentNode = NextDiag.TempNode;
 			//AddDialogExitQuestFunction("TavernWaitDate_Night");
 			TavernWaitDate("wait_night");
 			DialogExit_Self();
 		break;
-
 		case "TalkSelf_room_day":
 			NextDiag.CurrentNode = NextDiag.TempNode;
 			//AddDialogExitQuestFunction("TavernWaitDate_Day");
@@ -1186,10 +1058,8 @@ void ProcessDialogEvent()
 				}			
 			}
 	    break;
-
 		case "TalkSelf_TownAttack_Start":
 	        NextDiag.CurrentNode = NextDiag.TempNode;
-
 			Pchar.GenQuestFort.StartAttack = true;
 		    Pchar.GenQuestFort.fortCharacterIdx = GetCharIDXForTownAttack(pchar.location);
 		    DeleteQuestAttribute("Union_with_Escadra");
@@ -1240,7 +1110,6 @@ void ProcessDialogEvent()
 	    		}
 			}
 		break;
-
 		case "TalkSelf_SlavesToCrew_1":
 	        if (CheckOfficersPerk(pchar, "IronWill"))
 	        {
@@ -1262,39 +1131,32 @@ void ProcessDialogEvent()
 			// падение опыта <-- 
 			pchar.Ship.Crew.Quantity = sti(pchar.Ship.Crew.Quantity) + sti(pchar.GenQuest.SlavesToCrew); 
 	        RemoveCharacterGoodsSelf(pchar, GOOD_SLAVES, sti(pchar.GenQuest.SlavesToCrew));       
-			                            
 	        NextDiag.CurrentNode = NextDiag.TempNode;
 			DialogExit_Self();
 		break;
 		// Зачислить рабов в команду  <--
 		// boal <--
-
 //navy CONTRABAND METRO -->
 		case "GenTravel_Main":
 			NextDiag.TempNode = "First time";
 			dialog.Text = "This nice ship is mine now, and I am the captain here! Pity that I had to kill the entire crew, though.";
 			Link.l1 = "It's time to come ashore...";
 			Link.l1.go = "exit";
-
 			chr = CharacterFromID("Abracham_Gray");
 			chr.location = "none";
 			SeaExchangeCharactersShips(PChar, chr, false, false);
 			SetCrewQuantity(PChar, 0);
-
 			//грузим ГГ куда нужно...
 			SetAnyReloadToLocation(pchar.GenQuest.contraTravel.destination.loc, pchar.GenQuest.contraTravel.destination.group, pchar.GenQuest.contraTravel.destination.locator, "", 0, 0, 0, 0);
 			AddDialogExitQuest("AnyReloadToLocation");
             chrDisableReloadToLocation = false;
-            
 			CloseQuestHeader("Gen_ContrabandTravel");
 			setCharacterShipLocation(PChar, pchar.GenQuest.contraTravel.destination.loc);
 			setWDMPointXZ(pchar.GenQuest.contraTravel.destination.loc);
-
 			//трем аттрибуты
 			DeleteAttribute(PChar, "GenQuest.contraTravel");
 			break;
 //navy CONTRABAND METRO <--
-
 //navy --> 13.02.08
 		case "Cabin_CompanionSelect":
 			Dialog.Text = "Which companion to summon?";
@@ -1312,16 +1174,13 @@ void ProcessDialogEvent()
 			link.l9 = "Some other time.";
 			link.l9.go = "exit";
 			break;
-
 		case "Cabin_Companion_Talk":
 			i = sti(PChar.GenQuest.CabinCompanionNum);
 			PlaceCompanionCloneNearMChr(i, false);
-
 			NextDiag.CurrentNode = NextDiag.TempNode;
 			DialogExit_Self();
 			break;
 //navy <--
-
 		//--> Голландский гамбит
 		case "Seek_AbyIsland":
 			bOk = CheckCharacterItem(pchar, "bussol") && CheckCharacterItem(pchar, "clock2");
@@ -1341,7 +1200,6 @@ void ProcessDialogEvent()
 			}
 		break;
 		//<-- Голландский гамбит
-		
 		//--> Ложный след
 		case "FalseTrace_Cabin":
 			dialog.text = "Bosun! Bring Adam Rayner to me immediately!";
@@ -1353,7 +1211,6 @@ void ProcessDialogEvent()
 			pchar.questTemp.FalseTrace.CharID = "Mugger";
 			AddDialogExitQuest("SetFalseTraceCharToCabin");
 		break;
-		
 		case "FalseTrace_Woman":
 			DialogExit();
 			chr = characterFromId("FalseTraceWife");
@@ -1362,7 +1219,6 @@ void ProcessDialogEvent()
 			AddDialogExitQuest("SetFalseTraceCharToCabin");
 		break;
 		//<-- Ложный след
-		
 		//--> LSC, приколы со стуком в дверь
 		case "knock_2":
 			PlaySound("interface\knock_2.wav");
@@ -1370,41 +1226,35 @@ void ProcessDialogEvent()
 			link.l1 = "(wait)";
 			link.l1.go = "knock_wrong";
 		break;
-		
 		case "knock_3":
 			PlaySound("interface\knock.wav");
 			dialog.text = "So, I knocked, now let's wait for the answer...";
 			link.l1 = "(wait)";
 			link.l1.go = "knock_wrong";
 		break;
-		
 		case "knock_3_1":
 			PlaySound("interface\knock_3_1.wav");
 			dialog.text = "So, I knocked, now let's wait for the answer...";
 			link.l1 = "(wait)";
 			link.l1.go = "knock_wrong";
 		break;
-		
 		case "knock_1_3":
 			PlaySound("interface\knock_1_3.wav");
 			dialog.text = "So, I knocked, now let's wait for the answer...";
 			link.l1 = "(wait)";
 			link.l1.go = "knock_wrong";
 		break;
-		
 		case "knock_2_2":
 			PlaySound("interface\knock_2_2.wav");
 			dialog.text = "So, I knocked, now let's wait for the answer...";
 			link.l1 = "(wait)";
 			link.l1.go = "knock_right";
 		break;
-		
 		case "knock_wrong":
 			dialog.text = "He doesn't open the door... I guess I used the wrong secret knock. Alright, I'll come tomorrow and try it again. Today he will not open the door for sure.";
 			link.l1 = "(leave)";
 			link.l1.go = "exit";
 		break;
-		
 		case "knock_right":
 			PlaySound("interface\key.wav");
 			PlaySound("voice\russian\YouFace.wav");
@@ -1415,7 +1265,6 @@ void ProcessDialogEvent()
 			LocatorReloadEnterDisable("LostShipsCity_town", "reload74", false);
 		break;
 		//<-- LSC, приколы со стуком в дверь
-		
 		// суп из черепахи
 		case "terrapin":
 			PlaySound("Interface\Door_Kick.wav");
@@ -1425,7 +1274,6 @@ void ProcessDialogEvent()
 			link.l1.go = "exit";
 			AddDialogExitQuest("Terrapin_GoWindow");
 		break;
-		
 		// защита Сен-Пьера
 		case "SP_defend":
 			PlaySound("VOICE\Russian\military02.wav");
@@ -1434,7 +1282,6 @@ void ProcessDialogEvent()
 			link.l1.go = "exit";
 			AddDialogExitQuest("DefendSP_GoJungle");
 		break;
-		
 		// финал игры
 		case "final_1": // Jason НСО
 			if (CheckAttribute(pchar, "questTemp.Patria.GenGovernor")) // генерал-губернатор никуда не уедет
@@ -1451,7 +1298,6 @@ void ProcessDialogEvent()
 				AddDialogExitQuest("Final_ReturnToEurope");
 			}
 		break;
-		
 		case "final_2":
 			dialog.text = "And I think this is the right decision! What is left in good old Europe waiting for me, if I found myself here? Besides, I can get back to France whenever I choose, anyway!";
 			link.l1 = "";
@@ -1459,7 +1305,6 @@ void ProcessDialogEvent()
 			AddDialogExitQuest("Final_StayInCarribean"); // 010912
 			DeleteAttribute(pchar, "questTemp.Tieyasal_final");
 		break;
-		
 		// Addon-2016 Jason, французские миниквесты (ФМК) Сент-Кристофер
 		case "FMQN_1":
 			dialog.text = "That's the best way. I should come on board and sail away from here.";
@@ -1467,14 +1312,12 @@ void ProcessDialogEvent()
 			link.l1.go = "exit";
 			AddDialogExitQuestFunction("FMQN_ChooseExit");
 		break;
-		
 		case "FMQN_2":
 			dialog.text = "Nah, no way, I am staying. But hell, I won't stay here waiting for God knows what. I should sail to the port of Philipsburg and investigate the situation. I don't fancy the idea of being a tool in the hands of some untruthful Englishman.";
 			link.l1 = "";
 			link.l1.go = "exit";
 			AddDialogExitQuestFunction("FMQN_ChooseContinue");
 		break;
-		
 		// Addon 2016-1 Jason Пиратская линейка
 		case "mtraxx_ammo":
 			Mtraxx_PlantCheckShoreBox(); // анализируем содержимое сундука
@@ -1493,21 +1336,18 @@ void ProcessDialogEvent()
 				link.l1.go = "exit";
 			}
 		break;
-		
 		case "mtraxx_ammo_1":
             dialog.text = "Locking the chest and making a plan to sneak it to the plantation.";
 			link.l1 = "";
 			link.l1.go = "exit";
 			AddDialogExitQuestFunction("Mtraxx_PlantShoreBoxComplete");
 		break;
-		
 		case "mtraxx_mutiny":
             dialog.text = "Go, chaaarge! Huurah!";
 			link.l1 = "";
 			link.l1.go = "exit";
 			AddDialogExitQuestFunction("Mtraxx_PlantMutiny");
 		break;
-		
 		case "mtraxx_boats":
             if (GetSquadronGoods(pchar, GOOD_PLANKS) >= 20 && GetSquadronGoods(pchar, GOOD_LEATHER) >= 10) // наличие материалов
 			{
@@ -1532,7 +1372,6 @@ void ProcessDialogEvent()
 				link.l1.go = "exit";
 			}
 		break;
-		
 		case "mtraxx_powder":
             if (GetSquadronGoods(pchar, GOOD_POWDER) >= 300) // наличие пороха
 			{
@@ -1557,14 +1396,12 @@ void ProcessDialogEvent()
 				link.l1.go = "exit";
 			}
 		break;
-		
 		case "mtraxx_dungeon":
 			PlaySound("ambient\jail\jail_door2.wav");
             dialog.text = "Was it a door?";
 			link.l1 = "";
 			link.l1.go = "mtraxx_dungeon_1";
 		break;
-		
 		case "mtraxx_dungeon_1":
 			PlaySound("ambient\jail\jail_door1.wav");
             dialog.text = "Right! We have visitors... Jan?..";
@@ -1572,7 +1409,6 @@ void ProcessDialogEvent()
 			link.l1.go = "exit";
 			AddDialogExitQuestFunction("Mtraxx_RetributionRunToEnrico");
 		break;
-		
 		// Jason Долго и счастливо
 		case "LH_marry":
 			if (CheckAttribute(pchar, "questTemp.Saga.Helena_officer")) sld = characterFromId("Helena");
@@ -1592,7 +1428,6 @@ void ProcessDialogEvent()
 				link.l3.go = "LH_marry_1_3";
 			}
 		break;
-		
 		case "LH_marry_1_1":
 			pchar.questTemp.LongHappy.Shore = "Shore_ship1";
 			AddQuestRecord("LongHappy", "2_1");
@@ -1604,7 +1439,6 @@ void ProcessDialogEvent()
 			link.l1 = "";
 			link.l1.go = "LH_marry_2";
 		break;
-		
 		case "LH_marry_1_2":
 			pchar.questTemp.LongHappy.Shore = "Mayak6";
 			AddQuestRecord("LongHappy", "2_2");
@@ -1616,7 +1450,6 @@ void ProcessDialogEvent()
 			link.l1 = "";
 			link.l1.go = "LH_marry_2";
 		break;
-		
 		case "LH_marry_1_3":
 			pchar.questTemp.LongHappy.Shore = "Shore36";
 			AddQuestRecord("LongHappy", "2_3");
@@ -1628,7 +1461,6 @@ void ProcessDialogEvent()
 			link.l1 = "";
 			link.l1.go = "LH_marry_2";
 		break;
-		
 		case "LH_marry_2":
 			AddQuestRecord("LongHappy", "3");
 			if (CheckAttribute(pchar, "questTemp.Saga.Helena_officer")) sld = characterFromId("Helena");
@@ -1640,14 +1472,12 @@ void ProcessDialogEvent()
 			link.l1.go = "exit";
 			pchar.questTemp.LongHappy = "choose";
 		break;
-		
 		case "LH_marry_3":
 			dialog.text = "Well, I'm ready!";
 			link.l1 = "";
 			link.l1.go = "exit";
 			LongHappy_MarryOffer();
 		break;
-		
 		case "LH_marry_4":
 			if (LongHappy_CheckGoods())
 			{
@@ -1665,7 +1495,6 @@ void ProcessDialogEvent()
 		break;
 	}
 }
-
 void  DialogExit_Self()
 {
     DialogExit();

@@ -7,7 +7,6 @@ int 	iShipCapacity;
 float 	fShipWeight, fStoreWeight;
 int 	iMaxGoodsStore = 50000;
 int 	iTotalSpace = iMaxGoodsStore
-
 bool 	bShowChangeWin = false;;
 int  	BuyOrSell = 0; // 1-buy -1 sell
 string 	sChrId;
@@ -16,14 +15,11 @@ int 	iShipQty, iStoreQty, iShipPrice, iStorePrice, iUnits;
 float 	fWeight;
 int  	iCurGoodsIdx;
 bool 	ok; // for if
-
 void InitInterface_R(string iniName, ref pStore)
 {
  	StartAboveForm(true);
-
     refStore = pStore;
 	refCharacter = pchar;
-
 	GameInterface.TABLE_LIST.hr.td1.str = XI_ConvertString("In the hold");
 	GameInterface.TABLE_LIST.hr.td1.scale = 0.9;
 	GameInterface.TABLE_LIST.hr.td2.str = "Wgt";
@@ -36,46 +32,34 @@ void InitInterface_R(string iniName, ref pStore)
 	GameInterface.TABLE_LIST.hr.td5.scale = 0.9;
 	GameInterface.TABLE_LIST.hr.td6.str = "Wgt";
 	GameInterface.TABLE_LIST.hr.td6.scale = 0.9;
-
     FillShipsScroll();
-
 	SendMessage(&GameInterface,"ls",MSG_INTERFACE_INIT,iniName);
-
 	CreateString(true,"ShipName","",FONT_NORMAL,COLOR_MONEY, 405,105,SCRIPT_ALIGN_CENTER,1.0);
-
     SetShipWeight();
 	SetDescription();
 	SetFormatedText("INFO_TEXT",totalInfo);
-
 	SendMessage(&GameInterface,"lsl",MSG_INTERFACE_MSG_TO_NODE,"INFO_TEXT",5);
-
 	SetEventHandler("InterfaceBreak","ProcessBreakExit",0);
 	SetEventHandler("exitCancel","ProcessCancelExit",0);
 	SetEventHandler("ievnt_command","ProcCommand",0);
 	SetEventHandler("evntDoPostExit","DoPostExit",0);
-
 	SetEventHandler("OnTableClick", "OnTableClick", 0);
 	SetEventHandler("MouseRClickUP","EndTooltip",0);
 	SetEventHandler("ShowItemInfo", "ShowItemInfo", 0);
 	SetEventHandler("TableSelectChange", "CS_TableSelectChange", 0);
 	SetEventHandler("TransactionOK", "TransactionOK", 0);
 	SetEventHandler("confirmChangeQTY_EDIT", "confirmChangeQTY_EDIT", 0);
-
 	SetEventHandler("ADD_ALL_BUTTON", "ADD_ALL_BUTTON", 0);
 	SetEventHandler("ADD_BUTTON","ADD_BUTTON",0);
 	SetEventHandler("REMOVE_BUTTON", "REMOVE_BUTTON", 0);
 	SetEventHandler("REMOVE_ALL_BUTTON", "REMOVE_ALL_BUTTON", 0);
-
 	SetEventHandler("frame","ProcessFrame",1);
-
 	SetFormatedText("STORECAPTION1", XI_ConvertString("Colony" + refStore.Colony) + ": " + XI_ConvertString("titleStorage"));
 }
-
 void ProcessBreakExit()
 {
 	IDoExit( RC_INTERFACE_STORAGE_EXIT );
 }
-
 void ProcessCancelExit()
 {
 	if (bShowChangeWin)
@@ -87,16 +71,13 @@ void ProcessCancelExit()
 		IDoExit( RC_INTERFACE_STORAGE_EXIT );
 	}
 }
-
 void IDoExit(int exitCode)
 {
     EndAboveForm(true);
-
 	DelEventHandler("InterfaceBreak","ProcessBreakExit");
 	DelEventHandler("exitCancel","ProcessCancelExit");
 	DelEventHandler("ievnt_command","ProcCommand");
 	DelEventHandler("evntDoPostExit","DoPostExit");
-
 	DelEventHandler("OnTableClick", "OnTableClick");
 	DelEventHandler("MouseRClickUP","EndTooltip");
 	DelEventHandler("ShowItemInfo", "ShowItemInfo");
@@ -108,16 +89,13 @@ void IDoExit(int exitCode)
 	DelEventHandler("ADD_BUTTON","ADD_BUTTON");
 	DelEventHandler("REMOVE_BUTTON", "REMOVE_BUTTON");
 	DelEventHandler("REMOVE_ALL_BUTTON", "REMOVE_ALL_BUTTON");
-
 	interfaceResultCommand = exitCode;
 	EndCancelInterface(true);
 }
-
 void ProcCommand()
 {
 	string comName = GetEventData();
 	string nodName = GetEventData();
-
 	switch(nodName)
 	{
 		case "QTY_OK_BUTTON":
@@ -138,7 +116,6 @@ void ProcCommand()
 	            REMOVE_ALL_BUTTON();
 			}
 		break;
-
 		case "QTY_CANCEL_BUTTON":
 			if(comName == "leftstep")
 			{
@@ -157,7 +134,6 @@ void ProcCommand()
 	            REMOVE_ALL_BUTTON();
 			}
 		break;
-
 		case "TABLE_LIST":
 			if(comName == "leftstep")
 			{
@@ -178,19 +154,16 @@ void ProcCommand()
 		break;
 	}
 }
-
 void DoPostExit()
 {
 	int exitCode = GetEventData();
 	IDoExit(exitCode);
 }
-
 void CalculateInfoData()
 {
     AddToTable();
 	ShowGoodsInfo(sti(GameInterface.TABLE_LIST.tr1.index));
 }
-
 void AddToTable()
 {
 	int n, i;
@@ -207,33 +180,25 @@ void AddToTable()
         row = "tr" + n;
 		sGood = Goods[i].name;
 		makearef(refGoods,refStore.Storage.Goods.(sGood));
-                        
 		sShipQ = GetCargoGoods(refCharacter, i);
 		sStoreQ = GetStorageGoodsQuantity(refStore, i); 
-		
 		if(i == GOOD_SLAVES) continue; // рабов низзя !!
-		
 		if(sti(sStoreQ) < 0)
 		{
 			sStoreQ = 0;
 			refGoods.quantity = 0;
 		}
 		if (sStoreQ == 0 && sShipQ == 0) continue; // только не нули
-
 		GameInterface.TABLE_LIST.(row).td1.str = sShipQ;
 		GameInterface.TABLE_LIST.(row).td2.str = GetGoodWeightByType(i, sti(sShipQ));
 		GameInterface.TABLE_LIST.(row).td5.str = Goods[i].Units;
 		GameInterface.TABLE_LIST.(row).td6.str = GetGoodWeightByType(i, sti(sStoreQ));
-
 		GameInterface.TABLE_LIST.(row).td4.str = sStoreQ;
-
 		iColor = argb(255,255,255,255);
-		
 		if(checkAttribute(refCharacter, "ship.cargo.goods." + sGood + ".isquest"))
 		{
 			iColor = argb(255,255,192,255);
 		}
-
         GameInterface.TABLE_LIST.(row).td3.icon.group = "GOODS";
 		GameInterface.TABLE_LIST.(row).td3.icon.image = sGood;
 		GameInterface.TABLE_LIST.(row).td3.icon.offset = "5, 0";
@@ -247,32 +212,26 @@ void AddToTable()
 	}
 	NextFrameRefreshTable();
 }
-
 void NextFrameRefreshTable()
 {
 	SetEventHandler("frame", "RefreshTableByFrameEvent", 0);
 }
-
 void RefreshTableByFrameEvent()
 {
 	DelEventHandler("frame", "RefreshTableByFrameEvent");
 	SendMessage(&GameInterface,"lsl",MSG_INTERFACE_MSG_TO_NODE,"TABLE_LIST", 0 );
 }
-
 void OnTableClick()
 {
 	string sControl = GetEventData();
 	int iRow = GetEventData();
 	int iColumn = GetEventData();
-
 	string sRow = "tr" + (iRow + 1);
     Table_UpdateWindow(sControl);
 }
-
 void ChangePosTable()
 {
 }
-
 void EndTooltip()
 {
 	CloseTooltip(); // всегда убирать, если был
@@ -284,7 +243,6 @@ void EndTooltip()
 	XI_WindowShow("QTY_WINDOW", false);
 	bShowChangeWin = false;
 }
-
 void ShowItemInfo()
 {
 	if (bShowChangeWin) // жмем окей, когда курсор на таблице
@@ -296,7 +254,6 @@ void ShowItemInfo()
 		GameInterface.qty_edit.str = "0";
 		BuyOrSell = 0;
 		ChangeQTY_EDIT();
-
 		XI_WindowDisable("QTY_WINDOW", false);
 		XI_WindowShow("QTY_WINDOW", true);
 		bShowChangeWin = true;
@@ -310,7 +267,6 @@ void ShowItemInfo()
 		}
 	}
 }
-
 void RefreshTable()
 {
     PostEvent("RefreshTable", 100);
@@ -320,12 +276,10 @@ void RefreshTable()
         ChangePosTable();
     }
 }
-
 void Log_InfoOwn(string _str)
 {
     SetFormatedText("INFO_TEXT", _str);
 }
-
 void CS_TableSelectChange()
 {
 	string sControl = GetEventData();
@@ -336,42 +290,31 @@ void CS_TableSelectChange()
 	SetVariable();
     ShowGoodsInfo(sti(GameInterface.TABLE_LIST.(sRow).index));
 }
-
 void FillShipsScroll()
 {
 	nCurScrollNum = -1;
 	FillScrollImageWithCompanionShips("SHIPS_SCROLL", 5);
-
 	if(!CheckAttribute(&GameInterface,"SHIPS_SCROLL.current"))
 	{
 		GameInterface.SHIPS_SCROLL.current = 0;
 	}
 }
-
 void SetVariable()
 {
 	string sText, sTextSecond;
-
 	int nShipType = sti(refCharacter.ship.type);
 	ref refBaseShip = GetRealShip(nShipType);
-
 	iShipCapacity = sti(refBaseShip.Capacity);
 	sText  = iShipCapacity;
-
 	sText  = makeint(fShipWeight) + " / " + sText;
 	sText = sText;
 	SetFormatedText("CAPACITY", XI_ConvertString("Capacity") + ":\n" + sText);
-
 	iTotalSpace = iMaxGoodsStore;
 	string sMaxGoodsStore;
-
 	sMaxGoodsStore = XI_ConvertString("storage");
-
 	SetFormatedText("STORE_CAPACITY", sMaxGoodsStore);
-	
 	sText = "Total workload warehouse : " + GetStorageUsedWeight(refStore) + " / " + iTotalSpace + " cent.";
 	SetFormatedText("STORAGE_INFO", sText);
-
 	if (CheckAttribute(refCharacter, "ship.name"))
 	{
 		GameInterface.strings.shipname = refCharacter.ship.name;
@@ -381,7 +324,6 @@ void SetVariable()
 	    GameInterface.strings.shipname = "";
 	}
 }
-
 void ProcessFrame()
 {
 	if(GetCurrentNode() == "SHIPS_SCROLL")
@@ -391,14 +333,12 @@ void ProcessFrame()
             XI_WindowDisable("QTY_WINDOW", true);
 			XI_WindowShow("QTY_WINDOW", false);
 			nCurScrollNum = sti(GameInterface.SHIPS_SCROLL.current);
-
 			SetDescription();
    			GameInterface.TABLE_LIST.select = 1;
 			GameInterface.TABLE_LIST.top = 0;
 		}
 	}
 }
-
 void SetDescription()
 {
  	if(GetCurrentNode() == "SHIPS_SCROLL")
@@ -416,7 +356,6 @@ void SetDescription()
 	SetNewPicture("MAIN_CHARACTER_PICTURE", "interfaces\portraits\256\face_" + its(refCharacter.FaceId) + ".tga");
 	SetVariable();
 }
-
 void SetShipWeight()
 {
     if (CheckAttribute(refCharacter, "Ship.Cargo.RecalculateCargoLoad") && sti(refCharacter.Ship.Cargo.RecalculateCargoLoad))
@@ -425,47 +364,35 @@ void SetShipWeight()
 		refCharacter.Ship.Cargo.RecalculateCargoLoad = 0;
 	}
 	fShipWeight  = makeint(GetCargoLoad(refCharacter)+ 0.4);
-
 	fStoreWeight = GetStorageUsedWeight(refStore);
 }
-
 void ShowGoodsInfo(int iGoodIndex)
 {
 	string GoodName = goods[iGoodIndex].name;
-
 	int lngFileID = LanguageOpenFile("GoodsDescribe.txt");
 	string sHeader = XI_ConvertString(GoodName);
-
     iCurGoodsIdx = iGoodIndex;
     string goodsDescr = "";
-
 	goodsDescr += GetAssembledString( LanguageConvertString(lngFileID,goodName+"_descr"), &Goods[iGoodIndex]);
     goodsDescr += newStr() + XI_ConvertString("weight") + " " + Goods[iGoodIndex].weight + " " + XI_ConvertString("cwt") +
 	              ", packet " + Goods[iGoodIndex].Units + " " + XI_ConvertString("units");
-
 	iUnits  = sti(Goods[iGoodIndex].Units);
 	fWeight = stf(Goods[iGoodIndex].weight);
-
     BuyOrSell = 0;
     SetFormatedText("QTY_TypeOperation", "");
     SetFormatedText("QTY_Result", "");
     GameInterface.qty_edit.str = "0";
-
 	SetNewGroupPicture("QTY_GOODS_PICTURE", "GOODS", GoodName);
     SetFormatedText("QTY_CAPTION", sHeader);
     SetFormatedText("QTY_GOODS_INFO", goodsDescr);
 	LanguageCloseFile(lngFileID);
-
 	iShipQty = GetCargoGoods(refCharacter, iGoodIndex);
 	iStoreQty = GetStorageGoodsQuantity(refStore, iGoodIndex); 
-
 	SetFormatedText("QTY_INFO_STORE_QTY", its(iStoreQty));
 	SetFormatedText("QTY_INFO_SHIP_QTY", its(iShipQty));
 	BuyOrSell = 0;
-	
 	ShowFoodInfo();
 }
-
 void ShowFoodInfo()
 {
 	if(iCurGoodsIdx == GOOD_FOOD)
@@ -490,7 +417,6 @@ void ShowFoodInfo()
 		}
 	}
 }
-
 void TransactionOK()
 {
 	int nTradeQuantity;
@@ -502,10 +428,7 @@ void TransactionOK()
 	    return;
 	}
     if (!GetRemovable(refCharacter)) return;
-	
 //	trace("CargoCostCoeff() " + GetCargoCostCoeff(GetMainCharacter(), iCurGoodsIdx) + " GetStorageGoodsCostCoeff() " + GetStorageGoodsCostCoeff(refStore, iCurGoodsIdx));
-	
-    
  	if (BuyOrSell == 1) // BUY
 	{
 		SetStorageGoods(refStore, iCurGoodsIdx, iStoreQty - nTradeQuantity, GetCargoCostCoeff(GetMainCharacter(), iCurGoodsIdx));
@@ -522,21 +445,17 @@ void TransactionOK()
 	EndTooltip();
 	ShowGoodsInfo(iCurGoodsIdx); //сбросим все состояния
 }
-
 void confirmChangeQTY_EDIT()
 {
 	ChangeQTY_EDIT();
     SetCurrentNode("QTY_OK_BUTTON");
 }
-
 void ChangeQTY_EDIT()
 {
 	int  iWeight;
 	SetShipWeight();
 	GameInterface.qty_edit.str = sti(GameInterface.qty_edit.str);
-	
 	string GoodName = goods[iCurGoodsIdx].name;
-	
 	if (sti(GameInterface.qty_edit.str) == 0)
 	{
 	    SetFormatedText("QTY_TypeOperation", "");
@@ -552,7 +471,6 @@ void ChangeQTY_EDIT()
 		    	GameInterface.qty_edit.str = -sti(GameInterface.qty_edit.str);
 		    }
             BuyOrSell = -1;
-
 		    // проверка на колво доступное -->
 		    if (sti(GameInterface.qty_edit.str) > iShipQty)
 		    {
@@ -605,7 +523,6 @@ void ChangeQTY_EDIT()
     SetVariable();
     ShowFoodInfo();
 }
-
 void REMOVE_ALL_BUTTON()  // продать все
 {
     if (!GetRemovable(refCharacter)) return;
@@ -618,7 +535,6 @@ void REMOVE_ALL_BUTTON()  // продать все
 	BuyOrSell = 0;
 	ChangeQTY_EDIT();
 }
-
 void ADD_ALL_BUTTON()  // купить все
 {
     if (!GetRemovable(refCharacter)) return;
@@ -631,7 +547,6 @@ void ADD_ALL_BUTTON()  // купить все
 	BuyOrSell = 0;
 	ChangeQTY_EDIT();
 }
-
 void REMOVE_BUTTON()  // продать
 {
     if (!GetRemovable(refCharacter)) return;
@@ -654,7 +569,6 @@ void REMOVE_BUTTON()  // продать
 	}
 	ChangeQTY_EDIT();
 }
-
 void ADD_BUTTON()  // купить
 {
     if (!GetRemovable(refCharacter)) return;

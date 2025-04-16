@@ -1,45 +1,35 @@
-
 //0,1,2,3,4,5 - ????
 //6,7,8,9,10 - ????
 //11,12,13,14,15,16,17,18 - ????
-
 int Whr_InitNight(int n)
 {
-
 // ====================================================================
 // Night1
-
 	Weathers[n].id = "0 Hours";
 	Weathers[n].Hour.Min = 0;
 	Weathers[n].Hour.Max = 0;
 	Weathers[n].Lighting = "night0";
 	Weathers[n].LightingLm = "storm";
 	Weathers[n].InsideBack = "n";
-
 	Weathers[n].Storm = false;
 	Weathers[n].Tornado = false;
 	Weathers[n].Shark = true;
 	Weathers[n].Lights = 1;
 	Weathers[n].Night = true;
-
 	Weathers[n].Shadow.Density.Head = argb(255,46,46,46);
 	Weathers[n].Shadow.Density.Foot = argb(255,46,46,44);
-
 	Weathers[n].Lightning.Enable = false;
 	Weathers[n].Lightning.Texture = "Weather\lightning\lightning.tga.tx";
 	Weathers[n].Lightning.FlickerTime = 32;
 	Weathers[n].Lightning.SubTexX = 1;
 	Weathers[n].Lightning.SubTexY = 1;
-
 	Weathers[n].Sky.Dir = "weather\skies\24\";
 	Weathers[n].Sky.Color = argb(0,64,64,64);
 	Weathers[n].Sky.Rotate.Min = 0.0;
 	Weathers[n].Sky.Rotate.Max = 0.0;
 	Weathers[n].Sky.Size = 512.0;
 	Weathers[n].Sky.Angle = 0.0;
-
 	Weathers[n].Planets.enable = false;
-
 	Weathers[n].Stars.Enable = true;
 	Weathers[n].Stars.Texture = "weather\astronomy\stars.tga.tx";
 	Weathers[n].Stars.Color = argb(0, 255, 255, 255);
@@ -48,7 +38,6 @@ int Whr_InitNight(int n)
 	Weathers[n].Stars.HeightFade = 200.0;
 	Weathers[n].Stars.SunFade = 1.0;
 	Weathers[n].Stars.VisualMagnitude = 10.0;
-
 	Weathers[n].Fog.Enable = true;
 	Weathers[n].Fog.Height = 200;
 	Weathers[n].Fog.Start = 10;
@@ -59,7 +48,6 @@ int Whr_InitNight(int n)
 	Weathers[n].SpecialSeaFog.Color = argb(0,15,15,15);
 	Weathers[n].Bak.Fog.Color = argb(0,15,15,15);
 	Weathers[n].Bak.SpecialSeaFog.Color = argb(0,15,15,15);
-
 	Weathers[n].Rain.NumDrops = 0;
 	Weathers[n].Rain.Color = argb(0,73,73,73);
 	Weathers[n].Rain.DropLength = 2.12;
@@ -70,7 +58,6 @@ int Whr_InitNight(int n)
 	Weathers[n].Rain.WindSpeedJitter = 0.5;
 	Weathers[n].Rain.MaxBlend = 49;
 	Weathers[n].Rain.TimeBlend = 2000;
-
 	Weathers[n].Rain.DropsNearNum = 500;
 	Weathers[n].Rain.DropsFarNum = 500;
 	Weathers[n].Rain.DropsNearRadius = 25.0;
@@ -79,12 +66,9 @@ int Whr_InitNight(int n)
 	Weathers[n].Rain.DropsSize = 0.06;
 	Weathers[n].Rain.DropsTexture = "weather\rain_drops.tga.tx";
 	Weathers[n].Rain.DropsColor = argb(43, 255, 255, 255);
-
 	Weathers[n].Planets.enable = false;
-
 	Weathers[n].Rainbow.Enable = false;
 	Weathers[n].Rainbow.Texture = "weather\rainbow\rainbow.tga.tx";
-
 	Weathers[n].Sun.Color = argb(0,30,30,30);
 	Weathers[n].Sun.Ambient = argb(0,28,28,35);
 	Weathers[n].Sun.AzimuthAngle = Degree2Radian(90.0);
@@ -120,13 +104,11 @@ int Whr_InitNight(int n)
 	Weathers[n].Sun.Flares.f6 = "0.4,100.0,1,0x0F0F0F";
 	Weathers[n].Sun.Flares.f7 = "0.3,200.0,0,0x0F0F0F";
 	Weathers[n].Sun.Flares.f8 = "0.2,200.0,0,0x0F0F0F";
-
 	Weathers[n].Sea.GF2MX.Sky.Color = argb(0,160,210,255);
 	Weathers[n].Sea.GF2MX.Water.Color = argb(0,0,5,10);
 	Weathers[n].Sea.GF2MX.Bump.Tile = 0.05;
 	Weathers[n].Sea.GF2MX.Bump.AnimSpeed = 7.0;
 	Weathers[n].Sea.GF2MX.Bump.Dir = "weather\sea\bump_g2mx\";
-
 	Weathers[n].Sea.Transparency = 0.4;
 	Weathers[n].Sea.FrenelCoefficient = 0.5;
 	Weathers[n].Sea.WaterReflection = 0.7;
@@ -150,82 +132,64 @@ int Whr_InitNight(int n)
 	//Weathers[n].Sea.Harmonics.h3 = "45.0, 7.0, 2.5, 0.0, 200.00";
 	//Weathers[n].Sea.Harmonics.h3 = "135.0, 5.0, 1.0, 0.0, 150.00";
 	//Weathers[n].Sea.Harmonics.h4 = "90.0, 40.0, 0.2, 0.0, 20.00";
-
 	Weathers[n].Sun.Reflection.Enable = true;
 	Weathers[n].Sun.Reflection.Texture = "weather\sun\reflection\refl_night.tga.tx";
 	Weathers[n].Sun.Reflection.Technique = "sunreflection";
 	Weathers[n].Sun.Reflection.Dist = 3500.0;
 	Weathers[n].Sun.Reflection.Size = 500.0;
 	Weathers[n].Sun.Reflection.Color = argb(200, 200, 200, 200);
-
 	Weathers[n].Sea2.BumpScale = 0.035; //?????? ?????
 	Weathers[n].Sea2.PosShift = 1.4; //??????????????? ????
-
 	Weathers[n].Sea2.WaterColor = argb(0, 0, 0, 15);
 	Weathers[n].Sea2.SkyColor = argb(0, 175, 175, 175);
-
 	Weathers[n].Sea2.Reflection = 0.8;
 	Weathers[n].Sea2.Transparency =0.1;
 	Weathers[n].Sea2.Frenel = 0.6;
 	Weathers[n].Sea2.Attenuation = 0.2;
-
 	Weathers[n].Sea2.Amp1 = 12.0; //????????? 1 ?????
 	Weathers[n].Sea2.AnimSpeed1 = 2.0; //???????? ????????
 	Weathers[n].Sea2.Scale1 = 0.25; //??????? ?????
 	Weathers[n].Sea2.MoveSpeed1 = "1.0, 0.0, 7.5"; //???????? ????????
-
 	Weathers[n].Sea2.Amp2 = 1.5;
 	Weathers[n].Sea2.AnimSpeed2 = 9.0;
 	Weathers[n].Sea2.Scale2 = 3.0;
 	Weathers[n].Sea2.MoveSpeed2 = "0.0, 0.0, 1.0";
-	
 	Weathers[n].Sea2.FoamK = 0.2;
 	Weathers[n].Sea2.FoamV = 7.0;
 	Weathers[n].Sea2.FoamUV = 0.2;
 	Weathers[n].Sea2.FoamTexDisturb = 0.2;
-
 	Weathers[n].Wind.Angle = 2.0;
 	Weathers[n].Wind.Speed.Min = 5.0;
 	Weathers[n].Wind.Speed.Max = 8.8;
-	
 	Weathers[n].doLagoon = false;
-
 	n++;
-
 // ====================================================================
 // Night1
-
 	Weathers[n].id = "1 hour";
 	Weathers[n].Hour.Min = 1;
 	Weathers[n].Hour.Max = 1;
 	Weathers[n].Lighting = "night1";
 	Weathers[n].LightingLm = "storm";
 	Weathers[n].InsideBack = "n";
-
 	Weathers[n].Storm = false;
 	Weathers[n].Tornado = false;
 	Weathers[n].Shark = true;
 	Weathers[n].Lights = 1;
 	Weathers[n].Night = true;
-
 	Weathers[n].Shadow.Density.Head = argb(255,46,46,46);
 	Weathers[n].Shadow.Density.Foot = argb(255,46,46,44);
-
 	Weathers[n].Lightning.Enable = false;
 	Weathers[n].Lightning.Texture = "Weather\lightning\lightning.tga.tx";
 	Weathers[n].Lightning.FlickerTime = 32;
 	Weathers[n].Lightning.SubTexX = 1;
 	Weathers[n].Lightning.SubTexY = 1;
-
 	Weathers[n].Sky.Dir = "weather\skies\01\";
 	Weathers[n].Sky.Color = argb(0,64,64,64);
 	Weathers[n].Sky.Rotate.Min = 0.0;
 	Weathers[n].Sky.Rotate.Max = 0.0;
 	Weathers[n].Sky.Size = 512.0;
 	Weathers[n].Sky.Angle = 0.0;
-
 	Weathers[n].Planets.enable = false;
-
 	Weathers[n].Stars.Enable = true;
 	Weathers[n].Stars.Texture = "weather\astronomy\stars.tga.tx";
 	Weathers[n].Stars.Color = argb(0, 255, 255, 255);
@@ -234,7 +198,6 @@ int Whr_InitNight(int n)
 	Weathers[n].Stars.HeightFade = 200.0;
 	Weathers[n].Stars.SunFade = 1.0;
 	Weathers[n].Stars.VisualMagnitude = 12.0;
-
 	Weathers[n].Fog.Enable = true;
 	Weathers[n].Fog.Height = 200;
 	Weathers[n].Fog.Start = 10;
@@ -245,7 +208,6 @@ int Whr_InitNight(int n)
 	Weathers[n].SpecialSeaFog.Color = argb(0,10,10,10);
 	Weathers[n].Bak.Fog.Color = argb(0,10,10,10);
 	Weathers[n].Bak.SpecialSeaFog.Color = argb(0,10,10,10);
-
 	Weathers[n].Rain.NumDrops = 0;
 	Weathers[n].Rain.Color = argb(0,73,73,73);
 	Weathers[n].Rain.DropLength = 2.12;
@@ -256,7 +218,6 @@ int Whr_InitNight(int n)
 	Weathers[n].Rain.WindSpeedJitter = 0.5;
 	Weathers[n].Rain.MaxBlend = 49;
 	Weathers[n].Rain.TimeBlend = 2000;
-
 	Weathers[n].Rain.DropsNearNum = 500;
 	Weathers[n].Rain.DropsFarNum = 500;
 	Weathers[n].Rain.DropsNearRadius = 25.0;
@@ -265,12 +226,9 @@ int Whr_InitNight(int n)
 	Weathers[n].Rain.DropsSize = 0.06;
 	Weathers[n].Rain.DropsTexture = "weather\rain_drops.tga.tx";
 	Weathers[n].Rain.DropsColor = argb(43, 255, 255, 255);
-
 	Weathers[n].Planets.enable = false;
-
 	Weathers[n].Rainbow.Enable = false;
 	Weathers[n].Rainbow.Texture = "weather\rainbow\rainbow.tga.tx";
-
 	Weathers[n].Sun.Color = argb(0,30,30,30);
 	Weathers[n].Sun.Ambient = argb(0,30,25,25);
 	Weathers[n].Sun.AzimuthAngle = Degree2Radian(90.0);
@@ -306,13 +264,11 @@ int Whr_InitNight(int n)
 	Weathers[n].Sun.Flares.f6 = "0.4,100.0,1,0x0F0F0F";
 	Weathers[n].Sun.Flares.f7 = "0.3,200.0,0,0x0F0F0F";
 	Weathers[n].Sun.Flares.f8 = "0.2,200.0,0,0x0F0F0F";
-
 	Weathers[n].Sea.GF2MX.Sky.Color = argb(0,160,210,255);
 	Weathers[n].Sea.GF2MX.Water.Color = argb(0,0,5,10);
 	Weathers[n].Sea.GF2MX.Bump.Tile = 0.05;
 	Weathers[n].Sea.GF2MX.Bump.AnimSpeed = 7.0;
 	Weathers[n].Sea.GF2MX.Bump.Dir = "weather\sea\bump_g2mx\";
-
 	Weathers[n].Sea.Transparency = 0.4;
 	Weathers[n].Sea.FrenelCoefficient = 0.5;
 	Weathers[n].Sea.WaterReflection = 0.7;
@@ -336,82 +292,64 @@ int Whr_InitNight(int n)
 	//Weathers[n].Sea.Harmonics.h3 = "45.0, 7.0, 2.5, 0.0, 200.00";
 	//Weathers[n].Sea.Harmonics.h3 = "135.0, 5.0, 1.0, 0.0, 150.00";
 	//Weathers[n].Sea.Harmonics.h4 = "90.0, 40.0, 0.2, 0.0, 20.00";
-
 	Weathers[n].Sun.Reflection.Enable = true;
 	Weathers[n].Sun.Reflection.Texture = "weather\sun\reflection\refl_night.tga.tx";
 	Weathers[n].Sun.Reflection.Technique = "sunreflection";
 	Weathers[n].Sun.Reflection.Dist = 3500.0;
 	Weathers[n].Sun.Reflection.Size = 500.0;
 	Weathers[n].Sun.Reflection.Color = argb(200, 200, 200, 200);
-
 	Weathers[n].Sea2.BumpScale = 0.035; //?????? ?????
 	Weathers[n].Sea2.PosShift = 1.4; //??????????????? ????
-
 	Weathers[n].Sea2.WaterColor = argb(0, 0, 0, 15);
 	Weathers[n].Sea2.SkyColor = argb(0, 175, 175, 175);
-
 	Weathers[n].Sea2.Reflection = 0.8;
 	Weathers[n].Sea2.Transparency =0.1;
 	Weathers[n].Sea2.Frenel = 0.6;
 	Weathers[n].Sea2.Attenuation = 0.2;
-
 	Weathers[n].Sea2.Amp1 = 12.0; //????????? 1 ?????
 	Weathers[n].Sea2.AnimSpeed1 = 2.0; //???????? ????????
 	Weathers[n].Sea2.Scale1 = 0.25; //??????? ?????
 	Weathers[n].Sea2.MoveSpeed1 = "1.0, 0.0, 7.5"; //???????? ????????
-
 	Weathers[n].Sea2.Amp2 = 1.5;
 	Weathers[n].Sea2.AnimSpeed2 = 9.0;
 	Weathers[n].Sea2.Scale2 = 3.0;
 	Weathers[n].Sea2.MoveSpeed2 = "0.0, 0.0, 1.0";
-	
 	Weathers[n].Sea2.FoamK = 0.2;
 	Weathers[n].Sea2.FoamV = 7.0;
 	Weathers[n].Sea2.FoamUV = 0.2;
 	Weathers[n].Sea2.FoamTexDisturb = 0.2;
-
 	Weathers[n].Wind.Angle = 2.0;
 	Weathers[n].Wind.Speed.Min = 5.0;
 	Weathers[n].Wind.Speed.Max = 8.8;
-	
 	Weathers[n].doLagoon = false;
-
 	n++;
-
 // ====================================================================
 // Night2
-
 	Weathers[n].id = "2 Hours";
 	Weathers[n].Hour.Min = 2;
 	Weathers[n].Hour.Max = 2;
 	Weathers[n].Lighting = "night2";
 	Weathers[n].LightingLm = "storm";
 	Weathers[n].InsideBack = "n";
-
 	Weathers[n].Storm = false;
 	Weathers[n].Tornado = false;
 	Weathers[n].Shark = true;
 	Weathers[n].Lights = 1;
 	Weathers[n].Night = true;
-
 	Weathers[n].Shadow.Density.Head = argb(255,46,46,46);
 	Weathers[n].Shadow.Density.Foot = argb(255,46,46,44);
-
 	Weathers[n].Lightning.Enable = false;
 	Weathers[n].Lightning.Texture = "Weather\lightning\lightning.tga.tx";
 	Weathers[n].Lightning.FlickerTime = 32;
 	Weathers[n].Lightning.SubTexX = 1;
 	Weathers[n].Lightning.SubTexY = 1;
-
 	Weathers[n].Sky.Dir = "weather\skies\02\";
 	Weathers[n].Sky.Color = argb(0,64,64,64);
 	Weathers[n].Sky.Rotate.Min = 0.0;
 	Weathers[n].Sky.Rotate.Max = 0.0;
 	Weathers[n].Sky.Size = 512.0;
 	Weathers[n].Sky.Angle = 0.0;
-
 	Weathers[n].Planets.enable = false;
-
 	Weathers[n].Stars.Enable = true;
 	Weathers[n].Stars.Texture = "weather\astronomy\stars.tga.tx";
 	Weathers[n].Stars.Color = argb(0, 255, 255, 255);
@@ -420,7 +358,6 @@ int Whr_InitNight(int n)
 	Weathers[n].Stars.HeightFade = 200.0;
 	Weathers[n].Stars.SunFade = 1.0;
 	Weathers[n].Stars.VisualMagnitude = 14.0;
-
 	Weathers[n].Fog.Enable = true;
 	Weathers[n].Fog.Height = 200;
 	Weathers[n].Fog.Start = 10;
@@ -431,7 +368,6 @@ int Whr_InitNight(int n)
 	Weathers[n].SpecialSeaFog.Color = argb(0,10,10,10);
 	Weathers[n].Bak.Fog.Color = argb(0,10,10,10);
 	Weathers[n].Bak.SpecialSeaFog.Color = argb(0,10,10,10);
-
 	Weathers[n].Rain.NumDrops = 0;
 	Weathers[n].Rain.Color = argb(0,73,73,73);
 	Weathers[n].Rain.DropLength = 2.12;
@@ -442,7 +378,6 @@ int Whr_InitNight(int n)
 	Weathers[n].Rain.WindSpeedJitter = 0.5;
 	Weathers[n].Rain.MaxBlend = 49;
 	Weathers[n].Rain.TimeBlend = 2000;
-
 	Weathers[n].Rain.DropsNearNum = 500;
 	Weathers[n].Rain.DropsFarNum = 500;
 	Weathers[n].Rain.DropsNearRadius = 25.0;
@@ -451,12 +386,9 @@ int Whr_InitNight(int n)
 	Weathers[n].Rain.DropsSize = 0.06;
 	Weathers[n].Rain.DropsTexture = "weather\rain_drops.tga.tx";
 	Weathers[n].Rain.DropsColor = argb(43, 255, 255, 255);
-
 	Weathers[n].Planets.enable = false;
-
 	Weathers[n].Rainbow.Enable = false;
 	Weathers[n].Rainbow.Texture = "weather\rainbow\rainbow.tga.tx";
-
 	Weathers[n].Sun.Color = argb(0,30,30,30);
 	Weathers[n].Sun.Ambient = argb(0,25,28,28);
 	Weathers[n].Sun.AzimuthAngle = Degree2Radian(190.0);
@@ -492,13 +424,11 @@ int Whr_InitNight(int n)
 	Weathers[n].Sun.Flares.f6 = "0.4,100.0,1,0x0F0F0F";
 	Weathers[n].Sun.Flares.f7 = "0.3,200.0,0,0x0F0F0F";
 	Weathers[n].Sun.Flares.f8 = "0.2,200.0,0,0x0F0F0F";
-
 	Weathers[n].Sea.GF2MX.Sky.Color = argb(0,160,210,255);
 	Weathers[n].Sea.GF2MX.Water.Color = argb(0,0,5,10);
 	Weathers[n].Sea.GF2MX.Bump.Tile = 0.05;
 	Weathers[n].Sea.GF2MX.Bump.AnimSpeed = 7.0;
 	Weathers[n].Sea.GF2MX.Bump.Dir = "weather\sea\bump_g2mx\";
-
 	Weathers[n].Sea.Transparency = 0.4;
 	Weathers[n].Sea.FrenelCoefficient = 0.5;
 	Weathers[n].Sea.WaterReflection = 0.7;
@@ -522,82 +452,64 @@ int Whr_InitNight(int n)
 	//Weathers[n].Sea.Harmonics.h3 = "45.0, 7.0, 2.5, 0.0, 200.00";
 	//Weathers[n].Sea.Harmonics.h3 = "135.0, 5.0, 1.0, 0.0, 150.00";
 	//Weathers[n].Sea.Harmonics.h4 = "90.0, 40.0, 0.2, 0.0, 20.00";
-
 	Weathers[n].Sun.Reflection.Enable = true;
 	Weathers[n].Sun.Reflection.Texture = "weather\sun\reflection\refl_night.tga.tx";
 	Weathers[n].Sun.Reflection.Technique = "sunreflection";
 	Weathers[n].Sun.Reflection.Dist = 3500.0;
 	Weathers[n].Sun.Reflection.Size = 500.0;
 	Weathers[n].Sun.Reflection.Color = argb(200, 200, 200, 200);
-
 	Weathers[n].Sea2.BumpScale = 0.035; //?????? ?????
 	Weathers[n].Sea2.PosShift = 1.4; //??????????????? ????
-
 	Weathers[n].Sea2.WaterColor = argb(0, 0, 0, 15);
 	Weathers[n].Sea2.SkyColor = argb(0, 175, 175, 175);
-
 	Weathers[n].Sea2.Reflection = 0.8;
 	Weathers[n].Sea2.Transparency =0.1;
 	Weathers[n].Sea2.Frenel = 0.6;
 	Weathers[n].Sea2.Attenuation = 0.2;
-
 	Weathers[n].Sea2.Amp1 = 12.0; //????????? 1 ?????
 	Weathers[n].Sea2.AnimSpeed1 = 2.0; //???????? ????????
 	Weathers[n].Sea2.Scale1 = 0.25; //??????? ?????
 	Weathers[n].Sea2.MoveSpeed1 = "1.0, 0.0, 7.5"; //???????? ????????
-
 	Weathers[n].Sea2.Amp2 = 1.5;
 	Weathers[n].Sea2.AnimSpeed2 = 9.0;
 	Weathers[n].Sea2.Scale2 = 3.0;
 	Weathers[n].Sea2.MoveSpeed2 = "0.0, 0.0, 1.0";
-	
 	Weathers[n].Sea2.FoamK = 0.2;
 	Weathers[n].Sea2.FoamV = 7.0;
 	Weathers[n].Sea2.FoamUV = 0.2;
 	Weathers[n].Sea2.FoamTexDisturb = 0.2;
-
 	Weathers[n].Wind.Angle = 2.0;
 	Weathers[n].Wind.Speed.Min = 5.0;
 	Weathers[n].Wind.Speed.Max = 8.8;
-	
 	Weathers[n].doLagoon = false;
-
 	n++;
-
 // ====================================================================
 // Night3
-
 	Weathers[n].id = "3 Hours";
 	Weathers[n].Hour.Min = 3;
 	Weathers[n].Hour.Max = 3;
 	Weathers[n].Lighting = "night3";
 	Weathers[n].LightingLm = "storm";
 	Weathers[n].InsideBack = "n";
-
 	Weathers[n].Storm = false;
 	Weathers[n].Tornado = false;
 	Weathers[n].Shark = true;
 	Weathers[n].Lights = 1;
 	Weathers[n].Night = true;
-
 	Weathers[n].Shadow.Density.Head = argb(255,46,46,46);
 	Weathers[n].Shadow.Density.Foot = argb(255,46,46,44);
-
 	Weathers[n].Lightning.Enable = false;
 	Weathers[n].Lightning.Texture = "Weather\lightning\lightning.tga.tx";
 	Weathers[n].Lightning.FlickerTime = 32;
 	Weathers[n].Lightning.SubTexX = 1;
 	Weathers[n].Lightning.SubTexY = 1;
-
 	Weathers[n].Sky.Dir = "weather\skies\03\";
 	Weathers[n].Sky.Color = argb(0,64,64,64);
 	Weathers[n].Sky.Rotate.Min = 0.0;
 	Weathers[n].Sky.Rotate.Max = 0.0;
 	Weathers[n].Sky.Size = 512.0;
 	Weathers[n].Sky.Angle = 0.0;
-
 	Weathers[n].Planets.enable = false;
-
 	Weathers[n].Stars.Enable = true;
 	Weathers[n].Stars.Texture = "weather\astronomy\stars.tga.tx";
 	Weathers[n].Stars.Color = argb(0, 255, 255, 255);
@@ -606,7 +518,6 @@ int Whr_InitNight(int n)
 	Weathers[n].Stars.HeightFade = 200.0;
 	Weathers[n].Stars.SunFade = 1.0;
 	Weathers[n].Stars.VisualMagnitude = 14.0;
-
 	Weathers[n].Fog.Enable = true;
 	Weathers[n].Fog.Height = 200;
 	Weathers[n].Fog.Start = 10;
@@ -617,7 +528,6 @@ int Whr_InitNight(int n)
 	Weathers[n].SpecialSeaFog.Color = argb(0,20,15,15);
 	Weathers[n].Bak.Fog.Color = argb(0,20,15,15);
 	Weathers[n].Bak.SpecialSeaFog.Color = argb(0,20,15,15);
-
 	Weathers[n].Rain.NumDrops = 0;
 	Weathers[n].Rain.Color = argb(0,73,73,73);
 	Weathers[n].Rain.DropLength = 2.12;
@@ -628,7 +538,6 @@ int Whr_InitNight(int n)
 	Weathers[n].Rain.WindSpeedJitter = 0.5;
 	Weathers[n].Rain.MaxBlend = 49;
 	Weathers[n].Rain.TimeBlend = 2000;
-
 	Weathers[n].Rain.DropsNearNum = 500;
 	Weathers[n].Rain.DropsFarNum = 500;
 	Weathers[n].Rain.DropsNearRadius = 25.0;
@@ -637,12 +546,9 @@ int Whr_InitNight(int n)
 	Weathers[n].Rain.DropsSize = 0.06;
 	Weathers[n].Rain.DropsTexture = "weather\rain_drops.tga.tx";
 	Weathers[n].Rain.DropsColor = argb(43, 255, 255, 255);
-
 	Weathers[n].Planets.enable = false;
-
 	Weathers[n].Rainbow.Enable = false;
 	Weathers[n].Rainbow.Texture = "weather\rainbow\rainbow.tga.tx";
-
 	Weathers[n].Sun.Color = argb(0,40,40,40);
 	Weathers[n].Sun.Ambient = argb(0,30,30,30);
 	Weathers[n].Sun.AzimuthAngle = Degree2Radian(130.0);
@@ -678,13 +584,11 @@ int Whr_InitNight(int n)
 	Weathers[n].Sun.Flares.f6 = "0.4,100.0,1,0x0F0F0F";
 	Weathers[n].Sun.Flares.f7 = "0.3,200.0,0,0x0F0F0F";
 	Weathers[n].Sun.Flares.f8 = "0.2,200.0,0,0x0F0F0F";
-
 	Weathers[n].Sea.GF2MX.Sky.Color = argb(0,160,210,255);
 	Weathers[n].Sea.GF2MX.Water.Color = argb(0,0,5,10);
 	Weathers[n].Sea.GF2MX.Bump.Tile = 0.05;
 	Weathers[n].Sea.GF2MX.Bump.AnimSpeed = 7.0;
 	Weathers[n].Sea.GF2MX.Bump.Dir = "weather\sea\bump_g2mx\";
-
 	Weathers[n].Sea.Transparency = 0.4;
 	Weathers[n].Sea.FrenelCoefficient = 0.5;
 	Weathers[n].Sea.WaterReflection = 0.7;
@@ -708,82 +612,64 @@ int Whr_InitNight(int n)
 	//Weathers[n].Sea.Harmonics.h3 = "45.0, 7.0, 2.5, 0.0, 200.00";
 	//Weathers[n].Sea.Harmonics.h3 = "135.0, 5.0, 1.0, 0.0, 150.00";
 	//Weathers[n].Sea.Harmonics.h4 = "90.0, 40.0, 0.2, 0.0, 20.00";
-
 	Weathers[n].Sun.Reflection.Enable = true;
 	Weathers[n].Sun.Reflection.Texture = "weather\sun\reflection\refl_night.tga.tx";
 	Weathers[n].Sun.Reflection.Technique = "sunreflection";
 	Weathers[n].Sun.Reflection.Dist = 3500.0;
 	Weathers[n].Sun.Reflection.Size = 500.0;
 	Weathers[n].Sun.Reflection.Color = argb(200, 200, 200, 200);
-
 	Weathers[n].Sea2.BumpScale = 0.035; //?????? ?????
 	Weathers[n].Sea2.PosShift = 1.4; //??????????????? ????
-
 	Weathers[n].Sea2.WaterColor = argb(0, 0, 0, 15);
 	Weathers[n].Sea2.SkyColor = argb(0, 175, 175, 175);
-
 	Weathers[n].Sea2.Reflection = 0.8;
 	Weathers[n].Sea2.Transparency =0.1;
 	Weathers[n].Sea2.Frenel = 0.6;
 	Weathers[n].Sea2.Attenuation = 0.2;
-
 	Weathers[n].Sea2.Amp1 = 12.0; //????????? 1 ?????
 	Weathers[n].Sea2.AnimSpeed1 = 2.0; //???????? ????????
 	Weathers[n].Sea2.Scale1 = 0.25; //??????? ?????
 	Weathers[n].Sea2.MoveSpeed1 = "1.0, 0.0, 7.5"; //???????? ????????
-
 	Weathers[n].Sea2.Amp2 = 1.5;
 	Weathers[n].Sea2.AnimSpeed2 = 9.0;
 	Weathers[n].Sea2.Scale2 = 3.0;
 	Weathers[n].Sea2.MoveSpeed2 = "0.0, 0.0, 1.0";
-	
 	Weathers[n].Sea2.FoamK = 0.2;
 	Weathers[n].Sea2.FoamV = 7.0;
 	Weathers[n].Sea2.FoamUV = 0.2;
 	Weathers[n].Sea2.FoamTexDisturb = 0.2;
-
 	Weathers[n].Wind.Angle = 2.0;
 	Weathers[n].Wind.Speed.Min = 5.0;
 	Weathers[n].Wind.Speed.Max = 8.8;
-	
 	Weathers[n].doLagoon = false;
-
 	n++;
-
 // ====================================================================
 // Night4
-
 	Weathers[n].id = "4 Hours";
 	Weathers[n].Hour.Min = 4;
 	Weathers[n].Hour.Max = 4;
 	Weathers[n].Lighting = "night4";
 	Weathers[n].LightingLm = "storm";
 	Weathers[n].InsideBack = "n";
-
 	Weathers[n].Storm = false;
 	Weathers[n].Tornado = false;
 	Weathers[n].Shark = true;
 	Weathers[n].Lights = 1;
 	Weathers[n].Night = true;
-
 	Weathers[n].Shadow.Density.Head = argb(255,46,46,46);
 	Weathers[n].Shadow.Density.Foot = argb(255,46,46,44);
-
 	Weathers[n].Lightning.Enable = false;
 	Weathers[n].Lightning.Texture = "Weather\lightning\lightning.tga.tx";
 	Weathers[n].Lightning.FlickerTime = 32;
 	Weathers[n].Lightning.SubTexX = 1;
 	Weathers[n].Lightning.SubTexY = 1;
-
 	Weathers[n].Sky.Dir = "weather\skies\04\";
 	Weathers[n].Sky.Color = argb(0,64,64,64);
 	Weathers[n].Sky.Rotate.Min = 0.0;
 	Weathers[n].Sky.Rotate.Max = 0.0;
 	Weathers[n].Sky.Size = 512.0;
 	Weathers[n].Sky.Angle = 0.0;
-
 	Weathers[n].Planets.enable = false;
-
 	Weathers[n].Stars.Enable = true;
 	Weathers[n].Stars.Texture = "weather\astronomy\stars.tga.tx";
 	Weathers[n].Stars.Color = argb(0, 255, 255, 255);
@@ -792,7 +678,6 @@ int Whr_InitNight(int n)
 	Weathers[n].Stars.HeightFade = 200.0;
 	Weathers[n].Stars.SunFade = 1.0;
 	Weathers[n].Stars.VisualMagnitude = 8.0;
-
 	Weathers[n].Fog.Enable = true;
 	Weathers[n].Fog.Height = 200;
 	Weathers[n].Fog.Start = 10;
@@ -803,7 +688,6 @@ int Whr_InitNight(int n)
 	Weathers[n].SpecialSeaFog.Color = argb(0,20,15,15);
 	Weathers[n].Bak.Fog.Color = argb(0,20,15,15);
 	Weathers[n].Bak.SpecialSeaFog.Color = argb(0,20,15,15);
-
 	Weathers[n].Rain.NumDrops = 0;
 	Weathers[n].Rain.Color = argb(0,73,73,73);
 	Weathers[n].Rain.DropLength = 2.12;
@@ -814,7 +698,6 @@ int Whr_InitNight(int n)
 	Weathers[n].Rain.WindSpeedJitter = 0.5;
 	Weathers[n].Rain.MaxBlend = 49;
 	Weathers[n].Rain.TimeBlend = 2000;
-
 	Weathers[n].Rain.DropsNearNum = 500;
 	Weathers[n].Rain.DropsFarNum = 500;
 	Weathers[n].Rain.DropsNearRadius = 25.0;
@@ -823,12 +706,9 @@ int Whr_InitNight(int n)
 	Weathers[n].Rain.DropsSize = 0.06;
 	Weathers[n].Rain.DropsTexture = "weather\rain_drops.tga.tx";
 	Weathers[n].Rain.DropsColor = argb(43, 255, 255, 255);
-
 	Weathers[n].Planets.enable = false;
-
 	Weathers[n].Rainbow.Enable = false;
 	Weathers[n].Rainbow.Texture = "weather\rainbow\rainbow.tga.tx";
-
 	Weathers[n].Sun.Color = argb(0,30,30,25);
 	Weathers[n].Sun.Ambient = argb(0,48,48,43);
 	Weathers[n].Sun.AzimuthAngle = Degree2Radian(320.0);
@@ -864,13 +744,11 @@ int Whr_InitNight(int n)
 	Weathers[n].Sun.Flares.f6 = "0.4,100.0,1,0x0F0F0F";
 	Weathers[n].Sun.Flares.f7 = "0.3,200.0,0,0x0F0F0F";
 	Weathers[n].Sun.Flares.f8 = "0.2,200.0,0,0x0F0F0F";
-
 	Weathers[n].Sea.GF2MX.Sky.Color = argb(0,160,210,255);
 	Weathers[n].Sea.GF2MX.Water.Color = argb(0,0,5,10);
 	Weathers[n].Sea.GF2MX.Bump.Tile = 0.05;
 	Weathers[n].Sea.GF2MX.Bump.AnimSpeed = 7.0;
 	Weathers[n].Sea.GF2MX.Bump.Dir = "weather\sea\bump_g2mx\";
-
 	Weathers[n].Sea.Transparency = 0.4;
 	Weathers[n].Sea.FrenelCoefficient = 0.5;
 	Weathers[n].Sea.WaterReflection = 0.7;
@@ -894,82 +772,64 @@ int Whr_InitNight(int n)
 	//Weathers[n].Sea.Harmonics.h3 = "45.0, 7.0, 2.5, 0.0, 200.00";
 	//Weathers[n].Sea.Harmonics.h3 = "135.0, 5.0, 1.0, 0.0, 150.00";
 	//Weathers[n].Sea.Harmonics.h4 = "90.0, 40.0, 0.2, 0.0, 20.00";
-
 	Weathers[n].Sun.Reflection.Enable = true;
 	Weathers[n].Sun.Reflection.Texture = "weather\sun\reflection\refl_night.tga.tx";
 	Weathers[n].Sun.Reflection.Technique = "sunreflection";
 	Weathers[n].Sun.Reflection.Dist = 3500.0;
 	Weathers[n].Sun.Reflection.Size = 500.0;
 	Weathers[n].Sun.Reflection.Color = argb(200, 200, 200, 200);
-
 	Weathers[n].Sea2.BumpScale = 0.035; //?????? ?????
 	Weathers[n].Sea2.PosShift = 1.4; //??????????????? ????
-
 	Weathers[n].Sea2.WaterColor = argb(0, 0, 0, 25);
 	Weathers[n].Sea2.SkyColor = argb(0, 175, 175, 175);
-
 	Weathers[n].Sea2.Reflection = 0.8;
 	Weathers[n].Sea2.Transparency =0.1;
 	Weathers[n].Sea2.Frenel = 0.6;
 	Weathers[n].Sea2.Attenuation = 0.2;
-
 	Weathers[n].Sea2.Amp1 = 12.0; //????????? 1 ?????
 	Weathers[n].Sea2.AnimSpeed1 = 2.0; //???????? ????????
 	Weathers[n].Sea2.Scale1 = 0.25; //??????? ?????
 	Weathers[n].Sea2.MoveSpeed1 = "1.0, 0.0, 7.5"; //???????? ????????
-
 	Weathers[n].Sea2.Amp2 = 1.5;
 	Weathers[n].Sea2.AnimSpeed2 = 9.0;
 	Weathers[n].Sea2.Scale2 = 3.0;
 	Weathers[n].Sea2.MoveSpeed2 = "0.0, 0.0, 1.0";
-	
 	Weathers[n].Sea2.FoamK = 0.2;
 	Weathers[n].Sea2.FoamV = 7.0;
 	Weathers[n].Sea2.FoamUV = 0.2;
 	Weathers[n].Sea2.FoamTexDisturb = 0.2;
-
 	Weathers[n].Wind.Angle = 2.0;
 	Weathers[n].Wind.Speed.Min = 5.0;
 	Weathers[n].Wind.Speed.Max = 8.8;
-	
 	Weathers[n].doLagoon = false;
-
 	n++;
-
 // ====================================================================
 // Night4
-
 	Weathers[n].id = "5 Hours";
 	Weathers[n].Hour.Min = 5;
 	Weathers[n].Hour.Max = 5;
 	Weathers[n].Lighting = "night5";
 	Weathers[n].LightingLm = "storm";
 	Weathers[n].InsideBack = "n";
-
 	Weathers[n].Storm = false;
 	Weathers[n].Tornado = false;
 	Weathers[n].Shark = true;
 	Weathers[n].Lights = 1;
 	Weathers[n].Night = true;
-
 	Weathers[n].Shadow.Density.Head = argb(255,46,46,46);
 	Weathers[n].Shadow.Density.Foot = argb(255,46,46,44);
-
 	Weathers[n].Lightning.Enable = false;
 	Weathers[n].Lightning.Texture = "Weather\lightning\lightning.tga.tx";
 	Weathers[n].Lightning.FlickerTime = 32;
 	Weathers[n].Lightning.SubTexX = 1;
 	Weathers[n].Lightning.SubTexY = 1;
-
 	Weathers[n].Sky.Dir = "weather\skies\05\";
 	Weathers[n].Sky.Color = argb(0,64,64,64);
 	Weathers[n].Sky.Rotate.Min = 0.0;
 	Weathers[n].Sky.Rotate.Max = 0.0;
 	Weathers[n].Sky.Size = 512.0;
 	Weathers[n].Sky.Angle = 0.0;
-
 	Weathers[n].Planets.enable = false;
-
 	Weathers[n].Stars.Enable = true;
 	Weathers[n].Stars.Texture = "weather\astronomy\stars.tga.tx";
 	Weathers[n].Stars.Color = argb(0, 255, 255, 255);
@@ -978,7 +838,6 @@ int Whr_InitNight(int n)
 	Weathers[n].Stars.HeightFade = 200.0;
 	Weathers[n].Stars.SunFade = 1.0;
 	Weathers[n].Stars.VisualMagnitude = 12.0;
-
 	Weathers[n].Fog.Enable = true;
 	Weathers[n].Fog.Height = 200;
 	Weathers[n].Fog.Start = 10;
@@ -989,7 +848,6 @@ int Whr_InitNight(int n)
 	Weathers[n].SpecialSeaFog.Color = argb(0,50,40,40);
 	Weathers[n].Bak.Fog.Color = argb(0,50,40,40);
 	Weathers[n].Bak.SpecialSeaFog.Color = argb(0,50,40,40);
-
 	Weathers[n].Rain.NumDrops = 0;
 	Weathers[n].Rain.Color = argb(0,73,73,73);
 	Weathers[n].Rain.DropLength = 2.12;
@@ -1000,7 +858,6 @@ int Whr_InitNight(int n)
 	Weathers[n].Rain.WindSpeedJitter = 0.5;
 	Weathers[n].Rain.MaxBlend = 49;
 	Weathers[n].Rain.TimeBlend = 2000;
-
 	Weathers[n].Rain.DropsNearNum = 500;
 	Weathers[n].Rain.DropsFarNum = 500;
 	Weathers[n].Rain.DropsNearRadius = 25.0;
@@ -1009,12 +866,9 @@ int Whr_InitNight(int n)
 	Weathers[n].Rain.DropsSize = 0.06;
 	Weathers[n].Rain.DropsTexture = "weather\rain_drops.tga.tx";
 	Weathers[n].Rain.DropsColor = argb(43, 255, 255, 255);
-
 	Weathers[n].Planets.enable = false;
-
 	Weathers[n].Rainbow.Enable = false;
 	Weathers[n].Rainbow.Texture = "weather\rainbow\rainbow.tga.tx";
-
 	Weathers[n].Sun.Color = argb(0,30,30,25);
 	Weathers[n].Sun.Ambient = argb(0,58,58,53);
 	Weathers[n].Sun.AzimuthAngle = Degree2Radian(320.0);
@@ -1050,13 +904,11 @@ int Whr_InitNight(int n)
 	Weathers[n].Sun.Flares.f6 = "0.4,100.0,1,0x0F0F0F";
 	Weathers[n].Sun.Flares.f7 = "0.3,200.0,0,0x0F0F0F";
 	Weathers[n].Sun.Flares.f8 = "0.2,200.0,0,0x0F0F0F";
-
 	Weathers[n].Sea.GF2MX.Sky.Color = argb(0,160,210,255);
 	Weathers[n].Sea.GF2MX.Water.Color = argb(0,0,5,10);
 	Weathers[n].Sea.GF2MX.Bump.Tile = 0.05;
 	Weathers[n].Sea.GF2MX.Bump.AnimSpeed = 7.0;
 	Weathers[n].Sea.GF2MX.Bump.Dir = "weather\sea\bump_g2mx\";
-
 	Weathers[n].Sea.Transparency = 0.4;
 	Weathers[n].Sea.FrenelCoefficient = 0.5;
 	Weathers[n].Sea.WaterReflection = 0.7;
@@ -1080,47 +932,36 @@ int Whr_InitNight(int n)
 	//Weathers[n].Sea.Harmonics.h3 = "45.0, 7.0, 2.5, 0.0, 200.00";
 	//Weathers[n].Sea.Harmonics.h3 = "135.0, 5.0, 1.0, 0.0, 150.00";
 	//Weathers[n].Sea.Harmonics.h4 = "90.0, 40.0, 0.2, 0.0, 20.00";
-
 	Weathers[n].Sun.Reflection.Enable = true;
 	Weathers[n].Sun.Reflection.Texture = "weather\sun\reflection\refl_night.tga.tx";
 	Weathers[n].Sun.Reflection.Technique = "sunreflection";
 	Weathers[n].Sun.Reflection.Dist = 3500.0;
 	Weathers[n].Sun.Reflection.Size = 500.0;
 	Weathers[n].Sun.Reflection.Color = argb(200, 200, 200, 200);
-
 	Weathers[n].Sea2.BumpScale = 0.035; //?????? ?????
 	Weathers[n].Sea2.PosShift = 1.4; //??????????????? ????
-
 	Weathers[n].Sea2.WaterColor = argb(0, 0, 0, 40);
 	Weathers[n].Sea2.SkyColor = argb(0, 175, 175, 175);
-
 	Weathers[n].Sea2.Reflection = 0.7;
 	Weathers[n].Sea2.Transparency = 0.5;
 	Weathers[n].Sea2.Frenel = 0.3;
 	Weathers[n].Sea2.Attenuation = 0.3;
-
 	Weathers[n].Sea2.Amp1 = 12.0; //????????? 1 ?????
 	Weathers[n].Sea2.AnimSpeed1 = 2.0; //???????? ????????
 	Weathers[n].Sea2.Scale1 = 0.25; //??????? ?????
 	Weathers[n].Sea2.MoveSpeed1 = "1.0, 0.0, 7.5"; //???????? ????????
-
 	Weathers[n].Sea2.Amp2 = 1.5;
 	Weathers[n].Sea2.AnimSpeed2 = 9.0;
 	Weathers[n].Sea2.Scale2 = 3.0;
 	Weathers[n].Sea2.MoveSpeed2 = "0.0, 0.0, 1.0";
-	
 	Weathers[n].Sea2.FoamK = 0.2;
 	Weathers[n].Sea2.FoamV = 7.0;
 	Weathers[n].Sea2.FoamUV = 0.2;
 	Weathers[n].Sea2.FoamTexDisturb = 0.2;
-
 	Weathers[n].Wind.Angle = 2.0;
 	Weathers[n].Wind.Speed.Min = 5.0;
 	Weathers[n].Wind.Speed.Max = 8.8;
-	
 	Weathers[n].doLagoon = false;
-
 	n++;
-
 	return n;
 }

@@ -1,518 +1,1 @@
-void ProcessDialogEvent()
-{
-	ref NPChar, sld;
-	aref Link, NextDiag;
-	string sTemp, sStr, sPlace;
-	float locx, locy, locz;
-	int n;
-	DeleteAttribute(&Dialog,"Links");
-
-	makeref(NPChar,CharacterRef);
-	makearef(Link, Dialog.Links);
-	makearef(NextDiag, NPChar.Dialog);
-	
-	if (Dialog.CurrentNode == "First time")
-	{
-		switch (pchar.questTemp.tugs.berglarState)
-		{
-			case "2": Dialog.CurrentNode = "Second time";	break;
-			case "3": Dialog.CurrentNode = "Third time";	break;
-			case "4": Dialog.CurrentNode = "Fourth time";	break;
-			case "5": Dialog.CurrentNode = "Fifth time";	break;
-			case "6": Dialog.CurrentNode = "Sixth time";	break;
-		}
-	}
-  
-	switch (Dialog.CurrentNode)
-  {
-    //------------- первая боевка --------------
-		case "First time":
-      dialog.text = "Wait, buddy... Be so kind as to tell me your name.";
-      link.l1 = GetFullName(pchar) + ", in the flesh. What's the matter?";
-      link.l1.go = "Step1_1";
-    break;
- 		case "Step1_1":
-    	dialog.text = "Aha. I need you...";
-  		link.l1 = "I'm listening closely.";
-  		link.l1.go = "Step1_2";
-		break;
- 		case "Step1_2":
-			if (npchar.city == "SentJons") sStr = "under";
-			else sStr = "behind";
-    	dialog.text = "That's good that you're listening closely, 'cause we've got something important to talk about. Here goes: There's a dungeon somewhere " + sStr + "the city. You can find me there. ";
-  		link.l1 = "Maybe we should go to the tavern, discuss things there? What's the hell's the point of wandering around dungeons at night?";
-  		link.l1.go = "Step1_3";
-		break;
- 		case "Step1_3":
-    	dialog.text = "No, I don't need any extra eyes or hands. Believe that...";
-  		link.l1 = "Hm, I don't know... What this matter worth to me?";
-  		link.l1.go = "Step1_4";
-		break;
- 		case "Step1_4":
-    	dialog.text = "It's a matter of life and death.  \nAnyway, I've got no time to chat with you. I'll wait for you at the dungeon at midnight. If you don't come, well. You know best...";
-  		link.l1 = "I wanted to ask this, too...";
-  		link.l1.go = "Step_overAll";
-		break;
-		//--------------
-    case "Fight_1":
-      dialog.text = "Ah! You've come after all...";
-      link.l1 = "Yeah, I've come. Talk quickly. What's this matter of life and death?";
-      link.l1.go = "FirstFight_1";
-    break;    
-		case "FirstFight_1":
-      dialog.text = "It's so... Man, it's... It's the matter of YOUR death.";
-      link.l1 = "What are you talking about?";
-      link.l1.go = "FirstFight_2";
-    break;    
-		case "FirstFight_2":
-      dialog.text = "I hope you've been to confession recently, 'cause you're going to your forefathers. I want you to go get cleaned, or I'll be worried about you...";
-      link.l1 = "Okay, uh. Thanks for the concern. Do you actually know who I am, for you to talk with me like this?";
-      link.l1.go = "FirstFight_3";
-    break;    
-		case "FirstFight_3":
-      dialog.text = "Some captain, and I don't need anything else. You're not the first idiot to come here and stay here forever. In fact, you're standing on one of them now. Good guy, he was. And he was beautiful, like Apollo. \nUnderstand, I have to kill you. There's no way around it.";
-      link.l1 = "Wow, I never would have thought that a cynical killer could be behind such an appearance...";
-      link.l1.go = "FirstFight_4";    
-		break; 
-		case "FirstFight_4":
-      dialog.text = "Heh. That's the rub, pal. Appearances can be deceiving. I, uh, was about to suggest you remember that in the future, but...";
-			link.l1 = "I want to hope it's a happy one...";
-      link.l1.go = "FirstFight_overAll";
-    break; 
-    //------------ вторая боевка ----------------
-    case "Second time":
-      dialog.text = "Tell me, may I have a minute of your time?";
-      link.l1 = "You may.";
-      link.l1.go = "Step2_1";
-    break;
-    case "Step2_1":
-      dialog.text = "Your name...";
-      link.l1 = GetFullName(pchar) + ". And what of it?";
-      link.l1.go = "Step2_2";
-    break;
-    case "Step2_2":
-      dialog.text = "Then I need just you. I've got something for you, but I have to meet you in secluded place.";
-      link.l1 = "Let's go to a tavern.";
-      link.l1.go = "Step2_3";
-    break;
-    case "Step2_3":
-			if (npchar.city == "SentJons") sStr = "under";
-			else sStr = "behind";
-      dialog.text = "Sorry, that's no good. Believe me, there's a reason for it. I can't talk long with you, so I'll ask you to come to a certain dungeon in " + sStr + ".";
-      link.l1 = "Hmm. This all seems familiar, somehow...";
-      link.l1.go = "Step_overAll";
-    break;
-		//----------
-    case "Fight_2":
-      dialog.text = "I've waited long enough...";
-      link.l1 = "Yes. As you see, I've come. What do you have for me? Speak quickly!";
-      link.l1.go = "SecondFight_1";
-    break;
-    case "SecondFight_1":
-      dialog.text = "Run everything you have, and tell me what kind of ship you've got and what kind of cargo in the holds...";
-      link.l1 = "And why should I do that?";
-      link.l1.go = "SecondFight_2";
-    break;
-    case "SecondFight_2":
-      dialog.text = "Say it, idiot, or you'll lose your head in a second!";
-      link.l1 = "Hot damn, is this ridiculous. You're the second person who's tried to kill me this way.";
-      link.l1.go = "SecondFight_3";
-    break;
-    case "SecondFight_3":
-      dialog.text = "Hm. Is that how it is?  \nWell, that clears up a few things for me...";
-      link.l1 = "And what has cleared up for you?";
-      link.l1.go = "FirstFight_overAll";
-    break;
-    //------------ третья встреча, сумасшедший ----------------
-    case "Third time":
-      dialog.text = "Beware the optimates, pal!";
-      link.l1 = "The what-now?";
-      link.l1.go = "Step3_1";
-    break;
-    case "Step3_1":
-      dialog.text = "Sulla's proscripts are pure evil! If only he'd known what it would do to the empire...";
-      link.l1 = "What are you jabbering about?";
-      link.l1.go = "Step3_2";
-    break;
-    case "Step3_2":
-      dialog.text = "What do mean? Don't you understand?!  \nBeware the strapping young men- that's what Sulla said to the optimates - and he was right! Holy Julius eliminated the remnants of the Republic...";
-      link.l1 = "Bud, it looks like you're really and truly sick. Excuse me, but I must be going...";
-      link.l1.go = "Step3_3";
-    break;
-    case "Step3_3":
-      dialog.text = "Where?! Where will you go?! Evil is on every corner, and you've had the misfortune of feeling its icy touch! To twice get into a trap and avoid death... hee-hehehee...";
-      link.l1 = "Are you talking about the strange people who've been calling me into dungeons and trying to kill me?";
-      link.l1.go = "Step3_4";
-    break;
-    case "Step3_4":
-      dialog.text = "Quite so, my friend. Quite so...";
-      link.l1 = "Damn it, who are they?!";
-      link.l1.go = "Step3_5";
-    break;
-    case "Step3_5":
-      dialog.text = "Hee-hehehee! I won't tell you...";
-      link.l1 = "You'll tell me, or I'll ring your neck in a second!";
-      link.l1.go = "Step3_6";
-    break;
-    case "Step3_6":
-      dialog.text = "I'm not scared anymore... I've killed captains as well! I've had the chance to do that! Ahh, fear ate at my soul!  \nBut I'm not scared anymore! It's all over... And I've got to hurry! I've got to warn August, against warming his gallbladder! To the contrary, he should apply a cold compress. Then the bile would leave...";
-      link.l1 = "Um...";
-      link.l1.go = "Step3_7";
-    break;
-    case "Step3_7":
-      dialog.text = "Oh, piss off! This has nothing to do with you! This just between me and the Caesars!";
-      link.l1 = "Okay, got it...";
-      link.l1.go = "Step3_8";
-    break;
-    case "Step3_8":
-      dialog.text = "And you should seek them! You must find Austin, before they realize that you've killed both. Be careful and clever. Don't scare them away, or they'll disappear!";
-      link.l1 = "Austin?";
-      link.l1.go = "Step3_9";
-    break;
-    case "Step3_9":
-			sTemp = "berglar" + npchar.city;
-			pchar.questTemp.tugs.berglarState = sti(pchar.questTemp.tugs.berglarState) + 1; //счетчик
-			npchar.LifeDay = 0;
-			LAi_SetActorTypeNoGroup(NPChar);
-      LAi_ActorRunToLocation(NPChar, "reload", pchar.questTemp.tugs.(sTemp).locator, "none", "", "", "", -1);
-			if (sti(pchar.questTemp.tugs.berglarState) > 6)
-		{
-			pchar.quest.Berglars_Ostin.win_condition.l1 = "location";
-			pchar.quest.Berglars_Ostin.win_condition.l1.location = "Bravo_shack1";
-			pchar.quest.Berglars_Ostin.win_condition = "Berglars_Ostin";
-		}
-			pchar.questTemp.(sTemp) = "over";
-			DialogExit();
-    break;
-    //------------ четвертая встреча ----------------
-    case "Fourth time":
-      dialog.text = "Hello, " + GetAddress_Form(NPChar) + ".";
-      link.l1 = "Hello. To what do I owe the honor?";
-      link.l1.go = "Step4_1";
-    break;
-    case "Step4_1":
-      dialog.text = "Listen, I've got a little item that you'd definitely be interested in. And for a good price!";
-      link.l1 = "Well, I'm always happy to receive good business offers. Show me what you've got.";
-      link.l1.go = "Step4_2";
-    break;
-    case "Step4_2":
-			if (npchar.city == "SentJons") sStr = "under";
-			else sStr = "behind";
-      dialog.text = "Not here, " + GetAddress_Form(NPChar) + ". We don't need any extra eyes or ears. I'll wait for you at midnight in a dungeon, in " + sStr + ". Come! You won't regret it!";
-      link.l1 = "You know, buddy, you're the third unseemly type who's called me out to the local catacombs. The previous two ended in big trouble...";
-      link.l1.go = "Step4_3";
-      link.l2 = "Ha! I'll come to the meeting place, with pleasure. Is the thing expensive?";
-      link.l2.go = "Step4_5";
-    break;
-    case "Step4_3":
-      dialog.text = "Oh, is that it... Sorry, our deal's off.";
-      link.l1 = "Oh, you don't mean?!";
-      link.l1.go = "Step4_4";
-    break;
-    case "Step4_4":
-			sTemp = "berglar" + npchar.city;
-			npchar.LifeDay = 0;
-			LAi_SetActorTypeNoGroup(NPChar);
-      LAi_ActorRunToLocation(NPChar, "reload", pchar.questTemp.tugs.(sTemp).locator, "none", "", "", "", -1);
-			pchar.questTemp.(sTemp) = "over";
-			DialogExit();
-    break;
-    case "Step4_5":
-      dialog.text = "Yeah, it isn't cheap.";
-      link.l1 = "Then I'd better take more money!";
-      link.l1.go = "Step4_6";
-    break;
-    case "Step4_6":
-      dialog.text = "Well, then I can't wait to meet you, " + GetAddress_Form(NPChar) + ".";
-      link.l1 = "Til we meet again, buddy.";
-      link.l1.go = "Step_overAll";
-    break;
-    case "Fight_4":
-      dialog.text = "Ah! You came after all...";
-      link.l1 = "Spill it. Tell me what you got.";
-      link.l1.go = "Fight4_1";
-    break;
-    case "Fight4_1":
-      dialog.text = "Ho, you spill it. How much money did you bring?";
-      link.l1 = "Show me the goods, first.";
-      link.l1.go = "Fight4_2";
-    break;
-    case "Fight4_2":
-			dialog.text = "Ain't no goods. A little slow, are we? ";
-      link.l1 = "Nah, doesn't take a great mind. You're the third guy who's tried to pull this on me. So go ahead, tell me who you and this Austin are.";
-      link.l1.go = "Fight4_3";
-    break;
-    case "Fight4_3":
-      dialog.text = "Well, this is unexpected... ";
-      link.l1 = "So are the runs... Now quit the stallin', and start the squawkin'. If you value your life, that is.";
-      link.l1.go = "Fight4_4";
-    break;
-    case "Fight4_4":
-      dialog.text = "Hmm... Cocky ain't we, brother.";
-      link.l1 = "Yeah, that's right... And that's not all I got.";
-      link.l1.go = "FirstFight_overAll";
-    break;
-    //------------ пятая встреча ----------------
-    case "Fifth time":
-      dialog.text = "Hello, " + GetAddress_Form(NPChar) + ". Tell me, are you that famous captain who brought in a whole mess of copra from the Old World?";
-      link.l1 = "Nah, I don't do business with Europe.";
-      link.l1.go = "Step5_1";
-    break;
-    case "Step5_1":
-      dialog.text = "Ah, a pity. Such a pity! I has an extremely profitable deal for that captain.";
-      link.l1 = "So you're in the market for copra?";
-      link.l1.go = "Step5_2";
-    break;
-    case "Step5_2":
-      dialog.text = "No, not at all! I deal in compact, yet quite valuable, goods. They're the dream of any merchant captain - take up a minimum of space, yet provide maximum of profit.";
-      link.l1 = "What kind of goods, if I may ask? I might be interested.";
-      link.l1.go = "Step5_3";
-    break;
-    case "Step5_3":
-      dialog.text = "Hmm... I'm afraid I can't just tell you, Captain. Security and all. Mum's the word, I'm sure you understand. I can't just show my cards to the first person I meet.";
-      link.l1 = "All right. So if you're unwilling to discuss the goods, how might I, or any other captain, ascertain the value in this deal?";
-      link.l1.go = "Step5_4";
-    break;
-    case "Step5_4":
-			if (npchar.city == "SentJons") sStr = "under";
-			else sStr = "behind";
-      dialog.text = "I'm prepared to discuss it in detail, but not here. I propose we meet, one on one, in the catacombs under the city of " + sStr + ". I won't take too much of your time, and I will be sure of my own security.";
-      link.l1 = "Ha! I've been down this road before, brother. Every time, someone's tried to kill me. ";
-      link.l1.go = "Step5_5";
-      link.l2 = "Fair enough, I guess. I know how it pays to be cautious... ";
-      link.l2.go = "Step5_7";
-    break;
-    case "Step5_5":
-      dialog.text = "In that case, we have no more to talk about! ";
-      link.l1 = "...";
-      link.l1.go = "Step5_6";
-    break;
-    case "Step5_6":
-			sTemp = "berglar" + npchar.city;
-			npchar.LifeDay = 0;
-			LAi_SetActorTypeNoGroup(NPChar);
-			LAi_ActorRunToLocation(NPChar, "reload", pchar.questTemp.tugs.(sTemp).locator, "none", "", "", "", -1);
-			pchar.questTemp.(sTemp) = "over";
-			DialogExit();
-    break;
-    case "Step5_7":
-      dialog.text = "Then we're agreed. I will wait for you till midnight. If you fail to show, the deal is off.";
-      link.l1 = "Fine, I understand.";
-      link.l1.go = "Step_overAll";
-    break;
-    case "Fight_5":
-      dialog.text = "Very well. Sounds grand! ";
-      link.l1 = "So. Show me the goods.";
-      link.l1.go = "Fight5_1";
-    break;
-    case "Fight5_1":
-      dialog.text = "You know, I have some bad news. The goods have vanished, but you'll have to pay for them anyway.";
-      link.l1 = "Hmm. Every single time... ";
-      link.l1.go = "Fight5_2";
-    break;
-    case "Fight5_2":
-      dialog.text = "What do you mean?";
-      link.l1 = "If I'm counting right, you're the fourth scoundrel that has pulled this scheme on me. What is it about me, do I have the face of a greenhorn?";
-      link.l1.go = "Fight5_3";
-    break;
-    case "Fight5_3":
-      dialog.text = "So... I take it you killed them all? Hmm... Quite the worthy opponent... ";
-      link.l1 = "Look, just tell me where Austin is, and I'll let you live.";
-      link.l1.go = "Fight5_4";
-    break;
-    case "Fight5_4":
-      dialog.text = "If I tell you where Austin is, I know I'm a dead man - the gang doesn't abide betrayal. This way, 'least I got a chance to survive.";
-      link.l1 = "No. No, you don't. Tell me, and at least you'll have a little longer to settle your affairs.";
-      link.l1.go = "Fight5_5";
-    break;
-    case "Fight5_5":
-      dialog.text = "I think I'll take my chances.";
-      link.l1 = "Well, it's your life. ";
-      link.l1.go = "FirstFight_overAll";
-    break;
-    //------------ шестая встреча ----------------
-    case "Sixth time":
-      dialog.text = "Hey, " + GetAddress_Form(NPChar) + " . Tell me, are you Captain " + GetFullName(pchar) + "?";
-      link.l1 = "Yes, that's my name.";
-      link.l1.go = "Step6_1";
-    break;
-    case "Step6_1":
-			dialog.text = "Got a message for you. Man named Austin wants to meet with you.";
-      link.l1 = "Hmm... Tell him I agree.";
-      link.l1.go = "Step6_2";
-    break;
-    case "Step6_2":
-			if (npchar.city == "SentJons") sStr = "under";
-			else sStr = "behind";
-      dialog.text = "Great. He'll wait for you until midnight, in the catacombs " + sStr + "the city. You can find me there.";
-      link.l1 = "This is getting monotonous. Yes, all right.";
-      link.l1.go = "Step_overAll";
-    break;
-    case "Fight_6":
-      dialog.text = "Ah, here you are... ";
-      link.l1 = "Where is Austin?";
-      link.l1.go = "Fight6_1";
-    break;
-    case "Fight6_1":
-      dialog.text = "He didn't make it, but asked me to give you his greetings. And then to kill you.";
-      link.l1 = "Yes, all right. Look, do you even know what happened to the last four guys?";
-      link.l1.go = "Fight6_2";
-    break;
-    case "Fight6_2":
-      dialog.text = "I do, but I think I'll manage.";
-      link.l1 = "Yeah? Well, if I'm going to die anyway, you might as well tell me where I can find this Austin guy. I hear he's in the market for a new scam.";
-      link.l1.go = "Fight6_3";
-    break;
-    case "Fight6_3":
-      dialog.text = "He lives in one of the pearl diver villages, on the west side of the Main.";
-      link.l1 = "Ah, thank you. I would never have looked in such a far-away place. ";
-      link.l1.go = "Fight6_4";
-    break;
-    case "Fight6_4":
-      dialog.text = "Not that the information will do you much good. ";
-      link.l1 = "Well, you never know.";
-      link.l1.go = "FirstFight_overAll";
-			AddQuestRecord("BerglarsGang", "1");
-    break;
-		//------------ общие ноды ----------------
- 		case "Step_overAll":
-			sTemp = "berglar" + npchar.city;
-			sStr = "Birglars_fight_" + npchar.index;
-			pchar.quest.(sStr).win_condition.l1 = "locator";
-			pchar.quest.(sStr).win_condition.l1.location = pchar.questTemp.tugs.(sTemp);
-			pchar.quest.(sStr).win_condition.l1.locator_group = "item";
-			pchar.quest.(sStr).win_condition.l1.locator = "berglar1";
-			pchar.quest.(sStr).function = "Birglars_fight";
-			pchar.quest.(sStr).city = npchar.city; //запомним город грабителя
-			npchar.LifeDay = 1;
-			SaveCurrentNpcQuestDateParam(npchar, "LifeTimeCreate");
-      NextDiag.CurrentNode = "Fight_" + pchar.questTemp.tugs.berglarState;
-			npchar.equip.blade = FindCharacterItemByGroup(npchar, BLADE_ITEM_TYPE); 
-			npchar.equip.gun = FindCharacterItemByGroup(npchar, GUN_ITEM_TYPE); 	
-			LAi_LocationDisableMonGenTimer(pchar.questTemp.tugs.(sTemp), 1); //монстров не генерить 1 день
-			LAi_LocationDisableOffGenTimer(pchar.questTemp.tugs.(sTemp), 1); //офицеров не пускать 1 день
-			LAi_SetActorTypeNoGroup(NPChar);
-      LAi_ActorRunToLocation(NPChar, "reload", pchar.questTemp.tugs.(sTemp).locator, pchar.questTemp.tugs.(sTemp), "item", "berglar1", "OpenTheDoors", -1.0);
-			chrDisableReloadToLocation = true;
-			//pchar.questTemp.tugs.(sTemp) = "fight";
-			DialogExit();
-		break;
-		case "FirstFight_overAll":
-			LAi_group_Delete("EnemyFight");
-			pchar.questTemp.tugs.berglarState = sti(pchar.questTemp.tugs.berglarState) + 1; //счетчик
-			npchar.SaveItemsForDead = true; 
-			npchar.DontClearDead = true; 
-			SetCharacterPerk(npchar, "Energaiser"); // скрытый перк дает 1.5 к приросту энергии, дается ГГ и боссам уровней
-			sTemp = "berglar" + npchar.city;
-			LAi_SetHP(npchar, stf(pchar.questTemp.tugs.(sTemp).hp), stf(pchar.questTemp.tugs.(sTemp).hp));
-			LAi_SetCurHPMax(npchar);
-			chrDisableReloadToLocation = true;
-			DeleteAttribute(npchar, "city"); //чтобы не ругались с нацией
-			LAi_group_MoveCharacter(npchar, "EnemyFight");
-			if (npchar.id == "BerglarMaracaibo")
-			{
-				GetCharacterPos(pchar, &locx, &locy, &locz);
-				sld = GetCharacter(NPC_GenerateCharacter("Berglars_Helper", "pirate_"+(rand(9)+1), "man", "man", 18, PIRATE, 0, true, "quest"));
-				FantomMakeCoolFighter(sld, 18, 60, 50, BLADE_LONG, "pistol3", "bullet", 10);
-				LAi_group_MoveCharacter(sld, "EnemyFight");
-				ChangeCharacterAddressGroup(sld, npchar.location, "monsters", LAi_FindNearestFreeLocator("monsters", locx, locy, locz));
-			}
-			if (npchar.id == "BerglarPanama")
-			{
-				GetCharacterPos(pchar, &locx, &locy, &locz);
-				sld = GetCharacter(NPC_GenerateCharacter("Berglars_Helper", "pirate_"+(rand(9)+1), "man", "man", 21, PIRATE, 0, true, "quest"));
-				FantomMakeCoolFighter(sld, 21, 60, 50, BLADE_LONG, "pistol3", "bullet", 20);
-				LAi_group_MoveCharacter(sld, "EnemyFight");
-				ChangeCharacterAddressGroup(sld, npchar.location, "monsters", LAi_FindNearestFreeLocator("monsters", locx, locy, locz));
-			}
-			if (npchar.id == "BerglarSantaCatalina")
-			{
-				GetCharacterPos(pchar, &locx, &locy, &locz);
-				sld = GetCharacter(NPC_GenerateCharacter("Berglars_Helper", "pirate_"+(rand(9)+1), "man", "man", 20, PIRATE, 0, true, "quest"));
-				FantomMakeCoolFighter(sld, 20, 60, 50, BLADE_LONG, "pistol3", "bullet", 20);
-				LAi_group_MoveCharacter(sld, "EnemyFight");
-				ChangeCharacterAddressGroup(sld, npchar.location, "monsters", LAi_FindNearestFreeLocator("monsters", locx, locy, locz));
-			}
-			string sGunpowder = LAi_GetCharacterGunpowderType(npchar);
-TakeNItems(npchar, LAi_GetCharacterBulletType(npchar), n);
-if(sGunPowder != "")
-{
-AddItems(sld, sGunpowder, n);
-}			
-			LAi_group_SetRelation("EnemyFight", LAI_GROUP_PLAYER, LAI_GROUP_ENEMY);
-			LAi_group_FightGroups("EnemyFight", LAI_GROUP_PLAYER, true);
-			LAi_group_SetCheck("EnemyFight", "OpenTheDoors_O");
-			DialogExit();
-			AddDialogExitQuest("MainHeroFightModeOn");
-			if (sti(pchar.questTemp.tugs.berglarState) > 6)
-		{
-			pchar.quest.Berglars_Ostin.win_condition.l1 = "location";
-			pchar.quest.Berglars_Ostin.win_condition.l1.location = "Bravo_shack1";
-			pchar.quest.Berglars_Ostin.win_condition = "Berglars_Ostin";
-		}
-    break;
-    //------------ финальная боевка с Остином ----------------
-    case "Final_fight":
-      dialog.text = "Why, hullo! Visitors are right uncommon 'round these parts. What can I do you for?";
-      link.l1 = "Hello, Austin. I just wanted to break out of the catacombs and meet you face to face. All these messengers start to look the same after a while... ";
-      link.l1.go = "StepF1_1";
-    break;
-    case "StepF1_1":
-      dialog.text = "Austin, you say? Ain't too many folks know that name. Oh, I get it. You're that captain what's been slaughterin' all my men! " + GetFullName(pchar) + ", if I ain't altogether mistaken... ";
-      link.l1 = "Yes, Austin, that's right. Tell me, friend, what is the world coming to when murderers lurk the streets, luring the innocent into dark holes and then ripping their guts out?";
-      link.l1.go = "StepF1_2";
-    break;
-    case "StepF1_2":
-      dialog.text = "Lawd, I can't believe my ears! You ain't tryin' to shame me? You think you're so diffn't a' me?";
-      link.l1 = "And what do you mean by that?";
-      link.l1.go = "StepF1_3";
-    break;
-    case "StepF1_3":
-      dialog.text = "Don't you tail merchants all over th' sea? Don't you chop up people by the barrel? And what for? Wait, I'll answer that my own self: for money.  \nYou and I, we's brothers in blood! Only diff'nce is, my operation is land-based.";
-      link.l1 = "I don't fall so low as to lure people into burrows! ";
-      link.l1.go = "StepF1_4";
-    break;
-    case "StepF1_4":
-      dialog.text = "Yeah, well. Don't you raise other people's flags, pull the wool-eyes over yer victims to thusly approach unhindered?";
-      link.l1 = "That's different... ";
-      link.l1.go = "StepF1_5";
-    break;
-    case "StepF1_5":
-      dialog.text = "Oh, it is, is it! It is, is it! Mah friend, deceit, murder, takin' a victim's possessions. It's all the same, my sea brother.  \nLook, I'll answer yer question f'm the beginning of our conversation: nothing extraordinary is afoot. Everything is copus mentis.";
-      link.l1 = "You're a real smooth talker, you know that?";
-      link.l1.go = "StepF1_6";
-    break;
-    case "StepF1_6":
-      dialog.text = "Hmm, may be. May well be! Tell me why you're here, sea brother.";
-      link.l1 = "Look, you're certainly adept at spinning the dials, but I wasn't born yesterday. The difference between us is enormous. I offer people a choice: surrender or die. You give no option, and your meeting place is quite literally a burial ground. So you are no brother of mine.";
-      link.l1.go = "StepF1_7";
-    break;
-    case "StepF1_7":
-      dialog.text = "You sayin' you wish to further escalate our hostilities?";
-      link.l1 = "Nothing would give me greater pleasure. I want to finish what I started, and rid the Caribbean of your bile.";
-      link.l1.go = "StepF1_8";
-    break;
-    case "StepF1_8":
-      dialog.text = "Wal... Guess it's fer the best, then. You're a bit of an itch on my unmentionables as well. Let's get it on, Seignior! ";
-      link.l1 = "About time... ";
-      link.l1.go = "StepF1_9";
-    break;
-    case "StepF1_9":
-			LAi_LocationFightDisable(loadedLocation, false);
-			CloseQuestHeader("BerglarsGang");
-			LAi_group_Delete("EnemyFight");
-			LAi_group_MoveCharacter(npchar, "EnemyFight");
-			LAi_group_SetRelation("EnemyFight", LAI_GROUP_PLAYER, LAI_GROUP_ENEMY);
-			LAi_group_FightGroups("EnemyFight", LAI_GROUP_PLAYER, true);
-			LAi_group_SetCheck("EnemyFight", "OpenTheDoors_O");
-			DialogExit();
-			AddDialogExitQuest("MainHeroFightModeOn");
-    break;
-
- 		case "Exit":
-      NextDiag.TempNode = "First time";
-      NextDiag.CurrentNode = NextDiag.TempNode;
-			DialogExit();
-		break;
-  }
-}
+void ProcessDialogEvent(){	ref NPChar, sld;	aref Link, NextDiag;	string sTemp, sStr, sPlace;	float locx, locy, locz;	int n;	DeleteAttribute(&Dialog,"Links");	makeref(NPChar,CharacterRef);	makearef(Link, Dialog.Links);	makearef(NextDiag, NPChar.Dialog);	if (Dialog.CurrentNode == "First time")	{		switch (pchar.questTemp.tugs.berglarState)		{			case "2": Dialog.CurrentNode = "Second time";	break;			case "3": Dialog.CurrentNode = "Third time";	break;			case "4": Dialog.CurrentNode = "Fourth time";	break;			case "5": Dialog.CurrentNode = "Fifth time";	break;			case "6": Dialog.CurrentNode = "Sixth time";	break;		}	}	switch (Dialog.CurrentNode)  {    //------------- первая боевка --------------		case "First time":      dialog.text = "Wait, buddy... Be so kind as to tell me your name.";      link.l1 = GetFullName(pchar) + ", in the flesh. What's the matter?";      link.l1.go = "Step1_1";    break; 		case "Step1_1":    	dialog.text = "Aha. I need you...";  		link.l1 = "I'm listening closely.";  		link.l1.go = "Step1_2";		break; 		case "Step1_2":			if (npchar.city == "SentJons") sStr = "under";			else sStr = "behind";    	dialog.text = "That's good that you're listening closely, 'cause we've got something important to talk about. Here goes: There's a dungeon somewhere " + sStr + "the city. You can find me there. ";  		link.l1 = "Maybe we should go to the tavern, discuss things there? What's the hell's the point of wandering around dungeons at night?";  		link.l1.go = "Step1_3";		break; 		case "Step1_3":    	dialog.text = "No, I don't need any extra eyes or hands. Believe that...";  		link.l1 = "Hm, I don't know... What this matter worth to me?";  		link.l1.go = "Step1_4";		break; 		case "Step1_4":    	dialog.text = "It's a matter of life and death.  \nAnyway, I've got no time to chat with you. I'll wait for you at the dungeon at midnight. If you don't come, well. You know best...";  		link.l1 = "I wanted to ask this, too...";  		link.l1.go = "Step_overAll";		break;		//--------------    case "Fight_1":      dialog.text = "Ah! You've come after all...";      link.l1 = "Yeah, I've come. Talk quickly. What's this matter of life and death?";      link.l1.go = "FirstFight_1";    break;    		case "FirstFight_1":      dialog.text = "It's so... Man, it's... It's the matter of YOUR death.";      link.l1 = "What are you talking about?";      link.l1.go = "FirstFight_2";    break;    		case "FirstFight_2":      dialog.text = "I hope you've been to confession recently, 'cause you're going to your forefathers. I want you to go get cleaned, or I'll be worried about you...";      link.l1 = "Okay, uh. Thanks for the concern. Do you actually know who I am, for you to talk with me like this?";      link.l1.go = "FirstFight_3";    break;    		case "FirstFight_3":      dialog.text = "Some captain, and I don't need anything else. You're not the first idiot to come here and stay here forever. In fact, you're standing on one of them now. Good guy, he was. And he was beautiful, like Apollo. \nUnderstand, I have to kill you. There's no way around it.";      link.l1 = "Wow, I never would have thought that a cynical killer could be behind such an appearance...";      link.l1.go = "FirstFight_4";    		break; 		case "FirstFight_4":      dialog.text = "Heh. That's the rub, pal. Appearances can be deceiving. I, uh, was about to suggest you remember that in the future, but...";			link.l1 = "I want to hope it's a happy one...";      link.l1.go = "FirstFight_overAll";    break;     //------------ вторая боевка ----------------    case "Second time":      dialog.text = "Tell me, may I have a minute of your time?";      link.l1 = "You may.";      link.l1.go = "Step2_1";    break;    case "Step2_1":      dialog.text = "Your name...";      link.l1 = GetFullName(pchar) + ". And what of it?";      link.l1.go = "Step2_2";    break;    case "Step2_2":      dialog.text = "Then I need just you. I've got something for you, but I have to meet you in secluded place.";      link.l1 = "Let's go to a tavern.";      link.l1.go = "Step2_3";    break;    case "Step2_3":			if (npchar.city == "SentJons") sStr = "under";			else sStr = "behind";      dialog.text = "Sorry, that's no good. Believe me, there's a reason for it. I can't talk long with you, so I'll ask you to come to a certain dungeon in " + sStr + ".";      link.l1 = "Hmm. This all seems familiar, somehow...";      link.l1.go = "Step_overAll";    break;		//----------    case "Fight_2":      dialog.text = "I've waited long enough...";      link.l1 = "Yes. As you see, I've come. What do you have for me? Speak quickly!";      link.l1.go = "SecondFight_1";    break;    case "SecondFight_1":      dialog.text = "Run everything you have, and tell me what kind of ship you've got and what kind of cargo in the holds...";      link.l1 = "And why should I do that?";      link.l1.go = "SecondFight_2";    break;    case "SecondFight_2":      dialog.text = "Say it, idiot, or you'll lose your head in a second!";      link.l1 = "Hot damn, is this ridiculous. You're the second person who's tried to kill me this way.";      link.l1.go = "SecondFight_3";    break;    case "SecondFight_3":      dialog.text = "Hm. Is that how it is?  \nWell, that clears up a few things for me...";      link.l1 = "And what has cleared up for you?";      link.l1.go = "FirstFight_overAll";    break;    //------------ третья встреча, сумасшедший ----------------    case "Third time":      dialog.text = "Beware the optimates, pal!";      link.l1 = "The what-now?";      link.l1.go = "Step3_1";    break;    case "Step3_1":      dialog.text = "Sulla's proscripts are pure evil! If only he'd known what it would do to the empire...";      link.l1 = "What are you jabbering about?";      link.l1.go = "Step3_2";    break;    case "Step3_2":      dialog.text = "What do mean? Don't you understand?!  \nBeware the strapping young men- that's what Sulla said to the optimates - and he was right! Holy Julius eliminated the remnants of the Republic...";      link.l1 = "Bud, it looks like you're really and truly sick. Excuse me, but I must be going...";      link.l1.go = "Step3_3";    break;    case "Step3_3":      dialog.text = "Where?! Where will you go?! Evil is on every corner, and you've had the misfortune of feeling its icy touch! To twice get into a trap and avoid death... hee-hehehee...";      link.l1 = "Are you talking about the strange people who've been calling me into dungeons and trying to kill me?";      link.l1.go = "Step3_4";    break;    case "Step3_4":      dialog.text = "Quite so, my friend. Quite so...";      link.l1 = "Damn it, who are they?!";      link.l1.go = "Step3_5";    break;    case "Step3_5":      dialog.text = "Hee-hehehee! I won't tell you...";      link.l1 = "You'll tell me, or I'll ring your neck in a second!";      link.l1.go = "Step3_6";    break;    case "Step3_6":      dialog.text = "I'm not scared anymore... I've killed captains as well! I've had the chance to do that! Ahh, fear ate at my soul!  \nBut I'm not scared anymore! It's all over... And I've got to hurry! I've got to warn August, against warming his gallbladder! To the contrary, he should apply a cold compress. Then the bile would leave...";      link.l1 = "Um...";      link.l1.go = "Step3_7";    break;    case "Step3_7":      dialog.text = "Oh, piss off! This has nothing to do with you! This just between me and the Caesars!";      link.l1 = "Okay, got it...";      link.l1.go = "Step3_8";    break;    case "Step3_8":      dialog.text = "And you should seek them! You must find Austin, before they realize that you've killed both. Be careful and clever. Don't scare them away, or they'll disappear!";      link.l1 = "Austin?";      link.l1.go = "Step3_9";    break;    case "Step3_9":			sTemp = "berglar" + npchar.city;			pchar.questTemp.tugs.berglarState = sti(pchar.questTemp.tugs.berglarState) + 1; //счетчик			npchar.LifeDay = 0;			LAi_SetActorTypeNoGroup(NPChar);      LAi_ActorRunToLocation(NPChar, "reload", pchar.questTemp.tugs.(sTemp).locator, "none", "", "", "", -1);			if (sti(pchar.questTemp.tugs.berglarState) > 6)		{			pchar.quest.Berglars_Ostin.win_condition.l1 = "location";			pchar.quest.Berglars_Ostin.win_condition.l1.location = "Bravo_shack1";			pchar.quest.Berglars_Ostin.win_condition = "Berglars_Ostin";		}			pchar.questTemp.(sTemp) = "over";			DialogExit();    break;    //------------ четвертая встреча ----------------    case "Fourth time":      dialog.text = "Hello, " + GetAddress_Form(NPChar) + ".";      link.l1 = "Hello. To what do I owe the honor?";      link.l1.go = "Step4_1";    break;    case "Step4_1":      dialog.text = "Listen, I've got a little item that you'd definitely be interested in. And for a good price!";      link.l1 = "Well, I'm always happy to receive good business offers. Show me what you've got.";      link.l1.go = "Step4_2";    break;    case "Step4_2":			if (npchar.city == "SentJons") sStr = "under";			else sStr = "behind";      dialog.text = "Not here, " + GetAddress_Form(NPChar) + ". We don't need any extra eyes or ears. I'll wait for you at midnight in a dungeon, in " + sStr + ". Come! You won't regret it!";      link.l1 = "You know, buddy, you're the third unseemly type who's called me out to the local catacombs. The previous two ended in big trouble...";      link.l1.go = "Step4_3";      link.l2 = "Ha! I'll come to the meeting place, with pleasure. Is the thing expensive?";      link.l2.go = "Step4_5";    break;    case "Step4_3":      dialog.text = "Oh, is that it... Sorry, our deal's off.";      link.l1 = "Oh, you don't mean?!";      link.l1.go = "Step4_4";    break;    case "Step4_4":			sTemp = "berglar" + npchar.city;			npchar.LifeDay = 0;			LAi_SetActorTypeNoGroup(NPChar);      LAi_ActorRunToLocation(NPChar, "reload", pchar.questTemp.tugs.(sTemp).locator, "none", "", "", "", -1);			pchar.questTemp.(sTemp) = "over";			DialogExit();    break;    case "Step4_5":      dialog.text = "Yeah, it isn't cheap.";      link.l1 = "Then I'd better take more money!";      link.l1.go = "Step4_6";    break;    case "Step4_6":      dialog.text = "Well, then I can't wait to meet you, " + GetAddress_Form(NPChar) + ".";      link.l1 = "Til we meet again, buddy.";      link.l1.go = "Step_overAll";    break;    case "Fight_4":      dialog.text = "Ah! You came after all...";      link.l1 = "Spill it. Tell me what you got.";      link.l1.go = "Fight4_1";    break;    case "Fight4_1":      dialog.text = "Ho, you spill it. How much money did you bring?";      link.l1 = "Show me the goods, first.";      link.l1.go = "Fight4_2";    break;    case "Fight4_2":			dialog.text = "Ain't no goods. A little slow, are we? ";      link.l1 = "Nah, doesn't take a great mind. You're the third guy who's tried to pull this on me. So go ahead, tell me who you and this Austin are.";      link.l1.go = "Fight4_3";    break;    case "Fight4_3":      dialog.text = "Well, this is unexpected... ";      link.l1 = "So are the runs... Now quit the stallin', and start the squawkin'. If you value your life, that is.";      link.l1.go = "Fight4_4";    break;    case "Fight4_4":      dialog.text = "Hmm... Cocky ain't we, brother.";      link.l1 = "Yeah, that's right... And that's not all I got.";      link.l1.go = "FirstFight_overAll";    break;    //------------ пятая встреча ----------------    case "Fifth time":      dialog.text = "Hello, " + GetAddress_Form(NPChar) + ". Tell me, are you that famous captain who brought in a whole mess of copra from the Old World?";      link.l1 = "Nah, I don't do business with Europe.";      link.l1.go = "Step5_1";    break;    case "Step5_1":      dialog.text = "Ah, a pity. Such a pity! I has an extremely profitable deal for that captain.";      link.l1 = "So you're in the market for copra?";      link.l1.go = "Step5_2";    break;    case "Step5_2":      dialog.text = "No, not at all! I deal in compact, yet quite valuable, goods. They're the dream of any merchant captain - take up a minimum of space, yet provide maximum of profit.";      link.l1 = "What kind of goods, if I may ask? I might be interested.";      link.l1.go = "Step5_3";    break;    case "Step5_3":      dialog.text = "Hmm... I'm afraid I can't just tell you, Captain. Security and all. Mum's the word, I'm sure you understand. I can't just show my cards to the first person I meet.";      link.l1 = "All right. So if you're unwilling to discuss the goods, how might I, or any other captain, ascertain the value in this deal?";      link.l1.go = "Step5_4";    break;    case "Step5_4":			if (npchar.city == "SentJons") sStr = "under";			else sStr = "behind";      dialog.text = "I'm prepared to discuss it in detail, but not here. I propose we meet, one on one, in the catacombs under the city of " + sStr + ". I won't take too much of your time, and I will be sure of my own security.";      link.l1 = "Ha! I've been down this road before, brother. Every time, someone's tried to kill me. ";      link.l1.go = "Step5_5";      link.l2 = "Fair enough, I guess. I know how it pays to be cautious... ";      link.l2.go = "Step5_7";    break;    case "Step5_5":      dialog.text = "In that case, we have no more to talk about! ";      link.l1 = "...";      link.l1.go = "Step5_6";    break;    case "Step5_6":			sTemp = "berglar" + npchar.city;			npchar.LifeDay = 0;			LAi_SetActorTypeNoGroup(NPChar);			LAi_ActorRunToLocation(NPChar, "reload", pchar.questTemp.tugs.(sTemp).locator, "none", "", "", "", -1);			pchar.questTemp.(sTemp) = "over";			DialogExit();    break;    case "Step5_7":      dialog.text = "Then we're agreed. I will wait for you till midnight. If you fail to show, the deal is off.";      link.l1 = "Fine, I understand.";      link.l1.go = "Step_overAll";    break;    case "Fight_5":      dialog.text = "Very well. Sounds grand! ";      link.l1 = "So. Show me the goods.";      link.l1.go = "Fight5_1";    break;    case "Fight5_1":      dialog.text = "You know, I have some bad news. The goods have vanished, but you'll have to pay for them anyway.";      link.l1 = "Hmm. Every single time... ";      link.l1.go = "Fight5_2";    break;    case "Fight5_2":      dialog.text = "What do you mean?";      link.l1 = "If I'm counting right, you're the fourth scoundrel that has pulled this scheme on me. What is it about me, do I have the face of a greenhorn?";      link.l1.go = "Fight5_3";    break;    case "Fight5_3":      dialog.text = "So... I take it you killed them all? Hmm... Quite the worthy opponent... ";      link.l1 = "Look, just tell me where Austin is, and I'll let you live.";      link.l1.go = "Fight5_4";    break;    case "Fight5_4":      dialog.text = "If I tell you where Austin is, I know I'm a dead man - the gang doesn't abide betrayal. This way, 'least I got a chance to survive.";      link.l1 = "No. No, you don't. Tell me, and at least you'll have a little longer to settle your affairs.";      link.l1.go = "Fight5_5";    break;    case "Fight5_5":      dialog.text = "I think I'll take my chances.";      link.l1 = "Well, it's your life. ";      link.l1.go = "FirstFight_overAll";    break;    //------------ шестая встреча ----------------    case "Sixth time":      dialog.text = "Hey, " + GetAddress_Form(NPChar) + " . Tell me, are you Captain " + GetFullName(pchar) + "?";      link.l1 = "Yes, that's my name.";      link.l1.go = "Step6_1";    break;    case "Step6_1":			dialog.text = "Got a message for you. Man named Austin wants to meet with you.";      link.l1 = "Hmm... Tell him I agree.";      link.l1.go = "Step6_2";    break;    case "Step6_2":			if (npchar.city == "SentJons") sStr = "under";			else sStr = "behind";      dialog.text = "Great. He'll wait for you until midnight, in the catacombs " + sStr + "the city. You can find me there.";      link.l1 = "This is getting monotonous. Yes, all right.";      link.l1.go = "Step_overAll";    break;    case "Fight_6":      dialog.text = "Ah, here you are... ";      link.l1 = "Where is Austin?";      link.l1.go = "Fight6_1";    break;    case "Fight6_1":      dialog.text = "He didn't make it, but asked me to give you his greetings. And then to kill you.";      link.l1 = "Yes, all right. Look, do you even know what happened to the last four guys?";      link.l1.go = "Fight6_2";    break;    case "Fight6_2":      dialog.text = "I do, but I think I'll manage.";      link.l1 = "Yeah? Well, if I'm going to die anyway, you might as well tell me where I can find this Austin guy. I hear he's in the market for a new scam.";      link.l1.go = "Fight6_3";    break;    case "Fight6_3":      dialog.text = "He lives in one of the pearl diver villages, on the west side of the Main.";      link.l1 = "Ah, thank you. I would never have looked in such a far-away place. ";      link.l1.go = "Fight6_4";    break;    case "Fight6_4":      dialog.text = "Not that the information will do you much good. ";      link.l1 = "Well, you never know.";      link.l1.go = "FirstFight_overAll";			AddQuestRecord("BerglarsGang", "1");    break;		//------------ общие ноды ---------------- 		case "Step_overAll":			sTemp = "berglar" + npchar.city;			sStr = "Birglars_fight_" + npchar.index;			pchar.quest.(sStr).win_condition.l1 = "locator";			pchar.quest.(sStr).win_condition.l1.location = pchar.questTemp.tugs.(sTemp);			pchar.quest.(sStr).win_condition.l1.locator_group = "item";			pchar.quest.(sStr).win_condition.l1.locator = "berglar1";			pchar.quest.(sStr).function = "Birglars_fight";			pchar.quest.(sStr).city = npchar.city; //запомним город грабителя			npchar.LifeDay = 1;			SaveCurrentNpcQuestDateParam(npchar, "LifeTimeCreate");      NextDiag.CurrentNode = "Fight_" + pchar.questTemp.tugs.berglarState;			npchar.equip.blade = FindCharacterItemByGroup(npchar, BLADE_ITEM_TYPE); 			npchar.equip.gun = FindCharacterItemByGroup(npchar, GUN_ITEM_TYPE); 				LAi_LocationDisableMonGenTimer(pchar.questTemp.tugs.(sTemp), 1); //монстров не генерить 1 день			LAi_LocationDisableOffGenTimer(pchar.questTemp.tugs.(sTemp), 1); //офицеров не пускать 1 день			LAi_SetActorTypeNoGroup(NPChar);      LAi_ActorRunToLocation(NPChar, "reload", pchar.questTemp.tugs.(sTemp).locator, pchar.questTemp.tugs.(sTemp), "item", "berglar1", "OpenTheDoors", -1.0);			chrDisableReloadToLocation = true;			//pchar.questTemp.tugs.(sTemp) = "fight";			DialogExit();		break;		case "FirstFight_overAll":			LAi_group_Delete("EnemyFight");			pchar.questTemp.tugs.berglarState = sti(pchar.questTemp.tugs.berglarState) + 1; //счетчик			npchar.SaveItemsForDead = true; 			npchar.DontClearDead = true; 			SetCharacterPerk(npchar, "Energaiser"); // скрытый перк дает 1.5 к приросту энергии, дается ГГ и боссам уровней			sTemp = "berglar" + npchar.city;			LAi_SetHP(npchar, stf(pchar.questTemp.tugs.(sTemp).hp), stf(pchar.questTemp.tugs.(sTemp).hp));			LAi_SetCurHPMax(npchar);			chrDisableReloadToLocation = true;			DeleteAttribute(npchar, "city"); //чтобы не ругались с нацией			LAi_group_MoveCharacter(npchar, "EnemyFight");			if (npchar.id == "BerglarMaracaibo")			{				GetCharacterPos(pchar, &locx, &locy, &locz);				sld = GetCharacter(NPC_GenerateCharacter("Berglars_Helper", "pirate_"+(rand(9)+1), "man", "man", 18, PIRATE, 0, true, "quest"));				FantomMakeCoolFighter(sld, 18, 60, 50, BLADE_LONG, "pistol3", "bullet", 10);				LAi_group_MoveCharacter(sld, "EnemyFight");				ChangeCharacterAddressGroup(sld, npchar.location, "monsters", LAi_FindNearestFreeLocator("monsters", locx, locy, locz));			}			if (npchar.id == "BerglarPanama")			{				GetCharacterPos(pchar, &locx, &locy, &locz);				sld = GetCharacter(NPC_GenerateCharacter("Berglars_Helper", "pirate_"+(rand(9)+1), "man", "man", 21, PIRATE, 0, true, "quest"));				FantomMakeCoolFighter(sld, 21, 60, 50, BLADE_LONG, "pistol3", "bullet", 20);				LAi_group_MoveCharacter(sld, "EnemyFight");				ChangeCharacterAddressGroup(sld, npchar.location, "monsters", LAi_FindNearestFreeLocator("monsters", locx, locy, locz));			}			if (npchar.id == "BerglarSantaCatalina")			{				GetCharacterPos(pchar, &locx, &locy, &locz);				sld = GetCharacter(NPC_GenerateCharacter("Berglars_Helper", "pirate_"+(rand(9)+1), "man", "man", 20, PIRATE, 0, true, "quest"));				FantomMakeCoolFighter(sld, 20, 60, 50, BLADE_LONG, "pistol3", "bullet", 20);				LAi_group_MoveCharacter(sld, "EnemyFight");				ChangeCharacterAddressGroup(sld, npchar.location, "monsters", LAi_FindNearestFreeLocator("monsters", locx, locy, locz));			}			string sGunpowder = LAi_GetCharacterGunpowderType(npchar);TakeNItems(npchar, LAi_GetCharacterBulletType(npchar), n);if(sGunPowder != ""){AddItems(sld, sGunpowder, n);}						LAi_group_SetRelation("EnemyFight", LAI_GROUP_PLAYER, LAI_GROUP_ENEMY);			LAi_group_FightGroups("EnemyFight", LAI_GROUP_PLAYER, true);			LAi_group_SetCheck("EnemyFight", "OpenTheDoors_O");			DialogExit();			AddDialogExitQuest("MainHeroFightModeOn");			if (sti(pchar.questTemp.tugs.berglarState) > 6)		{			pchar.quest.Berglars_Ostin.win_condition.l1 = "location";			pchar.quest.Berglars_Ostin.win_condition.l1.location = "Bravo_shack1";			pchar.quest.Berglars_Ostin.win_condition = "Berglars_Ostin";		}    break;    //------------ финальная боевка с Остином ----------------    case "Final_fight":      dialog.text = "Why, hullo! Visitors are right uncommon 'round these parts. What can I do you for?";      link.l1 = "Hello, Austin. I just wanted to break out of the catacombs and meet you face to face. All these messengers start to look the same after a while... ";      link.l1.go = "StepF1_1";    break;    case "StepF1_1":      dialog.text = "Austin, you say? Ain't too many folks know that name. Oh, I get it. You're that captain what's been slaughterin' all my men! " + GetFullName(pchar) + ", if I ain't altogether mistaken... ";      link.l1 = "Yes, Austin, that's right. Tell me, friend, what is the world coming to when murderers lurk the streets, luring the innocent into dark holes and then ripping their guts out?";      link.l1.go = "StepF1_2";    break;    case "StepF1_2":      dialog.text = "Lawd, I can't believe my ears! You ain't tryin' to shame me? You think you're so diffn't a' me?";      link.l1 = "And what do you mean by that?";      link.l1.go = "StepF1_3";    break;    case "StepF1_3":      dialog.text = "Don't you tail merchants all over th' sea? Don't you chop up people by the barrel? And what for? Wait, I'll answer that my own self: for money.  \nYou and I, we's brothers in blood! Only diff'nce is, my operation is land-based.";      link.l1 = "I don't fall so low as to lure people into burrows! ";      link.l1.go = "StepF1_4";    break;    case "StepF1_4":      dialog.text = "Yeah, well. Don't you raise other people's flags, pull the wool-eyes over yer victims to thusly approach unhindered?";      link.l1 = "That's different... ";      link.l1.go = "StepF1_5";    break;    case "StepF1_5":      dialog.text = "Oh, it is, is it! It is, is it! Mah friend, deceit, murder, takin' a victim's possessions. It's all the same, my sea brother.  \nLook, I'll answer yer question f'm the beginning of our conversation: nothing extraordinary is afoot. Everything is copus mentis.";      link.l1 = "You're a real smooth talker, you know that?";      link.l1.go = "StepF1_6";    break;    case "StepF1_6":      dialog.text = "Hmm, may be. May well be! Tell me why you're here, sea brother.";      link.l1 = "Look, you're certainly adept at spinning the dials, but I wasn't born yesterday. The difference between us is enormous. I offer people a choice: surrender or die. You give no option, and your meeting place is quite literally a burial ground. So you are no brother of mine.";      link.l1.go = "StepF1_7";    break;    case "StepF1_7":      dialog.text = "You sayin' you wish to further escalate our hostilities?";      link.l1 = "Nothing would give me greater pleasure. I want to finish what I started, and rid the Caribbean of your bile.";      link.l1.go = "StepF1_8";    break;    case "StepF1_8":      dialog.text = "Wal... Guess it's fer the best, then. You're a bit of an itch on my unmentionables as well. Let's get it on, Seignior! ";      link.l1 = "About time... ";      link.l1.go = "StepF1_9";    break;    case "StepF1_9":			LAi_LocationFightDisable(loadedLocation, false);			CloseQuestHeader("BerglarsGang");			LAi_group_Delete("EnemyFight");			LAi_group_MoveCharacter(npchar, "EnemyFight");			LAi_group_SetRelation("EnemyFight", LAI_GROUP_PLAYER, LAI_GROUP_ENEMY);			LAi_group_FightGroups("EnemyFight", LAI_GROUP_PLAYER, true);			LAi_group_SetCheck("EnemyFight", "OpenTheDoors_O");			DialogExit();			AddDialogExitQuest("MainHeroFightModeOn");    break; 		case "Exit":      NextDiag.TempNode = "First time";      NextDiag.CurrentNode = NextDiag.TempNode;			DialogExit();		break;  }}

@@ -1,12 +1,9 @@
-
 int CreateCaracasCharacters(int n)
 {
 	ref ch;
-	
 	///////////////////////////////////////////////////////////////////////////////
 	// ОСНОВНЫЕ ПЕРСОНАЖИ
 	///////////////////////////////////////////////////////////////////////////////
-
 	makeref(ch,Characters[n]);			//Губернатор
 	ch.id		= "Caracas_Mayor";
 	ch.model	= "huber_24";
@@ -35,7 +32,6 @@ int CreateCaracasCharacters(int n)
 	LAi_SetImmortal(ch, true);
     LAi_LoginInCaptureTown(ch, true); //TO_DO eddy, снести
 	n = n + 1;
-
     makeref(ch,Characters[n]);			//Священик
 	ch.id		= "Caracas_Priest";
 	ch.model	= "priest_1";
@@ -53,7 +49,6 @@ int CreateCaracasCharacters(int n)
 	LAi_group_MoveCharacter(ch, "SPAIN_CITIZENS");
 	LAi_SetImmortal(ch, true);
 	n = n + 1;
-	
 	makeref(ch,Characters[n]);		// ОФициантка
 	ch.id		= "Caracas_waitress";
 	ch.model	= "women_14";
@@ -70,7 +65,6 @@ int CreateCaracasCharacters(int n)
 	LAi_group_MoveCharacter(ch, "SPAIN_CITIZENS");
 	LAi_SetImmortal(ch, true);
 	n = n + 1;
-
 	makeref(ch,Characters[n]);			//Трактирщик
 	ch.id		= "Caracas_tavernkeeper";
 	ch.model	= "barmen_3";
@@ -88,7 +82,6 @@ int CreateCaracasCharacters(int n)
 	LAi_group_MoveCharacter(ch, "SPAIN_CITIZENS");
 	LAi_SetImmortal(ch, true);
 	n = n + 1;
-
 	makeref(ch,Characters[n]);			//Торговец
 	ch.id		= "Caracas_trader";
 	ch.model	= "trader_3";
@@ -106,7 +99,6 @@ int CreateCaracasCharacters(int n)
 	LAi_SetImmortal(ch, true);
 	ch.item_date = "";
 	n = n + 1;
-
 	makeref(ch,Characters[n]);			//Корабел
 	ch.id		= "Caracas_shipyarder";
 	ch.model	= "shipowner_3";
@@ -131,7 +123,6 @@ int CreateCaracasCharacters(int n)
 	LAi_group_MoveCharacter(ch, "SPAIN_CITIZENS");
 	LAi_SetImmortal(ch, true);
 	n = n + 1;
-
 	makeref(ch,Characters[n]);			//Банкир
 	ch.id		= "Caracas_usurer";
 	ch.model	= "banker_3";
@@ -151,7 +142,6 @@ int CreateCaracasCharacters(int n)
 	LAi_group_MoveCharacter(ch, "SPAIN_CITIZENS");
 	LAi_SetImmortal(ch, true);
 	n = n + 1;
-
 	makeref(ch,Characters[n]);			//Начальник порта
 	ch.id		= "Caracas_PortMan";
 	ch.model	= "citiz_1";
@@ -168,7 +158,6 @@ int CreateCaracasCharacters(int n)
 	LAi_SetImmortal(ch, true);
 	ch.item_date = "";
 	n = n + 1;
-
     makeref(ch,Characters[n]);
 	ch.name 	= "Smuggler";
 	ch.lastname = "";
@@ -185,6 +174,5 @@ int CreateCaracasCharacters(int n)
 	LAi_SetHP(ch, 80.0, 80.0);
 	ch.greeting = "smuggler";
 	n = n + 1;
-	
 	return n;
 }

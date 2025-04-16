@@ -16,7 +16,6 @@ void ProcessCommonDialogEvent(ref NPChar, aref Link, aref NextDiag)
                 link.l1.go = "UsurerDone";
             }
 		break;
-		
 		case "UsurerDone":
 			dialog.text = "Credit for a reputable trader, no problem. What amount do you need? Let's talk about it.";
 			link.l1 = "All right. I'll load the hold and count how much space is left. I'll figurate out the amount that I'm missing and then I'll come back to you.";
@@ -38,4 +37,3 @@ void ProcessCommonDialogEvent(ref NPChar, aref Link, aref NextDiag)
 	}
 	UnloadSegment(NPChar.FileDialog2);  // если где-то выход внутри switch  по return не забыть сделать анлод
 }
-

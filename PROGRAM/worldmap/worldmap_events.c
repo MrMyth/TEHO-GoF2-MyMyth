@@ -1,8 +1,6 @@
-
 //=========================================================================================
 //Events
 //=========================================================================================
-
 void wdmEvent_EncounterCreate()
 {
 	float dltTime = GetEventData();
@@ -23,7 +21,6 @@ void wdmEvent_EncounterCreate()
 	wdmStormGen(dltTime, playerShipX, playerShipZ, playerShipAY);
 	wdmShipEncounter(dltTime, playerShipX, playerShipZ, playerShipAY);	// дает тормоза
 }
-
 void wdmEvent_PlayerInStorm()
 {
 	float playerShipX = GetEventData();
@@ -32,7 +29,6 @@ void wdmEvent_PlayerInStorm()
 	int stormIndex = GetEventData();
 	wdmReloadToSea();
 }
-
 void wdmEvent_ShipEncounter()
 {
 	float playerShipX = GetEventData();
@@ -42,9 +38,7 @@ void wdmEvent_ShipEncounter()
 	if (CheckAttribute(pchar, "SkipEshipIndex") && pchar.SkipEshipIndex == eshipIndex) return; // boal
 	pchar.eshipIndex = eshipIndex;
 	LaunchMapScreen();
-
 }
-
 void wdmEvent_UpdateDate()
 {
 	Environment.date.day = worldMap.date.day;
@@ -55,7 +49,6 @@ void wdmEvent_UpdateDate()
 	Environment.date.sec = worldMap.date.sec;
 	Environment.time = GetEventData();
 }
-
 //Добавляем по запросу квестовых энкоунтеров
 #event_handler("WorldMap_AddQuestEncounters", "wdmEvent_AddQuestEncounters");
 void wdmEvent_AddQuestEncounters()
@@ -69,7 +62,6 @@ void wdmEvent_AddQuestEncounters()
 	for(int i = 0; i < num; i++)
 	{
 		at = GetAttributeN(encs, i);
-		
 		if (CheckAttribute(at, "characterID")) // boal fix 14.09.06
 		{
 			if(at.type == "trader")
@@ -176,7 +168,6 @@ void wdmEvent_AddQuestEncounters()
 	//Очищаем массив энкоунтеров
 	ReleaseMapEncounters();
 }
-
 #event_handler("WorldMap_IsSkipEnable", "wdmIsSkipEnable");
 bool wdmSkipReturnBool = false;
 bool wdmIsSkipEnable()
@@ -191,38 +182,32 @@ bool wdmIsSkipEnable()
 	}
 	return wdmSkipReturnBool;
 }
-
 void wdmDeleteLoginEncounter(string encID)
 {
 	Event("WorldMap_EncounterDelete", "s", encID);
 }
-
 #event_handler("WorldMap_EncounterDelete", "wdmEncounterDelete");
 ref wdmEncounterDelete()
 {
 	BI_intRetValue = true;
-
 	string encID = GetEventData();
 	string encPath = "encounters." + encID;
 	if(CheckAttribute(&worldMap, encPath) == 0)
 	{
 		return &BI_intRetValue;
 	}
-		
 	aref enc;
 	makearef(enc, worldMap.(encPath));
 	//Сохраняем событие
 	bool needEvent = false;
 	string eventName = "";
 	string chrID = "";
-	
 	if(CheckAttribute(enc, "quest.chrID"))
 	{
 		//homo 14/04/07 не ясно если энкоутер еще не доплыл до пункта назанчения значит его нельзя тереть?
 		//Даже если его трет программист?
     	if(CheckAttribute(&enc, "Gotox") && CheckAttribute(&enc, "Gotoz"))
 		{
-
 			float fDeltaX = (stf(enc.x) - stf(enc.Gotox));
 			float fDeltaZ = (stf(enc.z) - stf(enc.Gotoz));
 			float fRadSqr = fDeltaX*fDeltaX + fDeltaZ*fDeltaZ;
@@ -231,7 +216,6 @@ ref wdmEncounterDelete()
 				BI_intRetValue = false;
 			}
 		}
-
 		if(CheckAttribute(enc, "quest.event") != 0)
 		{
 			eventName = enc.quest.event;
@@ -239,18 +223,15 @@ ref wdmEncounterDelete()
 			needEvent = true;
 		}		
 	}
-	
 	//Отмечаем, что удалён
 	enc.needDelete = "wdmEncounterDelete";
 	//Удаляем квестовую пометку
 	DeleteAttribute(&enc, "quest");
-	
 	if (!IsEntity(&worldMap))
 	{
 	   //Трем сам энкаутер сразу homo 10/04/07
         DeleteAttribute(&worldMap, encPath);
     }
-	
 	//Отправляем квестовый эвент, если надо
 	if(needEvent)
 	{
@@ -258,7 +239,6 @@ ref wdmEncounterDelete()
 	}	
 	return &BI_intRetValue;
 }
-
 #event_handler("WorldMap_GetMoral", "wdmGetMoral");
 float wdmGetMoral()
 {
@@ -277,24 +257,20 @@ float wdmGetMoral()
 	iMorale = iMorale / iRealCompNum;
 	return stf(iMorale);
 }
-
 #event_handler("WorldMap_GetFood", "wdmGetFood");
 float wdmGetFood()
 {
 	return makefloat(CalculateFood());
 }
-
 #event_handler("WorldMap_GetRum", "wdmGetRum");
 float wdmGetRum()
 {
 	return makefloat(CalculateShipRum(pchar));
 }
-
 //  квестовый отлов входа в море по начилию НПС в случайке
 void wdmEnterSeaQuest(string _chrId)
 {
 	ref NPChar = characterFromID(_chrId);
-	
 	if (findsubstr(_chrId, "Hunter0" , 0) != -1) // ОЗГи
 	{
 		AddQuestRecord("HeadHunter", "HeadHunter_Sea");
@@ -315,16 +291,12 @@ void wdmEnterSeaQuest(string _chrId)
         SiegeSquadronOnMap(_chrId);
 	}
 }
-
 #event_handler("WorldMap_GetWindParameters", "wdmGetWindParameters");
 void wdmGetWindParameters()
 {
 	float WindForce = GetEventData();
 	float WindAngle = GetEventData();
-	
 	pchar.WorldMap.WindForce = WindForce;
 	pchar.WorldMap.WindAngle = WindAngle;
-	
 	//trace("WorldMap.WindAngle " + WindAngle + " worldMap.playerShipAY " + worldMap.playerShipAY);
 }
-

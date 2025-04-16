@@ -1,24 +1,18 @@
-
 #define LOCCAMERA_FOLLOW	1
 #define LOCCAMERA_TOPOS		2
 #define LOCCAMERA_FREE		3
 #define LOCCAMERA_MODERN	4
-
 // Warship 20.07.09 Новое
 #define LOCCAMERA_MAX_STATES 15
 #define LOCCAMERA_ROTATE "Rotate"
 #define LOCCAMERA_FLYTOPOS "FlyToPosition"
 #define LOCCAMERA_NEARHERO "LockNearHero"
-
 #event_handler("frame", "locCameraUpdate");
-
 Object objLocCameraStates[LOCCAMERA_MAX_STATES];
 int iLocCameraCurState = -1;
-
 int locCameraCurMode;
 bool locCameraEnableSpecialMode;
 bool locCameraEnableFree;
-
 void locCameraInit()
 {
 	locCameraEnableFree = false;
@@ -26,7 +20,6 @@ void locCameraInit()
 	//locCameraEnableFree = true;
 	locCameraCurMode = LOCCAMERA_FOLLOW;
 }
-
 // нет в ядре to_do
 /*void locCameraSetRadius(float fRadius)
 {
@@ -41,7 +34,6 @@ bool locCameraFollow()
 	locCameraCurMode = LOCCAMERA_FOLLOW;
 	return res;
 }
-
 //Set camera toPos mode
 bool locCameraToPos(float x, float y, float z, bool isTeleport)
 {
@@ -51,21 +43,12 @@ bool locCameraToPos(float x, float y, float z, bool isTeleport)
 	locCameraCurMode = LOCCAMERA_TOPOS;
 	return res;
 }
-
 //Set camera move mode (speed meter per second)
 bool locCameraFree()
 {
 	if(IsEntity(&locCamera) == 0) return false;
 	bool res = SendMessage(&locCamera, "l", MSG_CAMERA_FREE);
 	locCameraCurMode = LOCCAMERA_FREE;
-	return res;
-}
-
-bool locCameraModern()
-{
-	if(IsEntity(&locCamera) == 0) return false;
-	bool res = SendMessage(&locCamera, "l", MSG_CAMERA_MODERN);
-	locCameraCurMode = LOCCAMERA_MODERN;
 	return res;
 }
 
@@ -76,13 +59,10 @@ bool locCameraLock(float ax)
 	bool res = SendMessage(&locCamera, "lf", MSG_CAMERA_MOVE, ax);
 	return res;
 }
-
-
 void locCameraSleep(bool isSleep)
 {
 	SendMessage(&locCamera, "ll", MSG_CAMERA_SLEEP, isSleep);
 }
-
 void locCameraSwitch()
 {
 	if(locCameraEnableFree == false) return;
@@ -95,12 +75,10 @@ void locCameraSwitch()
 		locCameraFollow();
 	}
 }
-
 void locCameraSetSpecialMode(bool isEnable)
 {
 	locCameraEnableSpecialMode = isEnable;
 }
-
 #event_handler("EventGetSpecialMode", "locCameraGetSpecialMode");
 int locCameraGetSpecialMode()
 {
@@ -110,7 +88,6 @@ void LoadTrackCamera(string sTrackName,float fTrackTime,aref arTrackPause)
 {
 	SendMessage(&locCamera, "lsfa", -2, sTrackName, fTrackTime, arTrackPause);
 }
-
 void TurnOffTrackCamera()
 {
 	SendMessage(&locCamera, "l", -3);
@@ -136,11 +113,9 @@ bool locCameraFromToPos(float from_x,float from_y,float from_z, bool isTeleport,
 	locCameraCurMode = LOCCAMERA_TOPOS;
 	return res;
 }
-
 /////////////////////////////////////////////////////////////////////////////////////////
 //							Warship 20.07.09 НОВОЕ - СНИМАЕМ КИНО
 /////////////////////////////////////////////////////////////////////////////////////////
-
 // Функция запуска вращения камеры вокруг персонажа.
 // Параметры:
 // float  _offsetX ... _offsetZ - смещение камеры относительно текущей позиции персонажа
@@ -154,9 +129,7 @@ bool locCameraRotateAroundHero(float _offsetX, float _offsetY, float _offsetZ, f
 	ref curCameraState;
 	int cameraCurState = locCameraGetFirstEmptyState();
 	float charX, charY, charZ;
-	
 	if(cameraCurState == -1 || !GetCharacterPos(PChar, &charX, &charY, &charZ)) return false;
-	
 	curCameraState = &objLocCameraStates[cameraCurState];
 	curCameraState.curCameraX = charX + _offsetX;
 	curCameraState.curCameraY = charY + _offsetY;
@@ -170,12 +143,9 @@ bool locCameraRotateAroundHero(float _offsetX, float _offsetY, float _offsetZ, f
 	curCameraState.time = _time;
 	curCameraState.angle = _startAngle;
 	curCameraState.type = LOCCAMERA_ROTATE; // Тип камеры
-	
 	if(iLocCameraCurState == -1) iLocCameraCurState = 0;
-	
 	return true;
 }
-
 // Полет камеры от начальных точек _startX ... _startZ до конечных точек _endX ... _endZ
 // float _speed - множитель скорости в режиме полета _time == -1. Если _speed == 1, то это станрадтрая скорость
 // int _time - кол-во кадров, за которое должно долететь. Если -1, то высчитывается исходя из расстояния
@@ -185,11 +155,8 @@ bool locCameraFlyToPosition(float _startX, float _startY, float _startZ, float _
 	ref curCameraState;
 	int cameraCurState = locCameraGetFirstEmptyState();
 	float distance;
-	
 	if(cameraCurState == -1) return false;
-	
 	distance = GetDistance3D(_startX, _startY, _startZ, _endX, _endY, _endZ);
-
 	curCameraState = &objLocCameraStates[cameraCurState];
 	curCameraState.curCameraX = _startX;
 	curCameraState.curCameraY = _startY;
@@ -197,7 +164,6 @@ bool locCameraFlyToPosition(float _startX, float _startY, float _startZ, float _
 	curCameraState.endCameraX = _endX;
 	curCameraState.endCameraY = _endY;
 	curCameraState.endCameraZ = _endZ;
-	
 	if(_time == -1)
 	{
 		curCameraState.speedX = (_endX - _startX) / (distance * (1 / _speed));
@@ -210,16 +176,12 @@ bool locCameraFlyToPosition(float _startX, float _startY, float _startZ, float _
 		curCameraState.speedY = (_endY - _startY) / _time;
 		curCameraState.speedZ = (_endZ - _startZ) / _time;
 	}
-	
 	curCameraState.speed = _speed;
 	curCameraState.time = _time;
 	curCameraState.type = LOCCAMERA_FLYTOPOS; // Тип камеры
-	
 	if(iLocCameraCurState == -1) iLocCameraCurState = 0;
-	
 	return true;
 }
-
 // Фиксирование камеры в определенной точке относительно ГГ
 // float _offsetX ... _offsetZ - смещение относительно координат ГГ, для определения точки, где будет находиться камера
 // int _time - кол-во кадров, сколько будет висеть. Если -1 - будет висеть вечно
@@ -229,16 +191,12 @@ bool locCameraLockNearHero(float _offsetX, float _offsetY, float _offsetZ, int _
 	ref curCameraState;
 	int cameraCurState = locCameraGetFirstEmptyState();
 	float charX, charY, charZ, offsetAY;
-	
 	if(cameraCurState == -1 || !GetCharacterPos(PChar, &charX, &charY, &charZ)) return false;
-	
 	offsetAY = atan2(_offsetZ, _offsetX);
-	
 	if(_offsetX > 0 && _offsetZ > 0)
 	{
 		offsetAY = offsetAY + PI;
 	}
-	
 	curCameraState = &objLocCameraStates[cameraCurState];
 	curCameraState.curCameraX = charX;
 	curCameraState.curCameraY = charY;
@@ -250,12 +208,9 @@ bool locCameraLockNearHero(float _offsetX, float _offsetY, float _offsetZ, int _
 	curCameraState.canRotate = _canRotate;
 	curCameraState.offsetAY = offsetAY;
 	curCameraState.type = LOCCAMERA_NEARHERO; // Тип камеры
-	
 	if(iLocCameraCurState == -1) iLocCameraCurState = 0;
-	
 	return true;
 }
-
 int locCameraGetFirstEmptyState()
 {
 	for(int i = 0; i < LOCCAMERA_MAX_STATES; i++)
@@ -265,10 +220,8 @@ int locCameraGetFirstEmptyState()
 			return i;
 		}
 	}
-	
 	return -1;
 }
-
 // Переход к следующей функции установки камеры
 // Последовательность методов задается, например, так:
 // locCameraRotateAroundHero(0.0, 1.0, 0.0, 0.03, 0.0, 3.0, 0.0, 200);
@@ -280,40 +233,30 @@ void locCameraNextState()
 	ref prevCamera, curCamera, nextCamera;
 	float distance;
 	int time;
-	
 	prevCamera = &objLocCameraStates[iLocCameraCurState];
 	DeleteAttribute(prevCamera, "time"); // Критерий ненужность
 	iLocCameraCurState++;
-	
 	curCamera = &objLocCameraStates[iLocCameraCurState];
-	
 	if(iLocCameraCurState == LOCCAMERA_MAX_STATES || !CheckAttribute(&curCamera, "curCameraX"))
 	{
 		locCameraResetState();
 		return;
 	}
-	
 	time = sti(curCamera.time);
-	
 	Log_TestInfo("locCameraNextState() == " + curCamera.type); 
 }
-
 // Сброс специальных состояний камеры - привязывание к персонажу
 void locCameraResetState()
 {
 	locCameraFollow();
-	
 	iLocCameraCurState = -1;
-	
 	// Потрем все
 	for(int i = 0; i < LOCCAMERA_MAX_STATES; i++)
 	{
 		DeleteAttribute(&objLocCameraStates[i], "");
 	}
-	
 	Log_TestInfo("locCameraResetState()");
 }
-
 // Обновление позиции камеры при входе в кадр
 void locCameraUpdate()
 {
@@ -322,23 +265,18 @@ void locCameraUpdate()
 	float offsetX, offsetZ;
 	float rotateRadius, rotateAngle;
 	float time; // Здесь время дробное, т.к. учитывается еще ускорение времени
-	
 	float timeScale = 1 + TimeScaleCounter * 0.25; // Текущее ускорение времени
-	
 	if(iLocCameraCurState != -1 && !sti(InterfaceStates.Launched))
 	{
 		if(GetCharacterPos(PChar, &charX, &charY, &charZ))
 		{
 			curCameraState = &objLocCameraStates[iLocCameraCurState];
-			
 			time = stf(curCameraState.time);
-			
 			switch(curCameraState.type)
 			{
 				case LOCCAMERA_ROTATE:
 					rotateRadius = stf(curCameraState.rotateRadius);
 					rotateAngle = stf(curCameraState.angle);
-					
 					// X rotation
 					if(stf(curCameraState.rotateX) != 0.0)
 					{
@@ -351,7 +289,6 @@ void locCameraUpdate()
 						curCameraState.curCameraX = charX + stf(curCameraState.offsetX);
 						curCameraState.curCameraZ = charZ + stf(curCameraState.offsetZ);
 					}
-					
 					// Y rotation
 					if(stf(curCameraState.rotateY) != 0.0)
 					{
@@ -364,17 +301,14 @@ void locCameraUpdate()
 						curCameraState.curCameraY = charY + stf(curCameraState.offsetY);
 					}
 				break;
-				
 				case LOCCAMERA_FLYTOPOS:
 					curCameraState.curCameraX = stf(curCameraState.curCameraX) + stf(curCameraState.speedX) * timeScale;
 					curCameraState.curCameraY = stf(curCameraState.curCameraY) + stf(curCameraState.speedY) * timeScale;
 					curCameraState.curCameraZ = stf(curCameraState.curCameraZ) + stf(curCameraState.speedZ) * timeScale;
 				break;
-				
 				case LOCCAMERA_NEARHERO:
 					offsetX = stf(curCameraState.offsetX);
 					offsetZ = stf(curCameraState.offsetZ);
-					
 					if(sti(curCameraState.canRotate) && GetCharacterAy(PChar, &charAY))
 					{
 						curCameraState.curCameraX = charX + offsetX * sin(charAY + stf(curCameraState.offsetAY));
@@ -385,24 +319,19 @@ void locCameraUpdate()
 						curCameraState.curCameraX = charX + offsetX;
 						curCameraState.curCameraZ = charZ + offsetZ;
 					}
-					
 					curCameraState.curCameraY = charY + stf(curCameraState.offsetY);
 				break;
 			}
-			
 			locCameraToPos(stf(curCameraState.curCameraX), stf(curCameraState.curCameraY), stf(curCameraState.curCameraZ), true);
-			
 			if(time != -1.0)
 			{
 				time -= 1 * timeScale; // Учет ускорения времени
 				curCameraState.time = time;
 			}
-			
 			if(time <= 0.0 && time != -1.0)
 			{
 				locCameraNextState();
 			}
-			
 			// Тут высчитываем попадание в нужную точку
 			if(time == -1.0 && curCameraState.type == LOCCAMERA_FLYTOPOS)
 			{
@@ -419,5 +348,3 @@ void locCameraUpdate()
 		}
 	}
 }
-
-

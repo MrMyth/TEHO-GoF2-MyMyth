@@ -1,6 +1,5 @@
 void ProcessCommonDialogEvent(ref NPChar, aref Link, aref NextDiag)
 {
-
 	switch (Dialog.CurrentNode)
 	{
 		case "quests":
@@ -36,13 +35,11 @@ void ProcessCommonDialogEvent(ref NPChar, aref Link, aref NextDiag)
 				link.l1.go = "BlueBird_2";
 			}
 		break;
-
 		case "BlueBird_close":
 			dialog.text = "You'd better think about your reputation... I have nothing more to tell you.";
 			link.l1 = "Heh!..";
 			link.l1.go = "exit";
 		break;
-
 		case "BlueBird_2":
 			dialog.text = "Begin with the main thing.";
 			link.l1 = "Perhaps, that's what I'll do. I have a suspicion that Pascal Vousier is not a simple merchant. I was told that you are kind of enemies with him. That's why I'm here, I wish to learn as much as possible about this person.";
@@ -88,4 +85,3 @@ void ProcessCommonDialogEvent(ref NPChar, aref Link, aref NextDiag)
 	}
 	UnloadSegment(NPChar.FileDialog2);
 }
-

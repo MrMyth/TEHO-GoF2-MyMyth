@@ -6,26 +6,21 @@ void ProcessDialogEvent()
 	int iTemp, i, n;
 	string sTemp;
 	bool bOk;
-	
 	DeleteAttribute(&Dialog,"Links");
-	
 	makeref(NPChar,CharacterRef);
 	makearef(Link, Dialog.Links);
 	makearef(NextDiag, NPChar.Dialog);
-
 	switch(Dialog.CurrentNode)
 	{
 		case "Exit":
 			NextDiag.CurrentNode = NextDiag.TempNode;
 			DialogExit();
 		break;
-		
         case "First time":
 			dialog.text = "Do you need anything?";
 			link.l1 = "No, I don't.";
 			link.l1.go = "exit";
 		break;
-		
 		case "fight":
 			DialogExit();
 			NextDiag.CurrentNode = NextDiag.TempNode;
@@ -33,28 +28,24 @@ void ProcessDialogEvent()
 			SetNationRelation2MainCharacter(sti(npchar.nation), RELATION_ENEMY);
 			AddDialogExitQuest("MainHeroFightModeOn");
 		break;
-		
 		// рабы
 		case "plantation_slave":
 			dialog.text = RandPhraseSimple(RandPhraseSimple("I am so tired, already falling down...", "Can't keep living like that!"), RandPhraseSimple("This work is killing me.", "Guards want us all dead!"));				
 			link.l1 = RandPhraseSimple("What a pity.", "I am sorry.");
 			link.l1.go = "exit";				
 		break;
-		
 		// рабы-пираты по пиратской линейке
 		case "pirate_slave":
 			dialog.text = RandPhraseSimple(RandPhraseSimple("Listen, go away!", "Get lost!"), RandPhraseSimple("What do you want?!", "Get the hell out of here!"));				
 			link.l1 = RandPhraseSimple("Hm...", "Well...");
 			link.l1.go = "exit";				
 		break;
-		
 		// охрана - солдаты
 		case "plantation_soldier":
             dialog.text = RandPhraseSimple(RandPhraseSimple("Go bother the head of plantation", "Don't distract slaves, pal."), RandPhraseSimple("My job is to motivate these lazy bastards.", "Damn, too hot today. Actually, as always..."));
 			link.l1 = RandPhraseSimple("I see...", "Understood...");
 			link.l1.go = "exit";
 		break;
-		
 		// охрана - протектор
 		case "plantation_protector":
             if (GetNationRelation2MainCharacter(sti(NPChar.nation)) == RELATION_ENEMY && sti(NPChar.nation) != PIRATE)
@@ -107,7 +98,6 @@ void ProcessDialogEvent()
 				}
 			}
 		break;
-		
 		case "Licence":
 			iTemp = GetDaysContinueNationLicence(HOLLAND);
 			if (ChangeCharacterNationReputation(pchar, sti(NPChar.nation), 0) <= -12)
@@ -131,31 +121,26 @@ void ProcessDialogEvent()
 			link.l1 = "Don't worry, friend.";
 			link.l1.go = "plantation_exit";
 		break;
-		
 		case "PegYou":
 			PlaySound("VOICE\Russian\soldier_arest_2.wav");
             dialog.text = "Business? Ha-ha! Well, this is funny! You smell of "+NationNameAblative(sti(GetBaseHeroNation()))+" from a thousand miles! It's time for you to meet our commandant.";
 			link.l1 = "Nah, it's time for you to meet my blade.";
 			link.l1.go = "fight";
 		break;
-		
 		case "NotPegYou":
             dialog.text = "Fine. You can come in. Behave yourself and don't bother the slaves.";
 			link.l1 = "Don't worry, friend.";
 			link.l1.go = "plantation_exit";
 		break;
-		
 		case "plantation_exit":
            DialogExit();
 		   NextDiag.CurrentNode = "plantation_repeat";
 		break;
-		
 		case "plantation_repeat":
             dialog.text = "Come on, move along!";
 			link.l1 = "...";
 			link.l1.go = "plantation_exit";
 		break;
-		
 		// управляющий в Маракайбо // Addon 2016-1 Jason
 		case "Plantator":
 			if (CheckAttribute(pchar, "questTemp.Mtraxx") && pchar.questTemp.Mtraxx == "plant_2" && GetSquadronGoods(pchar, GOOD_SLAVES) >= 50)
@@ -169,12 +154,10 @@ void ProcessDialogEvent()
 			link.l1 = "Just walking around, wanted to say hello.";
 			link.l1.go = "plantator_x";
 		break;
-		
 		case "plantator_x":
            DialogExit();
 		   npchar.dialog.currentnode = "plantator";
 		break;
-		
 		case "plantator_1":
 			bOk = GetSquadronGoods(pchar, GOOD_COFFEE) >= 500 || GetSquadronGoods(pchar, GOOD_CINNAMON) >= 500 || GetSquadronGoods(pchar, GOOD_COPRA) >= 500;
 			if (CheckAttribute(pchar, "questTemp.Mtraxx") && pchar.questTemp.Mtraxx == "plant_6" && bOk)
@@ -188,36 +171,30 @@ void ProcessDialogEvent()
 			link.l1 = "Thanks, I am good.";
 			link.l1.go = "plantator_1x";
 		break;
-		
 		case "plantator_1x":
            DialogExit();
 		   npchar.dialog.currentnode = "plantator_1";
 		break;
-		
 		case "mtraxx":
             dialog.text = "I have to disappoint you, senor, but we don't need slaves at this moment. Captain Eduardo de Losada had already supplied us with pirates he captured in his last raid.";
 			link.l1 = "Pirates here? How can you even sleep here?";
 			link.l1.go = "mtraxx_1";
 		break;
-		
 		case "mtraxx_1":
             dialog.text = "We have a good guard, so chances of riot are low. But you are right in some point: these bastards are terrible workers. I wouldn't had bought them if the governor wasn't asking me to show respect to don de Losada. Plus, he also didn't ask much for them.";
 			link.l1 = "I see. I will have to sail to Los-Tekes then... Senor, may I walk around your plantation and explore it? Perhaps, I'd like to buy some of your production...";
 			link.l1.go = "mtraxx_2";
 		break;
-		
 		case "mtraxx_2":
             dialog.text = "Are you a merchant?";
 			link.l1 = "In some degree, yes. I am not a professional trader but I'd never walk away from a promising deal.";
 			link.l1.go = "mtraxx_3";
 		break;
-		
 		case "mtraxx_3":
             dialog.text = "Interesting. Very well, you have my permission. Come back if you'll have any ideas.";
 			link.l1 = "Thank you, senor. I believe I will.";
 			link.l1.go = "mtraxx_4";
 		break;
-		
 		case "mtraxx_4":
            DialogExit();
 		   NextDiag.CurrentNode = "plantator_1";
@@ -225,7 +202,6 @@ void ProcessDialogEvent()
 		   AddQuestRecord("Roger_3", "5");
 		   Mtraxx_PlantSetMaxRocur();
 		break;
-		
 		case "mtraxx_5":
             dialog.text = "Why not? What goods are you offering?";
 			if (GetSquadronGoods(pchar, GOOD_COFFEE) >= 500)
@@ -244,7 +220,6 @@ void ProcessDialogEvent()
 				link.l3.go = "mtraxx_copra";
 			}
 		break;
-		
 		case "mtraxx_coffee":
 			i = drand(3)+1;
 			n = 5 - i;
@@ -255,7 +230,6 @@ void ProcessDialogEvent()
 			link.l1 = "M-m-m... I hoped for better terms. Well, who cares. Deal!";
 			link.l1.go = "mtraxx_6";
 		break;
-		
 		case "mtraxx_cinnamon":
 			i = drand(3)+1;
 			n = 5 - i;
@@ -266,7 +240,6 @@ void ProcessDialogEvent()
 			link.l1 = "M-m-m... I hoped for better terms. Well, who cares. Deal!";
 			link.l1.go = "mtraxx_6";
 		break;
-		
 		case "mtraxx_copra":
 			i = drand(3)+1;
 			n = 5 - i;
@@ -277,20 +250,16 @@ void ProcessDialogEvent()
 			link.l1 = "M-m-m... I hoped for better terms... Well, who cares. Deal!";
 			link.l1.go = "mtraxx_6";
 		break;
-		
 		case "mtraxx_6":
             dialog.text = "Splendid! It's a profitable deal for both of us! When will we execute the exchange?";
 			link.l1 = "I should prepare the goods first. You too I believe. Let's begin tomorrow at four o'clock in the evening. My men will deliver the boxes before the sunset.";
 			link.l1.go = "mtraxx_7";
 		break;
-		
-		
 		case "mtraxx_7":
             dialog.text = "Deal. See you tomorrow, senor!";
 			link.l1 = "See you...";
 			link.l1.go = "mtraxx_8";
 		break;
-		
 		case "mtraxx_8":
             DialogExit();
 			NextDiag.CurrentNode = "plantator_1";
@@ -301,14 +270,11 @@ void ProcessDialogEvent()
 			pchar.quest.mtraxx_plant_goods.win_condition.l1.location = pchar.location;
 			pchar.quest.mtraxx_plant_goods.function = "Mtraxx_PlantFindRocurDay";
 		break;
-		
 		case "mtraxx_9":
             dialog.text = "This is it, senor. If you'll ever need sugar or cacao, please come and see me. Anytime!";
 			link.l1 = "If this bargain will prove to be profitable - we'll see each other again. I should go now, senor.";
 			link.l1.go = "mtraxx_10";
 		break;
-		
-		
 		case "mtraxx_10":
             dialog.text = "Farewell, senor!";
 			link.l1 = "";

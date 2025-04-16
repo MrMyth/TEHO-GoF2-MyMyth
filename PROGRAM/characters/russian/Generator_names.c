@@ -9,7 +9,6 @@ void InitGeneratorNames()
 	n = AddStr2Array(&sEnManGenNames, n, "Ken,Larry,Matt,Mike,Nick,Norm,Pat");
 	n = AddStr2Array(&sEnManGenNames, n, "Pete,Phil,Randy,Ray,Rick,Rob,Rogie");
 	n = AddStr2Array(&sEnManGenNames, n, "Ron,Sam,Steve,Tim,Tom,Tony,Walt");
-
 // women names -5
 	n = 0;
 	n = AddStr2Array(&sEnWomenGenNames, n, "Adela,Alicia,Alison,Ammie,Angie,Annice,Annie,Barbara");
@@ -17,7 +16,6 @@ void InitGeneratorNames()
 	n = AddStr2Array(&sEnWomenGenNames, n, "Dorie,Elinor,Elisa,Emmie,Janet,Jess,Joanie,Judie");
 	n = AddStr2Array(&sEnWomenGenNames, n, "Kathie,Laurie,Lettie,Lexie,Lindy,Maggie,Millie,Nancy");
 	n = AddStr2Array(&sEnWomenGenNames, n, "Norie,Pattie,Peggie,Pollie,Rosie,Sallie,Suzie");
-
 // families - 29
 	n = 0;
 	n = AddStr2Array(&sEnGenFamilies, n, "Ackland,Acton,Adderley,Adkins,Adney,Ainsworth,Albury,Allard,Allerton,Almond,Anderton,Archer,Argent,Armstrong,Arnett,Ashfield,Ashman");
@@ -49,7 +47,6 @@ void InitGeneratorNames()
 	n = AddStr2Array(&sEnGenFamilies, n, "Trippett,Tucker,Turner,Underwood,Wadlow,Waghorn,Wakeford,Walburn,Walker,Walley,Walmsley,Walton,Warner,Watkins,Webb,Weekes");
 	n = AddStr2Array(&sEnGenFamilies, n, "Weight,Welham,Welsh,Westcott,Westfield,Westgate,Westwood,Wharton,Wheatley,Wheeldon,Whitehead,Whitfield,Whitford,Whitney,Whitwell,Wilder,Wilkins,Willard");
 	n = AddStr2Array(&sEnGenFamilies, n, "Willows,Wilson,Wing,Winslow,Winters,Winthrop,Woller,Woodbridge,Woodcock,Woodford,Woodman,Woods,Wright,Yeomans");
-
 // Holland
 // man names - 16
 	n = 0;
@@ -69,7 +66,6 @@ void InitGeneratorNames()
 	n = AddStr2Array(&sHoManGenNames, n, "Rijk,Rintje,Rob,Robbie,Roel,Roelofje,Roeltje,Ruud,Sam");
 	n = AddStr2Array(&sHoManGenNames, n, "Sannie,Seb,Sebas,Sieb,Stef,Thijs,Thom,Tim,Toontje,Thuur");
 	n = AddStr2Array(&sHoManGenNames, n, "Val,Vic,Vin,Vince,Walt,Wiek,Wieke,Wijn,Wikus,Wil,Wilm,Wout");
-
 // women names - 13
 	n = 0;
 	n = AddStr2Array(&sHoWomenGenNames, n, "Aaltje,Aartje,Abbie,Adie,Adria,Agaatje,Agnesje,Alie");
@@ -85,7 +81,6 @@ void InitGeneratorNames()
 	n = AddStr2Array(&sHoWomenGenNames, n, "Rensje,Rietje,Roosje,Saartje,Santje,Sientje,Stanneke");
 	n = AddStr2Array(&sHoWomenGenNames, n, "Steefje,Stientje,Suusje,Tilda,Tineke,Tonnie,Toosje");
 	n = AddStr2Array(&sHoWomenGenNames, n, "Tresia,Trijntje,Trude,Truide,Wijntje,Wilma,Xandra");
-
 // families - 27
 	n = 0;
 	n = AddStr2Array(&sHoGenFamilies, n, "Abrahamsen,Abts,Achterberg,Addicks,Ader,Aelberts,Amerman,Angillis,Ariaensen,Arts,Asmus,Aukes");
@@ -115,7 +110,6 @@ void InitGeneratorNames()
 	n = AddStr2Array(&sHoGenFamilies, n, "Vanderbilt,van der Hoek,van der Vliet,van der Voort,van Duren,van Haren,van Hecke,van Holten");
 	n = AddStr2Array(&sHoGenFamilies, n, "van Hoof,van Leest,van Lemens,van Peene,van Schaack,van Slyke,van Wyck,Vermeulen");
 	n = AddStr2Array(&sHoGenFamilies, n, "Versteeg,Weijers,Wesselsz,Westervelt,Wilde,Willaert,Woeder,Wolvendijk,Wynkoop,Zeeuw,Zwart");
-
 // French
 // man names - 11
 	n = 0;
@@ -130,7 +124,6 @@ void InitGeneratorNames()
 	n = AddStr2Array(&sFrManGenNames, n, "Martinien,Mathurin,Maur,Maximin,Meloir,Natal,Nathanael,Nazaire,Norbert,Odelin,Oderic,Oscar,Pascalin,Paulin");
 	n = AddStr2Array(&sFrManGenNames, n, "Philbert,Pierrin,Pontien,Prudent,Rainier,Rigobert,Roderic,Rogatien,Ruben,Rufinien,Samson,Seraphin,Serge,Sylvestre,Terence");
 	n = AddStr2Array(&sFrManGenNames, n, "Thierry,Tristan,Victorien,Vivien");
-
 // women names - 8
 	n = 0;
 	n = AddStr2Array(&sFrWomenGenNames, n, "Abelie,Adeline,Agnelle,Alayette,Aliette,Aline,Alouette,Ameline,Anceline,Angele,Anicette,Antonie,Apollonie,Arielle,Arlette");
@@ -141,7 +134,6 @@ void InitGeneratorNames()
 	n = AddStr2Array(&sFrWomenGenNames, n, "Marine,Martine,Mirabelle,Muriel,Nonne,Odelie,Olivie,Opheline,Palmire,Patricie,Penelope,Petronille,Priscille,Renaldine");
 	n = AddStr2Array(&sFrWomenGenNames, n, "Rosaire,Rosalie,Roseline,Roselle,Roxane,Rufine,Sabrine,Sandrine,Segolene,Seraphine,Sidonie,Solange,Sylviane");
 	n = AddStr2Array(&sFrWomenGenNames, n, "Theodosie,Tiphanie,Ulrique,Urielle,Ursuline,Violaine,Violette");
-
 // families - 86
 	n = 0;
 	n = AddStr2Array(&sFrGenFamilies, n, "Abadie,Abeille,Agard,Aguillard,Aime,Alary,Alibert,Allaire,Allais,Allard,Allier,Amar,Ambre,Amiel");
@@ -231,7 +223,6 @@ void InitGeneratorNames()
 	n = AddStr2Array(&sFrGenFamilies, n, "Verdier,Verdun,Verne,Vernier,Vernon,Verreault,Verret,Verrette,Vezina,Vibert,Vicknair,Videaul,Viel,Vien");
 	n = AddStr2Array(&sFrGenFamilies, n, "Vigeant,Viger,Vigneau,Vigneault,Vignes,Vilbois,Villaret,Villeneuve,Villiers,Vinet");
 	n = AddStr2Array(&sFrGenFamilies, n, "Violet,Violette,Vivier,Voirol,Voisard,Voisier,Voisin,Voisinet,Voyer,Vuitton");
-
 // Spain
 // man names - 21
 	n = 0;
@@ -257,7 +248,6 @@ void InitGeneratorNames()
 	n = AddStr2Array(&sSpManGenNames, n, "Sebito,Septimio,Sergito,Simonito,Taco,Tadeito,Taquito,Tavito,Tebanito,Teo,Teodorito,Teodosito,Terencito");
 	n = AddStr2Array(&sSpManGenNames, n, "Teresito,Tiago,Timo,Tino,Tobalito,Tomasito,Tonino,Tonio,Tristanito,Tulito,Tunito,Turo,Ulisito,Urbanito");
 	n = AddStr2Array(&sSpManGenNames, n, "Urielito,Valerito,Varisto,Vasquito,Ventura,Veto,Vicentito,Vico,Virgilito,Zefe");
-
 // women names - 9
 	n = 0;
 	n = AddStr2Array(&sSpWomenGenNames, n, "Adelita,Albertita,Albita,Alicita,Alita,Amandita,Angelita,Anita");
@@ -269,7 +259,6 @@ void InitGeneratorNames()
 	n = AddStr2Array(&sSpWomenGenNames, n, "Lucita,Malena,Mandita,Manuelita,Marcelita,Marcita,Mariquita,Martita,Mechita,Melisita,Miguelita,Mirita,Munda,Nardita,Neusita");
 	n = AddStr2Array(&sSpWomenGenNames, n, "Nica,Noemita,Norbertita,Normita,Palmirita,Palomita,Patricita,Paulita,Pilarita,Priscilita,Quinita,Rafaelita,Ramonita,Raquelita");
 	n = AddStr2Array(&sSpWomenGenNames, n, "Robertita,Rosita,Sabinita,Salomita,Sanchita,Sarita,Selenita,Sibilita,Susanita,Tea,Teodorita,Teodosita,Teresita,Ursulita");
-
 // families - 54
 	n = 0;
 	n = AddStr2Array(&sSpGenFamilies, n, "Abalos,Abarca,Abrego,Acedo,Acevedo,Acosta,Aguero,Aguila,Aguilar,Alameda,Alamo,Alatorre,Albo,Alcantar,Alcazar");

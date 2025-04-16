@@ -7,9 +7,7 @@ void ProcessDialogEvent()
 	int jewelType;
 	string sItemName = "";
 	string sItem;
-	
 	DeleteAttribute(&Dialog,"Links");
-
 	makeref(NPChar,CharacterRef);
 	makearef(Link, Dialog.Links);
 	makearef(Diag, NPChar.Dialog);
@@ -17,14 +15,12 @@ void ProcessDialogEvent()
 	string sTemp = "Patrol" + locations[FindLocation(npchar.location)].index + "_";
 	string sGroup = "PatrolGroup_" + locations[FindLocation(npchar.location)].index;
 	string sTemp1, sTemp2;
-
 	switch(Dialog.CurrentNode)
 	{
 		case "exit":
 			Diag.CurrentNode = Diag.TempNode;
 			DialogExit();			
 		break;
-
 		case "exit_fight":
 			for(i = 0; i < iTemp; i++)
 			{
@@ -38,7 +34,6 @@ void ProcessDialogEvent()
 			DialogExit();	
 			AddDialogExitQuest("MainHeroFightModeOn");
 		break;
-
 		case "exit_noFight":
 			for(i = 0; i < iTemp; i++)
 			{
@@ -52,7 +47,6 @@ void ProcessDialogEvent()
 			LAi_group_SetCheck(sGroup, "LandEnc_PatrolAfrer");
 			DialogExit();			
 		break;
-
 		case "First Time":
 			for(i = 0; i < iTemp; i++)
 			{
@@ -84,14 +78,12 @@ void ProcessDialogEvent()
 				Link.l1.go = "Node_2";
 			}
 		break;
-		
 		case "Node_2":
 			dialog.text = RandPhraseSimple("Have you seen anything suspicious in the district?",
 				"Have you met anyone looking suspicious, " + GetAddress_Form(NPChar) + "?");
 			Link.l1 = RandPhraseSimple("No, nothing like that.", "No, officer, everything seemed calm.");
 			Link.l1.go = "Node_3";		
 		break;
-
 		case "Node_3":
 			Diag.TempNode = "GoodBye";
 			dialog.text = RandPhraseSimple("Alright, that I will not delay you any longer. Goodbye, " + GetAddress_Form(NPChar) + ".",
@@ -99,7 +91,6 @@ void ProcessDialogEvent()
 			Link.l1 = "Good luck.";
 			Link.l1.go = "exit_noFight";
 		break;
-
 		case "GoodBye":
 			Diag.TempNode = "GoodBye";
 			dialog.text = LinkRandPhrase("Do not distract us from our duty.",
@@ -108,7 +99,6 @@ void ProcessDialogEvent()
 			Link.l1 = "Fine.";
 			Link.l1.go = "Exit";			
 		break;
-		
 		// генератор "A reason to hurry"
 		case "Reason_To_Fast_1":
 				if(Pchar.Location == Pchar.location.from_sea)
@@ -129,12 +119,10 @@ void ProcessDialogEvent()
 					link.l1.go = "Reason_To_Fast_Hunter";
 				} 
 		break;
-		
 		case "Reason_To_Fast_Hunter":
 			DialogExit();	
 			AddDialogExitQuest("ReasonToFast_MeetHunter");
 		break;
-		
 		case "Reason_To_Fast_11":
 			dialog.text = "You don't look much like someone whom I would trust " + GetName( NAMETYPE_MAIN, pchar.questTemp.ReasonToFast.p3, NAME_NOM) + ".";
 			if(!CheckCharacterItem(pchar,"mapQuest"))
@@ -145,14 +133,12 @@ void ProcessDialogEvent()
 			link.l2 = "And who is this " + GetName( NAMETYPE_MAIN, pchar.questTemp.ReasonToFast.p3, NAME_NOM) + "?";
 			link.l2.go = "Reason_To_Fast_13";
 		break;
-		
 		case "Reason_To_Fast_21":
 			dialog.text = "Curiosity has killed a lot more people than cats...";
 			link.l1 = "Well-well!";
 			link.l1.go = "Reason_To_Fast_ExitFight";
 			pchar.questTemp.ReasonToFast = "PatrolAfter";	
 		break;
-		
 		case "Reason_To_Fast_31":
 			Diag.TempNode = "Reason_To_Fast_GoodBye";
 			dialog.text = "The tide is coming. You'd better leave the cove - the water here rises to the level of the palm tangle.";
@@ -160,7 +146,6 @@ void ProcessDialogEvent()
 			link.l1.go = "Reason_To_Fast_GoodBye_0";
 			pchar.questTemp.ReasonToFast = "MeetPatrolFail";
 		break;
-		
 		case "Reason_To_Fast_12":
 			jewelType = sti(pchar.questTemp.ReasonToFast.p4);
 			pchar.questTemp.ReasonToFast.item = "jewelry" + jewelType;
@@ -190,14 +175,12 @@ void ProcessDialogEvent()
 				link.l2.go = "Reason_To_Fast_15";
 			}			
 		break;
-		
 		case "Reason_To_Fast_13":
 			dialog.text = "Heh! You'll know it in hell!";
 			link.l1 = "What a self-assurance...";
 			link.l1.go = "Reason_To_Fast_ExitFight";
 			pchar.questTemp.ReasonToFast = "PatrolAfter";	
 		break;
-		
 		case "Reason_To_Fast_14":
 			dialog.text = "Alright, then you owe me " + sti(pchar.questTemp.ReasonToFast.p5) + " pesos, as we had agreed.";
 			link.l1 = "Isn't that a little to much?";
@@ -212,14 +195,12 @@ void ProcessDialogEvent()
 			AddQuestRecord("ReasonToFast", "9");
 			AddQuestUserData("ReasonToFast", "sText", pchar.questTemp.ReasonToFast.jewType);
 		break;
-		
 		case "Reason_To_Fast_15":
 			TakeNItems(pchar, pchar.questTemp.ReasonToFast.item, -30); 
 			dialog.text = "Everything is in accordance with the agreement. Here you go. This map was taken from the hanged pirate, about whom "  + GetName( NAMETYPE_MAIN, pchar.questTemp.ReasonToFast.p3, NAME_NOM) + " had inquired.";
 			link.l1 = "The deal is done!";
 			link.l1.go = "Reason_To_Fast_15_1";
 		break;
-		
 		case "Reason_To_Fast_15_1":
 			Diag.TempNode = "Reason_To_Fast_GoodBye";
 			DialogExit();
@@ -233,14 +214,12 @@ void ProcessDialogEvent()
 			AddDialogExitQuest("pchar_back_to_player");	
 			LAi_LocationFightDisable(&locations[FindLocation(pchar.questTemp.ReasonToFast.PatrolLocation)], false);	
 		break;
-		
 		case "Reason_To_Fast_16":
 			dialog.text = "We have settled the sum with " + GetName( NAMETYPE_MAIN, pchar.questTemp.ReasonToFast.p3, NAME_ABL) + " in advance. I don't like it a bit. Kill h"+ GetSexPhrase("im","er") +", boys!";
 			link.l1 = "Alright, you may try!";
 			link.l1.go = "Reason_To_Fast_ExitFight";
 			pchar.questTemp.ReasonToFast = "PatrolAfter";	
 		break;
-		
 		case "Reason_To_Fast_17":
 			pchar.questTemp.ReasonToFast = "PatrolSuccess_1";
 			AddMoneyToCharacter(pchar, -makeint(sti(pchar.questTemp.ReasonToFast.p5)));
@@ -266,7 +245,6 @@ void ProcessDialogEvent()
 					AddQuestUserData("ReasonToFast", "sGoodsName", GetGoodsNameAlt(iShipGoods));
 					ReasonToFast_GenerateVictimShip(iShipType, iShipGoods);					
 				break;
-
 				case 1: // сокровища губернатора
 					switch(rand(3))
 					{
@@ -307,7 +285,6 @@ void ProcessDialogEvent()
 					AddQuestRecord("ReasonToFast", "12");
 					pchar.questTemp.ReasonToFast.ShipName = sTemp2;
 					DeleteAttribute(pchar, "questTemp.ReasonToFast.cantSpeakOther");//можем говорить с губером
-					
 					pchar.quest.ReasonToFast_ClearLakey.win_condition.l1 = "Timer";
 					pchar.quest.ReasonToFast_ClearLakey.win_condition.l1.date.day = GetAddingDataDay(0, 0, 2);
 					pchar.quest.ReasonToFast_ClearLakey.win_condition.l1.date.month = GetAddingDataMonth(0, 0, 2);
@@ -316,7 +293,6 @@ void ProcessDialogEvent()
 				break;				
 			}
 		break;
-		
 		case "Reason_To_Fast_18":
 			if(makeint(pchar.money) >= sti(pchar.questTemp.ReasonToFast.p5))
 			{
@@ -333,7 +309,6 @@ void ProcessDialogEvent()
 				pchar.questTemp.ReasonToFast = "PatrolAfter";	
 			}
 		break;
-
 		case "Reason_To_Fast_GoodBye_0":
 			LAi_SetPlayerType(pchar);
 			for(i = 0; i < iTemp; i++)
@@ -350,21 +325,17 @@ void ProcessDialogEvent()
             pchar.quest.RemovePatrolFromShore.function    				= "ReasonToFast_DeletePatrolFromShore"; 
 			DialogExit();			
 		break;
-		
 		case "Reason_To_Fast_GoodBye":
 			Diag.TempNode = "Reason_To_Fast_GoodBye";
 			dialog.text = "You'd better leave the cove, the tide is already coming...";
 			link.l1 = "Yeah, yeah, I am leaving.";
 			link.l1.go = "Exit";
 		break;
-		
 		case "Reason_To_Fast_ExitFight":
 			pchar.questTemp.ReasonToFast.relation = GetNationRelation2MainCharacter(sti(pchar.questTemp.ReasonToFast.GuardNation));
 			SetNationRelation2MainCharacter(sti(pchar.questTemp.ReasonToFast.GuardNation), RELATION_ENEMY); 
-			
 			pchar.GenQuest.HunterScore2Pause = 1; //НЗГ не начисляются
 			pchar.GenQuest.ReputationNotChange = 1; //репутацию не менять
-			
 			chrDisableReloadToLocation = true;
 			LAi_SetPlayerType(pchar);
 			LAi_LocationFightDisable(&locations[FindLocation(pchar.questTemp.ReasonToFast.PatrolLocation)], false);	
@@ -390,7 +361,6 @@ void ProcessDialogEvent()
 			DialogExit();	
 			AddDialogExitQuest("MainHeroFightModeOn");
 		break;
-		
 		case "Reason_To_Fast_AfterHunter1":
 			dialog.text = "Haven't we agreed that the messenger must be alone?";
 			link.l1 = "Lack of coordination. The messenger had lost his way. I am the substitute.";
@@ -398,14 +368,12 @@ void ProcessDialogEvent()
 			link.l2 = "And I have come alone, but not for what you are expecting.";
 			link.l2.go = "Reason_To_Fast_AfterHunter2";
 		break;
-		
 		case "Reason_To_Fast_AfterHunter2":
 			dialog.text = "So, you have tracked me down after all, I am sorry for what will happen...";
 			link.l1 = "Arrgh!";
 			link.l1.go = "Reason_To_Fast_ExitFight";
 			pchar.questTemp.ReasonToFast = "PatrolAfterHunter";	
 		break;
-		
 		case "Reason_To_Fast_AfterHunter3":
 			dialog.text = "You prick! I've almost believed in that! Guards! Seize h"+ GetSexPhrase("im","er") +"...";
 			link.l1 = "Try it, bastards!";

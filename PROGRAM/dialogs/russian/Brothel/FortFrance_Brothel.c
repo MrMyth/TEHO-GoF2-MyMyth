@@ -18,20 +18,17 @@ void ProcessCommonDialogEvent(ref NPChar, aref Link, aref NextDiag)
 			}	
 			//<-- Бремя гасконца
 		break;
-		
 		//--> Бремя гасконца
 		case "Gigolo":
 			dialog.text = "Sure, dear. What kind of girl do you need? Have you already found the girl for yourself or you don't care?";
 			link.l1 = "I do care. I need a girl named Lucille.";
 			link.l1.go = "Gigolo_1";
 		break;
-		
 		case "Gigolo_1":
 			dialog.text = "Are you talking about Lucille Montaigne?";
 			link.l1 = "To be honest, I didn't ask her surname. I only know that she is young and hot blonde named Lucille.";
 			link.l1.go = "Gigolo_2";
 		break;
-		
 		case "Gigolo_2":
 			dialog.text = "Very well... Tell me, why have you chosen her? Aren't you interested in other girls?";
 			link.l1 = "Hm.. She has been working for you for a short time and I think that she is not the best girl in this job and can't cost a lot.";
@@ -39,7 +36,6 @@ void ProcessCommonDialogEvent(ref NPChar, aref Link, aref NextDiag)
 			link.l2 = "I like blondes with fair skin. That is why I have chosen Lucille";
 			link.l2.go = "Gigolo_2_2";
 		break;
-		
 		case "Gigolo_2_1":
 			if (sti(pchar.questTemp.Sharlie.Gigolo.Rand1) == 0)
 			{
@@ -72,7 +68,6 @@ void ProcessCommonDialogEvent(ref NPChar, aref Link, aref NextDiag)
 				}
 			}
 		break;
-		
 		case "Gigolo_2_2":
 			if (sti(pchar.questTemp.Sharlie.Gigolo.Rand2) == 0)
 			{
@@ -105,14 +100,12 @@ void ProcessCommonDialogEvent(ref NPChar, aref Link, aref NextDiag)
 				}
 			}
 		break;
-		
 		case "Gigolo_3":
 			AddMoneyToCharacter(pchar, -sti(pchar.questTemp.Sharlie.Gigolo.Money));
 			dialog.text = "Very well, dear. The girl is going to free herself at eleven o'clock in the evening. She will be waiting for you. Remember, she must return not later than seven o'clock in the morning. If you don't take Lucille before midnight, another client will, and then you will have to wait for the next evening to take her\nAnd don't even try to... hurt her or I guarantee problems for you. Don't think of it as a threat, I am only warning you.";
 			link.l1 = "Don't worry. I am going to take this girl for love, not for anything else. I'll take her at eleven o'clock. Farewell!";
 			link.l1.go = "Gigolo_4";
 		break;
-		
 		case "Gigolo_4":
 			DeleteAttribute(pchar, "GenQuest.CannotWait");
 			DialogExit();
@@ -123,4 +116,3 @@ void ProcessCommonDialogEvent(ref NPChar, aref Link, aref NextDiag)
 	}
 	UnloadSegment(NPChar.FileDialog2);  // если где-то выход внутри switch  по return не забыть сделать анлод
 }
-

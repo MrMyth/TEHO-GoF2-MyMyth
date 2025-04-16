@@ -1,12 +1,9 @@
-
 int CreateBelizCharacters(int n)
 {
 	ref ch;
-	
 	///////////////////////////////////////////////////////////////////////////////
 	// ОСНОВНЫЕ ПЕРСОНАЖИ
 	///////////////////////////////////////////////////////////////////////////////
-
 	makeref(ch,Characters[n]);			//Губернатор
 	ch.id		= "Beliz_Mayor";
 	ch.model	= "huber_13";
@@ -34,7 +31,6 @@ int CreateBelizCharacters(int n)
 	LAi_group_MoveCharacter(ch, "ENGLAND_CITIZENS");
 	LAi_SetImmortal(ch, true);
 	n = n + 1;
-
 	makeref(ch,Characters[n]);			//Священик
 	ch.id		= "Beliz_Priest";
 	ch.model	= "priest_3";
@@ -52,7 +48,6 @@ int CreateBelizCharacters(int n)
 	LAi_group_MoveCharacter(ch, "ENGLAND_CITIZENS");
 	LAi_SetImmortal(ch, true);
 	n = n + 1;
-
 	makeref(ch,Characters[n]);		// ОФициантка
 	ch.id		= "Beliz_waitress";
 	ch.model	= "women_13";
@@ -69,7 +64,6 @@ int CreateBelizCharacters(int n)
 	LAi_group_MoveCharacter(ch, "ENGLAND_CITIZENS");
 	LAi_SetImmortal(ch, true);
 	n = n + 1;
-
 	makeref(ch,Characters[n]);			//Трактирщик
 	ch.id		= "Beliz_tavernkeeper";
 	ch.model	= "barmen_11";
@@ -87,8 +81,6 @@ int CreateBelizCharacters(int n)
 	LAi_group_MoveCharacter(ch, "ENGLAND_CITIZENS");
 	LAi_SetImmortal(ch, true);
 	n = n + 1;
-
-
 	makeref(ch,Characters[n]);			//Торговец
 	ch.id		= "Beliz_trader";
 	ch.model	= "trader_11";
@@ -106,7 +98,6 @@ int CreateBelizCharacters(int n)
 	LAi_SetImmortal(ch, true);
 	ch.item_date = "";
 	n = n + 1;
-
 	makeref(ch,Characters[n]);			//Корабел
 	ch.id		= "Beliz_shipyarder";
 	ch.model	= "shipowner_11";
@@ -131,7 +122,6 @@ int CreateBelizCharacters(int n)
 	LAi_group_MoveCharacter(ch, "ENGLAND_CITIZENS");
 	LAi_SetImmortal(ch, true);
 	n = n + 1;
-
 	makeref(ch,Characters[n]);			//Банкир
 	ch.id		= "Beliz_usurer";
 	ch.model	= "banker_11";
@@ -151,7 +141,6 @@ int CreateBelizCharacters(int n)
 	LAi_group_MoveCharacter(ch, "ENGLAND_CITIZENS");
 	LAi_SetImmortal(ch, true);
 	n = n + 1;
-	
 	makeref(ch,Characters[n]);			//Начальник порта
 	ch.id		= "Beliz_PortMan";
 	ch.model	= "citiz_8";
@@ -168,7 +157,6 @@ int CreateBelizCharacters(int n)
 	LAi_SetImmortal(ch, true);
 	ch.item_date = "";
 	n = n + 1;
-
     makeref(ch,Characters[n]);
 	ch.name 	= "Smuggler";
 	ch.lastname = "";
@@ -185,6 +173,5 @@ int CreateBelizCharacters(int n)
 	LAi_SetHP(ch, 80.0, 80.0);
 	ch.greeting = "smuggler";
 	n = n + 1;
-	
 	return n;
 }

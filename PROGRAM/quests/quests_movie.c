@@ -1,21 +1,14 @@
-
-
 int questMovieProcess = 0;
 object questMovieStack;
 object questMovieWideScreen;
 bool questMovieIsLockPlayerCtrl = false;
 string questMovieOldSaveState = true;
-
-
-
 void ResetQuestMovie()
 {
 	questMovieProcess = 0;
 	questMovieIsLockPlayerCtrl = false;
 	questMovieOldSaveState = true;
 }
-
-
 bool StartQuestMovie(bool noReload, bool noSave, bool lockPlayerCtrl)
 {
 	Event("EventStartQuestMovie", "lll", noReload, noSave, lockPlayerCtrl);
@@ -48,7 +41,6 @@ bool StartQuestMovie(bool noReload, bool noSave, bool lockPlayerCtrl)
 	questMovieProcess = questMovieProcess + 1;
 	return true;
 }
-
 bool EndQuestMovie()
 {
 	if(questMovieProcess == 0) return false;
@@ -73,7 +65,6 @@ bool EndQuestMovie()
 	}
 	return true;
 }
-
 void QuestMovieLockPlayer()
 {
 	if(questMovieIsLockPlayerCtrl == true) return;
@@ -81,7 +72,6 @@ void QuestMovieLockPlayer()
 	SetCharacterTask_Stay(GetMainCharacter());
 	CreateEntity(&questMovieWideScreen, "WideScreen");
 }
-
 void QuestMovieUnLockPlayer()
 {
 	if(questMovieIsLockPlayerCtrl == false) return;
@@ -89,7 +79,6 @@ void QuestMovieUnLockPlayer()
 	SetCharacterTask_None(GetMainCharacter());
 	SendMessage(&questMovieWideScreen, "");
 }
-
 bool qmIsNoReload()
 {
 	if(questMovieProcess > 0)
@@ -100,4 +89,3 @@ bool qmIsNoReload()
 	}
 	return false;
 }
-

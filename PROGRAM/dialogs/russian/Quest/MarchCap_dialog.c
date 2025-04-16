@@ -4,13 +4,10 @@ void ProcessDialogEvent()
 	aref Link, NextDiag;
 	int i, iTemp, iQty;
 	string sTemp;
-	
 	DeleteAttribute(&Dialog,"Links");
-	
 	makeref(NPChar,CharacterRef);
 	makearef(Link, Dialog.Links);
 	makearef(NextDiag, NPChar.Dialog);
-	
 	switch(Dialog.CurrentNode)
 	{
 		case "First time":
@@ -18,7 +15,6 @@ void ProcessDialogEvent()
 			link.l1 = "OK.";
 			link.l1.go = "exit";
 		break;
-		
 		//разговор на палубе
 		case "MarchCap":
 			pchar.quest.MarchCapOver.over = "yes"; //снять прерывание
@@ -26,7 +22,6 @@ void ProcessDialogEvent()
 			link.l1 = "Go on, sir. I am listening.";
 			link.l1.go = "MarchCap_1";
 		break;
-		
 		case "MarchCap_1":
 			pchar.GenQuest.MarchCap.Goods = SelectMarchCapGoods1();//целевой товар
 			switch (rand(2))
@@ -51,7 +46,6 @@ void ProcessDialogEvent()
 					link.l2 = "Some"+GetGoodsNameAlt(sti(pchar.GenQuest.MarchCap.Goods))+" is not enough for me to spoil my relations with "+NationNameAblative(sti(pchar.GenQuest.MarchCap.Nation))+". No, I am not going to do this! Farewell, sir, and don't even try to stop me!";
 					link.l2.go = "MarchCap_exit";
 				break;
-				
 				case 1: //энкаунтер на глобалке, установка параметров
 					pchar.GenQuest.MarchCap.Startcity = SelectAnyColony(pchar.GenQuest.MarchCap.basecity);
 					pchar.GenQuest.MarchCap.Finishcity = SelectAnyColony2(pchar.GenQuest.MarchCap.basecity, pchar.GenQuest.MarchCap.Startcity);
@@ -62,7 +56,6 @@ void ProcessDialogEvent()
 					link.l2 = "Some "+GetGoodsNameAlt(sti(pchar.GenQuest.MarchCap.Goods))+" is not enough for me to spoil my relations with "+NationNameAblative(sti(pchar.GenQuest.MarchCap.Nation))+". No, I am not going to do this! Farewell, sir, and don't even try to stop me!";
 					link.l2.go = "MarchCap_exit";
 				break;
-				
 				case 2: //одиночный пиратский кулсейлор у бухты, установка параметров
 					pchar.GenQuest.MarchCap.Goods = GOOD_GOLD + drand(makeint(GOOD_SILVER - GOOD_GOLD));
 					pchar.GenQuest.MarchCap.GoodsQty = sti(pchar.rank)*50+170+rand(30);
@@ -91,13 +84,11 @@ void ProcessDialogEvent()
 				break;
 			}
 		break;
-		
 		case "MarchCap_1_1":
 			dialog.text = "I knew that I could count on you! Lets not waste a single minute. Go to your ship and take a lead. It is time to set sail!";
 			link.l1 = "Order to anchor-up, captain!";
 			link.l1.go = "MarchCap_1_2";
 		break;
-		
 		case "MarchCap_1_2":
 			DialogExit();
 			NextDiag.CurrentNode = "MarchCap_repeat";
@@ -127,14 +118,12 @@ void ProcessDialogEvent()
 			AddQuestUserData("MarchCap", "sGoods", GetGoodsNameAlt(sti(pchar.GenQuest.MarchCap.Goods)));
 			AddQuestUserData("MarchCap", "sName", GetFullName(npchar));
 		break;
-		
 		case "MarchCap_TimeOver":
 			dialog.text = "And why have I got involved with you, captain? We have lost such a valuable prize because of you! I'd better sail alone next time...";
 			link.l1 = "Your fault, not mine. Bye.";
 			link.l1.go = "MarchCap_Talk_exit";
 			pchar.GenQuest.MarchCap = "late";
 		break;
-		
 		case "MarchCap_Talk_exit":
 			pchar.quest.MarchCap1_fail2.over = "yes"; //снять прерывание
 			pchar.quest.MarchCap1_fail1.over = "yes"; //снять прерывание
@@ -173,7 +162,6 @@ void ProcessDialogEvent()
 			CloseQuestHeader("MarchCap");
 			DeleteAttribute(pchar, "GenQuest.MarchCap");
 		break;
-		
 		case "MarchCap_AfterBattle":
 			iTemp = makeint(GetSquadronGoods(pchar, sti(pchar.GenQuest.MarchCap.Goods))-sti(pchar.GenQuest.MarchCap.StartGoodsQty))*sti(Goods[sti(pchar.GenQuest.MarchCap.Goods)].Weight);
 			iQty = makeint(GetSquadronGoods(pchar, sti(pchar.GenQuest.MarchCap.Goods))-sti(pchar.GenQuest.MarchCap.StartGoodsQty));
@@ -207,20 +195,17 @@ void ProcessDialogEvent()
 			link.l1.go = "MarchCap_Deck_continue";
 			pchar.GenQuest.MarchCap = "exellent";
 		break;
-		
 		//если будет время - здесь создаем еще одного клона с уникальным ИД для продолжения квеста
 		case "MarchCap_Deck_continue":
 			dialog.text = "There is a possibility, captain. I will find you if I would get another profitable lead which I won't be able to do on my own. You look like a reliable battle companion for me as well.";
 			link.l1 = "Nice! Farewell, captain. Good luck!";
 			link.l1.go = "MarchCap_Talk_exit";
 		break;
-		
 		case "MarchCap_2_1":
 			dialog.text = "I knew that I could count on you! Lets not waste a single minute. Go to your ship and take a lead. It is time to set sail!";
 			link.l1 = "Order to achor-up, captain.";
 			link.l1.go = "MarchCap_2_2";
 		break;
-		
 		case "MarchCap_2_2":
 			DialogExit();
 			NextDiag.CurrentNode = "MarchCap_repeat";
@@ -248,13 +233,11 @@ void ProcessDialogEvent()
 			AddQuestUserData("MarchCap", "sGoods", GetGoodsNameAlt(sti(pchar.GenQuest.MarchCap.Goods)));
 			AddQuestUserData("MarchCap", "sName", GetFullName(npchar));
 		break;
-		
 		case "MarchCap_3_1":
 			dialog.text = "I knew that I could count on you! Lets not waste a single minute. Go to your ship and lead me. It is time to set sail!";
 			link.l1 = "Order to anchor-up, captain.";
 			link.l1.go = "MarchCap_3_2";
 		break;
-		
 		case "MarchCap_3_2":
 			DialogExit();
 			NextDiag.CurrentNode = "MarchCap_repeat";
@@ -281,19 +264,16 @@ void ProcessDialogEvent()
 			AddQuestUserData("MarchCap", "sName", GetFullName(npchar));
 			AddQuestUserData("MarchCap", "sName1", GetName(NAMETYPE_ORIG, pchar.GenQuest.MarchCap.PirateName, NAME_NOM));
 		break;
-		
 		case "MarchCap_DieHard":
 			dialog.text = "You are a coward, damn you! You have just run away from the battlefield!";
 			link.l1 = "And what do you think I was supposed to do? To let that pirate to sink my ship? No way, I'd better be a living coward than a dead idiot!";
 			link.l1.go = "MarchCap_DieHard_1";
 		break;
-		
 		case "MarchCap_DieHard_1":
 			dialog.text = "And why have I got involved with you, captain? I should have found a man who didn't fear boarding sabers!";
 			link.l1 = " Now, I ask you to leave my ship - I need to repair her.";
 			link.l1.go = "MarchCap_Talk_exit";
 		break;
-		
 		case "MarchCap_AfterBattleGold":
 			iTemp = makeint(GetSquadronGoods(pchar, sti(pchar.GenQuest.MarchCap.Goods))-sti(pchar.GenQuest.MarchCap.StartGoodsQty))*sti(Goods[sti(pchar.GenQuest.MarchCap.Goods)].Weight);
 			iQty = makeint(GetSquadronGoods(pchar, sti(pchar.GenQuest.MarchCap.Goods))-sti(pchar.GenQuest.MarchCap.StartGoodsQty));
@@ -327,26 +307,22 @@ void ProcessDialogEvent()
 			link.l1.go = "MarchCap_Deck_continue";
 			pchar.GenQuest.MarchCap = "exellent";
 		break;
-		
 		case "":
 			dialog.text = "";
 			link.l1 = "";
 			link.l1.go = "";
 		break;
-		
 		case "MarchCap_repeat":
 			dialog.text = ""+GetAddress_Form(NPChar)+", go to your ship. We don't have time to chat. Let's set sail!";
 			link.l1 = "Yes, yes, of course, you are right.";
 			link.l1.go = "exit";
 			NextDiag.TempNode = "MarchCap_repeat";
 		break;
-		
 		case "MarchCap_exit":
 			dialog.text = "Hm... I ain't going to. Get lost! I will do it by myself!";
 			link.l1 = "Well, well, happy journey...";
 			link.l1.go = "MarchCap_DeckExit";
 		break;
-		
 		case "MarchCap_DeckExit":
 			DialogExit();
 			LAi_CharacterDisableDialog(npchar);
@@ -355,14 +331,12 @@ void ProcessDialogEvent()
 			npchar.DontDeskTalk = true;
 			DeleteAttribute(pchar, "GenQuest.MarchCap");
 		break;
-		
 		case "Exit":
 			NextDiag.CurrentNode = NextDiag.TempNode;
 			DialogExit();
 		break;
 	}
 }
-
 int SelectMarchCapGoods1()
 {
 	int iGoods;
@@ -377,16 +351,13 @@ int SelectMarchCapGoods1()
 	}
 	return iGoods;
 }
-
 int SelectPirateShipType()
 {
 	int iShip;
-	
 	if(sti(pchar.rank) >= 19) iShip = SHIP_LINESHIP;	
 	if(sti(pchar.rank) >= 13 && sti(pchar.rank) < 18) iShip = SHIP_GALEON_H;	
 	if(sti(pchar.rank) >= 8 && sti(pchar.rank) < 12) iShip = SHIP_CORVETTE;
 	if(sti(pchar.rank) >= 5 && sti(pchar.rank) < 8) iShip = SHIP_SCHOONER_W;	
 	if(sti(pchar.rank) < 5) iShip = SHIP_LUGGER + drand(makeint(SHIP_BRIG - SHIP_LUGGER));
-	
 	return iShip;
 }

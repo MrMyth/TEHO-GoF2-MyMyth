@@ -1,12 +1,9 @@
-
 int CreatePortPaxCharacters(int n)
 {
 	ref ch;
-	
 	///////////////////////////////////////////////////////////////////////////////
 	// ОСНОВНЫЕ ПЕРСОНАЖИ
 	///////////////////////////////////////////////////////////////////////////////
-
 	makeref(ch,Characters[n]);			//Губернатор
 	ch.id		= "PortPax_Mayor";
 	ch.model	= "huber_8";
@@ -34,7 +31,6 @@ int CreatePortPaxCharacters(int n)
 	LAi_group_MoveCharacter(ch, "FRANCE_CITIZENS");
 	LAi_SetImmortal(ch, true);
 	n = n + 1;
-
 	makeref(ch,Characters[n]);			//Священик
 	ch.id		= "PortPax_Priest";
 	ch.model	= "priest_3";
@@ -52,7 +48,6 @@ int CreatePortPaxCharacters(int n)
 	LAi_group_MoveCharacter(ch, "FRANCE_CITIZENS");
 	LAi_SetImmortal(ch, true);
 	n = n + 1;
-
 	makeref(ch,Characters[n]);		// ОФициантка
 	ch.id		= "PortPax_waitress";
 	ch.model	= "women_15";
@@ -69,7 +64,6 @@ int CreatePortPaxCharacters(int n)
 	LAi_group_MoveCharacter(ch, "FRANCE_CITIZENS");
 	LAi_SetImmortal(ch, true);
 	n = n + 1;
-
 	makeref(ch,Characters[n]);			//Трактирщик
 	ch.id		= "PortPax_tavernkeeper";
 	ch.model	= "barmen_7";
@@ -87,8 +81,6 @@ int CreatePortPaxCharacters(int n)
 	LAi_group_MoveCharacter(ch, "FRANCE_CITIZENS");
 	LAi_SetImmortal(ch, true);
 	n = n + 1;
-
-
 	makeref(ch,Characters[n]);			//Торговец
 	ch.id		= "PortPax_trader";
 	ch.model	= "trader_7";
@@ -106,7 +98,6 @@ int CreatePortPaxCharacters(int n)
 	LAi_SetImmortal(ch, true);
 	ch.item_date = "";
 	n = n + 1;
-
 	makeref(ch,Characters[n]);			//Корабел
 	ch.id		= "PortPax_shipyarder";
 	ch.model	= "shipowner_7";
@@ -131,7 +122,6 @@ int CreatePortPaxCharacters(int n)
 	LAi_group_MoveCharacter(ch, "FRANCE_CITIZENS");
 	LAi_SetImmortal(ch, true);
 	n = n + 1;
-
 	makeref(ch,Characters[n]);			//Банкир
 	ch.id		= "PortPax_usurer";
 	ch.model	= "banker_7";
@@ -151,7 +141,6 @@ int CreatePortPaxCharacters(int n)
 	LAi_group_MoveCharacter(ch, "FRANCE_CITIZENS");
 	LAi_SetImmortal(ch, true);
 	n = n + 1;
-	
 	makeref(ch,Characters[n]);			//Начальник порта
 	ch.id		= "PortPax_PortMan";
 	ch.model	= "citiz_1";
@@ -168,7 +157,6 @@ int CreatePortPaxCharacters(int n)
 	LAi_SetImmortal(ch, true);
 	ch.item_date = "";
 	n = n + 1;
-	
 	makeref(ch,Characters[n]);
 	ch.name 	= "Smuggler";
 	ch.lastname = "";
@@ -185,7 +173,6 @@ int CreatePortPaxCharacters(int n)
 	LAi_SetHP(ch, 80.0, 80.0);
 	ch.greeting = "smuggler";
 	n = n + 1;
-	
 	makeref(ch,Characters[n]);			//Смотритель маяка
 	ch.id		= "PortPax_Lightman";
 	ch.model	= "keeper_4";
@@ -205,6 +192,5 @@ int CreatePortPaxCharacters(int n)
 	LAi_group_MoveCharacter(ch, "FRANCE_CITIZENS");
 	LAi_SetImmortal(ch, true);
 	n = n + 1;
-	
 	return n;
 }

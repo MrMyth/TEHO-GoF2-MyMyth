@@ -1,4 +1,3 @@
-
 #include "characters\characters_ai.c"
 #include "characters\characters_events.c"
 #include "characters\characters_login.c"
@@ -10,11 +9,8 @@
 #include "characters\TravelMap.c" //navy
 #include "characters\QuestsUtilite.c" //boal
 #include "characters\LSC_Q2Utilite.c" 
-
 object chrFindNearCharacters[MAX_CHARS_IN_LOC];
 bool isBoardingLoading = false;
-
-
 void CharactersInit()
 {
     if(LoadSegment("characters\Characters_tables.c"))
@@ -23,74 +19,42 @@ void CharactersInit()
 		UnloadSegment("characters\Characters_tables.c");
 	}
 	ReloadProgressUpdate();
-
 	string sPath = "characters\";
 	// + LanguageGetLanguage() + "\";
-	
 	LoadSegment(sPath + "init\Antigua.c");			ReloadProgressUpdate();
-	
 	LoadSegment(sPath + "init\Barbados.c");				ReloadProgressUpdate();
-	
 	LoadSegment(sPath + "init\Jamaica.c");				ReloadProgressUpdate();
-
 	LoadSegment(sPath + "init\Curacao.c");		ReloadProgressUpdate();
-	
 	LoadSegment(sPath + "init\Guadeloupe.c");			ReloadProgressUpdate();
-	
 	LoadSegment(sPath + "init\Santiago.c");				ReloadProgressUpdate();
-
 	LoadSegment(sPath + "init\Panama.c");				ReloadProgressUpdate();
-	
 	LoadSegment(sPath + "init\PuertoPrincipe.c");				ReloadProgressUpdate();
-
 	LoadSegment(sPath + "init\Martinique.c");				ReloadProgressUpdate();
-
 	LoadSegment(sPath + "init\Havana.c");	ReloadProgressUpdate();
-
 	LoadSegment(sPath + "init\Bermudes.c");		ReloadProgressUpdate();
-		
 	LoadSegment(sPath + "init\Nevis.c");				ReloadProgressUpdate();
-	
 	LoadSegment(sPath + "init\PuertoRico.c");				ReloadProgressUpdate();
-	
 	LoadSegment(sPath + "init\LaVega.c");				ReloadProgressUpdate();
-	
 	LoadSegment(sPath + "init\SantoDomingo.c");				ReloadProgressUpdate();
-	
 	LoadSegment(sPath + "init\PortPax.c");				ReloadProgressUpdate();
-	
 	LoadSegment(sPath + "init\PortoBello.c");				ReloadProgressUpdate();
-	
 	LoadSegment(sPath + "init\Trinidad.c");				ReloadProgressUpdate();
-	
 	LoadSegment(sPath + "init\SentMartin.c");				ReloadProgressUpdate();
-	
 	LoadSegment(sPath + "init\Tortuga.c");				ReloadProgressUpdate();
-
 	LoadSegment(sPath + "init\Cartahena.c");				ReloadProgressUpdate();
-
 	LoadSegment(sPath + "init\Maracaibo.c");				ReloadProgressUpdate();
-
 	LoadSegment(sPath + "init\Caracas.c");				ReloadProgressUpdate();
-
 	LoadSegment(sPath + "init\Cumana.c");				ReloadProgressUpdate();
-
 	LoadSegment(sPath + "init\Beliz.c");				ReloadProgressUpdate();
-
 	LoadSegment(sPath + "init\SantaCatalina.c");				ReloadProgressUpdate();
-	
 	LoadSegment(sPath + "init\Providence.c");				ReloadProgressUpdate();
-
 	LoadSegment(sPath + "init\StoryCharacters.c");		ReloadProgressUpdate();
-	
 	LoadSegment(sPath + "init\Other.c");				ReloadProgressUpdate();
-	
  	if(LoadSegment("characters\characters_init.c"))
 	{
 		CreateCharacters();
 		UnloadSegment("characters\characters_init.c");
 	}
-
 	ReloadProgressUpdate();	   
 	sPath = "characters\";
 	UnloadSegment(sPath + "init\Antigua.c");
@@ -122,13 +86,11 @@ void CharactersInit()
 	UnloadSegment(sPath + "init\Providence.c");
 	UnloadSegment(sPath + "init\StoryCharacters.c");
 	UnloadSegment(sPath + "init\Other.c");
-
 	ReloadProgressUpdate();
 	InitCharacterEvents();
 	ReloadProgressUpdate();
 	LAi_NewGame();
 }
-
 bool CreateCharacter(ref character)
 {
 	CreateEntity(&character, character.model.entity);
@@ -138,7 +100,6 @@ bool CreateCharacter(ref character)
 		DeleteClass(&character);
 		return false;
 	}
-
 	float fCurCharge = 1000.0;
 	if ( actLoadFlag == 1 && //fix
 		CheckAttribute(character,"chr_ai.charge") ) 
@@ -150,7 +111,6 @@ bool CreateCharacter(ref character)
 		fCurCharge<stf(character.chr_ai.charge) ) {
 			character.chr_ai.charge = fCurCharge;
 	}
-
 	//Set fight level
 	if(!CheckAttribute(&character, "sex"))
 	{
@@ -159,7 +119,6 @@ bool CreateCharacter(ref character)
 	//if(character.sex == "man")
 	//{
 	float fgtlevel = LAi_GetCharacterFightLevel(character); // boal fix
-
 	SendMessage(character, "lf", MSG_CHARACTER_SETFTGLEVEL, fgtlevel);
 	//Set character sex
 	SendMessage(character, "lsl", MSG_CHARACTER_EX_MSG, "SetSex", character.sex == "man");
@@ -171,41 +130,34 @@ bool CreateCharacter(ref character)
 	//}
 	return true;
 }
-
 bool DeleteCharacter(ref character)
 {
 	DeleteClass(character);
 	return true;
 }
-
 bool TeleportCharacterToPos(ref character, float x, float y, float z)
 {
 	return SendMessage(character, "lfff", MSG_CHARACTER_TELEPORT, x, y, z);
 }
-
 bool TeleportCharacterToPosAy(ref character, float x, float y, float z, float ay)
 {
 	return SendMessage(character, "lffff", MSG_CHARACTER_TELEPORT_AY, x, y, z, ay);
 }
-
 bool TeleportCharacterToLocator(ref character, string group, string locator)
 {
 	return SendMessage(character, "lss", MSG_CHARACTER_TELEPORT_TO_LOCATOR, group, locator);
 }
-
 bool CheckLocationPosition(ref location, float x, float y, float z)
 {
 	if(IsEntity(&loadedLocation) == false) return false;
 	return (SendMessage(loadedLocation, "lfff", MSG_LOCATION_CHECKENTRY, x, y, z) != 0);
 }
-
 object GetCharacterModel(ref character)
 {
 	object model;
 	SendMessage(character, "le", MSG_CHARACTER_GETMODEL, &model);
 	return model;
 }
-
 bool GetCharacterPos(ref character, ref float_x, ref float_y, ref float_z)
 {
 	float cx, cy, cz;
@@ -213,7 +165,6 @@ bool GetCharacterPos(ref character, ref float_x, ref float_y, ref float_z)
 	float_x = cx; float_y = cy; float_z = cz;
 	return true;
 }
-
 bool GetCharacterAy(ref character, ref float_ay)
 {
 	float ay = 0.0;
@@ -221,48 +172,40 @@ bool GetCharacterAy(ref character, ref float_ay)
 	float_ay = ay;
 	return true;
 }
-
 bool PushCharacterAy(ref character)
 {
 	return SendMessage(character, "l", MSG_CHARACTER_TURNPUSH);
 }
-
 bool PopCharacterAy(ref character)
 {
 	return SendMessage(character, "l", MSG_CHARACTER_TURNPOP);
 }
-
 int FindNearCharacters(ref character, float rad, float ax, float testAng, float nearDist, bool isVisibleTest, bool isSort)
 {
 	int num = 0;
 	SendMessage(character, "leeffffll", MSG_CHARACTER_FINDNEAR, &chrFindNearCharacters, &num, rad, ax, testAng, nearDist, isVisibleTest, isSort);
 	return num;
 }
-
 /*int FindNearNotCompanionCharacters(ref character, float rad, float ax, float testAng, float nearDist, bool isVisibleTest, bool isSort)
 {
 	int num = 0;
 	SendMessage(character, "leeffffll", MSG_CHARACTER_FINDNEAR, &chrFindNearCharacters, &num, rad, ax, testAng, nearDist, isVisibleTest, isSort);
 	return num;
 }*/
-
 bool CharactersVisibleTest(ref character, ref lookTo)
 {
 	return SendMessage(character, "li", MSG_CHARACTER_VISIBLE, lookTo);
 }
-
 //
 void BeginChangeCharacterActions(ref character)
 {
 	DeleteAttribute(character, "actions");
 }
-
 //
 void EndChangeCharacterActions(ref character)
 {
 	character.actions = "";
 }
-
 //Character is stay where play idle animation
 void SetDefaultStayIdle(ref character)
 {
@@ -279,7 +222,6 @@ void SetDefaultStayIdle(ref character)
 	character.actions.idle.i11 = "idle_11";
 	character.actions.HitNoFight = "HitNoFight";
 }
-
 //Character is sit where play idle animation
 void SetDefaultSitIdle(ref character)
 {		
@@ -293,7 +235,6 @@ void SetDefaultSitIdle(ref character)
 	character.actions.idle.i8 = "Sit_Idle06";
 	character.actions.HitNoFight = "HitNoFightSit";
 }
-
 void SetDefaultSit2Idle(ref character)
 {		
 	character.actions.idle.i1 = "Sit2_Idle01";
@@ -305,7 +246,6 @@ void SetDefaultSit2Idle(ref character)
 	character.actions.idle.i7 = "Sit2_Idle07";
 	character.actions.HitNoFight = "HitNoFightSit";
 }
-
 void SetDialogStayIdle(ref character)
 {
 	character.actions.idle.i1 = "dialog_stay1";
@@ -354,7 +294,6 @@ void SetOverloadNormWalk(ref character)
         character.actions.stsDownRun = "stairs down";
     }
 }
-
 void SetOverloadFight(ref character)
 {
     //if(GetItemsWeight(character) > GetMaxItemsWeight(character) && !IsEquipCharacterByArtefact(character, "totem_06"))
@@ -384,7 +323,6 @@ void CheckAndSetOverloadMode(ref character)
             character.actions.stsUpRun = "stairs up";
             character.actions.stsDown = "stairs down";
             character.actions.stsDownRun = "stairs down";
-
             character.actions.fightwalk = "fight walk";
 	        character.actions.fightbackwalk = "fight back walk";
 	        character.actions.fightrun = "fight walk";
@@ -401,7 +339,6 @@ void CheckAndSetOverloadMode(ref character)
 // boal <--
 void SetDefaultNormWalk(ref character)
 {
-	
 //	if( character.id == pchar.id && CheckAttribute(&InterfaceStates,"alwaysrun") && sti(InterfaceStates.alwaysrun) )
 //	{
 		character.actions.walk = "walk";
@@ -432,11 +369,9 @@ void SetDefaultNormWalk(ref character)
 		character.actions.stsUpRunBack = "back stairs up";
 		character.actions.stsDownRunBack = "back stairs down";
 	}*/
-
     // boal 21.01.2004 -->
 	SetOverloadNormWalk(character);
 	// boal 21.01.2004 <--
-	
 	character.actions.turnLeft = "turn left";
 	character.actions.turnRight = "turn right";
 	character.actions.swim = "swim";
@@ -444,10 +379,8 @@ void SetDefaultNormWalk(ref character)
 	character.actions.fall_land = "fall_land";
 	character.actions.fall_water = "fall_water";
 }
-
 void SetDefaultFight(ref character)
 {
-	
 	//if( character.id == pchar.id && CheckAttribute(&InterfaceStates,"alwaysrun") && sti(InterfaceStates.alwaysrun) )
 	//{
 		character.actions.fightwalk = "fight walk";
@@ -462,11 +395,9 @@ void SetDefaultFight(ref character)
 		character.actions.fightbackwalk = "fight back run";
 		character.actions.fightbackrun = "fight back walk";
 	}*/
-	
 	// boal 21.01.2004 -->
     SetOverloadFight(character);
     // boal 21.01.2004 <--
-    
 	//Действия в режиме боя
 	//Fast (max 3) --------------------------------------------------
 	character.actions.attack_fast.a1 = "attack_fast_1";
@@ -532,24 +463,20 @@ void SetDefaultFight(ref character)
 	character.actions.fightidle.i7 = "fight stand_7";
 	character.actions.fightidle.i8 = "fight stand_8";
 }
-
 void SetDefaultDead(ref character)
 {
 	character.actions.dead.d1 = "death_citizen_1";
 	character.actions.dead.d2 = "death_citizen_2";
 }
-
 void SetDefaultSitDead(ref character)
 {
 	character.actions.dead.d1 = "Sit_Death";
 }
-
 void SetAfraidDead(ref character)
 {
 	character.actions.dead.d1 = "death_afraid_1";
 	character.actions.dead.d2 = "death_afraid_2";
 }
-
 void SetDefaultFightDead(ref character)
 {
 	character.actions.fightdead.d1 = "death_0";
@@ -557,7 +484,6 @@ void SetDefaultFightDead(ref character)
 	character.actions.fightdead.d3 = "death_2";
 	character.actions.fightdead.d4 = "death_3";
 }
-
 void SetHuberAnimation(ref character)
 {
 	character.actions.idle.i1 = "Gov_ObserveHands";

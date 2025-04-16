@@ -1,22 +1,18 @@
 /*
 Тип: Оглушенный
-
 	Используемые шаблоны:
 		stay
 		dialog
 		ani
 */
-
 #define LAI_TYPE_STUNNED		"stunned"
 #define LAI_GROUP_STUNNED		"stunned"
-
 void LAi_Stunned_StunCharacter(aref chr, float duration, bool resumeoldtype)
 {
 	string snd = "";
 	if (CheckAttribute(chr, "nodisarm" )) return;
 	if (IsMainCharacter(chr)) return;
 	if (LAi_IsBoardingProcess() && CheckAttribute(chr, "chr_ai.group") && chr.chr_ai.group !=  LAI_GROUP_PLAYER) return;
-
 	if(!CheckAttribute(chr, "stuntime"))
 	{
 		aref achr, astun;
@@ -28,7 +24,6 @@ void LAi_Stunned_StunCharacter(aref chr, float duration, bool resumeoldtype)
 			makearef(astun, chr.stuntime.actor.type);
 			makearef(achr, chr.chr_ai.type);
 			CopyAttributes(&astun, &achr);
-			
 			chr.stuntime.actor.tmpl = "";
 			makearef(astun, chr.stuntime.actor.tmpl);
 			makearef(achr, chr.chr_ai.tmpl);
@@ -59,13 +54,10 @@ void LAi_Stunned_StunCharacter(aref chr, float duration, bool resumeoldtype)
 		chr.stuntime.old_type_resume = true;
 	}
 	else DeleteAttribute(chr, "stuntime.old_type_resume");
-	
 	float x, y, z;
 	GetCharacterPos(chr, &x, &y, &z);
-	
 	//LAi_CharacterPlaySound(chr, snd);
 }
-
 bool LAi_Stunned_AwakenCharacter(aref chr)
 {
 	if(!CheckAttribute(chr, "stuntime")) return false;		
@@ -87,12 +79,10 @@ bool LAi_Stunned_AwakenCharacter(aref chr)
 			CharacterPlayAction(chr, "idle_10"); 
 		}		
 	}
-	
 	if(!Lai_IsBoardingProcess()) PostEvent("LAi_StandsUp", 3750, "i", chr);
 	else PostEvent("LAi_StandsUp", 3970, "i", chr);
 	return true;
 }
-
 #event_handler("LAi_StandsUp", "LAi_StunnedStandsUp");
 void LAi_StunnedStandsUp()
 {
@@ -132,7 +122,6 @@ void LAi_StunnedStandsUp()
 		DeleteAttribute(chr,"stuntime"); 
 	}
 }
-
 void LAi_type_stunned_Init(aref chr)
 {
 	DeleteAttribute(chr, "location.follower");
@@ -142,7 +131,6 @@ void LAi_type_stunned_Init(aref chr)
 	//Установим анимацию персонажу
 	LAi_SetDefaultStayAnimation(chr);
 	BeginChangeCharacterActions(chr);
-
 	if(chr.sex == "man") 
 	{ 
 		//CharacterPlayAction(chr, "Ground_SitDown"); 
@@ -154,13 +142,11 @@ void LAi_type_stunned_Init(aref chr)
 	}
 	PostEvent("LAi_BecameStunned", 3500, "i", chr);		
 }
-
 #event_handler ("LAi_BecameStunned", "LAi_CharacterBecameStunned");
 void LAi_CharacterBecameStunned()
 {
 	aref chr = GetEventData();
 	CharacterPlayAction(chr, "");
-
 	if(chr.sex != "woman")
 	{
 		chr.actions.idle.i1 	= "idle_1";
@@ -174,7 +160,6 @@ void LAi_CharacterBecameStunned()
 		chr.actions.idle.i9 	= "idle_9";
 		chr.actions.idle.i10 	= "idle_10";
 		chr.actions.idle.i11 	= "idle_11";
-
 /*	
 		chr.actions.idle.i1 = "Ground_sitting";
 		chr.actions.idle.i2 = "Ground_sitting";
@@ -196,7 +181,6 @@ void LAi_CharacterBecameStunned()
 	EndChangeCharacterActions(chr);
 	SendMessage(&chr, "lsl", MSG_CHARACTER_EX_MSG, "SetFightWOWeapon", false);
 }
-
 //Процессирование типа персонажа
 void LAi_type_stunned_CharacterUpdate(aref chr, float dltTime)
 {
@@ -207,7 +191,6 @@ void LAi_type_stunned_CharacterUpdate(aref chr, float dltTime)
 			LAi_Stunned_AwakenCharacter(&chr); return; 
 		}
 	}
-
 	int num = FindNearCharacters(chr, 5.0, -1.0, -1.0, 0.001, false, true);
 	int idx;
 	if(num > 0)
@@ -235,29 +218,24 @@ void LAi_type_stunned_CharacterUpdate(aref chr, float dltTime)
 		}
 	}
 }
-
 //Загрузка персонажа в локацию
 bool LAi_type_stunned_CharacterLogin(aref chr)
 {
 	return true;
 }
-
 //Выгрузка персонажа из локацию
 bool LAi_type_stunned_CharacterLogoff(aref chr)
 {
 	return true;
 }
-
 //Завершение работы темплейта
 void LAi_type_stunned_TemplateComplite(aref chr, string tmpl)
 {
 }
-
 //Сообщить о желании завести диалог
 void LAi_type_stunned_NeedDialog(aref chr, aref by)
 {
 }
-
 //Запрос на диалог, если возвратить true то в этот момент можно начать диалог
 bool LAi_type_stunned_CanDialog(aref chr, aref by)
 {
@@ -265,38 +243,30 @@ bool LAi_type_stunned_CanDialog(aref chr, aref by)
 	if(chr.chr_ai.tmpl == LAI_TMPL_STAY) return true;
 	return false;
 }
-
 //Начать диалог
 void LAi_type_stunned_StartDialog(aref chr, aref by)
 {
 	//Если мы пасивны, запускаем шаблон без времени завершения
 	LAi_tmpl_SetActivatedDialog(chr, by);
 }
-
 //Закончить диалог
 void LAi_type_stunned_EndDialog(aref chr, aref by)
 {
 	LAi_tmpl_stay_InitTemplate(chr);
 }
-
 //Персонаж атаковал другого персонажа
 void LAi_type_stunned_Attack(aref attack, aref enemy, float attackDmg, float hitDmg)
 {
 }
-
 //Персонаж атоковал заблокировавшегося персонажа
 void LAi_type_stunned_Block(aref attack, aref enemy, float attackDmg, float hitDmg)
 {
 }
-
 //Персонаж выстрелил
 void LAi_type_stunned_Fire(aref attack, aref enemy, float kDist, bool isFindedEnemy)
 {
 }
-
 //Персонаж атакован
 void LAi_type_stunned_Attacked(aref chr, aref by)
 {
 }
-
-

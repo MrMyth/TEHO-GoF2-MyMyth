@@ -1,12 +1,9 @@
-
 int CreateProvidenceCharacters(int n)
 {
 	ref ch;
-	
 	///////////////////////////////////////////////////////////////////////////////
 	// ОСНОВНЫЕ ПЕРСОНАЖИ
 	///////////////////////////////////////////////////////////////////////////////
-	
 	makeref(ch,Characters[n]);			//губернатор
 	ch.id		= "SanAndres_Mayor";
 	ch.model	= "huber_19";
@@ -34,7 +31,6 @@ int CreateProvidenceCharacters(int n)
 	LAi_group_MoveCharacter(ch, "SPAIN_CITIZENS");
 	LAi_SetImmortal(ch, true);
 	n = n + 1;
-
 	makeref(ch,Characters[n]);			//Священик
 	ch.id		= "SanAndres_Priest";
 	ch.model	= "priest_2";
@@ -52,7 +48,6 @@ int CreateProvidenceCharacters(int n)
 	LAi_group_MoveCharacter(ch, "SPAIN_CITIZENS");
 	LAi_SetImmortal(ch, true);
 	n = n + 1;
-
 	makeref(ch,Characters[n]);		// ОФициантка
 	ch.id		= "SanAndres_waitress";
 	ch.model	= "women_16";
@@ -69,7 +64,6 @@ int CreateProvidenceCharacters(int n)
 	LAi_group_MoveCharacter(ch, "SPAIN_CITIZENS");
 	LAi_SetImmortal(ch, true);
 	n = n + 1;
-
 	makeref(ch,Characters[n]);			//Трактирщик
 	ch.id		= "SanAndres_tavernkeeper";
 	ch.model	= "barmen_5";
@@ -87,7 +81,6 @@ int CreateProvidenceCharacters(int n)
 	LAi_group_MoveCharacter(ch, "SPAIN_CITIZENS");
 	LAi_SetImmortal(ch, true);
 	n = n + 1;
-
 	makeref(ch,Characters[n]);			//Торговец
 	ch.id		= "SanAndres_trader";
 	ch.model	= "trader_5";
@@ -109,7 +102,6 @@ int CreateProvidenceCharacters(int n)
 	ch.from_sea   = "SanAndres_town";
 	// настройка магазина <--
 	n = n + 1;
-
 	makeref(ch,Characters[n]);			//Корабел
 	ch.id		= "SanAndres_shipyarder";
 	ch.model	= "shipowner_5";
@@ -134,7 +126,6 @@ int CreateProvidenceCharacters(int n)
 	LAi_group_MoveCharacter(ch, "SPAIN_CITIZENS");
 	LAi_SetImmortal(ch, true);
 	n = n + 1;
-
 	makeref(ch,Characters[n]);			//Банкир
 	ch.id		= "SanAndres_usurer";
 	ch.model	= "banker_5";
@@ -154,7 +145,6 @@ int CreateProvidenceCharacters(int n)
 	LAi_group_MoveCharacter(ch, "SPAIN_CITIZENS");
 	LAi_SetImmortal(ch, true);
 	n = n + 1;
-
 	makeref(ch,Characters[n]);			//Начальник порта
 	ch.id		= "SanAndres_PortMan";
 	ch.model	= "citiz_2";
@@ -171,7 +161,6 @@ int CreateProvidenceCharacters(int n)
 	LAi_SetImmortal(ch, true);
 	ch.item_date = "";
 	n = n + 1;
-	
 	makeref(ch,Characters[n]);
 	ch.name 	= "Smuggler";
 	ch.lastname = "";
@@ -188,6 +177,5 @@ int CreateProvidenceCharacters(int n)
 	LAi_SetHP(ch, 80.0, 80.0);
 	ch.greeting = "smuggler";
 	n = n + 1;
-	
 	return n;
 }

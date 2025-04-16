@@ -1,6 +1,5 @@
 /*
 Тип: воин, бьёт врагов, когда свободен, возвращается к лидеру или стоит
-
 	Используемые шаблоны:
 		fight
 		follow
@@ -8,31 +7,22 @@
 		stay
 		dialog
 */
-
-
-
 #define LAI_TYPE_WARRIOR	"warrior"
-
-
-
 //Установить войну командира
 void LAi_warrior_SetCommander(aref chr, aref commander)
 {
 	chr.chr_ai.type.index = commander.index;
 }
-
 //Разрешить или запретить диалоги для война
 void LAi_warrior_DialogEnable(aref chr, bool isEnable)
 {
 	chr.chr_ai.type.dialog = isEnable;
 }
-
 //Сказать войну стоять при отсутствие целей
 void LAi_warrior_SetStay(aref chr, bool isStay)
 {
 	chr.chr_ai.type.stay = isStay;
 }
-
 //Инициализация
 void LAi_type_warrior_Init(aref chr)
 {
@@ -71,7 +61,6 @@ void LAi_type_warrior_Init(aref chr)
 	}
 	SendMessage(&chr, "lsl", MSG_CHARACTER_EX_MSG, "SetFightWOWeapon", false);
 }
-
 //Процессирование типа персонажа
 void LAi_type_warrior_CharacterUpdate(aref chr, float dltTime)
 {
@@ -79,7 +68,6 @@ void LAi_type_warrior_CharacterUpdate(aref chr, float dltTime)
 	//Ссылка на ветку с параметрами
 	aref type;
 	makearef(type, chr.chr_ai.type);
-
     // boal  лечимся -->
 	float fCheck = stf(chr.chr_ai.type.bottle) - dltTime;
 	if(fCheck < 0)
@@ -186,29 +174,24 @@ void LAi_type_warrior_CharacterUpdate(aref chr, float dltTime)
 		}
 	}	
 }
-
 //Загрузка персонажа в локацию
 bool LAi_type_warrior_CharacterLogin(aref chr)
 {
 	return true;
 }
-
 //Выгрузка персонажа из локацию
 bool LAi_type_warrior_CharacterLogoff(aref chr)
 {
 	return true;
 }
-
 //Завершение работы темплейта
 void LAi_type_warrior_TemplateComplite(aref chr, string tmpl)
 {
 }
-
 //Сообщить о желании завести диалог
 void LAi_type_warrior_NeedDialog(aref chr, aref by)
 {
 }
-
 //Запрос на диалог, если возвратить true то в этот момент можно начать диалог
 bool LAi_type_warrior_CanDialog(aref chr, aref by)
 {	
@@ -219,7 +202,6 @@ bool LAi_type_warrior_CanDialog(aref chr, aref by)
 	if(chr.chr_ai.tmpl == LAI_TMPL_WALK) return true;
 	return false;
 }
-
 //Начать диалог
 void LAi_type_warrior_StartDialog(aref chr, aref by)
 {
@@ -228,21 +210,16 @@ void LAi_type_warrior_StartDialog(aref chr, aref by)
 	CharacterTurnByChr(chr, by);
 	LAi_tmpl_SetActivatedDialog(chr, by);
 }
-
 //Закончить диалог
 void LAi_type_warrior_EndDialog(aref chr, aref by)
 {
 	LAi_tmpl_stay_InitTemplate(chr);
 	LAi_CharacterRestoreAy(chr);
 }
-
-
 //Персонаж выстрелил
 void LAi_type_warrior_Fire(aref attack, aref enemy, float kDist, bool isFindedEnemy)
 {
 }
-
-
 //Персонаж атакован
 void LAi_type_warrior_Attacked(aref chr, aref by)
 {
@@ -263,7 +240,6 @@ void LAi_type_warrior_Attacked(aref chr, aref by)
 		LAi_type_warrior_PlaySound(chr);
 	}
 }
-
 //Переходим в режим ожидания
 void LAi_type_warrior_SetWateState(aref chr)
 {
@@ -292,7 +268,6 @@ void LAi_type_warrior_SetWateState(aref chr)
 		}
 	}
 }
-
 void LAi_type_warrior_PlaySound(aref chr)
 {
 	if(LAi_IsDead(chr) && !LAi_IsDead(pchar)) return;
@@ -314,4 +289,3 @@ void LAi_type_warrior_PlaySound(aref chr)
 	if(sname == "") return;
 	LAi_CharacterPlaySound(chr, sname);
 }
-

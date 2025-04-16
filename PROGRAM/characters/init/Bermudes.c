@@ -1,12 +1,9 @@
-
 int CreateBermudesCharacters(int n)
 {
 	ref ch;
-	
 	///////////////////////////////////////////////////////////////////////////////
 	// ОСНОВНЫЕ ПЕРСОНАЖИ
 	///////////////////////////////////////////////////////////////////////////////
-		
 		makeref(ch,Characters[n]);			//Глава пиратов
 	ch.id		= "SharpPirateLead";
 	ch.name 	= "Karlos";
@@ -63,7 +60,6 @@ int CreateBermudesCharacters(int n)
 	LAi_SetHP(ch, 200.0, 200.0);
 	LAi_SetImmortal(ch, true);
 	n = n + 1;
-
 	makeref(ch,Characters[n]);		// ОФициантка
 	ch.id		= "Pirates_waitress";
 	ch.model	= "women_7";
@@ -80,7 +76,6 @@ int CreateBermudesCharacters(int n)
 	LAi_group_MoveCharacter(ch, "PIRATE_CITIZENS");
 	LAi_SetImmortal(ch, true);
 	n = n + 1;
-
 	makeref(ch,Characters[n]);			//Трактирщик
 	ch.id		= "Pirates_tavernkeeper";
 	ch.model	= "Tuerto";
@@ -100,7 +95,6 @@ int CreateBermudesCharacters(int n)
 	LAi_group_MoveCharacter(ch, "PIRATE_CITIZENS");
 	LAi_SetImmortal(ch, true);
 	n = n + 1;
-
 	makeref(ch,Characters[n]);			//Торговец
 	ch.id		= "Pirates_trader";
 	ch.name		= "Pascal";
@@ -125,7 +119,6 @@ int CreateBermudesCharacters(int n)
 	ch.from_sea   = "Pirates_town";
 	// настройка магазина <--
 	n = n + 1;
-
 	makeref(ch,Characters[n]);			//Корабел
 	ch.id		= "Pirates_shipyarder";
 	ch.model	= "Alexus";//"trader_15";
@@ -146,7 +139,6 @@ int CreateBermudesCharacters(int n)
 	LAi_group_MoveCharacter(ch, "PIRATE_CITIZENS");
 	LAi_SetImmortal(ch, true);
 	n = n + 1;
-
 	makeref(ch,Characters[n]);			// Норман
 	ch.id		= "Norman";
 	ch.name 	= "Abraham";
@@ -180,6 +172,5 @@ int CreateBermudesCharacters(int n)
 	LAi_group_MoveCharacter(ch, "PIRATE_CITIZENS");
 	//LAi_SetImmortal(ch, true);
 	n = n + 1;
-
 	return n;
 }

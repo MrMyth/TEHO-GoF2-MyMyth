@@ -1,7 +1,6 @@
 #define CHARACTER_NOTUSED_NAME	"Noname"
 #define BASE_CHARACTER_ONE 0
 #define BASE_CHARACTER_TWO 1
-
 #define MORALE_MAX  100
 #define MORALE_NORMAL   50
 #define MORALE_MIN      0
@@ -18,21 +17,16 @@
 #define MORALET_HEROIC		9	//Героическая
 string  MoraleTable[MORALE_TABLE_SIZE];
 string  LoyalityTable[MORALE_TABLE_SIZE];
-
 #define REPUTATION_MIN          1
 #define REPUTATION_NEUTRAL      45
 #define REPUTATION_MAX          90
-
 #define COMPLEX_REPUTATION_MIN		1
 #define COMPLEX_REPUTATION_MAX		100
 #define COMPLEX_REPUTATION_NEUTRAL	50 
-
 #define MAX_LOYALITY            35
-
 #define PASSENGERS_MAX	64
 #define PRISONER_MAX	20
 #define COMPANION_MAX	5
-
 // boal -->
 #define SKILL_MAX           100
 #define SKILL_MAX_TOTAL	    100 // делитель для скила для формул
@@ -54,7 +48,6 @@ string  LoyalityTable[MORALE_TABLE_SIZE];
 #define SKILL_GRAPPLING		"Grappling"
 #define SKILL_DEFENCE		"Defence"
 #define SKILL_SNEAK		    "Sneak"   //14
-
 // атрибуты
 #define SPECIAL_S	"Strength"   //15
 #define SPECIAL_P	"Perception"
@@ -63,11 +56,9 @@ string  LoyalityTable[MORALE_TABLE_SIZE];
 #define SPECIAL_I	"Intellect"
 #define SPECIAL_A	"Agility"
 #define SPECIAL_L	"Luck"  //21
-
 #define SPECIAL_TYPE	"SPECIAL"
 #define SKILL_TYPE	    "Skill"
 // boal <--
-
 #define KILL_BY_BALL		1
 #define KILL_BY_ABORDAGE	2
 #define KILL_BY_SPY			3

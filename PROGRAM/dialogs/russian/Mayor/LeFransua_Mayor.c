@@ -9,7 +9,6 @@ void ProcessCommonDialogEvent(ref NPChar, aref Link, aref NextDiag)
 			link.l1 = HeroStringReactionRepeat(RandPhraseSimple("I have changed my mind...", "Not now. Wrong place and time."), "True... But later, not now...",
                       "I'll ask... But a bit later...", "I am sorry, " + GetAddress_FormToNPC(NPChar) + "...", npchar, Dialog.CurrentNode);			  
 			link.l1.go = "exit";
-
 			if (CheckAttribute(pchar, "GenQuest.CaptainComission") && NPChar.city == pchar.GenQuest.CaptainComission.PiratesCity)
 			{
 				if(CheckAttribute(pchar,"GenQuest.CaptainComission.toMayor"))
@@ -35,14 +34,11 @@ void ProcessCommonDialogEvent(ref NPChar, aref Link, aref NextDiag)
 				link.l1.go = "Marginpassenger";
 			}
 		break;
-		
-		
 		case "CapComission1":
 			dialog.text = "Ha-ha. Do you think that I've got only one prisoner here? Name him.";
 			link.l1 = pchar.GenQuest.CaptainComission.SlaveName + ". Is he here?";
 			link.l1.go = "CapComission2";
 		break;
-
 		case "CapComission2":
 			if(CheckAttribute(pchar,"GenQuest.CaptainComission.DaysLeft"))
 			{
@@ -63,19 +59,16 @@ void ProcessCommonDialogEvent(ref NPChar, aref Link, aref NextDiag)
 				}	
 			}
 		break;
-		
 		case "CapComission2_1":
 			dialog.text = "You were too slow... And why do you care about him? I have been negotiating with his relatives only.";
 			link.l1 = "They have asked me to come here.";
 			link.l1.go = "CapComission2_11";
 		break;
-		
 		case "CapComission2_11":
 			dialog.text = "Well, you're late. I can do nothing.";
 			link.l1 = "Listen, for how much have you sold him if it's not a secret?"; 
 			link.l1.go = "CapComission2_12";
 		break;
-		
 		case "CapComission2_12":
 			dialog.text = "Eh, it's not. But I won't tell you... You will laugh if I tell. Ha-ha-ha-ha! Farewell.";
 			link.l1 = "See you.";
@@ -84,7 +77,6 @@ void ProcessCommonDialogEvent(ref NPChar, aref Link, aref NextDiag)
 			AddQuestUserData("CaptainComission1", "sName", ChangeNameCase(NAMETYPE_MAIN, pchar.GenQuest.CaptainComission.PirateName, NAME_NOM));
 			CaptainComission_GenerateManager();
 		break;
-		
 		case "CapComission2_2":
 			if(rand(1) == 0)
 			{
@@ -105,13 +97,11 @@ void ProcessCommonDialogEvent(ref NPChar, aref Link, aref NextDiag)
 				pchar.GenQuest.CaptainComission.RepeatSpeak = true;
 			}
 		break;
-
 		case "CapComission2_2_1":
 			dialog.text = "It's not the way how business works, you know... I don't need his death, I need to teach some people to avoid taking my part of a loot. But if he goes to feed the sharks, I won't be upset.";
 			link.l1 = "Why don't you send your own people for him?";
 			link.l1.go = "CapComission2_2_2";
 		break;
-		
 		case "CapComission2_2_2":
 			CaptainComission_GetRandomShore();
 			pchar.GenQuest.CaptainComission.ShipName1 = GenerateRandomNameToShip(sti(NPChar.nation));
@@ -121,7 +111,6 @@ void ProcessCommonDialogEvent(ref NPChar, aref Link, aref NextDiag)
 			link.l1 = "I do. How much time do I have?";
 			link.l1.go = "CapComission2_2_3";
 		break;
-		
 		case "CapComission2_2_3":
 			dialog.text = "12-15 days not more, it's important to me if they won't get to the stash, or it will be no sense to sink them with a valuable cargo. In that case, it would be better if they brought it here...";
 			link.l1 = "Fine, I am in. I'll try to catch them.";
@@ -138,13 +127,11 @@ void ProcessCommonDialogEvent(ref NPChar, aref Link, aref NextDiag)
 			SetFunctionTimerCondition("CaptainComission_PirateShipsOver", 0, 0, 15, false);	
 			pchar.GenQuest.CaptainComission.PirateShips = "goaway";	
 		break;
-		
 		case "CapComission2_3":
 			dialog.text = "Don't worry. My men will deliver him to your ship. And why do you care about him?";
 			link.l1 = "I don't. His relatives asked me to deliver him.";
 			link.l1.go = "CapComission2_31";
 		break;
-		
 		case "CapComission2_31":
 			dialog.text = "Ah, that's fine. I was almost sorry for giving such a low price for your man. Ha-ha-ha-ha. Farewell.";
 			link.l1 = "See you.";
@@ -156,7 +143,6 @@ void ProcessCommonDialogEvent(ref NPChar, aref Link, aref NextDiag)
 			addMoneyToCharacter(pchar, -150000);
 			AddDialogExitQuestFunction("CaptainComission_GeneratePassengerSlave");	
 		break;
-		
 		case "CapComission3":
 			dialog.text = "Well, " + GetFullName(pchar) + ", did you sink my buddy? He-he-he...";
 			if(pchar.GenQuest.CaptainComission.PirateShips == "goaway")
@@ -174,7 +160,6 @@ void ProcessCommonDialogEvent(ref NPChar, aref Link, aref NextDiag)
 			}	
 			DeleteAttribute(pchar,"GenQuest.CaptainComission.PirateShips");
 		break;
-		
 		case "CapComission4":
 			dialog.text = "Damn! Met them or didn't, it doesn't matter now! And what will be your next suggest?";
 			link.l1 = "Maybe you've got an easer job for me?";
@@ -182,7 +167,6 @@ void ProcessCommonDialogEvent(ref NPChar, aref Link, aref NextDiag)
 			link.l2 = "Listen, " + NPChar.name + ", bring down the price for the prisoner...";
 			link.l2.go = "CapComission4_2";
 		break;
-		
 		case "CapComission4_1":
 			dialog.text = "No.";
 			link.l1 = "Farewell then...";
@@ -195,7 +179,6 @@ void ProcessCommonDialogEvent(ref NPChar, aref Link, aref NextDiag)
 			AddQuestUserData("CaptainComission1", "sCharName", pchar.GenQuest.CaptainComission.Name);
 			DeleteAttribute(pchar,"GenQuest.CaptainComission.PirateShips");			
 		break;
-		
 		case "CapComission4_2":
 			dialog.text = "Bring down the price?! I've just lost my stash because of your slowness! And now I can rise up the price! You can take him for 200000 pesos if you want, or you can get the hell away";
 			link.l1 = "It's too expensive... Farewell...";
@@ -206,7 +189,6 @@ void ProcessCommonDialogEvent(ref NPChar, aref Link, aref NextDiag)
 				link.l2.go = "CapComission4_5";
 			}	
 		break;
-				
 		case "CapComission4_4":
 			ChangeCharacterComplexReputation(pchar,"nobility", -2);
 			AddQuestRecord("CaptainComission1", "28");
@@ -217,7 +199,6 @@ void ProcessCommonDialogEvent(ref NPChar, aref Link, aref NextDiag)
 			DeleteAttribute(pchar,"GenQuest.CaptainComission.PirateShips");
 			DialogExit();		
 		break;
-		
 		case "CapComission4_5":
 			dialog.text = "You can take this weakling...";
 			link.l1 = "Farewell.";
@@ -231,7 +212,6 @@ void ProcessCommonDialogEvent(ref NPChar, aref Link, aref NextDiag)
 			pchar.GenQuest.CaptainComission.SlaveAddMoney = true;
 			AddDialogExitQuestFunction("CaptainComission_GeneratePassengerSlave");	
 		break;
-				
 		case "CapComission5":
 			dialog.text = "Ho-ho! Well done! Take your weakling and good luck.";
 			link.l1 = "Thanks. Farewell.";
@@ -243,7 +223,6 @@ void ProcessCommonDialogEvent(ref NPChar, aref Link, aref NextDiag)
 			DeleteAttribute(pchar,"GenQuest.CaptainComission.PirateShips");
 			AddDialogExitQuestFunction("CaptainComission_GeneratePassengerSlave");
 		break;
-				
 		case "CapComission6":
 			dialog.text = "Have you brought money, Charles? I wasn't kidding about selling that man to planters";			
 			link.l1 = "Listen, "+ NPChar.name +", there is a problem... I don't have that much money. But I am ready to work.";
@@ -254,32 +233,27 @@ void ProcessCommonDialogEvent(ref NPChar, aref Link, aref NextDiag)
 				link.l2.go = "CapComission2_3";
 			}			
 		break;
-		
 		//Захват пассажиров
 		case "Marginpassenger":
 			dialog.text = "And why do you care about what I do? You know, you'd better go aw...";
 			link.l1 = "Tshh, calm down. I have a business for you. It's about your prisoner.";
 			link.l1.go = "Marginpassenger_1";
 		break;
-		
 		case "Marginpassenger_1":
 			dialog.text = "Ah, fine. Who do you want to ransom?";
 			link.l1 = "Wait. I am not here to buy out, I am here to offer you to buy a prisoner. Well, and you will have an opportunity to get a ransom for him.";
 			link.l1.go = "Marginpassenger_2";
 		break;
-		
 		case "Marginpassenger_2":
 			dialog.text = "Hm. And why do you need my agency? Why don't you want to get money directly for yourself?";
 			link.l1 = "It's quite risky to me. I may have problems with authorities.";
 			link.l1.go = "Marginpassenger_3";
 		break;
-		
 		case "Marginpassenger_3":
 			dialog.text = "Ha-h... fine then. Let's take a look. Who is your prisoner?";
 			link.l1 = "This is "+pchar.GenQuest.Marginpassenger.Text+" "+XI_ConvertString("Colony"+pchar.GenQuest.Marginpassenger.City+"Gen")+".";
 			link.l1.go = "Marginpassenger_4";
 		break;
-		
 		case "Marginpassenger_4":
 			int iTemp = makeint(sti(pchar.GenQuest.Marginpassenger.Dublon)*2*stf(pchar.GenQuest.Marginpassenger.Chance))*100;
 			dialog.text = "I see and it would be a fine trade if you are not lying. I suppose that I can pay you for this man "+iTemp+" pesos or give some interesting information instead. It's your choice.";
@@ -288,13 +262,11 @@ void ProcessCommonDialogEvent(ref NPChar, aref Link, aref NextDiag)
 			link.l2 = "Ha! Tell me more. I am sure that you'll give me an interesting information.";
 			link.l2.go = "Marginpassenger_offer";
 		break;
-		
 		case "Marginpassenger_money":
 			dialog.text = "Money then. Take them. Now, it's not your problem. Deliver the subject of sale here.";
 			link.l1 = "He has to be near the town's gates already. Thanks! You have really helped me.";
 			link.l1.go = "Marginpassenger_money_1";
 		break;
-		
 		case "Marginpassenger_money_1":
 			iTemp = makeint(sti(pchar.GenQuest.Marginpassenger.Dublon)*2*stf(pchar.GenQuest.Marginpassenger.Chance))*100;
 			dialog.text = "You're welcome, bring me more... See you!";
@@ -309,7 +281,6 @@ void ProcessCommonDialogEvent(ref NPChar, aref Link, aref NextDiag)
 			CloseQuestHeader("Marginpassenger");
 			DeleteAttribute(Pchar, "GenQuest.Marginpassenger");
 		break;
-		
 		case "Marginpassenger_offer":
 			pchar.GenQuest.Marginpassenger.Goods = GOOD_EBONY + rand(makeint(GOOD_SANDAL - GOOD_EBONY));
 			pchar.GenQuest.Marginpassenger.GoodsQty = 200+rand(10)*10;
@@ -322,7 +293,6 @@ void ProcessCommonDialogEvent(ref NPChar, aref Link, aref NextDiag)
 					link.l1 = "Thanks! The wood will be a nice compensation for my troubles. And my passenger has to be near the town's gates already. He will be brought to you.";
 					link.l1.go = "Marginpassenger_offer_1";
 				break;
-				
 				case 1: //просто кораблик
 					SelectSouthcity();
 					pchar.GenQuest.Marginpassenger.ShipName1 = GenerateRandomNameToShip(SPAIN);
@@ -336,7 +306,6 @@ void ProcessCommonDialogEvent(ref NPChar, aref Link, aref NextDiag)
 			sld.lifeday = 0;
 			pchar.GenQuest.Marginpassenger = "final";
 		break;
-		
 		case "Marginpassenger_offer_1":
 			DialogExit();
 			AddQuestRecord("Marginpassenger", "13");
@@ -346,7 +315,6 @@ void ProcessCommonDialogEvent(ref NPChar, aref Link, aref NextDiag)
 			pchar.quest.Marginpassenger.win_condition.l1.location = pchar.GenQuest.Marginpassenger.Shore;
 			pchar.quest.Marginpassenger.function = "Marginpassenger_Southshore";
 		break;
-		
 		case "Marginpassenger_offer_2":
 			DialogExit();
 			AddQuestRecord("Marginpassenger", "16");
@@ -358,7 +326,6 @@ void ProcessCommonDialogEvent(ref NPChar, aref Link, aref NextDiag)
 	}
 	UnloadSegment(NPChar.FileDialog2);  // если где-то выход внутри switch  по return не забыть сделать анлод
 }
-
 void SelectSouthshore()
 {
 	switch (rand(6))
@@ -372,7 +339,6 @@ void SelectSouthshore()
 		case 6: pchar.GenQuest.Marginpassenger.Shore = "shore19"; break;
 	}
 }
-
 void SelectSouthcity()
 {
 	switch (drand(2))
@@ -381,12 +347,10 @@ void SelectSouthcity()
 			pchar.GenQuest.Marginpassenger.Southcity = "Maracaibo";
 			pchar.GenQuest.Marginpassenger.Southcity1 = "Havana"; 
 		break;
-		
 		case 1:
 			pchar.GenQuest.Marginpassenger.Southcity = "Cartahena";
 			pchar.GenQuest.Marginpassenger.Southcity1 = "Santiago"; 
 		break;
-		
 		case 2:
 			pchar.GenQuest.Marginpassenger.Southcity = "Portobello";
 			pchar.GenQuest.Marginpassenger.Southcity1 = "Santodomingo"; 

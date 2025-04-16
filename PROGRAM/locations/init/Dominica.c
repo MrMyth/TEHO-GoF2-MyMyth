@@ -1,10 +1,8 @@
-
 int LocationInitDominica(int n)
 {
 	//////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 	// Остров Доминика
 	//////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
-
 	//////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 	// мыс Скотс Хед
 	//////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
@@ -26,31 +24,25 @@ int LocationInitDominica(int n)
 	locations[n].models.always.shore11.sea_reflection = 1;
 	Locations[n].models.always.shore11seabed = "sandshore_sb";
 	Locations[n].models.always.locators = "sandshore_locators";
-	
 	Locations[n].models.always.shore11_quest = "sandshore_quest";
 	locations[n].models.always.shore11_quest.sea_reflection = 1;
 	Locations[n].models.always.shore11_quest_seabed = "sandshorequest_sb";
-	
 	Locations[n].models.always.grassPatch = "sandshore_grass";
 	Locations[n].models.always.grassPatch.texture = "grass\grassshore.tga.tx";
-	
 	Locations[n].models.always.l1 = "plan1";
 	Locations[n].models.always.l1.level = 9;
 	Locations[n].models.always.l1.tech = "LocationModelBlend";
 	locations[n].models.always.l1.sea_reflection = 1;
-	
 	Locations[n].models.always.Waterfall1 = "WaterFall1";
 	Locations[n].models.always.Waterfall1.uvslide.v0 = 0.2;
     Locations[n].models.always.Waterfall1.uvslide.v1 = 0.0;
 	Locations[n].models.always.Waterfall1.tech = "LocationWaterFall";
 	Locations[n].models.always.Waterfall1.level = 50;
-	
 	Locations[n].models.always.Waterfall2 = "WaterFall2";
 	Locations[n].models.always.Waterfall2.uvslide.v0 = 0.3;
     Locations[n].models.always.Waterfall2.uvslide.v1 = 0.0;
 	Locations[n].models.always.Waterfall2.tech = "LocationWaterFall";
 	Locations[n].models.always.Waterfall2.level = 49;
-		
 	//Day
 	locations[n].models.day.charactersPatch = "sandshore_patch";
 	//Night
@@ -58,7 +50,6 @@ int LocationInitDominica(int n)
 	// Jump patch
 	Locations[n].models.day.jumpPatch = "sandshore_jump_patch";
 	Locations[n].models.night.jumpPatch = "sandshore_jump_patch";
-	
 	Locations[n].animals = "true";
 	Locations[n].heaters_night_only = 1;
 	//Environment
@@ -71,21 +62,18 @@ int LocationInitDominica(int n)
 	locations[n].reload.l1.autoreload = "1";
 	locations[n].reload.l1.label = "Jungle";
 	locations[n].locators_radius.reload.reload2_back = 2;
-
 	locations[n].reload.l2.name = "boat";
 	locations[n].reload.l2.go = "Dominica";
 	locations[n].reload.l2.emerge = "reload_1";
 	locations[n].reload.l2.autoreload = "0";
 	locations[n].reload.l2.label = "Sea";
     locations[n].locators_radius.reload.boat = 6.0;
-	
 	locations[n].reload.l3.name = "reload3_back";
 	locations[n].reload.l3.go = "Dominica_GrotS";
 	locations[n].reload.l3.emerge = "reload1";
 	locations[n].reload.l3.autoreload = "0";
 	locations[n].reload.l3.label = "Grot";
 	locations[n].locators_radius.reload.reload3_back = 2;
-	
 	n = n + 1;
 	//////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 	// Джунгли
@@ -128,14 +116,12 @@ int LocationInitDominica(int n)
 	locations[n].reload.l1.autoreload = "1";
 	locations[n].reload.l1.label = "Shore27";
 	locations[n].locators_radius.reload.reload1_back = 2;
-
 	locations[n].reload.l2.name = "reload2_back";
 	locations[n].reload.l2.go = "Dominica_Jungle_02";
 	locations[n].reload.l2.emerge = "reload1";
 	locations[n].reload.l2.autoreload = "1";
 	locations[n].reload.l2.label = "jungle";
     locations[n].locators_radius.reload.reload2_back = 2;
-
 	locations[n].reload.l3.name = "reload3_back";
 	locations[n].reload.l3.go = "Dominica_CaveEntrance";
 	locations[n].reload.l3.emerge = "reload2";
@@ -179,21 +165,18 @@ int LocationInitDominica(int n)
 	locations[n].environment.weather = "true";
 	locations[n].environment.sea = "false";
 	//Reload map
-
 	locations[n].reload.l1.name = "reload1_back";
 	locations[n].reload.l1.go = "Dominica_Jungle_01";
 	locations[n].reload.l1.emerge = "reload2";
 	locations[n].reload.l1.autoreload = "1";
 	locations[n].reload.l1.label = "Jungle";
 	locations[n].locators_radius.reload.reload1_back = 2;
-
 	locations[n].reload.l2.name = "reload2_back";
 	locations[n].reload.l2.go = "Indian_town";
 	locations[n].reload.l2.emerge = "reload1";
 	locations[n].reload.l2.autoreload = "1";
 	locations[n].reload.l2.label = "Village";
 	locations[n].locators_radius.reload.reload2_back = 2;
-
 	locations[n].reload.l3.name = "reload3_back";
 	locations[n].reload.l3.go = "Shore26";
 	locations[n].reload.l3.emerge = "reload1";
@@ -201,7 +184,6 @@ int LocationInitDominica(int n)
 	locations[n].reload.l3.label = "Shore26";
 	locations[n].locators_radius.reload.reload3_back = 2;
 	locations[n].locators_radius.item.dolly3 = 1.0;
-
 	n = n + 1;
 	//////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 	// Деревня карибов
@@ -229,7 +211,6 @@ int LocationInitDominica(int n)
 	Locations[n].models.always.l3 = "plan3";
 	Locations[n].models.always.l3.level = 7;
 	Locations[n].models.always.l3.tech = "LocationModelBlend";	
-
 	//Day
 	locations[n].models.day.charactersPatch = "village_patch";
 	//Night
@@ -237,7 +218,6 @@ int LocationInitDominica(int n)
 	//Environment
 	locations[n].environment.weather = "true";
 	locations[n].environment.sea = "false";
-	
 	//Reload map	
 	Locations[n].reload.l1.name = "reload1_back";
 	Locations[n].reload.l1.go = "Dominica_Jungle_02";
@@ -245,27 +225,22 @@ int LocationInitDominica(int n)
 	Locations[n].reload.l1.label = "Jungle";
 	Locations[n].reload.l1.autoreload = 1;
 	Locations[n].locators_radius.reload.reload1_back = 2;
-	
 	Locations[n].reload.l2.name = "reload2";
 	Locations[n].reload.l2.go = "IndianlTown_shack1";
 	Locations[n].reload.l2.emerge = "reload1";
 	Locations[n].reload.l2.label = "shack";
 	Locations[n].reload.l2.autoreload = "0";
-	
 	Locations[n].reload.l3.name = "reload3";
 	Locations[n].reload.l3.go = "IndianlTown_shack2";
 	Locations[n].reload.l3.emerge = "reload1";
 	Locations[n].reload.l3.label = "shack";
 	Locations[n].reload.l3.autoreload = "0";
-	
 	Locations[n].reload.l4.name = "reload4";
 	Locations[n].reload.l4.go = "IndianlTown_shack3";
 	Locations[n].reload.l4.emerge = "reload1";
 	Locations[n].reload.l4.label = "shack";
 	Locations[n].reload.l4.autoreload = "0";
-
 	n = n + 1;
-	
 	//////////////////////////////////////////////////////////////////////////////////////////////////
 	//// хижина №1 - большая
 	/////////////////////////////////////////////////////////////////////////////////////////////////
@@ -284,7 +259,6 @@ int LocationInitDominica(int n)
 	locations[n].models.always.Hut_1_inside = "Hut_1_inside";
 	locations[n].models.always.Hut_1_inside.level = 65538;
 	Locations[n].models.always.locators = "Hut_1_inside_locators";
-
 	locations[n].models.always.back = "..\inside_back2";
 	locations[n].models.always.back.level = 65529;
 	//Day
@@ -300,9 +274,7 @@ int LocationInitDominica(int n)
 	locations[n].reload.l1.emerge = "reload2";
 	locations[n].reload.l1.autoreload = "0";
 	locations[n].reload.l1.label = "Street";
-	
 	n = n + 1;
-	
 	//////////////////////////////////////////////////////////////////////////////////////////////////
 	//// хижина №2
 	/////////////////////////////////////////////////////////////////////////////////////////////////
@@ -323,7 +295,6 @@ int LocationInitDominica(int n)
 	//locations[n].models.day.locators = "Hut_2_inside_locators";
 	//locations[n].models.night.locators = "Hut_2_inside_ln";
 	Locations[n].models.always.locators = "Hut_2_inside_locators";
-
 	locations[n].models.always.Hut_2_back = "Hut_2_back";
 	locations[n].models.always.Hut_2_back.level = 65538; 
 	locations[n].models.always.back = "..\inside_back2";
@@ -342,9 +313,7 @@ int LocationInitDominica(int n)
 	locations[n].reload.l1.emerge = "reload3";
 	locations[n].reload.l1.autoreload = "0";
 	locations[n].reload.l1.label = "Street";
-	
 	n = n + 1;
-	
 	//////////////////////////////////////////////////////////////////////////////////////////////////
 	//// хижина №3
 	/////////////////////////////////////////////////////////////////////////////////////////////////
@@ -365,7 +334,6 @@ int LocationInitDominica(int n)
 	//locations[n].models.day.locators = "Hut_2_inside_locators";
 	//locations[n].models.night.locators = "Hut_2_inside_ln";
 	Locations[n].models.always.locators = "Hut_2_inside_locators";
-
 	locations[n].models.always.Hut_2_back = "Hut_2_back";
 	locations[n].models.always.Hut_2_back.level = 65538; 
 	locations[n].models.always.back = "..\inside_back2";
@@ -384,7 +352,6 @@ int LocationInitDominica(int n)
 	locations[n].reload.l1.emerge = "reload4";
 	locations[n].reload.l1.autoreload = "0";
 	locations[n].reload.l1.label = "Street";
-	
 	n = n + 1;
 	//////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 	// пляж Касл-Брус
@@ -424,14 +391,12 @@ int LocationInitDominica(int n)
 	locations[n].environment.weather = "true";
 	locations[n].environment.sea = "true";
 	//Reload map
-	
 	locations[n].reload.l1.name = "reload1_back";
 	locations[n].reload.l1.go = "Dominica_Jungle_02";
 	locations[n].reload.l1.emerge = "reload3";
 	locations[n].reload.l1.autoreload = "1";
 	locations[n].reload.l1.label = "Jungle";
 	locations[n].locators_radius.reload.reload1_back = 2;
-
 	locations[n].reload.l2.name = "boat";
 	locations[n].reload.l2.go = "Dominica";
 	locations[n].reload.l2.emerge = "reload_2";
@@ -439,7 +404,6 @@ int LocationInitDominica(int n)
 	locations[n].reload.l2.label = "Sea";
     locations[n].locators_radius.reload.boat = 9.0;
 	n = n + 1;
-
 	//////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 	// Вход в грот
 	//////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
@@ -481,7 +445,6 @@ int LocationInitDominica(int n)
 	locations[n].reload.l1.autoreload = "0";
 	locations[n].reload.l1.label = "Grot";
 	locations[n].locators_radius.reload.reload1_back = 1.3;
-
 	locations[n].reload.l2.name = "reload2_back";
 	locations[n].reload.l2.go = "Dominica_Jungle_01";
 	locations[n].reload.l2.emerge = "reload3";
@@ -489,7 +452,6 @@ int LocationInitDominica(int n)
 	locations[n].reload.l2.label = "Jungle";
 	locations[n].locators_radius.reload.reload2_back = 2.0;
 	n = n + 1;
-
 	//////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 	// Грот
 	//////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
@@ -509,7 +471,6 @@ int LocationInitDominica(int n)
 	Locations[n].models.always.grotto2alpha.tech = "LocationWindows";	
 	locations[n].models.always.grotto2alpha.level = 65532;	
 	locations[n].models.always.locators = "grotto2_locators";	
-
 	locations[n].locators_radius.item.duhi1 = 0.0;
 /*	
 	Locations[n].models.always.rays = "grotto2_rays";
@@ -534,6 +495,5 @@ int LocationInitDominica(int n)
 	locations[n].reload.l1.label = "Cave entrance";
 	locations[n].locators_radius.reload.reload1_back = 2;
 	n = n + 1;
-
 	return n;
 }

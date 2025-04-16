@@ -1,6 +1,4 @@
-
 //Подключённые шаблоны для интелекта
-
 //Игрок
 #include "Loc_ai\templates\LAi_player.c"
 //Стояние

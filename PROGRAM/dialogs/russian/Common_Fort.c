@@ -3,13 +3,10 @@ void ProcessDialogEvent()
 {
 	ref NPChar;
 	aref Link, NextDiag;	
-
 	DeleteAttribute(&Dialog,"Links");
-
 	makeref(NPChar,CharacterRef);
 	makearef(Link, Dialog.Links);
 	makearef(NextDiag, NPChar.Dialog);
-
     // вызов диалога по городам -->
     NPChar.FileDialog2 = "DIALOGS\" + LanguageGetLanguage() + "\Fort\" + NPChar.City + "_Fort.c";
     if (LoadSegment(NPChar.FileDialog2))
@@ -34,7 +31,6 @@ void ProcessDialogEvent()
 			NextDiag.CurrentNode = NextDiag.TempNode;
 			DialogExit();
 		break;
-		
 		case "fight":
 			DialogExit();
 			NextDiag.CurrentNode = NextDiag.TempNode;
@@ -42,7 +38,6 @@ void ProcessDialogEvent()
 			if (rand(3) != 1) SetNationRelation2MainCharacter(sti(npchar.nation), RELATION_ENEMY);
 			AddDialogExitQuest("MainHeroFightModeOn");
 		break;
-		
 		case "First time":			
             NextDiag.TempNode = "First time";
 			if (GetNationRelation2MainCharacter(sti(NPChar.nation)) == RELATION_ENEMY && sti(NPChar.nation) != PIRATE)
@@ -106,61 +101,51 @@ void ProcessDialogEvent()
 									link.l1 = "And here, my friend, you can feast your eyes upon charming ladies, you won't see them at sea.";
 									link.l1.go = "exit";
 								break;
-
 								case 1:
 									dialog.text = "Captain, what have we done to deserve this?! We aren't land rats, are we?";
 									link.l1 = "Quiet, sailor! Your post is very important and honorary one, so quit your whining.";
 									link.l1.go = "exit";
 								break;
-
 								case 2:
 									dialog.text = "What's up with the sea, captain? Will we ever see it again?";
 									link.l1 = "But of course, sailor! Once you are relieved from duty, you can go to the pier and enjoy the sea as much as you like.";
 									link.l1.go = "exit";
 								break;
-
 								case 3:
 									dialog.text = "I want to complain, captain: every one of us is missing the sea. We're all totally fed up with this land duty!";
 									link.l1 = "I got tired from this whining! You've got enough rum here too! Serve wherein you were put by a captain! Or then somebody will be hanged like an example for others.";
 									link.l1.go = "exit";
 								break;
-
 								case 4:
 									dialog.text = "I'll tell you in confidence, captain, the new governor is a bribetaker and embezzler. But that's really none of my business...";
 									link.l1 = "Exactly, corsair. Your business is standing at your post and keeping order. And to hang the governor on the yardarm is my business. Good job!";
 									link.l1.go = "exit";
 								break;
-
 								case 5:
 									dialog.text = "Thank you for not forgetting about us, captain! We'd follow you through the fire and the water!";
 									link.l1 = "I know your type, crooks! All you really love is gold. There's a drunk party at the tavern tonight, I pay. Don't forget to show up.";
 									link.l1.go = "exit";
 								break;
-
 								case 6:
 									dialog.text = "Heh, captain! Just think about it, can a corsair really be a keeper of order?! It's been so long we've last been on the real business!";
 									link.l1 = "No time for relaxing, corsair! Enemy armadas are scouring the waters near our islands, and we must be ready for a bloodbath at any time.";
 									link.l1.go = "exit";
 								break;
-
 								case 7:
 									dialog.text = "Captain, I heard that the Crown had sent another squadron our way?";
 									link.l1 = "Of course, corsair. While we live, there will be no peace for us. And even in Hell we will be fighting devils!";
 									link.l1.go = "exit";
 								break;
-
 								case 8:
 									dialog.text = "Yo-ho-ho! Damn, that was a really strong booze yesterday, captain! It's a pity you weren't there.";
 									link.l1 = "Not a big deal, I'll make up for it. And I don't envy you, guys.";
 									link.l1.go = "exit";
 								break;
-
 								case 9:
 									dialog.text = "I'll tell you in confidence, captain, 'cause you've always treated us well, we had some good time with a really nice chick yesterday...";
 									link.l1 = "Heh, corsair, a noose is something you really need!";
 									link.l1.go = "exit";
 								break;
-
 								case 10:
 									dialog.text = "Cap! Please, relieve me from this cursed duty! I simply can't play the part of a keeper of order anymore.";
 									link.l1 = "Night watch on a ship is not easy as well. Friend, duty is duty, whatever and wherever it is.";
@@ -172,7 +157,6 @@ void ProcessDialogEvent()
 							break;
 						}
 					}
-					
 					//Jason --> мини-квест Дефицитный товар
 					if (!CheckAttribute(pchar, "questTemp.Sharlie.FastStart") && sti(pchar.rank) < 4 && !CheckAttribute(pchar, "questTemp.Wine") && npchar.location.group == "soldiers")
 					{// Addon 2016-1 Jason пиратская линейка
@@ -188,7 +172,6 @@ void ProcessDialogEvent()
 						}
 					}
 					// <-- мини-квест Дефицитный товар
-					
 					switch (rand(10))
 					{
 						case 0: ////////////////////////////////////////
@@ -196,61 +179,51 @@ void ProcessDialogEvent()
 							link.l1 = "Alright, alright...";
 							link.l1.go = "exit";
 						break;
-
 						case 1:
 							dialog.text = "Are you going to tell me about some suspicious activity?";
 							link.l1 = "No, none at all, and I am a captain, by the way. I see you're not listening anymore? Bye.";
 							link.l1.go = "exit";
 						break;
-
 						case 2: ///////////////////////////////////////////
 							dialog.text = "This is a military objective, so don't make too much noise here.";
 							link.l1 = "Alright, I'll keep that in mind.";
 							link.l1.go = "exit";
 						break;
-
 						case 3:
 							dialog.text = "Such fair weather, and I'm bound to stand here. There are girls at least in the town, and what do we have here? Only rats around.";
 							link.l1 = ""+ GetSexPhrase("I sympathize, but there's nothing I can do to help - it's your duty after all.","Hey! What's wrong with me? Am I not a girl?") +"";
 							link.l1.go = "exit";
 						break;
-
 						case 4: ///////////////////////////////////////////
 							dialog.text = "If you like talking, find someone else. I must keep order here, and I have no time for cheap talk.";
 							link.l1 = "Oh, no, I am just "+ GetSexPhrase("checking","checking") +", if you're still alive. You were standing just like a statue.";
 							link.l1.go = "exit";
 						break;
-
 						case 5: ////////////////////////////////////////////
 							dialog.text = "You probably think that garrison working days are a cakewalk? Absolutely not! It's a hard and important work. I remember once... ";
 							link.l1 = "You will tell me that story some other time. I am in a bit of hurry now.";
 							link.l1.go = "exit";
 						break;
-
 						case 6: ////////////////////////////////////////////
 							dialog.text = "Careful here, you're in a fort! Be quiet as a mouse!";
 							link.l1 = "As you say, soldier.";
 							link.l1.go = "exit";
 						break;
-
 						case 7:
 							dialog.text = "Hey! Do you have any water, by chance? I am dying of thirst.";
 							link.l1 = "No, buddy, keep your patience...";
 							link.l1.go = "exit";
 						break;
-
 						case 8://///////////////////////////////////////////
 							dialog.text = "How boring is the garrison life, only rednecks like you around! Now, the town garrison surely has better times...";
 							link.l1 = "And you are calling this 'being on duty'? This way you'll surely let a spy slip past you!";
 							link.l1.go = "exit";
 						break;
-
 						case 9://///////////////////////////////////////////
 							dialog.text = ""+ GetSexPhrase("You look like a strong guy, don't you? Would you like to sign up for duty at the fort's garrison? We have roomy barracks, two meals a day and booze for free.","Oh, young lady, you have no idea, how pleasant it is to meet such a nice damsel in this back of beyond!") +"";
 							link.l1 = ""+ GetSexPhrase("That's certainly tempting, but I still must refuse. All that barrack drill is just not for me.","Thank you for a compliment, soldier.") +".";
 							link.l1.go = "exit";
 						break;
-
 						case 10:
 							dialog.text = "This goddamn heat... I would gladly give up a half of my life to go back to Europe.";
 							link.l1 = "Yeah, I can see that your health is not fit for the local climate.";
@@ -262,14 +235,12 @@ void ProcessDialogEvent()
 				}
 			}
 		break;
-		
 		//Jason --> мини-квест Дефицитный товар
 		case "Wine_soldier":
 			dialog.text = "You see, I badly want some wine... But not the local swill made of rotten fruits, which sells for two pesos per barrel - I want a bottle of real European wine. You can get it in the town from merchants. It is quite expensive, but I will pay in full and will even add three hundred pesos on top of it. So, will you bring me some?";
 			link.l1 = "And why can't you get it by yourself? You won't need to overpay, just wait until you're relieved of your post and go for it. What's the catch?";
 			link.l1.go = "Wine_soldier_1";
 		break;
-		
 		case "Wine_soldier_1":
 			dialog.text = "There is no catch. I just can't leave the fort to go to the town until I get my leave, which is not going to happen anytime soon. Besides, our commander strictly banned all drinking in the fort, screw him! So, will you help a soldier?";
 			link.l1 = "Well, why not? I'll bring you that wine, I have some spare time anyway.";
@@ -277,7 +248,6 @@ void ProcessDialogEvent()
 			link.l2 = "I am sorry, buddy, but I can't do that. Look for someone else to help you.";
 			link.l2.go = "exit";
 		break;
-		
 		case "Wine_soldier_2":
 			dialog.text = "Great! Thank you very much! Today I am on watch, so come tomorrow. You'll find me on top of the fort, there you can slip me the bottle so no one takes notice...";
 			link.l1 = "Alright. Wait for me, I'll come see you tomorrow.";
@@ -293,7 +263,6 @@ void ProcessDialogEvent()
 			AddQuestRecord("Wine", "0");
 		break;
 		// <-- мини-квест Дефицитный товар
-		
 		//============================== ноды на разборки при распознавании =========================
 		case "PegYou":
 			dialog.text = RandPhraseSimple("It seems to me it's some trickery. Let's talk with the commandant, "+ GetSexPhrase("buddy","deary") +", and figure it all out...", "Hmm... Something tells me that you're not "+ GetSexPhrase("the one","the one") +", who you're pretending to be... Surrender your weapon " + GetAddress_Form(npchar) + ", and follow me for further investigation!");
@@ -360,7 +329,6 @@ void ProcessDialogEvent()
 				link.l1.go = "exit";
 			}
 		break;
-
 		//замечение по обнаженному оружию
 		case "SoldierNotBlade":
 			dialog.text = LinkRandPhrase("Why the hell are you running around with an unsheathed blade? Put away your weapon at once!", "I am ordering you to sheathe your weapon immediately!", "Hey, "+ GetSexPhrase("buddy","lass") +", stop scaring the folks! Sheathe your weapon.");

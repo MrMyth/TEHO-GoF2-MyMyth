@@ -3,13 +3,10 @@ void ProcessDialogEvent()
 	ref NPChar, sld;
 	aref Link, NextDiag;
 	string sLoc;
-
 	DeleteAttribute(&Dialog,"Links");
-
 	makeref(NPChar,CharacterRef);
 	makearef(Link, Dialog.Links);
 	makearef(NextDiag, NPChar.Dialog);
-
 	switch(Dialog.CurrentNode)
 	{
 		case "First time":
@@ -41,7 +38,6 @@ void ProcessDialogEvent()
 			}
 			NextDiag.TempNode = "First time";
 		break;
-		
 		case "meeting":
 			dialog.text = "As am I, senior. Will you have a look at my merchandise? I'm sure I have something that'll be of interest to you.";
 			link.l1 = "This is my first time here and I'd like to find out a little bit more about this settlement.";
@@ -49,13 +45,11 @@ void ProcessDialogEvent()
 			link.l2 = "Then show me what you have for sale.";
 			link.l2.go = "trade";
 		break;
-		
 		case "info":
 			dialog.text = "Our small town was built thanks to the golden mine. They mine there golden ore, silver and golden nuggets. Sometimes even gems. We used to have here only a garrison until friendly Indians and some white settlers joined us\nIgnacio Ortega has built a tavern and made our life a bit cheerier. All kinds of adventurers visit this place with a stupid intention to rob us. We don't have a court here, so their numbers went low after we had hanged several idiots right in the middle of the town\nGolden ore is being sent to the ships under protection of soldiers and friendly Indians, nuggets, however, you can buy right here, in this store\nBesides, I sometimes have very interesting minerals to offer, so visit me when you've got time, I always resupply my stock.";
 			link.l1 = "Thank you for the interesting story! I'll keep it in mind.";			
 			link.l1.go = "exit";
 		break;
-		
 		case "trade":
 			DialogExit();
 			if (!CheckAttribute(npchar, "trade_date") || GetNpcQuestPastDayParam(npchar, "trade_date") >= 10)
@@ -65,12 +59,10 @@ void ProcessDialogEvent()
 			}
 			LaunchItemsTrade(npchar, 0);
 		break;
-
  		case "Exit":
 			DialogExit();
 			NextDiag.CurrentNode = NextDiag.TempNode;
 		break;
-
 		// ============== Грабеж среди бела дня, попытка залезть в сундуки =========================
 		case "Man_FackYou":
 			dialog.text = LinkRandPhrase("Robbery in broad daylight!!! What's going on here?! Wait, hold on, pal...", "Hey, what are doing there?! Trying to rob me? Now you are screwed...", "Wait, what the hell are you doing? Turns out that you are a thief! Consider this the end of the line, bastard...");

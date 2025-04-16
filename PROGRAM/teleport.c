@@ -1,9 +1,7 @@
 int nTeleportShowData;
 object objTeleport;
-
 #event_handler("QuickTeleport","StartQuickTeleport");
 #event_handler(EVENT_LOCATION_LOAD,"WQuickTeleport");
-
 void InitTeleport()
 {
 	nTeleportShowData = 0;
@@ -13,12 +11,10 @@ void InitTeleport()
 	SetEventHandler("TeleportChoose","DoTeleportChoose",0);
 	SetEventHandler("TeleportStart","DoTeleportStart",0);
 }
-
 void DoTeleportStart()
 {
 	SetTeleportData(0);
 }
-
 void DoTeleportChoose()
 {
 	aref datRef,selRef;
@@ -27,9 +23,7 @@ void DoTeleportChoose()
 	ref rch = GetMainCharacter();
 	int n;
 	aref ar1,ar2;
-
 	ref tmp_chref;
-
 	switch(nTeleportShowData)
 	{
 	case 0:
@@ -96,12 +90,10 @@ void DoTeleportChoose()
 		}
 		DoReloadCharacterToLocation(tel_location_id,locatorGroup,locatorName);
 		break;
-
 	case 10:
 		tel_dialogFileName = objTeleport.data.(attrName);
 		SetTeleportData(11);
 		break;
-
 	case 11:
 		tel_dialogNodeName = objTeleport.data.(attrName);
 		n = GetCharacterIndex("DilogChecking");
@@ -125,15 +117,12 @@ void DoTeleportChoose()
 		break;
 	}
 }
-
 string tel_dialogFileName = "";
 string tel_dialogNodeName = "";
-
 int teleportType;
 string tel_location_id = "";
 string locatorGroup = "";
 string locatorName = "";
-
 void SetTeleportData(int tshowType)
 {
 	string attrName,locName;
@@ -141,13 +130,10 @@ void SetTeleportData(int tshowType)
 	int locationNum;
 	aref groupRef,locRef;
 	int i,n;
-
 	aref arList;
 	aref arData;
-
 	nTeleportShowData = tshowType;
 	DeleteAttribute(&objTeleport,"");
-
 	switch(tshowType)
 	{
 	case 0: // Выбор телепорт персонажа или корабля
@@ -238,17 +224,14 @@ void SetTeleportData(int tshowType)
 		}
 		break;
 	}
-
 	makearef(locRef,objTeleport.data);
 	SendMessage(&objTeleport,"la",42222,locRef);
 }
-
 void StartQuickTeleport()
 {
 	if(tel_location_id!="" && locatorGroup!="" && locatorName!="")
 		DoReloadCharacterToLocation(tel_location_id,locatorGroup,locatorName);
 }
-
 void WQuickTeleport()
 {
 	ref chref = GetMainCharacter();

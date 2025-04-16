@@ -1,7 +1,6 @@
 // диалог по городам
 void ProcessCommonDialogEvent(ref NPChar, aref Link, aref NextDiag)
 {
-
 	switch (Dialog.CurrentNode)
 	{
 		case "quests":
@@ -23,7 +22,6 @@ void ProcessCommonDialogEvent(ref NPChar, aref Link, aref NextDiag)
 				link.l1.go = "guardoftruth";
 			}
 		break;
-		
 		//Цена чахотки
 		case "Consumption":
 			dialog.text = "Oh, come off it, captain! I've just had two Juans in my store today, and another one yesterday. What, am I supposed to remember each one?";
@@ -31,7 +29,6 @@ void ProcessCommonDialogEvent(ref NPChar, aref Link, aref NextDiag)
 			link.l1.go = "exit";
 			npchar.quest.Consumption = "true";
 		break;
-		
 		case "guardoftruth":
 			dialog.text = "Oh, captain, I've had so many frigates and galleons come in and out of here in that time, Miguels and Carloses...";
 			link.l1 = "I see. So, you can't be of any help...";
@@ -41,4 +38,3 @@ void ProcessCommonDialogEvent(ref NPChar, aref Link, aref NextDiag)
 	}
 	UnloadSegment(NPChar.FileDialog2);
 }
-

@@ -1,12 +1,9 @@
-
 int CreateMartiniqueCharacters(int n)
 {
 	ref ch;
-	
 	///////////////////////////////////////////////////////////////////////////////
 	// ОСНОВНЫЕ ПЕРСОНАЖИ
 	///////////////////////////////////////////////////////////////////////////////
-
     // FortFrance -->
 	makeref(ch,Characters[n]);			//Губернатор
 	ch.id		= "FortFrance_Mayor";
@@ -35,7 +32,6 @@ int CreateMartiniqueCharacters(int n)
 	LAi_group_MoveCharacter(ch, "FRANCE_CITIZENS");
 	LAi_SetImmortal(ch, true);
 	n = n + 1;
-
 	makeref(ch,Characters[n]);			//Священик
 	ch.id		= "FortFrance_Priest";
 	ch.model	= "priest_4";
@@ -53,7 +49,6 @@ int CreateMartiniqueCharacters(int n)
 	LAi_group_MoveCharacter(ch, "FRANCE_CITIZENS");
 	LAi_SetImmortal(ch, true);
 	n = n + 1;
-
 	makeref(ch,Characters[n]);		// ОФициантка
 	ch.id		= "FortFrance_waitress";
 	ch.model	= "women_15";
@@ -70,7 +65,6 @@ int CreateMartiniqueCharacters(int n)
 	LAi_group_MoveCharacter(ch, "FRANCE_CITIZENS");
 	LAi_SetImmortal(ch, true);
 	n = n + 1;
-
 	makeref(ch,Characters[n]);			//Трактирщик
 	ch.id		= "FortFrance_tavernkeeper";
 	ch.model	= "barmen_8";
@@ -88,8 +82,6 @@ int CreateMartiniqueCharacters(int n)
 	LAi_group_MoveCharacter(ch, "FRANCE_CITIZENS");
 	LAi_SetImmortal(ch, true);
 	n = n + 1;
-
-
 	makeref(ch,Characters[n]);			//Торговец
 	ch.id		= "FortFrance_trader";
 	ch.model	= "trader_8";
@@ -107,7 +99,6 @@ int CreateMartiniqueCharacters(int n)
 	LAi_SetImmortal(ch, true);
 	ch.item_date = "";
 	n = n + 1;
-
 	makeref(ch,Characters[n]);			//Корабел
 	ch.id		= "FortFrance_shipyarder";
 	ch.model	= "shipowner_8";
@@ -132,7 +123,6 @@ int CreateMartiniqueCharacters(int n)
 	LAi_group_MoveCharacter(ch, "FRANCE_CITIZENS");
 	LAi_SetImmortal(ch, true);
 	n = n + 1;
-
 	makeref(ch,Characters[n]);			//Банкир
 	ch.id		= "FortFrance_usurer";
 	ch.model	= "banker_8_2";
@@ -154,7 +144,6 @@ int CreateMartiniqueCharacters(int n)
 	LAi_group_MoveCharacter(ch, "FRANCE_CITIZENS");
 	LAi_SetImmortal(ch, true);
 	n = n + 1;
-
 	makeref(ch,Characters[n]);			//Начальник порта
 	ch.id		= "FortFrance_PortMan";
 	ch.model	= "citiz_2";
@@ -171,7 +160,6 @@ int CreateMartiniqueCharacters(int n)
 	LAi_SetImmortal(ch, true);
 	ch.item_date = "";
 	n = n + 1;
-
 	makeref(ch,Characters[n]);			//Хозяйка борделя
 	ch.id		= "FortFrance_Hostess";
 	ch.name		= "Aurora"
@@ -190,7 +178,6 @@ int CreateMartiniqueCharacters(int n)
 	LAi_SetOwnerType(ch);
 	LAi_group_MoveCharacter(ch, "FRANCE_CITIZENS");
 	n = n + 1;
-
     makeref(ch,Characters[n]);
 	ch.name 	= "Smuggler";
 	ch.lastname = "";
@@ -207,9 +194,7 @@ int CreateMartiniqueCharacters(int n)
 	LAi_SetHP(ch, 80.0, 80.0);
 	ch.greeting = "smuggler";
 	n = n + 1;
-	
     //============== LeFransua ===============
-
 	makeref(ch,Characters[n]);			//Губернатор
 	ch.id		= "Barbazon";
 	ch.model	= "Barbazon";
@@ -236,7 +221,6 @@ int CreateMartiniqueCharacters(int n)
 	LAi_group_MoveCharacter(ch, "PIRATE_CITIZENS");
 	LAi_SetImmortal(ch, true);
 	n = n + 1;
-	
 	makeref(ch,Characters[n]);		// ОФициантка
 	ch.id		= "LeFransua_waitress";
 	ch.model	= "women_10";
@@ -253,7 +237,6 @@ int CreateMartiniqueCharacters(int n)
 	LAi_group_MoveCharacter(ch, "PIRATE_CITIZENS");
 	LAi_SetImmortal(ch, true);
 	n = n + 1;
-
 	makeref(ch,Characters[n]);			//Трактирщик
 	ch.id		= "LeFransua_tavernkeeper";
 	ch.model	= "barmen_13";
@@ -273,7 +256,6 @@ int CreateMartiniqueCharacters(int n)
 	LAi_group_MoveCharacter(ch, "PIRATE_CITIZENS");
 	LAi_SetImmortal(ch, true);
 	n = n + 1;
-	
 	makeref(ch,Characters[n]);			//Торговец
 	ch.id		= "LeFransua_trader";
 	ch.model	= "trader_13_1";
@@ -293,6 +275,5 @@ int CreateMartiniqueCharacters(int n)
 	LAi_SetImmortal(ch, true);
 	ch.item_date = "";
 	n = n + 1;
-
 	return n;
 }

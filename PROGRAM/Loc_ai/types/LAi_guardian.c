@@ -1,18 +1,12 @@
 /*
 Тип: охраник
-
 	Используемые шаблоны:
 		stay
 		talk
 		fight		
 		goto
 */
-
-
-
 #define LAI_TYPE_GUARDIAN	"guardian"
-
-
 //Инициализация
 void LAi_type_guardian_Init(aref chr)
 {
@@ -62,7 +56,6 @@ void LAi_type_guardian_Init(aref chr)
 	chr.chr_ai.type.group = chr.location.group;
 	chr.chr_ai.type.locator = chr.location.locator;
 }
-
 //Процессирование типа персонажа
 void LAi_type_guardian_CharacterUpdate(aref chr, float dltTime)
 {
@@ -72,7 +65,6 @@ void LAi_type_guardian_CharacterUpdate(aref chr, float dltTime)
 	makearef(type, chr.chr_ai.type);
 	//Режим ожидания
 	if(type.wait != "") return;
-	
     // boal  лечимся -->
 	float fCheck = stf(chr.chr_ai.type.bottle) - dltTime;
 	if(fCheck < 0)
@@ -93,7 +85,6 @@ void LAi_type_guardian_CharacterUpdate(aref chr, float dltTime)
 	}
 	else chr.chr_ai.type.bottle = fCheck;
 	// boal  лечимся <--
-	
 	//Нормальная работа
 	string tmpl = chr.chr_ai.tmpl;
 	if(tmpl == LAI_TMPL_DIALOG) return;
@@ -220,32 +211,26 @@ void LAi_type_guardian_CharacterUpdate(aref chr, float dltTime)
 		}
 	}
 }
-
 //Загрузка персонажа в локацию
 bool LAi_type_guardian_CharacterLogin(aref chr)
 {
 	return true;
 }
-
 //Выгрузка персонажа из локацию
 bool LAi_type_guardian_CharacterLogoff(aref chr)
 {
 	return true;
 }
-
 //Завершение работы темплейта
 void LAi_type_guardian_TemplateComplite(aref chr, string tmpl)
 {
 	LAi_tmpl_stay_InitTemplate(chr);
 	CharacterTurnByLoc(chr, chr.chr_ai.type.group, chr.chr_ai.type.locator);
 }
-
-
 //Сообщить о желании завести диалог
 void LAi_type_guardian_NeedDialog(aref chr, aref by)
 {
 }
-
 //Запрос на диалог, если возвратить true то в этот момент можно начать диалог
 bool LAi_type_guardian_CanDialog(aref chr, aref by)
 {
@@ -264,7 +249,6 @@ bool LAi_type_guardian_CanDialog(aref chr, aref by)
 	}
 	return false;
 }
-
 //Начать диалог
 void LAi_type_guardian_StartDialog(aref chr, aref by)
 {
@@ -273,20 +257,16 @@ void LAi_type_guardian_StartDialog(aref chr, aref by)
 	CharacterTurnByChr(chr, by);
 	LAi_tmpl_SetActivatedDialog(chr, by);
 }
-
 //Закончить диалог
 void LAi_type_guardian_EndDialog(aref chr, aref by)
 {
 	LAi_tmpl_stay_InitTemplate(chr);
 	LAi_CharacterRestoreAy(chr);
 }
-
 //Персонаж выстрелил
 void LAi_type_guardian_Fire(aref chr, aref enemy, float kDist, bool isFindedEnemy)
 {
-
 }
-
 //Персонаж атакован
 void LAi_type_guardian_Attacked(aref chr, aref by)
 {
@@ -300,7 +280,6 @@ void LAi_type_guardian_Attacked(aref chr, aref by)
 	if(!LAi_group_IsEnemy(chr, by)) return;
     //boal fix ai -->
     float dist = -1.0;
-	
 	if(!GetCharacterDistByChr3D(chr, by, &dist)) return;
 	if(dist < 0.0) return;
 	if(dist > 20.0) return;
@@ -309,19 +288,15 @@ void LAi_type_guardian_Attacked(aref chr, aref by)
     // boal <--
 	if (rand(100) > 90)	LAi_CharacterPlaySound(chr, "warrior");
 }
-
-
 //------------------------------------------------------------------------------------------
 //Внутреннии функции
 //------------------------------------------------------------------------------------------
-
 void LAi_type_guardian_CmdAttack(aref chr)
 {
 	chr.chr_ai.type.wait = "attack";
 	PostEvent("Event_type_guardian_Attacked", rand(5)*100, "i", chr);
 	if (rand(100) > 80 && !LAi_IsDead(chr) && !LAi_IsDead(pchar))	LAi_CharacterPlaySound(chr, "warrior");
 }
-
 #event_handler("Event_type_guardian_Attacked", "LAi_type_guardian_CmdAttack_Event");
 void LAi_type_guardian_CmdAttack_Event()
 {
@@ -332,7 +307,6 @@ void LAi_type_guardian_CmdAttack_Event()
 	int trg = sti(chr.chr_ai.type.enemy);
 	LAi_type_guardian_CmdAttack_Now(chr, trg);
 }
-
 bool LAi_type_guardian_CmdAttack_Now(aref chr, int trg)
 {
 	if(trg < 0)
@@ -350,14 +324,12 @@ bool LAi_type_guardian_CmdAttack_Now(aref chr, int trg)
 	if (rand(100) > 90 && !LAi_IsDead(chr) && !LAi_IsDead(pchar)) LAi_CharacterPlaySound(chr, "warrior");
 	return true;
 }
-
 void LAi_type_guardian_Return(aref chr)
 {
 	chr.chr_ai.type.wait = "return";
 	chr.chr_ai.type.enemy = "";
 	PostEvent("Event_type_guardian_Return", rand(10)*100, "i", chr);
 }
-
 #event_handler("Event_type_guardian_Return", "LAi_type_guardian_Return_Event");
 void LAi_type_guardian_Return_Event()
 {
@@ -368,7 +340,6 @@ void LAi_type_guardian_Return_Event()
 	LAi_tmpl_runto_InitTemplate(chr);
 	LAi_tmpl_runto_SetLocator(chr, chr.chr_ai.type.group, chr.chr_ai.type.locator, -1.0);
 }
-
 //Проверить персонажа с заданной вероятностью
 void LAi_type_guardian_TestControl(aref chr)
 {

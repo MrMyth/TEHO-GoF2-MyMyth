@@ -14,27 +14,21 @@ void ProcessCommonDialogEvent(ref NPChar, aref Link, aref NextDiag)
                 link.l1.go = "guardoftruth";
 			}
 		break;
-		
 		case "guardoftruth":
 			dialog.text = "'Admirable'? Galleon? I remember it. We have chartered it to deliver paprika to Bridgetown on Barbados. Something happened?";
 			link.l1 = "No, but Gaius is my friend and I am looking forward to meet him.";
 			link.l1.go = "guardoftruth_1";
 		break;
-		
 		case "guardoftruth_1":
 			dialog.text = "Then sail to Barbados. But I doubt that you will find him there, it was long ago. At least you can ask the local harbor master to help you.";
 			link.l1 = "Thanks! Then I should go.";
 			link.l1.go = "guardoftruth_2";
 		break;
-		
 		case "guardoftruth_2":
 			DialogExit();
 			AddQuestRecord("Guardoftruth", "12");
 			pchar.questTemp.Guardoftruth = "barbados";
 		break;
-
 	}
 	UnloadSegment(NPChar.FileDialog2);  // если где-то выход внутри switch  по return не забыть сделать анлод
 }
-
-

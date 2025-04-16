@@ -2,13 +2,10 @@ void ProcessDialogEvent()
 {
 	ref NPChar;
 	aref Link, NextDiag;
-
 	DeleteAttribute(&Dialog,"Links");
-
 	makeref(NPChar,CharacterRef);
 	makearef(Link, Dialog.Links);
 	makearef(NextDiag, NPChar.Dialog);
-	
 	switch(Dialog.CurrentNode)
 	{
 		case "First time":
@@ -16,12 +13,10 @@ void ProcessDialogEvent()
 			link.l1 = "Hm, I see.";
 			link.l1.go = "exit";
 		break;
-
 		case "Exit":
 			NextDiag.CurrentNode = NextDiag.TempNode;
 			DialogExit();
 		break;
-
 		case "zpq_sld2":
 			dialog.text = "Just a minute, senor, are you "+ GetFullName (pchar) +"?";
 			link.l1 = "Yes.. How can I help you??";
@@ -73,13 +68,11 @@ void ProcessDialogEvent()
 		case "zpq_sld2_5":
 			LAi_LocationFightDisable(loadedLocation, false);
 			LAi_SetFightMode(PChar, true);
-
 			LAi_group_SetRelation("EnemyFight", LAI_GROUP_PLAYER, LAI_GROUP_ENEMY);
 			LAi_group_FightGroups("EnemyFight", LAI_GROUP_PLAYER, true);
 			DialogExit();	
 			AddDialogExitQuest("MainHeroFightModeOn");
 			AddQuestRecord("zpq", "7");
-
 			pchar.quest.zpq_seaBattle.win_condition.l1 = "location";
 			pchar.quest.zpq_seaBattle.win_condition.l1.location = "Cumana";
 			pchar.quest.zpq_seaBattle.function = "zpq_seaBattle";
@@ -97,9 +90,7 @@ void ProcessDialogEvent()
 			DialogExit();
 			LAi_LocationFightDisable(loadedLocation, false);
 			for(int i = 1; i <= 3; i++)
-
 			{
-
 				sld = CharacterFromID("qp2_" +i);
 				LAi_SetImmortal(sld, true);
 				LAi_type_actor_Reset(sld);
@@ -108,8 +99,3 @@ void ProcessDialogEvent()
 		break;
 	}
 }
-
-
-
-
-

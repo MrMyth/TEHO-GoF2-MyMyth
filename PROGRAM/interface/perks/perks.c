@@ -1,10 +1,6 @@
-
 #event_handler("evntChrPerkDelay","procChrPerkDelay");
-
 object ChrPerksList;
-
 extern void extrnInitPerks();
-
 void InitPerks()
 {
 	if( LoadSegment("interface\perks\perks_init.c") )
@@ -13,13 +9,11 @@ void InitPerks()
 		UnloadSegment("interface\perks\perks_init.c");
 	}
 }
-
 bool CheckCharacterPerk(ref chref, string perkName)
 {
 	if( CheckAttribute(chref,"perks.list."+perkName) ) return true;
 	return false;
 }
-
 bool SetCharacterPerk(ref chref, string perkName)
 {
 	chref.perks.list.(perkName) = true;
@@ -30,12 +24,10 @@ bool SetCharacterPerk(ref chref, string perkName)
 			LAi_SetHP(chref, LAi_GetCharacterHP(chref) + 20, LAi_GetCharacterMaxHP(chref) + 20);
 			return true; // нужен рефрешь	
 		break;
-		
 		case "EnergyPlus":
 			SetEnergyToCharacter(chref);
 			return true; // нужен рефрешь		
 		break; */
-		
 		case "Grus":
 			return true; // нужен рефрешь
 		break;
@@ -43,7 +35,6 @@ bool SetCharacterPerk(ref chref, string perkName)
 	// разовые применения при назначении <--
 	return false; // нужен рефрешь
 }
-
 void ActivateCharacterPerk(ref chref, string perkName)
 {
 	if( !CheckAttribute(&ChrPerksList,"list."+perkName) )
@@ -51,10 +42,8 @@ void ActivateCharacterPerk(ref chref, string perkName)
 		trace("Invalid perk name - " + perkName);
 		return;
 	}
-
 	int timeDelay = 0;
 	int timeDuration = 0;
-
 	if( CheckAttribute(&ChrPerksList,"list."+perkName+".TimeDuration") )
 	{	timeDelay = sti(ChrPerksList.list.(perkName).TimeDuration);
 		timeDuration = timeDelay;
@@ -65,11 +54,9 @@ void ActivateCharacterPerk(ref chref, string perkName)
 	}
     // boal fix
     // иначе после применения давался ГГ
-	
     int cn;
     if (!CheckCharacterPerk(chref, perkName))
     {
-
         cn = GetOfficersPerkUsingIdx(chref, perkName);
         if (cn != -1)
         chref = GetCharacter(cn);
@@ -77,26 +64,22 @@ void ActivateCharacterPerk(ref chref, string perkName)
     // <--
 	chref.perks.list.(perkName).delay = timeDelay;
 	chref.perks.list.(perkName).active = timeDuration;
-
 	//if(sti(chref.index) == nMainCharacterIndex)
 	if (sti(chref.index) == nMainCharacterIndex || isOfficerInShip(chref, false)) // наследие перка от офа boal 30.06.06
 	{
 		AddPerkToActiveList(perkName);
 	}
-
 	if(timeDelay>0) PostEvent("evntChrPerkDelay",1000,"sl",perkName,sti(chref.index));
 	Event("eSwitchPerks","l",sti(chref.index));
 	// fix boal всегда для ГГ
 	Event("eSwitchPerks","l", GetMainCharacterIndex());
 }
-
 bool GetCharacterPerkUsing(ref chref, string perkName)
 {   // можно ли пользовать умение (задержки нет)
 	if( !CheckAttribute(chref,"perks.list."+perkName) ) return false;
 	if( CheckAttribute(chref,"perks.list."+perkName+".delay") ) return false;
 	return true;
 }
-
 bool GetOfficersPerkUsing(ref chref, string perkName)
 { // boal препишем внутрянку под новых офов, че в к3 не было? не ведаю.
 	string  sOfficerType;	
@@ -123,7 +106,6 @@ bool GetOfficersPerkUsing(ref chref, string perkName)
 	}
 	return (ok) && (okDelay);
 }
-
 // boal
 int GetOfficersPerkUsingIdx(ref chref, string perkName)
 {
@@ -142,7 +124,6 @@ int GetOfficersPerkUsingIdx(ref chref, string perkName)
 	}
 	return -1;
 }
-
 bool IsCharacterPerkOn(ref chref, string perkName)
 {
 	aref arRoot, arBase;
@@ -154,7 +135,6 @@ bool IsCharacterPerkOn(ref chref, string perkName)
 	}
 	return true;
 }
-
 void CharacterPerkOff(ref chref, string perkName)
 {
 	if (perkName == "Turn180")
@@ -170,11 +150,9 @@ void CharacterPerkOff(ref chref, string perkName)
 		DelPerkFromActiveList(perkName);
 	}
 }
-
 bool CheckOfficersPerk(ref chref, string perkName)
 { // активность перка в данный момент, для временных - режим активности, а не задержки
 	bool ret = CheckOfficersPerkWOSelf(chref, perkName);
-
 	if (ret) return true;
 	// самого НПС
 	if(IsCharacterPerkOn(chref,perkName) == true)
@@ -183,7 +161,6 @@ bool CheckOfficersPerk(ref chref, string perkName)
 	}
 	return false;
 }
-
 bool CheckOfficersPerkWOSelf(ref chref, string perkName)
 {
 	int     iOfficer = -1;
@@ -200,7 +177,6 @@ bool CheckOfficersPerkWOSelf(ref chref, string perkName)
 			}
 		}	
 	}
-
 	if(iOfficer != -1)
 	{
 		if(IsCharacterPerkOn(GetCharacter(iOfficer), perkName) == true )
@@ -223,12 +199,10 @@ bool CheckCompanionsPerk(ref chref, string perkName)
 	}
 	return false; // fix by boal
 }
-
 void procChrPerkDelay()
 {
 	string perkName = GetEventData();
 	int chrIdx = GetEventData();
-
 	aref arPerk;
 	makearef(arPerk,Characters[chrIdx].perks.list.(perkName));
 	if( !CheckAttribute(arPerk,"delay") ) return;
@@ -240,7 +214,6 @@ void procChrPerkDelay()
  	{
 		delay--;
 	}
-
 	if( CheckAttribute(arPerk,"active") )
 	{
 		int iActive = sti(arPerk.active)-1;
@@ -250,7 +223,6 @@ void procChrPerkDelay()
 			CharacterPerkOff(GetCharacter(chrIdx),perkName);
 		}
 	}
-
 	if( delay<=0 )
 	{	DeleteAttribute(&Characters[chrIdx],"perks.list."+perkName+".delay");
 		DeleteAttribute(&Characters[chrIdx],"perks.list."+perkName+".active");
@@ -262,7 +234,6 @@ void procChrPerkDelay()
 		PostEvent("evntChrPerkDelay",1000,"sl",perkName,chrIdx);
 	}
 }
-
 void EnableUsingAbility(ref chref,string perkName)
 {
     // boal fix
@@ -270,23 +241,19 @@ void EnableUsingAbility(ref chref,string perkName)
 	int cn;
     if (!CheckCharacterPerk(chref, perkName))
     {
-
         cn = GetOfficersPerkUsingIdx(chref, perkName);
         if (cn != -1)
         chref = GetCharacter(cn);
     }
     // <--
-    
 	Event("evntChrPerkDelay","sl",perkName, sti(chref.index));
 }
-
 void PerkLoad()
 {
 //	int iRDTSC = RDTSC_B();
 	string locName = pchar.location;
 	aref arPerksRoot,arPerk;
 	int i,j,n,tmpi;
-
 	for(i=0; i<MAX_CHARACTERS; i++)
 	{
 		if(Characters[i].location == locName)
@@ -307,7 +274,6 @@ void PerkLoad()
 			}
 		}
 	}
-
 //	trace("TIME!!! PerkLoad() = " + RDTSC_E(iRDTSC));
 }
 // boal под новые слоты -->
@@ -316,9 +282,7 @@ void ClearActiveChrPerks(ref chref)
 	int i,cn;
     ref offc; // boal
     string  sOfficerType;	
-    
     if (bAbordageStarted || bSeaReloadStarted) return; 
-	
 	ClearActive(chref); // босс отдельно
 	if (CheckAttribute(chref, "Fellows.Passengers")) // не у всех есть
 	{
@@ -332,19 +296,15 @@ void ClearActiveChrPerks(ref chref)
 		}
 	}
 }
-
 void ClearActive(ref offic)
 {
 	aref arPerksRoot, arPerk;
 	int i,n;
-	
 	makearef(arPerksRoot, offic.perks.list);
-		
 	n = GetAttributesNum(arPerksRoot);
 	for (i=0; i<n; i++)
 	{
 		arPerk = GetAttributeN(arPerksRoot,i);
-
 		if (CheckAttribute(arPerk, "delay"))
         {
 			DeleteAttribute(arPerk,"delay");
@@ -360,13 +320,10 @@ void AcceptWindCatcherPerk(ref refCharacter)
 {
     int  nShipType;
     ref  refBaseShip, refRealShip;
-
 	nShipType = GetCharacterShipType(refCharacter);
 	if (nShipType==SHIP_NOTUSED) return;
-
 	refRealShip = GetRealShip(nShipType);
 	refBaseShip = GetShipByType(sti(refRealShip.BaseType));
-		
 	if (CheckOfficersPerk(refCharacter, "WindCatcher"))
 	{
 		refRealShip.InertiaAccelerationX	= stf(refBaseShip.InertiaAccelerationX) + stf(refBaseShip.InertiaAccelerationX) / 10.0;
@@ -385,7 +342,6 @@ void AcceptWindCatcherPerk(ref refCharacter)
 	    refRealShip.InertiaAccelerationY = stf(refRealShip.InertiaAccelerationY) / 2.0;
 	}
 }
-
 // Jason: зелье берсеркера
 void PerkBerserkerReaction()
 {

@@ -2,21 +2,15 @@
 int curQuestTop;
 string CurTable, CurRow;
 int iMaxGoodsStore = 50000;
-
 bool bPlayerColonies = false; // Vex: adding colony management
-
 void InitInterface(string iniName)
 {
     InterfaceStack.SelectMenu_node = "LaunchQuestBook"; // запоминаем, что звать по Ф2
 	GameInterface.title = "titleQuestBook";
-
 	SendMessage(&GameInterface,"ls",MSG_INTERFACE_INIT,iniName);
-	
 	selectJournal(1); // первый режим журнала, только активные
-	
 	SetEventHandler("InterfaceBreak","ProcessCancelExit",0);
 	SetEventHandler("exitCancel","ProcessCancelExit",0);
-
     SetEventHandler("eTabControlPress","procTabChange",0);
 	SetEventHandler("SetScrollerPos","SetScrollerPos",0);
 	SetEventHandler("ScrollPosChange","ProcScrollPosChange",0);
@@ -29,10 +23,8 @@ void InitInterface(string iniName)
 	SetEventHandler("MouseRClickUp","HideInfoWindow",0);
 	SetEventHandler("TableSelectChange", "TableSelectChange", 0);
 	SetEventHandler("ShowInfoWindow","ShowInfoWindow",0); // belamour окно инфы на пкм
-
 	// Vex: adding colony management -->
 	bPlayerColonies = PlayerHasColonies();
-	
 	CreateString(true, "buttonColonyManagement", XI_ConvertString("buttonColonyManagement"), "INTERFACE_TITLE", COLOR_NORMAL, 700, 15, SCRIPT_ALIGN_LEFT, 0.7);
 	if (bPlayerColonies==true)
 	{
@@ -44,7 +36,6 @@ void InitInterface(string iniName)
 		ChangeStringColor("buttonColonyManagement", greyColor);
 	}
 	// <-- Vex: adding colony management
-	
 	string sDate = " ";
 	sDate = GetDateString();
 	string sTime; 
@@ -64,21 +55,16 @@ void InitInterface(string iniName)
 	// <--
 	InitTableHeader();
 }
-
 void XI_SetQuestData(bool qtitle)
 {
 	aref arefTmp;
 	makearef(arefTmp,pchar.TmpQuestInfo);
-
 	XI_SetQuestTitles("QUEST_TITLE",arefTmp,0);
 	curQuestTop = 0;
-	
 	SetNodeUsing("QUEST_TITLE",qtitle);
 	SetNodeUsing("QUEST_TEXT",!qtitle);
 	SetNodeUsing("QUESTSCROLL",true);
-	
 	ShowButtons();
-	
 	if(qtitle == true)
 	{
 		SetCurrentNode("QUEST_TITLE");
@@ -88,19 +74,15 @@ void XI_SetQuestData(bool qtitle)
 		SetCurrentNode("QUEST_TEXT");
 	}
 }
-
 void ShowButtons()
 {
-
 }
-
 void HideQuests()
 {
 	SetNodeUsing("QUEST_TITLE",false);
 	SetNodeUsing("QUEST_TEXT",false);
 	SetNodeUsing("QUESTSCROLL",false);
 }
-
 void HideStatistic()
 {
 	SetNodeUsing("TABLE_SHIPCLASS",false);
@@ -110,7 +92,6 @@ void HideStatistic()
 	SetNodeUsing("TABLE_MONEY",false);
 	CreateString(true, "LevelComplexity", "", "INTERFACE_ULTRASMALL", COLOR_NORMAL, 0, 0, SCRIPT_ALIGN_RIGHT, 1);
 }
-
 void HideCashBook()
 {
 	SetNodeUsing("SCROLL_DEBIT",false);
@@ -118,13 +99,11 @@ void HideCashBook()
 	SetNodeUsing("SCROLL_CREDIT",false);
 	SetNodeUsing("TABLE_CREDIT",false);
 }
-
 void HideShipPlace()
 {
 	SetNodeUsing("TABLE_SHIP_PLACE",false);
 	SetNodeUsing("SCROLL_SHIP_PLACE",false);
 }
-
 void HideStoreBook()
 {
 	SetNodeUsing("TABLE_CITY",false);
@@ -132,7 +111,6 @@ void HideStoreBook()
 	SetNodeUsing("TABLE_GOODS",false);
 	SetNodeUsing("SCROLL_GOODS",false);
 }
-
 void ProcessCancelExit()
 {
 	if( GetSelectable("QUEST_TEXT") )
@@ -142,13 +120,11 @@ void ProcessCancelExit()
 	}
 	IDoExit(RC_INTERFACE_ANY_EXIT);
 }
-
 void QuestTopChange()
 {
 	if( GetSelectable("QUEST_TITLE") )
 	{
 		int newTop = curQuestTop+GetEventData();
-
 		aref arefTmp;
 		makearef(arefTmp,pchar.TmpQuestInfo);
 		int maxVal = GetAttributesNum(arefTmp);
@@ -160,7 +136,6 @@ void QuestTopChange()
 		{
 			newTop=0;
 		}
-
 		if(newTop!=curQuestTop)
 		{
 			curQuestTop=newTop;
@@ -169,7 +144,6 @@ void QuestTopChange()
 		}
 	}
 }
-
 void SetQTextShow(aref pA,int qnum)
 {
 	// boal Покраска, выбрали 22.06.07 -->
@@ -179,12 +153,10 @@ void SetQTextShow(aref pA,int qnum)
 	SendMessage(&GameInterface,"lsal",MSG_INTERFACE_INIT_QTEXT_SHOW,"QUEST_TEXT",pA,qnum);
 	SetCurrentNode("QUEST_TEXT");
 }
-
 void BackToTitle()
 {
 	XI_SetQuestData(true);
 }
-
 void XI_QuestActivate()
 {
 	int aq = curQuestTop+GetEventData();
@@ -194,19 +166,16 @@ void XI_QuestActivate()
 	SetQTextShow(pA,aq);
 	SetCurrentNode("QUEST_TEXT");
 }
-
 void XI_SetScroller(float pos)
 {
 	SendMessage(&GameInterface,"lsf",MSG_INTERFACE_SET_SCROLLER,"QUESTSCROLL",pos);
 }
-
 void SetScrollerPos()
 {
 	string nodName = GetEventData();
 	float pos = GetEventData();
 	XI_SetScroller(pos);
 }
-
 void IDoExit(int exitCode)
 {
 	DelEventHandler("InterfaceBreak","ProcessCancelExit");
@@ -223,7 +192,6 @@ void IDoExit(int exitCode)
  	DelEventHandler("QuestDeActivate","QuestDeActivate");
 	DelEventHandler("TableSelectChange", "TableSelectChange");
 	DelEventHandler("ShowInfoWindow","ShowInfoWindow"); // belamour окно инфы
-
     interfaceResultCommand = exitCode;
 	if( CheckAttribute(&InterfaceStates,"ReloadMenuExit"))
 	{
@@ -239,7 +207,6 @@ void QuestDeActivate()
 {
 	XI_SetQuestData(true);
 }
-
 void ProcScrollPosChange()
 {
 	float newPos = GetEventData();
@@ -250,7 +217,6 @@ void ProcScrollPosChange()
 		makearef(arefTmp,pchar.TmpQuestInfo);
 		int maxVal = GetAttributesNum(arefTmp);
 		int newTop = makeint(newPos*maxVal);
-
 		if(newTop!=curQuestTop)
 		{
 			curQuestTop=newTop;
@@ -262,7 +228,6 @@ void ProcScrollPosChange()
 		SendMessage(&GameInterface,"lslf",MSG_INTERFACE_MSG_TO_NODE,"QUEST_TEXT", 1,newPos);
 	}
 }
-
 void ProcScrollChange()
 {
 	int changeNum = GetEventData();
@@ -270,7 +235,6 @@ void ProcScrollChange()
 	string controlNode = "";
 	if( GetSelectable("QUEST_TITLE") ) controlNode = "QUEST_TITLE";
 	if( GetSelectable("QUEST_TEXT") ) controlNode = "QUEST_TEXT";
-
 	if(controlNode!="")
 	{
 		if(changeNum>0) {
@@ -280,14 +244,11 @@ void ProcScrollChange()
 		}
 	}
 }
-
 void ProcessCommandExecute()
 {
 	string comName = GetEventData();
 	string nodName = GetEventData();
-	
 	aref arCurRow;
-
 	// Vex: adding colony management -->
 	if(nodName == "I_COLONIES" || nodName == "I_COLONIES_2")
 	{
@@ -296,7 +257,6 @@ void ProcessCommandExecute()
 		}
 	}
 	// <-- Vex: adding colony management
-
 	switch(nodName)
 	{
         case "I_CHARACTER_2":
@@ -343,7 +303,6 @@ void ProcessCommandExecute()
 			}
 		break;
 		// <-- Vex: adding colony management
-
 		// belamour клик по кораблику
 		case "TABLE_SHIP_PLACE": 
 			if(comName=="click")
@@ -376,7 +335,6 @@ void ProcessCommandExecute()
 	}
 	// boal new menu 31.12.04 -->
 }
-
 void selectJournal(int iMode)
 {
     HideStatistic();
@@ -405,14 +363,12 @@ void selectJournal(int iMode)
                     ok = true;
                 }
             break;
-            
             case 2:
                 if (!CheckAttribute(pchar, "QuestInfo." + attributeName + ".InfoType") && sti(pchar.QuestInfo.(attributeName).Complete) == true)
                 {
                     ok = true;
                 }
             break;
-            
             case 3:
                 if (CheckAttribute(pchar, "QuestInfo." + attributeName + ".InfoType"))
                 {
@@ -429,7 +385,6 @@ void selectJournal(int iMode)
     }
 	XI_SetQuestData(true);
 }
-
 void selectStatistic()
 {
     SetNodeUsing("TABLE_SHIPCLASS",true);
@@ -445,7 +400,6 @@ void selectStatistic()
 	XI_RegistryExitKey("IExit_Escape"); // belamour выход на ESC
 	CreateString(true, "LevelComplexity", XI_ConvertString("m_Complexity") + " : " + GetLevelComplexity(MOD_SKILL_ENEMY_RATE), "INTERFACE_SMALL", COLOR_NORMAL, 440, 334, SCRIPT_ALIGN_CENTER, 1);
 }
-
 void selectCashBook()
 {
     SetNodeUsing("SCROLL_DEBIT",true);
@@ -459,7 +413,6 @@ void selectCashBook()
 	ShowButtons();
 	XI_RegistryExitKey("IExit_Escape"); // belamour выход на ESC
 }
-
 void selectShipPlace()
 {
     SetNodeUsing("TABLE_SHIP_PLACE",true);
@@ -471,7 +424,6 @@ void selectShipPlace()
 	ShowButtons();
 	XI_RegistryExitKey("IExit_Escape"); // belamour выход на ESC
 }
-
 void selectStoreBook()
 {
 	SetNodeUsing("TABLE_CITY",true);
@@ -485,12 +437,10 @@ void selectStoreBook()
 	ShowButtons();
 	XI_RegistryExitKey("IExit_Escape"); // belamour выход на ESC
 }
-
 void HideInfoWindow() 
 {
 	CloseTooltip();
 }
-
 void ShowInfoWindow() // belamour int index не нужен тут
 {
 	string sCurrentNode = GetCurrentNode();
@@ -519,10 +469,8 @@ void ShowInfoWindow() // belamour int index не нужен тут
 				CreateTooltip("#" + sHeader, sText1, argb(255,255,255,255), sText2, argb(255,255,192,192), sText3, argb(255,192,255,192), "", argb(255,255,255,255), sPicture, sGroup, sGroupPicture, 64, 64);
 		break;
 	}
-
 	// CreateTooltip("#" + sHeader, sText1, argb(255,255,255,255), "", argb(255,255,255,255), "", argb(255,192,255,192), "", argb(255,255,255,255), sPicture, "NATIONS", sGroupPicture, 64, 64);
 }
-
 void procTabChange()
 {
 	int iComIndex = GetEventData();
@@ -563,7 +511,6 @@ void procTabChange()
 		return;
 	}	
 }
-
 void SetControlsTabMode(int nMode)
 {
 	int nColor1 = argb(255,196,196,196);
@@ -573,7 +520,6 @@ void SetControlsTabMode(int nMode)
 	int nColor5 = nColor1;
 	int nColor6 = nColor1;
 	int nColor7 = nColor1;
-
 	string sPic1 = "TabSelected";
 	string sPic2 = sPic1;
 	string sPic3 = sPic1;
@@ -581,7 +527,6 @@ void SetControlsTabMode(int nMode)
 	string sPic5 = sPic1;
 	string sPic6 = sPic1;
 	string sPic7 = sPic1;
-
 	switch (nMode)
 	{
 		case 1: //
@@ -613,7 +558,6 @@ void SetControlsTabMode(int nMode)
 			nColor7 = argb(255,255,255,255);
 		break;		
 	}
-
 	SetNewGroupPicture("TABBTN_QUEST", "TABS", sPic1);
 	SetNewGroupPicture("TABBTN_QUESTARJ", "TABS", sPic2);
 	SetNewGroupPicture("TABBTN_INFO", "TABS", sPic3);
@@ -628,10 +572,8 @@ void SetControlsTabMode(int nMode)
     SendMessage(&GameInterface,"lslll",MSG_INTERFACE_MSG_TO_NODE,"TABSTR_STATISTIC", 8,0,nColor5);
     SendMessage(&GameInterface,"lslll",MSG_INTERFACE_MSG_TO_NODE,"TABSTR_SHIP_PLACE", 8,0,nColor6);
     SendMessage(&GameInterface,"lslll",MSG_INTERFACE_MSG_TO_NODE,"TABSTR_STOREBOOK", 8,0,nColor7);
-	
 	FillControlsList(nMode);
 }
-
 void FillControlsList(int nMode)
 {
 	switch (nMode)
@@ -645,12 +587,10 @@ void FillControlsList(int nMode)
 		case 7: selectStoreBook(); break;
 	}
 }
-
 void InitTableHeader()
 {
 	int    i;
 	string row;
-	
 	GameInterface.TABLE_SHIPCLASS.hr.td1.str = "Ships";
 	GameInterface.TABLE_SHIPCLASS.hr.td1.scale = 0.9;
 	GameInterface.TABLE_SHIPCLASS.hr.td2.str = "Sunk by guns";
@@ -659,7 +599,6 @@ void InitTableHeader()
 	GameInterface.TABLE_SHIPCLASS.hr.td3.scale = 0.7;
 	GameInterface.TABLE_SHIPCLASS.hr.td4.str = "Captured by boarding";
 	GameInterface.TABLE_SHIPCLASS.hr.td4.scale = 0.7;
-	
     for (i = 1; i< 7; i++)
 	{
         row = "tr" + i;
@@ -668,80 +607,62 @@ void InitTableHeader()
 		GameInterface.TABLE_SHIPCLASS.(row).td3.str = Statistic_AddValue(pchar, "KillAbordShip_" + i, 0);
 		GameInterface.TABLE_SHIPCLASS.(row).td4.str = Statistic_AddValue(pchar, "AbordShip_" + i, 0);
 	}
-
 	GameInterface.TABLE_HUMAN.hr.td1.str = "Killed";
 	GameInterface.TABLE_HUMAN.hr.td1.scale = 0.9;
 	GameInterface.TABLE_HUMAN.hr.td2.str = "By blades";
 	GameInterface.TABLE_HUMAN.hr.td2.scale = 0.7;
 	GameInterface.TABLE_HUMAN.hr.td3.str = "By firearms";
 	GameInterface.TABLE_HUMAN.hr.td3.scale = 0.7;
-	
 	GameInterface.TABLE_HUMAN.tr1.td1.str = "Soldiers";
 	GameInterface.TABLE_HUMAN.tr1.td2.str = Statistic_AddValue(pchar, "Solder_s", 0);
 	GameInterface.TABLE_HUMAN.tr1.td3.str = Statistic_AddValue(pchar, "Solder_g", 0);
-	
 	GameInterface.TABLE_HUMAN.tr2.td1.str = "Citizens";
 	GameInterface.TABLE_HUMAN.tr2.td2.str = Statistic_AddValue(pchar, "Citizen_s", 0);
 	GameInterface.TABLE_HUMAN.tr2.td3.str = Statistic_AddValue(pchar, "Citizen_g", 0);
-	
 	GameInterface.TABLE_HUMAN.tr3.td1.str = "Scum";
 	GameInterface.TABLE_HUMAN.tr3.td2.str = Statistic_AddValue(pchar, "Monster_s", 0);
 	GameInterface.TABLE_HUMAN.tr3.td3.str = Statistic_AddValue(pchar, "Monster_g", 0);
-	
 	GameInterface.TABLE_HUMAN.tr4.td1.str = "Other";
 	GameInterface.TABLE_HUMAN.tr4.td2.str = Statistic_AddValue(pchar, "Warrior_s", 0);
 	GameInterface.TABLE_HUMAN.tr4.td3.str = Statistic_AddValue(pchar, "Warrior_g", 0);
-	
 	GameInterface.TABLE_HUMAN.tr5.td1.str = "Total";
 	GameInterface.TABLE_HUMAN.tr5.td2.str = Statistic_AddValue(pchar, "Solder_s", 0) + Statistic_AddValue(pchar, "Citizen_s", 0) + Statistic_AddValue(pchar, "Monster_s", 0) + Statistic_AddValue(pchar, "Warrior_s", 0);
 	GameInterface.TABLE_HUMAN.tr5.td3.str = Statistic_AddValue(pchar, "Solder_g", 0) + Statistic_AddValue(pchar, "Citizen_g", 0) + Statistic_AddValue(pchar, "Monster_g", 0) + Statistic_AddValue(pchar, "Warrior_g", 0);
-	
 	GameInterface.TABLE_OTHER.hr.td1.str = "Events";
 	GameInterface.TABLE_OTHER.hr.td1.scale = 0.9;
 	GameInterface.TABLE_OTHER.hr.td2.str = "Value";
 	GameInterface.TABLE_OTHER.hr.td2.scale = 0.9;
-	
 	GameInterface.TABLE_OTHER.tr1.td1.str = "Ships sold";
 	GameInterface.TABLE_OTHER.tr1.td1.scale = 0.9;
 	GameInterface.TABLE_OTHER.tr1.td2.str = Statistic_AddValue(PChar, "SellShip", 0);
-	
 	GameInterface.TABLE_OTHER.tr2.td1.str = "Ships purchased";
 	GameInterface.TABLE_OTHER.tr2.td1.scale = 0.9;
 	GameInterface.TABLE_OTHER.tr2.td2.str = Statistic_AddValue(PChar, "BuyShip", 0);
-	
 	GameInterface.TABLE_OTHER.tr3.td1.str = "Mutiny on the ship";
 	GameInterface.TABLE_OTHER.tr3.td1.scale = 0.9;
 	GameInterface.TABLE_OTHER.tr3.td2.str = Statistic_AddValue(PChar, "ShipMunity", 0);
-	
 	GameInterface.TABLE_OTHER.tr4.td1.str = "Slave revolt";
 	GameInterface.TABLE_OTHER.tr4.td1.scale = 0.9;
 	GameInterface.TABLE_OTHER.tr4.td2.str = Statistic_AddValue(PChar, "SlavesMunity", 0);
-	
 	GameInterface.TABLE_OTHER.tr5.td1.str = "Ships released";
 	GameInterface.TABLE_OTHER.tr5.td1.scale = 0.9;
 	GameInterface.TABLE_OTHER.tr5.td2.str = Statistic_AddValue(PChar, "AbordShipFree", 0);
-	
 	GameInterface.TABLE_OTHER.tr6.td1.str = "Items spoiled by rats";
 	GameInterface.TABLE_OTHER.tr6.td1.scale = 0.9;
 	GameInterface.TABLE_OTHER.tr6.td2.str = Statistic_AddValue(PChar, "RatsEatGoods", 0);
-	
 	GameInterface.TABLE_OTHER.tr7.td1.str = "Save\nLoad";
 	GameInterface.TABLE_OTHER.tr7.td1.scale = 0.9;
 	GameInterface.TABLE_OTHER.tr7.td2.str = pchar.SystemInfo.SaveCount +"\n" + pchar.SystemInfo.LoadCount;
 	GameInterface.TABLE_OTHER.tr7.td2.scale = 0.9;
-	
 	GameInterface.TABLE_OTHER.tr8.td1.str = "Health lost";
 	GameInterface.TABLE_OTHER.tr8.td1.scale = 0.9;
 	GameInterface.TABLE_OTHER.tr8.td2.str = sti(pchar.Health.TotalDamg);
-	
 	GameInterface.TABLE_OTHER.tr9.td1.str = "Sailors killed";
 	GameInterface.TABLE_OTHER.tr9.td1.scale = 0.9;
 	GameInterface.TABLE_OTHER.tr9.td2.str = Statistic_AddValue(PChar, "Sailors_dead", 0);
-	
 	GameInterface.TABLE_OTHER.tr10.td1.str = "Treasures found";
 	GameInterface.TABLE_OTHER.tr10.td1.scale = 0.9;
 	GameInterface.TABLE_OTHER.tr10.td2.str = Statistic_AddValue(PChar, "Treasure", 0);
-	
 	GameInterface.TABLE_NATION.hr.td1.str = "Events";
 	GameInterface.TABLE_NATION.hr.td1.scale = 0.9;
  	GameInterface.TABLE_NATION.hr.td2.icon.group = "NATIONS"
@@ -773,7 +694,6 @@ void InitTableHeader()
     GameInterface.TABLE_NATION.hr.td6.icon.offset = "10, 2";
 	GameInterface.TABLE_NATION.hr.td7.str = "Total";
 	GameInterface.TABLE_NATION.hr.td7.scale = 0.9;
-	
 	GameInterface.TABLE_NATION.tr1.td1.str = "Forts destroyed";
 	GameInterface.TABLE_NATION.tr1.td1.scale = 0.9;
 	GameInterface.TABLE_NATION.tr1.td2.str = Statistic_AddValue(PChar, "eng_KillFort", 0);
@@ -786,7 +706,6 @@ void InitTableHeader()
              Statistic_AddValue(PChar, "fra_KillFort", 0) +
              Statistic_AddValue(PChar, "spa_KillFort", 0) +
              Statistic_AddValue(PChar, "hol_KillFort", 0));
-             
     GameInterface.TABLE_NATION.tr2.td1.str = "Cities captured";
 	GameInterface.TABLE_NATION.tr2.td1.scale = 0.9;
 	GameInterface.TABLE_NATION.tr2.td2.str = Statistic_AddValue(PChar, "eng_TakeTown", 0);
@@ -799,7 +718,6 @@ void InitTableHeader()
              Statistic_AddValue(PChar, "fra_TakeTown", 0) +
              Statistic_AddValue(PChar, "spa_TakeTown", 0) +
              Statistic_AddValue(PChar, "hol_TakeTown", 0));
-             
     GameInterface.TABLE_NATION.tr3.td1.str = "Plundered cities";
 	GameInterface.TABLE_NATION.tr3.td1.scale = 0.9;
 	GameInterface.TABLE_NATION.tr3.td2.str = Statistic_AddValue(PChar, "eng_GrabbingTown", 0);
@@ -812,7 +730,6 @@ void InitTableHeader()
              Statistic_AddValue(PChar, "fra_GrabbingTown", 0) +
              Statistic_AddValue(PChar, "spa_GrabbingTown", 0) +
              Statistic_AddValue(PChar, "hol_GrabbingTown", 0));
-             
     GameInterface.TABLE_NATION.tr4.td1.str = "Ships captured";
 	GameInterface.TABLE_NATION.tr4.td1.scale = 0.9;
 	GameInterface.TABLE_NATION.tr4.td2.str = Statistic_AddValue(PChar, "eng_AbordShip", 0);
@@ -825,7 +742,6 @@ void InitTableHeader()
              Statistic_AddValue(PChar, "fra_AbordShip", 0) +
              Statistic_AddValue(PChar, "spa_AbordShip", 0) +
              Statistic_AddValue(PChar, "hol_AbordShip", 0));
-             
     GameInterface.TABLE_NATION.tr5.td1.str = "Ships sunk";
 	GameInterface.TABLE_NATION.tr5.td1.scale = 0.9;
 	GameInterface.TABLE_NATION.tr5.td2.str = Statistic_AddValue(PChar, "eng_KillShip", 0);
@@ -838,23 +754,19 @@ void InitTableHeader()
              Statistic_AddValue(PChar, "fra_KillShip", 0) +
              Statistic_AddValue(PChar, "spa_KillShip", 0) +
              Statistic_AddValue(PChar, "hol_KillShip", 0));
-
 	GameInterface.TABLE_MONEY.tr1.td1.str = "Expenses";
 	GameInterface.TABLE_MONEY.tr1.td1.scale = 0.9;
 	GameInterface.TABLE_MONEY.tr1.td2.str = Statistic_AddValue(PChar, "Money_spend", 0);
 	GameInterface.TABLE_MONEY.tr1.td2.scale = 0.9;
-	
 	GameInterface.TABLE_MONEY.tr2.td1.str = "Payments for crew";
 	GameInterface.TABLE_MONEY.tr2.td1.scale = 0.9;
 	GameInterface.TABLE_MONEY.tr2.td2.str = Statistic_AddValue(PChar, "PartitionPay", 0);
 	GameInterface.TABLE_MONEY.tr2.td2.scale = 0.9;
-	
     Table_UpdateWindow("TABLE_SHIPCLASS");
     Table_UpdateWindow("TABLE_HUMAN");
     Table_UpdateWindow("TABLE_OTHER");
     Table_UpdateWindow("TABLE_NATION");
     Table_UpdateWindow("TABLE_MONEY");
-	
     //  ростовщики
     GameInterface.TABLE_CREDIT.hr.td1.str = "Credit in";
 	GameInterface.TABLE_CREDIT.hr.td1.scale = 0.9;
@@ -867,7 +779,6 @@ void InitTableHeader()
 	GameInterface.TABLE_CREDIT.hr.td5.str = "%";
 	GameInterface.TABLE_CREDIT.hr.td5.scale = 0.9;
 	GameInterface.TABLE_CREDIT.select = 0;
-	
     aref quests;
 	aref quest;
 	int  nQuestsNum;
@@ -877,13 +788,10 @@ void InitTableHeader()
     if (CheckAttribute(pchar, "Quest.Loans"))
     {
     	makearef(quests, pchar.Quest.Loans);
-
     	nQuestsNum = GetAttributesNum(quests);
-
     	for(n = 0; n < nQuestsNum; n++)
     	{
     		quest = GetAttributeN(quests,n);
-
     		sQuestName = GetAttributeName(quest);
     		row = "tr" + i;
     		i++;
@@ -902,7 +810,6 @@ void InitTableHeader()
         }
     }
 	Table_UpdateWindow("TABLE_CREDIT");
-	
 	GameInterface.TABLE_DEBIT.hr.td1.str = "Contribution in";
 	GameInterface.TABLE_DEBIT.hr.td1.scale = 0.9;
 	GameInterface.TABLE_DEBIT.hr.td2.str = "Summ";
@@ -918,15 +825,11 @@ void InitTableHeader()
     if (CheckAttribute(pchar, "Quest.Deposits")) // не треться при возврате
     {
     	makearef(quests,Characters[GetMainCharacterIndex()].Quest.Deposits);
-
     	nQuestsNum = GetAttributesNum(quests);
-
     	for(n = 0; n < nQuestsNum; n++)
     	{
     		quest = GetAttributeN(quests,n);
-
     		sQuestName = GetAttributeName(quest);
-						
     		if (CheckAttribute(Pchar, "Quest.Deposits."+sQuestName+".Sum"))
     		{
                 row = "tr" + i;
@@ -954,18 +857,14 @@ void InitTableHeader()
         }
     }
 	Table_UpdateWindow("TABLE_DEBIT");
-	
 	FillShipPlaceTable("TABLE_SHIP_PLACE"); // 1.2.3
-	
 	FillPriceListTown("TABLE_CITY");
 }
-
 void FillShipPlaceTable(string _tabName)
 {
     int     i, cn, n;
     string  row;
     ref     rCity, chref;
-
     // шапка -->
     GameInterface.(_tabName).select = 0;
     GameInterface.(_tabName).hr.td1.str = "N";
@@ -998,10 +897,8 @@ void FillShipPlaceTable(string _tabName)
 					GameInterface.(_tabName).(row).UserData.IDX = i; // belamour запомнить в кого тыкать будем
                     GameInterface.(_tabName).(row).td1.str = cn;
                     GameInterface.(_tabName).(row).td1.scale = 0.9;
-                    
 				    GameInterface.(_tabName).(row).td2.str = XI_ConvertString(RealShips[sti(chref.Ship.Type)].BaseName) + " '" + chref.Ship.Name + "'";
 				    GameInterface.(_tabName).(row).td2.scale = 0.83;
-				    
 	                GameInterface.(_tabName).(row).td3.icon.texture = "INTERFACES\PORTRAITS\128\face_" + chref.faceId + ".tga";
 	                GameInterface.(_tabName).(row).td3.icon.uv = "0,0,1,1";
 	                GameInterface.(_tabName).(row).td3.icon.offset = "0, 3";
@@ -1010,26 +907,20 @@ void FillShipPlaceTable(string _tabName)
 				    GameInterface.(_tabName).(row).td3.str = GetFullName(chref);
 				    GameInterface.(_tabName).(row).td3.textoffset = "30, 0";
 				    GameInterface.(_tabName).(row).td3.scale = 0.83;
-				    
                     GameInterface.(_tabName).(row).td4.icon.group  = "NATIONS";
 					GameInterface.(_tabName).(row).td4.icon.image  = Nations[sti(rCity.nation)].Name;
 					GameInterface.(_tabName).(row).td4.icon.width  = 26;
 				    GameInterface.(_tabName).(row).td4.icon.height = 26;
 				    GameInterface.(_tabName).(row).td4.icon.offset = "0, 3";
-		    
 					GameInterface.(_tabName).(row).td4.str = GetConvertStr(rCity.id + " Town", "LocLables.txt");
 					GameInterface.(_tabName).(row).td4.scale = 0.85;
 					GameInterface.(_tabName).(row).td4.textoffset = "30, 0";
-					
 					GameInterface.(_tabName).(row).td5.str = GetConvertStr(rCity.islandLable, "LocLables.txt");
 					GameInterface.(_tabName).(row).td5.scale = 0.8;
-					
 					GameInterface.(_tabName).(row).td6.str = chref.ShipInStockMan.AltDate;
 					GameInterface.(_tabName).(row).td6.scale = 0.75;
-					
 					GameInterface.(_tabName).(row).td7.str = chref.ShipInStockMan.MoneyForShip;
 					GameInterface.(_tabName).(row).td7.scale = 0.85;
-                    
     		        cn++;
 		        }
     		}
@@ -1047,10 +938,8 @@ void FillShipPlaceTable(string _tabName)
 				GameInterface.(_tabName).(row).UserData.IDX = i; // belamour запомнить в кого тыкать будем
 				GameInterface.(_tabName).(row).td1.str = cn;
 				GameInterface.(_tabName).(row).td1.scale = 0.9;
-				
 				GameInterface.(_tabName).(row).td2.str = XI_ConvertString(RealShips[sti(chref.Ship.Type)].BaseName) + " '" + chref.Ship.Name + "'";
 				GameInterface.(_tabName).(row).td2.scale = 0.83;
-				
 				GameInterface.(_tabName).(row).td3.icon.texture = "INTERFACES\PORTRAITS\128\face_" + chref.faceId + ".tga";
 				GameInterface.(_tabName).(row).td3.icon.uv = "0,0,1,1";
 				GameInterface.(_tabName).(row).td3.icon.offset = "0, 3";
@@ -1059,33 +948,26 @@ void FillShipPlaceTable(string _tabName)
 				GameInterface.(_tabName).(row).td3.str = GetFullName(chref);
 				GameInterface.(_tabName).(row).td3.textoffset = "30, 0";
 				GameInterface.(_tabName).(row).td3.scale = 0.83;
-				
 				GameInterface.(_tabName).(row).td4.icon.group  = "NATIONS";
 				GameInterface.(_tabName).(row).td4.icon.image  = Nations[PIRATE].Name;
 				GameInterface.(_tabName).(row).td4.icon.width  = 26;
 				GameInterface.(_tabName).(row).td4.icon.height = 26;
 				GameInterface.(_tabName).(row).td4.icon.offset = "0, 3";
-		
 				GameInterface.(_tabName).(row).td4.str = "Isla Mona";
 				GameInterface.(_tabName).(row).td4.scale = 0.85;
 				GameInterface.(_tabName).(row).td4.textoffset = "30, 0";
-				
 				GameInterface.(_tabName).(row).td5.str = "Isla Mona";
 				GameInterface.(_tabName).(row).td5.scale = 0.8;
-				
 				GameInterface.(_tabName).(row).td6.str = chref.ShipInStockMan.AltDate;
 				GameInterface.(_tabName).(row).td6.scale = 0.75;
-				
 				GameInterface.(_tabName).(row).td7.str = chref.ShipInStockMan.MoneyForShip;
 				GameInterface.(_tabName).(row).td7.scale = 0.85;
-				
 				cn++;
 			}
 		}
 	}
 	Table_UpdateWindow(_tabName);
 }
-
 void FillPriceListTown(string _tabName)
 {
     int     i, cn, n, StoreNum;
@@ -1094,7 +976,6 @@ void FillPriceListTown(string _tabName)
     aref    curItem;
     ref     rCity;
 	ref		refStorage;
-    
     // шапка -->
     GameInterface.(_tabName).select = 0;
     GameInterface.(_tabName).hr.td1.str = "Nation";
@@ -1107,7 +988,6 @@ void FillPriceListTown(string _tabName)
 	GameInterface.(_tabName).hr.td4.scale = 0.75;
 	GameInterface.(_tabName).hr.td5.str = "Rent";
 	GameInterface.(_tabName).hr.td5.scale = 0.75;
-
 	cn = 1;
 	for (i=1; i<MAX_CHARACTERS; i++)
 	{
@@ -1148,7 +1028,6 @@ void FillPriceListTown(string _tabName)
 	Table_UpdateWindow(_tabName);
 	FillPriceList("TABLE_GOODS", firstId);
 }
-
 void TableSelectChange()
 {
 	string sControl = GetEventData();
@@ -1161,7 +1040,6 @@ void TableSelectChange()
     	FillPriceList("TABLE_GOODS", GameInterface.(CurTable).(CurRow).UserData.CityID);
     }
 }
-
 void NullSelectTable(string sControl)
 {
 	if (sControl != CurTable)
@@ -1170,7 +1048,6 @@ void NullSelectTable(string sControl)
 	    Table_UpdateWindow(sControl);
 	}
 }
-
 void FillPriceList(string _tabName, string  attr1)
 {
     string  sGoods;
@@ -1180,7 +1057,6 @@ void FillPriceList(string _tabName, string  attr1)
     string  row;
 	ref 	chref;
     ref		refStorage;
-	
     // шапка -->
     GameInterface.(_tabName).select = 0;
     GameInterface.(_tabName).hr.td1.str = XI_ConvertString("Good name");
@@ -1191,9 +1067,7 @@ void FillPriceList(string _tabName, string  attr1)
 	GameInterface.(_tabName).hr.td3.scale = 0.75;
 	GameInterface.(_tabName).hr.td4.str = "Wgt";
 	GameInterface.(_tabName).hr.td4.scale = 0.75;
-	
 	Table_Clear("TABLE_GOODS", false, true, false);
-	
 	n = 1;
 	if (attr1 != "")
 	{

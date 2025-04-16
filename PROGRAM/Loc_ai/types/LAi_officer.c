@@ -1,16 +1,10 @@
 /*
 Тип: офицер
-
 	Используемые шаблоны:
 		stay
 		dialog
 */
-
-
-
 #define LAI_TYPE_OFFICER		"officer"
-
-
 //Инициализация
 void LAi_type_officer_Init(aref chr)
 {
@@ -49,7 +43,6 @@ void LAi_type_officer_Init(aref chr)
 	}
 	SendMessage(&chr, "lsl", MSG_CHARACTER_EX_MSG, "SetFightWOWeapon", false);
 }
-
 void LAi_type_follower_Init(aref chr)
 {
 	//Новый тип
@@ -61,7 +54,6 @@ void LAi_type_follower_Init(aref chr)
 	LAi_SetDefaultStayAnimation(chr);
 	SendMessage(&chr, "lsl", MSG_CHARACTER_EX_MSG, "SetFightWOWeapon", false);
 }
-
 //Процессирование типа персонажа
 void LAi_type_officer_CharacterUpdate(aref chr, float dltTime)
 {
@@ -120,9 +112,7 @@ void LAi_type_officer_CharacterUpdate(aref chr, float dltTime)
 	else chr.chr_ai.type.bottle = fCheck;
 	//Log_Info("LAi_type_officer_CharacterUpdate "+chr.chr_ai.tmpl);
 	if (chr.chr_ai.tmpl == LAI_TMPL_STAY) return; // приказ ему стоять. Врага не ищем 18.06.05
-	
 	if (CheckAttribute(loadedLocation, "noFight")) return;
-
 	//Дистанция до главного персонажа
 	if (chr.chr_ai.tmpl != LAI_TMPL_FIGHT)
 	{
@@ -180,33 +170,27 @@ void LAi_type_officer_CharacterUpdate(aref chr, float dltTime)
 		}
 	}
 }
-
 void LAi_type_follower_CharacterUpdate(aref chr, float dltTime)
 {
 }
-
 //Загрузка персонажа в локацию
 bool LAi_type_officer_CharacterLogin(aref chr)
 {
 	return true;
 }
-
 bool LAi_type_follower_CharacterLogin(aref chr)
 {
 	return true;
 }
-
 //Выгрузка персонажа из локацию
 bool LAi_type_officer_CharacterLogoff(aref chr)
 {
 	return true;
 }
-
 bool LAi_type_follower_CharacterLogoff(aref chr)
 {
 	return true;
 }
-
 //Завершение работы темплейта
 void LAi_type_officer_TemplateComplite(aref chr, string tmpl)
 {
@@ -218,22 +202,17 @@ void LAi_type_officer_TemplateComplite(aref chr, string tmpl)
         }
     }
 }
-
 void LAi_type_follower_TemplateComplite(aref chr, string tmpl)
 {
 	if(chr.chr_ai.tmpl != LAI_TMPL_FOLLOW) LAi_tmpl_SetFollow(chr, pchar, -1.0);
 }
-
 //Сообщить о желании завести диалог
 void LAi_type_officer_NeedDialog(aref chr, aref by)
 {
 }
-
 void LAi_type_follower_NeedDialog(aref chr, aref by)
 {
 }
-
-
 //Запрос на диалог, если возвратить true то в этот момент можно начать диалог
 bool LAi_type_officer_CanDialog(aref chr, aref by)
 {
@@ -244,7 +223,6 @@ bool LAi_type_officer_CanDialog(aref chr, aref by)
 	//Согласимся на диалог
 	return true;
 }
-
 bool LAi_type_follower_CanDialog(aref chr, aref by)
 {
 	if(LAi_IsBoardingProcess()) return false;
@@ -254,7 +232,6 @@ bool LAi_type_follower_CanDialog(aref chr, aref by)
 	//Согласимся на диалог
 	return true;
 }
-
 //Начать диалог
 void LAi_type_officer_StartDialog(aref chr, aref by)
 {
@@ -263,7 +240,6 @@ void LAi_type_officer_StartDialog(aref chr, aref by)
 	CharacterTurnByChr(chr, by);
 	LAi_tmpl_SetActivatedDialog(chr, by);
 }
-
 void LAi_type_follower_StartDialog(aref chr, aref by)
 {
 	//Если мы пасивны, запускаем шаблон без времени завершения
@@ -271,7 +247,6 @@ void LAi_type_follower_StartDialog(aref chr, aref by)
 	CharacterTurnByChr(chr, by);
 	LAi_tmpl_SetActivatedDialog(chr, by);
 }
-
 //Закончить диалог
 void LAi_type_officer_EndDialog(aref chr, aref by)
 {
@@ -279,21 +254,15 @@ void LAi_type_officer_EndDialog(aref chr, aref by)
 	if (chr.chr_ai.tmpl != LAI_TMPL_STAY)//команда ждать!
 	   LAi_tmpl_SetFollow(chr, GetMainCharacter(), -1.0);
 }
-
 void LAi_type_follower_EndDialog(aref chr, aref by)
 {
 	LAi_CharacterRestoreAy(chr);
 	LAi_tmpl_SetFollow(chr, pchar, -1.0);
 }
-
-
 //Персонаж выстрелил
 void LAi_type_officer_Fire(aref attack, aref enemy, float kDist, bool isFindedEnemy)
 {
-
 }
-
-
 //Персонаж атакован
 void LAi_type_officer_Attacked(aref chr, aref by)
 {
@@ -329,8 +298,6 @@ void LAi_type_officer_Attacked(aref chr, aref by)
 		LAi_type_officer_FindTarget(chr);
 	}
 }
-
-
 void LAi_type_officer_FindTarget(aref chr)
 {
 	//Проверим наличие врагов
@@ -369,7 +336,6 @@ void LAi_type_officer_FindTarget(aref chr)
 		}
 	}
 }
-
 bool LAi_type_officer_CheckDists(aref chr, aref trg)
 {
 	float dist = -1.0;
@@ -388,4 +354,3 @@ bool LAi_type_officer_CheckDists(aref chr, aref trg)
 	}
 	return false;
 }
-

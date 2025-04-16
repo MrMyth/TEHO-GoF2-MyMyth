@@ -2,7 +2,6 @@ void Telescope_Request()
 {
 	int nTelescopeIn = GetEventData();
 	if (FindCharacterItemByGroup(pchar, SPYGLASS_ITEM_TYPE) == "") return;
-
 	if( GetCharacterEquipByGroup(pchar,SPYGLASS_ITEM_TYPE)=="" ) {
 		nTelescopeIn = 0;
 	}
@@ -15,7 +14,6 @@ void Telescope_Request()
 		SendMessage(&objISpyGlass, "ll", MSG_TELESCOPE_REQUEST,0);
 	}
 }
-
 void Telescope_Off()
 {
 	SendMessage(&objISpyGlass, "ll", MSG_TELESCOPE_REQUEST, 0);

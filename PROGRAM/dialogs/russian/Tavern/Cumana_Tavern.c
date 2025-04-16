@@ -10,20 +10,17 @@ void ProcessCommonDialogEvent(ref NPChar, aref Link, aref NextDiag)
 			link.l1 = HeroStringReactionRepeat("You know, " + NPChar.name + ", maybe next time.", "Right, I've forgotten for some reason...",
                       "Yes, it really is the third time...", "Yup...", npchar, Dialog.CurrentNode);
 			link.l1.go = "exit";
-
 		 if (CheckAttribute(pchar, "RomanticQuest.ShipToCumana"))
 			{
     			link.l1 = "Do you know where I could find the captain of the brig 'Five Wounds of Christ'?";
     			Link.l1.go = "RomanticQuest_1";
 			}
 		break;
-		
 		case "guardoftruth":
 			dialog.text = "In the governor's palace, of course. She's a relative of Don Fernando de Villegas. You can look for her there after noon during a siesta, she usually has business to attend to in the mornings. She's into some trouble right now, so keep that in mind. But she won't mind speaking with you. Donna Belinda is a good woman.";
 			link.l1 = "Thank you!";
 			link.l1.go = "guardoftruth_1";
 		break;
-		
 		case "guardoftruth_1":
 			DialogExit();
 			npchar.quest.utensil = "true";
@@ -55,4 +52,3 @@ void ProcessCommonDialogEvent(ref NPChar, aref Link, aref NextDiag)
 	}
 	UnloadSegment(NPChar.FileDialog2);  // если где-то выход внутри switch  по return не забыть сделать анлод
 }
-

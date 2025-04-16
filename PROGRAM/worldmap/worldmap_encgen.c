@@ -1,9 +1,6 @@
-
-
 //--------------------------------------------------------------------------------------
 //Генерация энкоунтеров
 //--------------------------------------------------------------------------------------
-
 //Частота штормов в секунду
 #define WDM_STORM_RATE   		0.0001
 //Частота торговцев в секунду
@@ -14,23 +11,16 @@
 #define WDM_FOLLOW_RATE  		0.020
 //Частота специальных событий  (бочка или шлюпка) в секунду
 #define WDM_SPECIAL_RATE  		0.0015
-
 //MAX, это поменял Я!!!!!!! Шуршунчик.
 // Boal - учите мат. часть, г-н Шуршунчик. не работает это до начала новой игры, всегда по уполчанию идет. Дефайн правильно, тем более  iEncountersRate далее работает
 //float WDM_FOLLOW_RATE = 0.025 * iEncountersRate;
 //float WDM_STORM_RATE = 0.0001 * iEncountersRate;
-
-
 //--------------------------------------------------------------------------------------
-
-
 float wdmTimeOfLastStorm = 0.0;
 float wdmTimeOfLastMerchant = 0.0;
 float wdmTimeOfLastWarring = 0.0;
 float wdmTimeOfLastFollow = 0.0;
 float wdmTimeOfLastSpecial = 0.0;
-
-
 void wdmReset()
 {
 	wdmTimeOfLastStorm = 0.0;
@@ -39,7 +29,6 @@ void wdmReset()
 	wdmTimeOfLastFollow = 0.0;
 	wdmTimeOfLastSpecial = 0.0;
 }
-
 //Storm
 void wdmStormGen(float dltTime, float playerShipX, float playerShipZ, float playerShipAY)
 {
@@ -61,7 +50,6 @@ void wdmStormGen(float dltTime, float playerShipX, float playerShipZ, float play
 		wdmTimeOfLastStorm = 0.0;
 	}
 }
-
 //Random ships
 void wdmShipEncounter(float dltTime, float playerShipX, float playerShipZ, float playerShipAY)
 {
@@ -131,8 +119,6 @@ void wdmShipEncounter(float dltTime, float playerShipX, float playerShipZ, float
 		wdmTimeOfLastSpecial = 0.0;
 	}
 }
-
-
 #event_handler("Map_TraderSucces", "Map_TraderSucces");
 #event_handler("Map_WarriorEnd", "Map_WarriorEnd");
 // to_do -->
@@ -160,9 +146,7 @@ void Map_TraderSucces()
 		pchar.worldmap.shipcounter = 0;
 	}
 	string sChar = GetEventData();
-
 	Map_TraderSucces_quest(sChar); //обработка квестов по поиску кэпов
-
 	//homo 03/08/06 Наводка на купца
 	if (findsubstr(sChar, "_QuestMerchant" , 0) != -1)
 	{
@@ -175,7 +159,6 @@ void Map_TraderSucces()
 	{
         RouteGoldFleet();
 	}
-	
 	if (findsubstr(sChar, "SiegeCap_" , 0) != -1)
 	{
         SiegeProgress();
@@ -196,7 +179,6 @@ void Map_TraderSucces()
 		trace("Can't find character with character id " + sChar);
 		return;
 	}
-
 	if(sChar == "Head of Gold Squadron")
 	{
 		PrepareContinueGoldConvoy();
@@ -213,20 +195,16 @@ void Map_TraderSucces()
 		pchar.quest.(sQuest).win_condition.l1.date.hour = rand(23);
 		pchar.quest.(sQuest).win_condition = "sink_ship_travel";
 		pchar.quest.(sQuest).quest = iQuest;
-
 		return;
 	}  */
 }
-
 void Map_TraderSucces_quest(string sChar)
 {
 	ref character = CharacterFromID(sChar);
-	
 	// Warship 08.07.09 Пасхалка с бригантиной Мэри Селест
 	if(sChar == "MaryCelesteCapitan")
 	{
 		Map_ReleaseQuestEncounter("MaryCelesteCapitan");
-		
 		// Для палубы, при Map_ReleaseQuestEncounter() рассылалось событие, а ставить еще раз не нужно
 		if(PChar.QuestTemp.MaryCeleste != "OnDeck")
 		{
@@ -234,44 +212,35 @@ void Map_TraderSucces_quest(string sChar)
 			character.fromShore = character.toShore;
 			character.toCity = SelectAnyColony(character.fromCity); // Колония, в бухту которой придет
 			character.toShore = GetIslandRandomShoreId(GetArealByCityName(character.toCity));
-			
 			Map_CreateTrader(character.fromShore, character.toShore, "MaryCelesteCapitan", GetMaxDaysFromIsland2Island(GetArealByCityName(character.toCity), GetArealByCityName(character.fromCity)));
-			
 			Log_TestInfo("Бригантина Мэри Селест вышла из " + character.fromCity + " и направилась в " + character.toShore);
 		}
 	}
-	
 	// Warship Генер "Пираты на необитайке"
 	// В город не выходит, только по глобалке: город - это лишние телодвижения, которые погоды особо не сделают
 	if(sChar == "PiratesOnUninhabited_BadPirate")
 	{
 		Map_ReleaseQuestEncounter("PiratesOnUninhabited_BadPirate");
-		
 		if(!CheckAttribute(PChar, "GenQuest.PiratesOnUninhabited.ClearShip"))
 		{
 			character.fromCity = character.toCity; // Колония, из бухты которой выйдет
 			character.fromShore = character.toShore;
 			character.toCity = SelectAnyColony(character.fromCity); // Колония, в бухту которой придет
 			character.toShore = GetIslandRandomShoreId(GetArealByCityName(character.toCity));
-			
 			Map_CreateTrader(character.fromShore, character.toShore, "PiratesOnUninhabited_BadPirate", -1);
-			
 			Log_TestInfo("Пираты на необитайке: кэп вышел из " + character.fromCity + " и направился в: " + character.toShore);
 		}
 	}
 	if(sChar == "ShipWreck_BadPirate") // лесник - добавил блок по генеру "потерпевшие кораблекрушение"
 	{
 		Map_ReleaseQuestEncounter("ShipWreck_BadPirate");
-		
 		if(!CheckAttribute(PChar, "GenQuest.ShipWreck_BadPirate.ClearShip")) // проверка на срок действия квеста. 
 		{
 			character.fromCity = character.toCity; // Колония, из бухты которой выйдет
 			character.fromShore = character.toShore;
 			character.toCity = SelectAnyColony(character.fromCity); // Колония, в бухту которой придет
 			character.toShore = GetIslandRandomShoreId(GetArealByCityName(character.toCity));
-			
 			Map_CreateTrader(character.fromShore, character.toShore, "ShipWreck_BadPirate", -1);
-			
 			Log_TestInfo("Кораблекрушенцы: корабль вышел из " + character.fromCity + " и направился в: " + character.toCity);
 		}
 	}
@@ -284,7 +253,6 @@ void Map_TraderSucces_quest(string sChar)
 		CloseQuestHeader("ReasonToFast");
 		DeleteAttribute(pchar,"questTemp.ReasonToFast");
 	}
-	
 	//розыск и отдача кэпу судового журнала
 	if (findsubstr(sChar, "PortmansCap_" , 0) != -1 && characters[GetCharacterIndex(sChar)].quest == "InMap")
 	{
@@ -305,7 +273,6 @@ void Map_TraderSucces_quest(string sChar)
 			CitizCapFromMapToCity(sChar);
 			Log_TestInfo("Энканутер кэпа " + sChar + " дошел до места назначения.");
 		}
-		
 		if(character.quest == "outMap")
 		{
 			string sTemp = "SCQ_" + character.index;

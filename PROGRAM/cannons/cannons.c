@@ -1,7 +1,5 @@
 #include "cannons\cannons.h"
-
 extern void InitCannons();
-
 void CannonsInit()
 {
 	if(LoadSegment("cannons\cannons_init.c"))
@@ -9,16 +7,13 @@ void CannonsInit()
 		InitCannons();
 		UnloadSegment("cannons\cannons_init.c");
 	}
-
 	SetEventHandler(GET_CANNON_BY_TYPE_EVENT,"CannonGetByTypeEvent",0);
 }
-
 aref CannonGetByTypeEvent()
 {
 	int iCannonType = GetEventData();
 	return &Cannon[iCannonType];
 }
-
 int GetCannonByTypeAndCaliber(string sCannonType, int iCaliber)
 {
 	switch (sCannonType)
@@ -100,10 +95,8 @@ int GetCannonByTypeAndCaliber(string sCannonType, int iCaliber)
 			}
 		break;
 	}
-
 	return CANNON_TYPE_NONECANNON;
 }
-
 int FindCannonByText(string sId)
 {
 	for(int i = 0; i < CANNON_TYPES_QUANTITY; i++)
@@ -115,13 +108,11 @@ int FindCannonByText(string sId)
 	}
 	return -1;
 }
-
 string GetCannonType(int iCannon)
 {
 	if (iCannon != CANNON_TYPE_NONECANNON) //fix
 	{
 		int iCannonType = sti(Cannon[iCannon].type);
-
 		switch(iCannonType)
 		{
 			case CANNON_NAME_CULVERINE:
@@ -134,7 +125,6 @@ string GetCannonType(int iCannon)
 	}
 	return "NoneCannon";
 }
-
 // boal 09/02/05
 float GetCannonReloadTime(ref rCannon)
 {
@@ -147,11 +137,9 @@ float GetCannonReloadTime(ref rCannon)
 	    return  stf(rCannon.ReloadTime);
 	}
 }
-
 int GetCannonGoodsIdxByType(int iCannon)
 {
 	int i;
-	
 	for (i = 0; i< GOODS_QUANTITY; i++)
 	{
 		if (CheckAttribute(&Goods[i], "CannonIdx"))

@@ -2,7 +2,6 @@ int igoldpos 	= 0;
 int GoldCapNum  = 0;
 string GoldMonth;
 bool isGoldFleet = false;
-
 void GoldFleet()
 {
     ref sld, chref;
@@ -26,7 +25,6 @@ void GoldFleet()
 	SetCharacterPerk(chref, "MusketsShoot");
 	UpgradeShipParameter(chref, "SpeedRate");	//апгрейдить скорость
 	UpgradeShipParameter(chref, "TurnRate");	//маневренность 
-	
 	string sGroup = "Sea_"+chref.id
 	Group_FindOrCreateGroup(sGroup);
 	Group_SetType(sGroup,"trade");
@@ -38,13 +36,11 @@ void GoldFleet()
 	chref.dialog.filename = "Capitans_dialog.c"; // homo 20/01/07
 	chref.dialog.currentnode = "GoldSquadron";
 	chref.DeckDialogNode = "GoldSquadron";
- 
     int nfreg 	= (3+rand(1));
     int ngal 	= (4+rand(1));
     GoldCapNum 	= nfreg + ngal;
 	int capHasGold = drand(GoldCapNum - 1) + 1;
 	int iSpace;
-
     for(int k = 1; k <= GoldCapNum ; k++)
 	{
 		sName = GenerateRandomNameToShip(SPAIN); 	
@@ -72,7 +68,6 @@ void GoldFleet()
 		ChangeCrewExp(sld, "Cannoners", 100);
 		ChangeCrewExp(sld, "Soldiers",  100); 
 		LAi_SetHP(sld, 100 + makeint(pchar.rank) * 2, 100 + makeint(pchar.rank) * 2);	
-	
 		if(k == capHasGold)
 		{
             iSpace = GetCharacterFreeSpace(sld, GOOD_GOLD);
@@ -86,7 +81,6 @@ void GoldFleet()
 			iSpace = iSpace / 2 + rand(100);
 			Fantom_SetCharacterGoods(sld, GOOD_SILVER, iSpace, 1);
 		}
-		
         sld.AlwaysEnemy = true;
 		sld.DontRansackCaptain = true; //квестовые не сдаются
         sld.dialog.filename = "Capitans_dialog.c"; // homo 20/01/07
@@ -99,20 +93,17 @@ void GoldFleet()
 	chref.mapEnc.type = "trade";
 	chref.mapEnc.worldMapShip = "Manowar_gold";
 	chref.mapEnc.Name = XI_ConvertString("GoldConvoy");
-
 	string sQuest = "KillHeadGoldFleet";
 	pchar.quest.(sQuest).win_condition.l1 = "NPC_Death";
 	pchar.quest.(sQuest).win_condition.l1.character = chref.id;
 	pchar.quest.(sQuest).win_condition = "KillHeadGoldFleet";
     pchar.quest.(sQuest).function= "KillHeadGoldFleet";
 }
-
 void KillHeadGoldFleet(string temp)
 {
 	isGoldFleet = false;
 	Map_ReleaseQuestEncounter("Head_of_Gold_Squadron");
 }
-
 void GoldFleetEncounter(string temp)
 {
     string sQuest = "LeaveGoldleet";
@@ -120,7 +111,6 @@ void GoldFleetEncounter(string temp)
     pchar.quest.(sQuest).win_condition = "LeaveGoldleet";
     pchar.quest.(sQuest).function = "LeaveGoldleet";
 }
-
 void LeaveGoldleet(string temp)
 {
     if ( isGoldFleet )
@@ -155,7 +145,6 @@ void LeaveGoldleet(string temp)
     	DefeatGoldFleet("");
     }
 }
-
 void DefeatGoldFleet(string temp)
 {
     string Text;
@@ -174,7 +163,6 @@ void DefeatGoldFleet(string temp)
 	Statistic_AddValue(pchar, "GoldFleet", 1);
 	Achievment_SetStat(pchar, 4, 1);
 }
-
 void RouteGoldFleet()
 {
     ref sld;
@@ -188,7 +176,6 @@ void RouteGoldFleet()
                 Map_CreateTraderXZ(-858.089, 897.072, hvx, hvz, "Head_of_Gold_Squadron", 3);
                 Log_TestInfo("GoldFleet is near of Havana");
             break;
-
             case 1 :
                 ClearIslandShips("Havana");
                 Colonies[FindColony("Havana")].DontSetShipInPort = true;
@@ -212,7 +199,6 @@ void RouteGoldFleet()
         igoldpos++;
     }
 }
-
 void GoldfleetInHavana(string temp)
 {
          string sQuest = "CheckHavanaGoldFleet";
@@ -220,7 +206,6 @@ void GoldfleetInHavana(string temp)
          pchar.quest.(sQuest).win_condition = "LeaveGoldleet";
          pchar.quest.(sQuest).function = "LeaveGoldleet";
 }
-
 void EndOfGoldFleet(string temp)
 {
     string Text;
@@ -238,7 +223,6 @@ void EndOfGoldFleet(string temp)
     isGoldFleet = false;
     DeleteAttribute (&colonies[FindColony("Havana")], "DontSetShipInPort"); //возвращаем жизнь
 }
-
 void StartGoldFleet(string temp);
 {
     if (Colonies[FindColony("Havana")].nation == SPAIN && Colonies[FindColony("PortoBello")].nation == SPAIN
@@ -257,7 +241,6 @@ void StartGoldFleet(string temp);
             igoldpos = 0;
     }
 }
-
 void EndTime_GoldFleet(int nid)
 {
     ref Prm, CurTpl;
@@ -276,7 +259,6 @@ void EndTime_GoldFleet(int nid)
         }
     }
 }
-
 int NumDeadCapitan()
 {
     int rez = GoldCapNum + 1 - Group_GetLiveCharactersNum("Sea_Head_of_Gold_Squadron");
@@ -284,13 +266,11 @@ int NumDeadCapitan()
     GoldCapNum = GoldCapNum - rez;
     return rez;
 }
-
 void DefeatRumour(int noall)
 {
     ref CurrentRumour;
     string tid;
     int lngFileID = LanguageOpenFile("RumourTexts.txt");
-    
     for(int Rumour_Index = 0; Rumour_Index < MAX_RUMOURS; Rumour_Index++)
     {
         makeref(CurrentRumour, Rumour[Rumour_Index]);
@@ -319,7 +299,6 @@ void DefeatRumour(int noall)
         }        
     }
 }
-
 //OnInit_GoldFleet
 void OnInit_GoldFleet(ref rTmpl)
 {

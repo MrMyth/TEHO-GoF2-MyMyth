@@ -8,7 +8,6 @@ void LAi_LocationFightDisable(ref location, bool isDisable)
 		DeleteAttribute(location, "noFight");
 	}
 }
-
 //Разрешить или запретить генерации монстров 
 void LAi_LocationDisableMonstersGen(string locationId, bool isDisable)
 {
@@ -20,7 +19,6 @@ void LAi_LocationDisableMonstersGen(string locationId, bool isDisable)
 		DeleteAttribute(location, "monsters");
 	}
 }
-
 //Запретить генерации монстров в локации locationId на Days дней
 void LAi_LocationDisableMonGenTimer(string locationId, int Days)
 {
@@ -28,7 +26,6 @@ void LAi_LocationDisableMonGenTimer(string locationId, int Days)
 	SaveCurrentNpcQuestDateParam(location, "monstersTimer");
 	location.monstersTimer = Days;
 }
-
 //сброс таймера на генерацию монстров
 void LAi_LocationResetMonGenTimer(string locationId)
 {
@@ -44,7 +41,6 @@ void LAi_LocationResetMonGenTimer(string locationId)
 		DeleteAttribute(mchr, "GenQuest.monstersTimer");		
 	}	
 }
-
 //Установить время генерации монстров
 void LAi_LocationSetMonstersTime(ref location, float start, float end)
 {
@@ -55,7 +51,6 @@ void LAi_LocationSetMonstersTime(ref location, float start, float end)
 	location.monsters.stime = start;
 	location.monsters.etime = end;	
 }
-
 bool LAi_LocationIsMonstersGen(ref location)
 {
 	//Проверим таймер на запрет генерации монстров
@@ -80,7 +75,6 @@ bool LAi_LocationIsMonstersGen(ref location)
 	}
 	return false;
 }
-
 //Разрешить или запретить генерации фантомов при убийстве в данной локации
 void LAi_LocationFantomsGen(ref location, bool isEnable)
 {
@@ -91,14 +85,12 @@ void LAi_LocationFantomsGen(ref location, bool isEnable)
 		DeleteAttribute(location, "fantoms");
 	}
 }
-
 bool LAi_LocationIsFantomsGen(ref location)
 {
 	if(CheckAttribute(location, "fantoms") == false) return false;
 	if(sti(location.fantoms) != true) return false;
 	return true;
 }
-
 //Запретить генерацию офицеров в локации, или разрешить после запрещения.
 void LAi_LocationDisableOfficersGen(string locationId, bool isDisable)
 {
@@ -110,7 +102,6 @@ void LAi_LocationDisableOfficersGen(string locationId, bool isDisable)
 		DeleteAttribute(location, "DisableOfficers");
 	}
 }
-
 //Запретить генерацию офицеров в локации locationId на Days дней.
 void LAi_LocationDisableOffGenTimer(string locationId, int Days)
 {

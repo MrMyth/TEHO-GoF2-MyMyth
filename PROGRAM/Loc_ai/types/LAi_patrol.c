@@ -1,17 +1,11 @@
 /*
 Тип: стоячий, всегда стоит, отвечает на диалоги, никогда не боится
-
 	Используемые шаблоны:
 		stay
 		dialog
 		goto
 */
-
-
-
 #define LAI_TYPE_PATROL		"patrol"
-
-
 //Инициализация
 void LAi_type_patrol_Init(aref chr)
 {
@@ -55,14 +49,12 @@ void LAi_type_patrol_Init(aref chr)
 	}
 	SendMessage(&chr, "lsl", MSG_CHARACTER_EX_MSG, "SetFightWOWeapon", false);
 }
-
 //Процессирование типа персонажа
 void LAi_type_patrol_CharacterUpdate(aref chr, float dltTime)
 {
 	int trg = -1;
 	//Если болтаем, то ничего пока не меняем
 	if(chr.chr_ai.tmpl == LAI_TMPL_DIALOG) return;
-	
     // boal  лечимся -->
 	float fCheck = stf(chr.chr_ai.type.bottle) - dltTime;
 	if(fCheck < 0)
@@ -148,7 +140,6 @@ void LAi_type_patrol_CharacterUpdate(aref chr, float dltTime)
 				LAi_type_patrol_Goto(chr);
 				return;
 			}
-
 		}else{
 			//Начинаем атаку
 			chr.chr_ai.type.state = "fight";
@@ -198,19 +189,16 @@ void LAi_type_patrol_CharacterUpdate(aref chr, float dltTime)
 		}
 	}
 }
-
 //Загрузка персонажа в локацию
 bool LAi_type_patrol_CharacterLogin(aref chr)
 {
 	return true;
 }
-
 //Выгрузка персонажа из локацию
 bool LAi_type_patrol_CharacterLogoff(aref chr)
 {
 	return true;
 }
-
 //Завершение работы темплейта
 void LAi_type_patrol_TemplateComplite(aref chr, string tmpl)
 {
@@ -221,12 +209,10 @@ void LAi_type_patrol_TemplateComplite(aref chr, string tmpl)
 		chr.chr_ai.type.locator = "";
 	}
 }
-
 //Сообщить о желании завести диалог
 void LAi_type_patrol_NeedDialog(aref chr, aref by)
 {
 }
-
 //Запрос на диалог, если возвратить true то в этот момент можно начать диалог
 bool LAi_type_patrol_CanDialog(aref chr, aref by)
 {
@@ -251,7 +237,6 @@ bool LAi_type_patrol_CanDialog(aref chr, aref by)
 	}
 	return false;
 }
-
 //Начать диалог
 void LAi_type_patrol_StartDialog(aref chr, aref by)
 {
@@ -260,7 +245,6 @@ void LAi_type_patrol_StartDialog(aref chr, aref by)
 	CharacterTurnByChr(chr, by);
 	LAi_tmpl_SetActivatedDialog(chr, by);
 }
-
 //Закончить диалог
 void LAi_type_patrol_EndDialog(aref chr, aref by)
 {
@@ -281,14 +265,10 @@ void LAi_type_patrol_EndDialog(aref chr, aref by)
 		LAi_type_patrol_Stay(chr);
 	}
 }
-
-
 //Персонаж выстрелил
 void LAi_type_patrol_Fire(aref attack, aref enemy, float kDist, bool isFindedEnemy)
 {
 }
-
-
 //Персонаж атакован
 void LAi_type_patrol_Attacked(aref chr, aref by)
 {
@@ -302,7 +282,6 @@ void LAi_type_patrol_Attacked(aref chr, aref by)
 	if(!LAi_group_IsEnemy(chr, by)) return;
     //boal fix ai -->
     float dist = -1.0;
-	
 	if(!GetCharacterDistByChr3D(chr, by, &dist)) return;
 	if(dist < 0.0) return;
 	if(dist > 20.0) return;
@@ -311,7 +290,6 @@ void LAi_type_patrol_Attacked(aref chr, aref by)
     // boal <--
 	if (rand(100) > 95 && !LAi_IsDead(chr) && !LAi_IsDead(pchar)) LAi_CharacterPlaySound(chr, "warrior");
 }
-
 //Проверить персонажа с заданной вероятностью
 void LAi_type_patrol_Stay(aref chr)
 {
@@ -319,7 +297,6 @@ void LAi_type_patrol_Stay(aref chr)
 	chr.chr_ai.type.state = "stay";
 	LAi_tmpl_stay_InitTemplate(chr);
 }
-
 //Отправить персонажа в новую точку
 void LAi_type_patrol_Goto(aref chr)
 {
@@ -340,7 +317,6 @@ void LAi_type_patrol_Goto(aref chr)
 		chr.chr_ai.type.locator = newloc;
 	}
 }
-
 //Проверить персонажа с заданной вероятностью
 void LAi_type_patrol_TestControl(aref chr)
 {
@@ -441,7 +417,6 @@ void LAi_type_patrol_TestControl(aref chr)
 	}
 	//Проверим на начало диалога
 	float luck = 0.0;
-	
 	luck = GetCharacterSkill(pchar, "Sneak");
 	if (rand(iRand) <= luck)
 	{

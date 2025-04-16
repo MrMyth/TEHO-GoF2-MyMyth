@@ -1,8 +1,4 @@
-
-
 #define LAI_TMPL_ANI	"ani"
-
-
 void LAi_tmpl_ani_PlayAnimation(aref chr, string actionName, float timeout)
 {
 	LAi_tmpl_ani_InitTemplate(chr);
@@ -17,7 +13,6 @@ void LAi_tmpl_ani_PlayAnimation(aref chr, string actionName, float timeout)
 		CharacterPlayAction(chr, actionName);
 	}
 }
-
 bool LAi_tmpl_ani_InitTemplate(aref chr)
 {
 	SendMessage(&chr, "lsl", MSG_CHARACTER_EX_MSG, "LockFightMode", false);
@@ -57,7 +52,6 @@ bool LAi_tmpl_ani_InitTemplate(aref chr)
 	}
 	return true;
 }
-
 //Процессирование шаблона персонажа
 void LAi_tmpl_ani_CharacterUpdate(aref chr, float dltTime)
 {
@@ -76,114 +70,91 @@ void LAi_tmpl_ani_CharacterUpdate(aref chr, float dltTime)
 		}
 	}
 }
-
 //Персонаж выполнил команду  go to point
 void LAi_tmpl_ani_EndGoToPoint(aref chr)
 {
 	LAi_tmpl_ani_UpdateState(chr);
 }
-
 //Персонаж провалил команду  go to point
 void LAi_tmpl_ani_FailureGoToPoint(aref chr)
 {
 	LAi_tmpl_ani_UpdateState(chr);
 }
-
-
 //Персонаж выполнил команду  run to point
 void LAi_tmpl_ani_EndRunToPoint(aref chr)
 {
 	LAi_tmpl_ani_UpdateState(chr);
 }
-
 //Персонаж провалил команду  run to point
 void LAi_tmpl_ani_FailureRunToPoint(aref chr)
 {
 	LAi_tmpl_ani_UpdateState(chr);
 }
-
 //Персонаж не может добраться до точки назначения
 void LAi_tmpl_ani_BusyPos(aref chr, float x, float y, float z)
 {
 	LAi_tmpl_ani_UpdateState(chr);
 }
-
 //Персонаж начал перемещение за другим
 void LAi_tmpl_ani_FollowGo(aref chr)
 {
 	LAi_tmpl_ani_UpdateState(chr);
 }
-
 //Персонаж начал дошёл до другого персонажа
 void LAi_tmpl_ani_FollowStay(aref chr)
 {
 	LAi_tmpl_ani_UpdateState(chr);
 }
-
 //Персонаж провалил команду  follow character
 void LAi_tmpl_ani_FailureFollow(aref chr)
 {
 	LAi_tmpl_ani_UpdateState(chr);
 }
-
-
 //Персонаж начал перемещение за другим
 void LAi_tmpl_ani_FightGo(aref chr)
 {
 	LAi_tmpl_ani_UpdateState(chr);
 }
-
 //Персонаж начал дошёл до другого персонажа
 void LAi_tmpl_ani_FightStay(aref chr)
 {
 	LAi_tmpl_ani_UpdateState(chr);
 }
-
 //Персонаж провалил команду  Fight
 void LAi_tmpl_ani_FailureFight(aref chr)
 {
 	LAi_tmpl_ani_UpdateState(chr);
 }
-
 //Можно ли стрелять
 bool LAi_tmpl_ani_IsFire(aref chr)
 {	
 	return false;
 }
-
 //Можно ли использовать оружие
 bool LAi_tmpl_ani_IsFight(aref chr)
 {
 	return false;
 }
-
-
 //Персонаж выполнил команду  escape
 void LAi_tmpl_ani_EndEscape(aref chr)
 {
 	LAi_tmpl_ani_UpdateState(chr);
 }
-
 //Персонаж скользит вдоль патча
 void LAi_tmpl_ani_EscapeSlide(aref chr)
 {
 	LAi_tmpl_ani_UpdateState(chr);
 }
-
 //Персонаж провалил команду  escape
 void LAi_tmpl_ani_FailureEscape(aref chr)
 {
 	LAi_tmpl_ani_UpdateState(chr);
 }
-
-
 //Персонаж толкается с другими персонажами
 void LAi_tmpl_ani_ColThreshold(aref chr)
 {
 	LAi_tmpl_ani_UpdateState(chr);
 }
-
-
 //Персонаж закончил проигрывать анимацию
 void LAi_tmpl_ani_EndAction(aref chr)
 {	
@@ -191,14 +162,11 @@ void LAi_tmpl_ani_EndAction(aref chr)
 	chr.chr_ai.tmpl.timeout = "-1"; //бага еще та!
 	LAi_tmpl_ani_EndAnimation(chr);
 }
-
-
 //Персонажа просят освободить место
 void LAi_tmpl_ani_FreePos(aref chr, aref who)
 {
 	LAi_tmpl_ani_UpdateState(chr);
 }
-
 //Обновить состояние шаблона
 void LAi_tmpl_ani_UpdateState(aref chr)
 {
@@ -211,7 +179,6 @@ void LAi_tmpl_ani_UpdateState(aref chr)
 		CharacterPlayAction(chr, chr.chr_ai.tmpl.animation);
 	}
 }
-
 //Завершение проигрывания анимации
 void LAi_tmpl_ani_EndAnimation(aref chr)
 {

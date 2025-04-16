@@ -18,14 +18,12 @@ void ProcessCommonDialogEvent(ref NPChar, aref Link, aref NextDiag)
                 link.l1.go = "Mtraxx";
 			}
 		break;
-		
 		case "Cupture_after":
             dialog.text = RandPhraseSimple("You have taken everything already. What else do you want?", "Is there anything left that you didn't grab?");
             link.l1 = RandPhraseSimple("Just looking around...", "Just checking, I might forget to take something...");
             link.l1.go = "exit";
             NextDiag.TempNode = "Cupture_after";
 		break;
-		
 		case "Slavetrader_HavanaAttack":
 			dialog.text = "Damn ladrones! You dare to attack Havana?! What do you want?!";
 			link.l1 = "Think a bit, you'll understand.";
@@ -33,13 +31,11 @@ void ProcessCommonDialogEvent(ref NPChar, aref Link, aref NextDiag)
 			pchar.quest.Slavetrader_HavanaOver.over = "yes";
 			AfterTownBattle();
         break;
-		
 		case "Slavetrader_HavanaAttack_1":
 			dialog.text = "Gold, of course! What else could you bastards be interested in but gold?! And we don't have it... Just a few measures in the store.";
 			link.l1 = "Ha-ha... No, we are not interested in gold. We came here for an ivory... the black one. Do you understand me?";
 			link.l1.go = "Slavetrader_HavanaAttack_2";
         break;
-		
 		case "Slavetrader_HavanaAttack_2":
 			if (CheckAttribute(FortChref, "Fort.Mode") && sti(FortChref.Fort.Mode) != FORT_DEAD)//для особо хитрых - нефиг лезть с суши
 			{
@@ -54,7 +50,6 @@ void ProcessCommonDialogEvent(ref NPChar, aref Link, aref NextDiag)
 				link.l1.go = "Slavetrader_HavanaAttack_3";
 			}
         break;
-		
 		case "Slavetrader_HavanaAttack_3":
 			dialog.text = "Fine, you have won anyway and we have to obey your violence. But don't hope to get away from the justice after that robbery and sinking two Spanish warships.";
 			link.l1 = "Don't puff up like that or you'll get a heart attack. Sit here and don't move...";
@@ -62,7 +57,6 @@ void ProcessCommonDialogEvent(ref NPChar, aref Link, aref NextDiag)
 			ChangeCharacterHunterScore(pchar, NationShortName(sti(npchar.Nation)) + "hunter", 50);
 			ChangeCharacterComplexReputation(pchar,"nobility", -8);
         break;
-		
 		 case "Slavetrader_HavanaAttack_4":
 			string sTemp;
             NextDiag.CurrentNode = "Cupture_after";
@@ -80,7 +74,6 @@ void ProcessCommonDialogEvent(ref NPChar, aref Link, aref NextDiag)
 			SetFunctionTimerCondition("Slavetrader_FiveTSlavesOver", 0, 0, 30, false);	//таймер
 			pchar.questTemp.Slavetrader = "Win_HavanaFort";
         break;
-		
 		case "Slavetrader_HavanaAttack_lose":
             NextDiag.CurrentNode = "Cupture_after";
 			DialogExit();
@@ -95,26 +88,22 @@ void ProcessCommonDialogEvent(ref NPChar, aref Link, aref NextDiag)
 			CloseQuestHeader("Slavetrader");
 			pchar.questTemp.Slavetrader = "End_quest";
         break;
-		
 		// Addon 2016-1 Jason пиратскаЯ линейка
 		case "Mtraxx":
             dialog.text = "How curious... more complaints?";
 			link.l1 = "No-no, quite on the contrary, your Excellence. Lope is an old army friend, we fought together back in Europe... I would love to help him out, and came to ask for your assistance.";
 			link.l1.go = "Mtraxx_1";
 		break;
-		
 		case "Mtraxx_1":
             dialog.text = "Hm.. Well, I assume, since you've come to me, you already know this... absurd story?";
 			link.l1 = "I do, your Excellence.";
 			link.l1.go = "Mtraxx_2";
 		break;
-		
 		case "Mtraxx_2":
             dialog.text = "I suggest you contacting don Rosario Gusman. He, just like you, wants to help don Lope Montero. He had attempted to contact the victim, however, the negotiations did't bare fruit. Meet with him, he'll explain the details. You can find don Rosario in the streets from four till eight afternoon. He does a full inspection of city guard posts every day.";
 			link.l1 = "Gratitude, your Excellence!";
 			link.l1.go = "Mtraxx_3";
 		break;
-		
 		case "Mtraxx_3":
             DialogExit();
 			pchar.questTemp.Mtraxx = "jewelry_7";
@@ -124,4 +113,3 @@ void ProcessCommonDialogEvent(ref NPChar, aref Link, aref NextDiag)
 	}
 	UnloadSegment(NPChar.FileDialog2);  // если где-то выход внутри switch  по return не забыть сделать анлод
 }
-

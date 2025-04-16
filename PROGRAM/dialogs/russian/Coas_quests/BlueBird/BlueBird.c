@@ -4,13 +4,10 @@ void ProcessDialogEvent()
 	aref Link, NextDiag, forName;
 	string sTemp, sTitle;
 	int iTemp;
-
 	DeleteAttribute(&Dialog,"Links");
-
 	makeref(NPChar,CharacterRef);
 	makearef(Link, Dialog.Links);
 	makearef(NextDiag, NPChar.Dialog);
-	
 	switch(Dialog.CurrentNode)
 	{
 		case "First time":
@@ -19,12 +16,10 @@ void ProcessDialogEvent()
 			link.l1.go = "exit";	
 			NextDiag.TempNode = "First time";
 		break;
-
 		case "Exit":
 			NextDiag.CurrentNode = NextDiag.TempNode;
 			DialogExit();
 		break;
-
 		case "BlueBirdCapitain":
 			dialog.text = "I'd like to know who you are.";
 			link.l1 = "I'm called " + GetFullName(pchar) + ". I'm a privateer.";
@@ -71,6 +66,5 @@ void ProcessDialogEvent()
 			QuestAboardCabinDialogNotBattle(); 
             DialogExit();
 		break;	
-
 	}
 }

@@ -1,7 +1,6 @@
 // Map quest encounters
 #define MAX_QUEST_MAP_ENCOUNTERS	20
 object QuestMapEncounters[MAX_QUEST_MAP_ENCOUNTERS];
-
 void InitQuestMapEncounters()
 {
 	for (int i=0; i<MAX_QUEST_MAP_ENCOUNTERS; i++)
@@ -10,7 +9,6 @@ void InitQuestMapEncounters()
 		DeleteAttribute(&QuestMapEncounters[i], "");
 	}
 }
-
 int FindQuestMapEncounter(string sGroupID)
 {
 	for (int i=0; i<MAX_QUEST_MAP_ENCOUNTERS; i++)
@@ -20,12 +18,10 @@ int FindQuestMapEncounter(string sGroupID)
 	}
 	return -1;
 }
-
 ref Encounter_GetQuestMapEncounter(int iEncounterIndex)
 {
 	return &QuestMapEncounters[iEncounterIndex];
 }
-
 int Encounter_FindFirstQuestMapEncounter(int iEncType)
 {
 	for (int i=0; i<MAX_QUEST_MAP_ENCOUNTERS; i++)
@@ -37,15 +33,12 @@ int Encounter_FindFirstQuestMapEncounter(int iEncType)
 	}
 	return -1;
 }
-
 void Encounter_DeleteQuestMapEncounter(string sGroupID)
 {
 	int iEncounter = FindQuestMapEncounter(sGroupID);
 	if (iEncounter < 0) { return; }
-
 	DeleteAttribute(&QuestMapEncounters[iEncounter], "");
 	//рэйнжер продолжает путь
-	
 	/*
 	if (characters[GetCharacterIndex(sGroupID)].adventure.type == "trade")
 	{
@@ -53,7 +46,6 @@ void Encounter_DeleteQuestMapEncounter(string sGroupID)
 	}
 	*/
 }
-
 void Encounter_DeleteDeadQuestMapEncounters()
 {
 	for (int i=0; i<MAX_QUEST_MAP_ENCOUNTERS; i++)
@@ -66,7 +58,6 @@ void Encounter_DeleteDeadQuestMapEncounters()
 		}
 	}
 }
-
 int FindFreeQuestMapEncounterSlot()
 {
 	for (int i=0; i<MAX_QUEST_MAP_ENCOUNTERS; i++)
@@ -85,7 +76,6 @@ int FindFreeOrExistsQuestMapEncounterSlot(string newId)
 	return FindFreeQuestMapEncounterSlot();
 }
 // boal <--
-
 // не работает!!!  теперь все иначе, через Map_CreateWarrior
 void Encounter_SetQuestMapEncounter(string sGroupID, int iEncType, bool bPermanent, int iRandomMeeting)
 {
@@ -96,12 +86,9 @@ void Encounter_SetQuestMapEncounter(string sGroupID, int iEncType, bool bPermane
 		return;
 	}
 	ref rEnc = &QuestMapEncounters[iEncounter];
-
     DeleteAttribute(rEnc, ""); //fix
-    
 	if (iRandomMeeting > 100)	{ iRandomMeeting = 100; }
 	if (iRandomMeeting < 0)		{ iRandomMeeting = 0; }
-
 	rEnc.ID = sGroupID;
 	rEnc.Type = iEncType;
 	rEnc.Permanent = bPermanent;

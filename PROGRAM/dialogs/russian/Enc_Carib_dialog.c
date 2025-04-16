@@ -4,29 +4,24 @@ void ProcessDialogEvent()
 	aref Link, Diag;
 	int i, iGun, iMush, qty;
 	string sGroup, sLink, sText;
-	
 	DeleteAttribute(&Dialog,"Links");
-
 	makeref(NPChar,CharacterRef);
 	makearef(Link, Dialog.Links);
 	makearef(Diag, NPChar.Dialog);
 	int iTemp = sti(npchar.EncQty);
 	string sTemp = "Carib" + locations[FindLocation(npchar.location)].index + "_";
-
 	switch(Dialog.CurrentNode)
 	{
 		case "exit":
 			Diag.CurrentNode = Diag.TempNode;
 			DialogExit();			
 		break;
-		
 		case "First time":
 			dialog.text = "Congratulation! This is a bug. Contact Jason and tell him how and where you got this one. Peace!";
 			link.l1 = "I will do it immediately!";
 			link.l1.go = "exit";
 			Diag.TempNode = "First time";
 		break;
-
 		case "exit_fight":
 			sGroup = "CaribGroup_" + locations[FindLocation(npchar.location)].index;
 			for(i = 0; i < iTemp; i++)
@@ -43,7 +38,6 @@ void ProcessDialogEvent()
 			DialogExit();	
 			AddDialogExitQuest("MainHeroFightModeOn");
 		break;
-		
 		case "exit_peace":
 			DialogExit();
 			sGroup = "CaribGroup_" + locations[FindLocation(npchar.location)].index;
@@ -57,7 +51,6 @@ void ProcessDialogEvent()
 			}	
 			ChangeIndianRelation(0.25);
 		break;
-		
 		// военные индеи - карибы
 		case "war_indian":
 			for(i = 0; i < iTemp; i++)
@@ -92,25 +85,21 @@ void ProcessDialogEvent()
 				else link.l3.go = "war_indian_3_2";
 			}
 		break;
-		
 		case "war_indian_1":
 			dialog.text = RandPhraseSimple("You feel sorry for being born, palefaced dog... I cut out your heart and fry it on fire!","I make you eat stones, palefaced dog! We laugh you beg for death on your knees, white cur!");
 			link.l1 = RandPhraseSimple("You still can't shut your smelly mouth, painted scarecrow? I will drive you back to the jungle from where you came!","You dare to threaten me, scum?! Now you will climb the tree you've just come down from!");
 			link.l1.go = "exit_fight";
 		break;
-		
 		case "war_indian_2_1":
 			dialog.text = RandPhraseSimple("I hear your voice speaks true. We not bare our axes against you this day. Go in peace, paleface.","Paleface rarely brings peace, but I see in your eyes you speak true. Go now.");
 			link.l1 = RandPhraseSimple("A wise decision, warrior. Good luck to you.","I am glad we came to an understanding, warrior.");
 			link.l1.go = "exit_peace";
 		break;
-		
 		case "war_indian_2_2":
 			dialog.text = RandPhraseSimple("You lie, paleface cur! You came here kill Indians! Ready for battle, paleface?!","You kill Indians. White tongue is lying tongue. I cut it of and fry on fire!");
 			link.l1 = RandPhraseSimple("Well, buddy, don't blame me then. God knows, I tried to avoid it...","Well, you asked for it, warrior.");
 			link.l1.go = "exit_fight";
 		break;
-		
 		case "war_indian_3_1":
 			if (CheckCaribGuns())
 			{
@@ -128,13 +117,11 @@ void ProcessDialogEvent()
 				link.l1.go = "exit_fight";
 			}
 		break;
-		
 		case "war_indian_3_2":
 			dialog.text = RandPhraseSimple("We no trade with paleface dogs. We kill and take!","We no filthy miskito or arawaks, we no trade with palefaces! We kill them and get war trophies!");
 			link.l1 = RandPhraseSimple("Well, then try to rob me, scoundrel!","First, you will need to take my saber from me, you filth!");
 			link.l1.go = "exit_fight";
 		break;
-		
 		case "war_indian_trade":
 			iGun = 1;
 			dialog.text = "You show what you have, and we say what we give for it.";
@@ -149,7 +136,6 @@ void ProcessDialogEvent()
 				}
 			}
 		break;
-		
 		case "gun_1":
 			npchar.quest.gun = "pistol1";
 			if (drand(1) == 0)
@@ -170,7 +156,6 @@ void ProcessDialogEvent()
 			link.l2 = "No. No way.";
 			link.l2.go = "war_indian_trade_bad";
 		break;
-		
 		case "gun_2":
 			npchar.quest.gun = "pistol2";
 			if (drand(3) < 2)
@@ -191,7 +176,6 @@ void ProcessDialogEvent()
 			link.l2 = "No. No way.";
 			link.l2.go = "war_indian_trade_bad";
 		break;
-		
 		case "gun_3":
 			npchar.quest.gun = "pistol3";
 			if (drand(5) < 3)
@@ -213,7 +197,6 @@ void ProcessDialogEvent()
 			link.l2 = "No. No way.";
 			link.l2.go = "war_indian_trade_bad";
 		break;
-		
 		case "gun_4":
 			npchar.quest.gun = "pistol4";
 			if (drand(9) < 8)
@@ -235,7 +218,6 @@ void ProcessDialogEvent()
 			link.l2 = "No. No way.";
 			link.l2.go = "war_indian_trade_bad";
 		break;
-		
 		case "gun_5":
 			npchar.quest.gun = "pistol5";
 			if (drand(7) < 7)
@@ -268,7 +250,6 @@ void ProcessDialogEvent()
 			link.l2 = "No. No way.";
 			link.l2.go = "war_indian_trade_bad";
 		break;
-		
 		case "gun_6":
 			npchar.quest.gun = "pistol6";
 			if (drand(9) < 8)
@@ -290,7 +271,6 @@ void ProcessDialogEvent()
 			link.l2 = "No. No way.";
 			link.l2.go = "war_indian_trade_bad";
 		break;
-		
 		case "war_indian_trade_agree":
 			ChangeIndianRelation(0.3);
 			npchar.quest.count = sti(npchar.quest.count)+1;
@@ -317,13 +297,11 @@ void ProcessDialogEvent()
 				link.l2.go = "war_indian_trade_exit";
 			}
 		break;
-		
 		case "war_indian_trade_exit":
 			dialog.text = "Bring. Better fiery weapon more we give for it. Now go!";
 			link.l1 = "See you, warrior...";
 			link.l1.go = "exit_peace";
 		break;
-		
 		case "war_indian_trade_bad":
 			if (sti(pchar.questTemp.Indian.relation) > 79)
 			{
@@ -345,7 +323,6 @@ void ProcessDialogEvent()
 				link.l1.go = "exit_fight";
 			}
 		break;
-		
 		// мирные индеи - мискито
 		case "peace_indian":
 			for(i = 0; i < iTemp; i++)
@@ -361,13 +338,11 @@ void ProcessDialogEvent()
 			link.l2 = RandPhraseSimple("And why do you need to know? Go your own way and stay away from trouble!","Go your own way, red-skinned one. I have no time to talk with you.");
 			link.l2.go = "peace_indian_2";
 		break;
-		
 		case "peace_indian_1":
 			dialog.text = RandPhraseSimple("We peaceful people. We not enemies with white men. Go, but be careful on our land!","I glad meet palefaced friend of Indians. Go in peace, son of sea!");
 			link.l1 = RandPhraseSimple("Good luck to you, too, son of the selva...","Farewell, red-skinned friend.");
 			link.l1.go = "exit_peace";
 		break;
-		
 		case "peace_indian_2":
 			dialog.text = RandPhraseSimple("We peaceful hunters. But we not stand when paleface talks like that on our land!","We not fight with white men, but if white men offend us, we answer like our forefathers taught us!");
 			link.l1 = RandPhraseSimple("You still can't shut your smelly mouth, painted scarecrow? I will drive you back to the jungle from where you came!","You dare to threaten me, scum?! Now you will climb the tree you've just come down from!");

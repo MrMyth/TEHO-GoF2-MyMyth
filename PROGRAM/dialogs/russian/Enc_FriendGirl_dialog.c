@@ -3,20 +3,16 @@ void ProcessDialogEvent()
 	ref NPChar, sld;
 	aref Link, NextDiag;
 	int i, iRank, iMassive;
-
 	DeleteAttribute(&Dialog,"Links");
-
 	makeref(NPChar,CharacterRef);
 	makearef(Link, Dialog.Links);
 	makearef(NextDiag, NPChar.Dialog);
-	
 	switch(Dialog.CurrentNode)
 	{		
 		case "exit":
 			NextDiag.CurrentNode = NextDiag.TempNode;
 			DialogExit();
 		break;
-
 		case "First time":
 			dialog.text = LinkRandPhrase("Oh my Lord, I am so glad that I met you!",
 				"Finally someone!",
@@ -45,7 +41,6 @@ void ProcessDialogEvent()
 			Link.l2 = "These are your problems, I don't wanna waste my time. Farewell...";
 			Link.l2.go = "Step_disAgree";
 		break;
-
 		case "Step_agree":
 			pchar.quest.Enc_FriendGirl_after.over = "yes";
 			if (rand(1))
@@ -107,7 +102,6 @@ void ProcessDialogEvent()
 			NextDiag.CurrentNode = NextDiag.TempNode;
 			DialogExit();
 		break;
-
 		case "Step_disAgree":
 			ChangeCharacterComplexReputation(pchar,"nobility", -3);
 			LAi_SetCitizenTypeNoGroup(npchar);
@@ -121,7 +115,6 @@ void ProcessDialogEvent()
 			Link.l1 = "Heh, what a bitch...";
 			Link.l1.go = "exit";
 		break;
-
 		case "Underground0": //девка реально заблудилась
             dialog.text = "Oh my God, I am so glad to see you!";
 			Link.l1 = "What's up, beauty?";
@@ -141,7 +134,6 @@ void ProcessDialogEvent()
 			LAi_ActorFollow(npchar, pchar, "", -1);
 			ChangeCharacterComplexReputation(pchar,"nobility", 4);
 		break;
-
 		case "Underground1": //крутая мочалка
             dialog.text = "Wow, it seems that someone else took interest in this dungeon!";
 			Link.l1 = "Beauty, what you are doing here?";
@@ -179,6 +171,5 @@ void ProcessDialogEvent()
 			Link.l1.go = "exit";
 			NextDiag.TempNode = "Underground1_again";
 		break;
-
 	}
 }

@@ -1,4 +1,3 @@
-
 native string LanguageGetLanguage();
 native int LanguageOpenFile(string sFileName);
 native void LanguageCloseFile(int idLngFile);
@@ -9,9 +8,7 @@ native int GlobalLngFileID();
 native string LanguageGetFaderPic(string faderPicName);
 native string DialogAssembleStr(string idStr, string paramStr);
 native string DialogAddParamToStr(string oldParamStr, string paramID, string paramValue);
-
 //native int NFFindFiles(ref rObject, string sDirectory, string sMask, bool bRecursive);
-
 native void XI_SetColorCorrection(float fContrast, float fGamma, float fBrightness);
 native void XI_SetMouseSensitivity( float fMouseXSens, float fMouseYSens );
 native void XI_ControlMakeInvert(string sControlName, int bInvertState);
@@ -30,28 +27,23 @@ native void XI_RestoreNodeLocks(int nStoreCode);
 native bool XI_IsKeyPressed(string key_name); // key_name = {"shift","control","alt"}
 native bool XI_IsVirtualKeyPressed(int key_code);
 native void XI_RegistryExitKey(string key_name);
-
 #libriary "script_interface_functions"
-
 void CreateImage(string AttrName,string imgListName,string imgName,int left,int top,int right,int bottom)
 {
 	GameInterface.pictures.(AttrName).tex = imgListName;
     GameInterface.pictures.(AttrName).pic = imgName;
     SendMessage(&GameInterface,"lslllll",MSG_INTERFACE_PLACE_IMAGE,AttrName,true,left,top,right,bottom);
 }
-
 void CreateAbsoluteImage(string AttrName,string imgListName,string imgName,int left,int top,int right,int bottom)
 {
 	GameInterface.pictures.(AttrName).tex = imgListName;
     GameInterface.pictures.(AttrName).pic = imgName;
     SendMessage(&GameInterface,"lslllll",MSG_INTERFACE_PLACE_IMAGE,AttrName,false,left,top,right,bottom);
 }
-
 void SetPictureBlind(string picName,bool blindFlag,int minCol,int maxCol)
 {
 	SendMessage(&GameInterface,"lslll",MSG_INTERFACE_SET_BLIND,picName,blindFlag,minCol,maxCol);
 }
-
 void CreateString(int enable,string strName, string strData, string fontName, int color, int x, int y, int alignment, float scale)
 {
     GameInterface.strings.(strName) = strData;
@@ -61,27 +53,22 @@ void CreateString(int enable,string strName, string strData, string fontName, in
         SendMessage(&GameInterface,"ls", MSG_INTERFACE_DISABLE_STRING, strName);
     }
 }
-
 void DisableString(string strName)
 {
     SendMessage(&GameInterface,"ls", MSG_INTERFACE_DISABLE_STRING, strName);
 }
-
 void EnableString(string strName)
 {
     SendMessage(&GameInterface,"ls", MSG_INTERFACE_ENABLE_STRING, strName);
 }
-
 void ChangeStringColor(string strName, int newCol)
 {
 	SendMessage(&GameInterface,"lsl",MSG_INTERFACE_CHANGE_STR_COLOR,strName,newCol);
 }
-
 void SetNodeUsing(string nodeName,int bUsing)
 {
     SendMessage(&GameInterface,"lsl", MSG_INTERFACE_SET_NODE_USING, nodeName, bUsing);
 }
-
 void SetCurrentNode(string nodeName)
 {
     SendMessage(&GameInterface,"ls", MSG_INTERFACE_NEW_CURRENT_NODE,nodeName);
@@ -92,12 +79,10 @@ string GetCurrentNode()
 	SendMessage(&GameInterface,"le", MSG_INTERFACE_GET_CURRENT_NODE,&retVal);
 	return retVal;
 }
-
 void ShowHelpString(string helpString)
 {
     SendMessage(&GameInterface,"ls", MSG_INTERFACE_SETHELPSTRING, helpString);
 }
-
 string MakeMoneyShow(int moneyQuantity,string sign,string deliver)
 {
 	string moneyStr;
@@ -127,22 +112,18 @@ string MakeMoneyShow(int moneyQuantity,string sign,string deliver)
 	moneyStr = sign+moneyQuantity+moneyStr;
 	return moneyStr;
 }
-
 void SetNewPicture(string _NodeName,string _NewPictureFileName)
 {
 	SendMessage(&GameInterface,"lslls", MSG_INTERFACE_MSG_TO_NODE,_NodeName,2, false, _NewPictureFileName);
 }
-
 void SetNewGroupPicture(string sNodeName,string sGroup, string sName)
 {
 	SendMessage(&GameInterface,"lslss", MSG_INTERFACE_MSG_TO_NODE, sNodeName ,6, sGroup, sName);	
 }
-
 void SetNewVideoPicture(string _NodeName,string _NewVideoPicFileName)
 {
 	SendMessage(&GameInterface,"lslls", MSG_INTERFACE_MSG_TO_NODE,_NodeName,2, true, _NewVideoPicFileName);
 }
-
 void SetSelectable(string _NodeName,int _Selectable)
 {
 	SendMessage(&GameInterface,"lsl", MSG_INTERFACE_SET_SELECTABLE, _NodeName, _Selectable);
@@ -151,7 +132,6 @@ int GetSelectable(string _NodeName)
 {
 	return SendMessage(&GameInterface,"ls", MSG_INTERFACE_GET_SELECTABLE, _NodeName);
 }
-
 void SetClickable(string _NodeName, bool ClickStatus)
 {
 	SendMessage(&GameInterface,"lslll", MSG_INTERFACE_MSG_TO_NODE,_NodeName,-1,1, ClickStatus);
@@ -160,7 +140,6 @@ bool GetClickable(string _NodeName)
 {
 	return SendMessage(&GameInterface,"lsll", MSG_INTERFACE_MSG_TO_NODE,_NodeName,-1,2);
 }
-
 void DelFromScroll(string nodeName,int pnum)
 {
 	int qn = sti(GameInterface.(nodeName).ListSize)-1;
@@ -179,17 +158,14 @@ void DelFromScroll(string nodeName,int pnum)
 	if(qn>=0) GameInterface.(nodeName).ListSize = qn;
 	SendMessage(&GameInterface,"lsl", MSG_INTERFACE_DEL_SCROLLIMAGE, nodeName, pnum);
 }
-
 void AddToScroll(string nodeName,int pnum)
 {
 	SendMessage(&GameInterface,"lsl", MSG_INTERFACE_ADD_SCROLLIMAGE, nodeName, pnum);
 }
-
 void XI_SetQuestTitles(string nodName,aref questInfo,int topNum)
 {
 	SendMessage(&GameInterface,"lsal",MSG_INTERFACE_SET_TITLE_STRINGS,nodName,questInfo,topNum);
 }
-
 int GetShipTexture(string shipType)
 {
 	if(shipType=="Not Used") return -1;
@@ -199,7 +175,6 @@ int GetShipTexture(string shipType)
 	if(shipType=="GhostShip") return 1;
 	return 0;
 }
-
 string GetShipTextureName(string shipType)
 {
 	if(shipType=="Not Used") return "";
@@ -209,13 +184,11 @@ string GetShipTextureName(string shipType)
 	if(shipType=="GhostShip") return "SHIPS1";
 	return "SHIPS16";
 }
-
 string GetFaceGroupName(int charIdx)
 {
 	if(charIdx<0) {return "EMPTYFACE";}
 	return "FACE128_"+Characters[charIdx].FaceID;
 }
-
 string GetFacePictureName(int charIdx)
 {
 	if(charIdx<0) return "emptyface";
@@ -243,7 +216,6 @@ int SelectedLineInFormatedText(string sNodeName)
 {
 	return SendMessage(&GameInterface,"lsl",MSG_INTERFACE_MSG_TO_NODE,sNodeName, 11);
 }
-
 int SetVAligmentFormatedText(string sNodeName)  // boal нарыл в ядре, что можно
 {
 	return SendMessage(&GameInterface,"lsl",MSG_INTERFACE_MSG_TO_NODE,sNodeName, 5);
@@ -256,7 +228,6 @@ void SetFormattedTextLastLineColor(string _sNodeName, int _iColor)
 }
 // <--
 //-------------------------------------------------------------------------------------------------------------
-
 string FloatToString(float fl,int nDigAfterPoint)
 {
 	//float fmul = pow(10.0,nDigAfterPoint);
@@ -264,7 +235,6 @@ string FloatToString(float fl,int nDigAfterPoint)
 	//int p1 = makeint(fl);
 	//int p2 = makeint((fl-p1)*fmul);
 	//return p1+"."+p2;
-
 	fl= fl + 0.5/pow(10.0,nDigAfterPoint); // округление
 	int p1 = makeint(fl); // целая часть
 	string str = p1 + "."; // строка
@@ -280,7 +250,6 @@ int GetStringWidth(string str, string fontID, float fScale)
 {
 	return SendMessage(&GameInterface, "lssf", MSG_INTERFACE_GET_STRWIDTH, str, fontID, fScale);
 }
-
 string GetItemPictureName(string itemName)
 {
 	aref arItm;
@@ -293,7 +262,6 @@ string GetItemPictureName(string itemName)
 	}
 	return "cannon back";
 }
-
 string GetItemTextureName(string itemName)
 {
 	aref arItm;
@@ -306,13 +274,11 @@ string GetItemTextureName(string itemName)
 	}
 	return "ICONS";
 }
-
 int GetItemPictureTexture(string accessString, string itemName)
 {
 	aref arItm,arGroup;
 	makearef(arGroup,GameInterface.(accessString));
 	string sTexName = "ICONS";
-
 	if( Items_FindItem(itemName,&arItm)>=0 )
 	{	if( CheckAttribute(arItm,"picTexture") )
 		{	sTexName = arItm.picTexture;
@@ -326,7 +292,6 @@ int GetItemPictureTexture(string accessString, string itemName)
 	}
 	return -1;
 }
-
 void FillImagesGroupForItems(aref arImgGrp)
 {
 	int i,n,q;
@@ -349,22 +314,16 @@ void FillImagesGroupForItems(aref arImgGrp)
 		n++;
 	}
 }
-
 string GetFacePicName(ref chref)
 {
 	return "face";
 }
-
-
 void FillFaceList(string strAccess, ref chref, int fillCode)
 {
 	aref ar;
 	makearef(ar, GameInterface.(strAccess));
-
 	int n, cn, q;
-
 	AddFaceGroup(strAccess,"FACE128_"+chref.faceID);
-
 	if(fillCode==0) // officers
 	{
 		//officers
@@ -376,7 +335,6 @@ void FillFaceList(string strAccess, ref chref, int fillCode)
 		{
 			AddFaceGroup(strAccess,"FACE128_"+Characters[sti(chref.Fellows.Passengers.navigator)].faceID);
 		}
-		
 		if (chref.Fellows.Passengers.boatswain == "-1")
 		{
 			AddFaceGroup(strAccess,"FACE128_BOATSWAIN");
@@ -385,7 +343,6 @@ void FillFaceList(string strAccess, ref chref, int fillCode)
 		{
 			AddFaceGroup(strAccess,"FACE128_"+Characters[sti(chref.Fellows.Passengers.boatswain)].faceID);
 		}
-		
 		if (chref.Fellows.Passengers.cannoner == "-1")
 		{
 			AddFaceGroup(strAccess,"FACE128_cannoner");
@@ -394,7 +351,6 @@ void FillFaceList(string strAccess, ref chref, int fillCode)
 		{
 			AddFaceGroup(strAccess,"FACE128_"+Characters[sti(chref.Fellows.Passengers.cannoner)].faceID);
 		}
-		
 		if (chref.Fellows.Passengers.doctor == "-1")
 		{
 			AddFaceGroup(strAccess,"FACE128_doctor");
@@ -403,7 +359,6 @@ void FillFaceList(string strAccess, ref chref, int fillCode)
 		{
 			AddFaceGroup(strAccess,"FACE128_"+Characters[sti(chref.Fellows.Passengers.doctor)].faceID);
 		}
-		
 		if (chref.Fellows.Passengers.treasurer == "-1")
 		{
 			AddFaceGroup(strAccess,"FACE128_treasurer");
@@ -412,7 +367,6 @@ void FillFaceList(string strAccess, ref chref, int fillCode)
 		{
 			AddFaceGroup(strAccess,"FACE128_"+Characters[sti(chref.Fellows.Passengers.treasurer)].faceID);
 		}
-		
 		if (chref.Fellows.Passengers.carpenter == "-1")
 		{
 			AddFaceGroup(strAccess,"FACE128_carpenter");
@@ -421,7 +375,6 @@ void FillFaceList(string strAccess, ref chref, int fillCode)
 		{
 			AddFaceGroup(strAccess,"FACE128_"+Characters[sti(chref.Fellows.Passengers.carpenter)].faceID);
 		}
-		
 		//fighters
 		for(n=1; n<4; n++)
 		{
@@ -435,7 +388,6 @@ void FillFaceList(string strAccess, ref chref, int fillCode)
 			}
 		}
 	}
-
 	if(fillCode==1) // companions
 	{
 		for(n=1; n<COMPANION_MAX; n++)
@@ -446,7 +398,6 @@ void FillFaceList(string strAccess, ref chref, int fillCode)
 			}
 		}
 	}
-
 	if(fillCode==2) // passengers
 	{
 		q = GetPassengersQuantity(chref);
@@ -459,10 +410,8 @@ void FillFaceList(string strAccess, ref chref, int fillCode)
 			}
 		}
 	}
-	
 	if(fillCode==3) // officer for hire
 	{
-		
 	}
 	if(fillCode==4) // free passengers
 	{
@@ -486,17 +435,14 @@ void FillFaceList(string strAccess, ref chref, int fillCode)
 		}
 	}
 }
-
 void FillShipList(string strAccess, ref chref)
 {
 	/*
 	aref ar;
 	makearef(ar, GameInterface.(strAccess));
-
 	int n, cn, q;
 	int iShipType;
 	string sShip;
-
 	for(n=0; n<COMPANION_MAX; n++)
 	{
 		cn = GetCompanionIndex(chref, n);
@@ -509,13 +455,10 @@ void FillShipList(string strAccess, ref chref)
 		}
 	}
 	*/
-
 	aref ar;
 	makearef(ar, GameInterface.(strAccess));
-
 	int n;
 	string sShip;
-
 	for(n= 0; n< SHIP_TYPES_QUANTITY; n++)
 	{
 		if(CheckAttribute(ShipsTypes[n], "name"))
@@ -525,7 +468,6 @@ void FillShipList(string strAccess, ref chref)
 		AddFaceGroup(strAccess,"SHIPS_"+sShip);
 	}
 }
-
 void FillItemsPicturesList(string strAccess, ref chref)  // to_do del
 {
 	AddFaceGroup(strAccess, "WEAPONS");
@@ -541,7 +483,6 @@ void FillUpgradesList(string strAccess, string smode, int iCannonMaterial)  // t
 {
 	aref ar;
 	makearef(ar, GameInterface.(strAccess));
-	
 	int iMax;
 	if(smode == "cannons")
 	{
@@ -563,8 +504,6 @@ void FillUpgradesList(string strAccess, string smode, int iCannonMaterial)  // t
 		}
 	}
 }
-
-
 void AddFaceGroup(string strAccess, string groupName)
 {
 	if( FindFaceGroupNum(strAccess,groupName)<0 )
@@ -575,71 +514,57 @@ void AddFaceGroup(string strAccess, string groupName)
 		ar.(attrName) = groupName;
 	}
 }
-
 int FindFaceGroupNum(string strAccess, string groupName)
 {
 	int n, q;
 	aref aRoot, aCur;
 	makearef(aRoot, GameInterface.(strAccess));
-
 	q = GetAttributesNum(aRoot);
 	for(n=0; n<q; n++)
 	{
 		aCur = GetAttributeN(aRoot,n);
 		if( GetAttributeValue(aCur) == groupName ) return n;
 	}
-
 	return -1;
 }
-
 string GlobalStringConvert(string strID)
 {
 	return LanguageConvertString( GlobalLngFileID(), strID );
 }
-
 void LoadIcons(string sDirectory, string sFileMask, string sControlName, int iAddListSize) {
 	object objFileFinder;
 	aref arList, arFile;
 	int iNumFiles;
 	string sFile, attrName, sName;
-	
 	objFileFinder.dir = "resource\textures\" + sDirectory;
 	objFileFinder.mask = sFileMask;
-	
 	CreateEntity(&objFileFinder, "FINDFILESINTODIRECTORY");
 	makearef(arList, objFileFinder.filelist);
 	iNumFiles = GetAttributesNum(arList);	
-		
 	for (int i = 0; i < iNumFiles; i++) {
 		arFile = GetAttributeN(arList, i);
 		sFile = GetAttributeValue(arFile);
-		
 		attrName = "pic" + (i + 1);
 		sName = "f" + i;
 		GameInterface.(sControlName).(attrName).name1 = sName;
 		GameInterface.(sControlName).(attrName).FileName = sFile;
 		GameInterface.(sControlName).(attrName).TexId = GetTexture(sDirectory + sFile);
 	}
-	
 	GameInterface.(sControlName).ListSize = iNumFiles + iAddListSize;
 	//SendMessage(&GameInterface,"lsl",MSG_INTERFACE_SCROLL_CHANGE,sControlName,-1);
 	DeleteClass(&objFileFinder);
 }
-
 void UnloadIcons(string sControlName) {
 	string sAttr;
 	aref arPics;
 	makearef(arPics, GameInterface.(sControlName));
 	int iNumPics = sti(GameInterface.(sControlName).ListSize);
-	
 	for (int i = 0; i < iNumPics; i++) {
 		sAttr = "pic" + (i + 1);
 		ReleaseTexture(sti(arPics.(sAttr).TexId));
 	}
-	
 	DeleteAttribute(&GameInterface, sControlName);
 }
-
 void CreateTooltip(string header, string text1, int color1, string text2, int color2, string text3, int color3, string text4, int color4, string picTexture, string picGroup, string picImage, int nPicWidth, int nPicHeight)
 {
 	// сохранить состояния окон и элементов
@@ -661,7 +586,6 @@ void CreateTooltip(string header, string text1, int color1, string text2, int co
 	XI_MakeNode( "", "TOOLTIP_TEXT4", "tooltip_text4", 30002 ); //
 	SendMessage(&GameInterface,"lsslslslslsssll",MSG_INTERFACE_SET_TOOLTIP, header, text1,color1, text2,color2, text3,color3, text4,color4, picTexture, picGroup, picImage, nPicWidth, nPicHeight );
 }
-
 void CloseTooltip()
 {
 	// удалить элементы тултипа:
@@ -689,7 +613,6 @@ void CloseTooltip()
 		InterfaceStates.tooltip.savestate = -1;
 	}
 }
-
 string GetMoralePicture(float fMoraleValue)
 {
 	if( fMoraleValue >= 75.0 ) {return "interfaces\flags\flag_1_64.tga.tx";}
@@ -697,7 +620,6 @@ string GetMoralePicture(float fMoraleValue)
 	if( fMoraleValue >= 25.0 ) {return "interfaces\flags\flag_3_64.tga.tx";}
 	return "interfaces\flags\flag_4_64.tga.tx";
 }
-
 string GetExperiencePicture(float fExpValue)
 {
 	if( fExpValue >= 75.0 ) {return "interfaces\stars\Yellow_star1.tga.tx";}
@@ -705,18 +627,15 @@ string GetExperiencePicture(float fExpValue)
 	if( fExpValue >= 25.0 ) {return "interfaces\stars\Yellow_star3.tga.tx";}
 	return "interfaces\stars\Yellow_star4.tga.tx";
 }
-
 string GetMoraleGroupPicture(float fMoraleValue)
 {
 	if( fMoraleValue >= 75.0 ) {return "high morale";}
 	if( fMoraleValue >= 40.0 ) {return "medium morale";}
 	return "low morale";
 }
-
 bool XI_FindFoldersWithoutNetsave(string sFindTemplate,aref arFoldersList)
 {
 	bool bRetVal = XI_FindFolders(sFindTemplate,arFoldersList);
-
 	int num = GetAttributesNum(arFoldersList);
 	int i = 0;
 	for(i=0; i<num; i++) {
@@ -726,7 +645,6 @@ bool XI_FindFoldersWithoutNetsave(string sFindTemplate,aref arFoldersList)
 			return bRetVal;
 		}
 	}
-
 	return bRetVal;
 }
 // boal -->
@@ -735,21 +653,16 @@ void ReadSavedOptionsEx(ref gopt)
 	string sFileName = "options";
 	SendMessage(&GameInterface, "lsa", MSG_INTERFACE_LOADOPTIONS, sFileName, gopt);
 }
-
 void SaveSavedOptionsEx(ref gopt)
 {
 	string sFileName = "options";
 	SendMessage(&GameInterface, "lsa", MSG_INTERFACE_SAVEOPTIONS, sFileName, gopt);
 }
-
 void SaveStartGameParam()
 {
     object gopt;
-
 	ReadSavedOptionsEx(&gopt);
-
 	ref optref = &gopt;
-
     optref.StartGameParam.PlayerProfile    		 = GameInterface.PROFILE_NAME.str;//PlayerProfile.name;
     optref.StartGameParam.MOD_SKILL_ENEMY_RATE   = MOD_SKILL_ENEMY_RATE;
     optref.StartGameParam.bHardcoreGame          = bHardcoreGame;
@@ -758,22 +671,17 @@ void SaveStartGameParam()
 	optref.StartGameParam.bPartitionSet          = bPartitionSet;
 	optref.StartGameParam.bRains                 = bRains;
 	optref.StartGameParam.iArcadeSails           = iArcadeSails;
-
 	SaveSavedOptionsEx(&gopt);
 }
 void LoadStartGameParam()
 {
     object gopt;
-
 	ReadSavedOptionsEx(&gopt);
-
 	ref optref = &gopt;
-
 	if (CheckAttribute(optref, "StartGameParam.PlayerProfile"))
 	{
     	GameInterface.PROFILE_NAME.str = optref.StartGameParam.PlayerProfile;
     }
-
     if (CheckAttribute(optref, "StartGameParam.MOD_SKILL_ENEMY_RATE"))
 	{
     	MOD_SKILL_ENEMY_RATE = sti(optref.StartGameParam.MOD_SKILL_ENEMY_RATE);
@@ -802,32 +710,25 @@ void LoadStartGameParam()
 	{
     	bPartitionSet = sti(optref.StartGameParam.bPartitionSet);
     }
-
 	if (CheckAttribute(optref, "StartGameParam.bRains"))
 	{
     	bRains = sti(optref.StartGameParam.bRains);
     }		
-	
     if (CheckAttribute(optref, "StartGameParam.iArcadeSails"))
 	{
     	iArcadeSails = sti(optref.StartGameParam.iArcadeSails);
     }
 }
-
 void LoadPlayerProfileDefault()
 {
     object gopt;
-
 	ReadSavedOptionsEx(&gopt);
-
 	ref optref = &gopt;
-
 	if (CheckAttribute(optref, "StartGameParam.PlayerProfile"))
 	{
     	PlayerProfile.name = optref.StartGameParam.PlayerProfile;
     }
 }
-
 // boal сложность -->
 string GetLevelComplexity(int _Level_Complexity)
 {
@@ -865,7 +766,6 @@ string GetLevelComplexity(int _Level_Complexity)
             break;
     }
 }
-
 string GetItemDescribe(int iGoodIndex)
 {
 	string GoodName = Items[iGoodIndex].name;
@@ -878,7 +778,6 @@ string GetItemDescribe(int iGoodIndex)
 		lngFileID = LanguageOpenFile("ItemsDescribe.txt")
 	}
     string describeStr = "";
-
 	if (CheckAttribute(arItm, "groupID"))
 	{
 		if(arItm.groupID == GUN_ITEM_TYPE)
@@ -902,7 +801,6 @@ string GetItemDescribe(int iGoodIndex)
 			}
 		}
 	}
-	
 	describeStr = describeStr + GetAssembledString(LanguageConvertString(lngFileID, Items[iGoodIndex].describe), &Items[iGoodIndex]);
 	if (CheckAttribute(arItm, "potion"))
 	{
@@ -921,9 +819,7 @@ string GetItemDescribe(int iGoodIndex)
 		}
 	}
     describeStr += newStr() + XI_ConvertString("weight") + " " + FloatToString(stf(arItm.weight), 1);
-    
 	LanguageCloseFile(lngFileID);
-	
 	return describeStr;
 }
 // boal <--

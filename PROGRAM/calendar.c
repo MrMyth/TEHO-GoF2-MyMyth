@@ -5,7 +5,6 @@
 #define DAY_TIME_MORNING	"Morning"
 #define DAY_TIME_DAY		"Day"
 #define DAY_TIME_EVENING	"Evening"
-
 //Levis moon calculations
 #define	MOON_CYCLE			29.530588853
 #define FULL_MOON_DAYS		3
@@ -16,7 +15,6 @@
 #define FULL_MOON			"Full Moon"
 #define	QUARTER_THREE		"Waning moon"
 #define QUARTER_FOUR		"Waning crescent moon"
-
 float  GetTime(){ return stf(Environment.time); }
 float  GetHour(){ return stf(Environment.date.hour); }
 float  GetMinute(){ return stf(Environment.date.min); }
@@ -24,7 +22,6 @@ float  GetSecond(){ return stf(Environment.date.sec); }
 int	GetDataYear(){ return sti(Environment.date.year); }
 int	GetDataMonth(){ return sti(Environment.date.month); }
 int	GetDataDay(){ return sti(Environment.date.day); }
-
 void SetDayTime(string name)
 {
 	switch(name)
@@ -35,7 +32,6 @@ void SetDayTime(string name)
 	case DAY_TIME_EVENING:	SetCurrentTime(19,1);	break;
 	}
 }
-
 string GetDayTime()
 {
 	if(GetTime()<6.0) return DAY_TIME_NIGHT;
@@ -48,12 +44,10 @@ bool IsDay()
 {
 	if(GetTime() > 6.0)	{if(GetTime() < 23.0) return true; } return false;
 }
-
 bool IsLoginTime()
 {
 	if(GetTime() > 6.0)	{if(GetTime() < 21.99) return true; } return false;
 }
-
 int GetMonthDays(int month)
 {
 	while(month>12) {month -= 12;}
@@ -75,11 +69,9 @@ int GetMonthDays(int month)
 	Trace("Error: " + month + " month is not relevant");
 	return 30;
 }
-
 int GetDayOfYear(int year, int month, int day)
 {
 	int yearday = 0;
-
 	int Leap = 0;
 	if (month > 2)
 	{
@@ -91,7 +83,6 @@ int GetDayOfYear(int year, int month, int day)
 			}
 		}
 	}
-
 	switch (month)
 	{
 		case  1: yearday =   0; break;	//   0
@@ -111,8 +102,6 @@ int GetDayOfYear(int year, int month, int day)
 	yearday += day;
 	return yearday;
 }
-
-
 int GetAddingDataYear(int addYear,int addMonth,int addDay)
 {
 	int nextDay = GetDataDay()+addDay;
@@ -193,7 +182,6 @@ int AddTimeToCurrent(int hour,int minute)
 	Environment.date.min = makeint(nexttime);
 	worldMap.date.min = makeint(nexttime);
     Weather.Time.time = GetTime(); // новая погода
-    
 	return addingDays; // boal верунть число дней, чтоб понять, что новый наступил
 }
 void AddDataToCurrent(int addYear,int addMonth,int addDay)
@@ -218,12 +206,10 @@ void AddDataToCurrent(int addYear,int addMonth,int addDay)
 	worldMap.date.year = nextYear;
 	worldMap.date.month = nextMonth;
 	worldMap.date.day = nextDay;
-	
 //	if(addYear!=0 || addMonth!=0 || addDay!=0)
 //	{
 //		for (int i=0; i<addDay; i++) Event("NextDay");
 //	}
-	
 	if(addYear!=0 || addMonth!=0 || addDay!=0)	
 	{
 		if (GetSteamEnabled() && AchievmentsDayUpdateCnt != 0)
@@ -234,7 +220,6 @@ void AddDataToCurrent(int addYear,int addMonth,int addDay)
 	}	
 	//  for (int i=0; i<addDay; i++) PostEvent("NextDay",0);
 }
-
 // "year","month","day","hour","minute"
 int GetPastTime(string timeUnit,
 				int pastYear,int pastMonth,int pastDay, float pastTime,
@@ -244,7 +229,6 @@ int GetPastTime(string timeUnit,
 	int dyear = currentYear - pastYear;
 	int dmonth = currentMonth - pastMonth;
 	int dday = currentDay - pastDay;
-
 	if(dtime<0.0)
 	{
 		dday--;
@@ -261,15 +245,12 @@ int GetPastTime(string timeUnit,
 		dyear--;
 		dmonth = dmonth+12;
 	}
-
 	if(dyear<0) return 0;
 	if(timeUnit=="year") return dyear;
-
 	if(timeUnit=="month")
 	{
 		return dmonth+dyear*12;
 	}
-	
 	int dayCount = dday + dyear*365;
 	for(int i=0; i<dmonth; i++)
 	{
@@ -278,12 +259,10 @@ int GetPastTime(string timeUnit,
 		if(pastMonth>12) pastMonth = 1;
 	}
 	//if(timeUnit=="day")	return dayCount;
-
 	if(timeUnit=="hour") return dayCount*24 + makeint(dtime);
 	if(timeUnit=="minute") return dayCount*1440 + makeint(dtime*60.0);
 	return dayCount;
 }
-
 void SetCurrentTime(int hour, int minutes)
 {
 	Environment.date.hour = makefloat(hour);
@@ -302,7 +281,6 @@ int GetFuterTime(string timeUnit,
 	int dyear = pastYear - currentYear;
 	int dmonth = pastMonth - currentMonth;
 	int dday = pastDay - currentDay;
-
 	if(dtime<0.0)
 	{
 		dday--;
@@ -319,15 +297,12 @@ int GetFuterTime(string timeUnit,
 		dyear--;
 		dmonth = dmonth+12;
 	}
-
 	if(dyear<0) return 0;
 	if(timeUnit=="year") return dyear;
-
 	if(timeUnit=="month")
 	{
 		return dmonth+dyear*12;
 	}
-	
 	int dayCount = dday + dyear*365;
 	for(int i=0; i<dmonth; i++)
 	{
@@ -336,7 +311,6 @@ int GetFuterTime(string timeUnit,
 		if(pastMonth>12) pastMonth = 1;
 	}
 	//if(timeUnit=="day")	return dayCount;
-
 	if(timeUnit=="hour") return dayCount*24 + makeint(dtime);
 	if(timeUnit=="minute") return dayCount*1440 + makeint(dtime*60.0);
 	return dayCount;

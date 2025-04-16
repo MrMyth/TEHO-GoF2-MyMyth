@@ -1,5 +1,3 @@
-
-
 void LoginCharactersInLocation(ref loc)
 {
     // boal 01.02.2004 -->
@@ -20,7 +18,6 @@ void LoginCharactersInLocation(ref loc)
 	Dead_Char_num = 0; // трупов нет
 	// boal dead can be searched 14.12.2003 <--
 }
-
 void LoginCharacter(aref chr, string locID)
 {
 	if(LAi_CharacterLogin(chr, locID))
@@ -51,7 +48,6 @@ void LoginCharacter(aref chr, string locID)
 		}
 	}
 }
-
 void LogoffCharacter(aref chr)
 {
 	if(IsEntity(&chr))
@@ -61,20 +57,16 @@ void LogoffCharacter(aref chr)
 		CharacterExitFromLocation(chr);
 	}
 }
-
-
 bool ChangeCharacterAddress(ref character, string location_id, string locator)
 {
 	return ChangeCharacterAddressGroup(character, location_id, "goto", locator);
 }
-
 string GetCharacterShipLocation(ref rCharacter)
 {
 	if (CheckAttribute(rCharacter,"location.from_sea")) return rCharacter.location.from_sea;
 	Trace("Character '" + rCharacter.id + "' location.from_sea is absent");
 	return "None";
 }
-
 bool SetCharacterShipLocation(ref character, string location_id)
 {
 	if (location_id == "")  // для пусто свой подход, это не баг, это нужно занулить
@@ -82,7 +74,6 @@ bool SetCharacterShipLocation(ref character, string location_id)
 		character.location.from_sea = location_id;	
 		return true;
 	}
-	
 	int lindex = FindLocation(location_id);
 	if (lindex < 0)
 	{
@@ -92,7 +83,6 @@ bool SetCharacterShipLocation(ref character, string location_id)
 	character.location.from_sea = location_id;
 	return true;
 }
-
 bool ChangeCharacterShipGroup(ref rCharacter, string group_id)
 {
 	rCharacter.Ship.AI.GroupName = group_id;
@@ -102,7 +92,6 @@ bool ChangeCharacterShipGroup(ref rCharacter, string group_id)
 	}
 	return true;
 }
-
 bool SetCharacterIslandLocation(ref character, string location_id, string group, string locator, string group_id, string task, string target_group_id)
 {
 	bool bRet = ChangeCharacterAddressGroup(character, location_id, group, locator);
@@ -112,7 +101,6 @@ bool SetCharacterIslandLocation(ref character, string location_id, string group,
 	character.Ship.AI.Task.Group = target_group_id;
 	return true;
 }
-
 bool ChangeCharacterAddressGroup(ref character, string location_id, string group, string locator)
 {
 	//Trace("Change character address id = " + character.id + "; location = " + location_id + "; group = " + group + "; locator = " + locator);
@@ -164,5 +152,3 @@ bool ChangeCharacterAddressGroup(ref character, string location_id, string group
 	}
 	return true;
 }
-
-

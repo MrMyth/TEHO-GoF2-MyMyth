@@ -1,6 +1,5 @@
 /*
 Тип: актёр, исполняет указания скрипторов
-
 	Используемые шаблоны:
 		stay
 		goto
@@ -8,12 +7,7 @@
 		follow
 		dialog
 */
-
-
-
 #define LAI_TYPE_ACTOR	"actor"
-
-
 //Инициализация
 void LAi_type_actor_Init(aref chr)
 {
@@ -66,7 +60,6 @@ void LAi_type_actor_Init(aref chr)
 	}
 	SendMessage(&chr, "lsl", MSG_CHARACTER_EX_MSG, "SetFightWOWeapon", false);
 }
-
 //Процессирование типа персонажа
 void LAi_type_actor_CharacterUpdate(aref chr, float dltTime)
 {
@@ -124,21 +117,17 @@ void LAi_type_actor_CharacterUpdate(aref chr, float dltTime)
 			}
 		}		
 	}
-
 }
-
 //Загрузка персонажа в локацию
 bool LAi_type_actor_CharacterLogin(aref chr)
 {
 	return true;
 }
-
 //Выгрузка персонажа из локацию
 bool LAi_type_actor_CharacterLogoff(aref chr)
 {
 	return true;
 }
-
 //Завершение работы темплейта
 void LAi_type_actor_TemplateComplite(aref chr, string tmpl)
 {
@@ -186,12 +175,10 @@ void LAi_type_actor_TemplateComplite(aref chr, string tmpl)
 	}
 	if(quest != "") CompleteQuestName(quest, "");
 }
-
 //Сообщить о желании завести диалог
 void LAi_type_actor_NeedDialog(aref chr, aref by)
 {
 }
-
 //Запрос на диалог, если возвратить true то в этот момент можно начать диалог
 bool LAi_type_actor_CanDialog(aref chr, aref by)
 {
@@ -207,7 +194,6 @@ bool LAi_type_actor_CanDialog(aref chr, aref by)
 	}
 	return canDialog;
 }
-
 //Начать диалог
 void LAi_type_actor_StartDialog(aref chr, aref by)
 {
@@ -230,7 +216,6 @@ void LAi_type_actor_StartDialog(aref chr, aref by)
 		}
 	}
 }
-
 //Закончить диалог
 void LAi_type_actor_EndDialog(aref chr, aref by)
 {
@@ -243,13 +228,10 @@ void LAi_type_actor_EndDialog(aref chr, aref by)
 		LAi_type_actor_TemplateComplite(chr, LAI_TMPL_DIALOG);
 	}
 }
-
 //Персонаж выстрелил
 void LAi_type_actor_Fire(aref attack, aref enemy, float kDist, bool isFindedEnemy)
 {
-
 }
-
 //Персонаж атакован
 void LAi_type_actor_Attacked(aref chr, aref by)
 {
@@ -267,7 +249,6 @@ void LAi_type_actor_Attacked(aref chr, aref by)
 		LAi_group_FightGroups(chr.chr_ai.group, by.chr_ai.group, true);
 	}
 }
-
 bool LAi_type_actor_Error(aref chr, bool lockTest)
 {
 	if (!CheckAttribute(chr, "chr_ai.type") || chr.chr_ai.type != LAI_TYPE_ACTOR)
@@ -288,8 +269,6 @@ bool LAi_type_actor_Error(aref chr, bool lockTest)
 	}
 	return false;
 }
-
-
 //------------------------------------------------------------------------------------------
 //Scripters ai program interface
 //------------------------------------------------------------------------------------------
@@ -302,7 +281,6 @@ bool LAi_type_actor_Error(aref chr, bool lockTest)
 //           если >= 0 то по истечении заданного времени просимулируется выполнение задания
 //
 //------------------------------------------------------------------------------------------
-
 //Указать актёру стоять
 void LAi_ActorStay(aref chr)
 {
@@ -311,7 +289,6 @@ void LAi_ActorStay(aref chr)
 	chr.chr_ai.type.quest = "";
 	LAi_tmpl_stay_InitTemplate(chr);
 }
-
 //Указать актёру идти в заданный локатор
 void LAi_ActorGoToLocator(aref chr, string group, string locator, string quest, float timeout)
 {
@@ -322,7 +299,6 @@ void LAi_ActorGoToLocator(aref chr, string group, string locator, string quest, 
 	LAi_tmpl_goto_SetLocator(chr, group, locator, timeout);
 	chr.chr_ai.type.lock = "1";
 }
-
 //Указать актёру бежать в заданный локатор
 void LAi_ActorRunToLocator(aref chr, string group, string locator, string quest, float timeout)
 {
@@ -333,7 +309,6 @@ void LAi_ActorRunToLocator(aref chr, string group, string locator, string quest,
 	LAi_tmpl_runto_SetLocator(chr, group, locator, timeout);
 	chr.chr_ai.type.lock = "1";
 }
-
 //Указать актёру идти в заданную локацию
 void LAi_ActorGoToLocation(aref chr, string groupExit, string locatorExit, string locID, string groupEnter, string locatorEnter, string quest, float timeout)
 {
@@ -347,7 +322,6 @@ void LAi_ActorGoToLocation(aref chr, string groupExit, string locatorExit, strin
 	LAi_tmpl_goto_SetLocator(chr, groupExit, locatorExit, timeout);
 	chr.chr_ai.type.lock = "1";
 }
-
 //Указать актёру бежать в заданную локацию
 void LAi_ActorRunToLocation(aref chr, string groupExit, string locatorExit, string locID, string groupEnter, string locatorEnter, string quest, float timeout)
 {
@@ -361,7 +335,6 @@ void LAi_ActorRunToLocation(aref chr, string groupExit, string locatorExit, stri
 	LAi_tmpl_runto_SetLocator(chr, groupExit, locatorExit, timeout);
 	chr.chr_ai.type.lock = "1";
 }
-
 //Указать актёру cледовать за персонажем в пределах локации
 //При первом подходе или истечении времени сработает квест
 void LAi_ActorFollow(aref chr, aref follow, string quest, float timeout)
@@ -372,7 +345,6 @@ void LAi_ActorFollow(aref chr, aref follow, string quest, float timeout)
 	LAi_tmpl_SetFollow(chr, follow, timeout);
 	chr.chr_ai.type.lock = "1";
 }
-
 //Указать актёру cледовать за игроком по всем локациям
 //При первом подходе или истечении времени сработает квест
 void LAi_ActorFollowEverywhere(aref chr, string quest, float timeout)
@@ -382,7 +354,6 @@ void LAi_ActorFollowEverywhere(aref chr, string quest, float timeout)
 	LAi_ActorFollow(chr, pchar, quest, timeout);
 	chr.chr_ai.type.lock = "0";
 }
-
 //Указать актёру на кого напасть
 void LAi_ActorAttack(aref chr, aref enemy, string quest)
 {
@@ -392,7 +363,6 @@ void LAi_ActorAttack(aref chr, aref enemy, string quest)
 	LAi_tmpl_SetFight(chr, enemy);
 	chr.chr_ai.type.lock = "1";
 }
-
 //Указать актёру бояться другого персонажа
 void LAi_ActorAfraid(aref chr, aref by, bool canMove)
 {
@@ -402,8 +372,6 @@ void LAi_ActorAfraid(aref chr, aref by, bool canMove)
 	LAi_tmpl_afraid_SetAfraidCharacter(chr, by, canMove);
 	chr.chr_ai.type.lock = "0";
 }
-
-
 //Активировать диалог между актёром и другим персонажем с подходом друг к другу
 void LAi_ActorDialog(aref chr, aref to, string quest, float timeout, float dlgTime)
 {
@@ -415,7 +383,6 @@ void LAi_ActorDialog(aref chr, aref to, string quest, float timeout, float dlgTi
 	LAi_tmpl_SetFollow(chr, to, timeout);
 	chr.chr_ai.type.lock = "1";
 }
-
 //Активировать диалог между актёром и другим персонажем немедленно
 void LAi_ActorDialogNow(aref chr, aref to, string quest, float dlgTime)
 {
@@ -428,7 +395,6 @@ void LAi_ActorDialogNow(aref chr, aref to, string quest, float dlgTime)
 	LAi_type_actor_CheckStartDialog(chr);
 	chr.chr_ai.type.lock = "1";
 }
-
 //Активировать диалог между актёром и другим персонажем с задержкой. eddy.
 void LAi_ActorDialogDelay(aref chr, aref to, string quest, float delayTime)
 {
@@ -449,8 +415,6 @@ void ActorDialogDelay()    // относится к методу выше.
 	LAi_type_actor_CheckStartDialog(chr);
 	chr.chr_ai.type.lock = "1";
 }
-
-
 //Активировать диалог с самим собой
 void LAi_ActorSelfDialog(aref chr, string quest)
 {
@@ -461,7 +425,6 @@ void LAi_ActorSelfDialog(aref chr, string quest)
 	SelfDialog(chr);
 	chr.chr_ai.type.lock = "1";
 }
-
 //Указать актёру стоять и ждать диалога от другого персонажа
 void LAi_ActorWaitDialog(aref chr, aref by)
 {
@@ -472,7 +435,6 @@ void LAi_ActorWaitDialog(aref chr, aref by)
 	LAi_tmpl_stay_InitTemplate(chr);
 	chr.chr_ai.type.lock = "1";
 }
-
 //eddy. Указать актеру возможность диалога с другим персонажем без остановки актера.
 // не перебивает вызов квеста, забитого предыдущей командой!!!
 void LAi_Actor2WaitDialog(aref chr, aref by)
@@ -482,7 +444,6 @@ void LAi_Actor2WaitDialog(aref chr, aref by)
 	chr.chr_ai.type.dlgchr = by.index;
 	chr.chr_ai.type.lock = "1";
 }
-
 //Проиграть анимацию для актёра, по окончанию вызвать квест
 //Если анимация зацикленна, то квест вызовется по истечению времени
 void LAi_ActorAnimation(aref chr, string animation, string quest, float timeout)
@@ -493,7 +454,6 @@ void LAi_ActorAnimation(aref chr, string animation, string quest, float timeout)
 	LAi_tmpl_ani_PlayAnimation(chr, animation, timeout);
 	chr.chr_ai.type.lock = "1";
 }
-
 //Ориентировать актёра на персонажа (одноразово)
 void LAi_ActorTurnToCharacter(aref chr, aref to)
 {
@@ -503,7 +463,6 @@ void LAi_ActorTurnToCharacter(aref chr, aref to)
 	CharacterTurnByChr(chr, to);
 	chr.chr_ai.type.lock = "0";
 }
-
 //Ориентировать актёра по локатору
 void LAi_ActorTurnByLocator(aref chr, string group, string locator)
 {
@@ -513,7 +472,6 @@ void LAi_ActorTurnByLocator(aref chr, string group, string locator)
 	CharacterTurnByLoc(chr, group, locator);
 	chr.chr_ai.type.lock = "0";
 }
-
 //Ориентировать актёра на локатор
 void LAi_ActorTurnToLocator(aref chr, string group, string locator)
 {
@@ -523,7 +481,6 @@ void LAi_ActorTurnToLocator(aref chr, string group, string locator)
 	CharacterTurnToLoc(chr, group, locator);
 	chr.chr_ai.type.lock = "0";
 }
-
 //Установить анимацию стоячего персонажа
 void LAi_ActorSetStayMode(aref chr)
 {
@@ -531,7 +488,6 @@ void LAi_ActorSetStayMode(aref chr)
 	chr.chr_ai.type.mode = "stay";
 	LAi_SetDefaultStayAnimation(chr);
 }
-
 //Установить анимацию сидячего персонажа
 void LAi_ActorSetSitMode(aref chr)
 {
@@ -539,7 +495,6 @@ void LAi_ActorSetSitMode(aref chr)
 	chr.chr_ai.type.mode = "sit";
 	LAi_SetDefaultSitAnimation(chr);
 }
-
 //Установить анимацию лежачего персонажа
 void LAi_ActorSetLayMode(aref chr)
 {
@@ -547,11 +502,9 @@ void LAi_ActorSetLayMode(aref chr)
 	chr.chr_ai.type.mode = "lay";
 	LAi_SetDefaultLayAnimation(chr);
 }
-
 //------------------------------------------------------------------------------------------
 //Внутреннии функции
 //------------------------------------------------------------------------------------------
-
 //Перейти в состояние ожидания новой команды
 void LAi_type_actor_Reset(aref chr)
 {
@@ -562,7 +515,6 @@ void LAi_type_actor_Reset(aref chr)
 	chr.chr_ai.type.lock = "0";
 	CharacterPlayAction(chr, "");
 }
-
 //Начать по возможности диалог
 void LAi_type_actor_CheckStartDialog(aref chr)
 {
@@ -575,4 +527,3 @@ void LAi_type_actor_CheckStartDialog(aref chr)
 		LAi_tmpl_SetDialog(chr, &Characters[idx], stf(chr.chr_ai.type.dlgtime));
 	}
 }
-

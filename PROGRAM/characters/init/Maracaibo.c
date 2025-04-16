@@ -1,12 +1,9 @@
-
 int CreateMaracaiboCharacters(int n)
 {
 	ref ch;
-	
 	///////////////////////////////////////////////////////////////////////////////
 	// ОСНОВНЫЕ ПЕРСОНАЖИ
 	///////////////////////////////////////////////////////////////////////////////
-
 	makeref(ch,Characters[n]);			//Губернатор
 	ch.id		= "Maracaibo_Mayor";
 	ch.model	= "huber_23";
@@ -34,7 +31,6 @@ int CreateMaracaiboCharacters(int n)
 	LAi_group_MoveCharacter(ch, "SPAIN_CITIZENS");
 	LAi_SetImmortal(ch, true);
 	n = n + 1;
-
 	makeref(ch,Characters[n]);			//Священик
 	ch.id		= "Maracaibo_Priest";
 	ch.model	= "priest_3";
@@ -52,7 +48,6 @@ int CreateMaracaiboCharacters(int n)
 	LAi_group_MoveCharacter(ch, "SPAIN_CITIZENS");
 	LAi_SetImmortal(ch, true);
 	n = n + 1;
-
 	makeref(ch,Characters[n]);		// ОФициантка
 	ch.id		= "Maracaibo_waitress";
 	ch.model	= "women_11";
@@ -69,7 +64,6 @@ int CreateMaracaiboCharacters(int n)
 	LAi_group_MoveCharacter(ch, "SPAIN_CITIZENS");
 	LAi_SetImmortal(ch, true);
 	n = n + 1;
-
 	makeref(ch,Characters[n]);			//Трактирщик
 	ch.id		= "Maracaibo_tavernkeeper";
 	ch.model	= "barmen_4";
@@ -87,8 +81,6 @@ int CreateMaracaiboCharacters(int n)
 	LAi_group_MoveCharacter(ch, "SPAIN_CITIZENS");
 	LAi_SetImmortal(ch, true);
 	n = n + 1;
-
-
 	makeref(ch,Characters[n]);			//Торговец
 	ch.id		= "Maracaibo_trader";
 	ch.model	= "trader_4";
@@ -106,7 +98,6 @@ int CreateMaracaiboCharacters(int n)
 	LAi_SetImmortal(ch, true);
 	ch.item_date = "";
 	n = n + 1;
-
 	makeref(ch,Characters[n]);			//Корабел
 	ch.id		= "Maracaibo_shipyarder";
 	ch.model	= "shipowner_4";
@@ -131,7 +122,6 @@ int CreateMaracaiboCharacters(int n)
 	LAi_group_MoveCharacter(ch, "SPAIN_CITIZENS");
 	LAi_SetImmortal(ch, true);
 	n = n + 1;
-
 	makeref(ch,Characters[n]);			//Банкир
 	ch.id		= "Maracaibo_usurer";
 	ch.model	= "banker_4";
@@ -151,7 +141,6 @@ int CreateMaracaiboCharacters(int n)
 	LAi_group_MoveCharacter(ch, "SPAIN_CITIZENS");
 	LAi_SetImmortal(ch, true);
 	n = n + 1;
-
 	makeref(ch,Characters[n]);			//Начальник порта
 	ch.id		= "Maracaibo_PortMan";
 	ch.model	= "citiz_1";
@@ -168,7 +157,6 @@ int CreateMaracaiboCharacters(int n)
 	LAi_SetImmortal(ch, true);
 	ch.item_date = "";
 	n = n + 1;
-
     makeref(ch,Characters[n]);
 	ch.name 	= "Smuggler";
 	ch.lastname = "";
@@ -185,6 +173,5 @@ int CreateMaracaiboCharacters(int n)
 	LAi_SetHP(ch, 80.0, 80.0);
 	ch.greeting = "smuggler";
 	n = n + 1;
-	
 	return n;
 }

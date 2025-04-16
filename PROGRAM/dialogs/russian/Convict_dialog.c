@@ -5,13 +5,10 @@ void ProcessDialogEvent()
 	aref Link, NextDiag;
 	string sTemp;
 	bool bOk;
-
 	DeleteAttribute(&Dialog,"Links");
-
 	makeref(NPChar,CharacterRef);
 	makearef(Link, Dialog.Links);
 	makearef(NextDiag, NPChar.Dialog);
-	
 	switch(Dialog.CurrentNode)
 	{
 		case "First time":
@@ -20,12 +17,10 @@ void ProcessDialogEvent()
 			link.l1.go = DialogGoNodeRepeat("exit", "", "", "", npchar, Dialog.CurrentNode);
 			NextDiag.TempNode = "First time";
 		break;
-
 		case "Exit":
 			NextDiag.CurrentNode = NextDiag.TempNode;
 			DialogExit();
 		break;
-			
 		case "CitizenNotBlade":
 			dialog.text = "Captain, what are you doing? Hide away your weapon, before you'll get a lot of troubles!";
 			link.l1 = LinkRandPhrase("Fine.", "Okay.", "Don't worry, I am hiding it away...");

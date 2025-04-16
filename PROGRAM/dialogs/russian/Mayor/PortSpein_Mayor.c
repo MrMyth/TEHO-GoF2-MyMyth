@@ -15,7 +15,6 @@ void ProcessCommonDialogEvent(ref NPChar, aref Link, aref NextDiag)
 				link.l1.go = "guardoftruth";
 			}
 		break;
-		
 		case "guardoftruth":
 			dialog.text = "Yes, I remember that man. But I don't remember any details about him to tell you. He came here and then he just went away. I can't help you.";
 			link.l1 = "I see. Sorry for troubling you...";
@@ -25,4 +24,3 @@ void ProcessCommonDialogEvent(ref NPChar, aref Link, aref NextDiag)
 	}
 	UnloadSegment(NPChar.FileDialog2);  // если где-то выход внутри switch  по return не забыть сделать анлод
 }
-

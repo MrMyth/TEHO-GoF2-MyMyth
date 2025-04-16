@@ -16,7 +16,6 @@ void ProcessCommonDialogEvent(ref NPChar, aref Link, aref NextDiag)
 				link.l1.go = "Consumption";
 			}
 		break;
-		
 		//Цена чахотки
 		case "Consumption":
 			dialog.text = "It doesn't, my son. There are a lot of parishioners in this town who named Juan.";
@@ -27,6 +26,3 @@ void ProcessCommonDialogEvent(ref NPChar, aref Link, aref NextDiag)
 	}
 	UnloadSegment(NPChar.FileDialog2);  // если где-то выход внутри switch  по return не забыть сделать анлод
 }
-
-
-

@@ -1,29 +1,23 @@
-
 void ProcessDialogEvent()
 {
 	ref NPChar;
 	aref Link, NextDiag, arRld, arDis;
 	int i, Qty;
-
 	DeleteAttribute(&Dialog,"Links");
-
 	makeref(NPChar,CharacterRef);
 	makearef(Link, Dialog.Links);
 	makearef(NextDiag, NPChar.Dialog);
-	
 	switch(Dialog.CurrentNode)
 	{
 		case "Exit":
 			NextDiag.CurrentNode = NextDiag.TempNode;
 			DialogExit();
 		break;
-
 		case "exit_setOwner":
 			LAi_SetOwnerTypeNoGroup(npchar);
 			NextDiag.CurrentNode = NextDiag.TempNode;
 			DialogExit();
 		break;
-
 		case "fight":
 			NextDiag.CurrentNode = NextDiag.TempNode;
 			DialogExit();

@@ -16,7 +16,6 @@ void ProcessCommonDialogEvent(ref NPChar, aref Link, aref NextDiag)
                 link.l1.go = "BrothelDone";
             }
 		break;
-		
 		case "BrothelDone":
 			dialog.text = "Fifty sailors - fifteen thousands.";
 			link.l1 = "Wow! A lot... I need to think about it.";
@@ -38,4 +37,3 @@ void ProcessCommonDialogEvent(ref NPChar, aref Link, aref NextDiag)
 	}
 	UnloadSegment(NPChar.FileDialog2);  // если где-то выход внутри switch  по return не забыть сделать анлод
 }
-

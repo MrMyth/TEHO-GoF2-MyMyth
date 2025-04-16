@@ -1,25 +1,20 @@
 /// BOAL меню торговли
 string CurTable, CurRow;
 bool bSortCityDisable, bSortByDate, bSortByABC, bClockwiseSort; // belamour значения не присваиваю, дабы сохранялись до перезагрузки
-
 bool bPlayerColonies = false; // Vex: adding colony management
-
 void InitInterface(string iniName)
 {
     InterfaceStack.SelectMenu_node = "LaunchTradeBook"; // запоминаем, что звать по Ф2
 	GameInterface.title = "titleTradeBook";
 	SendMessage(&GameInterface,"ls",MSG_INTERFACE_INIT,iniName);
-
 	SetEventHandler("InterfaceBreak","ProcessExitCancel",0);
 	SetEventHandler("exitCancel","ProcessExitCancel",0);
     SetEventHandler("ievnt_command","ProcessCommandExecute",0);
     SetEventHandler("TableSelectChange", "TableSelectChange", 0);
     SetEventHandler("ShowInfoWindow","ShowInfoWindow",0);
     SetEventHandler("MouseRClickUp","HideInfoWindow",0);
-
 	// Vex: adding colony management -->
 	bPlayerColonies = PlayerHasColonies();
-	
 	CreateString(true, "buttonColonyManagement", XI_ConvertString("buttonColonyManagement"), "INTERFACE_TITLE", COLOR_NORMAL, 700, 15, SCRIPT_ALIGN_LEFT, 0.7);
 	if (bPlayerColonies==true)
 	{
@@ -31,13 +26,10 @@ void InitInterface(string iniName)
 		ChangeStringColor("buttonColonyManagement", greyColor);
 	}
 	// <-- Vex: adding colony management
-    
     XI_RegistryExitKey("IExit_F2");
-
 	SetBySort(); // belamour установить параметры чекбоксам
 	GetBySort(); // сортировка от значения
 }
-
 void SetBySort() 
 {
 	if(!bSortCityDisable) 
@@ -76,7 +68,6 @@ void SetBySort()
 		CheckButton_SetState("CHECK_SortTradeBookClockwise", 1, false);
 	} 
 }
-
 void GetBySort()
 {
 	if(!bSortCityDisable || bSortByABC) FillPriceListTownSorted("TABLE_CITY"); // по нациям или алфавиту 
@@ -84,12 +75,10 @@ void GetBySort()
 	if(bClockwiseSort) FillPriceListClockwiseSort("TABLE_CITY"); // по часовой стрелке
 	if(bSortCityDisable && !bSortByDate && !bSortByABC && !bClockwiseSort) FillPriceListTown("TABLE_CITY"); // классика
 }
-	
 void ProcessExitCancel()
 {
 	IDoExit(RC_INTERFACE_ANY_EXIT);
 }
-
 void IDoExit(int exitCode)
 {
 	DelEventHandler("InterfaceBreak","ProcessExitCancel");
@@ -98,7 +87,6 @@ void IDoExit(int exitCode)
     DelEventHandler("TableSelectChange", "TableSelectChange");
     DelEventHandler("ShowInfoWindow","ShowInfoWindow");
     DelEventHandler("MouseRClickUp","HideInfoWindow");
-    
 	interfaceResultCommand = exitCode;
 	if( CheckAttribute(&InterfaceStates,"ReloadMenuExit"))
 	{
@@ -121,7 +109,6 @@ void ProcessCommandExecute()
 	{
 		bSortCityDisable = true;
 	}
-	
 	if(SendMessage(&GameInterface,"lsll",MSG_INTERFACE_MSG_TO_NODE, "CHECK_SortTradeBookDate", 3, 1))
 	{
 		bSortByDate = true;
@@ -146,10 +133,8 @@ void ProcessCommandExecute()
 	{
 		bClockwiseSort = false;
 	}
-	
 	string comName = GetEventData();
 	string nodName = GetEventData();
-
 	// Vex: adding colony management -->
 	if(nodName == "I_COLONIES" || nodName == "I_COLONIES_2")
 	{
@@ -158,7 +143,6 @@ void ProcessCommandExecute()
 		}
 	}
 	// <-- Vex: adding colony management
-
     switch(nodName)
 	{
 		case "I_CHARACTER_2":
@@ -205,7 +189,6 @@ void ProcessCommandExecute()
 			}
 		break;
 		// <-- Vex: adding colony management
-		
 		case "CHECK_SortTradeBook": 
 			if(comName=="click")
 			{
@@ -216,7 +199,6 @@ void ProcessCommandExecute()
 				GetBySort();
 			}
 		break;
-		
 		case "CHECK_SortTradeBookDate": 
 			if(comName=="click")
 			{
@@ -227,7 +209,6 @@ void ProcessCommandExecute()
 				GetBySort();
 			}
 		break;
-		
 		case "CHECK_SortTradeBookABC": 
 			if(comName=="click")
 			{
@@ -238,7 +219,6 @@ void ProcessCommandExecute()
 				GetBySort();
 			}
 		break;
-		
 		case "CHECK_SortTradeBookClockwise": 
 			if(comName=="click")
 			{
@@ -250,7 +230,6 @@ void ProcessCommandExecute()
 			}
 		break;
 	}
-	
 	// boal new menu 31.12.04 -->
 	if (nodName == "I_CHARACTER" || nodName == "I_SHIP" ||
 	    nodName == "I_QUESTBOOK" || nodName == "I_TRADEBOOK" ||
@@ -276,7 +255,6 @@ void FillPriceListTown(string _tabName)
     aref    rootItems;
     aref    curItem;
     ref     rCity;
-    
     // шапка -->
     GameInterface.(_tabName).select = 0;
     GameInterface.(_tabName).hr.td1.str = "Nation";
@@ -330,7 +308,6 @@ void FillPriceListTown(string _tabName)
 	Table_UpdateWindow(_tabName);
 	FillPriceList("TABLE_GOODS", firstId);
 }
-
 // LDH 06Jul17 
 #define MAX_OURCOLONIES 42
 void FillPriceListTownSorted(string _tabName)
@@ -342,7 +319,6 @@ void FillPriceListTownSorted(string _tabName)
     aref    rootItems;
     aref    curItem;
     ref     rCity;
-	
 	// LDH 06Jul17 -->
 	// belamour немного переделал метод для алфавитного порядка
     string AlphaColonies[MAX_OURCOLONIES];
@@ -377,7 +353,6 @@ void FillPriceListTownSorted(string _tabName)
 	AlphaColonies[z] = "SentJons";			z = z + 1;
 	AlphaColonies[z] = "Tortuga";			z = z + 1;
 	AlphaColonies[z] = "Villemstad";		z = z + 1;
-	
 	AlphaColonies[z] = "Minentown";       z = z + 1;
 	AlphaColonies[z] = "Terks";           z = z + 1;
     AlphaColonies[z] = "Dominica";        z = z + 1;
@@ -391,7 +366,6 @@ void FillPriceListTownSorted(string _tabName)
     AlphaColonies[z] = "SantaQuiteria";   z = z + 1;
     AlphaColonies[z] = "IslaDeVieques";   z = z + 1;
     AlphaColonies[z] = "Is";              
-   
 	// belamour сортировка Трейдбука по нациям -->
 	string OurColonies[MAX_OURCOLONIES];
 	ref rCitySort;
@@ -403,7 +377,6 @@ void FillPriceListTownSorted(string _tabName)
 		switch (sHeroNation) 
 		{
 			case "1": // Шарль де Мор
-			
 				for (z=0; z<MAX_OURCOLONIES; z++)
 				{
 					m = FindColony(AlphaColonies[z]); rCitySort = GetColonyByIndex(m);
@@ -430,9 +403,7 @@ void FillPriceListTownSorted(string _tabName)
 					if(Nations[sti(rCitySort.nation)].Name == "PIRATE") {OurColonies[i] = AlphaColonies[z]; i++;}
 				}
 			break;
-		
 			case "2": // Диего де Монтойя
-
 				for (z=0; z<MAX_OURCOLONIES; z++)
 				{
 					m = FindColony(AlphaColonies[z]); rCitySort = GetColonyByIndex(m);
@@ -459,9 +430,7 @@ void FillPriceListTownSorted(string _tabName)
 					if(Nations[sti(rCitySort.nation)].Name == "PIRATE") {OurColonies[i] = AlphaColonies[z]; i++;}
 				}
 			break;
-		
 			case "0": // малыш Вилли, если будет
-			
 				for (z=0; z<MAX_OURCOLONIES; z++)
 				{
 					m = FindColony(AlphaColonies[z]); rCitySort = GetColonyByIndex(m);
@@ -499,7 +468,6 @@ void FillPriceListTownSorted(string _tabName)
 		}
 	}
 	// <-- belamour
-	
     // шапка -->
     GameInterface.(_tabName).select = 0;
     GameInterface.(_tabName).hr.td1.str = "Nation";
@@ -523,18 +491,15 @@ void FillPriceListTownSorted(string _tabName)
 		{
 			curItem = GetAttributeN(rootItems, j);
 			cityId = GetAttributeName(curItem);
-			
 			if(cityId == OurColonies[i])
 			{
 				bFound = true;
 				break;
 			}
 		}
-		
 		if(!bFound)
 			continue;
 // LDH 06Jul17 <--
-
         row = "tr" + n;	
 		cn = FindColony(cityId);
 		if (cn != -1)
@@ -568,38 +533,28 @@ void FillPriceListTownSorted(string _tabName)
 	Table_UpdateWindow(_tabName);
 	FillPriceList("TABLE_GOODS", firstId);
 }
-
 // --> mitrokosta сортировка по дате
 int DateStringToInt(string dateString) {
 	int pos;
 	string time, date;
 	int totalTime = 0;
-	
 	// резка строки по пробелу
 	pos = findSubStr(&dateString, " ", 0);
 	if (pos < 0) return -1;
-	
 	time = strcut(&dateString, 0, pos - 1);
 	date = strcut(&dateString, pos + 1, strlen(&dateString) - 1);
-	
 	// парсинг и приведение дат к числам
 	totalTime += sti(strcut(&date, 6, 9));
 	totalTime *= 365;
-	
 	totalTime += sti(strcut(&date, 3, 4));
 	totalTime *= 31;
-	
 	totalTime += sti(strcut(&date, 0, 1));
 	totalTime *= 24;
-	
 	totalTime += sti(strcut(&time, 0, 1));
 	totalTime *= 60;
-	
 	totalTime += sti(strcut(&time, 3, 4));
-	
 	return totalTime;
 }
-
 void FillPriceListTownSortedByDate(string _tabName) {
 	string	cityId, attr2, firstId;
 	int		i, j, tmp, cn, n, totalEntries;
@@ -608,7 +563,6 @@ void FillPriceListTownSortedByDate(string _tabName) {
 	aref	rootItems;
 	aref	curItem;
 	ref		rCity;
-
 	// шапка -->
 	GameInterface.(_tabName).select = 0;
 	GameInterface.(_tabName).hr.td1.str = "Nation";
@@ -620,29 +574,23 @@ void FillPriceListTownSortedByDate(string _tabName) {
 	GameInterface.(_tabName).hr.td4.str = "Relevance";
 	GameInterface.(_tabName).hr.td4.scale = 0.7;
 	// <--
-
 	nulChr = &NullCharacter;
 	makearef(rootItems, nulChr.PriceList);  // тут живут ИД города и служ. инфа.
 	n = 1;
 	firstId = "";
 	totalEntries = GetAttributesNum(rootItems);
-
 	int entryIndices[2];
-	
 	if (totalEntries > 2) {
 		SetArraySize(&entryIndices, totalEntries);
 	}
-	
 	for (i = 0; i < totalEntries; i++) {
 		entryIndices[i] = i;
 	}
-
 	// Собственно сама сортировка (выбором)
 	for (i = 0; i < totalEntries - 1; i++) {
 		for (j = i + 1; j < totalEntries; j++) {
 			lAttr = "PriceList." + GetAttributeName(GetAttributeN(rootItems, entryIndices[j])) + ".AltDate";
 			rAttr = "PriceList." + GetAttributeName(GetAttributeN(rootItems, entryIndices[i])) + ".AltDate";
-			
 			if (CheckAttribute(nulChr, lAttr) && CheckAttribute(nulChr, rAttr)) {
 				if (DateStringToInt(nulChr.(lAttr)) > DateStringToInt(nulChr.(rAttr))) {
 					tmp = entryIndices[i];
@@ -652,7 +600,6 @@ void FillPriceListTownSortedByDate(string _tabName) {
 			}
 		}
 	}
-
 	for (i = 0; i < totalEntries; i++)
 	{
 		row = "tr" + n;
@@ -692,9 +639,7 @@ void FillPriceListTownSortedByDate(string _tabName) {
 	FillPriceList("TABLE_GOODS", firstId);
 }
 // <-- mitrokosta
-
 // belamour плюс метод сортировки по часовой стрелке от LDH -->
-
 void FillPriceListClockwiseSort(string _tabName)
 {
 	string  cityId, attr2, firstId;
@@ -704,7 +649,6 @@ void FillPriceListClockwiseSort(string _tabName)
     aref    rootItems;
     aref    curItem;
     ref     rCity;
-
 // LDH 06Jul17 -->
     string OurColonies[MAX_OURCOLONIES];
     i = 0;
@@ -740,7 +684,6 @@ void FillPriceListClockwiseSort(string _tabName)
     OurColonies[i] = "SantaCatalina";   i = i + 1;  // Blueweld
     OurColonies[i] = "Beliz";           i = i + 1;
     OurColonies[i] = "Caiman";          i = i + 1;
-    
     OurColonies[i] = "Tenotchitlan";    i = i + 1;
     OurColonies[i] = "Minentown";       i = i + 1;
     OurColonies[i] = "LostShipsCity";   i = i + 1;
@@ -751,9 +694,7 @@ void FillPriceListClockwiseSort(string _tabName)
     OurColonies[i] = "IslaDeVieques";   i = i + 1;
     OurColonies[i] = "Is";              i = i + 1;
     OurColonies[i] = "SanAndres";
-
 // LDH 06Jul17 <--
-    
     // шапка -->
     GameInterface.(_tabName).select = 0;
     GameInterface.(_tabName).hr.td1.str = "Nation";
@@ -777,18 +718,15 @@ void FillPriceListClockwiseSort(string _tabName)
 		{
 			curItem = GetAttributeN(rootItems, j);
 			cityId = GetAttributeName(curItem);
-			
 			if(cityId == OurColonies[i])
 			{
 				bFound = true;
 				break;
 			}
 		}
-		
 		if(!bFound)
 			continue;
 // LDH 06Jul17 <--
-
         row = "tr" + n;	
 		cn = FindColony(cityId);
 		if (cn != -1)
@@ -823,7 +761,6 @@ void FillPriceListClockwiseSort(string _tabName)
 	FillPriceList("TABLE_GOODS", firstId);
 }
 // <-- ClockwiseSort
-
 //  таблица
 // картинка, название, картинка экспорта, продажа, покупка, колво, пачка, вес пачки
 void FillPriceList(string _tabName, string  attr1)
@@ -858,10 +795,8 @@ void FillPriceList(string _tabName, string  attr1)
 	        row = "tr" + n;
 	        sGoods = "Gidx" + i;			
 	        if (sti(nulChr.PriceList.(attr1).(sGoods).TradeType) == T_TYPE_CANNONS && !bBettaTestMode) continue; // не пушки
-	        
             GameInterface.(_tabName).(row).UserData.ID = Goods[i].name;
             GameInterface.(_tabName).(row).UserData.IDX = i;
-            
 	        GameInterface.(_tabName).(row).td1.icon.group = "GOODS";
 			GameInterface.(_tabName).(row).td1.icon.image = Goods[i].name;
 			GameInterface.(_tabName).(row).td1.icon.offset = "1, 0";
@@ -870,13 +805,11 @@ void FillPriceList(string _tabName, string  attr1)
 			GameInterface.(_tabName).(row).td1.textoffset = "30,0";
 			GameInterface.(_tabName).(row).td1.str = XI_ConvertString(Goods[i].name);
 			GameInterface.(_tabName).(row).td1.scale = 0.85;
-
 	        GameInterface.(_tabName).(row).td2.icon.group = "TRADE_TYPE";
 			GameInterface.(_tabName).(row).td2.icon.image = "ico_" + nulChr.PriceList.(attr1).(sGoods).TradeType;
 			GameInterface.(_tabName).(row).td2.icon.offset = "0, 1";
 			GameInterface.(_tabName).(row).td2.icon.width = 16;
 			GameInterface.(_tabName).(row).td2.icon.height = 28;
-
 	        if (CheckAttribute(nulChr, "PriceList." + attr1 + "." + sGoods + ".Buy"))
 	        {
 	            GameInterface.(_tabName).(row).td3.str = nulChr.PriceList.(attr1).(sGoods).Buy;
@@ -908,7 +841,6 @@ void FillPriceList(string _tabName, string  attr1)
     }
     Table_UpdateWindow(_tabName);
 }
-
 void TableSelectChange()
 {
 	string sControl = GetEventData();
@@ -923,7 +855,6 @@ void TableSelectChange()
     	FillPriceList("TABLE_GOODS", GameInterface.(CurTable).(CurRow).UserData.CityID);
     }
 }
-
 void NullSelectTable(string sControl)
 {
 	if (sControl != CurTable)
@@ -932,14 +863,12 @@ void NullSelectTable(string sControl)
 	    Table_UpdateWindow(sControl);
 	}
 }
-
 void ShowInfoWindow()
 {
 	string sCurrentNode = GetCurrentNode();
 	string sHeader, sText1, sText2, sText3, sPicture;
 	string sGroup, sGroupPicture;
 	int iItem;
-
 	sPicture = "-1";
 	string sAttributeName;
 	int nChooseNum = -1;
@@ -962,17 +891,14 @@ void ShowInfoWindow()
 			sHeader = XI_ConvertString("CHECK_SortTradeBook Mode");
 		    sText1 = XI_ConvertString("CHECK_SortTradeBook Mode_descr");
 		break;
-		
 		case "CHECK_SortTradeBookABC":
 			sHeader = XI_ConvertString("CHECK_SortTradeBook Mode");
 		    sText1 = XI_ConvertString("CHECK_SortTradeBookABC Mode_descr");
 		break;
-		
 		case "CHECK_SortTradeBookDate":
 			sHeader = XI_ConvertString("CHECK_SortTradeBook Mode");
 		    sText1 = XI_ConvertString("CHECK_SortTradeBookDate Mode_descr");
 		break;
-		
 		case "CHECK_SortTradeBookClockwise":
 			sHeader = XI_ConvertString("CHECK_SortTradeBook Mode");
 		    sText1 = XI_ConvertString("CHECK_SortTradeBookClockwise Mode_descr");
@@ -980,7 +906,6 @@ void ShowInfoWindow()
 		// <--
 	}
 	CreateTooltip("#" + sHeader, sText1, argb(255,255,255,255), sText2, argb(255,255,192,192), sText3, argb(255,192,255,192), "", argb(255,255,255,255), sPicture, sGroup, sGroupPicture, 64, 64);
-
 }
 void HideInfoWindow()
 {

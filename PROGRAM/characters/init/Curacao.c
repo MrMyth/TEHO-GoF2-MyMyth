@@ -1,12 +1,9 @@
-
 int CreateCuracaoCharacters(int n)
 {
 	ref ch;
-	
 	///////////////////////////////////////////////////////////////////////////////
 	// ОСНОВНЫЕ ПЕРСОНАЖИ
 	///////////////////////////////////////////////////////////////////////////////
-
 	makeref(ch,Characters[n]);			//Губернатор
 	ch.id		= "hol_guber";
 	ch.model	= "huber_25";
@@ -35,7 +32,6 @@ int CreateCuracaoCharacters(int n)
 	LAi_group_MoveCharacter(ch, "HOLLAND_CITIZENS");
 	LAi_SetImmortal(ch, true);
 	n = n + 1;
-
 	makeref(ch,Characters[n]);			//Священик
 	ch.id		= "Villemstad_Priest";
 	ch.model	= "priest_4";
@@ -53,7 +49,6 @@ int CreateCuracaoCharacters(int n)
 	LAi_group_MoveCharacter(ch, "HOLLAND_CITIZENS");
 	LAi_SetImmortal(ch, true);
 	n = n + 1;
-
 	makeref(ch,Characters[n]);		// ОФициантка
 	ch.id		= "Villemstad_waitress";
 	ch.model	= "women_11";
@@ -70,7 +65,6 @@ int CreateCuracaoCharacters(int n)
 	LAi_group_MoveCharacter(ch, "HOLLAND_CITIZENS");
 	LAi_SetImmortal(ch, true);
 	n = n + 1;
-
 	makeref(ch,Characters[n]);			//Трактирщик
 	ch.id		= "Villemstad_tavernkeeper";
 	ch.model	= "barmen_12";
@@ -88,7 +82,6 @@ int CreateCuracaoCharacters(int n)
 	LAi_group_MoveCharacter(ch, "HOLLAND_CITIZENS");
 	LAi_SetImmortal(ch, true);
 	n = n + 1;
-
 	makeref(ch,Characters[n]);			//Торговец
 	ch.id		= "Villemstad_trader";
 	ch.model	= "trader_12";
@@ -106,7 +99,6 @@ int CreateCuracaoCharacters(int n)
 	LAi_SetImmortal(ch, true);
 	ch.item_date = "";
 	n = n + 1;
-
 	makeref(ch,Characters[n]);			//Корабел
 	ch.id		= "Villemstad_shipyarder";
 	ch.model	= "shipowner_12";
@@ -131,7 +123,6 @@ int CreateCuracaoCharacters(int n)
 	LAi_group_MoveCharacter(ch, "HOLLAND_CITIZENS");
 	LAi_SetImmortal(ch, true);
 	n = n + 1;
-
 	makeref(ch,Characters[n]);			//Банкир
 	ch.id		= "Villemstad_usurer";
 	ch.model	= "banker_12";
@@ -150,7 +141,6 @@ int CreateCuracaoCharacters(int n)
 	LAi_SetOwnerType(ch);
 	LAi_group_MoveCharacter(ch, "HOLLAND_CITIZENS");
 	n = n + 1;
-
 	makeref(ch,Characters[n]);			//Начальник порта
 	ch.id		= "Villemstad_PortMan";
 	ch.model	= "citiz_9";
@@ -167,7 +157,6 @@ int CreateCuracaoCharacters(int n)
 	LAi_SetImmortal(ch, true);
 	ch.item_date = "";
 	n = n + 1;
-	
 	makeref(ch,Characters[n]);
 	ch.name 	= "Smuggler";
 	ch.lastname = "";
@@ -184,7 +173,6 @@ int CreateCuracaoCharacters(int n)
 	LAi_SetHP(ch, 80.0, 80.0);
 	ch.greeting = "smuggler";
 	n = n + 1;
-	
 	makeref(ch,Characters[n]);			//Заведующий  складом на верфи
 	ch.id		= "Villemstad_SkladMan";
 	ch.model	= "citiz_"+(rand(9)+1);
@@ -203,7 +191,6 @@ int CreateCuracaoCharacters(int n)
 	LAi_SetImmortal(ch, true);
 	ch.Storage 	  = true;
 	n = n + 1; 
-	
 	makeref(ch,Characters[n]);			//Смотритель кладбища
 	ch.id		= "Villemstad_Cemeteryman";
 	ch.model	= "keeper_7";
@@ -223,6 +210,5 @@ int CreateCuracaoCharacters(int n)
 	LAi_group_MoveCharacter(ch, "HOLLAND_CITIZENS");
 	LAi_SetImmortal(ch, true);
 	n = n + 1;
-	
 	return n;
 }

@@ -4,13 +4,10 @@ void ProcessDialogEvent()
 	aref Link, NextDiag;
 	int i, iTemp;
 	string sTemp;
-	
 	DeleteAttribute(&Dialog,"Links");
-	
 	makeref(NPChar,CharacterRef);
 	makearef(Link, Dialog.Links);
 	makearef(NextDiag, NPChar.Dialog);
-	
 	switch(Dialog.CurrentNode)
 	{
 		case "First time":
@@ -18,20 +15,17 @@ void ProcessDialogEvent()
 			link.l1 = "OK";
 			link.l1.go = "exit";
 		break;
-		
 		//разговор на палубе
 		case "MarginCap":
 			dialog.text = "Greetings, captain. Do you want anything from me?";
 			link.l1 = "Yes. Exactly, "+GetAddress_FormToNPC(NPChar)+". There is a passenger on your ship I am quite interested in. Name's "+pchar.GenQuest.Marginpassenger.q1Name+". I want your passenger to become my passenger. If you are okay with that, then we will be parted and will never see each other again.";
 			link.l1.go = "MarginCap_1";
 		break;
-	
 		case "MarginCap_1":
 			dialog.text = "Is that so? And what if I say no?";
 			link.l1 = "Then I will have to make you rethink your decision with a few volleys of my guns which are pointed in your direction. Don't challenge your luck, "+GetAddress_FormToNPC(NPChar)+".";
 			link.l1.go = "MarginCap_2";
 		break;
-		
 		case "MarginCap_2":
 			int MCparam = (6-sti(RealShips[sti(pchar.ship.type)].Class))*100+sti(pchar.ship.Crew.Morale)+sti(pchar.Ship.Crew.Exp.Sailors)+sti(pchar.Ship.Crew.Exp.Cannoners)+sti(pchar.Ship.Crew.Exp.Soldiers);
 			int NPCparam = (6-sti(RealShips[sti(npchar.ship.type)].Class))*100+sti(npchar.ship.Crew.Morale)+sti(npchar.Ship.Crew.Exp.Sailors)+sti(npchar.Ship.Crew.Exp.Cannoners)+sti(npchar.Ship.Crew.Exp.Soldiers);
@@ -48,7 +42,6 @@ void ProcessDialogEvent()
 				link.l1.go = "MarginCap_4";
 			}
 		break;
-	
 		case "MarginCap_3":
 			DialogExit();
 			npchar.Dialog.CurrentNode = "MarginCap_repeat";
@@ -68,7 +61,6 @@ void ProcessDialogEvent()
 			npchar.AlwaysFriend = true;
 			ChangeCharacterNationReputation(pchar, sti(npchar.Nation), -1);
 		break;
-		
 		case "MarginCap_4":
 			DialogExit();
 			NextDiag.CurrentNode = "MarginCap_repeat";
@@ -78,14 +70,12 @@ void ProcessDialogEvent()
 			AddQuestUserData("Marginpassenger", "sShipName", pchar.GenQuest.Marginpassenger.ShipName);
 			ChangeCharacterNationReputation(pchar, sti(npchar.Nation), -1);
 		break;
-		
 		case "MarginCap_repeat":
 			dialog.text = "We have already had a talk, remember? Get away from my ship!";
 			link.l1 = "...";
 			link.l1.go = "exit";
 			NextDiag.TempNode = "MarginCap_repeat";
 		break;
-		
 		case "MarginCap_abordage":
 			if (CheckAttribute(pchar, "GenQuest.Marginpassenger.Mustboarding"))
 			{
@@ -100,19 +90,16 @@ void ProcessDialogEvent()
 				link.l1.go = "MarginCap_abordage_2";
 			}
 		break;
-		
 		case "MarginCap_abordage_1":
 			dialog.text = "You... are the filthy pirate!";
 			link.l1 = "Less talking, my friend...";
 			link.l1.go = "MarginCap_abordage_3";
 		break;
-		
 		case "MarginCap_abordage_2":
 			dialog.text = "And that is why you have committed a slaughter on my ship? A lot of men are dead! Pirate!";
 			link.l1 = "Less talking, my friend...";
 			link.l1.go = "MarginCap_abordage_3";
 		break;
-		
 		case "MarginCap_abordage_3":
 			DialogExit();
 			LAi_SetCurHPMax(npchar);
@@ -122,19 +109,16 @@ void ProcessDialogEvent()
 			LAi_group_SetCheck(LAI_GROUP_BRDENEMY, "Marginpassenger_GivePrisoner");
 			AddDialogExitQuest("MainHeroFightModeOn");
 		break;
-		
 		case "MarginNeed":
 			dialog.text = "What do you want, "+GetAddress_Form(NPChar)+"?";
 			link.l1 = "Are you "+pchar.GenQuest.Marginpassenger.q2Name+"?";
 			link.l1.go = "MarginNeed_1";
 		break;
-		
 		case "MarginNeed_1":
 			dialog.text = "Yes, it is me. Do you want to submit an application? Then you should know that...";
 			link.l1 = "Wait a second, sir. I have a bit different application... Do you know someone named "+pchar.GenQuest.Marginpassenger.q1Name+"?";
 			link.l1.go = "MarginNeed_2";
 		break;
-		
 		case "MarginNeed_2":
 			switch (pchar.GenQuest.Marginpassenger.sex)
 			{
@@ -150,44 +134,37 @@ void ProcessDialogEvent()
 				break;
 			}
 		break;
-		
 		case "MarginNeed_woman":
 			dialog.text = "Oh god! Where is she now? Why haven't you brought her here?";
 			link.l1 = "She is safe. And concerning your question... it is not that simple. I could have taken her back home myself, but I can give this opportunity to you. For a modest fee of course.";
 			link.l1.go = "MarginNeed_woman_1";
 		break;
-		
 		case "MarginNeed_woman_1":
 			dialog.text = "Hm... I don't get it...";
 			link.l1 = "Why don't you? You pay me in gold, I will give you the girl and you will be able to use this situation in your interests... You want to marry her, am I right? And I will repair my ship with those coins, she was damaged during that fight with pirates.";
 			link.l1.go = "MarginNeed_money";
 		break;
-		
 		case "MarginNeed_man":
 			dialog.text = "Oh god! Where is he now? Why haven't you brought him here?";
 			link.l1 = "He is safe. And what about your question... it is not that simple. I could have taken him back home myself, but I can give this opportunity to you, concerning that you have your own interests in his family. For a modest fee of course.";
 			link.l1.go = "MarginNeed_man_1";
 		break;
-		
 		case "MarginNeed_man_1":
 			dialog.text = "Hm... I don't get it...";
 			link.l1 = "Why don't you? You pay me in gold, I will give you your friend and you will be able to use this situation in your interests. I have some information, you know... I will repair my ship with those coins, she was damaged during that fight with pirates.";
 			link.l1.go = "MarginNeed_money";
 		break;
-		
 		case "MarginNeed_money":
 			dialog.text = "Well, well... and how much do you want?";
 			link.l1 = "Consider that I want doubloons, not pesos.";
 			link.l1.go = "MarginNeed_money_1";
 		break;
-		
 		case "MarginNeed_money_1":
 			dialog.text = "Fine, fine... So how many doubloons do you want?";
 			Link.l1.edit = 1;			
 			link.l1 = "";
 			link.l1.go = "MarginNeed_money_2";
 		break;
-		
 		case "MarginNeed_money_2":
 		iTemp = sti(dialogEditStrings[1]);
 		int iSum = makeint(sti(pchar.GenQuest.Marginpassenger.Dublon)*5*stf(pchar.GenQuest.Marginpassenger.Chance));
@@ -234,7 +211,6 @@ void ProcessDialogEvent()
 			link.l1 = "Hm...";
 			link.l1.go = "MarginNeed_exit";
 		break;
-		
 		case "MarginNeed_dublon":
 			DialogExit();
 			LAi_SetActorType(npchar);
@@ -251,13 +227,11 @@ void ProcessDialogEvent()
 			DeleteAttribute(Pchar, "GenQuest.Marginpassenger");
 			AddCharacterExpToSkill(pchar, "Fortune", 100);//везение
 		break;
-		
 		case "MarginNeed_peso":
 			dialog.text = "Here it is, the whole sum in pesos just what you have wanted... Where is "+pchar.GenQuest.Marginpassenger.q1Name+"?";
 			link.l1 = "Must be on the pier by now. So you can go and get the passenger..";
 			link.l1.go = "MarginNeed_peso_1";
 		break;
-		
 		case "MarginNeed_peso_1":
 			DialogExit();
 			LAi_SetActorType(npchar);
@@ -274,13 +248,11 @@ void ProcessDialogEvent()
 			DeleteAttribute(Pchar, "GenQuest.Marginpassenger");
 			AddCharacterExpToSkill(pchar, "Fortune", 80);//везение
 		break;
-		
 		case "MarginNeed_dublon_exit":
 			dialog.text = "I can't accept your proposal then, even with all of my wish to do that. Farewell!";
 			link.l1 = "Hm...";
 			link.l1.go = "MarginNeed_exit";
 		break;
-		
 		case "MarginNeed_exit":
 			DialogExit();
 			LAi_CharacterDisableDialog(npchar);
@@ -300,25 +272,21 @@ void ProcessDialogEvent()
 			// <-- belamour gen
 			pchar.GenQuest.Marginpassenger = "cabin";
 		break;
-		
 		case "MarginPass":
 			dialog.text = "What is... What's going on here?!";
 			link.l1 = "It is very simple, "+NPCharSexPhrase(NPChar, "pal","girl")+". You are my dear passenger now. A guarded passenger. Don't try to resist or you will end up in the cargo deck.";
 			link.l1.go = "MarginPass_1";
 		break;
-		
 		case "MarginPass_1":
 			dialog.text = "Do you mean that I am your prisoner?";
 			link.l1 = "Oh, no. Of course not. Not a prisoner, but a dear guest. A very valuable guest...";
 			link.l1.go = "MarginPass_2";
 		break;
-		
 		case "MarginPass_2":
 			dialog.text = "You... you will pay for your actions!";
 			link.l1 = "You are wrong again,"+NPCharSexPhrase(NPChar, ", pal",", dear")+". I won't pay, but I will be paid. Enough talking, go to your cabin!";
 			link.l1.go = "MarginPass_3";
 		break;
-		
 		case "MarginPass_3":
 			DialogExit();
 			LAi_SetActorType(npchar);
@@ -336,7 +304,6 @@ void ProcessDialogEvent()
 			AddQuestUserData("Marginpassenger", "sShipName", pchar.GenQuest.Marginpassenger.ShipName);
 			AddQuestUserData("Marginpassenger", "sShipType", GetStrSmallRegister(XI_ConvertString(GetBaseShipParamFromType(sti(pchar.GenQuest.Marginpassenger.ShipType), "Name")+"Acc")));
 		break;
-		
 		case "Exit":
 			NextDiag.CurrentNode = NextDiag.TempNode;
 			DialogExit();

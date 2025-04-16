@@ -1,19 +1,14 @@
 #define DIPLOMAT_SUM 80000
-
 void ProcessDialogEvent()
 {
 	ref NPChar;
 	aref Link, NextDiag;
-
 	DeleteAttribute(&Dialog,"Links");
-
 	makeref(NPChar,CharacterRef);
 	makearef(Link, Dialog.Links);
 	makearef(NextDiag, NPChar.Dialog);
-
 	int iSumm = 0;
 	string s1;
-	
 	if (!CheckAttribute(npchar, "PatentPrice"))
     {
         npchar.PatentPrice = (8000 + rand(6) * 1000);
@@ -21,30 +16,25 @@ void ProcessDialogEvent()
     int i;
     string attrLoc;
 	ref    sld;
-	
     attrLoc   = Dialog.CurrentNode;
-    
     if (findsubstr(attrLoc, "SetNationPatent_" , 0) != -1)
  	{
         i = findsubstr(attrLoc, "_" , 0);
 	 	NPChar.nation = strcut(attrLoc, i+1, strlen(attrLoc)-1); // индех в конце
  	    Dialog.CurrentNode = "patent_2";
  	}
- 	
  	if (findsubstr(attrLoc, "SetNationLicence_" , 0) != -1)
  	{
         i = findsubstr(attrLoc, "_" , 0);
 	 	NPChar.LicenceNation = strcut(attrLoc, i+1, strlen(attrLoc)-1); // индех в конце
  	    Dialog.CurrentNode = "NationLicenceType";
  	}
-
  	if (findsubstr(attrLoc, "NationLicenceType_" , 0) != -1)
  	{
         i = findsubstr(attrLoc, "_" , 0);
 	 	NPChar.LicenceType = strcut(attrLoc, i+1, strlen(attrLoc)-1); // индех в конце
  	    Dialog.CurrentNode = "NationLicenceType2";
  	}
- 	
  	if (findsubstr(attrLoc, "RelationTo_" , 0) != -1)
  	{
         i = findsubstr(attrLoc, "_" , 0);
@@ -61,28 +51,24 @@ void ProcessDialogEvent()
  	    	npchar.quest.relation.summ = CalculateRelationSum(sti(npchar.quest.relation));
  	    }
  	}
- 	
  	if (findsubstr(attrLoc, "CityPay_" , 0) != -1)
  	{
         i = findsubstr(attrLoc, "_" , 0);
 	 	NPChar.quest.CityIdx = strcut(attrLoc, i+1, strlen(attrLoc)-1); // индех в конце
  	    Dialog.CurrentNode = "CityInfo";
  	}
- 	
 	switch(Dialog.CurrentNode)
 	{
 		case "Exit":
 			NextDiag.CurrentNode = NextDiag.TempNode;
 			DialogExit();
 		break;
-		
 		case "First time":
 			dialog.text = "Glad to see you again.";
 			link.l1 = "I need your services again.";
 			link.l1.go = "relation";
 			link.l2 = "I should go.";
 			link.l2.go = "exit";
-
 			// генератор  "Найденные документы"
 			if ((pchar.questTemp.different == "GiveShipLetters") && !CheckAttribute(pchar, "questTemp.different.GiveShipLetters.speakAgent"))			
 			{
@@ -90,7 +76,6 @@ void ProcessDialogEvent()
 				link.l4.go = "D_ShipLetters_1"; 
 				pchar.questTemp.different.GiveShipLetters.speakAgent = true;
 			}			
-
 			if (npchar.quest.meeting == "0")
 			{
 				dialog.text = "Let me introduce myself. I am the man who can put in a word for you with any governor here. It is not free of course, but trust me that my services cost their price. You won't regret paying for my talents.";
@@ -100,10 +85,8 @@ void ProcessDialogEvent()
 				link.l2.go = "exit";
 				npchar.quest.meeting = "1";
 			}
-			
 			NextDiag.TempNode = "First time";
 		break;
-
 		//*************************** Генератор - "You've found shipping papers." **************		
 		case "D_ShipLetters_1":
 			dialog.text = "What are your terms?";
@@ -133,7 +116,6 @@ void ProcessDialogEvent()
 			NextDiag.CurrentNode = NextDiag.TempNode;
 			DialogExit(); 
 		break;
-		
 		case "relation":
 			dialog.text = "Let's see how I can help you.";
             if (ChangeCharacterNationReputation(pchar, ENGLAND, 0) < 0)
@@ -141,7 +123,6 @@ void ProcessDialogEvent()
 				link.l3 = "I want to reconcile with England.";
 				link.l3.go = "RelationTo_0";
 			}
-			
 			if (ChangeCharacterNationReputation(pchar, FRANCE, 0) < 0)
 			{
 				link.l1 = "I want to reconcile with France.";
@@ -152,7 +133,6 @@ void ProcessDialogEvent()
 				link.l2 = "I want to reconcile with Spain.";
 				link.l2.go = "RelationTo_2";
 			}
-
 			if (ChangeCharacterNationReputation(pchar, HOLLAND, 0) < 0)
 			{
 				link.l4 = "I want to reconcile with Holland.";
@@ -165,20 +145,16 @@ void ProcessDialogEvent()
             }
             Link.l8 = "I need a letter of marquee.";
 			Link.l8.go = "patent_0";
-			
 			Link.l9 = "Got any trade licenses?";
 			Link.l9.go = "Licence";
-			
 			if (isHeroOwnCity(true))
 			{
 				Link.l10 = "I have a question about the ownership of colonies.";
 				Link.l10.go = "City_Buy";
 			}
-			
 			link.l99 = "You know, I'd better deal with it by myself.";
 			link.l99.go = "exit";
 		break;
-		
 		case "Licence":
 			dialog.text = "Always have them for a different periods. License of which country do you want?";
 		    link.l1 = "Of England";
@@ -192,7 +168,6 @@ void ProcessDialogEvent()
 			link.l9 = "You know, I'd better deal with it by myself.";
 			link.l9.go = "exit";
 		break;
-		
 		case "NationLicenceType":
         	dialog.text = "Period?";
 		    link.l1 = "30 days";
@@ -204,7 +179,6 @@ void ProcessDialogEvent()
 			link.l9 = "I have changed my mind.";
 			link.l9.go = "exit";
 		break;
-		
 		case "NationLicenceType2":
 			iSumm = sti(npchar.LicenceType) * (3000 + MOD_SKILL_ENEMY_RATE*500);
         	dialog.text = "So, the trade license of" + XI_ConvertString(Nations[sti(npchar.LicenceNation)].Name + "Gen") + " for " + sti(npchar.LicenceType) + " days, the price is " + FindRussianMoneyString(iSumm) + ".";
@@ -220,7 +194,6 @@ void ProcessDialogEvent()
 			link.l9 = "I've changed my mind.";
 			link.l9.go = "exit";
 		break;
-		
 		case "NationLicenceType3":
             iSumm = sti(npchar.LicenceType) * (3000 + MOD_SKILL_ENEMY_RATE*500);
 			dialog.text = "Here it is. Don't forget to raise a friendly flag while entering a port. And remember that patrol can check the license's date.";
@@ -229,13 +202,11 @@ void ProcessDialogEvent()
 			AddMoneyToCharacter(pchar, -iSumm);
 			GiveNationLicence(sti(npchar.LicenceNation), sti(npchar.LicenceType));
 		break;
-		
         case "No_money":
 			dialog.text = "Most excellent! Come back when you'll get enough money.";
 			link.l1 = "Fine.";
 			link.l1.go = "exit";
 		break;
-		
         case "patent_0":
 			dialog.text = "Splendid. First of all you have to prove your loyalty to the nation" + 
                           " by an excellent serving for it. Go to any governor of" + //NationNameGenitive(sti(NPChar.nation)) +
@@ -245,7 +216,6 @@ void ProcessDialogEvent()
 			link.l2 = "Farwell, "+GetAddress_FormToNPC(NPChar);
 			link.l2.go = "exit";
 		break;
-		
 		case "patent_1":
 			dialog.text = "You mean a bribe!? You want me to make you a license by myself?";
 			link.l1 = "Exactly!";
@@ -260,13 +230,11 @@ void ProcessDialogEvent()
 			link.l2 = "No. Farewell, "+GetAddress_FormToNPC(NPChar);
 			link.l2.go = "exit";
 		break;
-		
 		case "patent_2_none":
 			dialog.text = "I don't have that kind of relations to do this. And I can't get you an empty blank of license with all stamps and signs.";
             link.l1 = "Too bad. Farewell."+GetAddress_FormToNPC(NPChar);
 			link.l1.go = "exit";
 		break;
-		
 		case "patent_2_give":
 			dialog.text = "Alright, I can arrange that for you. What kind of license do you need?";
 			if (GetPatentNation() != ENGLAND)
@@ -292,7 +260,6 @@ void ProcessDialogEvent()
 			link.l9 = "You know I'd better deal with it by myself.";
 			link.l9.go = "exit";
 		break;
-		
 		case "patent_2":
             //pchar.PatentPrice = 8000 + (sti(NPChar.PatentPrice) * sti(pchar.rank));
 			pchar.PatentPrice = 350000 - GetSummonSkillFromName(pchar, SKILL_LEADERSHIP) * 100 + (5000 + rand(1000)) * sti(pchar.rank) * MOD_SKILL_ENEMY_RATE;
@@ -319,7 +286,6 @@ void ProcessDialogEvent()
                     link.l1 = "I agree to give him my blood money which I got contraband and boardings!!";
                     break;
 			}
-
             if(makeint(Pchar.money) < makeint(pchar.PatentPrice))
             {
 				Link.l1.go = "No_money";
@@ -328,11 +294,9 @@ void ProcessDialogEvent()
 			{
 				link.l1.go = "patent_3";
 			}
-
 			link.l2 = "No, it's not for me.";
 			link.l2.go = "exit";
 		break;
-
 		case "patent_3":
             pchar.PatentNation = NationShortName(sti(NPChar.nation));
 			dialog.text = "I am glad that we have made a deal.";
@@ -340,7 +304,6 @@ void ProcessDialogEvent()
 			link.l1.go = "exit";
 			AddDialogExitQuest("any_patent_take");
 		break;
-
 		case "Contraband":
 			Pchar.questTemp.Relations.sum = makeint(0.3 * stf(Pchar.rank)/stf(Pchar.reputation.nobility)*DIPLOMAT_SUM);
 			dialog.Text = "Fine. It will cost you " + Pchar.questTemp.Relations.sum + " pesos.";
@@ -356,7 +319,6 @@ void ProcessDialogEvent()
 			Link.l2 = "I've changed my mind.";
 			Link.l2.go = "exit";
 		break;
-		
 		case "Contraband_Agreed":
 			dialog.Text = "Most excellent, I will settle everything. They will work with you.";
 			Link.l99 = "Thanks.";
@@ -376,7 +338,6 @@ void ProcessDialogEvent()
 			link.l2 = "No it is too much. Farewell.";
 			link.l2.go = "exit";
 		break;
-
 		case "relation3":
 			dialog.text = "Splendid! It is surprisingly easy to deal with you. Don't worry I will settle your problem in 15 days.";
 			link.l1 = "Fine.";
@@ -386,13 +347,11 @@ void ProcessDialogEvent()
 			attrLoc = "RelationAgent" + GetNationNameByType(sti(npchar.quest.relation));
             Pchar.GenQuest.(attrLoc) = true;
 		break;
-		
 		case "RelationYet":
 			dialog.Text = "You problem is solving now. Just wait, it can't go faster.";
 			Link.l99 = "Thanks.";
 			Link.l99.go = "exit";
 		break;
-		
 		case "City_Buy":
 			dialog.Text = "Which of the colonies ownership you want to discuss?";
 			for (i=0; i<MAX_COLONIES; i++)
@@ -408,7 +367,6 @@ void ProcessDialogEvent()
 			Link.l99 = "No. Nothing.";
 			Link.l99.go = "exit";
 		break;
-		
 		case "CityInfo":
             i = sti(NPChar.quest.CityIdx);
             sld = GetFortCommander(colonies[i].id);
@@ -422,7 +380,6 @@ void ProcessDialogEvent()
 			Link.l99 = "No thanks. I am not interested.";
 			Link.l99.go = "exit";
 		break;
-		
 		case "City_Buy_End":
             i = sti(NPChar.quest.CityIdx);
             TWN_RealeseForMoney(colonies[i].id, true);
@@ -434,4 +391,3 @@ void ProcessDialogEvent()
 		break;
 	}
 }
-

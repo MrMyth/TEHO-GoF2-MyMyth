@@ -1,13 +1,9 @@
-
 object objActivePerkShower;
-
 #event_handler(EVENT_LOCATION_LOAD,"procLoadIntoNew");
-
 void InitActivePerkShower()
 {
     InitShowPlaces();
 }
-
 void InitShowPlaces()
 {
 	float fHtRatio = stf(Render.screen_y) / iGlobalVar1;
@@ -20,20 +16,16 @@ void InitShowPlaces()
 	objActivePerkShower.ShowParam.IconSpace.horz	= RecalculateHIcon(2);
 	objActivePerkShower.ShowParam.IconSpace.vert	= RecalculateVIcon(2);
 }
-
 void procLoadIntoNew()
 {
 	UnloadActivePerkShower();
 	SetEventHandler("frame","LoadActivePerkShower",1);
 }
-
 void LoadActivePerkShower()
 {
 	DelEventHandler("frame","LoadActivePerkShower");
-
 	DeleteAttribute(&objActivePerkShower,"PerkList.list");
 	DeleteAttribute(&objActivePerkShower,"Textures");
-	
 	// информация о текстурах
 	if(bSeaActive && !bAbordageStarted)
 	{	// морская часть
@@ -47,11 +39,9 @@ void LoadActivePerkShower()
 		objActivePerkShower.Textures.t0.horz = 16;
 		objActivePerkShower.Textures.t0.vert = 4;
 	}
-
 	aref arPerksRoot,arPerk;
 	makearef(arPerksRoot,pchar.perks.list);
 	int perksQ = GetAttributesNum(arPerksRoot);
-
 	string stmp;
 	int idx = 0;
 	for(int j=0; j<perksQ; j++)
@@ -65,7 +55,6 @@ void LoadActivePerkShower()
 			}
 		}
 	}
-
 	CreateEntity(&objActivePerkShower,"ActivePerkShower");
 	if(bSeaActive && !bAbordageStarted)
 	{	// морская часть
@@ -80,27 +69,22 @@ void LoadActivePerkShower()
 	InitShowPlaces();
 	SendMessage(&objActivePerkShower,"l",MSG_ACTIVE_PERK_ICON_REFRESH);
 }
-
 void UnloadActivePerkShower()
 {
 	DeleteClass(&objActivePerkShower);
 	DeleteAttribute(&objActivePerkShower,"PerkList");
 }
-
 bool IsPerkIntoList(string perkID)
 {
 	return CheckAttribute(&objActivePerkShower,"PerkList.list."+perkID);
 }
-
 void AddPerkToActiveList(string perkID)
 {
 	if( !IsEntity(&objActivePerkShower) ) return;
 	aref arRoot,arCur;
 	makearef(arRoot,objActivePerkShower.PerkList.list);
 	if( CheckAttribute(arRoot,perkID) ) return;
-
 	makearef(arCur,arRoot.(perkID));
-
 	int nTex = GetTextureIndex(GetPerkTextureName(perkID));
 	if(nTex < 0)
         return;
@@ -108,7 +92,6 @@ void AddPerkToActiveList(string perkID)
 	arCur.pic_idx = GetPerkPictureIndex(perkID);
 	SendMessage(&objActivePerkShower,"lsa",MSG_ACTIVE_PERK_LIST_REFRESH,"add",arCur);
 }
-
 int GetPerkPictureIndex(string perkName)
 {
 	switch(perkName)
@@ -136,7 +119,6 @@ int GetPerkPictureIndex(string perkName)
 	trace("WARNING!!! Perk name - "+perkName+" hav`t picture");
 	return 0;
 }
-
 string GetPerkTextureName(string perkName)
 {
 	switch(perkName)
@@ -164,13 +146,11 @@ string GetPerkTextureName(string perkName)
 	trace("WARNING!!! Perk name - "+perkName+" hav`t texture");
 	return "";
 }
-
 int GetTextureIndex(string texName)
 {
 	aref arTexList,arCurTex;
 	makearef(arTexList,objActivePerkShower.Textures);
 	int i,q;
-
 	q = GetAttributesNum(arTexList);
 	for(i=0; i<q; i++)
 	{
@@ -180,13 +160,11 @@ int GetTextureIndex(string texName)
 	trace("WARNING!!! Texture name - "+texName+" hav`t describe");
 	return -1;
 }
-
 void DelPerkFromActiveList(string perkID)
 {
 	aref arRoot,arCur;
 	makearef(arRoot,objActivePerkShower.PerkList.list);
 	if( !CheckAttribute(arRoot,perkID) ) return;
-
 	makearef(arCur,arRoot.(perkID));
 	SendMessage(&objActivePerkShower,"lsa",MSG_ACTIVE_PERK_LIST_REFRESH,"del",arCur);
 	DeleteAttribute(arRoot,perkID);

@@ -5,56 +5,38 @@
 #include "interface\utilite.c"
 #include "interface\interface_utils.c"
 #include "interface\perks\perks.c"
-
 #define FONT_NORMAL	"interface_normal"
 #define FONT_CAPTION	"interface_button"
 #define FONT_BOLD_NUMBERS	"bold_numbers"
-
 #define COLOR_DESELECT	4286611584
 #define COLOR_NORMAL	4294967295
 #define COLOR_MONEY		4292915296
 #define COLOR_RED		4294901760
-
 #define BLIND_MIN	4282400832 //argb(255,96,96,96)
 #define BLIND_MAX	4286611584 //argb(255,128,128,128)
-
 #define MONEY_SIGN		""
 #define MONEY_DELIVER	" "
-
 #define MAX_CHARACTER_SKILL		10 // to_do del
-
 #define DISEASE_ON_SHIP	0
 #define DISEASE_ON_COLONY	1
-
-
-
 //extern string FindRussianDaysString(int idays); 
 //extern string FindRussianMoneyString(int imoney);
-
-
 #event_handler("LaunchIAfterFrame","ILaunchAfterFrame");
 #event_handler("ievent_GameOver","IProcEventGameOver");
 #event_handler("ievent_SetGameTime","IProcEventSetGameTime");
 #event_handler("evntPreLoad","procPreLoad");
-
 #event_handler("FaderEvent_StartFade","ProcBreakInterface");
 #event_handler("FaderEvent_StartFadeIn","ProcBreakInterface");
 #event_handler("FaderEvent_EndFade","ProcBreakInterface");
 #event_handler("FaderEvent_EndFadeIn","ProcBreakInterface");
-
 #event_handler("Fader_GetTipsPath","procGetTipsPath");
 #event_handler("Fader_GetFaderPicture","procGetFaderPicture");
-
 #event_handler("evntOptionsBreak","procOptionsBreak");
-
 #event_handler("evMouseWeel","procMouseWeel");
 #event_handler("evGetMouseWeel","procGetMouseWeel");
-
 bool EnableVideoBreak = false;
-
 int CurrentInterface;
 int gStoreNum;
-
 extern void InitInterface(string iniFile);
 extern void InitInterface_R(string iniFile, ref rParam);
 extern void InitInterface_RR(string iniFile, ref rParam1, ref rParam2);
@@ -67,17 +49,13 @@ extern void InitInterface_B(string iniFile, bool bParam1);
 extern void InitInterface_BB(string iniFile, bool bParam1, bool bParam2);
 extern void InitInterface_RRS(string iniFile, ref rParam1, ref rParam2, string sParam3);
 extern void InitInterface_RIS(string iniFile, ref rParam1, int iParam2, string sParam3);
-
-
 extern ref GetMyCharacterRef();
 extern ref GetEnemyCharacterRef();
 string ICurNode;
 int	   nPrevInterface;
-
 bool bGamePadChangeEnable = false;
 bool bPlayVideoNow = false;
 bool bMainMenuLaunchAfterVideo = false;
-
 // Warship -->
 void LaunchBestMapScreen()	// Интерфейс отличной карты
 {
@@ -88,7 +66,6 @@ void LaunchBestMapScreen()	// Интерфейс отличной карты
 		InitInterface(Interfaces[CurrentInterface].IniFile);
 	}
 }
-
 void LaunchTavernWaitScreen() // Интерфейс отдыха
 {
 	if(procInterfacePrepare(INTERFACE_TAVERN_WAIT))
@@ -98,7 +75,6 @@ void LaunchTavernWaitScreen() // Интерфейс отдыха
 		InitInterface(Interfaces[CurrentInterface].IniFile);
 	}
 }
-
 void LaunchTransferGoodsScreen() // Интерфейс закупки товара казначеем
 {
 	if(procInterfacePrepare(INTERFACE_GOODS_TRANSFER))
@@ -109,7 +85,6 @@ void LaunchTransferGoodsScreen() // Интерфейс закупки товар
 	}
 }
 // <-- Warship
-
 // ugeen -->
 void LaunchMapViewScreen()	// Интерфейс атласа карт
 {
@@ -120,7 +95,6 @@ void LaunchMapViewScreen()	// Интерфейс атласа карт
 		InitInterface(Interfaces[CurrentInterface].IniFile);
 	}
 }
-
 void LaunchStorage(int storageNum) // интерфейс склада
 {
 	if(storageNum < 0)	return;
@@ -133,7 +107,6 @@ void LaunchStorage(int storageNum) // интерфейс склада
 		InitInterface_R(Interfaces[CurrentInterface].IniFile, &stores[storageNum]);
 	}
 }
-
 void LaunchAlchemyScreen() // Интерфейс мультиобъектов
 {
 	if(procInterfacePrepare(INTERFACE_ALCHEMY))
@@ -144,7 +117,6 @@ void LaunchAlchemyScreen() // Интерфейс мультиобъектов
 	}
 }
 // <-- ugeen
-
 // boal -->
 void LaunchAboutScreen()
 {	
@@ -158,7 +130,6 @@ void LaunchAboutScreen()
 		InitInterface(Interfaces[CurrentInterface].IniFile);
 	}*/
 }
-
 void LaunchNationLegend()
 {
 	if(procInterfacePrepare(INTERFACE_NATION_LEGEND))
@@ -168,7 +139,6 @@ void LaunchNationLegend()
 		InitInterface(Interfaces[CurrentInterface].IniFile);
 	}
 }
-
 void LaunchPsHeroScreen()
 {
 	if(procInterfacePrepare(INTERFACE_PS_HERO))
@@ -178,7 +148,6 @@ void LaunchPsHeroScreen()
 		InitInterface(Interfaces[CurrentInterface].IniFile);
 	}
 }
-
 void LaunchLeaveBattleScreen()
 {
 	if(procInterfacePrepare(INTERFACE_LEAVE_BATTLE))
@@ -199,7 +168,6 @@ void LaunchFrameForm()
 	}
 }
 // boal 15.01.06 <--
-
 // boal 13.05.05 -->
 void LaunchCardsGame()
 {
@@ -211,7 +179,6 @@ void LaunchCardsGame()
 	}
 }
 // boal 13.05.05 <--
-
 // boal 10.06.05 -->
 void LaunchDiceGame()
 {
@@ -232,9 +199,7 @@ void LaunchDebuderMenu()
 		InitInterface(Interfaces[CurrentInterface].IniFile);
 	}
 }
-
 // boal <--
-
 /*
 void LaunchEndGameMenu()
 {
@@ -255,19 +220,16 @@ void LaunchQuickSaveMenu()
 		InitInterface(Interfaces[CurrentInterface].IniFile);
 	}
 }
-
 void HideQuickSaveMenu()
 {
 	/*DelEventHandler("InterfaceBreak","ProcessBreakExit");
 	DelEventHandler("exitCancel","ProcessCancelExit");
 	DelEventHandler("evntDoPostExit","DoPostExit");
 	*/
-
 	interfaceResultCommand = RC_INTERFACE_QUICK_SAVE;
 	EndCancelInterface(true);
 	//SetTimeScale(1.0);
 }
-
 void LaunchSalaryScreen(string _tmp)
 {
 	if(procInterfacePrepare(INTERFACE_SALARY))
@@ -277,8 +239,6 @@ void LaunchSalaryScreen(string _tmp)
 		InitInterface(Interfaces[CurrentInterface].IniFile);
 	}
 }
-
-
 void LaunchNetMenu()
 {
 	if(procInterfacePrepare(INTERFACE_NET_NETMENU))
@@ -288,7 +248,6 @@ void LaunchNetMenu()
 		InitInterface(Interfaces[CurrentInterface].IniFile);
 	}
 }
-
 void LaunchNetFindGame()
 {
 	if(procInterfacePrepare(INTERFACE_NET_FINDGAME))
@@ -298,7 +257,6 @@ void LaunchNetFindGame()
 		InitInterface(Interfaces[CurrentInterface].IniFile);
 	}
 }
-
 void LaunchNetBuyScreen()
 {
 	if(procInterfacePrepare(INTERFACE_NET_BUY))
@@ -308,7 +266,6 @@ void LaunchNetBuyScreen()
 		InitInterface(Interfaces[CurrentInterface].IniFile);
 	}
 }
-
 void LaunchNetGameStateScreen()
 {
 	if(procInterfacePrepare(INTERFACE_NET_GAMESTATE))
@@ -318,7 +275,6 @@ void LaunchNetGameStateScreen()
 		InitInterface(Interfaces[CurrentInterface].IniFile);
 	}
 }
-
 void LaunchNetPlayerSettings()
 {
 	if(procInterfacePrepare(INTERFACE_NET_PLAYERSETTINGS))
@@ -328,7 +284,6 @@ void LaunchNetPlayerSettings()
 		InitInterface(Interfaces[CurrentInterface].IniFile);
 	}
 }
-
 void LaunchNetChatString()
 {
 	if(procInterfacePrepare(INTERFACE_NET_CHATSTRING))
@@ -338,7 +293,6 @@ void LaunchNetChatString()
 		InitInterface(Interfaces[CurrentInterface].IniFile);
 	}
 }
-
 void LaunchNetEndGameScreen()
 {
 	if(procInterfacePrepare(INTERFACE_NET_ENDGAME))
@@ -348,7 +302,6 @@ void LaunchNetEndGameScreen()
 		InitInterface(Interfaces[CurrentInterface].IniFile);
 	}
 }
-
 void LaunchNetTopListScreen()
 {
 	if(procInterfacePrepare(INTERFACE_NET_TOPLIST))
@@ -358,7 +311,6 @@ void LaunchNetTopListScreen()
 		InitInterface(Interfaces[CurrentInterface].IniFile);
 	}
 }
-
 void LaunchNetCreateGame()
 {
 	if(procInterfacePrepare(INTERFACE_NET_CREATEGAME))
@@ -377,7 +329,6 @@ void LaunchMapScreen()
 		InitInterface(Interfaces[CurrentInterface].IniFile);
 	}
 }
-
 void LaunchDirSailEnc()
 {
     Interfaces[INTERFACE_DIRSAILENC].SectionName = "interface\DirSailEnc.c";
@@ -397,7 +348,6 @@ void LaunchPaperMapScreen()
 		InitInterface(Interfaces[CurrentInterface].IniFile);
 	}
 }
-
 void LaunchColonyInfoScreen()
 {
 	if (procInterfacePrepare(INTERFACE_COLONY_INFO))
@@ -407,7 +357,6 @@ void LaunchColonyInfoScreen()
 		InitInterface(Interfaces[CurrentInterface].IniFile);
 	}
 }
-
 // Дележ добычи
 void LaunchSailsGeraldScreen(ref chref)
 {
@@ -418,7 +367,6 @@ void LaunchSailsGeraldScreen(ref chref)
 		InitInterface_R(Interfaces[CurrentInterface].IniFile, chref);
 	}
 }
-
 void LaunchForTest()
 {
 	if(procInterfacePrepare(INTERFACE_FOR_TEST))
@@ -428,8 +376,6 @@ void LaunchForTest()
 		InitInterface(Interfaces[CurrentInterface].IniFile);
 	}
 }
-
-
 void LaunchItemsTrade(ref chref, int mode)
 {
 	if(procInterfacePrepare(INTERFACE_ITEMSTRADE))
@@ -440,7 +386,6 @@ void LaunchItemsTrade(ref chref, int mode)
 	}
 }
 // boal -->
-
 void LaunchColonyCapture(ref city)
 {
 	if (procInterfacePrepare(INTERFACE_COLONY_CAPTURE))
@@ -450,7 +395,6 @@ void LaunchColonyCapture(ref city)
 		InitInterface_R(Interfaces[CurrentInterface].IniFile, city);
 	}
 }
-
 void LaunchSelectMenu()
 {
 	if (CheckAttribute(&InterfaceStack,"SelectMenu_node"))
@@ -473,8 +417,6 @@ void LaunchOptionScreen()
 		InitInterface(Interfaces[CurrentInterface].IniFile);
 	}
 }
-
-
 void LaunchGameMenuScreen()
 {
 	SetEventHandler("makescrshot","LaunchGameMenuContinue",0);
@@ -486,7 +428,6 @@ void LaunchGameMenuScreen()
 		Event("makescrshot");
 	}
 }
-
 void LaunchGameMenuContinue()
 {
 	DelEventHandler("makescrshot","LaunchGameMenuContinue");
@@ -498,7 +439,6 @@ void LaunchGameMenuContinue()
 		}
 		//InitInterface_GM(Interfaces[CurrentInterface].IniFile);
 	}
-
 void CreateScreenShoter()
 {
 	object scrshoter;
@@ -511,8 +451,6 @@ void CreateScreenShoter()
 		LayerAddObject(REALIZE,&scrshoter,-1);
 	}
 }
-
-
 /*
 void LaunchHelpScreen(string help_section)
 {
@@ -524,7 +462,6 @@ void LaunchHelpScreen(string help_section)
 	}
 }
 */
-
 void LaunchCharacterItemChange(ref chref)
 {
 	if(procInterfacePrepare(INTERFACE_ITEMSBOX))
@@ -535,7 +472,6 @@ void LaunchCharacterItemChange(ref chref)
 		InitInterface_RS(Interfaces[CurrentInterface].IniFile,&charef,chref.FaceID);
 	}
 }
-
 void LaunchItemsBox(ref boxRef)
 {
 	if(procInterfacePrepare(INTERFACE_ITEMSBOX))
@@ -545,7 +481,6 @@ void LaunchItemsBox(ref boxRef)
 		InitInterface_RS(Interfaces[CurrentInterface].IniFile,boxRef,"");
 	}
 }
-
 void LaunchItemsBarrel(ref boxRef)
 {
 	if(procInterfacePrepare(INTERFACE_ITEMSBOX))
@@ -555,7 +490,6 @@ void LaunchItemsBarrel(ref boxRef)
 		InitInterface_RS(Interfaces[CurrentInterface].IniFile,boxRef,"Barrel");
 	}
 }
-
 void LaunchFortCapture(ref chref)
 {
 	if(procInterfacePrepare(INTERFACE_FORTCAPTURE))
@@ -565,7 +499,6 @@ void LaunchFortCapture(ref chref)
 		InitInterface_R(Interfaces[CurrentInterface].IniFile,chref);
 	}
 }
-
 void LaunchShipState()
 {
 	if(procInterfacePrepare(INTERFACE_SHIP_CHOOSE))
@@ -575,7 +508,6 @@ void LaunchShipState()
 		InitInterface_R(Interfaces[CurrentInterface].IniFile, pchar);
 	}
 }
-
 void LaunchShipStateNPC(ref _chr)
 {
 	if(procInterfacePrepare(INTERFACE_SHIP_CHOOSE))
@@ -585,7 +517,6 @@ void LaunchShipStateNPC(ref _chr)
 		InitInterface_R(Interfaces[CurrentInterface].IniFile, _chr);
 	}
 }
-
 void LaunchStore(int storeNum)
 {
   if(storeNum<0)	return;
@@ -598,7 +529,6 @@ void LaunchStore(int storeNum)
 		InitInterface_R(Interfaces[CurrentInterface].IniFile,&stores[storeNum]);
 	}
 }
-
 // --> ugeen
 void LaunchContrabandTrade(ref ContraTrader, int storeNum)
 {
@@ -612,7 +542,6 @@ void LaunchContrabandTrade(ref ContraTrader, int storeNum)
 		InitInterface_RR(Interfaces[CurrentInterface].IniFile, ContraTrader, &stores[storeNum]);
 	}
 }
-
 void LaunchRepair(ref refCharacter)
 {
 	if(procInterfacePrepare(INTERFACE_REPAIR))
@@ -623,7 +552,6 @@ void LaunchRepair(ref refCharacter)
 	}
 }
 // <-- ugeen
-
 void LaunchShipyard(ref shipmaster)
 {
 	if(procInterfacePrepare(INTERFACE_SHIPYARD))
@@ -633,7 +561,6 @@ void LaunchShipyard(ref shipmaster)
 		InitInterface_R(Interfaces[CurrentInterface].IniFile,shipmaster);
 	}
 }
-
 void LaunchDiseaseAlert(int iMode)
 {
 	if(procInterfacePrepare(INTERFACE_DISEASE_ALERT))
@@ -643,8 +570,6 @@ void LaunchDiseaseAlert(int iMode)
 		InitInterface_I(Interfaces[CurrentInterface].IniFile, iMode);
 	}
 }
-
-
 void LaunchCannons(int storeNum) // boal 31.08.06
 {
     if(storeNum<0)	return;
@@ -656,7 +581,6 @@ void LaunchCannons(int storeNum) // boal 31.08.06
 		InitInterface_R(Interfaces[CurrentInterface].IniFile, &stores[storeNum]);
 	}
 }
-
 void LaunchCharacter(ref refCharacter)
 {
 	if(procInterfacePrepare(INTERFACE_CHARACTER))
@@ -666,7 +590,6 @@ void LaunchCharacter(ref refCharacter)
 		InitInterface_R(Interfaces[CurrentInterface].IniFile,refCharacter);
 	}
 }
-
 void LaunchMainCharacter()
 {
  	if(procInterfacePrepare(INTERFACE_CHARACTER_ALL))
@@ -676,7 +599,6 @@ void LaunchMainCharacter()
 		InitInterface(Interfaces[CurrentInterface].IniFile);
 	}
 }
-
 void LaunchMainMenu_afterVideo()
 {
 	DelEventHandler(EVENT_END_VIDEO,"LaunchMainMenu_afterVideo");
@@ -686,7 +608,6 @@ void LaunchMainMenu_afterVideo()
 	LaunchMainMenu();*/
 	LaunchNewMainMenu(); // Переделка
 }
-
 void LaunchNewMainMenu()
 {
 	if(procInterfacePrepare(INTERFACE_MAINMENU))
@@ -696,11 +617,9 @@ void LaunchNewMainMenu()
 		InitInterface(Interfaces[CurrentInterface].IniFile);
 	}
 }
-
 void LaunchMainMenu()
 {
 	LayerSetRealize(REALIZE);
-
 	if(procEnableInterfaceLaunch(INTERFACE_MAINMENU)==false)
 	{
 		if( CheckAttribute(&InterfaceStates,"LaunchAnyway") && sti(InterfaceStates.LaunchAnyway)==true )
@@ -714,12 +633,10 @@ void LaunchMainMenu()
 	if(g_ibVideoExecuting) return;
 	InterfaceStates.Launched = true;
 	InterfaceStates.doUnFreeze = false;
-
 	ISetSoundEvents();
 	nPrevInterface = -1;
 	CurrentInterface = INTERFACE_MAINMENU;
 	EngineLayersOffOn(false);
-
 	bGamePadChangeEnable = true;
 	LoadSegment(Interfaces[CurrentInterface].SectionName);
 	InitInterface(Interfaces[CurrentInterface].IniFile);
@@ -728,7 +645,6 @@ void LaunchMainMenu()
 	TimeScaleCounter = 0;
     DelPerkFromActiveList("TimeSpeed");
 }
-
 void LaunchSaveGame()
 {
 	if(procInterfacePrepare(INTERFACE_SAVELOAD))
@@ -738,7 +654,6 @@ void LaunchSaveGame()
 		InitInterface_BB(Interfaces[CurrentInterface].IniFile,true,false);
 	}
 }
-
 void LaunchLoadGame(bool isMainMenu)
 {
 	if(procInterfacePrepare(INTERFACE_SAVELOAD))
@@ -748,7 +663,6 @@ void LaunchLoadGame(bool isMainMenu)
 		InitInterface_BB(Interfaces[CurrentInterface].IniFile,false, isMainMenu);
 	}
 }
-
 /*
 void LaunchShipHold()
 {
@@ -760,7 +674,6 @@ void LaunchShipHold()
 	}
 }
 */
-
 void LaunchHireCrew()
 {
 	if(procInterfacePrepare(INTERFACE_HIRECREW))
@@ -770,7 +683,6 @@ void LaunchHireCrew()
 		InitInterface(Interfaces[CurrentInterface].IniFile);
 	}
 }
-
 /*
 void LaunchPassengers(ref _refCharacter)
 {
@@ -782,7 +694,6 @@ void LaunchPassengers(ref _refCharacter)
 	}
 }
 */
-
 /*
 void LaunchRansackJoin(ref _refMy,ref _refEnemy)
 {
@@ -793,7 +704,6 @@ void LaunchRansackJoin(ref _refMy,ref _refEnemy)
 		InitInterface_RR(Interfaces[CurrentInterface].IniFile,_refMy,_refEnemy);
 	}
 }
-
 void LaunchRansackCrew(ref _refMy,ref _refEnemy)
 {
 	if(procInterfacePrepare(INTERFACE_RANSACK_CREW))
@@ -803,7 +713,6 @@ void LaunchRansackCrew(ref _refMy,ref _refEnemy)
 		InitInterface_RR(Interfaces[CurrentInterface].IniFile,_refMy,_refEnemy);
 	}
 }
-
 void LaunchRansackCaptain(ref _refMy,ref _refEnemy)
 {
 	if(procInterfacePrepare(INTERFACE_RANSACK_CAPTAIN))
@@ -814,7 +723,6 @@ void LaunchRansackCaptain(ref _refMy,ref _refEnemy)
 	}
 }
 */
-
 void LaunchRansackMain(ref _refMy,ref _refEnemy,string captureState)
 {
 	if(procInterfacePrepare(INTERFACE_RANSACK_MAIN))
@@ -825,7 +733,6 @@ void LaunchRansackMain(ref _refMy,ref _refEnemy,string captureState)
 	}
 	// Это по сути вызов LaunchTransferMain(_refMy, _refEnemy, captureState); , но нужна проверка на	INTERFACE_RANSACK_MAIN 
 }
-
 void LaunchTransferMain(ref _refMy,ref _refEnemy, string newCurNod)
 {
 	if(procInterfacePrepare(INTERFACE_TRANSFER_MAIN))
@@ -835,7 +742,6 @@ void LaunchTransferMain(ref _refMy,ref _refEnemy, string newCurNod)
 		InitInterface_RS(Interfaces[CurrentInterface].IniFile,_refEnemy,newCurNod);
 	}
 }
-
 /*
 void LaunchTransferGoods(ref _refMy,ref _refOther)
 {
@@ -846,7 +752,6 @@ void LaunchTransferGoods(ref _refMy,ref _refOther)
 		InitInterface_RR(Interfaces[CurrentInterface].IniFile,_refMy,_refOther);
 	}
 }
-
 void LaunchTransferCharacter(ref _refMy,ref _refEnemy)
 {
 	if(procInterfacePrepare(INTERFACE_TRANSFER_CHARACTER))
@@ -856,7 +761,6 @@ void LaunchTransferCharacter(ref _refMy,ref _refEnemy)
 		InitInterface_RR(Interfaces[CurrentInterface].IniFile,_refMy,_refEnemy);
 	}
 }
-
 void LaunchTransferCrew(ref _refMy,ref _refEnemy)
 {
 	if(procInterfacePrepare(INTERFACE_TRANSFER_CREW))
@@ -867,7 +771,6 @@ void LaunchTransferCrew(ref _refMy,ref _refEnemy)
 	}
 }
 */
-
 void LaunchQuestBook()
 {
 	if(procInterfacePrepare(INTERFACE_QUESTBOOK))
@@ -877,7 +780,6 @@ void LaunchQuestBook()
 		InitInterface(Interfaces[CurrentInterface].IniFile);
 	}
 }
-
 void LaunchTradeBook()
 {
 	if(procInterfacePrepare(INTERFACE_TRADEBOOK))
@@ -887,7 +789,6 @@ void LaunchTradeBook()
 		InitInterface(Interfaces[CurrentInterface].IniFile);
 	}
 }
-
 void LaunchNationRelation()
 {
 	if(procInterfacePrepare(INTERFACE_NATIONRELATION))
@@ -897,8 +798,6 @@ void LaunchNationRelation()
 		InitInterface(Interfaces[CurrentInterface].IniFile);
 	}
 }
-
-
 void LaunchItems()
 {
 	if(procInterfacePrepare(INTERFACE_ITEMS))
@@ -908,31 +807,26 @@ void LaunchItems()
 		InitInterface(Interfaces[CurrentInterface].IniFile);
 	}
 }
-
 void LaunchSelectCharacter()
 {
 	//if(procEnableInterfaceLaunch(INTERFACE_CHARACTER_SELECT)==false) return;
 	//InterfaceStates.Launched = true;
 	//InterfaceStates.doUnFreeze = false;
 	//EngineLayersOffOn(false);
-
 	SetEventHandler(EVENT_END_VIDEO,"ISTART_SelCharacter",0);
 	PostEvent(EVENT_END_VIDEO,0);
 	//StartVideo("3Ship");
 }
-
 void LaunchSelectNation()
 {
 	//if(procEnableInterfaceLaunch(INTERFACE_CHARACTER_SELECT)==false) return;
 	//InterfaceStates.Launched = true;
 	//InterfaceStates.doUnFreeze = false;
 	//EngineLayersOffOn(false);
-
 	SetEventHandler(EVENT_END_VIDEO,"ISTART_SelNation",0);
 	PostEvent(EVENT_END_VIDEO,0);
 	//StartVideo("3Ship");
 }
-
 void LaunchColonyManagement()
 {
 	if(procInterfacePrepare(INTERFACE_COLONY_MANAGEMENT))
@@ -942,7 +836,6 @@ void LaunchColonyManagement()
 		InitInterface(Interfaces[CurrentInterface].IniFile);
 	}
 }
-
 void ISTART_SelCharacter()
 {
 	InterfaceStates.Launched = true;
@@ -956,7 +849,6 @@ void ISTART_SelCharacter()
 	//interfaceResultCommand = RC_INTERFACE_CHARACTER_SELECT_EXIT;
 	//Start_InterfaceDoExit();
 }
-
 /*
 void ISTART_SelNation()
 {
@@ -971,11 +863,9 @@ void ISTART_SelNation()
 	//Start_InterfaceDoExit();
 }
 */
-
 void EndOkInterface()
 {
     UnloadSegment(Interfaces[CurrentInterface].SectionName);
-
 	if(nPrevInterface == INTERFACE_STORE)
 	{
 		int cn = GetCompanionIndex(pchar,sti(GameInterface.FourImage.current));
@@ -998,12 +888,10 @@ void EndOkInterface()
 	    Start_InterfaceDoExit();
 	}
 }
-
 void EndCancelInterface(bool bYesRelease)
 {
 	KillMessageBox();
 	KillIconSelector();
-
 	ref refObj1,refObj2;
 	bGamePadChangeEnable = false;
 	switch(interfaceResultCommand)
@@ -1013,36 +901,29 @@ void EndCancelInterface(bool bYesRelease)
 			refObj1 = GetMyCharacterRef(); 
 			refObj2 = GetEnemyCharacterRef(); 
 		break;
-
 		case RC_INTERFACE_RANSACK_CREW_EXIT: 
 			refObj1 = GetMyCharacterRef(); 
 			refObj2 = GetEnemyCharacterRef(); 
 		break;
-
 		case RC_INTERFACE_RANSACK_CAPTAIN_EXIT: 
 			refObj1 = GetMyCharacterRef(); 
 			refObj2 = GetEnemyCharacterRef(); 
 		break;
-		
-
 		case RC_INTERFACE_TRANSFER_START_GOODS: 
 			refObj1 = GetMyCharacterRef(); 
 			refObj2 = GetEnemyCharacterRef(); 
 			ICurNode = GetCurrentNode(); 
 		break;
-
 		case RC_INTERFACE_TRANSFER_START_CHARACTERS: 
 			refObj1 = GetMyCharacterRef(); 
 			refObj2 = GetEnemyCharacterRef(); 
 			ICurNode = GetCurrentNode(); 
 		break;
-
 		case RC_INTERFACE_TRANSFER_START_CREW: 
 			refObj1 = GetMyCharacterRef(); 
 			refObj2 = GetEnemyCharacterRef(); 
 			ICurNode = GetCurrentNode(); 
 		break;
-
 		case RC_INTERFACE_TRANSFER_MAIN_RETURN: 
 			refObj1 = GetMyCharacterRef(); 
 			refObj2 = GetEnemyCharacterRef(); 
@@ -1068,7 +949,6 @@ void EndCancelInterface(bool bYesRelease)
 			LaunchRansackCrew(refObj1,refObj2); 
 			return; 
 		break;
-		
 		case RC_INTERFACE_RANSACK_CREW_EXIT: 
 			if (!CheckAttribute(refObj2, "cannotsurrender"))
 			{
@@ -1083,33 +963,28 @@ void EndCancelInterface(bool bYesRelease)
 				return;
 			}
 		break;
-
 		case RC_INTERFACE_RANSACK_CAPTAIN_EXIT: 
 			InterfaceStates.Launched=false; 
 			LaunchRansackMain(refObj1,refObj2,""); 
 			return; 
 		break;
 		*/
-		
 		/*
 		case RC_INTERFACE_TRANSFER_START_GOODS: 
 			InterfaceStates.Launched=false; 
 			LaunchTransferGoods(&Characters[sti(refObj1.index)],&Characters[sti(refObj2.index)]); 
 			return; 
 		break;
-
 		case RC_INTERFACE_TRANSFER_START_CHARACTERS: 
 			InterfaceStates.Launched=false; 
 			LaunchTransferCharacter(refObj1,refObj2); 
 			return; 
 		break;
-
 		case RC_INTERFACE_TRANSFER_START_CREW: 
 			InterfaceStates.Launched=false; 
 			LaunchTransferCrew(refObj1,refObj2); 
 			return; 
 		break;
-		
 		case RC_INTERFACE_TRANSFER_MAIN_RETURN:
 			if(nPrevInterface==INTERFACE_RANSACK_MAIN)
 			{
@@ -1123,11 +998,9 @@ void EndCancelInterface(bool bYesRelease)
 		break;
 		*/
 	}
-	
     Start_InterfaceDoExit();
 	if(bYesRelease)	PostEvent("evntQuestsCheck",1);
 }
-
 // стек для вложенных интерфейсов
 object InterfaceStack;
 void ClearInterfaceStack()
@@ -1182,7 +1055,6 @@ string I_PopString()
 	DeleteAttribute(&InterfaceStack,"strings."+stackSlotName);
 	return retStr;
 }
-
 void ISetSoundEvents()
 {
 	SetEventHandler(ISOUND_EVENT,"IDoSoundEvent",0);
@@ -1200,7 +1072,6 @@ void IDoSoundEvent()
 	case 2: PlaySound("interface\menu_select_01.wav"); break; // выбор элемента
 	}
 }
-
 #event_handler("evntPostVideo","stPostVideo");
 void StartPictureAsVideo( string picname, float time )
 {
@@ -1216,7 +1087,6 @@ void PictureAsVideoBreak()
 	Event( "DoInfoShower", "sl", "Game Over Picture", false );
 	Event( EVENT_END_VIDEO );
 }
-
 object aviVideoObj;
 void StartPostVideo(string vidName,int n)
 {
@@ -1267,14 +1137,12 @@ void StartVideo(string vidName)
 	SendMessage(&aviVideoObj,"ls",MSG_SET_VIDEO_PLAY,GetVideoFileName(vidName));
 	bGamePadChangeEnable = true;
 	bPlayVideoNow = true;
-
 	if( vidName=="Artefact" ||
 		vidName=="Ending" ||
 		vidName=="Invasion" ||
 		vidName=="Temple"
 		) {bBreakVideoDisable = true;}
 	else {bBreakVideoDisable = false;}
-
 	DeleteAttribute(&InterfaceStates,"VideoBreakControls");
 	SetEventHandler("Control Activation","IVideoBreakPrepare",0);
 	SetEventHandler("Control Deactivation","IVideoBreak",0);
@@ -1295,7 +1163,6 @@ void IVideoBreak()
 	string ControlName = GetEventData();
 	if( !CheckAttribute(&InterfaceStates,"VideoBreakControls."+ControlName) ) {return;}
 	DeleteAttribute(&InterfaceStates,"VideoBreakControls");
-
 	bool bMakeBreak = false;
 	if( ControlName=="ICancel" )	{bMakeBreak = true;}
 	if( !bBreakVideoDisable )
@@ -1348,12 +1215,10 @@ void _Procedure_EndVideoPlay()
 	}
 	PostEvent(EVENT_END_VIDEO,1);
 }
-
 int GetCurrentInterface()
 {
 	return CurrentInterface;
 } 
-
 bool procEnableInterfaceLaunch(int _interfaceCode)
 {
 	if(sti(InterfaceStates.Launched)==true) return false;
@@ -1365,7 +1230,6 @@ bool procEnableInterfaceLaunch(int _interfaceCode)
 	}
 	return true;
 }
-
 /*
 bool bRunHelpChooser = false;
 void RunHelpChooser()
@@ -1375,13 +1239,11 @@ void RunHelpChooser()
 	else if( IsEntity(worldMap) )	chooserName = "world_map";
 	else if( DialogRun )	chooserName = "Dialog_window";
 	else chooserName = "land_interface";
-
 	if(chooserName=="")
 	{
 		LaunchHelpScreen("");
 		return;
 	}
-
 	DeleteEntitiesByType("HELPCHOOSER");
 	SetEventHandler("EventEndHelpChooser","ProcEndHelpChooser",0);
 	object objHelpChooser;
@@ -1402,7 +1264,6 @@ void RunHelpChooser()
 	LayerAddObject(INTERFACE_REALIZE,&objHelpChooser,10000);
 }
 */
-
 /*
 void ProcEndHelpChooser()
 {
@@ -1415,7 +1276,6 @@ void ProcEndHelpChooser()
 	else EngineLayersOffOn(true);
 }
 */
-
 void ReturnToMainMenu()
 {
 	/*if(sti(InterfaceStates.Buttons.Resume.enable)==true)
@@ -1430,7 +1290,6 @@ void ReturnToMainMenu()
 	InterfaceStates.MakeScreenShot = false;
 	LaunchMainMenu();
 }
-
 void ILaunchAfterFrame()
 {
 	string nodName = GetEventData();
@@ -1443,7 +1302,6 @@ void ILaunchAfterFrame()
 		PostEvent("LaunchIAfterFrame",1,"sl", nodName, n-1);
 		return;
 	}
-
 	switch(nodName)
 	{
 		case "I_CHARACTER":     LaunchMainCharacter();  return; break;
@@ -1464,19 +1322,16 @@ void ILaunchAfterFrame()
 		break;
 	}
 }
-
 bool procInterfacePrepare(int interfaceCode)
 {
 	if(procEnableInterfaceLaunch(interfaceCode)==false) return false;
 	if(g_ibVideoExecuting) return false;
 	//if(IsEntity(wdm_fader)!=0) return false;
-
 	if(interfaceCode != INTERFACE_FORTCAPTURE && interfaceCode != INTERFACE_RANSACK_MAIN)
 	{
 		aref arFader;
 		if( GetEntity(arFader,"fader") ) {return false;}
 	}
-
 	if( LoadSegment(Interfaces[interfaceCode].SectionName) )
 	{
 		Telescope_Off();
@@ -1499,16 +1354,13 @@ bool procInterfacePrepare(int interfaceCode)
 		return false;
 	}
 }
-
 void Start_InterfaceDoExit()
 {
 	if(IsPerkIntoList("TimeSpeed")) {SetTimeScale(GetSeaTimeScale());}
 	SetEventHandler("frame","InterfaceDoExit",1);
 }
-
 extern void OSL_WriteGameOption();
 extern void OSL_ReadGameOption();
-
 void LoadGameOptions()
 {
 	if( LoadSegment("interface\option_sl.c") )
@@ -1517,7 +1369,6 @@ void LoadGameOptions()
 		UnloadSegment("interface\option_sl.c");
 	}
 }
-
 void SaveGameOptions()
 {
 	if( LoadSegment("interface\option_sl.c") )
@@ -1526,7 +1377,6 @@ void SaveGameOptions()
 		UnloadSegment("interface\option_sl.c");
 	}
 }
-
 void ReloadAfterFortCapture()
 {
     // debug
@@ -1535,21 +1385,16 @@ void ReloadAfterFortCapture()
 		if (MOD_BETTATESTMODE == "On") Log_Info("Error: ReloadAfterFortCapture miss from_interface.fortCharacterIdx");
 		return;
 	}
-	
 	int fortChr = sti(pchar.from_interface.fortCharacterIdx);
 	// boal -->
 	AfterTownBattle();//трем неоконченый захват
-
     // перезапомним
     pchar.GenQuestFort.fortCharacterIdx = fortChr;
-
     bool ExitToSea = CheckAttribute(pchar, "from_interface.Exit_to_Sea"); // выход в море to_do
 	// boal <--
 	ref chref = GetCharacter(fortChr);
-
 	string sToLocation = "";
 	string sToLocator = "";
-
 	aref ar_FindLoc = FindIslandReloadLocator(chref.location,chref.location.locator);
 	if(CheckAttribute(ar_FindLoc,"GoAfterBoard.location"))
 	{
@@ -1561,29 +1406,23 @@ void ReloadAfterFortCapture()
 		{	sToLocator = ar_FindLoc.emerge;
 		}
 	}
-
 	//sToLocation = pchar.from_interface.town + "_town";
 	//sToLocator = "reload1";
-
 	DeleteAttribute(pchar,"from_interface");
-
 	chref.Fort.Mode = FORT_DEAD;
 	// data of frot die
 	chref.Fort.DieTime.Year = GetDataYear();
 	chref.Fort.DieTime.Month = GetDataMonth();
 	chref.Fort.DieTime.Day = GetDataDay();
 	chref.Fort.DieTime.Time = GetTime();
-
     pchar.GenQuest.Hunter2Pause = true;  // boal бойня в форте
 	// опыт
 	// boal -->
     AddCharacterExpToSkillSquadron(GetMainCharacter(), "Leadership", 500);//добавка в городе, если  бой непрерывен
     AddCharacterExpToSkillSquadron(GetMainCharacter(), "Sailing", 500);
     AddCharacterExpToSkillSquadron(GetMainCharacter(), "Sneak", 300);
-
     Statistic_AddValue(GetMainCharacter(), "Fort", 1);
     Statistic_AddValue(GetMainCharacter(), NationShortName(sti(chref.nation)) + "_KillFort", 1);
-	
 	Achievment_SetStat(GetMainCharacter(), 22, 1);
     fOldMaxSeaHeight = 0.6; // fix потоп в порту ФФ boal 03.01.05
     // boal <--
@@ -1624,7 +1463,6 @@ void ReloadAfterFortCapture()
 	    Log_info("ReloadAfterFortCapture has no sToLocation");
 	}
 }
-
 void IProcEventGameOver()
 {
 	string str = GetEventData();
@@ -1636,25 +1474,20 @@ void IProcEventGameOver()
 	}
 	GameOver(str);
 }
-
 void IProcEventSetGameTime()
 {
 	int itmp = GetEventData();
 	InterfaceStates.GameTime.hour = itmp;
-
 	itmp = GetEventData();
 	InterfaceStates.GameTime.min = itmp;
-
 	itmp = GetEventData();
 	InterfaceStates.GameTime.sec = itmp;
 }
-
 //==============================================================
 //	Секция Показывающая какую либо инфо на экране
 //==============================================================
 #event_handler("DoInfoShower", "procInfoShow");
 object objInfoList[10];
-
 void procInfoShow()
 {
 	string sInfoID = GetEventData();
@@ -1664,7 +1497,6 @@ void procInfoShow()
 	} else {
 		nInfoSet = GetEventData();
 	}
-
 	int nInfoIdx = 0;
 	switch(sInfoID)
 	{
@@ -1676,17 +1508,14 @@ void procInfoShow()
 	case "lost controller":		nInfoIdx = 5; break;
 	case "Game Over Picture":	nInfoIdx = 6; break;
 	}
-
 	int prevQ = 0;
 	if( CheckAttribute(&objInfoList[nInfoIdx],"refr") && IsEntity(&objInfoList[nInfoIdx]) ) {
 		prevQ = sti(objInfoList[nInfoIdx].refr);
 	}
-
 	if( nInfoSet!=0 ) prevQ++;
 	else prevQ--;
 	if(prevQ<0) prevQ=0;
 	objInfoList[nInfoIdx].refr = prevQ;
-
 	if( prevQ>0 )
 	{
 		if( !IsEntity(&objInfoList[nInfoIdx]) )
@@ -1697,40 +1526,31 @@ void procInfoShow()
 			//objInfoList[nInfoIdx].scale = 1.0;
 			objInfoList[nInfoIdx].offset = 30;
 			objInfoList[nInfoIdx].picbackfilename = "loading\ImgBack.tga";
-
 			switch(sInfoID)
 			{
 			case "save game":
 				objInfoList[nInfoIdx].picfilename = "loading\" + LanguageGetLanguage() + "\save_game.tga";
 			break;
-
 			case "lost controller":
 				objInfoList[nInfoIdx].picfilename = "loading\" + LanguageGetLanguage() + "\lost_controller.tga";
 			break;
-
 			case "Low Storage":
 				objInfoList[nInfoIdx].picfilename = "loading\" + LanguageGetLanguage() + "\low_storage.tga";
 			break;
-
 			case "game prepare":
 						objInfoList[nInfoIdx].picfilename = "loading\start_loading.tga";
 					break;
-
 			case "MainMenuLaunch":
 				objInfoList[nInfoIdx].picfilename = "loading\start_loading.tga";
 			break;
-
 			case "OptionsBreak":
 				objInfoList[nInfoIdx].picfilename = "loading\" + LanguageGetLanguage() + "\options.tga";
 			break;
-
 			case "Game Over Picture":
 				objInfoList[nInfoIdx].picfilename = InterfaceStates.GameOverPicture;
 			break;
 			}
-
 			CreateEntity(&objInfoList[nInfoIdx],"InfoHandler");
-
 			//LayerCreate("inf_realize", 1);
 			LayerSetRealize(INFO_REALIZE);
 		}
@@ -1742,10 +1562,8 @@ void procInfoShow()
 			DeleteClass(&objInfoList[nInfoIdx]);
 		}
 	}
-
 	InfoShowSetting();
 }
-
 void InfoShowSetting()
 {
 	bool bAlreadySet = false;
@@ -1767,14 +1585,12 @@ void InfoShowSetting()
 				}
 			}
 		}
-
 		if( bMakeSet ) {
 			LayerAddObject(INFO_REALIZE,&objInfoList[i],-1);
 			bAlreadySet = true;
 		} else {
 			LayerDelObject(INFO_REALIZE,&objInfoList[i]);
 		}
-
 		if(i==2) {
 			if(bMakeSet) {
 				SetEventHandler("Control Activation","InfoShow_Control",0);
@@ -1801,7 +1617,6 @@ void InfoShowSetting()
 			}
 		}
 	}
-
 	if(bAlreadySet) {
 		LayerFreeze(INTERFACE_REALIZE,true);
 		LayerFreeze(INTERFACE_EXECUTE,true);
@@ -1810,12 +1625,9 @@ void InfoShowSetting()
 		LayerFreeze(INTERFACE_EXECUTE,false);
 	}
 }
-
-
 void InfoShow_Control()
 {
 	string ControlName = GetEventData();
-
 	if(ControlName=="IAction" || ControlName=="ICancel")
 	{
 		PostEvent("DoInfoShower",0,"sl","Low Storage",false);
@@ -1828,11 +1640,9 @@ void InfoShow_Control()
 		LayerFreeze(INTERFACE_EXECUTE,false);
 	}
 }
-
 void InfoShow_Control2()
 {
 	string ControlName = GetEventData();
-
 	if(ControlName=="IAction" || ControlName=="IStartButton")
 	{
 		PostEvent("DoInfoShower",0,"sl","OptionsBreak",false);
@@ -1841,18 +1651,15 @@ void InfoShow_Control2()
 		LayerFreeze(INTERFACE_EXECUTE,false);
 	}
 }
-
 void procAttractExit()
 {
 	PostEvent("ievntEndVideo",1);
 	DelEventHandler("Control Activation","procAttractExit");
 }
-
 float GetSeaTimeScale()
 {
 	return 2.0;
 }
-
 void SetShowWindowParameters(bool TVused, int w,int h, int l,int t,int r,int b)
 {
 	showWindow.TVused = TVused;
@@ -1868,40 +1675,32 @@ void SetShowWindowParameters(bool TVused, int w,int h, int l,int t,int r,int b)
 	showWindow.sh = b-t;
 	showWindow.scale =  makefloat(w) / 1024.0;
 }
-
 void GetXYWindowOffset(ref offsetX, ref offsetY)
 {
 	float dwScreenHeight 			= 600.0;
 	float dwScreenWidth 			= sti(showWindow.width) * dwScreenHeight/ sti(showWindow.height);
 	if(dwScreenWidth < 800.0)  dwScreenWidth = 800.0;
-	
 	float offX = (dwScreenWidth - 800.0)/2.0;
 	float offY = 0.0;
-	
 	offsetX = offX;
 	offsetY = offY;
 }
-
 int RecalculateHIcon(int curHSize)
 {
 	return makeint(0.5+curHSize);
 }
-
 int RecalculateVIcon(int curVSize)
 {
 	return makeint(0.5+stf(showWindow.aspectRatio)*curVSize);
 }
-
 int RecalculateHIconScaled(int curHSize)
 {
 	return makeint(stf(showWindow.scale)*curHSize);
 }
-
 int RecalculateVIconScaled(int curVSize)
 {
 	return makeint(stf(showWindow.scale)*stf(showWindow.aspectRatio)*curVSize);
 }
-
 string GetVideoFileName(string baseName)
 {
 	if( baseName=="Invasion" ) {
@@ -1915,11 +1714,9 @@ string GetVideoFileName(string baseName)
 	{
 		baseName = "Credits_ru";
 	}
-
 	if( GetTargetPlatform()=="pc" ) return baseName+".wmv";
 	return baseName+".xmv";
 }
-
 void DisableMenuLaunch(bool bDisable)
 {
 	if(bDisable) {
@@ -1935,7 +1732,6 @@ bool IsEnableMenuLaunch()
 	}
 	return true;
 }
-
 void DisableFastTravel(bool bDisable)
 {
 	if(bDisable) {
@@ -1951,13 +1747,11 @@ bool IsEnableFastTravel()
 	}
 	return true;
 }
-
 void procPreLoad()
 {
 	DeleteAttribute(&objActivePerkShower,"PerkList");
 	SetTimeScale(1.0);
 }
-
 void ProcBreakInterface()
 {
 	if( CheckAttribute(&InterfaceStates,"Launched") &&
@@ -1977,13 +1771,11 @@ void ProcBreakInterface()
 	Event("exitCancel");
 	DeleteAttribute(&InterfaceStates,"InstantExit");
 }
-
 bool g_bOptionsBreak = false;
 void procOptionsBreak()
 {
 	g_bOptionsBreak = true;
 }
-
 string g_sTipsPath;
 ref procGetTipsPath()
 {
@@ -1992,7 +1784,6 @@ ref procGetTipsPath()
 	else g_sTipsPath = "tips\" + sLngID;
 	return &g_sTipsPath;
 }
-
 string g_sFaderPic;
 ref procGetFaderPicture()
 {
@@ -2000,11 +1791,9 @@ ref procGetFaderPicture()
 	g_sFaderPic = LanguageGetFaderPic(sPicName);
 	return &g_sFaderPic;
 }
-
 void StartLanguageSetting(string lngID)
 {
 	if(lngID!="") LanguageSetLanguage(lngID);
-
 	string segmentName = "Characters\" + LanguageGetLanguage() + "\Characters_names.c";
 	if( LoadSegment(segmentName) )
 	{
@@ -2013,7 +1802,6 @@ void StartLanguageSetting(string lngID)
 	} else {
 		Trace("Error! Can`t Load Segment: " + segmentName);
 	}
-
 	segmentName = "Characters\" + LanguageGetLanguage() + "\Pirates_names.c";
 	if( LoadSegment(segmentName) )
 	{
@@ -2022,7 +1810,6 @@ void StartLanguageSetting(string lngID)
 	} else {
 		Trace("Error! Can`t Load Segment: " + segmentName);
 	}
-
 	segmentName = "Characters\" + LanguageGetLanguage() + "\Indian_names.c";
 	if( LoadSegment(segmentName) )
 	{
@@ -2031,7 +1818,6 @@ void StartLanguageSetting(string lngID)
 	} else {
 		Trace("Error! Can`t Load Segment: " + segmentName);
 	}
-
 	segmentName = "Characters\" + LanguageGetLanguage() + "\Generator_names.c";
 	if( LoadSegment(segmentName) )
 	{
@@ -2040,7 +1826,6 @@ void StartLanguageSetting(string lngID)
 	} else {
 		Trace("Error! Can`t Load Segment: " + segmentName);
 	}
-	
 	segmentName = "Ships\" + LanguageGetLanguage() + "\ships_name.c";
 	if ( LoadSegment(segmentName) )
 	{
@@ -2049,12 +1834,10 @@ void StartLanguageSetting(string lngID)
 	} else {
 		Trace("Error! Can`t Load Segment: " + segmentName);
 	}
-
 	segmentName = LanguageGetLanguage() + "\Greetings_alias.ini";
 	SendMessage( &Sound, "ls", MSG_SOUND_ALIAS_ADD,  segmentName);
 	//SendMessage( &Sound, "ls", MSG_SOUND_ALIAS_ADD, LanguageGetLanguage() + "\talk_" + LanguageGetLanguage() + ".lng" );
 }
-
 int nWeelStep = 0;
 void procMouseWeel()
 {
@@ -2064,13 +1847,11 @@ ref procGetMouseWeel()
 {
 	return &nWeelStep;
 }
-
 int SetAlphaIntoColor(int col, int alpha)
 {
 	int newCol = and(col,16777215) + shl(alpha,24);
 	return newCol;
 }
-
 void SetSkillShow(string skillName, int skillVal)
 {
 	GameInterface.strings.(skillName) = skillVal;
@@ -2079,17 +1860,14 @@ void SetSkillShow(string skillName, int skillVal)
 	//ChangeStringColor(skillName,SetAlphaIntoColor(color,GetAlphaFromSkill(skillVal)));
 	ChangeStringColor(skillName,SetAlphaIntoColor(color, 55 + skillVal*2)); // 55-255
 }
-
 void SetSkillShowEx(aref xi_refCharacter, string skillName, int skillVal, int skillTempVal, int skillUpVal, int iX, int iY)
 {
 	//GameInterface.strings.(skillName) = skillVal;
 	string sReal = skillName+"real";
 	//GameInterface.strings.(sReal) = skillTempVal;
 	int color = COLOR_NORMAL;
-	
 	if(skillVal >= MAX_CHARACTER_SKILL) color = COLOR_MONEY;
 	int iResult = skillVal;
-	
 	if (skillTempVal > skillVal)
 	{
 		if (skillVal > 0)
@@ -2101,11 +1879,9 @@ void SetSkillShowEx(aref xi_refCharacter, string skillName, int skillVal, int sk
 			iResult = 1;
 		}
 	}
-	
 	if (skillUPVal > iResult && pchar.id == xi_refCharacter.id)
 	{
 		color = argb(255,128,255,128);
-
 		if(skillVal < 1)
 		{
 			iResult = skillUPVal + skillVal;
@@ -2115,7 +1891,6 @@ void SetSkillShowEx(aref xi_refCharacter, string skillName, int skillVal, int sk
 			iResult = skillUPVal;// - skillVal;
 		}
 	}
-	
 	if (skillTempVal > skillVal)
 	{
 		color = COLOR_RED;
@@ -2123,12 +1898,10 @@ void SetSkillShowEx(aref xi_refCharacter, string skillName, int skillVal, int sk
 	SendMessage(&GameInterface,"lslsssllllllfl", MSG_INTERFACE_MSG_TO_NODE,"MAIN_WINDOW_STRINGS",0,
 		skillName, its(iResult), FONT_BOLD_NUMBERS,iX,iY, SetAlphaIntoColor(color,GetAlphaFromSkill(iResult)),0, 
 		SCRIPT_ALIGN_RIGHT, true, 0.7, 420);
-	
 	SendMessage(&GameInterface,"lslsssllllllfl", MSG_INTERFACE_MSG_TO_NODE,"MAIN_WINDOW_STRINGS",0,
 		sReal, its(skillTempVal), FONT_BOLD_NUMBERS,(iX+37),iY, SetAlphaIntoColor(COLOR_NORMAL,GetAlphaFromSkill(skillTempVal)),0, 
 		SCRIPT_ALIGN_RIGHT, true, 0.7, 420);
 }
-
 /*int GetAlphaFromSkill(int nskill)
 {
 	switch(nskill)
@@ -2149,7 +1922,6 @@ void SetSkillShowEx(aref xi_refCharacter, string skillName, int skillVal, int sk
 	}
 	return 0;
 }  */
-
 int GetAlphaFromSkill(int nskill)
 {
 	switch (nskill)
@@ -2170,7 +1942,6 @@ int GetAlphaFromSkill(int nskill)
 	}
 	return 55;
 }
-
 //==============================
 // save load section
 //==============================
@@ -2188,31 +1959,24 @@ void MakeQuickLoad()
 	SetEventHandler("evntLoad","LoadGame",0);
 	PostEvent("evntLoad",0,"s", "SAVE\"+PlayerProfile.name+"\"+curSave);
 }
-
 void MakeQuickSave()
 {
 	if( bPlayVideoNow ) {return;}
 	if( dialogRun ) {return;}  // лесник - если диялог ,то быстре сохарнение отменяется. лесник
-
 	aref arTmp;
 	if( GetEntity(arTmp,"fader") ) {return;}
-
 	if (!CheckSaveGameEnabled()) {return;}
-
 	if( InterfaceStates.Launched != 0 ) {return;}
-
 	// boal 09.07.06 -->
 	if (!QuickSaveGameEnabledHardcore())
 	{
         Log_Info("In his game mode you can save only in churches");
 		return;
 	}
-	
 	SetTimeScale(1.0);
 	TimeScaleCounter = 0;
 	DelPerkFromActiveList("TimeSpeed");
 	DeleteAttribute(pchar, "pause");
-	
 	// boal 09.07.06 <--
 	aref arScrShoter;
 	if( !GetEntity(&arScrShoter,"scrshoter") ) {
@@ -2221,11 +1985,9 @@ void MakeQuickSave()
 		PostEvent("makescrshot",1);
 	} else { return; }
 }
-
 void QuickSaveContinue()
 {
 	DelEventHandler("makescrshot","QuickSaveContinue");
-
 	LaunchQuickSaveMenu();
 	//ugeen 2017 -->
 	int QuickSaveIndex = 1;
@@ -2239,20 +2001,16 @@ void QuickSaveContinue()
 		}	
 	}
 	PlayerProfile.QuickSaveIndex = QuickSaveIndex;
-	
 	string curSave = PlayerProfile.name + " QuickSave " + QuickSaveIndex;
 	// <-- ugeen 2017
 	SendMessage(&GameInterface,"ls",MSG_INTERFACE_DELETE_SAVE_FILE,curSave);
 	string sSaveDescriber = GetSaveDataString(GetCurLocationName());
-
 	SetEventHandler("evntSave","SaveGame",1);
 	PostEvent("evntSave",0,"ss", "SAVE\"+PlayerProfile.name+"\"+curSave, sSaveDescriber);
 }
-
 void MakeAutoSave()
 {
 	if( InterfaceStates.Launched != 0 ) {return;}
-
 	aref arScrShoter;
 	if( !GetEntity(&arScrShoter,"scrshoter") ) {
 		SetEventHandler("makescrshot","AutoSaveContinue",0);
@@ -2260,23 +2018,18 @@ void MakeAutoSave()
 		PostEvent("makescrshot",1);
 	} else { return; }
 }
-
 void AutoSaveContinue()
 {
 	DelEventHandler("makescrshot","AutoSaveContinue");
-
 	string curSave = PlayerProfile.name + " AutoSave";
 	SendMessage(&GameInterface,"ls",MSG_INTERFACE_DELETE_SAVE_FILE,curSave);
 	string sSaveDescriber = GetSaveDataString(GetCurLocationName());
-
 	SetEventHandler("evntSave","SaveGame",1);
 	PostEvent("evntSave",0,"ss", "SAVE\"+PlayerProfile.name+"\"+curSave, sSaveDescriber);
 }
-
 string GetSaveDataString(string label)
 {
 	string fighter1, fighter2, fighter3, fighter4, navigator, boatswain, cannoner, doctor, treasurer, carpenter;
-
 	// officers pictures
 	if( GetOfficersIndex(pchar,0) < 0 ) { fighter1 = "*";
 	} else { fighter1 = GetFaceGroupName( GetOfficersIndex(pchar,0) );
@@ -2317,10 +2070,8 @@ string GetSaveDataString(string label)
 		"@" + GetStringTime(GetTime()) + "  " + GetStringDate( GetDataDay(),GetDataMonth(),GetDataYear() ) + // boal FIX
 		"@" + GetPlayTime() +
 		"@" + LanguageGetLanguage();
-
 	return savedata;
 }
-
 string GetCurLocationName()
 {
 	if( nMainCharacterIndex < 0 ) return "";
@@ -2351,7 +2102,6 @@ string GetCurLocationName()
 		if (worldMap.island != "")
 		{
             locLabel =  worldMap.island;
-			
 			int iIslandIndex = FindIsland(locLabel);
 			if (iIslandIndex != -1 && Islands[iIslandIndex].visible == true)
 			{
@@ -2377,13 +2127,11 @@ string GetCurLocationName()
 	}
 	return locLabel;
 }
-
 string GetPlayTime()
 {
 	int hours = sti( InterfaceStates.GameTime.hour );
 	int days = hours / 24;
 	hours = hours - days*24;
-
 	string sPlayTime = "";
 	if( days>0 ) {
 		sPlayTime = days + "days - ";
@@ -2391,16 +2139,13 @@ string GetPlayTime()
 	sPlayTime += InterfaceStates.GameTime.hour + " hours " + InterfaceStates.GameTime.min + " min.";
 	return sPlayTime;
 }
-
 int GetPlayTimeHours() // ugeen 2016 - нужно для ачивки
 {
 	int hours = sti( InterfaceStates.GameTime.hour );
 //	int days = hours / 24;
 //	hours = hours - days*24;
-	
 	return hours;
 }
-
 string GetStringTime(float time)
 {
 	int hour = makeint(time);
@@ -2413,7 +2158,6 @@ string GetStringTime(float time)
 	else retVal += its(minute);
 	return retVal;
 }
-
 string GetStringDate(int day, int month, int year)
 {
 	// boal -->
@@ -2431,53 +2175,43 @@ string GetStringDate(int day, int month, int year)
 	// boal <--
 	return result;
 }
-
 void ISetSaveData(string saveName, string saveData)
 {
 	SendMessage(&GameInterface,"lss",MSG_INTERFACE_DO_SAVE_DATA,saveName,saveData);
 }
-
 string IGetSaveString(string saveName)
 {
 	string retStr;
 	SendMessage(&GameInterface,"lse",MSG_INTERFACE_GET_SAVE_DATA,saveName,&retStr);
 	return retStr;
 }
-
 // boal -->
 string GetConvertStr(string _param, string _file)
 {
     int    idLngFile = -1;
     string totalInfo;
-
     idLngFile = LanguageOpenFile(_file);
     totalInfo = LanguageConvertString(idLngFile, _param);
     LanguageCloseFile(idLngFile);
-
     return totalInfo;
 }
-
 void Picture_SetPicture(string sPictureControl, string sTexture)
 {
 	SendMessage(&GameInterface, "lslls", MSG_INTERFACE_MSG_TO_NODE, sPictureControl, 2, false, sTexture);
 }
-
 void Picture_SetGroupPicture(string sPictureControl, string sGroup, string sPicture)
 {
 	SendMessage(&GameInterface, "lslss", MSG_INTERFACE_MSG_TO_NODE, sPictureControl, 6, sGroup, sPicture);
 }
-
 void Table_UpdateWindow(string sTableControl)
 {
 	SendMessage(&GameInterface, "lsl", MSG_INTERFACE_MSG_TO_NODE, sTableControl, 0);
 }
-
 void Table_Clear(string sTableControl, bool bClearHeader, bool bClearContent, bool bUpdateWindow)
 {
 	if (bClearHeader)
 	{
 	}
-
 	if (bClearContent)
 	{
 		for (int i=1; i<2000; i++) 
@@ -2487,59 +2221,48 @@ void Table_Clear(string sTableControl, bool bClearHeader, bool bClearContent, bo
 			DeleteAttribute(&GameInterface, sA);
 		}
 	}
-
 	if (bUpdateWindow)
 	{
 		Table_UpdateWindow(sTableControl);
 	}
 }
-
 void Button_SetText(string sButtonControl, string sText)
 {
 	SendMessage( &GameInterface, "lsls", MSG_INTERFACE_MSG_TO_NODE, sButtonControl, 0, sText); 
 }
-
 void Button_SetEnable(string sButtonControl, bool bEnable)
 {
 	SetSelectable(sButtonControl, bEnable);
 }
-
 void CheckButton_SetDisable(string sControl, int iControlIndex, bool bDisableState)
 {
 	SendMessage(&GameInterface,"lslll",MSG_INTERFACE_MSG_TO_NODE, sControl, 5, iControlIndex, bDisableState);
 }
-
 int CheckButton_GetState(string sControl, int iControlIndex)
 {
 	return SendMessage(&GameInterface, "lsll", MSG_INTERFACE_MSG_TO_NODE, sControl, 3, iControlIndex);
 }
-
 void CheckButton_SetState(string sControl, int iControlIndex, bool bState)
 {
 	SendMessage(&GameInterface, "lslll", MSG_INTERFACE_MSG_TO_NODE, sControl, 2, iControlIndex, bState);
 }
-
 void StringCollection_SetText(string sControl, int iControlIndex, string sText)
 {
 	SendMessage(&GameInterface, "lslls", MSG_INTERFACE_MSG_TO_NODE, sControl, 1, iControlIndex, sText);
 }
-
 void StringCollection_SetTextValue(string sControl, int iControlIndex, int iValue)
 {
 	string sValue = "#" + iValue;
 	SendMessage(&GameInterface, "lslls", MSG_INTERFACE_MSG_TO_NODE, sControl, 1, iControlIndex, sValue);
 }
-
 void ImageCollection_ChangeTextureGroup(string sControl, string sNewTextureGroup)
 {
 	SendMessage(&GameInterface, "lsls", MSG_INTERFACE_MSG_TO_NODE, sControl, 1, sNewTextureGroup);
 }
-
 void ImageCollection_SetColor(string sControl, int iCIndex, int Color)
 {
 	SendMessage(&GameInterface, "lslll", MSG_INTERFACE_MSG_TO_NODE, sControl, 3, iCIndex, Color);
 }
-
 void ScrollImage_SetPosition(string sControl, int iPosition)
 {
 	SendMessage(&GameInterface, "lsll", MSG_INTERFACE_MSG_TO_NODE, sControl, 1, iPosition);

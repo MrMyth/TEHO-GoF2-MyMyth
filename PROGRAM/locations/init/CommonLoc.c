@@ -1,10 +1,8 @@
-
 int LocationInitCommonLoc(int n)
 {
 	//////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 	// ОБЩИЕ ЛОКАЦИИ НА ВСЕ ГОРОДА
 	//////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
-
 	//////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 	// Дома К3
 	//////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
@@ -28,7 +26,6 @@ int LocationInitCommonLoc(int n)
 	locations[n].models.always.window.level = 65539;
 	locations[n].models.day.locators = "FlamHouse_locators";
 	locations[n].models.night.locators = "FlamHouse_Nlocators";
-
 	locations[n].models.always.back = "..\inside_back";
 	locations[n].models.always.back.level = 65529;
 	//Day
@@ -44,20 +41,17 @@ int LocationInitCommonLoc(int n)
 	locations[n].reload.l1.emerge = "none";
 	locations[n].reload.l1.autoreload = "0";
 	locations[n].reload.l1.label = "";
-
 	locations[n].reload.l2.name = "reload3";
 	locations[n].reload.l2.go = "CommonRoom_MH4";
 	locations[n].reload.l2.emerge = "reload1";
 	locations[n].reload.l2.autoreload = "0";
 	locations[n].reload.l2.label = "Room";
-
 	locations[n].reload.l3.name = "reload4";
 	locations[n].reload.l3.go = "CommonRoom_MH3";
 	locations[n].reload.l3.emerge = "reload1";
 	locations[n].reload.l3.autoreload = "0";
 	locations[n].reload.l3.label = "Room";
 	n = n + 1;
-
 	//////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 	locations[n].id = "CommonCobHouse";
 	locations[n].filespath.models = "locations\inside\CobHouse";
@@ -79,7 +73,6 @@ int LocationInitCommonLoc(int n)
 	locations[n].models.always.window.level = 65539;
 	locations[n].models.day.locators = "CobHouse_locators";
 	locations[n].models.night.locators = "CobHouse_Nlocators";
-
 	locations[n].models.always.back = "..\inside_back";
 	locations[n].models.always.back.level = 65529;
 	//Day
@@ -95,14 +88,12 @@ int LocationInitCommonLoc(int n)
 	locations[n].reload.l1.emerge = "none";
 	locations[n].reload.l1.autoreload = "0";
 	locations[n].reload.l1.label = "";
-
 	locations[n].reload.l2.name = "reload2";
 	locations[n].reload.l2.go = "CommonPirateresidence";
 	locations[n].reload.l2.emerge = "reload1";
 	locations[n].reload.l2.autoreload = "0";
 	locations[n].reload.l2.label = "Room";
 	n = n + 1;
-
 	//////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 	locations[n].id = "CommonStoneHouse";
 	locations[n].filespath.models = "locations\inside\StoneHouse";
@@ -124,7 +115,6 @@ int LocationInitCommonLoc(int n)
 	locations[n].models.always.window.level = 65539;
     locations[n].models.day.locators = "StoneHouse_lPrivate"; // homo for CapBloodLine
     locations[n].models.night.locators = "StoneHouse_lPrivateN";
-
 	locations[n].models.always.back = "..\inside_back";
 	locations[n].models.always.back.level = 65529;
 	//Day
@@ -140,14 +130,12 @@ int LocationInitCommonLoc(int n)
 	locations[n].reload.l1.emerge = "none";
 	locations[n].reload.l1.autoreload = "0";
 	locations[n].reload.l1.label = "";
-
 	locations[n].reload.l2.name = "reload2";
 	locations[n].reload.l2.go = "CommonRoom_MH5";
 	locations[n].reload.l2.emerge = "reload1";
 	locations[n].reload.l2.autoreload = "0";
 	locations[n].reload.l2.label = "Room";
 	n = n + 1;
-
 	//////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 	locations[n].id = "CommonHut";
 	locations[n].filespath.models = "locations\inside\Hut";
@@ -168,7 +156,6 @@ int LocationInitCommonLoc(int n)
 	locations[n].models.always.window = "Hut_window";
 	locations[n].models.always.window.tech = "LocationWindows";
 	locations[n].models.always.window.level = 65539;
-
 	locations[n].models.always.back = "..\inside_back";
 	locations[n].models.always.back.level = 65529;
 	//Day
@@ -185,7 +172,6 @@ int LocationInitCommonLoc(int n)
 	locations[n].reload.l1.autoreload = "0";
 	locations[n].reload.l1.label = "";
 	n = n + 1;
-
 	//////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 	// Medium Houses 0-10
 	//////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
@@ -206,11 +192,9 @@ int LocationInitCommonLoc(int n)
 	locations[n].models.always.mediumhouse01.level = 65538;
 	locations[n].models.day.locators = "mediumhouse01_locators";
 	locations[n].models.night.locators = "mediumhouse01_Nlocators";
-
 	Locations[n].models.always.mediumhouse01windows = "mediumhouse01_windows";
 	Locations[n].models.always.mediumhouse01windows.tech = "LocationWindows";
 	locations[n].models.always.mediumhouse01windows.level = 65539;
-
 	locations[n].models.always.back = "..\inside_back";
 	locations[n].models.always.back.level = 65529;
 	//Day
@@ -231,7 +215,6 @@ int LocationInitCommonLoc(int n)
 	locations[n].reload.l1.autoreload = "0";
 	locations[n].reload.l1.label = "";
 	n = n + 1;
-
 	//////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 	locations[n].id = "CommonRoom_MH2";
 	locations[n].id.label = "house";
@@ -250,11 +233,9 @@ int LocationInitCommonLoc(int n)
 	locations[n].models.always.mediumhouse02.level = 65538;
 	locations[n].models.day.locators = "mediumhouse02_locators";
 	locations[n].models.night.locators = "mediumhouse02_Nlocators";
-
 	Locations[n].models.always.mediumhouse02windows = "mediumhouse02_windows";
 	Locations[n].models.always.mediumhouse02windows.tech = "LocationWindows";
 	locations[n].models.always.mediumhouse02windows.level = 65539;
-
 	locations[n].models.always.back = "..\inside_back";
 	locations[n].models.always.back.level = 65529;
 	//Day
@@ -272,7 +253,6 @@ int LocationInitCommonLoc(int n)
 	locations[n].reload.l1.autoreload = "0";
 	locations[n].reload.l1.label = "";
 	n = n + 1;
-
 	//////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 	locations[n].id = "CommonRoom_MH3";
 	locations[n].id.label = "Room";
@@ -291,11 +271,9 @@ int LocationInitCommonLoc(int n)
 	locations[n].models.always.mediumhouse03.level = 65538;
 	locations[n].models.day.locators = "mediumhouse03_locators";
 	locations[n].models.night.locators = "mediumhouse03_Nlocators";
-
 	Locations[n].models.always.mediumhouse03windows = "mediumhouse03_windows";
 	Locations[n].models.always.mediumhouse03windows.tech = "LocationWindows";
 	locations[n].models.always.mediumhouse03windows.level = 65539;
-
 	locations[n].models.always.back = "..\inside_back";
 	locations[n].models.always.back.level = 65529;
 	//Day
@@ -313,7 +291,6 @@ int LocationInitCommonLoc(int n)
 	locations[n].reload.l1.autoreload = "0";
 	locations[n].reload.l1.label = "";
 	n = n + 1;
-
 	//////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 	locations[n].id = "CommonRoom_MH4";
 	locations[n].id.label = "Room";
@@ -332,11 +309,9 @@ int LocationInitCommonLoc(int n)
 	locations[n].models.always.mediumhouse04.level = 65538;
 	locations[n].models.day.locators = "mediumhouse04_locators";
 	locations[n].models.night.locators = "mediumhouse04_Nlocators";
-
 	Locations[n].models.always.mediumhouse04windows = "mediumhouse04_windows";
 	Locations[n].models.always.mediumhouse04windows.tech = "LocationWindows";
 	locations[n].models.always.mediumhouse04windows.level = 65539;
-
 	locations[n].models.always.back = "..\inside_back";
 	locations[n].models.always.back.level = 65529;
 	//Day
@@ -354,7 +329,6 @@ int LocationInitCommonLoc(int n)
 	locations[n].reload.l1.autoreload = "0";
 	locations[n].reload.l1.label = "";
 	n = n + 1;
-
 	//////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 	locations[n].id = "CommonRoom_MH5";
 	locations[n].id.label = "Room";
@@ -373,11 +347,9 @@ int LocationInitCommonLoc(int n)
 	locations[n].models.always.mediumhouse05.level = 65538;
 	locations[n].models.day.locators = "mediumhouse05_locators";
 	locations[n].models.night.locators = "mediumhouse05_Nlocators";
-
 	Locations[n].models.always.mediumhouse05windows = "mediumhouse05_windows";
 	Locations[n].models.always.mediumhouse05windows.tech = "LocationWindows";
 	locations[n].models.always.mediumhouse05windows.level = 65539;
-
 	locations[n].models.always.back = "..\inside_back";
 	locations[n].models.always.back.level = 65529;
 	//Day
@@ -395,7 +367,6 @@ int LocationInitCommonLoc(int n)
 	locations[n].reload.l1.autoreload = "0";
 	locations[n].reload.l1.label = "";
 	n = n + 1;
-
 	//////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 	locations[n].id = "CommonRoom_MH7";
 	locations[n].id.label = "House";
@@ -414,14 +385,12 @@ int LocationInitCommonLoc(int n)
 	locations[n].models.always.house.level = 65538;
 	locations[n].models.day.locators = "mediumhouse07_locators";
 	locations[n].models.night.locators = "mediumhouse07_Nlocators";
-
 	Locations[n].models.always.mediumhouse07windows = "mediumhouse07_windows";
 	Locations[n].models.always.mediumhouse07windows.tech = "LocationWindows";
 	locations[n].models.always.mediumhouse07windows.level = 65539;
 	locations[n].models.always.tul = "mediumhouse07_tul";
 	Locations[n].models.always.tul.tech = "LocationWaterFall";
 	locations[n].models.always.tul.level = 180;
-
 	locations[n].models.always.back = "..\inside_back";
 	locations[n].models.always.back.level = 65529;
 	//Day
@@ -439,7 +408,6 @@ int LocationInitCommonLoc(int n)
 	locations[n].reload.l1.autoreload = "0";
 	locations[n].reload.l1.label = "";
 	n = n + 1;
-
 	//////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 	locations[n].id = "CommonRoom_MH9";
 	locations[n].id.label = "House";
@@ -458,11 +426,9 @@ int LocationInitCommonLoc(int n)
 	locations[n].models.always.house.level = 65538;
 	locations[n].models.day.locators = "mediumhouse09_locators";
 	locations[n].models.night.locators = "mediumhouse09_Nlocators";
-
 	Locations[n].models.always.mediumhouse09windows = "mediumhouse09_windows";
 	Locations[n].models.always.mediumhouse09windows.tech = "LocationWindows";
 	locations[n].models.always.mediumhouse09windows.level = 65539;
-
 	locations[n].models.always.back = "..\inside_back";
 	locations[n].models.always.back.level = 65529;
 	//Day
@@ -480,7 +446,6 @@ int LocationInitCommonLoc(int n)
 	locations[n].reload.l1.autoreload = "0";
 	locations[n].reload.l1.label = "";
 	n = n + 1;
-
 	//////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 	locations[n].id = "CommonRoom_MH10";
 	locations[n].id.label = "House";
@@ -499,11 +464,9 @@ int LocationInitCommonLoc(int n)
 	locations[n].models.always.house.level = 65538;
 	locations[n].models.day.locators = "mediumhouse10_locators";
 	locations[n].models.night.locators = "mediumhouse10_Nlocators";
-
 	Locations[n].models.always.mediumhouse10windows = "mediumhouse10_windows";
 	Locations[n].models.always.mediumhouse10windows.tech = "LocationWindows";
 	locations[n].models.always.mediumhouse10windows.level = 65539;
-
 	locations[n].models.always.back = "..\inside_back";
 	locations[n].models.always.back.level = 65529;
 	//Day
@@ -521,7 +484,6 @@ int LocationInitCommonLoc(int n)
 	locations[n].reload.l1.autoreload = "0";
 	locations[n].reload.l1.label = "";
 	n = n + 1;
-
 	//////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 	// Doubleflour house and upstairs room
 	//////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
@@ -542,11 +504,9 @@ int LocationInitCommonLoc(int n)
 	locations[n].models.always.largehouse01.level = 65538;
 	locations[n].models.day.locators = "largehouse01_locators";
 	locations[n].models.night.locators = "largehouse01_Nlocators";
-
 	Locations[n].models.always.largehouse01windows = "largehouse01_windows";
 	Locations[n].models.always.largehouse01windows.tech = "LocationWindows";
 	locations[n].models.always.largehouse01windows.level = 65539;
-
 	locations[n].models.always.back = "..\inside_back";
 	locations[n].models.always.back.level = 65529;
 	//Day
@@ -563,14 +523,12 @@ int LocationInitCommonLoc(int n)
 	locations[n].reload.l1.emerge = "none";
 	locations[n].reload.l1.autoreload = "0";
 	locations[n].reload.l1.label = "";
-
 	locations[n].reload.l2.name = "reload2";
 	locations[n].reload.l2.go = "CommonDoubleflourRoom";
 	locations[n].reload.l2.emerge = "reload1";
 	locations[n].reload.l2.autoreload = "0";
 	locations[n].reload.l2.label = "Room";
 	n = n + 1;
-
 	//////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 	locations[n].id = "CommonDoubleflourHouse_2"; //с комнатой на втором этаже
 	locations[n].id.label = "House";
@@ -589,11 +547,9 @@ int LocationInitCommonLoc(int n)
 	locations[n].models.always.largehouse01.level = 65538;
 	locations[n].models.day.locators = "largehouse01_locators";
 	locations[n].models.night.locators = "largehouse01_Nlocators";
-
 	Locations[n].models.always.largehouse01windows = "largehouse01_windows";
 	Locations[n].models.always.largehouse01windows.tech = "LocationWindows";
 	locations[n].models.always.largehouse01windows.level = 65539;
-
 	locations[n].models.always.back = "..\inside_back";
 	locations[n].models.always.back.level = 65529;
 	//Day
@@ -610,14 +566,12 @@ int LocationInitCommonLoc(int n)
 	locations[n].reload.l1.emerge = "none";
 	locations[n].reload.l1.autoreload = "0";
 	locations[n].reload.l1.label = "";
-
 	locations[n].reload.l2.name = "reload2";
 	locations[n].reload.l2.go = "CommonRoom_MH5";
 	locations[n].reload.l2.emerge = "reload1";
 	locations[n].reload.l2.autoreload = "0";
 	locations[n].reload.l2.label = "Room";
 	n = n + 1;
-	
     //////////////////////////  бывшая комната наверху таверны из ПКМ.
 	locations[n].id = "CommonDoubleflourRoom";
 	locations[n].id.label = "Room";
@@ -636,11 +590,9 @@ int LocationInitCommonLoc(int n)
 	locations[n].models.always.largehouse02.level = 65538;
 	locations[n].models.day.locators = "largehouse02_locators";
 	locations[n].models.night.locators = "largehouse02_Nlocators";
-
 	Locations[n].models.always.largehouse02windows = "largehouse02_windows";
 	Locations[n].models.always.largehouse02windows.tech = "LocationWindows";
 	locations[n].models.always.largehouse02windows.level = 65539;
-
 	locations[n].models.always.back = "..\inside_back";
 	locations[n].models.always.back.level = 65529;
 	//Day
@@ -661,7 +613,6 @@ int LocationInitCommonLoc(int n)
 	locations[n].reload.l1.autoreload = "0";
 	locations[n].reload.l1.label = "House";
 	n = n + 1;
-	
 	//////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 	// Pirate residence  and  Pirate house
 	//////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
@@ -684,7 +635,6 @@ int LocationInitCommonLoc(int n)
 	locations[n].models.always.window = "SmallResidence_windows";
 	locations[n].models.always.window.tech = "LocationWindows";
 	locations[n].models.always.window.level = 65539;
-
 	locations[n].models.always.back = "..\inside_back";
 	locations[n].models.always.back.level = 65529;
 	//Day
@@ -701,7 +651,6 @@ int LocationInitCommonLoc(int n)
 	locations[n].reload.l1.autoreload = "0";
 	locations[n].reload.l1.label = "";
 	n = n + 1;
-
 	//////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 	locations[n].id = "CommonPirateHouse";
 	locations[n].id.label = "House";
@@ -723,7 +672,6 @@ int LocationInitCommonLoc(int n)
 	locations[n].models.always.window = "TwoFloorHouse_windows";
 	locations[n].models.always.window.tech = "LocationWindows";
 	locations[n].models.always.window.level = 65539;
-
 	locations[n].models.always.back = "..\inside_back";
 	locations[n].models.always.back.level = 65529;
 	//Day
@@ -742,7 +690,6 @@ int LocationInitCommonLoc(int n)
 	locations[n].reload.l1.label = "";
 	locations[n].locators_radius.item.item1 = 0.8;
 	n = n + 1;
-
 	//////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 	locations[n].id = "CommonPackhouse_1";
 	locations[n].id.label = "packhouse";
@@ -764,7 +711,6 @@ int LocationInitCommonLoc(int n)
 	locations[n].models.always.window = "sklad_windows";
 	locations[n].models.always.window.tech = "LocationWindows";
 	locations[n].models.always.window.level = 65539;
-
 	locations[n].models.always.back = "..\inside_back";
 	locations[n].models.always.back.level = 65529;
 	//Day
@@ -781,7 +727,6 @@ int LocationInitCommonLoc(int n)
 	locations[n].reload.l1.autoreload = "0";
 	locations[n].reload.l1.label = "";
 	n = n + 1;
-
 	//////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 	locations[n].id = "CommonPackhouse_2";
 	locations[n].id.label = "packhouse";
@@ -803,7 +748,6 @@ int LocationInitCommonLoc(int n)
 	locations[n].models.always.window = "sklad_windows";
 	locations[n].models.always.window.tech = "LocationWindows";
 	locations[n].models.always.window.level = 65539;
-
 	locations[n].models.always.back = "..\inside_back";
 	locations[n].models.always.back.level = 65529;
 	//Day
@@ -820,7 +764,6 @@ int LocationInitCommonLoc(int n)
 	locations[n].reload.l1.autoreload = "0";
 	locations[n].reload.l1.label = "";
 	n = n + 1;
-
 	//////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 	locations[n].id = "CommonPackhouse_3";
 	locations[n].id.label = "packhouse";
@@ -839,7 +782,6 @@ int LocationInitCommonLoc(int n)
 	locations[n].models.always.locators = "sklad02_locators";
 	locations[n].models.always.modelSklad = "sklad02";
 	locations[n].models.always.modelSklad.level = 65538;
-	
 	locations[n].models.always.back = "..\inside_back";
 	locations[n].models.always.back.level = 65529;
 	//Day
@@ -859,7 +801,6 @@ int LocationInitCommonLoc(int n)
 	locations[n].reload.l1.autoreload = "0";
 	locations[n].reload.l1.label = "";
 	n = n + 1;
-
 	//////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 	locations[n].id = "CommonPackhouse_4";
 	locations[n].id.label = "packhouse";
@@ -878,7 +819,6 @@ int LocationInitCommonLoc(int n)
 	locations[n].models.always.locators = "sklad03_locators";
 	locations[n].models.always.modelSklad = "sklad03";
 	locations[n].models.always.modelSklad.level = 65538;
-	
 	locations[n].models.always.back = "..\inside_back";
 	locations[n].models.always.back.level = 65529;
 	//Day
@@ -898,8 +838,6 @@ int LocationInitCommonLoc(int n)
 	locations[n].reload.l1.autoreload = "0";
 	locations[n].reload.l1.label = "";
 	n = n + 1;
-
-	
 	//////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 	// Residence 1-5 and Back Hall
 	//////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
@@ -923,7 +861,6 @@ int LocationInitCommonLoc(int n)
 	locations[n].models.always.window = "BigHouse01_windows";
 	locations[n].models.always.window.tech = "LocationWindows";
 	locations[n].models.always.window.level = 65539;
-
 	locations[n].models.always.back = "..\inside_back";
 	locations[n].models.always.back.level = 65529;
 	//Day
@@ -941,7 +878,6 @@ int LocationInitCommonLoc(int n)
 	locations[n].reload.l1.label = "";
 	locations[n].locators_radius.reload.locator1 = 0.8;
 	n = n + 1;
-
 	//////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 	locations[n].id = "CommonResidence_2"; // c переходом в спальню
 	locations[n].id.label = "Room";
@@ -964,7 +900,6 @@ int LocationInitCommonLoc(int n)
 	locations[n].models.always.window = "BigHouse02_windows";
 	locations[n].models.always.window.tech = "LocationWindows";
 	locations[n].models.always.window.level = 65540;
-
 	locations[n].models.always.back = "..\inside_back";
 	locations[n].models.always.back.level = 65529;
 	//Day
@@ -982,14 +917,12 @@ int LocationInitCommonLoc(int n)
 	locations[n].reload.l1.emerge = "none";
 	locations[n].reload.l1.autoreload = "0";
 	locations[n].reload.l1.label = "Room";
-
 	locations[n].reload.l2.name = "reload2";
 	locations[n].reload.l2.go = "CommonBedroom";
 	locations[n].reload.l2.emerge = "reload1";
 	locations[n].reload.l2.autoreload = "0";
 	locations[n].reload.l2.label = "Bedroom";
 	n = n + 1;
-
 	//////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 	locations[n].id = "CommonResidence_3"; // c переходом в спальню
 	locations[n].id.label = "Room";
@@ -1009,7 +942,6 @@ int LocationInitCommonLoc(int n)
 	locations[n].models.always.window = "BigHouse03_windows";
 	locations[n].models.always.window.tech = "LocationWindows";
 	locations[n].models.always.window.level = 65539;
-
 	locations[n].models.always.back = "..\inside_back";
 	locations[n].models.always.back.level = 65529;
 	//Day
@@ -1027,14 +959,12 @@ int LocationInitCommonLoc(int n)
 	locations[n].reload.l1.emerge = "none";
 	locations[n].reload.l1.autoreload = "0";
 	locations[n].reload.l1.label = "Room";
-
 	locations[n].reload.l2.name = "reload2";
 	locations[n].reload.l2.go = "CommonBedroom";
 	locations[n].reload.l2.emerge = "reload1";
 	locations[n].reload.l2.autoreload = "0";
 	locations[n].reload.l2.label = "Bedroom";
 	n = n + 1;
-
 	//////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 	locations[n].id = "CommonResidence_4";
 	locations[n].id.label = "Room";
@@ -1054,7 +984,6 @@ int LocationInitCommonLoc(int n)
 	locations[n].models.always.window = "BigHouse04_windows";
 	locations[n].models.always.window.tech = "LocationWindows";
 	locations[n].models.always.window.level = 65539;
-
 	locations[n].models.always.back = "..\inside_back";
 	locations[n].models.always.back.level = 65529;
 	//Day
@@ -1073,7 +1002,6 @@ int LocationInitCommonLoc(int n)
 	locations[n].reload.l1.autoreload = "0";
 	locations[n].reload.l1.label = "";
 	n = n + 1;
-
 	//////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 	locations[n].id = "CommonResidence_5";
 	locations[n].id.label = "Room";
@@ -1091,7 +1019,6 @@ int LocationInitCommonLoc(int n)
 	locations[n].models.always.window = "BigHouse05_windows";
 	locations[n].models.always.window.tech = "LocationWindows";
 	locations[n].models.always.window.level = 50;
-
 	locations[n].models.always.back = "..\inside_back";
 	//Day
 	locations[n].models.day.charactersPatch = "BigHouse05_patch";
@@ -1109,7 +1036,6 @@ int LocationInitCommonLoc(int n)
 	locations[n].reload.l1.autoreload = "0";
 	locations[n].reload.l1.label = "";
 	n = n + 1;
-
 	//////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 	locations[n].id = "CommonResidence_BackHall";  //со спальней на втором этаже и пиратской резиденц. на первом
 	locations[n].id.label = "Room";
@@ -1129,7 +1055,6 @@ int LocationInitCommonLoc(int n)
 	locations[n].models.always.window = "BigHouseBack_windows";
 	locations[n].models.always.window.tech = "LocationWindows";
 	locations[n].models.always.window.level = 65539;
-
 	locations[n].models.always.back = "..\inside_back";
 	locations[n].models.always.back.level = 65529;
 	//Day
@@ -1147,20 +1072,17 @@ int LocationInitCommonLoc(int n)
 	locations[n].reload.l1.emerge = "none";
 	locations[n].reload.l1.autoreload = "0";
 	locations[n].reload.l1.label = "";
-
 	locations[n].reload.l2.name = "reload2";
 	locations[n].reload.l2.go = "CommonBedroom";
 	locations[n].reload.l2.emerge = "reload1";
 	locations[n].reload.l2.autoreload = "0";
 	locations[n].reload.l2.label = "Room";
-
 	locations[n].reload.l3.name = "reload3";
 	locations[n].reload.l3.go = "CommonPirateResidence";
 	locations[n].reload.l3.emerge = "reload1";
 	locations[n].reload.l3.autoreload = "0";
 	locations[n].reload.l3.label = "Room";
 	n = n + 1;
-
  	//////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 	// Bedroom
 	//////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
@@ -1253,7 +1175,6 @@ int LocationInitCommonLoc(int n)
 	locations[n].filespath.models = "locations\inside\crypt_inside\";
 	locations[n].models.always.crypt = "crypt_inside";
 	locations[n].models.always.locators = "crypt_inside_locators";
-
 	locations[n].models.always.back = "..\inside_back";
 	//Day
 	locations[n].models.day.charactersPatch = "crypt_inside_patch";
@@ -1272,7 +1193,6 @@ int LocationInitCommonLoc(int n)
 	locations[n].reload.l1.autoreload = "0";
 	locations[n].reload.l1.label = "";
 	n = n + 1;
-
 	//////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 	// Джунгли
 	//////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
@@ -1314,6 +1234,5 @@ int LocationInitCommonLoc(int n)
 	locations[n].reload.l1.label = "Beach";
 	locations[n].locators_radius.reload.reload1 = 2.0;
 	n = n + 1;
-
 	return n;
 }

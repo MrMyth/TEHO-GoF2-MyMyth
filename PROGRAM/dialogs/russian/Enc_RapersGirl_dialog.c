@@ -4,13 +4,10 @@ void ProcessDialogEvent()
 	aref Link, Diag;
 	int i, iRnd, iRnd1;
 	string sTemp, sGems;
-	
 	DeleteAttribute(&Dialog,"Links");
-
 	makeref(NPChar,CharacterRef);
 	makearef(Link, Dialog.Links);
 	makearef(Diag, NPChar.Dialog);
-	
 	switch(Dialog.CurrentNode)
 	{
 		case "exit_1":
@@ -18,13 +15,11 @@ void ProcessDialogEvent()
 			Diag.CurrentNode = Diag.TempNode;
 			DialogExit();			
 		break;
-		
 		case "exit":
 			LAi_SetCitizenTypeNoGroup(NPChar);
 			Diag.CurrentNode = Diag.TempNode;
 			DialogExit();
 		break;
-
 		case "Begin_1":
 			LAi_RemoveCheckMinHP(npchar);
 			for(i = 1; i <= 3; i++)
@@ -37,7 +32,6 @@ void ProcessDialogEvent()
 			link.l1 = LinkRandPhrase("What happened?","What's up?",RandPhraseSimple("What's the trouble?","What's happening?"));
 			link.l1.go = "Begin_11";
 		break;
-
 		case "Begin_2":
 			LAi_RemoveCheckMinHP(NPChar);
 			for(i = 1; i <= 3; i++)
@@ -50,7 +44,6 @@ void ProcessDialogEvent()
 			link.l1 = LinkRandPhrase("What happened?","What's up?",RandPhraseSimple("What's the trouble?","What's happening?"));
 			link.l1.go = "Begin_21";
 		break;
-
 		case "Begin_3":
 			LAi_RemoveCheckMinHP(NPChar);
 			for(i = 1; i <= 3; i++)
@@ -63,25 +56,21 @@ void ProcessDialogEvent()
 			link.l1 = LinkRandPhrase("What happened?","What's up?",RandPhraseSimple("What's the trouble?","What's happening?"));
 			link.l1.go = "Begin_31";
 		break;
-		
 		case "Begin_11":
 			dialog.text = RandPhraseSimple("These villains are going to rape me! For all that is good, do not let them!","For God's sake, protect me from these monsters! They are going to dishonor me!");
 			link.l1 = "Stop panicking"+ GetSexPhrase(", beauty","") +". What happened here?";
 			link.l1.go = "exit_1";
 		break;
-
 		case "Begin_21":
 			dialog.text = RandPhraseSimple("Rapists are chasing me!"+ GetSexPhrase(" Would you stand up for a lady's honor?","") +"","Captain, "+ GetSexPhrase("be a man","you're a woman, too") +" - save this girl from disgrace!");
 			link.l1 = "Stop panicking"+ GetSexPhrase(", beauty","") +". What happened here?";
 			link.l1.go = "exit_1";
 		break;
-		
 		case "Begin_31":
 			dialog.text = "They are running me down! The bandits! Tell them to leave me alone!";
 			link.l1 = "Stop panicking"+ GetSexPhrase(", beauty","") +". What happened here?";
 			link.l1.go = "exit_1";
 		break;
-		
 		case "First time":
 			LAi_RemoveCheckMinHP(npchar);
 			for(i = 1; i <= 3; i++)
@@ -96,7 +85,6 @@ void ProcessDialogEvent()
 			Link.l1 = LinkRandPhrase("What's happening?", "What's up?", "What happened?");
 			Link.l1.go = "Node_2";			
 		break;        
-
 		case "Node_2":
 			dialog.text = LinkRandPhrase("They... they are going to rape me! For all that is good, do not let them! Please!",
 				"These beasts... they are planning something horrible... Protect me from them, please!",
@@ -104,7 +92,6 @@ void ProcessDialogEvent()
 			Link.l1 = "Let's figure it all out, then.";
 			Link.l1.go = "exit_1";			
 		break;
-
 		case "ThanksForHelp":
 			if(pchar.GenQuest.EncGirl == "Begin_11")
 			{
@@ -143,7 +130,6 @@ void ProcessDialogEvent()
 				link.l1.go = "Node_31";
 			}
 		break;
-		
 		case "Node_11":
 			Diag.TempNode = "Node_1Next";
 			addMoneyToCharacter(pchar, makeint((sti(pchar.rank))*25 + frand(2)*500));
@@ -154,7 +140,6 @@ void ProcessDialogEvent()
 			sGlobalTemp = "Saved_CangGirl";
 			Diag.CurrentNode = Diag.TempNode;
 		break;
-		
 		case "Node_12":
 			dialog.text = "I still cannot put myself together. Could you please bring "+ GetSexPhrase("a lady","me") +" to the settlement of " + XI_ConvertString("Colony" + pchar.GenQuest.EncGirl.city) + "? You know, now rapists are seem to me behind in every bush.";
 			link.l1 = RandPhraseSimple("Don't worry so much, really... Alright, let's get going.","You're such a coward, aren't you? Alright, I'll bring you there.");
@@ -162,7 +147,6 @@ void ProcessDialogEvent()
 			link.l2 = "I am sorry, darling, but I simply have no time - too busy.";
 			link.l2.go = "Node_3End";
 		break;
-						
 		case "Node_22":
 			dialog.text = "I was thinking you'd just scare them off! Now you must take me to the tavern in the settlement of " + XI_ConvertString("Colony" + pchar.GenQuest.EncGirl.city) + ", I have no one else but you whom I could ask for help.";
 			link.l1 = "Oh, damn! Alright, let's go. Just don't fall behind.";
@@ -170,7 +154,6 @@ void ProcessDialogEvent()
 			link.l2 = "No, that's it, "+ GetSexPhrase("beauty","deary") +"! I've had enough surprises for today. Look for somebody else to help you.";
 			link.l2.go = "Node_3End";
 		break;
-		
 		case "Node_31":
 			dialog.text = "And what did I have to do?! My father wants me to marry the usurer's son, that milksop... just because his daddy has a crapload of money in his coffers! But I love another man! Take me to him, please...";
 			link.l1 = "What a burden you are! Well, alright, let's go - I cannot just leave you here now, can I?.. What's the name of your chosen one, where shall I take you to?";
@@ -178,14 +161,12 @@ void ProcessDialogEvent()
 			link.l2 = "No, that's it, "+ GetSexPhrase("beauty","deary") +"! I've had enough surprises for today. Look for somebody else to help you.";
 			link.l2.go = "Node_3End";
 		break;
-		
 		case "Node_32":
 			pchar.GenQuest.EncGirl.sLoverId = GenerateRandomName(sti(npchar.nation), "man"); 
 			dialog.text = "His name is " + pchar.GenQuest.EncGirl.sLoverId + ", he's a newcomer. Right now he stays at the settlement of " + XI_ConvertString("Colony" + pchar.GenQuest.EncGirl.city) + ", tried to find a job there, but these are hard times. Everybody keeps talking about a crisis... And now there is no coming back home for me, anyway.";
 			link.l1 = "A crisis? Ha... For a real pirate, a crisis is when there is a trade caravan at the horizon - and no wind whatsoever to fill the sails...";
 			link.l1.go = "Node_12Next";
 		break;
-		
 		case "Node_12Next":
 			pchar.quest.LandEnc_RapersBadExit.over = "yes";
 			Diag.TempNode = "Node_12End";
@@ -195,7 +176,6 @@ void ProcessDialogEvent()
 			AddDialogExitQuestFunction("EncGirl_GirlFollow");
 			DialogExit();
 		break;
-		
 		case "Node_121Next":
 			pchar.quest.LandEnc_RapersBadExit.over = "yes";
 			Diag.TempNode = "Node_253";
@@ -208,7 +188,6 @@ void ProcessDialogEvent()
 			AddDialogExitQuestFunction("EncGirl_GirlFollow");
 			DialogExit();
 		break;
-		
 		case "Node_122Next":
 			pchar.quest.LandEnc_RapersBadExit.over = "yes";
 			Diag.TempNode = "Node_12End";
@@ -221,14 +200,12 @@ void ProcessDialogEvent()
 			AddDialogExitQuestFunction("EncGirl_GirlFollow");
 			DialogExit();
 		break;
-		
 		case "Node_12End":
 			Diag.TempNode = "Node_12End";
 			dialog.text = RandPhraseSimple("You know, "+ GetSexPhrase("captain","young lady") +"? I was so scared - my pins are still a little wobbly.","Oh, you know, I was so frightened. It's great that God had sent you my way.");
 			link.l1 = RandPhraseSimple("Thank God you're still alive.","Don't take that to heart. It's good that it ended up like this, you know.");
 			link.l1.go = "exit";
 		break;
-		
 		case "Node_1Next":
 			dialog.text = RandPhraseSimple("Thank you, "+ GetSexPhrase("captain","young lady") +", once again. Really, I am so indebted to you.","Thank you so much, "+ GetSexPhrase("captain","young lady") +". I have no idea what would I do without your help.");
 			link.l1 = RandPhraseSimple("That should be a lesson to you. Alright, best of luck...","Next time you should be more careful... Now, run home, and I've got things to do.");
@@ -236,7 +213,6 @@ void ProcessDialogEvent()
 			link.l2 = "How could you be so careless? Why have you headed into the jungle alone?";
 			link.l2.go = "Node_13";
 		break;
-		
 		case "Node_1End":
 			sTemp = LAi_FindNearestFreeLocator2Pchar("reload");
 			LAi_SetActorType(npchar);
@@ -246,7 +222,6 @@ void ProcessDialogEvent()
 			DialogExit();
 			AddDialogExitQuest("pchar_back_to_player");			
 		break;
-		
 		case "Node_3End":
 			Diag.TempNode = "Node_3Final";
 			sTemp = LAi_FindNearestFreeLocator2Pchar("reload");
@@ -258,14 +233,12 @@ void ProcessDialogEvent()
 			Diag.CurrentNode = Diag.TempNode;
 			DialogExit();
 		break;
-		
 		case "Node_3Final":
 			Diag.TempNode = "Node_3Final";
 			dialog.text = RandPhraseSimple("Have you changed your mind?","Captain, it's great that you have changed your mind!");
 			link.l1 = RandPhraseSimple("No-no, darling, I'll pass.","Have no false hopes...");
 			link.l1.go = "exit";
 		break;
-		
 		case "Node_13":
 			if(pchar.GenQuest.EncGirl == "FindCoins") 
 			{
@@ -302,7 +275,6 @@ void ProcessDialogEvent()
 				break;
 			}	
 		break;
-		
 		case "Node_131":
 			pchar.GenQuest.EncGirl.SmallCoins = rand(25) + 20;
 			pchar.GenQuest.EncGirl.BigCoins = rand(15) + 5;
@@ -312,7 +284,6 @@ void ProcessDialogEvent()
 			link.l2 = "It's useless. It'd be easier to find a needle in the haystack than the pearls in this thick grass. Not to mention that you don't even know the place where the pearls were lost...";
 			link.l2.go = "Node_133";
 		break;
-		
 		case "Node_131End":
 			Diag.TempNode = "Node_12End";
 			pchar.GenQuest.EncGirl = "close";
@@ -325,20 +296,17 @@ void ProcessDialogEvent()
 			pchar.quest.LandEnc_RapersBadExit.win_condition = "LandEnc_RapersBadExit";
 			AddDialogExitQuest("pchar_back_to_player");			
 		break;
-		
 		case "Node_132":
 			pchar.GenQuest.EncGirl.mapOwner = "l" + rand(GetNamesCount(NAMETYPE_ORIG) - 1); 
 			dialog.text = "My father marked a place on it where he had hidden his treasure. Have you heard about famous pirate " + GetName( NAMETYPE_ORIG, pchar.GenQuest.EncGirl.mapOwner, NAME_VOC) + "?";
 			link.l1 = "No, never heard of him.";
 			link.l1.go = "Node_132_1";
 		break;
-		
 		case "Node_132_1":
 			dialog.text = "Well, " + GetName( NAMETYPE_ORIG, pchar.GenQuest.EncGirl.mapOwner, NAME_NOM) + " was my father. Everyone was scared of him, no one would dare to utter a word. Now they've become brazen, of course. When I refused to sell the map to them, they claimed that they, too, must have their share of the treasure. I wanted to hide the map, but they'd still tracked me down...";
 			link.l1 = "And why would you hide it, in the first place? Charter a ship and go claim your treasure. Your parent would not have hidden it all for nothing.";
 			link.l1.go = "Node_132_2";
 		break;
-		
 		case "Node_132_2":
 			dialog.text = "Easier to say than do. I have no money to charter a ship, and... I am afraid... How am I supposed to dig it all out, carry it to the ship... And where would I take the treasure afterwards? Anybody will make an easy prey of me along the way...";
 			link.l1 = "That's a point... Alright, go ahead and hide your map, then. Just remember the place well.";
@@ -351,7 +319,6 @@ void ProcessDialogEvent()
 			link.l3 = "Have you tried to find a companion?";
 			link.l3.go = "Node_132_8";	
 		break;
-		
 		case "Node_132_2End":
 			Diag.TempNode = "Node_12End";
 			pchar.GenQuest.EncGirl = "close";
@@ -363,20 +330,17 @@ void ProcessDialogEvent()
 			DialogExit();
 			AddDialogExitQuest("pchar_back_to_player");			
 		break;
-		
 		case "Node_132_3":
 			dialog.text = "It grieves me to lose such an opportunity... Dad told me about the treasures he'd hidden there. No one would pay me that much...";
 			link.l1 = "Well, don't sell it for too cheap. And, anyway, gold is not worth losing one's head for it. Not to mention that this is the easiest way for you - you just collect your money and rid yourself of all troubles...";
 			link.l1.go = "Node_132_4";
 		break;
-		
 		case "Node_132_4":
 			pchar.GenQuest.EncGirl.mapPrice = 20000 + 500 * sti(pchar.rank);
 			dialog.text = "That sounds tempting... And how much can you offer me for it?";
 			link.l1 = "I don't think it can be worth more than " + sti(pchar.GenQuest.EncGirl.mapPrice) + " pesos.";
 			link.l1.go = "Node_132_5";
 		break;
-		
 		case "Node_132_5":
 			if((GetSummonSkillFromName(pchar, SKILL_COMMERCE) + GetSummonSkillFromName(pchar, SKILL_LEADERSHIP) + GetSummonSkillFromName(pchar, SKILL_FORTUNE)) > (rand(220) + 100) && (makeint(pchar.money) >= sti(pchar.GenQuest.EncGirl.mapPrice)))
 			{
@@ -391,7 +355,6 @@ void ProcessDialogEvent()
 				link.l1.go = "Node_132_2End";
 			}	
 		break;
-		
 		case "Node_132_6":
 			AddMoneyToCharacter(pchar, -makeint(sti(pchar.GenQuest.EncGirl.mapPrice))); 
 			ref rMap = ItemsFromID("map_full"); // mitrokosta фикс пустой карты
@@ -404,26 +367,22 @@ void ProcessDialogEvent()
 			DialogExit();
 			AddDialogExitQuest("pchar_back_to_player");			
 		break;
-		
 		case "Node_132_8":
 			dialog.text = "And where will I find them? The young ones are not reliable, and they don't care much for treasures. And I fear the older ones - they all look too much like my dad's pals. So cunning and treacherous - you would never know what to expect of them.";
 			link.l1 = "Ha-ha-ha... Alright, but will you take me with you?";
 			link.l1.go = "Node_132_9";
 		break;
-		
 		case "Node_132_9":
 			dialog.text = "You? And would you go? But then you'll have to bring me back here, to the settlement of " + XI_ConvertString("Colony" + pchar.GenQuest.EncGirl.city) + ", alright?";
 			link.l1 = "Fine. Just show me the way.";
 			link.l1.go = "Node_132_10";
 		break;
-		
 		case "Node_132_10":
 			EncGirl_GenQuest_GetChestPlaceName();
 			dialog.text = "The treasure is hidden in the cave on " + XI_ConvertString(pchar.GenQuest.EncGirl.islandId + "Acc") + ", we need to land at " + XI_ConvertString(pchar.GenQuest.EncGirl.shoreId + "Gen") + ", the place I'll show myself... But don't forget, you will get only a half!";
 			link.l1 = "Alright, I won't cheat on you, I promise. Follow me and don't fall back.";
 			link.l1.go = "Node_132_11";
 		break;
-		
 		case "Node_132_11":
 			ReOpenQuestHeader("JungleGirl");
 			AddQuestRecord("JungleGirl", "4");
@@ -446,7 +405,6 @@ void ProcessDialogEvent()
 			DialogExit();
 			AddDialogExitQuest("pchar_back_to_player");			
 		break;
-		
 		case "Node_132_11_1":
 			dialog.text = "Captain, now we must find the cave.";
 			link.l1 = "Alright, let's take a look now.";
@@ -455,32 +413,27 @@ void ProcessDialogEvent()
 			Diag.CurrentNode = Diag.TempNode;
 			AddDialogExitQuestFunction("EncGirl_GirlFollow");
 		break;
-		
 		case "Node_132_11_2":
 			Diag.TempNode = "Node_132_11_2";
 			dialog.text = "Captain, we must find the cave.";
 			link.l1 = "Alright, let's take a look now.";
 			link.l1.go = "exit";
 		break;
-		
 		case "Node_132_12":
 			dialog.text = "Here! I found it! Just like my father said - a huge pile of treasure! A half is yours - as per our deal.";
 			link.l1 = "See? That wasn't hard, so there was nothing to fear.";
 			link.l1.go = "Node_132_13";
 		break;
-		
 		case "Node_132_13":
 			dialog.text = "Ha-ha-ha! I am rich now! Will you take your share now?";
 			link.l1 = "I guess.";
 			link.l1.go = "Node_132_15";
 		break;
-		
 		case "Node_132_15":
 			dialog.text = "Then take it and please help me in carrying all that stuff to the ship. Do you still remember that you promised to take me back home?";
 			link.l1 = "I haven't forgotten! Sure, I'll take you.";
 			link.l1.go = "Node_132_16";
 		break;
-		
 		case "Node_132_16":
 			pchar.quest.EncGirl_DeathSimple.over = "yes";
 			PChar.quest.EncGirl_DialogAtShore.over = "yes";// лесник . снял прерывание  , если не с той бухты зашел.		
@@ -519,32 +472,27 @@ void ProcessDialogEvent()
 			pchar.quest.EncGirl_AddPassenger.win_condition.l1.location = pchar.location.from_sea;
 			pchar.quest.EncGirl_AddPassenger.function = "EncGirl_AddPassenger";
 		break;
-		
 		case "Node_132_17":
 			Diag.TempNode = "Node_132_17";
 			dialog.text = "Being rich is simply great! I feel so different now."; 
 			link.l1 = "I am glad for you.";
 			link.l1.go = "exit";
 		break;
-		
 		case "Node_132_18":
 			dialog.text = "Alright, captain. My journey is over now. Thanks for your help.";
 			link.l1 = "You're welcome... So, what are you planning to do with your newfound riches? Buying a plantation with slaves?";
 			link.l1.go = "Node_132_19";
 		break;
-		
 		case "Node_132_19":
 			dialog.text = "I don't know, I haven't decided yet. Perhaps, I'll move to Europe...";
 			link.l1 = "Alright, good luck to you.";
 			link.l1.go = "Node_132_20";
 		break;
-		
 		case "Node_132_20":
 			dialog.text = "Hold on... That trinket was among my father's treasures. I have no use for it, but you might like it. Please, accept it as my personal gratitude for what you've done for me. That's from my share, ha-ha-ha!";
 			link.l1 = "Wow, now that's a really nice gift. Thank you"+ GetSexPhrase(", beauty","") +". Find a nice groom for yourself...";
 			link.l1.go = "Node_132_21";
 		break;
-		
 		case "Node_132_21":
 			chrDisableReloadToLocation = false;		
 			RemovePassenger(pchar, npchar);			
@@ -563,7 +511,6 @@ void ProcessDialogEvent()
             pchar.quest.EncGirl_EnterToSea.over = "yes";// лесник . снял прерывание  , если не с той бухты зашел.	
             PChar.quest.EncGirl_DialogAtShore.over = "yes";// лесник . снял прерывание  , если не с той бухты зашел.						
 		break;
-		
 		case "Node_133":
 			dialog.text = "But what can I do? I cannot ignore orders of my mistress - she will skin me alive.";
 			link.l1 = "Wait for me in the church of the settlement of " + XI_ConvertString("Colony" + pchar.GenQuest.EncGirl.city) + ", I'll bring you the pearls to make a new necklace.";
@@ -574,7 +521,6 @@ void ProcessDialogEvent()
 				link.l2.go = "Node_135";
 			}							
 		break;
-		
 		case "Node_133_1":
 			pchar.GenQuest.EncGirl = "GetCoins";
 			pchar.quest.EncGirl_Coins.win_condition.l1 = "ExitFromLocation";
@@ -600,7 +546,6 @@ void ProcessDialogEvent()
 			DialogExit();
 			AddDialogExitQuest("pchar_back_to_player");			
 		break;
-		
 		case "Node_134":
 			dialog.text = RandPhraseSimple(""+ GetSexPhrase("Captain","Young lady") +", I am so happy to see you again! Have you managed to collect pearls for the necklace?","Hello, captain! Have you brought me the pearls? You know, my mistress is getting so nervous...");
 			if (GetCharacterItem(pchar, "jewelry52") >= sti(pchar.GenQuest.EncGirl.BigCoins) && GetCharacterItem(pchar, "jewelry53") >= sti(pchar.GenQuest.EncGirl.SmallCoins))
@@ -614,7 +559,6 @@ void ProcessDialogEvent()
 				link.l1.go = "Node_134_2";
 			}	
 		break;
-		
 		case "Node_134_1":
 			TakeNItems(pchar, "jewelry52", -sti(pchar.GenQuest.EncGirl.BigCoins)); 
 			TakeNItems(pchar, "jewelry53", -sti(pchar.GenQuest.EncGirl.SmallCoins)); 
@@ -624,14 +568,12 @@ void ProcessDialogEvent()
 			link.l1 = "Wow! Well, thank you, too"+ GetSexPhrase(", beauty","") +", did not expect... Goodbye, and be happy.";
 			link.l1.go = "Node_134_End";
 		break;
-		
 		case "Node_134_2":
 			dialog.text = "Oh, "+ GetSexPhrase("captain","young lady") +", I am counting on you.";
 			link.l1 = "That's a right thing to do...";
 			link.l1.go = "exit";
 			LAi_SetStayType(NPChar);
 		break;
-		
 		case "Node_134_End":
 			GiveItem2Character(pchar, pchar.GenQuest.EncGirl.item); 
 			TakeNItems(pchar, "jewelry1", 15+drand(8));
@@ -644,7 +586,6 @@ void ProcessDialogEvent()
 			DeleteAttribute(pchar, "GenQuest.EncGirl");
 			DialogExit();
 		break;
-		
 		case "Node_135":
 			addMoneyToCharacter(pchar, -15000);
 			ChangeCharacterComplexReputation(pchar,"nobility", 10);
@@ -652,7 +593,6 @@ void ProcessDialogEvent()
 			link.l1 = "You're welcome. Say 'hi' to your mistress...";
 			link.l1.go = "Node_135End";
 		break;
-		
 		case "Node_135End":
 			pchar.quest.LandEnc_RapersBadExit.over = "yes";
 			NPChar.lifeDay = 0;
@@ -663,7 +603,6 @@ void ProcessDialogEvent()
 			DialogExit();		
 			AddDialogExitQuest("pchar_back_to_player");			
 		break;	
-		
 		case "ThanksForSave":
 			if (npchar.city == "Bridgetown" || npchar.city == "Charles" || npchar.city == "FortFrance" || npchar.city == "Marigo" || npchar.city == "Panama" || npchar.city == "PortRoyal" || npchar.city == "SantoDomingo" || npchar.city == "Tortuga") 
 			{
@@ -702,7 +641,6 @@ void ProcessDialogEvent()
 				break;
 			}
 		break;
-		
 		case "Node_200":
 			if(rand(1) == 0)
 			{
@@ -721,19 +659,16 @@ void ProcessDialogEvent()
 				link.l2.go = "Node_121Next";
 			}
 		break;
-		
 		case "Node_201":
 			dialog.text = "Oh no, what are you saying? I know these scoundrels all too well. They are former pals of my father. They are trying to locate the spot where he had hidden his treasures.";
 			link.l1 = "And what's the deal with your father?";
 			link.l1.go = "Node_202";
 		break;
-		
 		case "Node_202":
 			dialog.text = "He used to be a captain of a pirate ship. Recently he died... They all were so courteous during the burial, but as time passed, they have forgotten him - and all honesty, too. It's good that I had noticed them. As soon as they learn where the treasure is, I am done for.";
 			link.l1 = "That's a sad story. So, are you planning to keep hiding from them?";
 			link.l1.go = "Node_203";
 		break;
-		
 		case "Node_203":
 			dialog.text = "I can not keep jewels at home, I have no one to protect me. So I go at night in the cave, when money runs out...\nTake me, please, to the cave, and I'll give you the money you've given to them ... I think, the pirates would not risk following us while you're with me.";
 			link.l1 = "Sorry, darling, but I have different plans. You will collect your treasure some other time.";
@@ -741,13 +676,11 @@ void ProcessDialogEvent()
 			link.l2 = "Alright, let's go, if you're not afraid of me.";
 			link.l2.go = "Node_204";
 		break;
-		
 		case "Node_204":
 			dialog.text = "You know, for some reason, I am not...";
 			link.l1 = "Well, that's a good thing.";
 			link.l1.go = "Node_205";
 		break;
-		
 		case "Node_205":
 			Diag.TempNode = "Node_206";
 			EncGirl_GenerateChest(npchar);
@@ -755,26 +688,22 @@ void ProcessDialogEvent()
 			AddDialogExitQuestFunction("EncGirl_GirlFollow");
 			DialogExit();
 		break;
-		
 		case "Node_206":
 			Diag.TempNode = "Node_206";
 			dialog.text = "Captain, you promised to bring me to the cave.";
 			link.l1 = "Let's go...";
 			link.l1.go = "exit";
 		break;
-		
 		case "Node_207":
 			dialog.text = "Alright, captain, I've taken as much as I needed. We can now return.";
 			link.l1 = "Your buddies are not around, I see.";
 			link.l1.go = "Node_208";
 		break;
-		
 		case "Node_208":
 			dialog.text = "Thanks God. I don't need more trouble... Here, take these ingots - that should be enough to cover your expenses. Go alone, I'll take a different path...";
 			link.l1 = "Alright, good luck to you, if you're not afraid.";
 			link.l1.go = "Node_209";
 		break;
-		
 		case "Node_209":
 			LAi_LocationDisableMonstersGen(pchar.location, false);
 			i = makeint(sti(pchar.GenQuest.EncGirl.price)/100.0);
@@ -788,26 +717,22 @@ void ProcessDialogEvent()
 			pchar.quest.EncGirl_RapersExit.function = "EncGirl_MeetRapers";
 			DialogExit();
 		break;
-		
 		case "Node_200End":
 			pchar.quest.LandEnc_RapersBadExit.over = "yes";
 			AddDialogExitQuestFunction("EncGirl_GirlGoAway");
 			DialogExit();
 		break;
-		
 		case "Node_210":
 			dialog.text = "Hmm, "+ GetSexPhrase("captain","young lady") +", I don't like your irony.";
 			link.l1 = "You're good to go, "+ GetSexPhrase("beauty","deary") +". And you'd rather hurry to the town, before they chase you again.";
 			link.l1.go = "Node_1End";
 		break;
-		
 		case "Node_211":
 			dialog.text = "I was so agitated! Could you please bring me to the tavern in the settlement of " + XI_ConvertString("Colony" + pchar.GenQuest.EncGirl.city) + "? Otherwise, I am afraid, they are going to chase me again.";
 			link.l1 = "Perhaps, you're right. Let's go...";
 			link.l1.go = "Node_122Next";
 			ChangeCharacterComplexReputation(pchar,"nobility", 1);
 		break;
-		
 		case "Node_220":
 			dialog.text = "Oh, captain, that's a long story, and I am not certain that you would find it interesting. Although... I will still not do it without your help now. Could you please bring me to the tavern in the settlement of " + XI_ConvertString("Colony" + pchar.GenQuest.EncGirl.city) + "? I am afraid they'd just not leave me alone.";
 			link.l1 = "Sorry, darling, I have no time for that. I've got things to do.";
@@ -815,19 +740,16 @@ void ProcessDialogEvent()
 			link.l2 = "Why are you so secretive?";
 			link.l2.go = "Node_222";
 		break;
-		
 		case "Node_221":
 			ChangeCharacterComplexReputation(pchar,"nobility", -2);
 			AddDialogExitQuestFunction("EncGirl_GirlGoAway");
 			DialogExit();
 		break;
-		
 		case "Node_222":
 			dialog.text = "And how can I not be secretive, if everyone is trying to make a profit of my misfortune?";
 			link.l1 = "Alright, then...";
 			link.l1.go = "Node_223";
 		break;
-		
 		case "Node_223":
 			Diag.TempNode = "Node_224";
 			pchar.GenQuest.EncGirl = "HorseToTavern";
@@ -838,13 +760,11 @@ void ProcessDialogEvent()
 			AddDialogExitQuestFunction("EncGirl_GirlFollow");
 			DialogExit();		
 		break;
-		
 		case "Node_224":
 			dialog.text = "Captain, you promised to bring me to the tavern in the settlement of " + XI_ConvertString("Colony" + pchar.GenQuest.EncGirl.city) + ".";
 			link.l1 = RandPhraseSimple("I remember.","Don't you worry, I'll see you there.");
 			link.l1.go = "exit";
 		break;
-		
 		case "Node_225":
 			chrDisableReloadToLocation = false;
 			if (CheckAttribute(pchar, "questTemp.Saga.Helena_officer") || CheckAttribute(pchar, "questTemp.LSC.Mary_officer"))
@@ -882,7 +802,6 @@ void ProcessDialogEvent()
 				}
 			}
 		break;
-		
 		case "Node_226":
 			ChangeCharacterComplexReputation(pchar,"nobility", -1);
 			sTemp = LAi_FindNearestFreeLocator2Pchar("reload");
@@ -893,7 +812,6 @@ void ProcessDialogEvent()
 			DialogExit();		
 			AddDialogExitQuest("pchar_back_to_player");			
 		break;
-		
 		case "Node_226_1":
 			ChangeCharacterComplexReputation(pchar,"nobility", 3);
 			sTemp = LAi_FindNearestFreeLocator2Pchar("reload");
@@ -904,7 +822,6 @@ void ProcessDialogEvent()
 			DialogExit();		
 			AddDialogExitQuest("pchar_back_to_player");			
 		break;
-		
 		case "Node_227":
 			pchar.GenQuest.EncGirl = "EncGirl_ToTavern";
 			pchar.quest.EncGirl_inRoom.win_condition.l1 = "location";
@@ -913,7 +830,6 @@ void ProcessDialogEvent()
 			DialogExit();
 			AddDialogExitQuest("pchar_back_to_player");			
 		break;
-		
 		case "Node_228":
 			if(CheckAttribute(pchar, "GenQuest.EncGirl.Horse") && CheckAttribute(pchar,"GenQuest.EncGirl.BrothelCity") && sti(pchar.rank) > 15) // душещипательная история о невинной девочке попавшей в бордель
 			{
@@ -933,7 +849,6 @@ void ProcessDialogEvent()
 				link.l2.go = "Node_230"; // Послал в пешее эротическое путешествие
 			}
 		break;
-		
 		case "Node_229":
 			dialog.text = "Come to me now, my hero...";
 			link.l1 = "Oh, darling...";
@@ -941,19 +856,16 @@ void ProcessDialogEvent()
 			pchar.GenQuest.EncGirl = "EncGirl_facking";
 			DoQuestCheckDelay("PlaySex_1", 3.0);
 		break;
-		
 		case "Node_230":
 			dialog.text = "Oh! How... How dare you?! What a redneck! A girl thanked you with all her heart and soul, and you...";
 			link.l1 = "Well, if you weren't flirting as much and making a dead set at the first man you met, you surely would've had fewer troubles. I am no longer rescuing such flirts in the jungle...";
 			link.l1.go = "Node_231";
 		break;
-		
 		case "Node_231":
 			dialog.text = "I've never heard such words from anyone before! And I will not forgive them! You will yet remember me!";
 			link.l1 = "Go already, alright? And try to freshen yourself up, unless you want to be rescued again...";
 			link.l1.go = "Node_231_1";
 		break;
-		
 		case "Node_231_1":
 			ChangeCharacterComplexReputation(pchar,"nobility", 1);
 			sTemp = LAi_FindNearestFreeLocator2Pchar("reload");
@@ -963,7 +875,6 @@ void ProcessDialogEvent()
 			DoQuestFunctionDelay("EncGirl_SetBerglar", 5.0);
 			DialogExit();		
 		break;
-		
 		case "Node_232":
 			ChangeCharacterComplexReputation(pchar,"nobility", -3);
 			sTemp = LAi_FindNearestFreeLocator2Pchar("reload");
@@ -973,14 +884,12 @@ void ProcessDialogEvent()
 			DeleteAttribute(pchar, "GenQuest.EncGirl");
 			DialogExit();
 		break;
-		
 		case "Node_233":
 			pchar.GenQuest.EncGirl.Parents_City = GetQuestNationsCity(sti(pchar.GenQuest.EncGirl.nation));
 			dialog.text = "My family lives in the settlement of " + XI_ConvertString("Colony" + pchar.GenQuest.EncGirl.Parents_City) + ". I got here by chance - the ship, on which my groom was taking me to his parents, was captured by pirates. The ship was taken away, and the passengers were landed at the bay not far from here. My groom was killed during boarding of the ship, and I was seriously ill during the transition through the jungle\nMa'am of the local brothel has treated me, and when I got on my feet, she demanded to work money spent on treatment. I was a whore but I did not succeed out, and Ma'am sold me to some bandits to earn at least some money. The other part of story you know.";
 			link.l1 = "So just quit and return home! Why are you allowing them to treat you like a slave?!";
 			link.l1.go = "Node_234";
 		break;
-		
 		case "Node_234":
 			dialog.text = "I can't! All my belongings - decent clothing, money, documents - it's all in the brothel in my travelling bag. I've hidden it in the dating room. And while I am dressed like that, all sailors in the port will be running after me. And who will take me on board without documents or money? And now I can't even show my face in the town, or I'll be thrown behind bars...";
 			link.l1 = "Shouldn't be a problem. Let's go. I'll take you home myself.";
@@ -993,13 +902,11 @@ void ProcessDialogEvent()
 				link.l3.go = "Node_237";							
 			}			
 		break;
-		
 		case "Node_235":
 			dialog.text = "Oh, thank you, captain... But... you know, I don't have anything to pay you with.";
 			link.l1 = "What payment are you talking about? Let's go before they are missing you...";
 			link.l1.go = "Node_240";				
 		break;
-		
 		case "Node_240":
 			ReOpenQuestHeader("JungleGirl");
 			AddQuestRecord("JungleGirl", "20");
@@ -1007,7 +914,6 @@ void ProcessDialogEvent()
 			AddQuestUserData("JungleGirl", "sCity", XI_ConvertString("Colony" + pchar.GenQuest.EncGirl.Parents_City));
 			AddQuestUserData("JungleGirl", "sBrothelCity", XI_ConvertString("Colony" + pchar.GenQuest.EncGirl.city + "Gen"));
 			AddQuestUserData("JungleGirl", "sName", pchar.GenQuest.EncGirl.name);
-		
 			AddPassenger(pchar, npchar, false);
 			SetCharacterRemovable(npchar, false);
 			OfficersReaction("bad");
@@ -1019,19 +925,16 @@ void ProcessDialogEvent()
 			pchar.quest.EncGirl_DeliveToParents.function = "EncGirl_DeliveToParents";
 			DialogExit(); 		
 		break;
-		
 		case "Node_236":
 			dialog.text = "Oh, captain, you know, I would never dare to ask...";
 			link.l1 = "Have no fear. Soon I will be back.";
 			link.l1.go = "Node_239";				
 		break;		
-		
 		case "Node_239":
 			ReOpenQuestHeader("JungleGirl");
 			AddQuestRecord("JungleGirl", "21");
 			AddQuestUserData("JungleGirl", "sSex", GetSexPhrase("",""));
 			AddQuestUserData("JungleGirl", "sName", pchar.GenQuest.EncGirl.name);
-
 			pchar.quest.EncGirl_GenerateBag.win_condition.l1 = "location";
 			if(GetSummonSkillFromName(pchar, SKILL_FORTUNE) > rand(100))
 			{
@@ -1044,21 +947,17 @@ void ProcessDialogEvent()
 				pchar.quest.EncGirl_GenerateBag.win_condition.l1.location = pchar.GenQuest.EncGirl.city + "_SecBrRoom";
 			}
 			pchar.quest.EncGirl_GenerateBag.function = "EncGirl_GenerateLeatherBag";
-
 			pchar.quest.EncGirl_GetBagFail.win_condition.l1 = "Timer";
 			pchar.quest.EncGirl_GetBagFail.win_condition.l1.date.day = GetAddingDataDay(0, 0, 1);
 			pchar.quest.EncGirl_GetBagFail.win_condition.l1.date.month = GetAddingDataMonth(0, 0, 1);
 			pchar.quest.EncGirl_GetBagFail.win_condition.l1.date.year = GetAddingDataYear(0, 0, 1);
 			pchar.quest.EncGirl_GetBagFail.function = "EncGirl_GenQuest_GetBag";
-						
 			pchar.quest.EncGirl_ExitRoom.win_condition.l1 = "ExitFromLocation";
 			pchar.quest.EncGirl_ExitRoom.win_condition.l1.location = pchar.location;
 			pchar.quest.EncGirl_ExitRoom.function = "EncGirl_ExitTavernRoom";
-
 			AddDialogExitQuest("OpenTheDoors");
 			DialogExit();
 		break;
-		
 		case "Node_240_1":
 			pchar.quest.EncGirl_GetBagFail.over = "yes";
 			dialog.text = "Oh, I was already worrying that something might have happened to you.";
@@ -1073,14 +972,12 @@ void ProcessDialogEvent()
 				link.l1.go = "Node_242";			
 			}	
 		break;
-		
 		case "Node_241":
 			TakeNItems(pchar, "leather_bag", -1);
 			dialog.text = "Thank you, "+ GetSexPhrase("noble captain","noble girl") +". I'll never forget what you've done for me. I don't have much, but please accept this amulet. Perhaps, it was that trinket that saved my life during the pirate attack.";
 			link.l1 = "Thank you and good journey! Farewell now...";
 			link.l1.go = "Node_243";
 		break;
-		
 		case "Node_242":
 			dialog.text = "Did they really found my cache?";
 			if(sti(pchar.money) >= 5000)
@@ -1091,7 +988,6 @@ void ProcessDialogEvent()
 			link.l2 = "Perhaps, they did. Anyway, our roads part here now. Farewell!";
 			link.l2.go = "Node_244";
 		break;
-		
 		case "Node_243":
 			LAi_SetActorType(npchar);
 			LAi_ActorRunToLocation(npchar, "reload", "reload1_back", "none", "", "", "OpenTheDoors", -1.0);
@@ -1106,7 +1002,6 @@ void ProcessDialogEvent()
 			DeleteAttribute(pchar, "GenQuest.EncGirl");
 			DialogExit();
 		break;
-		
 		case "Node_244":
 			LAi_SetActorType(npchar);
 			LAi_ActorRunToLocation(npchar, "reload", "reload1_back", "none", "", "", "OpenTheDoors", -1.0);
@@ -1118,19 +1013,16 @@ void ProcessDialogEvent()
 			DeleteAttribute(pchar, "GenQuest.EncGirl");
 			DialogExit();
 		break;
-		
 		case "Node_245":
 			dialog.text = "Thanks, captain. You know, it's hard to believe that I am finally home. Please, come with me, I'll introduce you to my parents.";
 			link.l1 = "Listen, "+ GetSexPhrase("beauty","deary") +", I really have no time for that. Some other time perhaps?";
 			link.l1.go = "Node_246";
 		break;
-		
 		case "Node_246":
 			dialog.text = "What a pity... Well, farewell then, and may the Lord watch over you. I don't have anything to repay you with, but please accept this amulet.";
 			link.l1 = "Thanks! Run home now, make your parents feel happy!";
 			link.l1.go = "Node_247";
 		break;
-		
 		case "Node_247":
 			sTemp = LAi_FindNearestFreeLocator2Pchar("reload");
 			LAi_SetActorType(npchar);
@@ -1145,10 +1037,8 @@ void ProcessDialogEvent()
 			DeleteAttribute(pchar, "GenQuest.EncGirl");
 			DialogExit();			
 		break;
-		
 		case "Node_248":
 		break;
-		
 		case "Node_237":
 			dialog.text = "Well, I don't know... Perhaps, I'll have to wait for a passing ride. But I cannot ask you for money.";
 			if(makeint(pchar.money)>=5000)
@@ -1167,7 +1057,6 @@ void ProcessDialogEvent()
 				link.l3.go = "Node_237_3";
 			}
 		break;
-		
 		case "Node_237_1":
 			AddMoneyToCharacter(pchar, -5000);
 			ChangeCharacterComplexReputation(pchar,"nobility", -5);
@@ -1176,7 +1065,6 @@ void ProcessDialogEvent()
 			link.l1.go = "Node_238";
 			pchar.GenQuest.EncGirl = "EncGirlFack_GetMoney";
 		break;
-		
 		case "Node_237_2":
 			AddMoneyToCharacter(pchar, -25000);
 			ChangeCharacterComplexReputation(pchar,"nobility", 1);
@@ -1184,7 +1072,6 @@ void ProcessDialogEvent()
 			link.l1 = "Bon voyage, then. Farewell...";
 			link.l1.go = "Node_238";
 		break;
-		
 		case "Node_237_3":
 			AddMoneyToCharacter(pchar, -35000);
 			ChangeCharacterComplexReputation(pchar,"nobility", 2);
@@ -1192,7 +1079,6 @@ void ProcessDialogEvent()
 			link.l1 = "Bon voyage, then. Farewell...";
 			link.l1.go = "Node_238";
 		break;
-		
 		case "Node_238":
 			LAi_SetActorType(npchar);
 			LAi_ActorGoToLocation(npchar, "reload", "reload1_back", "none", "", "", "OpenTheDoors", -1.0);
@@ -1205,20 +1091,17 @@ void ProcessDialogEvent()
 			DeleteAttribute(pchar, "GenQuest.EncGirl");
 			DialogExit();
 		break;
-		
 		case "Node_250":
 			dialog.text = "Don't ruin my life, captain! My father wants me to marry the usurer's son, that filthy milksop... just because his daddy had a crapload of money in his coffers! Well, I'd rather stay in the jungle to be devoured by wild beasts rather than take a life sentence with him!";
 			link.l1 = "What's the problem with your marriage, "+ GetSexPhrase("beauty","deary") +"? Hold the one who seeks to marry you, and be happy. After some time you would be happy to marry that milksop, but it might be too late...";
 			link.l1.go = "Node_251";
 		break;
-		
 		case "Node_251":
 			pchar.GenQuest.EncGirl.sLoverId = GenerateRandomName(sti(npchar.nation), "man"); 
 			dialog.text = "No! No, captain, I love " + pchar.GenQuest.EncGirl.sLoverId + " and I will marry no other man! And my father doesn't want to hear anything! He says that " + XI_ConvertString("Colony" + pchar.GenQuest.EncGirl.city) + " is just a visitor here, so he will never find a job here, and he is destined to die in poverty, and me too! And I would go with him to the world's end, just to be at his side! Take me to him, I'm begging you!";
 			link.l1 = "Alright, let's go. I guess I'll figure out what to do with you...";
 			link.l1.go = "Node_252";
 		break;
-		
 		case "Node_252":
 			Diag.TempNode = "Node_253";
 			ReOpenQuestHeader("JungleGirl");
@@ -1231,14 +1114,12 @@ void ProcessDialogEvent()
 			AddDialogExitQuestFunction("EncGirl_GirlFollow");
 			DialogExit();
 		break;
-		
 		case "Node_253":
 			Diag.TempNode = "Node_253";
 			dialog.text = "Captain, you promised to bring me to the settlement of " + XI_ConvertString("Colony" + pchar.GenQuest.EncGirl.city) +".";
 			link.l1 = RandPhraseSimple("I remember.","Don't worry, I'll bring you there.");
 			link.l1.go = "exit";			
 		break;
-		
 		case "Node_260":
 			chrDisableReloadToLocation = false;
 			if(rand(1) == 0)
@@ -1256,7 +1137,6 @@ void ProcessDialogEvent()
 				link.l1.go = "Node_261";
 			}
 		break;
-		
 		case "Node_260End":
 			sTemp = LAi_FindNearestFreeLocator2Pchar("reload");
 			LAi_SetActorType(npchar);
@@ -1266,7 +1146,6 @@ void ProcessDialogEvent()
 			DialogExit();
 			AddDialogExitQuest("pchar_back_to_player");			
 		break;
-		
 		case "Node_261":
 			dialog.text = "Can you take me to the tavern? I need to wait for my auntie and take a rest - I was so alarmed...";
 			link.l1 = "No, "+ GetSexPhrase("beauty","deary") +", that's certainly enough for me. I have a lot to do.";
@@ -1274,7 +1153,6 @@ void ProcessDialogEvent()
 			link.l2 = ""+ GetSexPhrase("Oh, women! Is there anything they can do without a man's help?","Why are you so helpless?") +" Let's go...";
 			link.l2.go = "Node_263";
 		break;
-		
 		case "Node_262":
 			sTemp = LAi_FindNearestFreeLocator2Pchar("reload");
 			LAi_SetActorType(npchar);
@@ -1284,7 +1162,6 @@ void ProcessDialogEvent()
 			DialogExit();
 			AddDialogExitQuest("pchar_back_to_player");			
 		break;
-		
 		case "Node_263":
 			Diag.TempNode = "Node_224";
 			pchar.GenQuest.EncGirl = "HorseToTavern";
@@ -1296,7 +1173,6 @@ void ProcessDialogEvent()
 			DialogExit();
 			AddDialogExitQuest("pchar_back_to_player");			
 		break;
-				
 		case "ThanksForHelp_1":
 			Diag.TempNode = "ThanksAgain";
 			if(makeint(Pchar.reputation.nobility) >= 80)
@@ -1322,7 +1198,6 @@ void ProcessDialogEvent()
 				}
 			}
 		break;
-
 		case "ThanksAgain":
             Diag.TempNode = "ThanksAgain";
             dialog.text = "I will tell everybody that you have saved me! Let everybody know, "+ GetSexPhrase("what a brave and courageous person you are","what a brave and courageous person you are") +"!";

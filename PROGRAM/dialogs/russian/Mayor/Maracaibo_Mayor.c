@@ -10,7 +10,6 @@ void ProcessCommonDialogEvent(ref NPChar, aref Link, aref NextDiag)
                       "I'll ask... But a bit later...", "I am sorry, " + GetAddress_FormToNPC(NPChar) + "...", npchar, Dialog.CurrentNode);
 			link.l1.go = "exit";
 		break;
-
 		case "Cupture_after":
             dialog.text = RandPhraseSimple("You have taken everything already. What else do you want?", "Is there anything left that you didn't grab?");
             link.l1 = RandPhraseSimple("Just looking around...", "Just checking, I might forget to take something...");
@@ -20,4 +19,3 @@ void ProcessCommonDialogEvent(ref NPChar, aref Link, aref NextDiag)
 	}
 	UnloadSegment(NPChar.FileDialog2);  // если где-то выход внутри switch  по return не забыть сделать анлод
 }
-

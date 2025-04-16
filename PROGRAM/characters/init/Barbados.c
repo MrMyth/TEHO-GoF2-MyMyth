@@ -1,8 +1,6 @@
-
 int CreateBarbadosCharacters(int n)
 {
 	ref ch;
-	
 	///////////////////////////////////////////////////////////////////////////////
 	// ОСНОВНЫЕ ПЕРСОНАЖИ
 	///////////////////////////////////////////////////////////////////////////////
@@ -17,11 +15,9 @@ int CreateBarbadosCharacters(int n)
 	ch.location = "Bridgetown_townhall";
 	ch.location.group = "sit";
 	ch.location.locator = "sit1";
-	
 	ch.Default	= "Bridgetown_townhall";
 	ch.Default.group = "sit";
 	ch.Default.locator = "sit1";
-	
 	ch.Dialog.Filename = "Common_Mayor.c";
 	ch.nation = ENGLAND;
 	ch.quest.type = "hovernor";
@@ -38,7 +34,6 @@ int CreateBarbadosCharacters(int n)
 	LAi_group_MoveCharacter(ch, "ENGLAND_CITIZENS");
 	LAi_SetImmortal(ch, true);
 	n = n + 1;
-
 	makeref(ch,Characters[n]);			//Священик
 	ch.id		= "Bridgetown_Priest";
 	ch.model	= "priest_3";
@@ -56,7 +51,6 @@ int CreateBarbadosCharacters(int n)
 	LAi_group_MoveCharacter(ch, "ENGLAND_CITIZENS");
 	LAi_SetImmortal(ch, true);
 	n = n + 1;
-
 	makeref(ch,Characters[n]);		// ОФициантка
 	ch.id		= "Bridgetown_waitress";
 	ch.model	= "women_12";
@@ -73,7 +67,6 @@ int CreateBarbadosCharacters(int n)
 	LAi_group_MoveCharacter(ch, "ENGLAND_CITIZENS");
 	LAi_SetImmortal(ch, true);
 	n = n + 1;
-
 	makeref(ch,Characters[n]);			//Трактирщик
 	ch.id		= "Bridgetown_tavernkeeper";
 	ch.model	= "Gaston";
@@ -93,8 +86,6 @@ int CreateBarbadosCharacters(int n)
 	LAi_group_MoveCharacter(ch, "ENGLAND_CITIZENS");
 	LAi_SetImmortal(ch, true);
 	n = n + 1;
-
-
 	makeref(ch,Characters[n]);			//Торговец
 	ch.id		= "Bridgetown_trader";
 	ch.model	= "trader_10";
@@ -112,7 +103,6 @@ int CreateBarbadosCharacters(int n)
 	LAi_SetImmortal(ch, true);
 	ch.item_date = "";
 	n = n + 1;
-
 	makeref(ch,Characters[n]);			//Корабел
 	ch.id		= "Bridgetown_shipyarder";
 	ch.model	= "shipowner_10";
@@ -137,7 +127,6 @@ int CreateBarbadosCharacters(int n)
 	LAi_group_MoveCharacter(ch, "ENGLAND_CITIZENS");
 	LAi_SetImmortal(ch, true);
     n = n + 1;
-
 	makeref(ch,Characters[n]);			//Банкир
 	ch.id		= "Bridgetown_usurer";
 	ch.model	= "banker_10";
@@ -157,7 +146,6 @@ int CreateBarbadosCharacters(int n)
 	LAi_group_MoveCharacter(ch, "ENGLAND_CITIZENS");
 	LAi_SetImmortal(ch, true);
 	n = n + 1;
-
 	makeref(ch,Characters[n]);			//Начальник порта
 	ch.id		= "Bridgetown_PortMan";
 	ch.model	= "citiz_7";
@@ -174,7 +162,6 @@ int CreateBarbadosCharacters(int n)
 	LAi_SetImmortal(ch, true);
 	ch.item_date = "";
 	n = n + 1;
-
 	makeref(ch,Characters[n]);			//Хозяйка борделя
 	ch.id		= "Bridgetown_Hostess";
 	ch.name		= "Mirabelle"
@@ -193,7 +180,6 @@ int CreateBarbadosCharacters(int n)
 	LAi_SetOwnerType(ch);
 	LAi_group_MoveCharacter(ch, "ENGLAND_CITIZENS");
 	n = n + 1;
-
     makeref(ch,Characters[n]);
 	ch.name 	= "Smuggler";
 	ch.lastname = "";
@@ -210,7 +196,6 @@ int CreateBarbadosCharacters(int n)
 	LAi_SetHP(ch, 80.0, 80.0);
 	ch.greeting = "smuggler";
 	n = n + 1;
-	
 	makeref(ch,Characters[n]);			//Смотритель маяка
 	ch.id		= "Bridgetown_Lightman";
 	ch.model	= "keeper_8";
@@ -230,6 +215,5 @@ int CreateBarbadosCharacters(int n)
 	LAi_group_MoveCharacter(ch, "ENGLAND_CITIZENS");
 	LAi_SetImmortal(ch, true);
 	n = n + 1;
-	
 	return n;
 }

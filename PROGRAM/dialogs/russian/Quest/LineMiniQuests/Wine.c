@@ -2,13 +2,10 @@ void ProcessDialogEvent()
 {
 	ref sld, NPChar;
 	aref Link, NextDiag;
-
 	DeleteAttribute(&Dialog,"Links");
-
 	makeref(NPChar,CharacterRef);
 	makearef(Link, Dialog.Links);
 	makearef(NextDiag, NPChar.Dialog);
-	
 	switch(Dialog.CurrentNode)
 	{
 		case "First time":
@@ -17,7 +14,6 @@ void ProcessDialogEvent()
 			link.l1.go = "exit";
 			NextDiag.TempNode = "First time";
 		break;
-		
 		case "Wine_fort":
 			dialog.text = "So, did you bring the bottle?";
 			if (CheckCharacterItem(pchar, "potionwine"))
@@ -29,7 +25,6 @@ void ProcessDialogEvent()
 			link.l2.go = "exit";
 			NextDiag.TempNode = "Wine_fort";
 		break;
-	
 		case "Wine_fort_1":
 			AddMoneyToCharacter(pchar, 1000);
 			RemoveItems(PChar, "potionwine", 1);
@@ -39,7 +34,6 @@ void ProcessDialogEvent()
 			link.l2 = "Hm, interesting. How many bottles do you need?";
 			link.l2.go = "Wine_fort_2";
 		break;
-	
 	case "Wine_fort_exit":
 			dialog.text = "As you wish. Thanks for your help anyway!";
 			link.l1 = "Keep up, soldier!";
@@ -51,13 +45,11 @@ void ProcessDialogEvent()
 			pchar.questTemp.Wine.fail = "true";
 			CloseQuestHeader("Wine");
 	break;
-	
 		case "Wine_fort_2":
 			dialog.text = "Well, considering the price of each bottle, we can afford to buy sixty bottles, but not more. But don't bring us less than ten too - it will make no sense.";
 			link.l1 = "Fine. You will get your wine.";
 			link.l1.go = "Wine_fort_3";
 		break;
-	
 		case "Wine_fort_3":
 			dialog.text = "Nice! I am counting on you, captain. Try to bring me the wine no later than in a week cause then we will go to the sea, and I won't be around for a couple of months.";
 			link.l1 = "I see. I'll try to be quick.";
@@ -70,7 +62,6 @@ void ProcessDialogEvent()
 			SetFunctionTimerCondition("Soldier_wait", 0, 0, 7, false);
 			NextDiag.TempNode = "Wine_fort_check";
 		break;
-	
 		case "Wine_fort_check":
 			dialog.text = "So, captain, have you brought the wine?";
 			if (sti(pchar.items.potionwine) >= 10)
@@ -82,7 +73,6 @@ void ProcessDialogEvent()
 			link.l2.go = "exit";
 			NextDiag.TempNode = "Wine_fort_check";
 		break;
-	
 		case "Wine_take":
 			pchar.questTemp.Wine.Qty = sti(pchar.items.potionwine);
 			pchar.questTemp.Wine.Money = sti(pchar.questTemp.Wine.Qty)*1000;
@@ -102,14 +92,12 @@ void ProcessDialogEvent()
 				RemoveItems(PChar, "potionwine", sti(pchar.questTemp.Wine.Qty));
 			}
 		break;
-	
 		case "Wine_take_1":
 			AddMoneyToCharacter(pchar, sti(pchar.questTemp.Wine.Money));
 			dialog.text = "My gratitude, " + GetAddress_Form(NPChar) + "! And I have to go now. Goodbye!";
 			link.l1 = "Goodbye, soldier!";
 			link.l1.go = "Wine_take_2";
 		break;
-	
 		case "Wine_take_2":
 			DialogExit();
 			PlaySound("interface\important_item.wav");
@@ -125,7 +113,6 @@ void ProcessDialogEvent()
 			AddCharacterExpToSkill(pchar, "Leadership", 50);//авторитет
 			AddCharacterExpToSkill(pchar, "Fortune", 50);//везение
 		break;
-		
 		case "Exit":
 			NextDiag.CurrentNode = NextDiag.TempNode;
 			DialogExit();

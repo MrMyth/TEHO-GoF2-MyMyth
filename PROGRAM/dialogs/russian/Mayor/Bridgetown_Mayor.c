@@ -16,7 +16,6 @@ void ProcessCommonDialogEvent(ref NPChar, aref Link, aref NextDiag)
                 link.l1.go = "MayorDone";
             }
 		break;
-		
 		case "MayorDone":
 			dialog.text = "My assistance? Our trader is a very honest man, so I doubt that he will attempt to fool you. Talk to the shipmaster about the flute, he will help you with this matter. And if you get troubles anyway, then you should come to see me. I am interested in advance of trade connections with our colony and I will show you all my support\nAlso, I'm organizing a banquet tonight, all Bridgetown's brightest will attend. You should come too, captain.";
 			link.l1 = "Thanks for your invitation, but unfortunately I am too busy. Goodbye and thanks for your agency!";
@@ -38,4 +37,3 @@ void ProcessCommonDialogEvent(ref NPChar, aref Link, aref NextDiag)
 	}
 	UnloadSegment(NPChar.FileDialog2);  // если где-то выход внутри switch  по return не забыть сделать анлод
 }
-

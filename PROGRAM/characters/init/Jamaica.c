@@ -1,12 +1,9 @@
-
 int CreateJamaicaCharacters(int n)
 {
 	ref ch;
-	
 	///////////////////////////////////////////////////////////////////////////////
 	// ОСНОВНЫЕ ПЕРСОНАЖИ
 	///////////////////////////////////////////////////////////////////////////////
-
 	makeref(ch,Characters[n]);			//Губернатор
 	ch.id		= "PortRoyal_Mayor";
 	ch.model	= "huber_9";
@@ -34,7 +31,6 @@ int CreateJamaicaCharacters(int n)
 	LAi_group_MoveCharacter(ch, "ENGLAND_CITIZENS");
 	LAi_SetImmortal(ch, true);
 	n = n + 1;
-
 	makeref(ch,Characters[n]);			//Священик
 	ch.id		= "PortRoyal_Priest";
 	ch.model	= "priest_1";
@@ -52,7 +48,6 @@ int CreateJamaicaCharacters(int n)
 	LAi_group_MoveCharacter(ch, "ENGLAND_CITIZENS");
 	LAi_SetImmortal(ch, true);
 	n = n + 1;
-
 	makeref(ch,Characters[n]);		// ОФициантка
 	ch.id		= "PortRoyal_waitress";
 	ch.model	= "women_14";
@@ -69,7 +64,6 @@ int CreateJamaicaCharacters(int n)
 	LAi_group_MoveCharacter(ch, "ENGLAND_CITIZENS");
 	LAi_SetImmortal(ch, true);
 	n = n + 1;
-
 	makeref(ch,Characters[n]);			//Трактирщик
 	ch.id		= "PortRoyal_tavernkeeper";
 	ch.model	= "barmen_9";
@@ -87,7 +81,6 @@ int CreateJamaicaCharacters(int n)
 	LAi_group_MoveCharacter(ch, "ENGLAND_CITIZENS");
 	LAi_SetImmortal(ch, true);
 	n = n + 1;
-
 	makeref(ch,Characters[n]);			//Торговец
 	ch.id		= "PortRoyal_trader";
 	ch.model	= "trader_9";
@@ -105,7 +98,6 @@ int CreateJamaicaCharacters(int n)
 	LAi_SetImmortal(ch, true);
 	ch.item_date = "";
 	n = n + 1;
-
 	makeref(ch,Characters[n]);			//Корабел
 	ch.id		= "PortRoyal_shipyarder";
 	ch.model	= "shipowner_9_1";
@@ -132,7 +124,6 @@ int CreateJamaicaCharacters(int n)
 	LAi_group_MoveCharacter(ch, "ENGLAND_CITIZENS");
 	LAi_SetImmortal(ch, true);
 	n = n + 1;
-
 	makeref(ch,Characters[n]);			//Банкир
 	ch.id		= "PortRoyal_usurer";
 	ch.model	= "banker_9_1";
@@ -154,7 +145,6 @@ int CreateJamaicaCharacters(int n)
 	LAi_group_MoveCharacter(ch, "ENGLAND_CITIZENS");
 	LAi_SetImmortal(ch, true);
 	n = n + 1;
-
 	makeref(ch,Characters[n]);			//Начальник порта
 	ch.id		= "PortRoyal_PortMan";
 	ch.model	= "citiz_10";
@@ -171,7 +161,6 @@ int CreateJamaicaCharacters(int n)
 	LAi_SetImmortal(ch, true);
 	ch.item_date = "";
 	n = n + 1;
-
 	makeref(ch,Characters[n]);			//Хозяйка борделя
 	ch.id		= "PortRoyal_Hostess";
 	ch.name		= "Ida"
@@ -190,7 +179,6 @@ int CreateJamaicaCharacters(int n)
 	LAi_SetOwnerType(ch);
 	LAi_group_MoveCharacter(ch, "ENGLAND_CITIZENS");
 	n = n + 1;
-
     makeref(ch,Characters[n]);
 	ch.name 	= "Smuggler";
 	ch.lastname = "";
@@ -207,7 +195,6 @@ int CreateJamaicaCharacters(int n)
 	LAi_SetHP(ch, 80.0, 80.0);
 	ch.greeting = "smuggler";
 	n = n + 1;
-	
 	makeref(ch,Characters[n]);			//Заведующий  складом на верфи
 	ch.id		= "PortRoyal_SkladMan";
 	ch.model	= "citiz_"+(rand(9)+1);
@@ -226,7 +213,6 @@ int CreateJamaicaCharacters(int n)
 	LAi_SetImmortal(ch, true);
 	ch.Storage 	  = true;
 	n = n + 1; 
-	
 	makeref(ch,Characters[n]);			//Смотритель кладбища
 	ch.id		= "PortRoyal_Cemeteryman";
 	ch.model	= "keeper_6";
@@ -246,9 +232,7 @@ int CreateJamaicaCharacters(int n)
 	LAi_group_MoveCharacter(ch, "ENGLAND_CITIZENS");
 	LAi_SetImmortal(ch, true);
 	n = n + 1;
-	
    //=============== Марун-Таун =============== // 170712
-
     makeref(ch,Characters[n]);			//Глава пиратов
 	ch.id		= "Jackman";
 	ch.name 	= "Jacob";
@@ -295,7 +279,6 @@ int CreateJamaicaCharacters(int n)
 	ch.watchBoxes = true;
 	ch.standUp = true;
 	n = n + 1;
-   
 	makeref(ch,Characters[n]);		// ОФициантка
 	ch.id		= "FortOrange_waitress";
 	ch.model	= "women_9";
@@ -312,7 +295,6 @@ int CreateJamaicaCharacters(int n)
 	LAi_group_MoveCharacter(ch, "PIRATE_CITIZENS");
 	LAi_SetImmortal(ch, true);
 	n = n + 1;
-
 	makeref(ch,Characters[n]);			//Трактирщик
 	ch.id		= "FortOrange_tavernkeeper";
 	ch.model	= "barmen_14";
@@ -330,7 +312,6 @@ int CreateJamaicaCharacters(int n)
 	LAi_group_MoveCharacter(ch, "PIRATE_CITIZENS");
 	LAi_SetImmortal(ch, true);
 	n = n + 1;
-
 	makeref(ch,Characters[n]);			//Торговец
 	ch.id		= "FortOrange_trader";
 	ch.model	= "trader_14";
@@ -348,6 +329,5 @@ int CreateJamaicaCharacters(int n)
 	LAi_SetImmortal(ch, true);
 	ch.item_date = "";
 	n = n + 1;
-
 	return n;
 }

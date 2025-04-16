@@ -1,7 +1,6 @@
 // диалог по городам
 void ProcessCommonDialogEvent(ref NPChar, aref Link, aref NextDiag)
 {
-
 	switch (Dialog.CurrentNode)
 	{
 		case "quests":
@@ -18,7 +17,6 @@ void ProcessCommonDialogEvent(ref NPChar, aref Link, aref NextDiag)
 				link.l1.go = "caleuche";
 			}
 		break;
-		
 		// калеуче
 		case "caleuche":
 			dialog.text = "No, no one of my clients look like you described. Also, I've never heard this name before. Sorry, I can't give you a hand.";
@@ -29,4 +27,3 @@ void ProcessCommonDialogEvent(ref NPChar, aref Link, aref NextDiag)
 	}
 	UnloadSegment(NPChar.FileDialog2);
 }
-

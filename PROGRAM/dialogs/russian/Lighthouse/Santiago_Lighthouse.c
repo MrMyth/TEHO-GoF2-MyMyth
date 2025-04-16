@@ -29,19 +29,16 @@ void ProcessCommonDialogEvent(ref NPChar, aref Link, aref NextDiag)
                 link.l1.go = "guardoftruth_11";
 			}
 		break;
-		
 		case "guardoftruth":
 			dialog.text = "Sure, senor. You must be a man of a high fly if padre Vincento himself does business with you...";
 			link.l1 = "Splendid. You are our runner then. Now listen, this man is the one who need padre Vincento. He is under your responsibility now, you have to transfer him to Santiago or find anyone to do the same...";
 			link.l1.go = "guardoftruth_1";
 		break;
-		
 		case "guardoftruth_1":
 			dialog.text = "";
 			link.l1 = "You are responsible to the Inquisitor himself for the prisoner. Also, I don't advise you to remove the shackles from him, Gaius Marchais is a strong guy. Give this letter to padre Vincento and tell him that I wait for an answer from him in two days. This should be enough, I suppose...";
 			link.l1.go = "guardoftruth_2";
 		break;
-		
 		case "guardoftruth_2":
 			Log_Info("You have given the letter");
 			PlaySound("interface\important_item.wav");
@@ -49,13 +46,11 @@ void ProcessCommonDialogEvent(ref NPChar, aref Link, aref NextDiag)
 			link.l1 = "That's not all. The captain of carraca 'San Gregorio' Carlos Guevarra must have been here. He brought vanilla for me. Has he given you my letter?";
 			link.l1.go = "guardoftruth_3";
 		break;
-		
 		case "guardoftruth_3":
 			dialog.text = "Your cargo is fine, senor, waiting for you.";
 			link.l1 = "Good, I'll order to put it in my ship. I'll be here in two days for the padre Vincento's answer. I am not saying goodbye, "+npchar.name+"!..";
 			link.l1.go = "guardoftruth_4";
 		break;
-		
 		case "guardoftruth_4":
 			DialogExit();
 			LocatorReloadEnterDisable("mayak9", "boat", false);
@@ -68,13 +63,11 @@ void ProcessCommonDialogEvent(ref NPChar, aref Link, aref NextDiag)
 			SetCharacterGoods(pchar, GOOD_CINNAMON, GetCargoGoods(pchar, GOOD_CINNAMON) + sti(pchar.questTemp.Guardoftruth.VanilleQty));
 			AddQuestRecord("Guardoftruth", "21");
 		break;
-		
 		case "guardoftruth_5":
 			dialog.text = "Yes, senor. Here is the letter from padre Vincento. He is very pleased by you. He said that you'd know the rest from the letter.";
 			link.l1 = "Splendid. See you soon, "+npchar.name+". And for now - farewell...";
 			link.l1.go = "guardoftruth_6";
 		break;
-		
 		case "guardoftruth_6":
 			DialogExit();
 			pchar.questTemp.Guardoftruth = "mayak_exit";
@@ -82,37 +75,31 @@ void ProcessCommonDialogEvent(ref NPChar, aref Link, aref NextDiag)
 			sld = ItemsFromID("specialletter");
 			sld.text = "Letter_Vincento_next";
 		break;
-		
 		case "guardoftruth_7":
 			dialog.text = "Fine. Give them to me and I will take them to holy father.";
 			link.l1 = "No way, buddy! It wasn't easy to get those items and I don't want to loose them just like that. I will give them only to padre Vincento personally.";
 			link.l1.go = "guardoftruth_8";
 		break;
-		
 		case "guardoftruth_8":
 			dialog.text = "But senor! How can I know that you are not cheating on me?";
 			link.l1 = "Take a look: the censer, the chalice and the cross with a lazurite... "+npchar.name+", who do you think I am? Do you really think I am that stupid to go to the Inquisition without those items?";
 			link.l1.go = "guardoftruth_9";
 		break;
-		
 		case "guardoftruth_9":
 			dialog.text = "Forgive me, senor... Come tomorrow and I'll tell padre Vincento about your arrival.";
 			link.l1 = "Fine. See you tomorrow.";
 			link.l1.go = "guardoftruth_10";
 		break;
-		
 		case "guardoftruth_10":
 			DialogExit();
 			pchar.questTemp.Guardoftruth = "mayak_wait";
 			SetFunctionTimerCondition("GuardOT_MayakLastStage", 0, 0, 1, false);
 		break;
-		
 		case "guardoftruth_11":
 			dialog.text = "His Grace will receive you, senor. Don't delay your visit. Here is the document, show it to the guards and they will let you in. But raise a Spanish flag at first or soldiers will have to arrest you.";
 			link.l1 = "Got it. Spanish then. Thanks, pal! I am on my way!";
 			link.l1.go = "guardoftruth_12";
 		break;
-		
 		case "guardoftruth_12":
 			DialogExit();
 			GiveItem2Character(pchar, "VerifyPaper");

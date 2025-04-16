@@ -3,18 +3,14 @@ void ProcessDialogEvent()
 {
 	ref NPChar;
 	aref Link, NextDiag;
-
 	DeleteAttribute(&Dialog,"Links");
-
 	makeref(NPChar,CharacterRef);
 	makearef(Link, Dialog.Links);
 	makearef(NextDiag, NPChar.Dialog);
-
 	ref offref;
     int i, cn;
     int qty;
     string attrLoc, sTmp;
-    
 	switch(Dialog.CurrentNode)
 	{
 		// -----------------------------------Диалог первый - первая встреча
@@ -28,7 +24,6 @@ void ProcessDialogEvent()
 			break;	
 		}
 		//<-- Ложный след
-		
 		// Addon-2016 Jason ”ЊЉ-ѓваделупа
 		if (CheckAttribute(pchar, "questTemp.FMQG") && pchar.questTemp.FMQG != "fail" && CheckAttribute(pchar, "questTemp.FMQG.Prisoner") && GetFullName(npchar) == pchar.questTemp.FMQG.Prisoner)
 		{
@@ -76,7 +71,6 @@ void ProcessDialogEvent()
 			link.l99.go = "exit";
 			NextDiag.TempNode = "second time"; 
 		break;
-		
 		case "second time":
 			if(CheckAttribute(NPChar,"Hold_GenQuest") && !CheckAttribute(pchar,"GenQuest.Hold_GenQuest"))
 			{
@@ -88,7 +82,6 @@ void ProcessDialogEvent()
 						link.l1 = "I am listening.";	
 						link.l1.go = "free_tip_off";
 					break;
-					
 					case 1:
 						dialog.text = "Captain, why won't you just release me? I have no value for you. If you sell me to slavers you will only get a few coins and bad renown.";
 						link.l1 = "And if I will simply release you I won't get a thing...";
@@ -108,7 +101,6 @@ void ProcessDialogEvent()
 							"I have got my own plans on you.","I suppose that you can still be useful for me in future.");
 						link.l3.go = "exit";	
 					break;
-					
 					case 2: // "ransom"
 						dialog.text = "Captain, this uncertainty is killing me. May I know about your plans you have on me?";
 						link.l1 = "Have you got anything to offer me?";
@@ -191,13 +183,11 @@ void ProcessDialogEvent()
 				NextDiag.TempNode = "second time"; 
 			}	
 		break;
-		
 		case "offender":
 			dialog.text = "Criminal? Are you kidding me," + GetAddress_Form(NPChar) + "!";
 			link.l1 = "No kidding. You are a pirate.";
 			link.l1.go = "exit";
 		break;
-		
 		case "free_to_officer":
 			if ((GetSummonSkillFromName(pchar, "Leadership") + 20) <= GetSummonSkillFromName(npchar, "Leadership"))
 			{
@@ -214,7 +204,6 @@ void ProcessDialogEvent()
 				link.l2.go = "exit";
 			}
 		break;
-
 		case "free_to_officer_trader":
 			if (GetSummonSkillFromName(pchar, "Leadership") <= GetSummonSkillFromName(npchar, "Leadership"))
 			{
@@ -233,7 +222,6 @@ void ProcessDialogEvent()
 				link.l2.go = "exit";
 			}
 		break;
-		
 		case "free_to_officer_Hire":
             NPChar.Dialog.Filename = "Enc_Officer_dialog.c";
             NPChar.greeting = "Gr_Officer";
@@ -254,20 +242,16 @@ void ProcessDialogEvent()
 			Npchar.Ship.Type = SHIP_NOTUSED;
             DeleteAttribute(Npchar, "Fellows"); // его офицеры
             Npchar.Fellows.Passengers.id0 = Npchar.index; // свой пассажир
-
 			Npchar.Fellows.Passengers.boatswain = "-1";
 			Npchar.Fellows.Passengers.navigator = "-1";
 			Npchar.Fellows.Passengers.doctor = "-1";
 			Npchar.Fellows.Passengers.cannoner = "-1";
 			Npchar.Fellows.Passengers.treasurer = "-1";
 			Npchar.Fellows.Passengers.carpenter = "-1";
-            
 			if(CheckAttribute(NPChar,"Hold_GenQuest")) DeleteAttribute(NPChar, "Hold_GenQuest");
-			
 			AddDialogExitQuestFunction("LandEnc_OfficerHired");
 			DialogExit();
         break;
-				
 		case "Slave_1":
 			dialog.text = "But " + GetAddress_Form(NPChar) + ", you can't do that! I have surrendered.";
             link.l1 = "Shut your mouth! Bound him.";
@@ -275,7 +259,6 @@ void ProcessDialogEvent()
 			link.l99 = "Alright. Stay here until I decide...";
 			link.l99.go = "exit";
 		break;
-		
 		case "Slave_2":
 			OfficersReaction("bad");		
 			ChangeCharacterComplexReputation(pchar,"nobility", -2);
@@ -310,7 +293,6 @@ void ProcessDialogEvent()
     			}			
 			}
 		break;
-
 		case "Slave_3":
             ReleasePrisoner(NPChar); //  пленника в рабы
         	LAi_SetActorType(NPChar);
@@ -319,7 +301,6 @@ void ProcessDialogEvent()
         	DialogExit();
         	AddCharacterGoodsSimple(pchar, GOOD_SLAVES, 1);
         break;
-
 		case "free_withoutFee":
 			dialog.text = "Oh, " + GetAddress_Form(NPChar) + ", are you really that kind and releasing me without a ransom?";
             link.l1 = "Yes I do. You are free now," + GetFullName(NPChar);
@@ -327,14 +308,12 @@ void ProcessDialogEvent()
 			link.l99 = "Hm... You have a point! I need more time to decide.";
 			link.l99.go = "exit";
 		break;
-
 		case "free_withoutFee_2":
 			dialog.text = "Thank you, "+GetFullName(PChar) + "! I will pray for you.";
             link.l1 = "Go until I have changed my mind.";
 			link.l1.go = "free_withoutFee_3";
 			OfficersReaction("good");
 		break;
-		
 		case "free_withoutFee_3":
             ReleasePrisoner(NPChar); // освободили пленника
         	LAi_SetActorType(NPChar);
@@ -342,7 +321,6 @@ void ProcessDialogEvent()
         	ChangeCharacterComplexReputation(pchar,"nobility", 2);
         	DialogExit();
         break;	
-
 		case "free_withoutFee_4":	
 			switch(NPChar.EncType)
 			{
@@ -362,7 +340,6 @@ void ProcessDialogEvent()
 			}
 			link.l1.go = "free_withoutFee_3";
 		break;
-		
 		case "free_in_sea_battle_1":
             ReleasePrisoner(NPChar); // освободили пленника        	
         	LAi_LocationFightDisable(&Locations[FindLocation("My_Deck")], false);
@@ -376,7 +353,6 @@ void ProcessDialogEvent()
             LAi_group_SetRelation(LAI_GROUP_TmpEnemy, "Prisoner", LAI_GROUP_NEITRAL);
         	DialogExit();
         break;		
-
 		case "free_in_sea_battle_all":
 			//ugeen --> привет Сиварду !!! после релиза пленников кол-во пассажиров уменьшается и цикл нихрена дальше не срабатывал
 			for(int j = GetPassengersQuantity(pchar) - 1; j > -1; j--)
@@ -405,14 +381,12 @@ void ProcessDialogEvent()
             LAi_group_SetCheck(LAI_GROUP_TmpEnemy, "My_Deck_Battle_End");
         	DialogExit();
         break;
-		
 		case "free_in_sea_4":
         	ReleasePrisoner(NPChar); // освободили пленника
             NPChar.location = "";
 	        LAi_KillCharacter(NPChar);
         	DialogExit();
         break;
-
 		case "PunishmentAction":
 			dialog.text = "But " + GetAddress_Form(NPChar) + ", you can't do that! I have surrendered.";
 			link.l1 = "Only after your men were gone. You betrayed them... Boatswain! Do it.";
@@ -420,7 +394,6 @@ void ProcessDialogEvent()
 			link.l2 = "Well... I need time to think about it. Stay here.";
 			link.l2.go = "exit";
         break;
-
 		case "PunishmentAction1":
 			OfficersReaction("bad");		
 			ChangeCharacterComplexReputation(pchar,"nobility", -2);			
@@ -447,7 +420,6 @@ void ProcessDialogEvent()
         		link.l1.go = "PunishmentAction2";				
     		}						
 		break;
-		
 		case "PunishmentAction2":
         	ReleasePrisoner(NPChar); // освободили пленника
             NPChar.location = "";		
@@ -455,7 +427,6 @@ void ProcessDialogEvent()
 			LAi_CharacterDisableDialog(NPChar);
 			DialogExit();
 		break;
-		
 		case "free_tip_off":
 			dialog.text = "I have got an interesting information which can be useful for a man like you. But I need your guarantees that I will get my freedom in exchange.";
 			link.l1 = "How can I give you my guarantees if I don't even know your proposal? Doubtless your information can cost nothing.";
@@ -463,13 +434,11 @@ void ProcessDialogEvent()
 			link.l2 = "I can only give you my word.";
 			link.l2.go = "free_tip_off_1";
 		break;
-		
 		case "free_tip_off_0":
 			ChangeCharacterComplexReputation(pchar,"nobility", -2);			
 			DeleteAttribute(NPChar, "Hold_GenQuest");
 			DialogExit();
 		break;
-		
 		case "free_tip_off_1":
 			switch(NPChar.EncType)
 			{
@@ -491,14 +460,12 @@ void ProcessDialogEvent()
 			link.l2 = "Not sure that this information will work for me but I have given you my word. Boatswain will place you with my crew and will let you go in the closest harbor.";
 			link.l2.go = "free_tip_off_2";			
 		break;
-		
 		case "free_tip_off_2":
 			dialog.text = "My thanks, captain! I had no doubt in your honesty!";
 			link.l1 = RandPhraseSimple(RandPhraseSimple("I wish I could say the same about you","Sorry but I can't say the same about you."),
 				RandPhraseSimple("Go and notice that next time I won't be that generous.","Go and never stay in my way. Next time I won't believe you so easily."));
 			link.l1.go = "free_tip_off_3";
 		break;
-		
 		case "free_tip_off_3":
 			pchar.GenQuest.Hold_GenQuest.Goods 			= NPChar.Hold_GenQuest.Goods;			
 			pchar.GenQuest.Hold_GenQuest.Nation 		= NPChar.Hold_GenQuest.Nation; 
@@ -510,7 +477,6 @@ void ProcessDialogEvent()
 			pchar.GenQuest.Hold_GenQuest.CapName		= GetFullName(NPChar);
 			pchar.GenQuest.Hold_GenQuest.Island			= GetArealByCityName(pchar.GenQuest.Hold_GenQuest.City); 
 			pchar.GenQuest.Hold_GenQuest.Speak_Tavern 	= true;
-			
 			ReOpenQuestHeader("HoldQuest");
 			AddQuestRecord("HoldQuest", "1");
 			AddQuestUserData("HoldQuest", "sName", GetFullName(NPChar));
@@ -518,17 +484,14 @@ void ProcessDialogEvent()
 			AddQuestUserData("HoldQuest", "sCityFrom", XI_ConvertString("Colony" + pchar.GenQuest.Hold_GenQuest.FromCity));
 			AddQuestUserData("HoldQuest", "sCityTo", XI_ConvertString("Colony" + pchar.GenQuest.Hold_GenQuest.ToCity));
 			AddQuestUserData("HoldQuest", "sShipName", pchar.GenQuest.Hold_GenQuest.ShipName);
-			
 			SetFunctionTimerCondition("Hold_GenQuest_SetMerchant_pre", 0, 0, 1+rand(2), false);
 			SetFunctionTimerCondition("Hold_GenQuest_MerchantOver", 0, 0, 30, false);
-			
             ReleasePrisoner(NPChar); // освободили пленника
         	LAi_SetActorType(NPChar);
 			NPChar.LifeDay = 0;
         	LAi_ActorRunToLocation(NPChar, "reload", "reload1", "none", "", "", "", 4.0);
         	DialogExit();			
 		break;
-	
 		case "free_buyout":
 			dialog.text = "And I have a proposal for you. In " + XI_ConvertString("Colony" + NPChar.Hold_GenQuest.City + "Dat") + " lives my friend, " + NPChar.Hold_GenQuest.Name + " is his name. We had a business together once." +
 				"Find him there. I am sure that he'll pay you a great sum. He owes me and I'll deal with him myself.";
@@ -537,10 +500,8 @@ void ProcessDialogEvent()
 			link.l2 = "Why should I look for your friend if I can get ransom in the very first harbor?";
 			link.l2.go = "free_tip_off_0";
 		break;
-	
 		case "free_buyout1":
 			LAi_CharacterDisableDialog(NPChar);
-			
 			pchar.GenQuest.Hold_GenQuest.City 		= NPChar.Hold_GenQuest.City;			
 			pchar.GenQuest.Hold_GenQuest.Nation 	= NPChar.Hold_GenQuest.Nation;
 			pchar.GenQuest.Hold_GenQuest.Name 		= NPChar.Hold_GenQuest.Name;
@@ -548,7 +509,6 @@ void ProcessDialogEvent()
 			pchar.GenQuest.Hold_GenQuest.CapId		= NPChar.Id;
 			pchar.GenQuest.Hold_GenQuest.TavernVariant = rand(1);
 			pchar.GenQuest.Hold_GenQuest.Speak_Tavern = false;
-			
 			ReOpenQuestHeader("HoldQuest");
 			AddQuestRecord("HoldQuest", "6");
 			AddQuestUserData("HoldQuest", "sName", GetFullName(NPChar));
@@ -556,7 +516,6 @@ void ProcessDialogEvent()
 			AddQuestUserData("HoldQuest", "sNameChar", NPChar.Hold_GenQuest.Name);
 			DialogExit();
 		break;
-
 		case "free_by_hoard":
 			dialog.text = "Actually I know one man who has a fine treasure but he doesn't have balls to use it.";
 			link.l1 = "What do you mean?";
@@ -564,7 +523,6 @@ void ProcessDialogEvent()
 			link.l2 = "Spare me of your stories. You'd better think about your soul.";
 			link.l2.go = "free_tip_off_0";
 		break;
-		
 		case "free_by_hoard1":
 			dialog.text = "I'm telling you the story which leads to a great treasures. I need your word in return that you'll let me go in the next harbor.";
 			link.l1 = "I will decide when and what to do with you by myself. From your inventions that will not depend.";
@@ -572,13 +530,11 @@ void ProcessDialogEvent()
 			link.l2 = "I am listening. You have my word.";
 			link.l2.go = "free_by_hoard2";
 		break;
-		
 		case "free_by_hoard2":
 			dialog.text = "I trust such a honorable "+ GetSexPhrase("man","woman") +". People like you always keep their word! Doesn't matter if the whole world is burning, you will keep your word! Am I right, captain?";
 			link.l1 = "Tell me your story or I will let you go right now... overboard.";
 			link.l1.go = "free_by_hoard4";
 		break;
-		
 		case "free_by_hoard4":
 			dialog.text = "Ha-ha, nice joke... Now listen. There is one pal in " + XI_ConvertString("Colony" + NPChar.Hold_GenQuest.City + "Dat") + 
 				"named " + NPChar.Hold_GenQuest.Name + ", he was a really reckless guy in his youth. He had a lot of 'deals' those days..." + 
@@ -590,13 +546,11 @@ void ProcessDialogEvent()
 			link.l2 = "Interesting story, though I don't really believe in it. But you have my word, go and tell boatswain to give you a locker. You are free.";
 			link.l2.go = "free_by_hoard5";
 		break;
-		
 		case "free_by_hoard5":
 			dialog.text = "My thanks, captain! Now I see the price of the word of "+ GetSexPhrase("gentleman!","lady!");
 			link.l1 = "Go and never stay in my way. Next time I won't let you go so easily.");
 			link.l1.go = "free_by_hoard6";
 		break;
-		
 		case "free_by_hoard6":
 			pchar.GenQuest.Hold_GenQuest.City 		= NPChar.Hold_GenQuest.City;			
 			pchar.GenQuest.Hold_GenQuest.Nation 	= NPChar.Hold_GenQuest.Nation;
@@ -607,21 +561,18 @@ void ProcessDialogEvent()
 			pchar.GenQuest.Hold_GenQuest.Sum		= 10000 + rand(10000);
 			pchar.GenQuest.Hold_GenQuest.Treasure	= rand(1);
 			pchar.GenQuest.Hold_GenQuest.Speak_Tavern = false;
-			
 			ReOpenQuestHeader("HoldQuest");
 			AddQuestRecord("HoldQuest", "12");
 			AddQuestUserData("HoldQuest", "sName", GetFullName(NPChar));
 			AddQuestUserData("HoldQuest", "sCity", XI_ConvertString("Colony" + pchar.GenQuest.Hold_GenQuest.City + "Voc"));  // belamour gen
 			AddQuestUserData("HoldQuest", "sNameChar", pchar.GenQuest.Hold_GenQuest.Name);
 			AddQuestUserData("HoldQuest", "sPirateName", GetName( NAMETYPE_VIP, pchar.GenQuest.Hold_GenQuest.PirateName, NAME_ACC));
-			
             ReleasePrisoner(NPChar); // освободили пленника
         	LAi_SetActorType(NPChar);
 			NPChar.LifeDay = 0;
         	LAi_ActorRunToLocation(NPChar, "reload", "reload1", "none", "", "", "", 4.0);
         	DialogExit();					
 		break;
-		
 		case "free_in_sea":
 			dialog.text = "But, " + GetAddress_Form(NPChar) + ", we are in the open sea! It's the same as my execution!";
 			link.l1 = "That's what you wanted. Farewell. Boatswain will make my order done.";
@@ -629,50 +580,42 @@ void ProcessDialogEvent()
 			link.l2 = "Alright, I haven't decided yet.";
 			link.l2.go = "exit";
 		break;		
-		
 		//--> Jason, Ложный след
 		case "FalseTrace_Prisoner":
 			dialog.text = "Katerine! She really asked you to come here? Such a wonderful girl...";
 			link.l1 = "Let's stay away from lyrics, captain, and talk about more serious things. I'm going to tell you about the current situation and I am expecting an answer from you. Your answer will determine your and Katerine's fate.";
 			link.l1.go = "FalseTrace_Prisoner_1";
 		break;
-		
 		case "FalseTrace_Prisoner_1":
 			dialog.text = "I am listening, captain.";
 			link.l1 = "I have boarded your galleon because Adam Rayner, Katerin's husband, told me that there were a lot of silver on your ship. This trick allowed him to return his wife who had escaped from him to you.";
 			link.l1.go = "FalseTrace_Prisoner_2";
 		break;
-		
 		case "FalseTrace_Prisoner_2":
 			dialog.text = "Adam? That bastard? It was all his plan! Now I see... Yes, I helped Katrine to escape three month ago. Such a poor girl, you have no idea how he was treating her...";
 			link.l1 = "She is his wife and it's not my business. I made a mistake boarding your galleon but it is too late to talk about it. Adam has promised me to pay for my help.";
 			link.l1.go = "FalseTrace_Prisoner_3";
 		break;
-		
 		case "FalseTrace_Prisoner_3":
 			dialog.text = "Adam? Ha-ha! And you have trusted him? Captain, do you even know what kind of person he is? He...";
 			link.l1 = "Katerine has already told me a lot about him and put a great effort in that. But his proposal make sense and though I have no reason to trust this bastard but maybe this time he is telling the truth. Now let's go straight to the point...";
 			link.l1.go = "FalseTrace_Prisoner_4";
 		break;
-		
 		case "FalseTrace_Prisoner_4":
 			dialog.text = "";
 			link.l1 = "I was going to ransom you to the authorities and to deliver Adam with Katerine to "+XI_ConvertString("Colony"+pchar.questTemp.FalseTrace.QuestCity+"Gen")+", then get from Adam information about gold of Squint-Eyed Solly and sail for it. But Katerine has persuaded me to talk with you first, she said that you might offer me something better and more reliable than Adam did, in exchange for your lives and freedom.";
 			link.l1.go = "FalseTrace_Prisoner_5";
 		break;
-		
 		case "FalseTrace_Prisoner_5":
 			dialog.text = "";
 			link.l1 = "That's why I am standing here and talking to you. I have finished. Now is your turn. Think about my words and words of Katerine and give me your ideas. You don't have much time.";
 			link.l1.go = "FalseTrace_Prisoner_6";
 		break;
-		
 		case "FalseTrace_Prisoner_6":
 			dialog.text = "Captain! Though I don't think that you are a good man but you listened to pleading of a poor girl and came here. It shows me that you can be honorable and feel pity. I don't need time, I am ready to give you my proposal.";
 			link.l1 = "Really? Excellent! I am listening.";
 			link.l1.go = "FalseTrace_Prisoner_7";
 		break;
-		
 		case "FalseTrace_Prisoner_7":
 			dialog.text = "You will arrest Adam Rayner and put him in chains. Then you will take me and Katerine to "+XI_ConvertString("Colony"+pchar.questTemp.FalseTrace.TargetCity)+". Don't land in the city, after all, it was you who sank my galleon, drop all three of us at " + XI_ConvertString(pchar.questTemp.FalseTrace.TargetShore+"Gen") + "\nI would also ask you for a weapon. We will go to the city through the jungles and I'll make sure that the scum pays not only for his crimes but for yours too. He deserves it\nYou have my word that your name won't come up. In return, I will give you true information concerning a ship with gold of enemy state\nIt won't be big of a challenge, you will gain a fine booty. Much better than my ransom and 'so called' Squint-Eyed Solly's treasures. Do we have a deal?";
 			link.l1 = "I don't like your plan. I think, that local authorities will organize a hunt for me as soon as I leave the shores of " + XI_ConvertString(pchar.questTemp.FalseTrace.TargetShore+"Gen") + ". No, captain, I am not going to risk my head. Our conversation is over.";
@@ -680,7 +623,6 @@ void ProcessDialogEvent()
 			link.l2 = "Well, it looks like Katerine was right. I like your proposal. Adam Rayner will be arrested. I'll make it done right now. You will be released after we will arrest Adam. See you, captain!";
 			link.l2.go = "FalseTrace_Prisoner_9";
 		break;
-		
 		case "FalseTrace_Prisoner_8":
 			DialogExit();
 			AddQuestRecord("FalseTrace", "9");
@@ -690,7 +632,6 @@ void ProcessDialogEvent()
 			LAi_CharacterDisableDialog(npchar);
 			DeleteAttribute(pchar, "GenQuest.DontSetCabinOfficer");
 		break;
-		
 		case "FalseTrace_Prisoner_9":
 			DialogExit();
 			AddQuestRecord("FalseTrace", "10");
@@ -701,32 +642,27 @@ void ProcessDialogEvent()
 			Pchar.questTemp.FalseTrace.PrisonerIDX = GetCharacterIndex(npchar.id);
 		break;
 		//<-- Ложный след
-		
 		// Addon-2016 Jason ”ЊЉ-ѓваделупа
 		case "FMQG":
 			dialog.text = "You are here to preach or to do business?";
 			link.l1 = "to do business. I need your partner in crime - Bertrand Pinette. I am in a deep shit because of him. Where can I find him, huh?";
 			link.l1.go = "FMQG_1";
 		break;
-		
 		case "FMQG_1":
 			dialog.text = "Why do you think I'll tell you this?";
 			link.l1 = "It's your ass on the line. I will take you to Basse-Terre, deliver you to the governor and receive a reward for capturing a deserter who arranged an escape of Carlos de Milyar. It's your call. Either you are telling me about Pinette's location or we both are heading to Guadeloupe.";
 			link.l1.go = "FMQG_2";
 		break;
-		
 		case "FMQG_2":
 			dialog.text = "So you know everything... Fine, I'll tell you everything I know about Bertrand Pinette but you will set me free in return.";
 			link.l1 = "Go tell me then. I will land you in Mosquito's bay, same as I did the last time. But lie to me and I will return and set that plantation you were gifted by don Carlos on fire, I will also inform Basse-Terre of your whereabouts.";
 			link.l1.go = "FMQG_3";
 		break;
-		
 		case "FMQG_3":
 			dialog.text = "First, land me there. That will make me feel safer and I swear I'll tell you everything.";
 			link.l1 = "Fine. It's not like you are going anywhere from here.";
 			link.l1.go = "FMQG_4";
 		break;
-		
 		case "FMQG_4":
 			DialogExit();
 			AddQuestRecord("FMQ_Guadeloupe", "16");
@@ -738,11 +674,9 @@ void ProcessDialogEvent()
 			pchar.quest.FMQG_SailMoskitos.function = "FMQG_ArriveMoskitos";
 			pchar.questTemp.FMQG = "to_moskitos";
 		break;
-		
 		case "Exit":
 			DialogExit();
 			NextDiag.CurrentNode = NextDiag.TempNode;
 		break;
-		
 	}
 }

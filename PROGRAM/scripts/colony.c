@@ -5,7 +5,6 @@ void UpdateColonyProfit()
 	int iCommerce, iLeadership;
 	int iProfit;
 	float fCommerce, fLeadership;
-	
 	for (int i = 0; i < MAX_COLONIES; i++)
 	{
 		if (colonies[i].nation != "none")
@@ -18,25 +17,19 @@ void UpdateColonyProfit()
 			chr = &Characters[sti(colonies[i].commander)];
 			iColonyMoney = sti(colonies[i].money);
 			//iColonyMoney = iColonyMoney + sti(chr.skill.leadership) + sti(chr.skill.commerce);
-			
 			iCommerce = sti(chr.skill.commerce);
 			if(iCommerce > 12) iCommerce = 12;
 			iLeadership = sti(chr.skill.leadership);
 			if(iLeadership > 12) iLeadership = 12;
-
 			fCommerce = 1.0 + (0.01 * makefloat(iCommerce));
 			fLeadership = 1.0 + (0.01 * makefloat(iLeadership));
-			
 			iProfit = sti(colonies[i].population) * sti(colonies[i].tax_rate) / 30;
 			iProfit = iProfit * fCommerce * fLeadership;
-			
 			if(sti(colonies[i].nation) != PIRATE)
 			{
 				iProfit = iProfit * (1.0 + (0.05 * makefloat(iGameArcade)));
 			}
-
 			iColonyMoney = iColonyMoney + iProfit;
-
 			if(sti(colonies[i].goldmines) == 1)
 			{
 				iColonyMoney = iColonyMoney + sti(ColonyUpgrades[UPGRADE_GOLDMINES].money_per_day);
@@ -46,28 +39,19 @@ void UpdateColonyProfit()
 				iColonyMoney = iColonyMoney + sti(ColonyUpgrades[UPGRADE_SILVERMINES].money_per_day);
 			}
 			colonies[i].money = iColonyMoney;
-
 			/*if(iColonyMoney > 20000)
 			{
 				trace("Colony " + colonies[i].id + " have more then 20000 gil.")
 			}*/
-
 			if(sti(Colonies[i].capture_flag) == 1)
 			{
 				float fMoraleChange = 2.0 + iLeadership * 0.1;
-
 				Colonies[i].morale = stf(Colonies[i].morale) + fMoraleChange;
-
 				float fLoyalityChange = 2.0 + iLeadership * 0.1;
-				
 				fLoyalityChange = fLoyalityChange + (0.1 * iGameArcade);
-				
 				float fTaxRate = stf(colonies[i].tax_rate) -  (fCommerce * 0.1 + iGameArcade);
-
 				fLoyalityChange = fLoyalityChange - fTaxRate;
-
 				Colonies[i].loyality = stf(Colonies[i].loyality) + fLoyalityChange;
-
 				if(sti(Colonies[i].loyality) > 99)
 				{
 					Colonies[i].loyality = 99;
@@ -76,7 +60,6 @@ void UpdateColonyProfit()
 				{
 					Colonies[i].loyality = 0;
 				}
-
 				if(sti(Colonies[i].morale) > 99)
 				{
 					Colonies[i].morale = 99;
@@ -85,44 +68,31 @@ void UpdateColonyProfit()
 				{
 					Colonies[i].morale = 0;
 				}
-
 			}
 		}
 	}
 }
-
 void CreateGovernor(aref chr, string sColony)
 {
 	ref fortcommander;
-	
 	chr.dialog.currentnode = "hovernor";
-	
-
 	int iColony = FindColony(sColony);
-	
 	Colonies[iColony].commander = GetCharacterIndex(chr.id);
 	Colonies[iColony].time = "0";
-
 	//int iOldNation = sti(Colonies[iColony].nation);
 	//Colonies[iColony].loyality = GetCharacterReputation(pchar, iOldNation);
-	
 	RemovePassenger(pchar, chr);
-	
 	string sfortcommander = "Player " + sColony + " Fort Commander";
 	fortcommander = CharacterFromID(sfortcommander);
-
 	CreateFortCommander(chr, fortcommander);
-
 	chr.location = sColony+"_townhall";
 	chr.location.group = "sit";
 	chr.location.locator = "sit1";
 	chr.dialog.filename = "officer_dialog.c";
 	chr.dialog.currentnode = "First time";
 	chr.greeting = "officer_common_" + (rand(3) + 1);
-
 	LAi_RemoveLoginTime(chr);
 	LAi_SetHuberType(chr);
-	
 	if(sti(Colonies[iColony].ismaincolony) == 1)
 	{
 		int iOldNation = sti(pchar.from_interface.oldnation);
@@ -133,9 +103,7 @@ void CreateGovernor(aref chr, string sColony)
 			characters[iExHovernor].location = "none";
 		}
 	}
-
 	Colonies[iColony].nation = PIRATE;
-	
 	if (Colonies[iColony].capture_flag != "1")
 	{
 		Colonies[iColony].TimerInfo = sti(Colonies[iColony].TimerInfo) + 1;
@@ -144,39 +112,28 @@ void CreateGovernor(aref chr, string sColony)
 	}
 	Colonies[iColony].capture_flag = "1";
 	Colonies[iColony].nation = PIRATE;
-	
 	chr.colony_id = sColony;
-	
 	fortcommander.nation = PIRATE;	
 	pchar.nation = PIRATE;
-
 	string sLocator = "reload_fort" + colonies[iColony].num;
-
 	//int iOldFortChar = Fort_FindCharacter(colonies[iColony].island, "reload", sLocator);
-
 	Fort_SetCharacter(fortcommander, colonies[iColony].island, "reload", sLocator);
 	fortcommander.ship.crew.quantity = Colonies[iColony].crew;
 	fortcommander.ship.crew.experience = Colonies[iColony].crew.experience;
-
 	colonies[iColony].crew.sailors = sti(colonies[iColony].crew.sailors) + 50;
 	colonies[iColony].crew.soldiers = sti(colonies[iColony].crew.soldiers) + 50;
 	colonies[iColony].crew.musketeers = sti(colonies[iColony].crew.musketeers) + 20;
 	colonies[iColony].crew.cannoners = sti(colonies[iColony].crew.cannoners) + 50;
 	Colonies[iColony].crew.experience = 10;
-
 	SetCharacterRelationAsOtherCharacter(GetCharacterIndex(fortcommander.id), nMainCharacterIndex);
 	SetCharacterRelationBoth(GetCharacterIndex(fortcommander.id), nMainCharacterIndex, RELATION_FRIEND);
-	
 	RechargeColonyCaptureEx(sColony);
-	
 	//string sIsland = Colonies[iColony].island;
 	sColony = sColony + "Town";
 	worldMap.labels.(sColony).icon = PIRATE;
 	//worldMap.islands.(sIsland).locations.city.label.icon = PIRATE;
-
 	//SetTownCapturedState(sColony, false);
 }
-
 void FillColoniesInfo()
 {
 	string sLocation;
@@ -187,14 +144,12 @@ void FillColoniesInfo()
 		SetEnterLocationQuest(sLocation, "ColoniesInfoUpdate", 0);
 	}
 }
-
 int CheckColonyMoney(string sColony)
 {
 	int iMoney;
 	iMoney = sti(Colonies[FindColony(sColony)].money);
 	return iMoney;
 }
-
 void RemoveColonyMoney(string sColony)
 {
 	int iMoney;
@@ -203,17 +158,13 @@ void RemoveColonyMoney(string sColony)
 	AddMoneyToCharacter(pchar, iMoney);
 	Colonies[iColony].money = 0;
 }
-
 // клепаем фортовых командеров
 void CreateColonyCommanders()
 {
 	int iChar;
-	
 	string sColony;
-
 	int i;
 	float x, y, z;  // boal
-	
 	for (i=0; i<MAX_COLONIES; i++)
 	{
 		if (colonies[i].nation == "none") continue; // необитайки
@@ -233,7 +184,6 @@ void CreateColonyCommanders()
 			Colonies[i].commander = iChar;
 			trace("Making mayor for colony:" + colonies[i].id + ". Commander: " + characters[iChar].id);
         }
-
 		// добавить проверку на пиратов, у них нет фортов, нафиг им коммандер?
 		if (CheckAttribute(&colonies[i], "HasNoFort"))
 		{
@@ -248,9 +198,7 @@ void CreateColonyCommanders()
 		// boal <--
 		colonies[i].fortcommander = colonies[i].id + " Fort Commander";
 		trace("Making fort commander for colony:" + colonies[i].id);
-		
 		iChar = GenerateCharacter(sti(colonies[i].nation), WITH_SHIP, "officer", MAN, 1, FORT_COMMANDER);
-		
 		trace("characters[" + iChar + "].nation : " + characters[iChar].nation + " ship_type :" + characters[iChar].ship.type);
 		Nations[sti(colonies[i].nation)].fort = sti(Nations[sti(colonies[i].nation)].fort) + 1; // число фортов нации
 		characters[iChar].id = colonies[i].id + " Fort Commander";
@@ -273,15 +221,11 @@ void CreateColonyCommanders()
 		// boal <--
 		SetCharacterRelationBoth(iChar,nMainCharacterIndex,RELATION_FRIEND);
 		UpdateRelations();
-
   		characters[iChar].Fort.Cannons.Charge.Type = GOOD_BOMBS;
-
         SetCrewQuantityFull(&characters[iChar]);
-        
 		characters[iChar].Fort.Cannons.Type.1 = CANNON_TYPE_CANNON_LBS42;
 		characters[iChar].Fort.Cannons.Type.2 = -1;
 		characters[iChar].Fort.Cannons.Type.3 = -1;
-
 		if(sti(colonies[i].fort) > 1)
 		{
 			characters[iChar].Fort.Cannons.Type.2 = CANNON_TYPE_CULVERINE_LBS36;
@@ -301,7 +245,6 @@ void CreateColonyCommanders()
 		// boal <--
 	}
 }
-
 // чиним корабли ГГ после захвата города
 void RepairAllShips()
 {
@@ -332,18 +275,14 @@ int GetFortCommanderIdx(string _city)
 	 ind = GetCharacterIndex(_city + "_Mayor");
 	 return ind;
 }
-
 ref GetFortCommander(string _city)
 {
      int ind = GetFortCommanderIdx(_city);
-
 	 return GetCharacter(ind);
 }
-
 #define MAX_TOWN_CREW 9 // мах колво реальных солдат в локации (в сумме 32 мах)
 #define MAX_ESCADRA_CREW 5 // помощь эскадре - наши солдаты
 #define MAX_TOWN_MUSHKETER 3 //мушкетеры в городе
-
 void SetCrewBackAfterBattle()
 {
     float  fTemp, fTemp2;
@@ -383,7 +322,6 @@ void SetCrewBackAfterBattle()
 	SetCrewQuantityOverMax(Pchar, i);
 	AddTroopersCrewToOther(Pchar); // 09.07.05
 }
-
 bool PrepareTownBattle()
 {
     ref    fortChr;
@@ -392,10 +330,8 @@ bool PrepareTownBattle()
     string sTemp, sCity, sNext;
     int    i, how;
     ref    nulChr;
-
     nulChr  = &NullCharacter;
     fortChr = GetCharacter(sti(Pchar.GenQuestFort.fortCharacterIdx));
-
     mcrew = GetCrewQuantity(Pchar) + GetTroopersCrewQuantity(Pchar);
     if (CheckAttribute(fortChr, "Fort.Mode") && sti(fortChr.Fort.Mode) != FORT_DEAD)
     { // это фортовый город и форт целый
@@ -405,7 +341,6 @@ bool PrepareTownBattle()
     { // форт убит
         ecrew = sti(fortChr.Default.Crew.MinQuantity) + makeint(sti(fortChr.Default.Crew.MinQuantity) * (MOD_SKILL_ENEMY_RATE / 10.0));
     }
-
     Pchar.GenQuestFort.PlayerCrew_Start = mcrew; // скока было
 	// учет морали -->
     rel = (stf(Pchar.ship.crew.morale) - MORALE_NORMAL) / MORALE_NORMAL;
@@ -413,7 +348,6 @@ bool PrepareTownBattle()
 	if (rel > 0.5)  rel = 0.5 + rel / 5.0;
 	mcrew = makeint(mcrew * (rel * 0.3 + 1.0));
     // учет морали <--
-    
     // опыт солдат
     ///  to_do 29.07.06 пока не ясно как выделить долю и прикрутить опыт со всех коарблей, когдя это выжевшие после форта. rel = (GetCrewQuantity(Pchar) * GetCrewExp(Pchar, "Soldiers") / GetCrewExpRate()) / stf(Pchar.GenQuestFort.PlayerCrew_Start);
     // получается, что опыт солдат только для моря, на суше все по-старому.
@@ -423,10 +357,8 @@ bool PrepareTownBattle()
         Log_Info("ERROR: Не задан обход города при захвате!!!");
         return false;
     }
-
     how     = sti(nulChr.GenQuestFort.(sCity).howSolder);
     maxcrew = (how - 1) * MAX_TOWN_CREW;
-
     if(mcrew > ecrew)
 	{
         if(mcrew > maxcrew)
@@ -447,13 +379,10 @@ bool PrepareTownBattle()
 	}
 	if(mcrew < 1) mcrew = 1;
 	if(ecrew < 1) ecrew = 1;
-
     Pchar.GenQuestFort.TownCrew   = ecrew;
     Pchar.GenQuestFort.PlayerCrew = mcrew; // сколько моделей
-
     Pchar.GenQuestFort.PlayerCrew_per_char = makefloat(stf(Pchar.GenQuestFort.PlayerCrew_Start) / stf(Pchar.GenQuestFort.PlayerCrew));
 	trace("Pchar.GenQuestFort.PlayerCrew_per_char: " + Pchar.GenQuestFort.PlayerCrew_per_char);
-
     if (CheckAttribute(pchar, "quest.Enemy_" + sCity))// уже в осаде будет токо у сухопутных, тк иначе убирается при форте
     {
         Pchar.quest.FightInTown_Next0.win_condition.l1          = "location";
@@ -461,14 +390,12 @@ bool PrepareTownBattle()
 	    Pchar.quest.FightInTown_Next0.win_condition             = "FightInTown";
         return;
     }
-
     // прерывания
     how     = sti(nulChr.GenQuestFort.(sCity).how);
     for (i=0; i < how; i++)
     {
         sTemp = "FightInTown_Next" + i;
         sNext = "next" + i;
-
 		Pchar.quest.(sTemp).win_condition.l1          = "location";
 	    Pchar.quest.(sTemp).win_condition.l1.location = nulChr.GenQuestFort.(sCity).(sNext);
 	    Pchar.quest.(sTemp).win_condition             = "FightInTown";
@@ -478,34 +405,27 @@ bool PrepareTownBattle()
     Pchar.quest.FreeCaptureForts.win_condition    = "FreeCaptureForts";
     return true;
 }
-
 void AfterTownBattle()
 {
     ref    fortChr;
     string sTemp, sCity;
     int    i, how;
     ref    nulChr;
-
     nulChr  = &NullCharacter;
 	if (CheckAttribute(Pchar, "GenQuestFort.StartAttack" )) DeleteAttribute(Pchar, "GenQuestFort.StartAttack");	
     if (!CheckAttribute(Pchar, "GenQuestFort.fortCharacterIdx")) return; // еще не было
-
 	fortChr = GetCharacter(sti(Pchar.GenQuestFort.fortCharacterIdx));
     bDisableFastReload = false;
     chrDisableReloadToLocation = false;
-
     sCity   = fortChr.City;
     how     = sti(nulChr.GenQuestFort.(sCity).how);
-
     // прерывания
     for (i=0; i < how; i++)
     {
         sTemp = "FightInTown_Next" + i;
-
 		Pchar.quest.(sTemp).over          = "yes";
     }
 }
-
 void SoundInResidenceBattle()
 {
 	switch (rand(1))
@@ -518,17 +438,13 @@ void SoundInResidenceBattle()
         break;
     }
 }
-
 // противники рабы
 ref SetFantomSlaves(string group, string locator, string enemygroup)
 {
     string emodel;
     ref    Cr;
-
 	emodel = "panhandler_"+(rand(5)+1);
-	
     Cr = LAi_CreateFantomCharacter(emodel, group, locator);
-
     if (Cr.location.locator != "")
     {
 		SetFantomParam(Cr);
@@ -541,19 +457,16 @@ ref SetFantomSlaves(string group, string locator, string enemygroup)
         }
 		GiveItem2Character(Cr, blade);
 		EquipCharacterByItem(Cr, blade);
-
 	    LAi_group_MoveCharacter(Cr, enemygroup);
 	    LAi_NoRebirthEnable(Cr); //не показывать убитых при входе в локацию
 	    LAi_LoginInCaptureTown(Cr, true); // для записи игры
     }
     return Cr;
 }
-
 ref SetFantomDefenceForts(string group, string locator, int nation, string enemygroup)
 {
     string emodel,natmod;
     ref Cr;
-
     natmod = NationShortName(nation);
     if(nation == PIRATE)
     {
@@ -563,11 +476,9 @@ ref SetFantomDefenceForts(string group, string locator, int nation, string enemy
     {
        emodel = "sold_" + natmod + "_" + (rand(7) + 1);
     }
-
     Cr = LAi_CreateFantomCharacter(emodel, group, locator);
     FaceMaker(Cr);
 	CirassMaker(Cr);
-
     if (Cr.location.locator != "")
     {
 		SetFantomParam(Cr);
@@ -578,12 +489,10 @@ ref SetFantomDefenceForts(string group, string locator, int nation, string enemy
     }
     return Cr;
 }
-
 ref SetFantomOfficer(string group, string locator, int nation, string enemygroup)
 {
     string emodel,natmod;
     ref Cr;
-
     natmod = NationShortName(nation);
     if(nation == PIRATE)
     {
@@ -593,10 +502,8 @@ ref SetFantomOfficer(string group, string locator, int nation, string enemygroup
     {
        emodel = "off_" + natmod + "_" + (rand(2) + 1);
     }
-
     Cr = LAi_CreateFantomCharacter(emodel, group, locator);
     FaceMaker(Cr);
-
     if (Cr.location.locator != "")
     {
 		SetFantomParam(Cr);
@@ -615,9 +522,7 @@ ref SetFantomOurAttackForts(string group, string locator)
     string  ani;
 	// boal 08.01.05 патент влияет
     smodel = LAi_GetBoardingModel(GetMainCharacter(), &ani);
-
     CrOur = LAi_CreateFantomCharacterEx(smodel, ani, group, locator);
-
     if (CrOur.location.locator != "")
     {
 	    SetFantomParam(CrOur);
@@ -626,11 +531,9 @@ ref SetFantomOurAttackForts(string group, string locator)
     }
     return CrOur;
 }
-
 void TWN_FreeCaptureForts() // уберем солдат, откроем входы (на всяк случай) при выходе на карту
 {
 	ref sld, Builder;
-	
 	AfterTownBattle();
     // вернем людей досрочно
     sld = GetCharacter(sti(Pchar.GenQuestFort.fortCharacterIdx));
@@ -641,13 +544,11 @@ void TWN_FreeCaptureForts() // уберем солдат, откроем вхо�
 		Builder.greeting = "spa_gov_common";
     }
 }
-
 void TWN_Capture_Forts()
 {
     ref    sld, Builder;
     aref   aData;
     string sCap, sGroup;
-    
     sGroup = "NoGroupFind"; // чтоб не нашли в Group_FindGroup
     makearef(aData, NullCharacter.Siege);
     if (CheckAttribute(aData, "nation"))
@@ -655,11 +556,9 @@ void TWN_Capture_Forts()
         sCap = NationShortName(sti(aData.nation))+"SiegeCap_";
         sGroup = "Sea_"+sCap+"1";
     }
-    
 	if (PrepareTownBattle())
     {
         sld = GetCharacter(sti(Pchar.GenQuestFort.fortCharacterIdx));
-
 		if (!CheckAttribute(Pchar, "GenQuestFort.SoundOff"))  // будет для выхода в море и повтора захвата
 		{
         	PlaySound("INTERFACE\_GTBoard2.wav");
@@ -674,9 +573,7 @@ void TWN_Capture_Forts()
         {
             DeleteAttribute(Pchar, "GenQuestFort.SoundOff");
         }
-
         Builder = characterFromID(sld.City + "_Mayor");
-
         if (!CheckQuestAttribute("Union_with_Escadra", "Yes") || 
 			!CheckAttribute(aData, "Colony") || 
 			!CheckAttribute(aData, "island") || 
@@ -702,17 +599,14 @@ void TWN_Capture_Forts()
 		    LAi_SetCurHPMax(Builder); // если он умер
 		    LAi_SetImmortal(Builder, true);
 		    Builder.dialog.currentnode = "Talk_Capture_City";
-		    
         	string sQuest = "LeaveTown";
             pchar.quest.(sQuest).win_condition.l1 = "location";
             pchar.quest.(sQuest).win_condition.l1.location = aData.island;
             pchar.quest.(sQuest).win_condition = "LeaveTown";
             pchar.quest.(sQuest).function = "LeaveTown";
-
 		}
 	}
 }
-
 void TWN_FightInTown()
 {
 	int iNation = sti(rCharacter.nation);
@@ -721,7 +615,6 @@ void TWN_FightInTown()
     string sTemp, snCity, sModel;
     aref aData;  //  homo
     makearef(aData, NullCharacter.Siege);   // homo
-    
 	sld = GetCharacter(sti(Pchar.GenQuestFort.fortCharacterIdx));
     Log_TestInfo("Cur boarding_player_crew: " + Pchar.GenQuestFort.PlayerCrew);
     Log_TestInfo("Cur TownCrew: " + Pchar.GenQuestFort.TownCrew);
@@ -730,7 +623,6 @@ void TWN_FightInTown()
     {
 		// вернем живых на корабль -->
 		SetCrewBackAfterBattle();
-        
 		if (CheckQuestAttribute("Union_with_Escadra", "Yes") && CheckAttribute(aData, "Colony") && snCity == aData.Colony) //fix homo
         {
             chrDisableReloadToLocation = true;
@@ -766,10 +658,8 @@ void TWN_FightInTown()
 			//AddQuestRecord("tales_" + sld.City, "6");
 			//sTemp = "Enable_Gover_" + sld.City;
             //pchar.GenQuestFort.(sTemp) = "1";
-
             //Pchar.GenQuestFort.MunityCharacterIdx = sld.index;
             //DoQuestCheckDelay("LaunchMunityCapture", 1.0);
-
             //Log_Info("Мятеж в городе " + GetCityName(sld.City) + " подавлен.");
             SetCaptureTownByHero(sld.City);
             Statistic_AddValue(Pchar, NationShortName(sti(sld.nation)) + "_TakeTown", 1);
@@ -827,7 +717,6 @@ void TWN_FightInTown()
 	        	    Pchar.quest.FreeCaptureForts_Land.win_condition             = "FreeCaptureForts";
 	            }
 			}
-
             // недобитки
 			j = makeint(sti(Pchar.GenQuestFort.TownCrew) - sti(Pchar.GenQuestFort.PlayerCrew) / 1.6 + 0.6);
 			if (j > 5) j = 5;
@@ -837,21 +726,18 @@ void TWN_FightInTown()
 				// озвучка
 				PChar.GenQuest.CallFunctionParam = "SoundInResidenceBattle";
 				DoQuestCheckDelay("CallFunctionParam", 1.5);
-
 				natEsc = sti(sld.nation);
 				for (i = 0; i < j; i++)
 	            {
 					if (sti(Pchar.GenQuestFort.TownCrew) < 1) break;
 					sld = SetFantomDefenceForts("goto", "", natEsc, "TOWN_BATTLE_SOLDIERS");
 					SetFantomParamHunter(sld); //крутые парни
-
 	            	Pchar.GenQuestFort.TownCrew = sti(Pchar.GenQuestFort.TownCrew) - 1;
 	            }
 	            // натравим
 	            LAi_group_SetHearRadius("TOWN_BATTLE_SOLDIERS", 100.0);
 	            LAi_group_FightGroupsEx("TOWN_BATTLE_SOLDIERS", LAI_GROUP_PLAYER, true, Pchar, -1, false, false);
 	            LAi_group_SetRelation("TOWN_BATTLE_SOLDIERS", LAI_GROUP_PLAYER, LAI_GROUP_ENEMY);
-
 	            LAi_group_SetCheck("TOWN_BATTLE_SOLDIERS", "FightInTown_Finish");
                 LAi_LocationFightDisable(&Locations[FindLocation(Pchar.location)], false);
 	            LAi_SetFightMode(Pchar, true);
@@ -905,8 +791,6 @@ void TWN_FightInTown()
 				ChangeCharacterAddressGroup(sld, loadedLocation.id, "rld", sTemp);
 				Pchar.GenQuestFort.TownCrew = sti(Pchar.GenQuestFort.TownCrew) - 1;
 			}
-			
-
             if (chrDisableReloadToLocation)
             {
 	            // наши
@@ -943,10 +827,8 @@ void TWN_FightInTown()
 				// помощь эскадре
 		        if (CheckQuestAttribute("Union_with_Escadra", "Yes") && CheckAttribute(aData, "Colony") && snCity == aData.Colony) //fix homo
 	            {
-
                     natEsc = sti(aData.nation); // homo
                     //sti(Characters[GetCharacterIndex("NatCapitan_1")].nation);
-
 	                for (i = 0; i < MAX_ESCADRA_CREW; i++) //всегда 5 даем
 		            {
 		            	SetFantomDefenceForts("rld", sTemp, natEsc, LAI_GROUP_PLAYER);
@@ -957,15 +839,12 @@ void TWN_FightInTown()
 	            LAi_group_SetHearRadius("TOWN_BATTLE_SOLDIERS", 100.0);
 	            LAi_group_FightGroupsEx("TOWN_BATTLE_SOLDIERS", LAI_GROUP_PLAYER, true, Pchar, -1, false, false);
 	            LAi_group_SetRelation("TOWN_BATTLE_SOLDIERS", LAI_GROUP_PLAYER, LAI_GROUP_ENEMY);
-
 	            LAi_group_SetCheck("TOWN_BATTLE_SOLDIERS", "FightInTown_OpenNext");
-
 	            LAi_SetFightMode(Pchar, true);
             }
         }
     }
 }
-
 void TWN_FightInTown_OpenNext()
 {
     ref sld, Builder;
@@ -974,7 +853,6 @@ void TWN_FightInTown_OpenNext()
     float fTemp;
     aref aData;  //  homo
     makearef(aData, NullCharacter.Siege);   // homo
-    
 	sld = GetCharacter(sti(Pchar.GenQuestFort.fortCharacterIdx));
 	snCity = sld.City;
     if (CheckAttribute(pchar, "quest.Enemy_" + sld.City))
@@ -1030,17 +908,14 @@ void TWN_FightInTown_OpenNext()
 	SetCrewQuantityOverMax(Pchar, i);
 	// вернем живых на корабль <--
 }
-
 void TWN_Residence_Captured_Any()
 {
     ref sld, Builder;
     int j, i, natEsc;
     string sTemp;
     float fTemp;
-    
 	Lai_SetPlayerType(pchar);
     DoQuestCheckDelay("CapturedToOurCity", 1.5);
-
     sld = GetCharacter(sti(Pchar.GenQuestFort.fortCharacterIdx));
     Builder = characterFromID(sld.City + "_Mayor");
     if (Builder.location.group == "sit")
@@ -1051,7 +926,6 @@ void TWN_Residence_Captured_Any()
     sld = GetOurSailor("OurSailorForArest");
     sld.location = "none"; //fix
     LAi_LoginInCaptureTown(sld, true);
-
     if (PlaceCharacter(sld, "reload", pchar.location) != "")
     {
         chrDisableReloadToLocation = true; // чтоб ГГ не свалил до ухода
@@ -1060,21 +934,17 @@ void TWN_Residence_Captured_Any()
     {
         Builder.location = "none";
     }
-
     LAi_SetActorType(sld);
     LAi_ActorFollow(sld, Builder, "Residence_Captured_Any_02", 7.0);
 }
-
 void TWN_Residence_Captured_Any_02()
 {
     ref sld, Builder;
     int j, i, natEsc;
     string sTemp;
     float fTemp;
-    
 	sTemp = "reload1"; //LAi_FindRandomLocator("reload");
 	LAi_ActorRunToLocation(characterFromID("OurSailorForArest"), "reload", sTemp, "none", "", "", "", 7.0);
-
     sld = GetCharacter(sti(Pchar.GenQuestFort.fortCharacterIdx));
     Builder = characterFromID(sld.City + "_Mayor");
     LAi_SetActorType(Builder);
@@ -1087,14 +957,12 @@ void TWN_Residence_Captured_Any_02()
         LAi_ActorRunToLocation(Builder, "reload", sTemp, "none", "", "", "Back_Mayor_Type", 7.0);
     }
 }
-
 void TWN_Back_Mayor_Type()
 {
     ref sld, Builder;
     int j, i, natEsc;
     string sTemp;
     float fTemp;
-    
 	sld = GetCharacter(sti(Pchar.GenQuestFort.fortCharacterIdx));
     Builder = characterFromID(sld.City + "_Mayor");
     chrDisableReloadToLocation = false;
@@ -1104,17 +972,13 @@ void TWN_Back_Mayor_Type()
     { // тут анимация казни
     }
 }
-
 void TWN_ExitForPay() // мэр дает откуп - табличка прибыли
 {
     ref sld, Builder;
-    
     sld = GetCharacter(sti(Pchar.GenQuestFort.fortCharacterIdx));
     Builder = characterFromID(sld.City + "_Mayor");
     LAi_SetImmortal(Builder, false);
-
     PlayStereoOGG("music_ship_victory");
-
     int iTest;
     iTest = FindColony(sld.City); // город
     ref rColony;
@@ -1148,7 +1012,6 @@ void TWN_ExitForPay() // мэр дает откуп - табличка приб�
 	LaunchColonyCapture(rColony);
 	Partition_GetCargoCostCoeff("after");
 }
-
 //Для любой страны захват форта
 // SetAllTownNation старый
 void SetCaptureTownByNation(string sColony, int iNation)
@@ -1156,18 +1019,14 @@ void SetCaptureTownByNation(string sColony, int iNation)
 	ref  rChar;
 	int  j;
 	int iColony = FindColony(sColony);
-
     // табличка
     pchar.GenQuest.CapturedCity  = sColony;
 	pchar.GenQuest.CaptureNation = iNation;
-	
     string sGroup;
 	sGroup = GetNationNameByType(iNation) + "_CITIZENS";
-	
     for (j=0; j< MAX_CHARACTERS; j++)
     {
         rChar = GetCharacter(j);
-
         if(CheckAttribute(rChar, "city") && rChar.City == sColony)
         {
             if (CheckAttribute(rChar, "CityType")) // фантом
@@ -1246,8 +1105,6 @@ void SetCaptureTownByNation(string sColony, int iNation)
     }
     SaveCurrentNpcQuestDateParam(&Colonies[iColony], "CaptureDate");
 }
-
-
 //Если мы захватываем
 //void SetAllTownOurCity(ref FortCrefM) - аналог в вмл
 void SetCaptureTownByHero(string sColony)
@@ -1256,18 +1113,14 @@ void SetCaptureTownByHero(string sColony)
 	int  j;
 	int iColony = FindColony(sColony);
     int iNation = PIRATE;
-
     // табличка
     pchar.GenQuest.CapturedCity  = sColony;
 	pchar.GenQuest.CaptureNation = iNation;
-	
     string sGroup;
 	sGroup = LAI_GROUP_PLAYER_OWN;
-
     for (j=0; j< MAX_CHARACTERS; j++)
     {
         rChar = GetCharacter(j);
-
         if(CheckAttribute(rChar, "city") && rChar.City == sColony)
         {
             if (rChar.id != (sColony + "_Mayor"))  // мэр в тюряге, его не трогаем
@@ -1278,7 +1131,6 @@ void SetCaptureTownByHero(string sColony)
 	        	}
 	        	rChar.nation = iNation;
 	        	LAi_group_MoveCharacter(rChar, sGroup);
-
 		        if (rChar.id == (sColony + " Fort Commander"))
 				{
 				    SetTownOurOfficForts(rChar); // модель и отношения
@@ -1318,13 +1170,10 @@ void SetCaptureTownByHero(string sColony)
 	SaveCurrentNpcQuestDateParam(&Colonies[iColony], "CaptureDate");
 	ReplaceColonyCharactersAfterCapture(sColony);
 }
-
-
 //меняем модель мэра
 void SetTownMayor(ref Ch, int natGover)
 {
     string rmodel;
-
 	//if (natGover == PIRATE || Ch.id == "Minentown_Mayor")
 	//{
 	    // Когда берут пираты - а это только мятеж, мэра менять не нужно
@@ -1348,7 +1197,6 @@ void SetTownMayor(ref Ch, int natGover)
             case 11: rmodel = "shipowner_13";   break;
         }
 	}*/
-
     if (natGover != PIRATE) // как сидел мэр в тюрме так и будет сидеть... диалог старый + мордобой.
     {
  		// eddy, не сбивать имена нужных мэров
@@ -1378,7 +1226,6 @@ void ReturnMayorPosition(ref Ch)
 	Ch.location.locator = "sit1";
 	LAi_SetHuberTypeNoGroup(Ch);
 }
-
 //Добавить форт к нации  (не работает, в осадах расчет по факту)
 int AddFortNation(int nation,int fort)
 {
@@ -1387,14 +1234,11 @@ int AddFortNation(int nation,int fort)
 	Nations[nation].fort = newfort;
 	return newfort;
 }
-
 // boal переселение губернатора -->
 void Move_Govenour()
 {
     int iNation = rand(4);
-
     if (bWorldAlivePause) return;
-
     while (iNation == PIRATE)
     {
         iNation = rand(4);
@@ -1406,25 +1250,19 @@ void Move_Govenour_Nation(int iNation)
 {
     ref rChar;
     if (bWorldAlivePause) return;
-
     if (iNation != PIRATE)
     {
     	rChar = CharacterFromID(NationShortName(iNation)+"_guber");  // губер
-
 		if (CheckAttribute(rChar, "notMoveAble")) return; //проверяем личный флаг губернатора на переезд
-
         ref ch;
     	int i, iChar;
         int storeGover[40];
         int howGover = 0;
-
         for (i=0; i<MAX_COLONIES; i++)
 		{
 			if (colonies[i].nation == "none") continue; // необитайки
-
 			// добавить проверку на пиратов, у них нет фортов, нафиг им коммандер?
 			if (CheckAttribute(&colonies[i], "HasNoFort"))  continue;
-			
 			// проверим базовых мэров городов
 			iChar = GetCharacterIndex(colonies[i].id + "_Mayor");
 			if (iChar != -1)
@@ -1436,7 +1274,6 @@ void Move_Govenour_Nation(int iNation)
 			    }
 	        }
 		}
-
         if (howGover > 0) // иначе нечего делать - один город остался
         {
 			i = storeGover[rand(howGover-1)];
@@ -1464,11 +1301,8 @@ void SetGovenourToCity(int iNation, string sCity)
 {
     ref     rChar;
     int     iChar, i2;
-    
     rChar = CharacterFromID(NationShortName(iNation) + "_guber");  // губер
-    
     iChar = GetCharacterIndex(sCity + "_Mayor");  // куда
-	
 	if (CheckAttribute(rChar, "CityToStay")) // где был
 	{
         i2 = GetCharacterIndex(rChar.CityToStay + "_Mayor");  // старого мэра на место
@@ -1484,13 +1318,11 @@ void SetGovenourToCity(int iNation, string sCity)
 	rChar.location.group = "sit";
 	rChar.location.locator = "sit1";
 	LAi_SetHuberTypeNoGroup(rChar);
-	
 	characters[iChar].location.group = "goto";
 	characters[iChar].location.locator = "governor1";
 	LAi_SetHuberStayTypeNoGroup(&characters[iChar]);
 }
 // boal переселение губернатора <--
-
 void SetGovenoursToResidence() // Jason: усадка генгуберов и командоров - полностью ручной метод
 {
 	ref rChar;
@@ -1515,7 +1347,6 @@ void SetGovenoursToResidence() // Jason: усадка генгуберов и к
 	AddItems(rChar, "gunpowder", 50);
 	LAi_SetImmortal(rChar, true);
 	LAi_group_MoveCharacter(rChar, "FRANCE_CITIZENS");
-	
 	// главный англичанин - лорд Виндзор
 	rChar = GetCharacter(NPC_GenerateCharacter("Vindzor", "huber_0", "man", "man", 25, ENGLAND, -1, false, "quest"));
 	rChar.name = "lord Thomas";
@@ -1537,7 +1368,6 @@ void SetGovenoursToResidence() // Jason: усадка генгуберов и к
 	AddItems(rChar, "gunpowder", 50);
 	LAi_SetImmortal(rChar, true);
 	LAi_group_MoveCharacter(rChar, "ENGLAND_CITIZENS");
-	
 	// главный испанец - дон Хуан де Кордова
 	rChar = GetCharacter(NPC_GenerateCharacter("Cordova", "huber_2", "man", "man", 25, SPAIN, -1, false, "quest"));
 	rChar.name = "don Juan";
@@ -1559,7 +1389,6 @@ void SetGovenoursToResidence() // Jason: усадка генгуберов и к
 	AddItems(rChar, "gunpowder", 50);
 	LAi_SetImmortal(rChar, true);
 	LAi_group_MoveCharacter(rChar, "SPAIN_CITIZENS");
-	
 	// бравый вояка англичан - полковник Фокс
 	rChar = GetCharacter(NPC_GenerateCharacter("Fox", "Fox", "man", "man", 35, ENGLAND, -1, false, "quest"));
 	rChar.name = "colonel";
@@ -1582,28 +1411,23 @@ void SetGovenoursToResidence() // Jason: усадка генгуберов и к
 	LAi_SetImmortal(rChar, true);
 	LAi_group_MoveCharacter(rChar, "ENGLAND_CITIZENS");
 }
-
 //Меняем модель коменданта форта и отношение к нам
 void SetTownOurOfficForts(ref ChOff)
 {
     // сухопутные города
 	if (CheckAttribute(ChOff, "Mayor")) return; // сам себе командир (виртуальный форт)
-
     SetCaptanModelByEncType(ChOff, "pirate");
     SetCharacterRelationAsOtherCharacter(sti(ChOff.index), GetMainCharacterIndex());
     SetCharacterRelation(sti(ChOff.index),GetMainCharacterIndex(),RELATION_FRIEND);
     UpdateRelations();
 }
-
 //Меняем модель коменданта форта
 void SetTownOfficForts(ref ChOf, int fnat)
 {
 	// сухопутные города
 	if (CheckAttribute(ChOf, "Mayor")) return; // сам себе командир (виртуальный форт)
-
     SetCaptanModelByEncType(ChOf, "war");
     // отношения как у губера нации
-
 	int iGovernor = GetCharacterIndex(NationShortName(fnat)+"_guber");
 	if (fnat != PIRATE && iGovernor != -1)
 	{
@@ -1627,9 +1451,7 @@ void TWN_Siege_Any(string city)
     ref    sld, rCap;
     int    i, iDay;
     string sTemp, sGroup, sCapId, sAttr;
-
     city = PChar.Quest.(city).CityId; // реальный город
-    
     if (!isCityHasFort(city)) // сухопутный город
     {
         TWN_SiegeLand_Any(city);
@@ -1637,15 +1459,12 @@ void TWN_Siege_Any(string city)
     else
     {
 	    sld = GetFortCommander(city);
-
 	    Log_Info("Наш город " + GetCityName(city) + " в осаде!");
-
 	    sTemp = "Enemy_" + city;
 	    iDay = 9 + rand(15);
 	    SetTimerCondition(sTemp, 0, 0, iDay, false);
 	    PChar.Quest.(sTemp).CityId   = city;
 		PChar.Quest.(sTemp).function = "TWN_Enemy_Any";
-
 		//  СЖ -->
 		sTemp =  GetNationNameByType(sti(sld.Default.nation));
 		ReOpenQuestHeader("Gen_CityCapture");
@@ -1654,7 +1473,6 @@ void TWN_Siege_Any(string city)
 		AddQuestUserData("Gen_CityCapture", "sNation", XI_ConvertString(sTemp + "Gen"));
 		AddQuestUserData("Gen_CityCapture", "sDay", FindRussianDaysString(iDay));
 		//  СЖ <--
-
         sGroup = city + "Squadron";
 	    Group_FindOrCreateGroup(sGroup);
 	    sCapId = city + "CapSquadron_";
@@ -1662,7 +1480,6 @@ void TWN_Siege_Any(string city)
         for (i = 1; i <= 6; i++)
 	    {
 	        rCap = GetCharacter(NPC_GenerateCharacter(sCapId + i, "off_hol_2", "man", "man", 5, sti(sld.Default.nation), iDay + 2, true, "officer"));
-
 	        SetShipSquadron(rCap);
 	        SetFantomParamHunter(rCap); //крутые парни
 	        SetCaptanModelByEncType(rCap, "war");
@@ -1673,21 +1490,17 @@ void TWN_Siege_Any(string city)
 	        sAttr = "l" + i;
 			Pchar.quest.(sTemp).win_condition.(sAttr) = "NPC_Death";
 	        Pchar.quest.(sTemp).win_condition.(sAttr).character = sCapId + i;
-	        
 	        SetRandGeraldSail(rCap, sti(rCap.Nation));
 	    }
         Pchar.quest.(sTemp).win_condition = sTemp;
 	    PChar.Quest.(sTemp).CityId   = city;
 		PChar.Quest.(sTemp).function = "TWN_End_Siege_Any";
-		
 	    Group_SetGroupCommander(sGroup, sCapId + "1");
 	    Group_SetAddress(sGroup, sld.Default.Island, "Quest_ships", "reload_fort1_siege");
 	    Group_SetTaskAttack(sGroup, PLAYER_GROUP);
-	    
 	    ClearIslandShips(city); // убрать корабли в порту
 	    makeref(rCap, Colonies[FindColony(city)]);
     	rCap.DontSetShipInPort = true;
-    	
     	if (!bQuestCheckProcessFreeze) // можно показать
 		{
 	        Pchar.GenQuestFort.ColonySiegeId   = city;
@@ -1701,9 +1514,7 @@ void TWN_Siege_Any(string city)
 void SetShipSquadron(ref rChar)
 {
     int SiegeShips, hcrew;
-
 	SiegeShips = SHIP_FRIGATE + rand(makeint(SHIP_LINESHIP - SHIP_FRIGATE));
-	
 	if(rand(2) == 1)
 	{
 		switch( sti(rChar.nation) )
@@ -1715,19 +1526,16 @@ void SetShipSquadron(ref rChar)
 			case PIRATE	 : SiegeShips = SHIP_LINESHIP;  break;
 		}
 	}
-
     SetRandomNameToCharacter(rChar);
     SetRandomNameToShip(rChar);
     rChar.Ship.Type = GenerateShipExt(SiegeShips, 1, rChar);
     SetBaseShipData(rChar);
     hcrew = GetMaxCrewQuantity(rChar);
     SetCrewQuantity(rChar, hcrew);
-
     DeleteAttribute(rChar,"ship.sails");
     DeleteAttribute(rChar,"ship.masts");
     DeleteAttribute(rChar,"ship.blots");
 	DeleteAttribute(rChar,"ship.hulls");
-
     Fantom_SetCannons(rChar, "war");
     Fantom_SetBalls(rChar, "war");
     Fantom_SetGoods(rChar, "war");
@@ -1738,14 +1546,11 @@ void TWN_End_Siege_Any(string city)
     ref    sld, rColony;
     int    i;
     string sTemp, sAttr;
-
 	if (CheckAttribute(PChar, "Quest." + city +".CityId")) // это прерывание
 	{
     	city = PChar.Quest.(city).CityId; // реальный город
     } // иначе сухопутный, а там сразу город на входе
-
 	sld = GetFortCommander(city);
-
  	//  СЖ -->
 	sTemp =  GetNationNameByType(sti(sld.Default.nation));
 	ReOpenQuestHeader("Gen_CityCapture");
@@ -1763,15 +1568,12 @@ void TWN_End_Siege_Any(string city)
 	AddQuestUserData("Gen_CityCapture", "sCity", GetCityName(city));
 	AddQuestUserData("Gen_CityCapture", "sNation", XI_ConvertString(sTemp + "Gen"));
 	//  СЖ <--
-	
 	sTemp   = "Enemy_" + city;
     Pchar.quest.(sTemp).over = "yes";
-
     sTemp = "Attack_Fort_" + city;
     SetTimerCondition(sTemp, 0, 0, 25 + rand(70), false);
     PChar.Quest.(sTemp).CityId   = city;
 	PChar.Quest.(sTemp).function = "TWN_Siege_Any";
-			
     Log_Info("Осада снята!");
 }
 ///////////////////////////////
@@ -1781,17 +1583,13 @@ void TWN_SiegeLand_Any(string city)
     ref    sld;
     int    i;
     string sTemp, sAttr;
-
     sld = GetFortCommander(city);
-
     Log_Info("Наш город " + GetCityName(city) + " в осаде!");
-
     sTemp = "Enemy_" + city;
     i = 9 + rand(15);
     SetTimerCondition(sTemp, 0, 0, i, false);
     PChar.Quest.(sTemp).CityId   = city;
 	PChar.Quest.(sTemp).function = "TWN_Enemy_Any";
-	
 	//  СЖ -->
 	sTemp =  GetNationNameByType(sti(sld.Default.nation));
 	ReOpenQuestHeader("Gen_CityCapture");
@@ -1800,17 +1598,14 @@ void TWN_SiegeLand_Any(string city)
 	AddQuestUserData("Gen_CityCapture", "sNation", XI_ConvertString(sTemp + "Gen"));
 	AddQuestUserData("Gen_CityCapture", "sDay", FindRussianDaysString(i));
 	//  СЖ <--
-	
 	if (!bQuestCheckProcessFreeze) // можно показать
 	{
         Pchar.GenQuestFort.ColonySiegeId   = city;
         Pchar.GenQuestFort.ColonySiegeNation = sti(sld.Default.nation);
         Pchar.GenQuestFort.ColonySiegeTime = i;
-        
         PChar.GenQuest.CallFunctionParam = "LaunchColonyInfoScreen";
 		DoQuestCheckDelay("CallFunctionParam", 1.5);
 	}
-			
     sTemp = "LandBattleStart_For_" + city;
 	Pchar.quest.(sTemp).win_condition.l1          = "location";
     Pchar.quest.(sTemp).win_condition.l1.location = sld.Default.BoardLocation;
@@ -1818,23 +1613,16 @@ void TWN_SiegeLand_Any(string city)
     PChar.Quest.(sTemp).CityId   = city;
 	PChar.Quest.(sTemp).function = "TWN_LandBattleStart_For_Any";
 }
-
 // начнем отбив города на суше после мятежа
 void  TWN_LandBattleStart_For_Any(string city)
 {
     ref    sld;
     string sTemp;
-
     city = PChar.Quest.(city).CityId; // реальный город
-    
     sld = GetFortCommander(city);
-
 	Pchar.GenQuestFort.fortCharacterIdx = sld.index;
-
     DeleteQuestAttribute("Union_with_Escadra"); // to_do
-
     SetLocationCapturedState(sld.Default, true);
-
     if (CheckAttribute(pchar, "quest.Enemy_" + city))// уже в осаде
     {
         DoQuestCheckDelay("Capture_Town_Siege", 0.1); // боевка у ворот два раза!
@@ -1850,23 +1638,18 @@ void TWN_Enemy_Any(string city)
     ref    sld, rColony;
     int    i;
     string sTemp, sAttr;
-
     city = PChar.Quest.(city).CityId; // реальный город
     sld = GetFortCommander(city);
-
     sTemp = "End_Siege_" + city;
 	Pchar.quest.(sTemp).over               = "yes";
 	sTemp = "Attack_Fort_" + city;
 	Pchar.quest.(sTemp).over               = "yes";
 	sTemp = "LandBattleStart_For_" + city;
 	Pchar.quest.(sTemp).over               = "yes";
-
 	// контрабандиста на место
 	// сам в CreateHabitues будет
-
     SetCaptureTownByNation(city, sti(sld.Default.nation));
     // капитаны потрутся сами от времени, какое-то время будут тусить у форта
-
     if (!bQuestCheckProcessFreeze) // можно показать
 	{
         Pchar.GenQuestFort.ColonySiegeId     = city;
@@ -1879,12 +1662,10 @@ void TWN_Enemy_Any(string city)
 	makeref(rColony, Colonies[FindColony(city)]);
     DeleteAttribute(rColony, "DontSetShipInPort"); //возвращаем жизнь
 }
-
 void TWN_RealeseForMoney(string city, bool _agent)
 {
     string  sTemp;
     ref     sld, rColony;
-    
 	sTemp = "Attack_Fort_" + city;
 	Pchar.quest.(sTemp).over               = "yes";
 	sTemp = "End_Siege_" + city;
@@ -1894,11 +1675,9 @@ void TWN_RealeseForMoney(string city, bool _agent)
     sTemp   = "Enemy_" + city;
     Pchar.quest.(sTemp).over = "yes";
     // если корабли были, то они простоят еще до конца срока и растают
-    
 	makeref(rColony, Colonies[FindColony(city)]);
 	rColony.isBought = true;
 	DeleteAttribute(rColony, "DontSetShipInPort"); //возвращаем жизнь
-	
 	if (_agent)
 	{
 		sld = GetFortCommander(city);
@@ -1910,15 +1689,12 @@ void TWN_RealeseForMoney(string city, bool _agent)
 		AddQuestUserData("Gen_CityCapture", "sCity", GetCityName(city));
 		AddQuestUserData("Gen_CityCapture", "sNation", XI_ConvertString(sTemp + "Gen"));
 		//  СЖ <--
-
 		AddMoneyToCharacter(pchar, -TWN_CityCost(city));
 	}
 }
-
 bool isHeroOwnCity(bool _isBoughtCare) // _isBoughtCare - true, то проверять проданность, если нет, то пофиг, просто город ГГ (для подарить)
 {
 	int i;
-
 	for (i=0; i<MAX_COLONIES; i++)
 	{
 		if (sti(colonies[i].HeroOwn) == true)
@@ -1928,11 +1704,9 @@ bool isHeroOwnCity(bool _isBoughtCare) // _isBoughtCare - true, то прове�
 	}
 	return false;
 }
-
 int TWN_CityCost(string city)
 {
     ref     rColony;
-    
 	makeref(rColony, Colonies[FindColony(city)]);
 	int money =  1000;
 	if (CheckAttribute(rColony, "FortValue"))
@@ -1945,8 +1719,6 @@ int TWN_CityCost(string city)
 	}
 	return money;
 }
-
-
 void CreateFortCommander(aref chr, aref fortcommander)
 {
 	fortcommander.nation = chr.nation;
@@ -1967,29 +1739,22 @@ void CreateFortCommander(aref chr, aref fortcommander)
 	fortcommander.skill.temp.defence = chr.skill.temp.defence;
 	fortcommander.skill.sneak = chr.skill.sneak;
 	fortcommander.skill.temp.sneak = chr.skill.temp.sneak;
-
 	fortcommander.name = chr.name;
 	fortcommander.lastname = chr.lastname;
 	fortcommander.faceID = chr.faceID;
 }
-
 void RechargeColonyCaptureEx(string sColony)
 {
 	ref chr;
-
 	int iColony = FindColony(sColony);
 	chr = characterFromID(Colonies[iColony].commander);
-	
 	if (sti(Colonies[iColony].time) > 0)
 	{
 		AddCharacterExp(chr, 10000);
 	}
-	
 	string sQuestCapture = "check_for_capture_" + sColony;
-	
 	int iTimerForCapture = 10 + iAgressionState * 10 + sti(chr.skill.leadership) + rand(40); 
 	iTimerForCapture = iTimerForCapture * (1.0 + (0.2 * iGameArcade));
-	
 	pchar.quest.(sQuestCapture).win_condition.l1 = "Timer";
 	pchar.quest.(sQuestCapture).win_condition.l1.date.day = GetAddingDataDay(0, 0, iTimerForCapture);
 	pchar.quest.(sQuestCapture).win_condition.l1.date.month = GetAddingDataMonth(0, 0, iTimerForCapture);
@@ -1998,13 +1763,10 @@ void RechargeColonyCaptureEx(string sColony)
 	pchar.quest.(sQuestCapture).win_condition = "check_for_capture_colony";
 	pchar.quest.(sQuestCapture).function = "CheckForCaptureColony";
 	pchar.quest.(sQuestCapture).colony = sColony;
-	
 	sQuestCapture = "LooseColony_" + sColony;
 	pchar.quest.(sQuestCapture).over = "yes";
-	
 	sQuestCapture = "wait_for_capture_" + sColony;
 	pchar.quest.(sQuestCapture).over = "yes";
-	
 	Colonies[iColony].agressor = "-1";
 	Colonies[iColony].capturetime = "";
 	Colonies[iColony].capture_day = 0;
@@ -2012,7 +1774,6 @@ void RechargeColonyCaptureEx(string sColony)
 	Colonies[iColony].capture_year = 0;
 	Colonies[iColony].resquetime = "";
 }
-
 void ReplaceColonyCharactersAfterCapture(string sColony)
 {
 	int iColony = FindColony(sColony);
@@ -2020,7 +1781,6 @@ void ReplaceColonyCharactersAfterCapture(string sColony)
 		Log_TestInfo("ReplaceColonyCharactersAfterCapture: couldn't find colony: " + sColony);
 		return;
 	}
-
 	// Harbour-Master
 	string sPortman = sColony + "_Portman";
 	int iPortman = GetCharacterIndex(sPortman);
@@ -2031,6 +1791,5 @@ void ReplaceColonyCharactersAfterCapture(string sColony)
 		ref rPortman = GetCharacter(iPortman);
 		rPortman.nation = Colonies[FindColony(sColony)].nation;
 	}
-
 	// TODO: expand this to other characters
 }

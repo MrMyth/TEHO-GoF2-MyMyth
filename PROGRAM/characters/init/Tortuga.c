@@ -1,12 +1,9 @@
-
 int CreateTortugaCharacters(int n)
 {
 	ref ch;
-	
 	///////////////////////////////////////////////////////////////////////////////
 	// ОСНОВНЫЕ ПЕРСОНАЖИ
 	///////////////////////////////////////////////////////////////////////////////
-
 	makeref(ch,Characters[n]);			//Губернатор
 	ch.id = "Tortuga_Mayor";
 	ch.model	= "huber_6";
@@ -45,7 +42,6 @@ int CreateTortugaCharacters(int n)
 	LAi_SetImmortal(ch, true);
 	LAi_LoginInCaptureTown(ch, false);
 	n = n + 1;
-
 	makeref(ch,Characters[n]);			//Священик
 	ch.id = "Tortuga_Priest";
 	ch.model	= "priest_1";
@@ -63,7 +59,6 @@ int CreateTortugaCharacters(int n)
 	LAi_group_MoveCharacter(ch, "FRANCE_CITIZENS");
 	LAi_SetImmortal(ch, true);
 	n = n + 1;
-
 	makeref(ch,Characters[n]);		// ОФициантка
 	ch.id = "Tortuga_waitress";
 	ch.model	= "women_14";
@@ -80,7 +75,6 @@ int CreateTortugaCharacters(int n)
 	LAi_group_MoveCharacter(ch, "FRANCE_CITIZENS");
 	LAi_SetImmortal(ch, true);
 	n = n + 1;
-
 	makeref(ch,Characters[n]);			//Трактирщик
 	ch.id = "Tortuga_tavernkeeper";
 	ch.model	= "barmen_9";
@@ -98,8 +92,6 @@ int CreateTortugaCharacters(int n)
 	LAi_group_MoveCharacter(ch, "FRANCE_CITIZENS");
 	LAi_SetImmortal(ch, true);
 	n = n + 1;
-
-
 	makeref(ch,Characters[n]);			//Торговец
 	ch.id = "Tortuga_trader";
 	ch.model	= "trader_9";
@@ -117,7 +109,6 @@ int CreateTortugaCharacters(int n)
 	LAi_SetImmortal(ch, true);
 	ch.item_date = "";
 	n = n + 1;
-
 	makeref(ch,Characters[n]);			//Корабел
 	ch.id = "Tortuga_shipyarder";
 	ch.model	= "shipowner_9";
@@ -142,7 +133,6 @@ int CreateTortugaCharacters(int n)
 	LAi_group_MoveCharacter(ch, "FRANCE_CITIZENS");
 	LAi_SetImmortal(ch, true);
 	n = n + 1;
-
 	makeref(ch,Characters[n]);			//Банкир
 	ch.id		= "Tortuga_usurer";
 	ch.model	= "banker_9";
@@ -161,7 +151,6 @@ int CreateTortugaCharacters(int n)
 	LAi_SetOwnerType(ch);
 	LAi_group_MoveCharacter(ch, "FRANCE_CITIZENS");
 	n = n + 1;
-
 	makeref(ch,Characters[n]);			//Начальник порта
 	ch.id		= "Tortuga_PortMan";
 	ch.model	= "citiz_2";
@@ -178,7 +167,6 @@ int CreateTortugaCharacters(int n)
 	LAi_SetImmortal(ch, true);
 	ch.item_date = "";
 	n = n + 1;
-
 	makeref(ch,Characters[n]);			//Хозяйка борделя
 	ch.id		= "Tortuga_Hostess";
 	ch.name		= "Janetta"
@@ -197,7 +185,6 @@ int CreateTortugaCharacters(int n)
 	LAi_SetOwnerType(ch);
 	LAi_group_MoveCharacter(ch, "FRANCE_CITIZENS");
 	n = n + 1;
-
     makeref(ch,Characters[n]);
 	ch.name 	= "Smuggler";
 	ch.lastname = "";
@@ -214,7 +201,6 @@ int CreateTortugaCharacters(int n)
 	LAi_SetHP(ch, 80.0, 80.0);
 	ch.greeting = "smuggler";
 	n = n + 1;
-	
 	makeref(ch,Characters[n]);			//Смотритель маяка
 	ch.id		= "Tortuga_Lightman";
 	ch.model	= "keeper_5";
@@ -234,6 +220,5 @@ int CreateTortugaCharacters(int n)
 	LAi_group_MoveCharacter(ch, "FRANCE_CITIZENS");
 	LAi_SetImmortal(ch, true);
 	n = n + 1;
-	
 	return n;
 }

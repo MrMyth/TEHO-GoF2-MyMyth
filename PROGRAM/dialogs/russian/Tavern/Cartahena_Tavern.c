@@ -16,19 +16,16 @@ void ProcessCommonDialogEvent(ref NPChar, aref Link, aref NextDiag)
 				link.l1.go = "saga";				
 			}
 		break;
-			
 		case "saga":
 			dialog.text = "Everybody knows Senior Gonzales! His house is next to the port authority.";
 			link.l1 = "How old is he?";
 			link.l1.go = "saga_1";
 		break;
-		
 		case "saga_1":
 			dialog.text = "Well, I don't know for sure, but he looks to be at least half a century old. He's been living in that house for quite some time. He likes to tell all kinds of scary stories about pirates that he probably came across only in his imagination.";
 			link.l1 = "Looks like he's the man I need. Thank you, "+npchar.name+", you've been a big help!";
 			link.l1.go = "saga_2";
 		break;
-		
 		case "saga_2":
 			DialogExit();
 			npchar.quest.gonsales = "true";
@@ -40,4 +37,3 @@ void ProcessCommonDialogEvent(ref NPChar, aref Link, aref NextDiag)
 	}
 	UnloadSegment(NPChar.FileDialog2);  // если где-то выход внутри switch  по return не забыть сделать анлод
 }
-

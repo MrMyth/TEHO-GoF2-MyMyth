@@ -20,14 +20,12 @@ void ProcessCommonDialogEvent(ref NPChar, aref Link, aref NextDiag)
                 link.l1.go = "guardoftruth_3";
 			}
 		break;
-		
 		case "guardoftruth":
 			dialog.text = "Oh, yes! I remember them of course! Yes, they really were original, and more importantly, expensive items. But you're too late, captain, I don't have them anymore. I've already sold them.";
 			link.l1 = "Unbelievable! And who was interested in churchware of that sort? Mynheer, whom did you sell them to? I'd like to try to repurchase them...";
 			link.l1.go = "guardoftruth_1";
 			npchar.quest.utensil = "true";
 		break;
-		
 		case "guardoftruth_1":
 			dialog.text = "Hm, and why should I give you out the names of my clients?";
 			if (CheckAttribute(pchar, "questTemp.HWIC.Detector") && pchar.questTemp.HWIC.Detector == "self_win")
@@ -50,19 +48,16 @@ void ProcessCommonDialogEvent(ref NPChar, aref Link, aref NextDiag)
 				}
 			}
 		break;
-		
 		case "guardoftruth_2_1":
 			dialog.text = "Ah, sure you're "+GetFullName(pchar)+", a friend of the governor himself who disclosed the criminal conspiracy of Lucas Rodenburg... How can I forget about that? Of course, I'll tell you.";
 			link.l1 = "Then, I'm all ears.";
 			link.l1.go = "guardoftruth_4";
 		break;
-		
 		case "guardoftruth_2_2":
 			dialog.text = "Ah, right, you're "+GetFullName(pchar)+", the great conqueror of the pirate 'ghost ship'. How could I forget that? Of course, I'll tell you.";
 			link.l1 = "Then, I'm all ears.";
 			link.l1.go = "guardoftruth_4";
 		break;
-		
 		case "guardoftruth_2_3":
 			dialog.text = "All right, then. For a chest filled all the way to the top with gold doubloons, I suppose I'll tell you about those who outpaced you to make the purchase.";
 			if (CheckCharacterItem(pchar, "chest"))
@@ -76,7 +71,6 @@ void ProcessCommonDialogEvent(ref NPChar, aref Link, aref NextDiag)
 				link.l1.go = "exit";
 			}
 		break;
-		
 		case "guardoftruth_3":
 			RemoveItems(pchar, "chest", 1);
 			Log_Info("You've given a chest of doubloons");
@@ -86,43 +80,36 @@ void ProcessCommonDialogEvent(ref NPChar, aref Link, aref NextDiag)
 			link.l1.go = "guardoftruth_4";
 			DeleteAttribute(npchar, "quest.GOT_chest");
 		break;
-		
 		case "guardoftruth_4":
 			dialog.text = "The gold censer was bought by a man named Rolande Moses, better known as Rollie the Cap. Why this butcher needed a precious church item, I can't figure it out, but for some reason he was indescribably overjoyed by it... By the way, I doubt you'll meet Rollie himself.";
 			link.l1 = "Why is that?";
 			link.l1.go = "guardoftruth_5";
 		break;
-		
 		case "guardoftruth_5":
 			dialog.text = "Because this avid robber of lone English merchants has recently got with his schooner right into the paws of Colonel Fox. Do you know who that is? ";
 			link.l1 = "You bet! The commander of the 'sea foxes' in St. Jones on Antigua...";
 			link.l1.go = "guardoftruth_6";
 		break;
-		
 		case "guardoftruth_6":
 			dialog.text = "Well, then you understand why we will never see our poor Rolande again. The colonel seized his schooner with all of the survivors of his crew and delivered them to St. Jones where they've probably already had a tie fastened around their necks.";
 			link.l1 = "I see. And the ostensory?";
 			link.l1.go = "guardoftruth_7";
 		break;
-		
 		case "guardoftruth_7":
 			dialog.text = "The ostensory has been acquired very recently by Seniora Belinda de Ribero from Cumana. A very notable seniora, a relative of Fernando de Villegas himself, governor of Cumana. I take it that she wanted to bring it as a gift to the church.";
 			link.l1 = "Seniora Belinda de Ribero? I can find her in Cumana, right?";
 			link.l1.go = "guardoftruth_8";
 		break;
-		
 		case "guardoftruth_8":
 			dialog.text = "Definitely. She said herself that she was going straight home from Willemstad.";
 			link.l1 = "All right. Thanks, "+npchar.name+", you've been a big help!";
 			link.l1.go = "guardoftruth_9";
 		break;
-		
 		case "guardoftruth_9":
 			dialog.text = "Anytime, mynheer. Visit me from time to time!";
 			link.l1 = "I wish you rich clients with fat wallets and scanty brains... Ha-ha!";
 			link.l1.go = "guardoftruth_10";
 		break;
-		
 		case "guardoftruth_10":
 			DialogExit();
 			AddQuestRecord("Guardoftruth", "23");

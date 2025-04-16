@@ -20,7 +20,6 @@ void ProcessCommonDialogEvent(ref NPChar, aref Link, aref NextDiag)
 			}
 			//Бремя гасконца
 		break;
-		
 		case "info":
         // заменить на описание неких НПС, по квестам
 			dialog.text = "Do you think I work for the secret service of "+NationNameGenitive(sti(NPChar.nation))+"?";
@@ -29,7 +28,6 @@ void ProcessCommonDialogEvent(ref NPChar, aref Link, aref NextDiag)
 			link.l2 = "Another question then";
 			link.l2.go = "new question";
 		break;
-		
 		case "town":
         // заменить на описание как пройти, по квестам
 			dialog.text = "Am I the information bureau for you? Don't know. Don't know a thing.";
@@ -38,7 +36,6 @@ void ProcessCommonDialogEvent(ref NPChar, aref Link, aref NextDiag)
 			link.l2 = "Another question then";
 			link.l2.go = "new question";
 		break;
-		
 		//--> Бремя гасконца
 		case "Sharlie":
 			if (sti(pchar.questTemp.Sharlie.Citcount) == 3)
@@ -57,7 +54,6 @@ void ProcessCommonDialogEvent(ref NPChar, aref Link, aref NextDiag)
 				npchar.quest.Sharlie = "true";
 			}
 		break;
-		
 		case "Sharlie_1":
 			dialog.text = LinkRandPhrase("No, I don't know any navigators, so...","I have no idea. I have to go, bye.","Unfortunately, I can't help you, sorry...");
 			link.l1 = "I see. Pardon me...";

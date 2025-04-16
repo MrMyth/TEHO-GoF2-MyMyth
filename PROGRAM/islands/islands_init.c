@@ -1,28 +1,21 @@
 void InitIslands()
 {
 	int		n, i;
-
 	for (i=0; i<MAX_ISLANDS; i++)
 	{
 		DeleteAttribute(&Islands[i], "");
-
 		Islands[i].id = "";
 		Islands[i].reload_enable = true;
 		Islands[i].visible = true;
 		Islands[i].colonyquantity = 1;
-		
 		Islands[i].ImmersionDistance = 450000.0;
 		Islands[i].ImmersionDepth = 0.0;
 		Islands[i].maxviewdist = 5000.0;
 	}
-	
-
 	// ==================================================================================================
 	// Create temp module for enumerate locators
 		object	locator;
 		CreateEntity(&locator,"locator");
-
-
 	/////////////////////////////////////////////////////////////////////////
 	/// Barbados (Bridgetown)
 	/////////////////////////////////////////////////////////////////////////
@@ -40,7 +33,6 @@ void InitIslands()
 		//Islands[n].ImmersionDistance = 3500;
 		//Islands[n].ImmersionDepth = 250;
 		Islands[n].TexturePath = "BARBADOS";
-
 		Islands[n].reload.l1.label = "Bridgetown Port";
 		Islands[n].reload.l1.name = "reload_1";
 		Islands[n].reload.l1.go = "Bridgetown_town";
@@ -49,7 +41,6 @@ void InitIslands()
 		Islands[n].reload.l1.istown = true;
 		Islands[n].reload.l1.pic = 0;
 		Islands[n].reload.l1.tex = "t1";
-		
 		Islands[n].reload.l2.label = "Bridgetown Fort";
 		Islands[n].reload.l2.name = "reload_fort1";
 		Islands[n].reload.l2.go = "Bridgetown_fort";
@@ -62,7 +53,6 @@ void InitIslands()
 		Islands[n].reload.l2.fort.locators = "barbados_fort1_locators";
 		Islands[n].reload.l2.pic = 1;
 		Islands[n].reload.l2.tex = "t1";
-
 		Islands[n].reload.l3.label = "Mayak2";
 		Islands[n].reload.l3.name = "reload_2";
 		Islands[n].reload.l3.go = "Mayak2";
@@ -70,7 +60,6 @@ void InitIslands()
 		Islands[n].reload.l3.radius = 300.0;
 		Islands[n].reload.l3.pic = 1;
 		Islands[n].reload.l3.tex = "t1";
-
 		Islands[n].reload.l4.label = "Shore4";
 		Islands[n].reload.l4.name = "reload_3";
 		Islands[n].reload.l4.go = "Shore4";
@@ -78,7 +67,6 @@ void InitIslands()
 		Islands[n].reload.l4.radius = 300.0;
 		Islands[n].reload.l4.pic = 1;
 		Islands[n].reload.l4.tex = "t1";
-
 		Islands[n].reload.l5.label = "Shore5";
 		Islands[n].reload.l5.name = "reload_4";
 		Islands[n].reload.l5.go = "Shore5";
@@ -86,32 +74,26 @@ void InitIslands()
 		Islands[n].reload.l5.radius = 300.0;
 		Islands[n].reload.l5.pic = 1;
 		Islands[n].reload.l5.tex = "t1";
-		
 		Islands[n].Trade.Export.id1 = GOOD_BRICK;
 		Islands[n].Trade.Export.id2 = GOOD_FRUITS;
 		Islands[n].Trade.Export.id3 = GOOD_CHOCOLATE;
 		Islands[n].Trade.Export.id4 = GOOD_SUGAR;
 		Islands[n].Trade.Export.id5 = GOOD_RUM;
-		
 		Islands[n].Trade.Import.id1 = GOOD_WHEAT;
 		Islands[n].Trade.Import.id2 = GOOD_WEAPON;
 		Islands[n].Trade.Import.id3 = GOOD_MEDICAMENT;
 		Islands[n].Trade.Import.id4 = GOOD_WINE;
 		Islands[n].Trade.Import.id5 = GOOD_ALE;
-		
 		Islands[n].Trade.Contraband.id1 = GOOD_SLAVES;
 		Islands[n].Trade.Contraband.id2 = GOOD_ROPES;
 		Islands[n].Trade.Contraband.id3 = GOOD_SHIPSILK;
 		Islands[n].Trade.Contraband.id4 = GOOD_SANDAL;
 		Islands[n].Trade.Contraband.id5 = GOOD_OIL;
 		Islands[n].Trade.Contraband.id6 = GOOD_POWDER;
-		
 		Islands[n].InterfaceTextures.t1 = "battle_interface\moor_7.tga";
 		Islands[n].InterfaceTextures.t1.h = 4;
 		Islands[n].InterfaceTextures.t1.v = 1;
-
 		SendMessage(&locator,"le",LM_LOCATE_I,&Islands[n]);
-
 	/////////////////////////////////////////////////////////////////////////
 	/// Jamaica (PortRoyal)
 	/////////////////////////////////////////////////////////////////////////
@@ -132,7 +114,6 @@ void InitIslands()
 		Islands[n].LoadGroup.g1 = "IslandShips1";
 		Islands[n].mayak.model_day = "Jamaica_dayLight";     //день на маяке 
 		Islands[n].mayak.model_night = "Jamaica_nightLight"; //ночь на маяке 
-
 		Islands[n].reload.l1.label = "PortRoyal Port";
 		Islands[n].reload.l1.name = "reload_1";
 		Islands[n].reload.l1.go = "PortRoyal_town";
@@ -141,7 +122,6 @@ void InitIslands()
 		Islands[n].reload.l1.istown = true;
 		Islands[n].reload.l1.pic = 0;
 		Islands[n].reload.l1.tex = "t1";
-
 		Islands[n].reload.l2.label = "PortRoyal Fort";
 		Islands[n].reload.l2.name = "reload_fort1";
 		Islands[n].reload.l2.go = "PortRoyal_fort";
@@ -154,7 +134,6 @@ void InitIslands()
 		Islands[n].reload.l2.fort.locators = "jamaica_fort1_locators";
 		Islands[n].reload.l2.pic = 1;
 		Islands[n].reload.l2.tex = "t1";
-
 		Islands[n].reload.l3.label = "Shore36";
 		Islands[n].reload.l3.name = "reload_2";
 		Islands[n].reload.l3.go = "Shore36";
@@ -162,7 +141,6 @@ void InitIslands()
 		Islands[n].reload.l3.radius = 300.0;
 		Islands[n].reload.l3.pic = 1;
 		Islands[n].reload.l3.tex = "t1";
-
 		Islands[n].reload.l4.label = "Shore35";
 		Islands[n].reload.l4.name = "reload_3";
 		Islands[n].reload.l4.go = "Shore35";
@@ -170,7 +148,6 @@ void InitIslands()
 		Islands[n].reload.l4.radius = 300.0;
 		Islands[n].reload.l4.pic = 0;
 		Islands[n].reload.l4.tex = "t1";
-
 		Islands[n].reload.l5.label = "Mayak3";
 		Islands[n].reload.l5.name = "reload_4";
 		Islands[n].reload.l5.go = "Mayak3";
@@ -178,7 +155,6 @@ void InitIslands()
 		Islands[n].reload.l5.radius = 600.0;
 		Islands[n].reload.l5.pic = 0;
 		Islands[n].reload.l5.tex = "t1";
-		
 		Islands[n].Trade.Export.id1 = GOOD_FOOD;
 		Islands[n].Trade.Export.id2 = GOOD_PLANKS;
 		Islands[n].Trade.Export.id3 = GOOD_CLOTHES;		
@@ -186,7 +162,6 @@ void InitIslands()
 		Islands[n].Trade.Export.id5 = GOOD_MEDICAMENT;
 		Islands[n].Trade.Export.id6 = GOOD_WINE;
 		Islands[n].Trade.Export.id7 = GOOD_RUM;
-				
 		Islands[n].Trade.Import.id1 = GOOD_WHEAT;
 		Islands[n].Trade.Import.id2 = GOOD_COFFEE;
 		Islands[n].Trade.Import.id3 = GOOD_CHOCOLATE;
@@ -196,24 +171,19 @@ void InitIslands()
 		Islands[n].Trade.Import.id7 = GOOD_EBONY;
 		Islands[n].Trade.Import.id8 = GOOD_COPRA;
 		Islands[n].Trade.Import.id9 = GOOD_PAPRIKA;
-		
 		Islands[n].Trade.Aggressive.id1 = GOOD_COTTON;
 		Islands[n].Trade.Aggressive.id2 = GOOD_LEATHER;
 		Islands[n].Trade.Aggressive.id3 = GOOD_CINNAMON;
-		
 		Islands[n].Trade.Contraband.id1 = GOOD_SLAVES;
 		Islands[n].Trade.Contraband.id2 = GOOD_ROPES;
 		Islands[n].Trade.Contraband.id3 = GOOD_SHIPSILK;
 		Islands[n].Trade.Contraband.id4 = GOOD_SANDAL;
 		Islands[n].Trade.Contraband.id5 = GOOD_OIL;
 		Islands[n].Trade.Contraband.id6 = GOOD_POWDER;
-
 		Islands[n].InterfaceTextures.t1 = "battle_interface\moor_7.tga";
 		Islands[n].InterfaceTextures.t1.h = 4;
 		Islands[n].InterfaceTextures.t1.v = 1;
-
 		SendMessage(&locator,"le",LM_LOCATE_I,&Islands[n]);
-
 	/////////////////////////////////////////////////////////////////////////
 	/// PuertoRico  (SanJuan)
 	/////////////////////////////////////////////////////////////////////////
@@ -231,7 +201,6 @@ void InitIslands()
 		//Islands[n].ImmersionDistance = 4000;
 		//Islands[n].ImmersionDepth = 250;
 		Islands[n].TexturePath = "PuertoRico";
-
 		Islands[n].reload.l1.label = "SanJuan Port";
 		Islands[n].reload.l1.name = "reload_1";
 		Islands[n].reload.l1.go = "SanJuan_town";
@@ -240,7 +209,6 @@ void InitIslands()
 		Islands[n].reload.l1.pic = 0;
 		Islands[n].reload.l1.tex = "t1";	
 		Islands[n].reload.l1.istown = true;
-		
 		Islands[n].reload.l2.label = "SanJuan Fort";
 		Islands[n].reload.l2.name = "reload_fort1";
 		Islands[n].reload.l2.go = "SanJuan_fort";
@@ -253,7 +221,6 @@ void InitIslands()
 		Islands[n].reload.l2.fort.locators = "PuertoRico_fort1_locators";
 		Islands[n].reload.l2.pic = 1;
 		Islands[n].reload.l2.tex = "t1";
-		
 		Islands[n].reload.l3.label = "Shore45";
 		Islands[n].reload.l3.name = "reload_2";
 		Islands[n].reload.l3.go = "Shore45";
@@ -261,7 +228,6 @@ void InitIslands()
 		Islands[n].reload.l3.radius = 600.0;
 		Islands[n].reload.l3.pic = 0;
 		Islands[n].reload.l3.tex = "t1";
-
 		Islands[n].reload.l4.label = "Shore44";
 		Islands[n].reload.l4.name = "reload_3";
 		Islands[n].reload.l4.go = "Shore44";
@@ -269,32 +235,26 @@ void InitIslands()
 		Islands[n].reload.l4.radius = 600.0;
 		Islands[n].reload.l4.pic = 0;
 		Islands[n].reload.l4.tex = "t1";
-		
 		Islands[n].Trade.Export.id1 = GOOD_SAILCLOTH;
 		Islands[n].Trade.Export.id2 = GOOD_CLOTHES;
 		Islands[n].Trade.Export.id3 = GOOD_TOBACCO;
 		Islands[n].Trade.Export.id4 = GOOD_PAPRIKA;
 		Islands[n].Trade.Export.id5 = GOOD_RUM;
-		
 		Islands[n].Trade.Import.id1 = GOOD_WHEAT;
 		Islands[n].Trade.Import.id2 = GOOD_POWDER;
 		Islands[n].Trade.Import.id3 = GOOD_MEDICAMENT;
 		Islands[n].Trade.Import.id4 = GOOD_WINE;
 		Islands[n].Trade.Import.id5 = GOOD_ALE;
-				
 		Islands[n].Trade.Contraband.id1 = GOOD_SLAVES;
 		Islands[n].Trade.Contraband.id2 = GOOD_ROPES;
 		Islands[n].Trade.Contraband.id3 = GOOD_SHIPSILK;
 		Islands[n].Trade.Contraband.id4 = GOOD_SANDAL;
 		Islands[n].Trade.Contraband.id5 = GOOD_OIL;
 		Islands[n].Trade.Contraband.id6 = GOOD_WEAPON;
-		
 		Islands[n].InterfaceTextures.t1 = "battle_interface\moor_7.tga";
 		Islands[n].InterfaceTextures.t1.h = 4;
 		Islands[n].InterfaceTextures.t1.v = 1;
-
 		SendMessage(&locator,"le",LM_LOCATE_I,&Islands[n]);
-		
 	/////////////////////////////////////////////////////////////////////////
 	/// Cuba1 (Santiago, PuertoPrincipe)
 	/////////////////////////////////////////////////////////////////////////
@@ -312,7 +272,6 @@ void InitIslands()
 		//Islands[n].ImmersionDistance = 4000;
 		//Islands[n].ImmersionDepth = 250;
 		Islands[n].TexturePath = "Cuba1";
-
 		Islands[n].reload.l1.label = "Santiago Port";
 		Islands[n].reload.l1.name = "reload_1";
 		Islands[n].reload.l1.go = "Santiago_town";
@@ -321,7 +280,6 @@ void InitIslands()
 		Islands[n].reload.l1.pic = 0;
 		Islands[n].reload.l1.tex = "t1";
 		Islands[n].reload.l1.istown = true;
-		
 		Islands[n].reload.l2.label = "Santiago Fort";
 		Islands[n].reload.l2.name = "reload_fort1";
 		Islands[n].reload.l2.go = "Santiago_fort";
@@ -334,7 +292,6 @@ void InitIslands()
 		Islands[n].reload.l2.fort.locators = "Cuba1_fort1_locators";
 		Islands[n].reload.l2.pic = 1;
 		Islands[n].reload.l2.tex = "t1";
-
 		Islands[n].reload.l3.label = "Shore12";
 		Islands[n].reload.l3.name = "reload_2";
 		Islands[n].reload.l3.go = "Shore12";
@@ -342,7 +299,6 @@ void InitIslands()
 		Islands[n].reload.l3.radius = 600.0;
 		Islands[n].reload.l3.pic = 0;
 		Islands[n].reload.l3.tex = "t1";
-
 		Islands[n].reload.l4.label = "Shore11";
 		Islands[n].reload.l4.name = "reload_3";
 		Islands[n].reload.l4.go = "Shore11";
@@ -350,7 +306,6 @@ void InitIslands()
 		Islands[n].reload.l4.radius = 600.0;
 		Islands[n].reload.l4.pic = 0;
 		Islands[n].reload.l4.tex = "t1";
-
 		Islands[n].reload.l5.label = "PuertoPrincipe Port";
 		Islands[n].reload.l5.name = "reload_4";
 		Islands[n].reload.l5.go = "PuertoPrincipe_port";
@@ -359,7 +314,6 @@ void InitIslands()
 		Islands[n].reload.l5.pic = 0;
 		Islands[n].reload.l5.tex = "t1";
 		Islands[n].reload.l5.istown = true;
-
 		Islands[n].reload.l6.label = "Mayak9";
 		Islands[n].reload.l6.name = "reload_5";
 		Islands[n].reload.l6.go = "Mayak9";
@@ -367,31 +321,25 @@ void InitIslands()
 		Islands[n].reload.l6.radius = 600.0;
 		Islands[n].reload.l6.pic = 0;
 		Islands[n].reload.l6.tex = "t1";	
-
 		Islands[n].Trade.Export.id1 = GOOD_FOOD;
 		Islands[n].Trade.Export.id2 = GOOD_PLANKS;
 		Islands[n].Trade.Export.id3 = GOOD_TOBACCO;
 		Islands[n].Trade.Export.id4 = GOOD_LEATHER;
 		Islands[n].Trade.Export.id5 = GOOD_ALE;
-				
 		Islands[n].Trade.Import.id1 = GOOD_POWDER;
 		Islands[n].Trade.Import.id2 = GOOD_MEDICAMENT;
 		Islands[n].Trade.Import.id3 = GOOD_WINE;
 		Islands[n].Trade.Import.id4 = GOOD_RUM;
-				
 		Islands[n].Trade.Contraband.id1 = GOOD_SLAVES;
 		Islands[n].Trade.Contraband.id2 = GOOD_ROPES;
 		Islands[n].Trade.Contraband.id3 = GOOD_SHIPSILK;
 		Islands[n].Trade.Contraband.id4 = GOOD_SANDAL;
 		Islands[n].Trade.Contraband.id5 = GOOD_OIL;
 		Islands[n].Trade.Contraband.id6 = GOOD_WEAPON;		
-		
 		Islands[n].InterfaceTextures.t1 = "battle_interface\moor_7.tga";
 		Islands[n].InterfaceTextures.t1.h = 4;
 		Islands[n].InterfaceTextures.t1.v = 1;
-
 		SendMessage(&locator,"le",LM_LOCATE_I,&Islands[n]);	
-
 	/////////////////////////////////////////////////////////////////////////
 	/// Cuba2 (Havana)
 	/////////////////////////////////////////////////////////////////////////
@@ -409,7 +357,6 @@ void InitIslands()
 		//Islands[n].ImmersionDistance = 4000;
 		//Islands[n].ImmersionDepth = 250;
 		Islands[n].TexturePath = "Cuba2";
-
 		Islands[n].reload.l1.label = "Havana Port";
 		Islands[n].reload.l1.name = "Reload_1";
 		Islands[n].reload.l1.go = "Havana_town";
@@ -418,7 +365,6 @@ void InitIslands()
 		Islands[n].reload.l1.pic = 0;
 		Islands[n].reload.l1.tex = "t1";
 		Islands[n].reload.l1.istown = true;
-
 		Islands[n].reload.l2.label = "Havana Fort";
 		Islands[n].reload.l2.name = "reload_fort1";
 		Islands[n].reload.l2.go = "Havana_fort";
@@ -431,7 +377,6 @@ void InitIslands()
 		Islands[n].reload.l2.fort.locators = "Cuba2_fort1_locators";
 		Islands[n].reload.l2.pic = 1;
 		Islands[n].reload.l2.tex = "t1";
-
 		Islands[n].reload.l3.label = "Mayak10";
 		Islands[n].reload.l3.name = "reload_2";
 		Islands[n].reload.l3.go = "Mayak10";
@@ -439,7 +384,6 @@ void InitIslands()
 		Islands[n].reload.l3.radius = 600.0;
 		Islands[n].reload.l3.pic = 0;
 		Islands[n].reload.l3.tex = "t1";
-
 		Islands[n].reload.l4.label = "Shore13";
 		Islands[n].reload.l4.name = "reload_5";
 		Islands[n].reload.l4.go = "Shore13";
@@ -447,7 +391,6 @@ void InitIslands()
 		Islands[n].reload.l4.radius = 600.0;
 		Islands[n].reload.l4.pic = 0;
 		Islands[n].reload.l4.tex = "t1";
-
 		Islands[n].reload.l5.label = "Shore14";
 		Islands[n].reload.l5.name = "reload_4";
 		Islands[n].reload.l5.go = "Shore14";
@@ -455,7 +398,6 @@ void InitIslands()
 		Islands[n].reload.l5.radius = 600.0;
 		Islands[n].reload.l5.pic = 0;
 		Islands[n].reload.l5.tex = "t1";
-
 		Islands[n].reload.l6.label = "Shore15";
 		Islands[n].reload.l6.name = "reload_3";
 		Islands[n].reload.l6.go = "Shore15";
@@ -463,7 +405,6 @@ void InitIslands()
 		Islands[n].reload.l6.radius = 600.0;
 		Islands[n].reload.l6.pic = 0;
 		Islands[n].reload.l6.tex = "t1";
-		
 		Islands[n].Trade.Export.id1 = GOOD_FOOD;
 		Islands[n].Trade.Export.id2 = GOOD_SAILCLOTH;
 		Islands[n].Trade.Export.id3 = GOOD_CLOTHES;
@@ -475,7 +416,6 @@ void InitIslands()
 		Islands[n].Trade.Export.id9 = GOOD_MEDICAMENT;
 		Islands[n].Trade.Export.id10 = GOOD_WINE;
 		Islands[n].Trade.Export.id11 = GOOD_RUM;
-		
 		Islands[n].Trade.Import.id1 = GOOD_CHOCOLATE;
 		Islands[n].Trade.Import.id2 = GOOD_TOBACCO;
 		Islands[n].Trade.Import.id3 = GOOD_COTTON;
@@ -483,23 +423,18 @@ void InitIslands()
 		Islands[n].Trade.Import.id5 = GOOD_CINNAMON;
 		Islands[n].Trade.Import.id6 = GOOD_COPRA;
 		Islands[n].Trade.Import.id7 = GOOD_PAPRIKA;
-		
 		Islands[n].Trade.Aggressive.id1 = GOOD_EBONY;
 		Islands[n].Trade.Aggressive.id2 = GOOD_MAHOGANY;
-		
 		Islands[n].Trade.Contraband.id1 = GOOD_SLAVES;
 		Islands[n].Trade.Contraband.id2 = GOOD_ROPES;
 		Islands[n].Trade.Contraband.id3 = GOOD_SHIPSILK;
 		Islands[n].Trade.Contraband.id4 = GOOD_SANDAL;
 		Islands[n].Trade.Contraband.id5 = GOOD_OIL;
 		Islands[n].Trade.Contraband.id6 = GOOD_WEAPON;
-		
 		Islands[n].InterfaceTextures.t1 = "battle_interface\moor_7.tga";
 		Islands[n].InterfaceTextures.t1.h = 4;
 		Islands[n].InterfaceTextures.t1.v = 1;
-
 		SendMessage(&locator,"le",LM_LOCATE_I,&Islands[n]);
-
 	/////////////////////////////////////////////////////////////////////////
 	/// Curacao (Villemstad)
 	/////////////////////////////////////////////////////////////////////////
@@ -517,7 +452,6 @@ void InitIslands()
 		//Islands[n].ImmersionDistance = 4000;
 		//Islands[n].ImmersionDepth = 250;
 		Islands[n].TexturePath = "Curacao";
-
 		Islands[n].reload.l1.label = "Villemstad Port";
 		Islands[n].reload.l1.name = "reload_1";
 		Islands[n].reload.l1.go = "Villemstad_town";
@@ -526,7 +460,6 @@ void InitIslands()
 		Islands[n].reload.l1.pic = 0;
 		Islands[n].reload.l1.tex = "t1";	
 		Islands[n].reload.l1.istown = true;
-		
 		Islands[n].reload.l2.label = "Villemstad Fort";
 		Islands[n].reload.l2.name = "reload_fort1";
 		Islands[n].reload.l2.go = "Villemstad_fort";
@@ -539,7 +472,6 @@ void InitIslands()
 		Islands[n].reload.l2.fort.locators = "Curacao_fort1_locators";
 		Islands[n].reload.l2.pic = 1;
 		Islands[n].reload.l2.tex = "t1";
-		
 		Islands[n].reload.l3.label = "Shore23";
 		Islands[n].reload.l3.name = "reload_2";
 		Islands[n].reload.l3.go = "Shore23";
@@ -547,7 +479,6 @@ void InitIslands()
 		Islands[n].reload.l3.radius = 600.0;
 		Islands[n].reload.l3.pic = 0;
 		Islands[n].reload.l3.tex = "t1";
-
 		Islands[n].reload.l4.label = "Shore22";
 		Islands[n].reload.l4.name = "reload_3";
 		Islands[n].reload.l4.go = "Shore22";
@@ -555,7 +486,6 @@ void InitIslands()
 		Islands[n].reload.l4.radius = 600.0;
 		Islands[n].reload.l4.pic = 0;
 		Islands[n].reload.l4.tex = "t1";
-
 		Islands[n].reload.l5.label = "Shore24";
 		Islands[n].reload.l5.name = "reload_4";
 		Islands[n].reload.l5.go = "Shore24";
@@ -563,7 +493,6 @@ void InitIslands()
 		Islands[n].reload.l5.radius = 600.0;
 		Islands[n].reload.l5.pic = 0;
 		Islands[n].reload.l5.tex = "t1";
-		
 		Islands[n].Trade.Export.id1 = GOOD_FOOD;
 		Islands[n].Trade.Export.id2 = GOOD_PLANKS;
 		Islands[n].Trade.Export.id3 = GOOD_CLOTHES;
@@ -572,12 +501,10 @@ void InitIslands()
 		Islands[n].Trade.Export.id6 = GOOD_WINE;
 		Islands[n].Trade.Export.id7 = GOOD_ALE;				
 		Islands[n].Trade.Export.id8 = GOOD_SHIPSILK;
-		
 		Islands[n].Trade.Import.id1 = GOOD_WHEAT;
 		Islands[n].Trade.Import.id2 = GOOD_TOBACCO;
 		Islands[n].Trade.Import.id3 = GOOD_SUGAR;
 		Islands[n].Trade.Import.id4 = GOOD_COTTON;
-		
 		Islands[n].Trade.Aggressive.id1 = GOOD_COFFEE;
 		Islands[n].Trade.Aggressive.id2 = GOOD_CHOCOLATE;
 		Islands[n].Trade.Aggressive.id3 = GOOD_LEATHER;
@@ -586,19 +513,15 @@ void InitIslands()
 		Islands[n].Trade.Aggressive.id6 = GOOD_CINNAMON;
 		Islands[n].Trade.Aggressive.id7 = GOOD_COPRA;
 		Islands[n].Trade.Aggressive.id8 = GOOD_PAPRIKA;
-		
 		Islands[n].Trade.Contraband.id1 = GOOD_SLAVES;
 		Islands[n].Trade.Contraband.id2 = GOOD_ROPES;
 		Islands[n].Trade.Contraband.id3 = GOOD_SANDAL;
 		Islands[n].Trade.Contraband.id4 = GOOD_OIL;
 		Islands[n].Trade.Contraband.id5 = GOOD_POWDER;
-		
 		Islands[n].InterfaceTextures.t1 = "battle_interface\moor_7.tga";
 		Islands[n].InterfaceTextures.t1.h = 4;
 		Islands[n].InterfaceTextures.t1.v = 1;
-
 		SendMessage(&locator,"le",LM_LOCATE_I,&Islands[n]);	
-		
 	/////////////////////////////////////////////////////////////////////////
 	/// Tortuga
 	/////////////////////////////////////////////////////////////////////////
@@ -616,7 +539,6 @@ void InitIslands()
 		//Islands[n].ImmersionDistance = 6000;
 		//Islands[n].ImmersionDepth = 100;
 		Islands[n].TexturePath = "Tortuga";
-
 		Islands[n].reload.l1.label = "Tortuga Port";
 		Islands[n].reload.l1.name = "reload_1";
 		Islands[n].reload.l1.go = "Tortuga_town";
@@ -625,7 +547,6 @@ void InitIslands()
 		Islands[n].reload.l1.pic = 0;
 		Islands[n].reload.l1.tex = "t1";
 		Islands[n].reload.l1.istown = true;
-		
 		Islands[n].reload.l2.label = "Tortuga Fort";
 		Islands[n].reload.l2.name = "reload_fort1";
 		Islands[n].reload.l2.go = "Tortuga_fort";
@@ -638,7 +559,6 @@ void InitIslands()
 		Islands[n].reload.l2.fort.locators = "Tortuga_fort1_locators";
 		Islands[n].reload.l2.pic = 1;
 		Islands[n].reload.l2.tex = "t1";
-		
 		Islands[n].reload.l3.label = "Mayak6";
 		Islands[n].reload.l3.name = "reload_2";
 		Islands[n].reload.l3.go = "Mayak6";
@@ -646,7 +566,6 @@ void InitIslands()
 		Islands[n].reload.l3.radius = 600.0;
 		Islands[n].reload.l3.pic = 0;
 		Islands[n].reload.l3.tex = "t1";
-				
 		Islands[n].reload.l4.label = "Shore58";
 		Islands[n].reload.l4.name = "reload_3";
 		Islands[n].reload.l4.go = "Shore58";
@@ -654,32 +573,26 @@ void InitIslands()
 		Islands[n].reload.l4.radius = 600.0;
 		Islands[n].reload.l4.pic = 0;
 		Islands[n].reload.l4.tex = "t1";
-		
 		Islands[n].Trade.Export.id1 = GOOD_SAILCLOTH;
 		Islands[n].Trade.Export.id2 = GOOD_FRUITS;
 		Islands[n].Trade.Export.id3 = GOOD_TOBACCO;
 		Islands[n].Trade.Export.id4 = GOOD_SUGAR;
 		Islands[n].Trade.Export.id5 = GOOD_RUM;
-		
 		Islands[n].Trade.Import.id1 = GOOD_WHEAT;
 		Islands[n].Trade.Import.id2 = GOOD_POWDER;
 		Islands[n].Trade.Import.id3 = GOOD_MEDICAMENT;
 		Islands[n].Trade.Import.id4 = GOOD_WINE;
 		Islands[n].Trade.Import.id5 = GOOD_ALE;
-		
 		Islands[n].Trade.Contraband.id1 = GOOD_SLAVES;
 		Islands[n].Trade.Contraband.id2 = GOOD_ROPES;
 		Islands[n].Trade.Contraband.id3 = GOOD_SHIPSILK;
 		Islands[n].Trade.Contraband.id4 = GOOD_SANDAL;
 		Islands[n].Trade.Contraband.id5 = GOOD_OIL;
 		Islands[n].Trade.Contraband.id6 = GOOD_WEAPON;
-        
 		Islands[n].InterfaceTextures.t1 = "battle_interface\moor_7.tga";
 		Islands[n].InterfaceTextures.t1.h = 4;
 		Islands[n].InterfaceTextures.t1.v = 1;
-		
 		SendMessage(&locator,"le",LM_LOCATE_I,&Islands[n]);		
-
 		/////////////////////////////////////////////////////////////////////////
 		/// SentMartin (Marigo)
 		/////////////////////////////////////////////////////////////////////////
@@ -698,7 +611,6 @@ void InitIslands()
 		Islands[n].ImmersionDepth = 0;// ставим глубину погружения =0
 		Islands[n].maxviewdist = 5000.0; //ставим максимальную дистанцию видимости, кстати она считается от корабля, в отличие от утопления
 		Islands[n].TexturePath = "StMartin"; // хотя там теперь ничего нет
-
 		Islands[n].reload.l1.label = "Marigo Port";
 		Islands[n].reload.l1.name = "reload_1";
 		Islands[n].reload.l1.go = "Marigo_town";
@@ -707,7 +619,6 @@ void InitIslands()
 		Islands[n].reload.l1.pic = 0;
 		Islands[n].reload.l1.tex = "t1";
 		Islands[n].reload.l1.istown = true;
-
 		Islands[n].reload.l2.label = "Marigo Fort";
 		Islands[n].reload.l2.name = "reload_fort1";
 		Islands[n].reload.l2.go = "Marigo_fort";
@@ -720,7 +631,6 @@ void InitIslands()
 		Islands[n].reload.l2.fort.locators = "SentMartin_fort1_locators"; // меняем название модели на новое
 		Islands[n].reload.l2.pic = 1;
 		Islands[n].reload.l2.tex = "t1";
-
 		Islands[n].reload.l3.label = "Shore41";
 		Islands[n].reload.l3.name = "reload_2";
 		Islands[n].reload.l3.go = "Shore41";
@@ -728,7 +638,6 @@ void InitIslands()
 		Islands[n].reload.l3.radius = 600.0;
 		Islands[n].reload.l3.pic = 0;
 		Islands[n].reload.l3.tex = "t1";
-
 		Islands[n].reload.l4.label = "Shore40";
 		Islands[n].reload.l4.name = "reload_3";
 		Islands[n].reload.l4.go = "Shore40";
@@ -736,7 +645,6 @@ void InitIslands()
 		Islands[n].reload.l4.radius = 600.0;
 		Islands[n].reload.l4.pic = 0;
 		Islands[n].reload.l4.tex = "t1";
-		
 		Islands[n].Trade.Export.id1 = GOOD_SAILCLOTH;
 		Islands[n].Trade.Export.id2 = GOOD_BRICK;
 		Islands[n].Trade.Export.id3 = GOOD_FRUITS;
@@ -744,26 +652,21 @@ void InitIslands()
 		Islands[n].Trade.Export.id5 = GOOD_SUGAR;
 		Islands[n].Trade.Export.id6 = GOOD_COTTON;
 		Islands[n].Trade.Export.id7 = GOOD_RUM;
-		
 		Islands[n].Trade.Import.id1 = GOOD_WHEAT;
 		Islands[n].Trade.Import.id2 = GOOD_WEAPON;
 		Islands[n].Trade.Import.id3 = GOOD_MEDICAMENT;
 		Islands[n].Trade.Import.id4 = GOOD_WINE;
 		Islands[n].Trade.Import.id5 = GOOD_ALE;
-		
 		Islands[n].Trade.Contraband.id1 = GOOD_SLAVES;
 		Islands[n].Trade.Contraband.id2 = GOOD_ROPES;
 		Islands[n].Trade.Contraband.id3 = GOOD_SHIPSILK;
 		Islands[n].Trade.Contraband.id4 = GOOD_SANDAL;
 		Islands[n].Trade.Contraband.id5 = GOOD_OIL;
 		Islands[n].Trade.Contraband.id6 = GOOD_POWDER;
-        
 		Islands[n].InterfaceTextures.t1 = "battle_interface\moor_7.tga";
 		Islands[n].InterfaceTextures.t1.h = 4;
 		Islands[n].InterfaceTextures.t1.v = 1;
-
 		SendMessage(&locator,"le",LM_LOCATE_I,&Islands[n]);		
-
 	/////////////////////////////////////////////////////////////////////////
 	/// Trinidad  (PortSpein)
 	/////////////////////////////////////////////////////////////////////////
@@ -781,7 +684,6 @@ void InitIslands()
 		//Islands[n].ImmersionDistance = 4000;
 		//Islands[n].ImmersionDepth = 250;
 		Islands[n].TexturePath = "Trinidad";
-
 		Islands[n].reload.l1.label = "PortSpein Port";
 		Islands[n].reload.l1.name = "Reload_1";
 		Islands[n].reload.l1.go = "PortSpein_town";
@@ -790,7 +692,6 @@ void InitIslands()
 		Islands[n].reload.l1.pic = 0;
 		Islands[n].reload.l1.tex = "t1";
 		Islands[n].reload.l1.istown = true;
-		
 		Islands[n].reload.l2.label = "PortSpein Fort";
 		Islands[n].reload.l2.name = "reload_fort1";
 		Islands[n].reload.l2.go = "PortSpein_fort";
@@ -803,7 +704,6 @@ void InitIslands()
 		Islands[n].reload.l2.fort.locators = "Trinidad_fort1_locators";
 		Islands[n].reload.l2.pic = 1;
 		Islands[n].reload.l2.tex = "t1";
-				
 		Islands[n].reload.l3.label = "Shore60";
 		Islands[n].reload.l3.name = "reload_3";
 		Islands[n].reload.l3.go = "Shore60";
@@ -811,7 +711,6 @@ void InitIslands()
 		Islands[n].reload.l3.radius = 600.0;
 		Islands[n].reload.l3.pic = 0;
 		Islands[n].reload.l3.tex = "t1";
-
 		Islands[n].reload.l4.label = "Shore59";
 		Islands[n].reload.l4.name = "reload_2";
 		Islands[n].reload.l4.go = "Shore59";
@@ -819,7 +718,6 @@ void InitIslands()
 		Islands[n].reload.l4.radius = 600.0;
 		Islands[n].reload.l4.pic = 0;
 		Islands[n].reload.l4.tex = "t1";
-
 		Islands[n].reload.l5.label = "Mayak1";
 		Islands[n].reload.l5.name = "reload_4";
 		Islands[n].reload.l5.go = "Mayak1";
@@ -827,32 +725,26 @@ void InitIslands()
 		Islands[n].reload.l5.radius = 600.0;
 		Islands[n].reload.l5.pic = 0;
 		Islands[n].reload.l5.tex = "t1";
-		
 		Islands[n].Trade.Export.id1 = GOOD_SAILCLOTH;
 		Islands[n].Trade.Export.id2 = GOOD_BRICK;
 		Islands[n].Trade.Export.id3 = GOOD_COFFEE;
 		Islands[n].Trade.Export.id4 = GOOD_CHOCOLATE;
 		Islands[n].Trade.Export.id5 = GOOD_ALE;
 		Islands[n].Trade.Export.id6 = GOOD_OIL;
-		
 		Islands[n].Trade.Import.id1 = GOOD_WHEAT;
 		Islands[n].Trade.Import.id2 = GOOD_POWDER;
 		Islands[n].Trade.Import.id3 = GOOD_MEDICAMENT;
 		Islands[n].Trade.Import.id4 = GOOD_WINE;
 		Islands[n].Trade.Import.id5 = GOOD_RUM;
-				
 		Islands[n].Trade.Contraband.id1 = GOOD_SLAVES;
 		Islands[n].Trade.Contraband.id2 = GOOD_ROPES;
 		Islands[n].Trade.Contraband.id3 = GOOD_SHIPSILK;
 		Islands[n].Trade.Contraband.id4 = GOOD_SANDAL;
 		Islands[n].Trade.Contraband.id5 = GOOD_WEAPON;
-  
 		Islands[n].InterfaceTextures.t1 = "battle_interface\moor_7.tga";
 		Islands[n].InterfaceTextures.t1.h = 4;
 		Islands[n].InterfaceTextures.t1.v = 1;
-	
 		SendMessage(&locator,"le",LM_LOCATE_I,&Islands[n]);
-
 	/////////////////////////////////////////////////////////////////////////
 	/// Nevis   (Charles)
 	/////////////////////////////////////////////////////////////////////////
@@ -870,7 +762,6 @@ void InitIslands()
 		//Islands[n].ImmersionDistance = 4000;
 		//Islands[n].ImmersionDepth = 250;
 		Islands[n].TexturePath = "Nevis";
-
 		Islands[n].reload.l1.label = "Charles Port";
 		Islands[n].reload.l1.name = "reload_1";
 		Islands[n].reload.l1.go = "Charles_town";
@@ -879,7 +770,6 @@ void InitIslands()
 		Islands[n].reload.l1.pic = 0;
 		Islands[n].reload.l1.tex = "t1";
 		Islands[n].reload.l1.istown = true;
-		
 		Islands[n].reload.l2.label = "Charles Fort";
 		Islands[n].reload.l2.name = "reload_fort1";
 		Islands[n].reload.l2.go = "Charles_fort";
@@ -892,7 +782,6 @@ void InitIslands()
 		Islands[n].reload.l2.fort.locators = "Nevis_fort1_locators";
 		Islands[n].reload.l2.pic = 1;
 		Islands[n].reload.l2.tex = "t1";
-
 		Islands[n].reload.l3.label = "Shore43";
 		Islands[n].reload.l3.name = "reload_2";
 		Islands[n].reload.l3.go = "Shore43";
@@ -900,7 +789,6 @@ void InitIslands()
 		Islands[n].reload.l3.radius = 600.0;
 		Islands[n].reload.l3.pic = 0;
 		Islands[n].reload.l3.tex = "t1";
-		
 		Islands[n].reload.l4.label = "Shore42";
 		Islands[n].reload.l4.name = "reload_3";
 		Islands[n].reload.l4.go = "Shore42";
@@ -908,7 +796,6 @@ void InitIslands()
 		Islands[n].reload.l4.radius = 600.0;
 		Islands[n].reload.l4.pic = 0;
 		Islands[n].reload.l4.tex = "t1";
-
 		Islands[n].reload.l5.label = "Mayak5";
 		Islands[n].reload.l5.name = "reload_4";
 		Islands[n].reload.l5.go = "Mayak5";
@@ -916,7 +803,6 @@ void InitIslands()
 		Islands[n].reload.l5.radius = 600.0;
 		Islands[n].reload.l5.pic = 0;
 		Islands[n].reload.l5.tex = "t1";
-		
 		Islands[n].Trade.Export.id1 = GOOD_FOOD;
 		Islands[n].Trade.Export.id2 = GOOD_BRICK;
 		Islands[n].Trade.Export.id3 = GOOD_CLOTHES;
@@ -925,32 +811,26 @@ void InitIslands()
 		Islands[n].Trade.Export.id6 = GOOD_MEDICAMENT;
 		Islands[n].Trade.Export.id7 = GOOD_WINE;
 		Islands[n].Trade.Export.id8 = GOOD_ALE;
-
 		Islands[n].Trade.Import.id1 = GOOD_WHEAT;
 		Islands[n].Trade.Import.id2 = GOOD_COFFEE;
 		Islands[n].Trade.Import.id3 = GOOD_CHOCOLATE;
 		Islands[n].Trade.Import.id4 = GOOD_TOBACCO;
 		Islands[n].Trade.Import.id5 = GOOD_COTTON;
 		Islands[n].Trade.Import.id6 = GOOD_LEATHER;
-				
 		Islands[n].Trade.Aggressive.id1 = GOOD_EBONY;
 		Islands[n].Trade.Aggressive.id2 = GOOD_MAHOGANY;
 		Islands[n].Trade.Aggressive.id3 = GOOD_CINNAMON;
 		Islands[n].Trade.Aggressive.id4 = GOOD_PAPRIKA;
-		
 		Islands[n].Trade.Contraband.id1 = GOOD_SLAVES;
 		Islands[n].Trade.Contraband.id2 = GOOD_ROPES;
 		Islands[n].Trade.Contraband.id3 = GOOD_SHIPSILK;
 		Islands[n].Trade.Contraband.id4 = GOOD_SANDAL;
 		Islands[n].Trade.Contraband.id5 = GOOD_OIL;
 		Islands[n].Trade.Contraband.id6 = GOOD_WEAPON;
-		        
 		Islands[n].InterfaceTextures.t1 = "battle_interface\moor_7.tga";
 		Islands[n].InterfaceTextures.t1.h = 4;
 		Islands[n].InterfaceTextures.t1.v = 1;
-	
 		SendMessage(&locator,"le",LM_LOCATE_I,&Islands[n]);
-		
 	/////////////////////////////////////////////////////////////////////////
 	/// Antigua  (SentJons)
 	/////////////////////////////////////////////////////////////////////////
@@ -968,7 +848,6 @@ void InitIslands()
 		//Islands[n].ImmersionDistance = 4000;
 		//Islands[n].ImmersionDepth = 250;
 		Islands[n].TexturePath = "Antigua";
-
 		Islands[n].reload.l1.label = "SentJons Port";
 		Islands[n].reload.l1.name = "reload_1";
 		Islands[n].reload.l1.go = "SentJons_town";
@@ -977,7 +856,6 @@ void InitIslands()
 		Islands[n].reload.l1.pic = 0;
 		Islands[n].reload.l1.tex = "t1";
 		Islands[n].reload.l1.istown = true;
-		
 		Islands[n].reload.l2.label = "SentJons Fort";
 		Islands[n].reload.l2.name = "reload_fort1";
 		Islands[n].reload.l2.go = "SentJons_fort";
@@ -990,7 +868,6 @@ void InitIslands()
 		Islands[n].reload.l2.fort.locators = "Antigua_fort1_locators";
 		Islands[n].reload.l2.pic = 1;
 		Islands[n].reload.l2.tex = "t1";
-
 		Islands[n].reload.l3.label = "Shore1";
 		Islands[n].reload.l3.name = "reload_2";
 		Islands[n].reload.l3.go = "Shore1";
@@ -998,7 +875,6 @@ void InitIslands()
 		Islands[n].reload.l3.radius = 600.0;
 		Islands[n].reload.l3.pic = 0;
 		Islands[n].reload.l3.tex = "t1";
-
 		Islands[n].reload.l4.label = "Shore2";
 		Islands[n].reload.l4.name = "reload_3";
 		Islands[n].reload.l4.go = "Shore2";
@@ -1006,31 +882,25 @@ void InitIslands()
 		Islands[n].reload.l4.radius = 600.0;
 		Islands[n].reload.l4.pic = 0;
 		Islands[n].reload.l4.tex = "t1";
-		
 		Islands[n].Trade.Export.id1 = GOOD_SAILCLOTH;
 		Islands[n].Trade.Export.id2 = GOOD_TOBACCO;
 		Islands[n].Trade.Export.id3 = GOOD_PAPRIKA;
 		Islands[n].Trade.Export.id4 = GOOD_ALE;
-		
 		Islands[n].Trade.Import.id1 = GOOD_WHEAT;
 		Islands[n].Trade.Import.id2 = GOOD_WEAPON;
 		Islands[n].Trade.Import.id3 = GOOD_MEDICAMENT;
 		Islands[n].Trade.Import.id4 = GOOD_WINE;
 		Islands[n].Trade.Import.id5 = GOOD_RUM;
-		
 		Islands[n].Trade.Contraband.id1 = GOOD_SLAVES;
 		Islands[n].Trade.Contraband.id2 = GOOD_ROPES;
 		Islands[n].Trade.Contraband.id3 = GOOD_SHIPSILK;
 		Islands[n].Trade.Contraband.id4 = GOOD_SANDAL;
 		Islands[n].Trade.Contraband.id5 = GOOD_OIL;
 		Islands[n].Trade.Contraband.id6 = GOOD_POWDER;
-		
 		Islands[n].InterfaceTextures.t1 = "battle_interface\moor_7.tga";
 		Islands[n].InterfaceTextures.t1.h = 4;
 		Islands[n].InterfaceTextures.t1.v = 1;
-	
 		SendMessage(&locator,"le",LM_LOCATE_I,&Islands[n]);
-
 	/////////////////////////////////////////////////////////////////////////
 	/// Guadeloupe  (BasTer)
 	/////////////////////////////////////////////////////////////////////////
@@ -1048,7 +918,6 @@ void InitIslands()
 		//Islands[n].ImmersionDistance = 4000;
 		//Islands[n].ImmersionDepth = 250;
 		Islands[n].TexturePath = "Guadeloupe";
-
 		Islands[n].reload.l1.label = "BasTer Port";
 		Islands[n].reload.l1.name = "Reload_1";
 		Islands[n].reload.l1.go = "BasTer_town";
@@ -1057,7 +926,6 @@ void InitIslands()
 		Islands[n].reload.l1.pic = 0;
 		Islands[n].reload.l1.tex = "t1";
 		Islands[n].reload.l1.istown = true;
-		
 		Islands[n].reload.l2.label = "BasTer Fort";
 		Islands[n].reload.l2.name = "reload_fort1";
 		Islands[n].reload.l2.go = "BasTer_fort";
@@ -1070,7 +938,6 @@ void InitIslands()
 		Islands[n].reload.l2.fort.locators = "Guadeloupe_fort1_locators";
 		Islands[n].reload.l2.pic = 1;
 		Islands[n].reload.l2.tex = "t1";
-
 		Islands[n].reload.l3.label = "Mayak4";
 		Islands[n].reload.l3.name = "reload_2";
 		Islands[n].reload.l3.go = "Mayak4";
@@ -1078,7 +945,6 @@ void InitIslands()
 		Islands[n].reload.l3.radius = 300.0;
 		Islands[n].reload.l3.pic = 0;
 		Islands[n].reload.l3.tex = "t1";
-
 		Islands[n].reload.l4.label = "Shore28";
 		Islands[n].reload.l4.name = "reload_3";
 		Islands[n].reload.l4.go = "Shore28";
@@ -1086,7 +952,6 @@ void InitIslands()
 		Islands[n].reload.l4.radius = 600.0;
 		Islands[n].reload.l4.pic = 0;
 		Islands[n].reload.l4.tex = "t1";
-
 		Islands[n].reload.l5.label = "Shore31";
 		Islands[n].reload.l5.name = "reload_4";
 		Islands[n].reload.l5.go = "Shore31";
@@ -1094,7 +959,6 @@ void InitIslands()
 		Islands[n].reload.l5.radius = 600.0;
 		Islands[n].reload.l5.pic = 0;
 		Islands[n].reload.l5.tex = "t1";
-
 		Islands[n].reload.l6.label = "Shore30";
 		Islands[n].reload.l6.name = "reload_5";
 		Islands[n].reload.l6.go = "Shore30";
@@ -1102,7 +966,6 @@ void InitIslands()
 		Islands[n].reload.l6.radius = 600.0;
 		Islands[n].reload.l6.pic = 0;
 		Islands[n].reload.l6.tex = "t1";
-
 		Islands[n].reload.l7.label = "Shore29";
 		Islands[n].reload.l7.name = "reload_6";
 		Islands[n].reload.l7.go = "Shore29";
@@ -1110,32 +973,26 @@ void InitIslands()
 		Islands[n].reload.l7.radius = 600.0;
 		Islands[n].reload.l7.pic = 0;
 		Islands[n].reload.l7.tex = "t1";
-		
 		Islands[n].Trade.Export.id1 = GOOD_PLANKS;
 		Islands[n].Trade.Export.id2 = GOOD_FRUITS;
 		Islands[n].Trade.Export.id3 = GOOD_COFFEE;
 		Islands[n].Trade.Export.id4 = GOOD_CHOCOLATE;
 		Islands[n].Trade.Export.id5 = GOOD_RUM;
 		Islands[n].Trade.Export.id6 = GOOD_ROPES;
-		
 		Islands[n].Trade.Import.id1 = GOOD_WHEAT;
 		Islands[n].Trade.Import.id2 = GOOD_POWDER;
 		Islands[n].Trade.Import.id3 = GOOD_MEDICAMENT;
 		Islands[n].Trade.Import.id4 = GOOD_WINE;
 		Islands[n].Trade.Import.id5 = GOOD_ALE;
-		
 		Islands[n].Trade.Contraband.id1 = GOOD_SLAVES;
 		Islands[n].Trade.Contraband.id2 = GOOD_SHIPSILK;
 		Islands[n].Trade.Contraband.id3 = GOOD_SANDAL;
 		Islands[n].Trade.Contraband.id4 = GOOD_OIL;
 		Islands[n].Trade.Contraband.id5 = GOOD_WEAPON;
-
 		Islands[n].InterfaceTextures.t1 = "battle_interface\moor_7.tga";
 		Islands[n].InterfaceTextures.t1.h = 4;
 		Islands[n].InterfaceTextures.t1.v = 1;
-	
 		SendMessage(&locator,"le",LM_LOCATE_I,&Islands[n]);
-		
 	/////////////////////////////////////////////////////////////////////////
 	/// Martinique (FortFrance, LeFransua)
 	/////////////////////////////////////////////////////////////////////////
@@ -1153,7 +1010,6 @@ void InitIslands()
 		//Islands[n].ImmersionDistance = 4000;
 		//Islands[n].ImmersionDepth = 250;
 		Islands[n].TexturePath = "Martinique";
-
 		Islands[n].reload.l1.label = "FortFrance Port";
 		Islands[n].reload.l1.name = "reload_1";
 		Islands[n].reload.l1.go = "FortFrance_town";
@@ -1162,7 +1018,6 @@ void InitIslands()
 		Islands[n].reload.l1.pic = 0;
 		Islands[n].reload.l1.tex = "t1";
 		Islands[n].reload.l1.istown = true;
-		
 		Islands[n].reload.l2.label = "FortFrance Fort";
 		Islands[n].reload.l2.name = "reload_fort1";
 		Islands[n].reload.l2.go = "FortFrance_fort";
@@ -1175,7 +1030,6 @@ void InitIslands()
 		Islands[n].reload.l2.fort.locators = "Martinique_fort1_locators";
 		Islands[n].reload.l2.pic = 1;
 		Islands[n].reload.l2.tex = "t1";
-				
 		Islands[n].reload.l3.label = "Shore38";
 		Islands[n].reload.l3.name = "reload_2";
 		Islands[n].reload.l3.go = "Shore38";
@@ -1183,7 +1037,6 @@ void InitIslands()
 		Islands[n].reload.l3.radius = 600.0;
 		Islands[n].reload.l3.pic = 0;
 		Islands[n].reload.l3.tex = "t1";
-
 		Islands[n].reload.l4.label = "LeFransua Port";
 		Islands[n].reload.l4.name = "reload_3";
 		Islands[n].reload.l4.go = "LeFransua_port";
@@ -1192,7 +1045,6 @@ void InitIslands()
 		Islands[n].reload.l4.pic = 0;
 		Islands[n].reload.l4.tex = "t1";
 		Islands[n].reload.l1.istown = true;
-
 		Islands[n].reload.l5.label = "Shore39";
 		Islands[n].reload.l5.name = "reload_4";
 		Islands[n].reload.l5.go = "Shore39";
@@ -1200,32 +1052,26 @@ void InitIslands()
 		Islands[n].reload.l5.radius = 600.0;
 		Islands[n].reload.l5.pic = 0;
 		Islands[n].reload.l5.tex = "t1";
-		
 		Islands[n].Trade.Export.id1 = GOOD_FOOD;
 		Islands[n].Trade.Export.id2 = GOOD_BRICK;
 		Islands[n].Trade.Export.id3 = GOOD_COFFEE;
 		Islands[n].Trade.Export.id4 = GOOD_COTTON;
 		Islands[n].Trade.Export.id5 = GOOD_ALE;
-		
 		Islands[n].Trade.Import.id1 = GOOD_WHEAT;
 		Islands[n].Trade.Import.id2 = GOOD_POWDER;
 		Islands[n].Trade.Import.id3 = GOOD_MEDICAMENT;
 		Islands[n].Trade.Import.id4 = GOOD_WINE;
 		Islands[n].Trade.Import.id5 = GOOD_RUM;
-		
 		Islands[n].Trade.Contraband.id1 = GOOD_SLAVES;
 		Islands[n].Trade.Contraband.id2 = GOOD_ROPES;
 		Islands[n].Trade.Contraband.id3 = GOOD_SHIPSILK;
 		Islands[n].Trade.Contraband.id4 = GOOD_SANDAL;
 		Islands[n].Trade.Contraband.id5 = GOOD_OIL;
 		Islands[n].Trade.Contraband.id6 = GOOD_WEAPON;
-        
 		Islands[n].InterfaceTextures.t1 = "battle_interface\moor_7.tga";
 		Islands[n].InterfaceTextures.t1.h = 4;
 		Islands[n].InterfaceTextures.t1.v = 1;
-		
 		SendMessage(&locator,"le",LM_LOCATE_I,&Islands[n]);
-
 	/////////////////////////////////////////////////////////////////////////
 	/// Hispaniola1
 	/////////////////////////////////////////////////////////////////////////
@@ -1245,7 +1091,6 @@ void InitIslands()
 		Islands[n].jungle.texture = "junglesprites";
 		Islands[n].jungle.scale = 20;
 		Islands[n].TexturePath = "Hispaniola1";
-
 		Islands[n].reload.l1.label = "SantoDomingo Port";
 		Islands[n].reload.l1.name = "reload_1";
 		Islands[n].reload.l1.go = "SantoDomingo_town";
@@ -1254,7 +1099,6 @@ void InitIslands()
 		Islands[n].reload.l1.pic = 0;
 		Islands[n].reload.l1.tex = "t1";
 		Islands[n].reload.l1.istown = true;
-
 		Islands[n].reload.l2.label = "SantoDomingo Fort";
 		Islands[n].reload.l2.name = "reload_fort1";
 		Islands[n].reload.l2.go = "SantoDomingo_fort";
@@ -1267,7 +1111,6 @@ void InitIslands()
 		Islands[n].reload.l2.fort.locators = "Hispaniola1_fort1_locators";
 		Islands[n].reload.l2.pic = 1;
 		Islands[n].reload.l2.tex = "t1";
-
 		Islands[n].reload.l3.label = "Mayak8";
 		Islands[n].reload.l3.name = "reload_2";
 		Islands[n].reload.l3.go = "Mayak8";
@@ -1275,7 +1118,6 @@ void InitIslands()
 		Islands[n].reload.l3.radius = 600.0;
 		Islands[n].reload.l3.pic = 0;
 		Islands[n].reload.l3.tex = "t1";
-
 		Islands[n].reload.l4.label = "Shore32";
 		Islands[n].reload.l4.name = "reload_3";
 		Islands[n].reload.l4.go = "Shore32";
@@ -1283,7 +1125,6 @@ void InitIslands()
 		Islands[n].reload.l4.radius = 600.0;
 		Islands[n].reload.l4.pic = 0;
 		Islands[n].reload.l4.tex = "t1"; 
-
 		Islands[n].reload.l6.label = "LaVega Port";
 		Islands[n].reload.l6.name = "reload_4";
 		Islands[n].reload.l6.go = "LaVega_port";
@@ -1292,7 +1133,6 @@ void InitIslands()
 		Islands[n].reload.l6.pic = 0;
 		Islands[n].reload.l6.tex = "t1";
 		Islands[n].reload.l6.istown = true;
-
 		Islands[n].reload.l5.label = "Shore33";
 		Islands[n].reload.l5.name = "reload_5";
 		Islands[n].reload.l5.go = "Shore33";
@@ -1300,32 +1140,26 @@ void InitIslands()
 		Islands[n].reload.l5.radius = 600.0;
 		Islands[n].reload.l5.pic = 0;
 		Islands[n].reload.l5.tex = "t1";  
-		
 		Islands[n].Trade.Export.id1 = GOOD_FOOD;
 		Islands[n].Trade.Export.id2 = GOOD_PLANKS;
 		Islands[n].Trade.Export.id3 = GOOD_GOLD;
 		Islands[n].Trade.Export.id4 = GOOD_TOBACCO;
 		Islands[n].Trade.Export.id5 = GOOD_LEATHER;
 		Islands[n].Trade.Export.id6 = GOOD_ALE;
-		
 		Islands[n].Trade.Import.id1 = GOOD_POWDER;
 		Islands[n].Trade.Import.id2 = GOOD_MEDICAMENT;
 		Islands[n].Trade.Import.id3 = GOOD_WINE;
 		Islands[n].Trade.Import.id4 = GOOD_RUM;
-		
 		Islands[n].Trade.Contraband.id1 = GOOD_SLAVES;
 		Islands[n].Trade.Contraband.id2 = GOOD_ROPES;
 		Islands[n].Trade.Contraband.id3 = GOOD_SHIPSILK;
 		Islands[n].Trade.Contraband.id4 = GOOD_SANDAL;
 		Islands[n].Trade.Contraband.id5 = GOOD_OIL;
 		Islands[n].Trade.Contraband.id6 = GOOD_WEAPON;
-
 		Islands[n].InterfaceTextures.t1 = "battle_interface\moor_7.tga";
 		Islands[n].InterfaceTextures.t1.h = 4;
 		Islands[n].InterfaceTextures.t1.v = 1;
-	
 		SendMessage(&locator,"le",LM_LOCATE_I,&Islands[n]);
-		
 	/////////////////////////////////////////////////////////////////////////
 	/// Hispaniola2
 	/////////////////////////////////////////////////////////////////////////
@@ -1343,7 +1177,6 @@ void InitIslands()
 		//Islands[n].ImmersionDistance = 6000;
 		//Islands[n].ImmersionDepth = 250;
 		Islands[n].TexturePath = "Hispaniola2";
-
 		Islands[n].reload.l1.label = "PortPax Port";
 		Islands[n].reload.l1.name = "reload_1";
 		Islands[n].reload.l1.go = "PortPax_town";
@@ -1352,7 +1185,6 @@ void InitIslands()
 		Islands[n].reload.l1.pic = 0;
 		Islands[n].reload.l1.tex = "t1";
 		Islands[n].reload.l1.istown = true;
-
 		Islands[n].reload.l2.label = "PortPax Fort";
 		Islands[n].reload.l2.name = "reload_fort1";
 		Islands[n].reload.l2.go = "PortPax_fort";
@@ -1365,7 +1197,6 @@ void InitIslands()
 		Islands[n].reload.l2.fort.locators = "Hispaniola2_fort1_locators";
 		Islands[n].reload.l2.pic = 1;
 		Islands[n].reload.l2.tex = "t1";
-
 		Islands[n].reload.l3.label = "Mayak7";
 		Islands[n].reload.l3.name = "reload_2";
 		Islands[n].reload.l3.go = "Mayak7";
@@ -1373,7 +1204,6 @@ void InitIslands()
 		Islands[n].reload.l3.radius = 600.0;
 		Islands[n].reload.l3.pic = 0;
 		Islands[n].reload.l3.tex = "t1";
-
 		Islands[n].reload.l4.label = "Shore34";
 		Islands[n].reload.l4.name = "reload_3";
 		Islands[n].reload.l4.go = "Shore34";
@@ -1381,32 +1211,26 @@ void InitIslands()
 		Islands[n].reload.l4.radius = 600.0;
 		Islands[n].reload.l4.pic = 0;
 		Islands[n].reload.l4.tex = "t1";
-		
 		Islands[n].Trade.Export.id1 = GOOD_FOOD;
 		Islands[n].Trade.Export.id2 = GOOD_PLANKS;
 		Islands[n].Trade.Export.id3 = GOOD_TOBACCO;
 		Islands[n].Trade.Export.id4 = GOOD_LEATHER;
 		Islands[n].Trade.Export.id5 = GOOD_ALE;
-		
 		Islands[n].Trade.Import.id1 = GOOD_WHEAT;
 		Islands[n].Trade.Import.id2 = GOOD_POWDER;
 		Islands[n].Trade.Import.id3 = GOOD_MEDICAMENT;
 		Islands[n].Trade.Import.id4 = GOOD_WINE;
 		Islands[n].Trade.Import.id5 = GOOD_RUM;
-		
 		Islands[n].Trade.Contraband.id1 = GOOD_SLAVES;
 		Islands[n].Trade.Contraband.id2 = GOOD_ROPES;
 		Islands[n].Trade.Contraband.id3 = GOOD_SHIPSILK;
 		Islands[n].Trade.Contraband.id4 = GOOD_SANDAL;
 		Islands[n].Trade.Contraband.id5 = GOOD_OIL;
 		Islands[n].Trade.Contraband.id6 = GOOD_WEAPON;
-        
 		Islands[n].InterfaceTextures.t1 = "battle_interface\moor_7.tga";
 		Islands[n].InterfaceTextures.t1.h = 4;
 		Islands[n].InterfaceTextures.t1.v = 1;
-
 		SendMessage(&locator,"le",LM_LOCATE_I,&Islands[n]);
-
 	/////////////////////////////////////////////////////////////////////////
 	/// Bermudes (Pirates Town)
 	/////////////////////////////////////////////////////////////////////////
@@ -1426,7 +1250,6 @@ void InitIslands()
 		//Islands[n].ImmersionDepth = 0;// ставим глубину погружения =0
 		Islands[n].maxviewdist = 5000.0; //ставим максимальную дистанцию видимости
 		Islands[n].TexturePath = "Bermudes"
-
 		Islands[n].reload.l1.label = "Pirates Port";
 		Islands[n].reload.l1.name = "reload_1";
 		Islands[n].reload.l1.go = "Pirates_town";
@@ -1435,7 +1258,6 @@ void InitIslands()
 		Islands[n].reload.l1.pic = 0;
 		Islands[n].reload.l1.tex = "t1";
 		Islands[n].reload.l1.istown = true;
-		
 		Islands[n].reload.l2.label = "Shore3";
 		Islands[n].reload.l2.name = "reload_2";
 		Islands[n].reload.l2.go = "Shore3";
@@ -1443,7 +1265,6 @@ void InitIslands()
 		Islands[n].reload.l2.radius = 600.0;
 		Islands[n].reload.l2.pic = 0;
 		Islands[n].reload.l2.tex = "t1";
-
 		Islands[n].reload.l3.label = "Shore_ship1";
 		Islands[n].reload.l3.name = "reload_3";
 		Islands[n].reload.l3.go = "Shore_ship1";
@@ -1451,7 +1272,6 @@ void InitIslands()
 		Islands[n].reload.l3.radius = 600.0;
 		Islands[n].reload.l3.pic = 0;
 		Islands[n].reload.l3.tex = "t1";
-		
 		Islands[n].Trade.Export.id1 = GOOD_FOOD;
 		Islands[n].Trade.Export.id2 = GOOD_SAILCLOTH;
 		Islands[n].Trade.Export.id3 = GOOD_CLOTHES;
@@ -1459,7 +1279,6 @@ void InitIslands()
 		Islands[n].Trade.Export.id5 = GOOD_SILVER;
 		Islands[n].Trade.Export.id6 = GOOD_COFFEE;
 		Islands[n].Trade.Export.id7 = GOOD_SUGAR;
-		
 		Islands[n].Trade.Import.id1 = GOOD_WHEAT;
 		Islands[n].Trade.Import.id2 = GOOD_POWDER;
 		Islands[n].Trade.Import.id3 = GOOD_WEAPON;
@@ -1467,19 +1286,15 @@ void InitIslands()
 		Islands[n].Trade.Import.id5 = GOOD_WINE;
 		Islands[n].Trade.Import.id6 = GOOD_RUM;
 		Islands[n].Trade.Import.id7 = GOOD_ALE;
-		
 		Islands[n].Trade.Contraband.id1 = GOOD_SLAVES;
 		Islands[n].Trade.Contraband.id2 = GOOD_ROPES;
 		Islands[n].Trade.Contraband.id3 = GOOD_SHIPSILK;
 		Islands[n].Trade.Contraband.id4 = GOOD_SANDAL;
 		Islands[n].Trade.Contraband.id5 = GOOD_OIL;
-
 		Islands[n].InterfaceTextures.t1 = "battle_interface\moor_7.tga";
 		Islands[n].InterfaceTextures.t1.h = 4;
 		Islands[n].InterfaceTextures.t1.v = 1;
-		
 		SendMessage(&locator,"le",LM_LOCATE_I,&Islands[n]);
-
 	/////////////////////////////////////////////////////////////////////////
 	/// Dominica
 	/////////////////////////////////////////////////////////////////////////
@@ -1498,7 +1313,6 @@ void InitIslands()
 		//Islands[n].ImmersionDistance = 4000;
 		//Islands[n].ImmersionDepth = 250;
 		Islands[n].TexturePath = "Dominica";
-
 		Islands[n].reload.l1.label = "Shore27";
 		Islands[n].reload.l1.name = "reload_1";
 		Islands[n].reload.l1.go = "Shore27";
@@ -1506,7 +1320,6 @@ void InitIslands()
 		Islands[n].reload.l1.radius = 600.0;
 		Islands[n].reload.l1.pic = 0;
 		Islands[n].reload.l1.tex = "t1";
-
 		Islands[n].reload.l2.label = "Shore26";
 		Islands[n].reload.l2.name = "reload_2";
 		Islands[n].reload.l2.go = "Shore26";
@@ -1514,13 +1327,10 @@ void InitIslands()
 		Islands[n].reload.l2.radius = 600.0;
 		Islands[n].reload.l2.pic = 0;
 		Islands[n].reload.l2.tex = "t1";
-        
 		Islands[n].InterfaceTextures.t1 = "battle_interface\moor_7.tga";
 		Islands[n].InterfaceTextures.t1.h = 4;
 		Islands[n].InterfaceTextures.t1.v = 1;
-
 		SendMessage(&locator,"le",LM_LOCATE_I,&Islands[n]);
-
 	/////////////////////////////////////////////////////////////////////////
 	/// Terks
 	/////////////////////////////////////////////////////////////////////////
@@ -1539,7 +1349,6 @@ void InitIslands()
 		//Islands[n].ImmersionDistance = 4000;
 		//Islands[n].ImmersionDepth = 250;
 		Islands[n].TexturePath = "IslaMona";
-
 		Islands[n].reload.l1.label = "Shore57";
 		Islands[n].reload.l1.name = "reload_2";
 		Islands[n].reload.l1.go = "Shore57";
@@ -1547,7 +1356,6 @@ void InitIslands()
 		Islands[n].reload.l1.radius = 600.0;
 		Islands[n].reload.l1.pic = 0;
 		Islands[n].reload.l1.tex = "t1";
-
 		Islands[n].reload.l2.label = "Shore56";
 		Islands[n].reload.l2.name = "reload_1";
 		Islands[n].reload.l2.go = "Shore56";
@@ -1555,14 +1363,10 @@ void InitIslands()
 		Islands[n].reload.l2.radius = 600.0;
 		Islands[n].reload.l2.pic = 0;
 		Islands[n].reload.l2.tex = "t1";
-        
 		Islands[n].InterfaceTextures.t1 = "battle_interface\moor_7.tga";
 		Islands[n].InterfaceTextures.t1.h = 4;
 		Islands[n].InterfaceTextures.t1.v = 1;
-
 		SendMessage(&locator,"le",LM_LOCATE_I,&Islands[n]);
-
-
 	/////////////////////////////////////////////////////////////////////////
 	/// Caiman
 	/////////////////////////////////////////////////////////////////////////
@@ -1581,7 +1385,6 @@ void InitIslands()
 		//Islands[n].ImmersionDistance = 4000;
 		//Islands[n].ImmersionDepth = 250;
 		Islands[n].TexturePath = "Caiman";
-
 		Islands[n].reload.l1.label = "Shore17";
 		Islands[n].reload.l1.name = "reload_1";
 		Islands[n].reload.l1.go = "Shore17";
@@ -1589,7 +1392,6 @@ void InitIslands()
 		Islands[n].reload.l1.radius = 600.0;
 		Islands[n].reload.l1.pic = 0;
 		Islands[n].reload.l1.tex = "t1";
-
 		Islands[n].reload.l2.label = "Shore16";
 		Islands[n].reload.l2.name = "reload_2";
 		Islands[n].reload.l2.go = "Shore16";
@@ -1597,14 +1399,10 @@ void InitIslands()
 		Islands[n].reload.l2.radius = 600.0;
 		Islands[n].reload.l2.pic = 0;
 		Islands[n].reload.l2.tex = "t1";
-        
 		Islands[n].InterfaceTextures.t1 = "battle_interface\moor_7.tga";
 		Islands[n].InterfaceTextures.t1.h = 4;
 		Islands[n].InterfaceTextures.t1.v = 1;
-
 		SendMessage(&locator,"le",LM_LOCATE_I,&Islands[n]);
-
-
 	/////////////////////////////////////////////////////////////////////////
 	/// PortoBello   (Mein)
 	/////////////////////////////////////////////////////////////////////////
@@ -1622,7 +1420,6 @@ void InitIslands()
 		//Islands[n].ImmersionDistance = 4000;
 		//Islands[n].ImmersionDepth = 250;
 		Islands[n].TexturePath = "PortoBello";
-
 		Islands[n].reload.l1.label = "PortoBello Port";
 		Islands[n].reload.l1.name = "reload_1";
 		Islands[n].reload.l1.go = "PortoBello_town";
@@ -1631,7 +1428,6 @@ void InitIslands()
 		Islands[n].reload.l1.pic = 0;
 		Islands[n].reload.l1.tex = "t1";
 		Islands[n].reload.l1.istown = true;
-
 		Islands[n].reload.l2.label = "PortoBello Fort";
 		Islands[n].reload.l2.name = "reload_fort1";
 		Islands[n].reload.l2.go = "PortoBello_fort";
@@ -1644,7 +1440,6 @@ void InitIslands()
 		Islands[n].reload.l2.fort.locators = "PortoBello_fort1_locators";
 		Islands[n].reload.l2.pic = 1;
 		Islands[n].reload.l2.tex = "t1";
-
 		Islands[n].reload.l3.label = "Shore46";
 		Islands[n].reload.l3.name = "reload_2";
 		Islands[n].reload.l3.go = "Shore46";
@@ -1652,7 +1447,6 @@ void InitIslands()
 		Islands[n].reload.l3.radius = 600.0;
 		Islands[n].reload.l3.pic = 0;
 		Islands[n].reload.l3.tex = "t1";
-
 		Islands[n].reload.l4.label = "Shore47";
 		Islands[n].reload.l4.name = "reload_3";
 		Islands[n].reload.l4.go = "Shore47";
@@ -1660,7 +1454,6 @@ void InitIslands()
 		Islands[n].reload.l4.radius = 600.0;
 		Islands[n].reload.l4.pic = 0;
 		Islands[n].reload.l4.tex = "t1";
-		
 		Islands[n].reload.l5.label = "Shore48";
 		Islands[n].reload.l5.name = "reload_4";
 		Islands[n].reload.l5.go = "Shore48";
@@ -1668,7 +1461,6 @@ void InitIslands()
 		Islands[n].reload.l5.radius = 600.0;
 		Islands[n].reload.l5.pic = 0;
 		Islands[n].reload.l5.tex = "t1";
-		
 		Islands[n].Trade.Export.id1 = GOOD_SAILCLOTH;
 		Islands[n].Trade.Export.id2 = GOOD_WHEAT;
 		Islands[n].Trade.Export.id3 = GOOD_CLOTHES;
@@ -1681,30 +1473,24 @@ void InitIslands()
 		Islands[n].Trade.Export.id10 = GOOD_MEDICAMENT;
 		Islands[n].Trade.Export.id11 = GOOD_WINE;
 		Islands[n].Trade.Export.id12 = GOOD_ALE;
-		
 		Islands[n].Trade.Import.id1 = GOOD_COFFEE;
 		Islands[n].Trade.Import.id2 = GOOD_CHOCOLATE;
 		Islands[n].Trade.Import.id3 = GOOD_TOBACCO;
 		Islands[n].Trade.Import.id4 = GOOD_SUGAR;
 		Islands[n].Trade.Import.id5 = GOOD_COTTON;
 		Islands[n].Trade.Import.id6 = GOOD_PAPRIKA;
-		
 		Islands[n].Trade.Aggressive.id1 = GOOD_EBONY;
 		Islands[n].Trade.Aggressive.id2 = GOOD_MAHOGANY;
-		
 		Islands[n].Trade.Contraband.id1 = GOOD_SLAVES;
 		Islands[n].Trade.Contraband.id2 = GOOD_ROPES;
 		Islands[n].Trade.Contraband.id3 = GOOD_SHIPSILK;
 		Islands[n].Trade.Contraband.id4 = GOOD_SANDAL;
 		Islands[n].Trade.Contraband.id5 = GOOD_OIL;
 		Islands[n].Trade.Contraband.id6 = GOOD_WEAPON;
-
 		Islands[n].InterfaceTextures.t1 = "battle_interface\moor_7.tga";
 		Islands[n].InterfaceTextures.t1.h = 4;
 		Islands[n].InterfaceTextures.t1.v = 1;
-
 		SendMessage(&locator,"le",LM_LOCATE_I,&Islands[n]);
-		
 	/////////////////////////////////////////////////////////////////////////
 	/// Cartahena   (Mein)
 	/////////////////////////////////////////////////////////////////////////
@@ -1722,7 +1508,6 @@ void InitIslands()
 		//Islands[n].ImmersionDistance = 4000;
 		//Islands[n].ImmersionDepth = 250;
 		Islands[n].TexturePath = "Cartahena";
-
 		Islands[n].reload.l1.label = "Cartahena Port";
 		Islands[n].reload.l1.name = "reload_1";
 		Islands[n].reload.l1.go = "Cartahena_town";
@@ -1731,7 +1516,6 @@ void InitIslands()
 		Islands[n].reload.l1.pic = 0;
 		Islands[n].reload.l1.tex = "t1";
 		Islands[n].reload.l1.istown = true;
-
 		Islands[n].reload.l2.label = "Cartahena Fort";
 		Islands[n].reload.l2.name = "reload_fort1";
 		Islands[n].reload.l2.go = "Cartahena_fort";
@@ -1744,7 +1528,6 @@ void InitIslands()
 		Islands[n].reload.l2.fort.locators = "Cartahena_fort1_locators";
 		Islands[n].reload.l2.pic = 1;
 		Islands[n].reload.l2.tex = "t1";
-
 		Islands[n].reload.l3.label = "Shore25";
 		Islands[n].reload.l3.name = "reload_2";
 		Islands[n].reload.l3.go = "Shore25";
@@ -1752,7 +1535,6 @@ void InitIslands()
 		Islands[n].reload.l3.radius = 600.0;
 		Islands[n].reload.l3.pic = 0;
 		Islands[n].reload.l3.tex = "t1";
-
 		Islands[n].reload.l4.label = "Mayak11";
 		Islands[n].reload.l4.name = "reload_3";
 		Islands[n].reload.l4.go = "Mayak11";
@@ -1760,7 +1542,6 @@ void InitIslands()
 		Islands[n].reload.l4.radius = 600.0;
 		Islands[n].reload.l4.pic = 0;
 		Islands[n].reload.l4.tex = "t1";
-		
 		Islands[n].Trade.Export.id1 = GOOD_FOOD;
 		Islands[n].Trade.Export.id2 = GOOD_WHEAT;
 		Islands[n].Trade.Export.id3 = GOOD_GOLD;
@@ -1769,25 +1550,20 @@ void InitIslands()
 		Islands[n].Trade.Export.id6 = GOOD_CINNAMON;
 		Islands[n].Trade.Export.id7 = GOOD_COPRA;
 		Islands[n].Trade.Export.id8 = GOOD_RUM;
-		
 		Islands[n].Trade.Import.id1 = GOOD_POWDER;
 		Islands[n].Trade.Import.id2 = GOOD_MEDICAMENT;
 		Islands[n].Trade.Import.id3 = GOOD_WINE;
 		Islands[n].Trade.Import.id4 = GOOD_ALE;
-		
 		Islands[n].Trade.Contraband.id1 = GOOD_SLAVES;
 		Islands[n].Trade.Contraband.id2 = GOOD_ROPES;
 		Islands[n].Trade.Contraband.id3 = GOOD_SHIPSILK;
 		Islands[n].Trade.Contraband.id4 = GOOD_SANDAL;
 		Islands[n].Trade.Contraband.id5 = GOOD_OIL;
 		Islands[n].Trade.Contraband.id6 = GOOD_WEAPON;
-		        
 		Islands[n].InterfaceTextures.t1 = "battle_interface\moor_7.tga";
 		Islands[n].InterfaceTextures.t1.h = 4;
 		Islands[n].InterfaceTextures.t1.v = 1;
-
 		SendMessage(&locator,"le",LM_LOCATE_I,&Islands[n]);
-		
 	/////////////////////////////////////////////////////////////////////////
 	/// Maracaibo   (Mein)
 	/////////////////////////////////////////////////////////////////////////
@@ -1805,7 +1581,6 @@ void InitIslands()
 		//Islands[n].ImmersionDistance = 4000;
 		//Islands[n].ImmersionDepth = 250;
 		Islands[n].TexturePath = "Maracaibo";
-
 		Islands[n].reload.l1.label = "Maracaibo Port";
 		Islands[n].reload.l1.name = "reload_1";
 		Islands[n].reload.l1.go = "Maracaibo_town";
@@ -1814,7 +1589,6 @@ void InitIslands()
 		Islands[n].reload.l1.pic = 0;
 		Islands[n].reload.l1.tex = "t1";
 		Islands[n].reload.l1.istown = true;
-
 		Islands[n].reload.l2.label = "Maracaibo Fort";
 		Islands[n].reload.l2.name = "reload_fort1";
 		Islands[n].reload.l2.go = "Maracaibo_fort";
@@ -1827,7 +1601,6 @@ void InitIslands()
 		Islands[n].reload.l2.fort.locators = "Maracaibo_fort1_locators";
 		Islands[n].reload.l2.pic = 1;
 		Islands[n].reload.l2.tex = "t1";
-
 		Islands[n].reload.l3.label = "Shore37";
 		Islands[n].reload.l3.name = "reload_2";
 		Islands[n].reload.l3.go = "Shore37";
@@ -1835,7 +1608,6 @@ void InitIslands()
 		Islands[n].reload.l3.radius = 600.0;
 		Islands[n].reload.l3.pic = 0;
 		Islands[n].reload.l3.tex = "t1";
-
 		Islands[n].reload.l4.label = "Shore_ship3";
 		Islands[n].reload.l4.name = "reload_3";
 		Islands[n].reload.l4.go = "Shore_ship3";
@@ -1843,31 +1615,25 @@ void InitIslands()
 		Islands[n].reload.l4.radius = 600.0;
 		Islands[n].reload.l4.pic = 0;
 		Islands[n].reload.l4.tex = "t1";
-		
 		Islands[n].Trade.Export.id1 = GOOD_BRICK;
 		Islands[n].Trade.Export.id2 = GOOD_WHEAT;
 		Islands[n].Trade.Export.id3 = GOOD_CHOCOLATE;
 		Islands[n].Trade.Export.id4 = GOOD_SUGAR;
 		Islands[n].Trade.Export.id5 = GOOD_ALE;
-		
 		Islands[n].Trade.Import.id1 = GOOD_POWDER;
 		Islands[n].Trade.Import.id2 = GOOD_MEDICAMENT;
 		Islands[n].Trade.Import.id3 = GOOD_WINE;
 		Islands[n].Trade.Import.id4 = GOOD_RUM;
-		
 		Islands[n].Trade.Contraband.id1 = GOOD_SLAVES;
 		Islands[n].Trade.Contraband.id2 = GOOD_ROPES;
 		Islands[n].Trade.Contraband.id3 = GOOD_SHIPSILK;
 		Islands[n].Trade.Contraband.id4 = GOOD_SANDAL;
 		Islands[n].Trade.Contraband.id5 = GOOD_OIL;
 		Islands[n].Trade.Contraband.id6 = GOOD_WEAPON;
-        
 		Islands[n].InterfaceTextures.t1 = "battle_interface\moor_7.tga";
 		Islands[n].InterfaceTextures.t1.h = 4;
 		Islands[n].InterfaceTextures.t1.v = 1;
-
 		SendMessage(&locator,"le",LM_LOCATE_I,&Islands[n]);
-		
 	/////////////////////////////////////////////////////////////////////////
 	/// Caracas   (Mein)
 	/////////////////////////////////////////////////////////////////////////
@@ -1885,7 +1651,6 @@ void InitIslands()
 		//Islands[n].ImmersionDistance = 4000;
 		//Islands[n].ImmersionDepth = 250;
 		Islands[n].TexturePath = "Caracas";
-
 		Islands[n].reload.l1.label = "Caracas Port";
 		Islands[n].reload.l1.name = "reload_1";
 		Islands[n].reload.l1.go = "Caracas_town";
@@ -1894,7 +1659,6 @@ void InitIslands()
 		Islands[n].reload.l1.pic = 0;
 		Islands[n].reload.l1.tex = "t1";
 		Islands[n].reload.l1.istown = true;
-
 		Islands[n].reload.l2.label = "Caracas Fort";
 		Islands[n].reload.l2.name = "reload_fort1";
 		Islands[n].reload.l2.go = "Caracas_fort";
@@ -1907,7 +1671,6 @@ void InitIslands()
 		Islands[n].reload.l2.fort.locators = "Caracas_fort1_locators";
 		Islands[n].reload.l2.pic = 1;
 		Islands[n].reload.l2.tex = "t1";
-
 		Islands[n].reload.l3.label = "Shore21";
 		Islands[n].reload.l3.name = "reload_2";
 		Islands[n].reload.l3.go = "Shore21";
@@ -1915,32 +1678,26 @@ void InitIslands()
 		Islands[n].reload.l3.radius = 600.0;
 		Islands[n].reload.l3.pic = 0;
 		Islands[n].reload.l3.tex = "t1";
-		
 		Islands[n].Trade.Export.id1 = GOOD_BRICK;
 		Islands[n].Trade.Export.id2 = GOOD_WHEAT;
 		Islands[n].Trade.Export.id3 = GOOD_COFFEE;
 		Islands[n].Trade.Export.id4 = GOOD_CHOCOLATE;
 		Islands[n].Trade.Export.id5 = GOOD_LEATHER;
 		Islands[n].Trade.Export.id6 = GOOD_ALE;
-		
 		Islands[n].Trade.Import.id1 = GOOD_POWDER;
 		Islands[n].Trade.Import.id2 = GOOD_MEDICAMENT;
 		Islands[n].Trade.Import.id3 = GOOD_WINE;
 		Islands[n].Trade.Import.id4 = GOOD_RUM;
-		
 		Islands[n].Trade.Contraband.id1 = GOOD_SLAVES;
 		Islands[n].Trade.Contraband.id2 = GOOD_ROPES;
 		Islands[n].Trade.Contraband.id3 = GOOD_SHIPSILK;
 		Islands[n].Trade.Contraband.id4 = GOOD_SANDAL;
 		Islands[n].Trade.Contraband.id5 = GOOD_OIL;
 		Islands[n].Trade.Contraband.id6 = GOOD_WEAPON;
-		         
 		Islands[n].InterfaceTextures.t1 = "battle_interface\moor_7.tga";
 		Islands[n].InterfaceTextures.t1.h = 4;
 		Islands[n].InterfaceTextures.t1.v = 1;
-
 		SendMessage(&locator,"le",LM_LOCATE_I,&Islands[n]);
-		
 	/////////////////////////////////////////////////////////////////////////
 	/// Cumana   (Mein)
 	/////////////////////////////////////////////////////////////////////////
@@ -1958,7 +1715,6 @@ void InitIslands()
 		//Islands[n].ImmersionDistance = 4000;
 		//Islands[n].ImmersionDepth = 250;
 		Islands[n].TexturePath = "Cumana";
-
 		Islands[n].reload.l1.label = "Cumana Port";
 		Islands[n].reload.l1.name = "reload_1";
 		Islands[n].reload.l1.go = "Cumana_town";
@@ -1967,7 +1723,6 @@ void InitIslands()
 		Islands[n].reload.l1.pic = 0;
 		Islands[n].reload.l1.tex = "t1";
 		Islands[n].reload.l1.istown = true;
-
 		Islands[n].reload.l2.label = "Cumana Fort";
 		Islands[n].reload.l2.name = "reload_fort1";
 		Islands[n].reload.l2.go = "Cumana_fort";
@@ -1980,7 +1735,6 @@ void InitIslands()
 		Islands[n].reload.l2.fort.locators = "Cumana_fort1_locators";
 		Islands[n].reload.l2.pic = 1;
 		Islands[n].reload.l2.tex = "t1";
-
 		Islands[n].reload.l3.label = "Shore20";
 		Islands[n].reload.l3.name = "reload_2";
 		Islands[n].reload.l3.go = "Shore20";
@@ -1988,7 +1742,6 @@ void InitIslands()
 		Islands[n].reload.l3.radius = 600.0;
 		Islands[n].reload.l3.pic = 0;
 		Islands[n].reload.l3.tex = "t1";
-
 		Islands[n].reload.l4.label = "Shore19";
 		Islands[n].reload.l4.name = "reload_3";
 		Islands[n].reload.l4.go = "Shore19";
@@ -1996,7 +1749,6 @@ void InitIslands()
 		Islands[n].reload.l4.radius = 600.0;
 		Islands[n].reload.l4.pic = 0;
 		Islands[n].reload.l4.tex = "t1";
-
 		Islands[n].reload.l5.label = "Shore18";
 		Islands[n].reload.l5.name = "reload_4";
 		Islands[n].reload.l5.go = "Shore18";
@@ -2004,32 +1756,25 @@ void InitIslands()
 		Islands[n].reload.l5.radius = 600.0;
 		Islands[n].reload.l5.pic = 0;
 		Islands[n].reload.l5.tex = "t1"; 
-		
 		Islands[n].Trade.Export.id1 = GOOD_FOOD;
 		Islands[n].Trade.Export.id2 = GOOD_WHEAT;
 		Islands[n].Trade.Export.id3 = GOOD_COTTON;
 		Islands[n].Trade.Export.id4 = GOOD_PAPRIKA;
 		Islands[n].Trade.Export.id5 = GOOD_RUM;
-
 		Islands[n].Trade.Import.id1 = GOOD_POWDER;
 		Islands[n].Trade.Import.id2 = GOOD_MEDICAMENT;
 		Islands[n].Trade.Import.id3 = GOOD_WINE;
 		Islands[n].Trade.Import.id4 = GOOD_ALE;
-		
 		Islands[n].Trade.Contraband.id1 = GOOD_SLAVES;
 		Islands[n].Trade.Contraband.id2 = GOOD_ROPES;
 		Islands[n].Trade.Contraband.id3 = GOOD_SHIPSILK;
 		Islands[n].Trade.Contraband.id4 = GOOD_SANDAL;
 		Islands[n].Trade.Contraband.id5 = GOOD_OIL;
 		Islands[n].Trade.Contraband.id6 = GOOD_WEAPON;
-
 		Islands[n].InterfaceTextures.t1 = "battle_interface\moor_7.tga";
 		Islands[n].InterfaceTextures.t1.h = 4;
 		Islands[n].InterfaceTextures.t1.v = 1;
-
 		SendMessage(&locator,"le",LM_LOCATE_I,&Islands[n]);
-		
-		
 	/////////////////////////////////////////////////////////////////////////
 	/// SantaCatalina   (Mein)
 	/////////////////////////////////////////////////////////////////////////
@@ -2047,7 +1792,6 @@ void InitIslands()
 		//Islands[n].ImmersionDistance = 4000;
 		//Islands[n].ImmersionDepth = 250;
 		Islands[n].TexturePath = "SantaCatalina";
-
 		Islands[n].reload.l1.label = "SantaCatalina Port";
 		Islands[n].reload.l1.name = "reload_1";
 		Islands[n].reload.l1.go = "SantaCatalina_town";
@@ -2056,7 +1800,6 @@ void InitIslands()
 		Islands[n].reload.l1.pic = 0;
 		Islands[n].reload.l1.tex = "t1";
 		Islands[n].reload.l1.istown = true;
-
 		Islands[n].reload.l2.label = "SantaCatalina Fort";
 		Islands[n].reload.l2.name = "reload_fort1";
 		Islands[n].reload.l2.go = "SantaCatalina_fort";
@@ -2069,7 +1812,6 @@ void InitIslands()
 		Islands[n].reload.l2.fort.locators = "SantaCatalina_fort1_locators";
 		Islands[n].reload.l2.pic = 1;
 		Islands[n].reload.l2.tex = "t1";
-
 		Islands[n].reload.l3.label = "Shore53";
 		Islands[n].reload.l3.name = "reload_2";
 		Islands[n].reload.l3.go = "Shore53";
@@ -2077,7 +1819,6 @@ void InitIslands()
 		Islands[n].reload.l3.radius = 600.0;
 		Islands[n].reload.l3.pic = 0;
 		Islands[n].reload.l3.tex = "t1";
-
 		Islands[n].reload.l4.label = "Shore54";
 		Islands[n].reload.l4.name = "reload_3";
 		Islands[n].reload.l4.go = "Shore54";
@@ -2085,7 +1826,6 @@ void InitIslands()
 		Islands[n].reload.l4.radius = 600.0;
 		Islands[n].reload.l4.pic = 0;
 		Islands[n].reload.l4.tex = "t1";
-
 		Islands[n].reload.l5.label = "Shore55";
 		Islands[n].reload.l5.name = "reload_4";
 		Islands[n].reload.l5.go = "Shore55";
@@ -2093,32 +1833,26 @@ void InitIslands()
 		Islands[n].reload.l5.radius = 600.0;
 		Islands[n].reload.l5.pic = 0;
 		Islands[n].reload.l5.tex = "t1";
-		
 		Islands[n].Trade.Export.id1 = GOOD_PLANKS;
 		Islands[n].Trade.Export.id2 = GOOD_FRUITS;
 		Islands[n].Trade.Export.id3 = GOOD_EBONY;
 		Islands[n].Trade.Export.id4 = GOOD_MAHOGANY;
 		Islands[n].Trade.Export.id5 = GOOD_RUM;
 		Islands[n].Trade.Export.id6 = GOOD_SANDAL;
-		
 		Islands[n].Trade.Import.id1 = GOOD_WHEAT;
 		Islands[n].Trade.Import.id2 = GOOD_POWDER;
 		Islands[n].Trade.Import.id3 = GOOD_MEDICAMENT;
 		Islands[n].Trade.Import.id4 = GOOD_WINE;
 		Islands[n].Trade.Import.id5 = GOOD_ALE;
-		
 		Islands[n].Trade.Contraband.id1 = GOOD_SLAVES;
 		Islands[n].Trade.Contraband.id2 = GOOD_ROPES;
 		Islands[n].Trade.Contraband.id3 = GOOD_SHIPSILK;
 		Islands[n].Trade.Contraband.id4 = GOOD_OIL;
 		Islands[n].Trade.Contraband.id5 = GOOD_WEAPON;
-
 		Islands[n].InterfaceTextures.t1 = "battle_interface\moor_7.tga";
 		Islands[n].InterfaceTextures.t1.h = 4;
 		Islands[n].InterfaceTextures.t1.v = 1;
-
 		SendMessage(&locator,"le",LM_LOCATE_I,&Islands[n]);
-		
 	/////////////////////////////////////////////////////////////////////////
 	/// Beliz   (Mein)
 	/////////////////////////////////////////////////////////////////////////
@@ -2136,7 +1870,6 @@ void InitIslands()
 		//Islands[n].ImmersionDistance = 4000;
 		//Islands[n].ImmersionDepth = 250;
 		Islands[n].TexturePath = "Beliz";
-
 		Islands[n].reload.l1.label = "Beliz Port";
 		Islands[n].reload.l1.name = "reload_1";
 		Islands[n].reload.l1.go = "Beliz_town";
@@ -2145,7 +1878,6 @@ void InitIslands()
 		Islands[n].reload.l1.pic = 0;
 		Islands[n].reload.l1.tex = "t1";
 		Islands[n].reload.l1.istown = true;
-
 		Islands[n].reload.l2.label = "Beliz Fort";
 		Islands[n].reload.l2.name = "reload_fort1";
 		Islands[n].reload.l2.go = "Beliz_fort";
@@ -2158,7 +1890,6 @@ void InitIslands()
 		Islands[n].reload.l2.fort.locators = "Beliz_fort1_locators";
 		Islands[n].reload.l2.pic = 1;
 		Islands[n].reload.l2.tex = "t1";
-
 		Islands[n].reload.l3.label = "Shore8";
 		Islands[n].reload.l3.name = "reload_2";
 		Islands[n].reload.l3.go = "Shore8";
@@ -2166,7 +1897,6 @@ void InitIslands()
 		Islands[n].reload.l3.radius = 600.0;
 		Islands[n].reload.l3.pic = 0;
 		Islands[n].reload.l3.tex = "t1";
-
 		Islands[n].reload.l4.label = "Shore7";
 		Islands[n].reload.l4.name = "reload_3";
 		Islands[n].reload.l4.go = "Shore7";
@@ -2174,7 +1904,6 @@ void InitIslands()
 		Islands[n].reload.l4.radius = 600.0;
 		Islands[n].reload.l4.pic = 0;
 		Islands[n].reload.l4.tex = "t1";
-
 		Islands[n].reload.l5.label = "Shore6";
 		Islands[n].reload.l5.name = "reload_4";
 		Islands[n].reload.l5.go = "Shore6";
@@ -2182,7 +1911,6 @@ void InitIslands()
 		Islands[n].reload.l5.radius = 600.0;
 		Islands[n].reload.l5.pic = 0;
 		Islands[n].reload.l5.tex = "t1";
-
 		Islands[n].reload.l6.label = "Shore_ship2";
 		Islands[n].reload.l6.name = "reload_5";
 		Islands[n].reload.l6.go = "Shore_ship2";
@@ -2190,7 +1918,6 @@ void InitIslands()
 		Islands[n].reload.l6.radius = 600.0;
 		Islands[n].reload.l6.pic = 0;
 		Islands[n].reload.l6.tex = "t1";
-
 		Islands[n].reload.l7.label = "Shore9";
 		Islands[n].reload.l7.name = "reload_6";
 		Islands[n].reload.l7.go = "Shore9";
@@ -2198,7 +1925,6 @@ void InitIslands()
 		Islands[n].reload.l7.radius = 600.0;
 		Islands[n].reload.l7.pic = 0;
 		Islands[n].reload.l7.tex = "t1";
-
 		Islands[n].reload.l8.label = "Shore10";
 		Islands[n].reload.l8.name = "reload_7";
 		Islands[n].reload.l8.go = "Shore10";
@@ -2206,7 +1932,6 @@ void InitIslands()
 		Islands[n].reload.l8.radius = 600.0;
 		Islands[n].reload.l8.pic = 0;
 		Islands[n].reload.l8.tex = "t1";
-		
 		Islands[n].Trade.Export.id1 = GOOD_FOOD;
 		Islands[n].Trade.Export.id2 = GOOD_PLANKS;
 		Islands[n].Trade.Export.id3 = GOOD_COFFEE;
@@ -2214,29 +1939,23 @@ void InitIslands()
 		Islands[n].Trade.Export.id5 = GOOD_COPRA;
 		Islands[n].Trade.Export.id6 = GOOD_ALE;
 		Islands[n].Trade.Export.id7 = GOOD_SANDAL;
-		
 		Islands[n].Trade.Import.id1 = GOOD_WHEAT;
 		Islands[n].Trade.Import.id2 = GOOD_WEAPON;
 		Islands[n].Trade.Import.id3 = GOOD_MEDICAMENT;
 		Islands[n].Trade.Import.id4 = GOOD_WINE;
 		Islands[n].Trade.Import.id5 = GOOD_RUM;
-		
 		Islands[n].Trade.Contraband.id1 = GOOD_SLAVES;
 		Islands[n].Trade.Contraband.id2 = GOOD_ROPES;
 		Islands[n].Trade.Contraband.id3 = GOOD_SHIPSILK;
 		Islands[n].Trade.Contraband.id4 = GOOD_OIL;
 		Islands[n].Trade.Contraband.id5 = GOOD_POWDER;
-
 		Islands[n].InterfaceTextures.t1 = "battle_interface\moor_7.tga";
 		Islands[n].InterfaceTextures.t1.h = 4;
 		Islands[n].InterfaceTextures.t1.v = 1;
-
 		SendMessage(&locator,"le",LM_LOCATE_I,&Islands[n]);
-
 	/////////////////////////////////////////////////////////////////////////
 	/// ГПК
 	/////////////////////////////////////////////////////////////////////////
-
 		n = n + 1;
 		Islands[n].id = "LostShipsCity";
 		Islands[n].model = "LostShipsCity";
@@ -2256,7 +1975,6 @@ void InitIslands()
 		Islands[n].reload.l1.pic = 0;
 		Islands[n].reload.l1.tex = "t1";
 		Islands[n].reload.l1.istown = true; 
-
 		Islands[n].reload.l2.label = "LSC South";
 		Islands[n].reload.l2.name = "reload_2";
 		Islands[n].reload.l2.go = "LostShipsCity_town";
@@ -2265,11 +1983,9 @@ void InitIslands()
 		Islands[n].reload.l2.pic = 0;
 		Islands[n].reload.l2.tex = "t1";
 		Islands[n].reload.l2.istown = true;
-		
 		Islands[n].Trade.Export.id1 = GOOD_BRICK;		
 		Islands[n].Trade.Export.id2 = GOOD_GOLD;
 		Islands[n].Trade.Export.id3 = GOOD_SILVER;
-		
 		Islands[n].Trade.Import.id1 = GOOD_FOOD;
 		Islands[n].Trade.Import.id2 = GOOD_SAILCLOTH;
 		Islands[n].Trade.Import.id3 = GOOD_PLANKS;
@@ -2282,19 +1998,15 @@ void InitIslands()
 		Islands[n].Trade.Import.id10 = GOOD_WINE;
 		Islands[n].Trade.Import.id11 = GOOD_RUM;
 		Islands[n].Trade.Import.id12 = GOOD_ALE;
-		
 		Islands[n].Trade.Contraband.id1 = GOOD_SLAVES;
 		Islands[n].Trade.Contraband.id2 = GOOD_ROPES;
 		Islands[n].Trade.Contraband.id3 = GOOD_SHIPSILK;
 		Islands[n].Trade.Contraband.id4 = GOOD_SANDAL;
 		Islands[n].Trade.Contraband.id5 = GOOD_OIL;
-
 		Islands[n].InterfaceTextures.t1 = "battle_interface\moor_7.tga";
 		Islands[n].InterfaceTextures.t1.h = 4;
 		Islands[n].InterfaceTextures.t1.v = 1;
-
 		SendMessage(&locator,"le",LM_LOCATE_I,&Islands[n]);
-
 	/////////////////////////////////////////////////////////////////////////
 	/// Исла де Муэрте
 	/////////////////////////////////////////////////////////////////////////
@@ -2316,13 +2028,10 @@ void InitIslands()
 		Islands[n].reload.l1.radius = 600.0;
 		Islands[n].reload.l1.pic = 0;
 		Islands[n].reload.l1.tex = "t1";
-        
 		Islands[n].InterfaceTextures.t1 = "battle_interface\moor_7.tga";
 		Islands[n].InterfaceTextures.t1.h = 4;
 		Islands[n].InterfaceTextures.t1.v = 1;
-
 		SendMessage(&locator,"le",LM_LOCATE_I,&Islands[n]);
-
 	/////////////////////////////////////////////////////////////////////////
 	/// Ksochitam
 	/////////////////////////////////////////////////////////////////////////
@@ -2342,7 +2051,6 @@ void InitIslands()
 		Islands[n].jungle.scale = 10;
 		Islands[n].TexturePath = "IslaMona";
 		Islands[n].EffectRadius = 500; 
-		
 		Islands[n].reload.l1.label = "Shore65";
 		Islands[n].reload.l1.name = "reload_2";
 		Islands[n].reload.l1.go = "Shore65";
@@ -2350,7 +2058,6 @@ void InitIslands()
 		Islands[n].reload.l1.radius = 600.0;
 		Islands[n].reload.l1.pic = 0;
 		Islands[n].reload.l1.tex = "t1";
-
 		Islands[n].reload.l2.label = "Shore66_1";
 		Islands[n].reload.l2.name = "reload_1";
 		Islands[n].reload.l2.go = "";
@@ -2358,13 +2065,10 @@ void InitIslands()
 		Islands[n].reload.l2.radius = 0.0;
 		Islands[n].reload.l2.pic = 0;
 		Islands[n].reload.l2.tex = "t1";
-        
 		Islands[n].InterfaceTextures.t1 = "battle_interface\moor_7.tga";
 		Islands[n].InterfaceTextures.t1.h = 4;
 		Islands[n].InterfaceTextures.t1.v = 1;
-
 		SendMessage(&locator,"le",LM_LOCATE_I,&Islands[n]);
-				
 	/////////////////////////////////////////////////////////////////////////
 	/// RockIsland
 	/////////////////////////////////////////////////////////////////////////
@@ -2378,9 +2082,7 @@ void InitIslands()
 		Islands[n].reload_enable = false;
 		Islands[n].hidden = true;
 		Islands[n].colonyquantity = 0;
-				
 		Islands[n].TexturePath = "Reefs";
-
 		Islands[n].reload.l1.label = "Shore67_1";
 		Islands[n].reload.l1.name = "reload_1";
 		Islands[n].reload.l1.go = "Shore67";
@@ -2388,7 +2090,6 @@ void InitIslands()
 		Islands[n].reload.l1.radius = 600.0;
 		Islands[n].reload.l1.pic = 0;
 		Islands[n].reload.l1.tex = "t1";
-
 		Islands[n].reload.l2.label = "Shore67_2";
 		Islands[n].reload.l2.name = "reload_2";
 		Islands[n].reload.l2.go = "Shore67";
@@ -2396,13 +2097,10 @@ void InitIslands()
 		Islands[n].reload.l2.radius = 600.0;
 		Islands[n].reload.l2.pic = 0;
 		Islands[n].reload.l2.tex = "t1";
-
 		Islands[n].InterfaceTextures.t1 = "battle_interface\moor_7.tga";
 		Islands[n].InterfaceTextures.t1.h = 4;
 		Islands[n].InterfaceTextures.t1.v = 1;
-
 		SendMessage(&locator,"le",LM_LOCATE_I,&Islands[n]);		
-
 	/////////////////////////////////////////////////////////////////////////
 	/// Providence
 	/////////////////////////////////////////////////////////////////////////
@@ -2421,7 +2119,6 @@ void InitIslands()
 		Islands[n].jungle.texture = "junglesprites";
 		Islands[n].jungle.scale = 12.5;
 		Islands[n].TexturePath = "Providence";
-
 		Islands[n].reload.l1.label = "SanAndres Port";
 		Islands[n].reload.l1.name = "reload_1";
 		Islands[n].reload.l1.go = "SanAndres_town";
@@ -2430,7 +2127,6 @@ void InitIslands()
 		Islands[n].reload.l1.pic = 0;
 		Islands[n].reload.l1.tex = "t1";
 		Islands[n].reload.l1.istown = true;
-
 		Islands[n].reload.l2.label = "SanAndres Fort";
 		Islands[n].reload.l2.name = "reload_fort1";
 		Islands[n].reload.l2.go = "SanAndres_fort";
@@ -2443,7 +2139,6 @@ void InitIslands()
 		Islands[n].reload.l2.fort.locators = "Providence_fort1_locators";
 		Islands[n].reload.l2.pic = 1;
 		Islands[n].reload.l2.tex = "t1";
-				
 		Islands[n].reload.l3.label = "Shore68";
 		Islands[n].reload.l3.name = "reload_2";
 		Islands[n].reload.l3.go = "Shore68";
@@ -2451,7 +2146,6 @@ void InitIslands()
 		Islands[n].reload.l3.radius = 600.0;
 		Islands[n].reload.l3.pic = 0;
 		Islands[n].reload.l3.tex = "t1";
-
 		Islands[n].reload.l4.label = "Shore69";
 		Islands[n].reload.l4.name = "reload_3";
 		Islands[n].reload.l4.go = "Shore69";
@@ -2459,35 +2153,28 @@ void InitIslands()
 		Islands[n].reload.l4.radius = 600.0;
 		Islands[n].reload.l4.pic = 0;
 		Islands[n].reload.l4.tex = "t1";
-		
 		Islands[n].Trade.Export.id1 = GOOD_BRICK;
 		Islands[n].Trade.Export.id2 = GOOD_FRUITS;
 		Islands[n].Trade.Export.id3 = GOOD_COTTON;
 		Islands[n].Trade.Export.id4 = GOOD_LEATHER;
 		Islands[n].Trade.Export.id5 = GOOD_ALE;
-		
 		Islands[n].Trade.Import.id1 = GOOD_POWDER;
 		Islands[n].Trade.Import.id2 = GOOD_MEDICAMENT;
 		Islands[n].Trade.Import.id3 = GOOD_WINE;
 		Islands[n].Trade.Import.id4 = GOOD_RUM;
-		
 		Islands[n].Trade.Contraband.id1 = GOOD_SLAVES;
 		Islands[n].Trade.Contraband.id2 = GOOD_ROPES;
 		Islands[n].Trade.Contraband.id3 = GOOD_SHIPSILK;
 		Islands[n].Trade.Contraband.id4 = GOOD_SANDAL;
 		Islands[n].Trade.Contraband.id5 = GOOD_OIL;
 		Islands[n].Trade.Contraband.id6 = GOOD_WEAPON;
-	
 		Islands[n].InterfaceTextures.t1 = "battle_interface\moor_7.tga";
 		Islands[n].InterfaceTextures.t1.h = 4;
 		Islands[n].InterfaceTextures.t1.v = 1;
-
 		SendMessage(&locator,"le",LM_LOCATE_I,&Islands[n]);		
-
 	/////////////////////////////////////////////////////////////////////////
 	/// SantaQuiteria
 	/////////////////////////////////////////////////////////////////////////	
-	
 		n = n + 1;
 		Islands[n].id = "SantaQuiteria";
 		Islands[n].model = "SantaQuiteria";
@@ -2502,7 +2189,6 @@ void InitIslands()
 		Islands[n].jungle.texture = "junglesprites";
 		Islands[n].jungle.scale = 12.5;
 		Islands[n].TexturePath = "SantaQuiteria";
-
 		Islands[n].reload.l1.label = "Shore70";
 		Islands[n].reload.l1.name = "reload_1";
 		Islands[n].reload.l1.go = "Shore70";
@@ -2510,7 +2196,6 @@ void InitIslands()
 		Islands[n].reload.l1.radius = 600.0;
 		Islands[n].reload.l1.pic = 0;
 		Islands[n].reload.l1.tex = "t1";
-
 		Islands[n].reload.l2.label = "Shore71";
 		Islands[n].reload.l2.name = "reload_2";
 		Islands[n].reload.l2.go = "Shore71";
@@ -2518,7 +2203,6 @@ void InitIslands()
 		Islands[n].reload.l2.radius = 600.0;
 		Islands[n].reload.l2.pic = 0;
 		Islands[n].reload.l2.tex = "t1";
-		
 		Islands[n].reload.l3.label = "Shore72";
 		Islands[n].reload.l3.name = "reload_3";
 		Islands[n].reload.l3.go = "Shore72";
@@ -2526,17 +2210,13 @@ void InitIslands()
 		Islands[n].reload.l3.radius = 600.0;
 		Islands[n].reload.l3.pic = 0;
 		Islands[n].reload.l3.tex = "t1";
-        
 		Islands[n].InterfaceTextures.t1 = "battle_interface\moor_7.tga";
 		Islands[n].InterfaceTextures.t1.h = 4;
 		Islands[n].InterfaceTextures.t1.v = 1;
-
 		SendMessage(&locator,"le",LM_LOCATE_I,&Islands[n]);		
-
 	/////////////////////////////////////////////////////////////////////////
 	/// IslaDeVieques
 	/////////////////////////////////////////////////////////////////////////	
-	
 		n = n + 1;
 		Islands[n].id = "IslaDeVieques";
 		Islands[n].model = "IslaDeVieques";
@@ -2551,7 +2231,6 @@ void InitIslands()
 		Islands[n].jungle.texture = "IslaDeVieques";
 		Islands[n].jungle.scale = 12.5;
 		Islands[n].TexturePath = "IslaDeVieques";
-
 		Islands[n].reload.l2.label = "Shore74";
 		Islands[n].reload.l2.name = "reload_2";
 		Islands[n].reload.l2.go = "Shore74";
@@ -2559,17 +2238,13 @@ void InitIslands()
 		Islands[n].reload.l2.radius = 600.0;
 		Islands[n].reload.l2.pic = 0;
 		Islands[n].reload.l2.tex = "t1";
-						        
 		Islands[n].InterfaceTextures.t1 = "battle_interface\moor_7.tga";
 		Islands[n].InterfaceTextures.t1.h = 4;
 		Islands[n].InterfaceTextures.t1.v = 1;
-
 		SendMessage(&locator,"le",LM_LOCATE_I,&Islands[n]);		
-
 	/////////////////////////////////////////////////////////////////////////
 	/// IslaMona
 	/////////////////////////////////////////////////////////////////////////	
-	
 		n = n + 1;
 		Islands[n].id = "IslaMona";
 		Islands[n].model = "IslaMona";
@@ -2584,7 +2259,6 @@ void InitIslands()
 		Islands[n].jungle.texture = "junglesprites";
 		Islands[n].jungle.scale = 12.5;
 		Islands[n].TexturePath = "IslaMona";
-
 		Islands[n].reload.l1.label = "Shore75";
 		Islands[n].reload.l1.name = "reload_1";
 		Islands[n].reload.l1.go = "Shore75";
@@ -2592,7 +2266,6 @@ void InitIslands()
 		Islands[n].reload.l1.radius = 600.0;
 		Islands[n].reload.l1.pic = 0;
 		Islands[n].reload.l1.tex = "t1";
-
 		Islands[n].reload.l2.label = "Shore76"; // Addon 2016-1 Jason Пиратская линейка
 		Islands[n].reload.l2.name = "reload_2";
 		Islands[n].reload.l2.go = "";
@@ -2600,7 +2273,6 @@ void InitIslands()
 		Islands[n].reload.l2.radius = 0.0;
 		Islands[n].reload.l2.pic = 0;
 		Islands[n].reload.l2.tex = "t1";
-		
 		Islands[n].reload.l3.label = "Shore77";
 		Islands[n].reload.l3.name = "reload_3";
 		Islands[n].reload.l3.go = "Shore77";
@@ -2608,17 +2280,13 @@ void InitIslands()
 		Islands[n].reload.l3.radius = 600.0;
 		Islands[n].reload.l3.pic = 0;
 		Islands[n].reload.l3.tex = "t1";
-		        
 		Islands[n].InterfaceTextures.t1 = "battle_interface\moor_7.tga";
 		Islands[n].InterfaceTextures.t1.h = 4;
 		Islands[n].InterfaceTextures.t1.v = 1;
-
 		SendMessage(&locator,"le",LM_LOCATE_I,&Islands[n]);		
-
 	/////////////////////////////////////////////////////////////////////////
 	/// IslaDeCoche
 	/////////////////////////////////////////////////////////////////////////	
-	
 		n = n + 1;
 		Islands[n].id = "IslaDeCoche";
 		Islands[n].model = "IslaDeCoche";
@@ -2633,7 +2301,6 @@ void InitIslands()
 		Islands[n].jungle.texture = "junglesprites";
 		Islands[n].jungle.scale = 12.5;
 		Islands[n].TexturePath = "IslaDeCoche";
-
 		Islands[n].reload.l1.label = "Shore78";
 		Islands[n].reload.l1.name = "reload_1";
 		Islands[n].reload.l1.go = "Shore78";
@@ -2641,7 +2308,6 @@ void InitIslands()
 		Islands[n].reload.l1.radius = 600.0;
 		Islands[n].reload.l1.pic = 0;
 		Islands[n].reload.l1.tex = "t1";
-
 		Islands[n].reload.l2.label = "Shore79";
 		Islands[n].reload.l2.name = "reload_2";
 		Islands[n].reload.l2.go = "Shore79";
@@ -2649,18 +2315,14 @@ void InitIslands()
 		Islands[n].reload.l2.radius = 600.0;
 		Islands[n].reload.l2.pic = 0;
 		Islands[n].reload.l2.tex = "t1";
-						        
 		Islands[n].InterfaceTextures.t1 = "battle_interface\moor_7.tga";
 		Islands[n].InterfaceTextures.t1.h = 4;
 		Islands[n].InterfaceTextures.t1.v = 1;
-
 		SendMessage(&locator,"le",LM_LOCATE_I,&Islands[n]);		
-       
 		iNumIslands = n;
 		Trace("How islands = " + iNumIslands);
 		/////////////////////////////////////////////////////////////////////////////////////////
 		/////////////////////////////////////////////////////////////////////////////////////////
 		/////////////////////////////////////////////////////////////////////////////////////////
-		
 		DeleteClass(&locator);		
 }

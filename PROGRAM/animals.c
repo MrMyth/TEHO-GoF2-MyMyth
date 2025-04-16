@@ -1,25 +1,19 @@
 object Animals;
-
 void CreateAnimals(ref Location)
 {
 	if (!IsEntity(&Animals))
 		CreateEntity(&Animals, "Animals");
-
 	float midX, midY, midZ;
 	SendMessage(Location, "lseee", MSG_LOCATION_EX_MSG, "GetPatchMiddlePos", &midX, &midY, &midZ);
 	Animals.midY = midY;
-
 	aref locator_group;
 	aref locator;
 	int n;
 	int num;
-	
 	//DumpAttributes(Location);
-
 	SendMessage(Animals, "l", MSG_ANIMALS_BUTTERFLIES_HIDE);
 	SendMessage(Animals, "l", MSG_ANIMALS_FISHSCHOOLS_HIDE);
 	SendMessage(Animals, "l", MSG_ANIMALS_SEAGULLS_HIDE);
-
 	if (!Whr_IsRain() /*&& !Whr_IsNight() && !Whr_IsStorm() && (Location.environment.sea == "true") && (Location.environment.weather == "true")*/)
 	{
 		if (!Whr_IsNight())
@@ -42,7 +36,6 @@ void CreateAnimals(ref Location)
 						}
 					}
 				}
-
 				// butterflies
 				if(!CheckAttribute(Location, "type")) Log_SetStringToLog("В локации баг, нет типа id=" + Location.id );
 				if (Location.type == "jungle")
@@ -52,9 +45,7 @@ void CreateAnimals(ref Location)
 			}
 		}
 	}
-
 }
-
 void CreateSeaAnimals()
 {
 	if (!IsEntity(&Animals))
@@ -63,13 +54,10 @@ void CreateSeaAnimals()
 		LayerAddObject(SEA_EXECUTE, &Animals, 77);
 		LayerAddObject(SEA_REALIZE, &Animals, 77);
 	}
-
 	Animals.midY = 0.0;
-
 	SendMessage(Animals, "l", MSG_ANIMALS_BUTTERFLIES_HIDE);
 	SendMessage(Animals, "l", MSG_ANIMALS_FISHSCHOOLS_SHOW);
 	SendMessage(Animals, "l", MSG_ANIMALS_SEAGULLS_HIDE);
-
 	if (!Whr_IsRain())
 	{
 		if (!Whr_IsNight())
@@ -81,12 +69,9 @@ void CreateSeaAnimals()
 			}
 		}
 	}
-
 }
-
 void DeleteAnimals()
 {
 	if (IsEntity(&Animals))
 		DeleteClass(Animals);
 }
-

@@ -22,14 +22,12 @@ void ProcessCommonDialogEvent(ref NPChar, aref Link, aref NextDiag)
                 link.l1.go = "FMQG";
             }
 		break;
-
 		//-->работорговец
 		case "Panama_rat_1":
 			dialog.text = NPCStringReactionRepeat("Yes, we've had a fellow like that in town. He was hiding around dark places... Then some of his buddies came and paid him a visit, looked like a bunch of cutthroats and he left the town with them.", "You've already asked about that and I've answered you.", "I told you, you'd already asked about that Gontier.", "Listen, walk away and stop bothering me! Have you completely lost your noggin?", "block", 0, npchar, Dialog.CurrentNode);
 			link.l1 = HeroStringReactionRepeat("And where did he go, do you know?", "Hm, I guess so...", "Yes, right, I've asked that...", "Sorry, " + npchar.name + "...", npchar, Dialog.CurrentNode);
 			link.l1.go = "Panama_rat_2";
 		break;
-		
 		case "Panama_rat_2":
 			dialog.text = "Well, there is only one way out of here on foot - Porto Bello. And he hoofed it. So look for him there.";
 			link.l1 = "Thanks, you've been a ton of help!";
@@ -38,20 +36,17 @@ void ProcessCommonDialogEvent(ref NPChar, aref Link, aref NextDiag)
 			AddQuestRecord("Slavetrader", "21_1");
 		break;
 		//<--работорговец
-		
 		// Addon-2016 Jason ”ЊЉ-ѓваделупа
 		case "FMQG":
 			dialog.text = "Bertrand Pinette? French? Never heard about him. No pal, we haven't seen French folk around in a while.";
 			link.l1 = "What a pity... You sure? He is a friend of one important hidalgo named don Carlos de Milyar. They were supposed to arrive here together.";
 			link.l1.go = "FMQG_1";
 		break;
-		
 		case "FMQG_1":
 			dialog.text = "Senor de Milyar? This hidalgo visited Panama a year ago. Actually, don Carlos de Milyar lives in Portobello. He is a big friend of the local governor.";
 			link.l1 = "I see. There was no need to waste time and breath in the jungle. Anyway, thank you pal.";
 			link.l1.go = "FMQG_2";
 		break;
-		
 		case "FMQG_2":
 			DialogExit();
 			pchar.questTemp.FMQG = "headhunter_portobello";
@@ -60,4 +55,3 @@ void ProcessCommonDialogEvent(ref NPChar, aref Link, aref NextDiag)
 	}
 	UnloadSegment(NPChar.FileDialog2);  // если где-то выход внутри switch  по return не забыть сделать анлод
 }
-

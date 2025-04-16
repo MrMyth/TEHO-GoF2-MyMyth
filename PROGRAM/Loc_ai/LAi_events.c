@@ -1,8 +1,6 @@
-
 //==========================================================================================
 //Update events
 //==========================================================================================
-
 void LAi_Character_FrameUpdate()
 {
 	float dltTime = GetEventData();
@@ -11,7 +9,6 @@ void LAi_Character_FrameUpdate()
 	//Задержка исполнения квестов
 	LAi_QuestDelayProcess(dltTime);
 }
-
 void LAi_CharacterUpdate()
 {
 	//Параметры
@@ -31,11 +28,9 @@ void LAi_CharacterUpdate()
 	func = "LAi_tmpl_" + func + "_CharacterUpdate";
 	call func(chr, dltTime);
 }
-
 //==========================================================================================
 //EndTask events
 //==========================================================================================
-
 void LAi_CharacterEndTask()
 {
 	//Параметры
@@ -68,11 +63,9 @@ void LAi_CharacterEndTask()
 		Trace("LAi_CharacterEndTask -> unknow end task <" + endTask + ">");
 	}
 }
-
 //==========================================================================================
 //TaskFailure events
 //==========================================================================================
-
 void LAi_CharacterTaskFailure()
 {
 	//Параметры
@@ -113,7 +106,6 @@ void LAi_CharacterTaskFailure()
 		Trace("LAi_CharacterTaskFailure -> unknow failure task <" + endTask + ">");
 	}
 }
-
 void LAi_CharacterBusyPos()
 {
 	//Параметры
@@ -127,12 +119,9 @@ void LAi_CharacterBusyPos()
 	func = "LAi_tmpl_" + func + "_BusyPos";
 	call func(chr, x, y, z);
 }
-
-
 //==========================================================================================
 //Follow character's events
 //==========================================================================================
-
 void LAi_CharacterFollowGo()
 {
 	//Параметры
@@ -145,7 +134,6 @@ void LAi_CharacterFollowGo()
 	func = "LAi_tmpl_" + func + "_FollowGo";
 	call func(chr);
 }
-
 void LAi_CharacterFollowStay()
 {
 	//Параметры
@@ -158,11 +146,9 @@ void LAi_CharacterFollowStay()
 	func = "LAi_tmpl_" + func + "_FollowStay";
 	call func(chr);
 }
-
 //==========================================================================================
 //Fight character's events
 //==========================================================================================
-
 void LAi_CharacterFightGo()
 {
 	//Параметры
@@ -175,7 +161,6 @@ void LAi_CharacterFightGo()
 	func = "LAi_tmpl_" + func + "_FightGo";
 	call func(chr);
 }
-
 void LAi_CharacterFightStay()
 {
 	//Параметры
@@ -188,7 +173,6 @@ void LAi_CharacterFightStay()
 	func = "LAi_tmpl_" + func + "_FightStay";
 	call func(chr);
 }
-
 void LAi_CharacterAttack()
 {
 	aref attack = GetEventData();
@@ -222,9 +206,7 @@ void LAi_CharacterAttack()
 	call func(enemy, attack);
 	func = "LAi_type_" + enemy.chr_ai.type + "_CharacterUpdate";
 	call func(enemy, 0.0001);
-	
 }
-
 void LAi_CharacterFire()
 {
 	string sBullet, sGunPowder;
@@ -260,11 +242,9 @@ void LAi_CharacterFire()
 		return;
 	}
 	// ugeen -> мультиурон и прочее(27.07.10)
-		
 	string weaponID = GetCharacterEquipByGroup(attack, GUN_ITEM_TYPE);
 	aref weapon;
 	Items_FindItem(weaponID, &weapon);	
-	
 	if(CheckAttribute(attack, "chr_ai.misfire") && sti(attack.chr_ai.misfire) > 0 && rand(100) < sti(attack.chr_ai.misfire) && !HasSubStr(weapon.id, "mushket"))
 	{
 		LAi_Explosion(attack, rand(20));
@@ -273,7 +253,6 @@ void LAi_CharacterFire()
 		Log_SetStringToLog("A pistol's barrel got exploded into pieces! " + GetCharacterFullName(attack.id) + " has thrown it's away.");
 		return;
 	}
-	
 	if(CheckAttribute(attack, "chr_ai.explosion" ) && sti(attack.chr_ai.explosion) > 0)
 	{	
 		float x, y, z;						
@@ -281,7 +260,6 @@ void LAi_CharacterFire()
 		CreateParticleSystemX("blood_shoot", x, y, z, x, y, z, 0);	
 		PlayStereoSound("Sea Battles\cannon_fire_03.wav");
 	}	
-	
 	if(CheckAttribute(attack, "chr_ai.multidmg") && sti(attack.chr_ai.multidmg) > 0)
 	{
 		int num = FindNearCharacters(enemy, 2.5, -1.0, -1.0, 0.001, false, true);
@@ -296,7 +274,6 @@ void LAi_CharacterFire()
 			{
 				LAi_ApplyCharacterFireDamage(attack, &Characters[idx], kDist );
 			}	
-			
 			if(CheckAttribute(attack, "chr_ai.stun" ) && sti(attack.chr_ai.stun) > 0 && !LAi_IsFightMode(enemy) && !IsMainCharacter(enemy))
 			{
 				if(CheckAttribute(enemy, "cirassId"))
@@ -314,7 +291,6 @@ void LAi_CharacterFire()
 					}
 				}		
 			}			
-									
 			if( CheckAttribute(attack, "chr_ai.selfdmg" ) && sti(attack.chr_ai.selfdmg) > 0 && findCh.id == attack.id && rand(4) == 1)	
 			{
 				LAi_ApplyCharacterDamage( &Characters[idx], 10 + rand(sti(weapon.dmg_min) - 10), "fire" );
@@ -322,7 +298,6 @@ void LAi_CharacterFire()
 			}
 		}
 	}
-
 	if(CheckAttribute(attack, "chr_ai.stun" ) && sti(attack.chr_ai.stun) > 0 && !LAi_IsFightMode(enemy) && !IsMainCharacter(enemy))
 	{
 		if(CheckAttribute(enemy, "cirassId"))
@@ -341,7 +316,6 @@ void LAi_CharacterFire()
 		}		
 	}
 	// <-- ugeen
-	
 	//Реакция груп на атаку
 	LAi_group_Attack(attack, enemy);
 	//Начисление повреждений
@@ -351,7 +325,6 @@ void LAi_CharacterFire()
 		if(stf(enemy.chr_ai.hp) < 1.0 && enemy.chr_ai.group == LAI_GROUP_PLAYER) enemy.chr_ai.hp = 5;
 		LAi_CheckKillCharacter( enemy );	
 	}
-	
 	//Исполнение типа
 	string func = attack.chr_ai.type;
 	if(func == "") return;
@@ -366,7 +339,6 @@ void LAi_CharacterFire()
 	func = "LAi_type_" + enemy.chr_ai.type + "_CharacterUpdate";
 	call func(enemy, 0.0001);
 }
-
 bool LAi_tmp_return_bool;
 bool LAi_CharacterIsFire()
 {
@@ -378,7 +350,6 @@ bool LAi_CharacterIsFire()
 	LAi_tmp_return_bool = call func(chr);
 	return LAi_tmp_return_bool;
 }
-
 bool LAi_CharacterIsFight()
 {
 	aref chr = GetEventData();
@@ -389,11 +360,9 @@ bool LAi_CharacterIsFight()
 	LAi_tmp_return_bool = call func(chr);
 	return LAi_tmp_return_bool;
 }
-
 //==========================================================================================
 //Escape events
 //==========================================================================================
-
 void LAi_CharacterEscapeSlide()
 {
 	//Параметры
@@ -406,11 +375,9 @@ void LAi_CharacterEscapeSlide()
 	func = "LAi_tmpl_" + func + "_EscapeSlide";
 	call func(chr);
 }
-
 //==========================================================================================
 //Collision events
 //==========================================================================================
-
 void LAi_CharacterColThreshold()
 {
 	//Параметры
@@ -423,11 +390,9 @@ void LAi_CharacterColThreshold()
 	func = "LAi_tmpl_" + func + "_ColThreshold";
 	call func(chr);
 }
-
 //==========================================================================================
 //Animation events
 //==========================================================================================
-
 void LAi_Character_EndAction()
 {
 	//Параметры
@@ -439,12 +404,9 @@ void LAi_Character_EndAction()
 	func = "LAi_tmpl_" + func + "_EndAction";
 	call func(chr);
 }
-
-
 //==========================================================================================
 //Dead event
 //==========================================================================================
-
 void LAi_Character_Dead_Process(aref chr)
 {
 	DialogExit();
@@ -464,7 +426,6 @@ void LAi_Character_Dead_Process(aref chr)
             PostEvent("LAi_event_Character_Dead", MOD_DEAD_CLEAR_TIME * 1000, "i", chr);
         }
         // убираем совместителя в CharacterDeadProcess
-        
 		//Реинкарнируем
 		LAi_GenerateFantomFromMe(chr);
 		//Посмотрим группу
@@ -491,7 +452,6 @@ void LAi_Character_Dead_Process(aref chr)
 		}
 	}
 }
-
 #event_handler("LAi_event_Character_Dead", "LAi_Character_Dead_Event");
 void LAi_Character_Dead_Event()
 {
@@ -504,32 +464,23 @@ void LAi_Character_Dead_Event()
 		CharacterExitFromLocation(chr);
 	}
 }
-
 #event_handler("LAi_event_GameOver", "LAi_GameOver");
 void LAi_GameOver()
 {
 	string str = GetEventData();
 	GameOver(str);
 }
-
-
-
 //==========================================================================================
 //Internal events
 //==========================================================================================
-
 //------------------------------------------------------------------------------------------
 //Сообщение об окончании работы темплейта
 //------------------------------------------------------------------------------------------
-
 void LAi_Character_TemplateComplite(aref chr, string tmplName)
 {
-
 	int index = sti(chr.index);
 	PostEvent("LAi_event_Character_TemplateComplite", 1, "ls", index, tmplName);
-
 }
-
 #event_handler("LAi_event_Character_TemplateComplite", "LAi_Character_TemplateComplite_Event");
 void LAi_Character_TemplateComplite_Event()
 {
@@ -549,17 +500,14 @@ void LAi_Character_TemplateComplite_Event()
 		call func(chr, tmpl);
 	}
 }
-
 //------------------------------------------------------------------------------------------
 //Запрос локатора
 //------------------------------------------------------------------------------------------
-
 void LAi_Character_FreeLocator(aref chr, string group, string locator)
 {
 	int index = sti(chr.index);
 	PostEvent("LAi_event_Character_FreePos", 1, "lss", index, group, locator);
 }
-
 #event_handler("LAi_event_Character_FreePos", "LAi_Character_FreePos_Event");
 void LAi_Character_FreePos_Event()
 {
@@ -589,12 +537,9 @@ void LAi_Character_FreePos_Event()
 		}
 	}
 }
-
-
 //------------------------------------------------------------------------------------------
 //Запрос на диалог
 //------------------------------------------------------------------------------------------
-
 void LAi_Character_NeedDialog(aref chr, aref by)
 {
 	if(IsEntity(&by))
@@ -607,7 +552,6 @@ void LAi_Character_NeedDialog(aref chr, aref by)
 		}
 	}
 }
-
 //Запрос на диалог, если возвратить true то в этот момент можно начать диалог
 bool LAi_Character_CanDialog(aref chr, aref by)
 {
@@ -630,7 +574,6 @@ bool LAi_Character_CanDialog(aref chr, aref by)
 	}
 	return false;
 }
-
 //Начать диалог
 void LAi_Character_StartDialog(aref chr, aref by)
 {
@@ -644,7 +587,6 @@ void LAi_Character_StartDialog(aref chr, aref by)
 		}
 	}
 }
-
 //Закончить диалог
 void LAi_Character_EndDialog(aref chr, aref by)
 {
@@ -664,7 +606,6 @@ void LAi_CharacterItemAction()
 	aref chr = GetEventData();
 	string sActionName = GetEventData();
 	int nItemIndex = GetEventData();
-
 	switch(sActionName)
 	{
 	case "reset": LAi_UntieItemFromCharacter(chr,nItemIndex); break;
@@ -679,10 +620,8 @@ void LAi_UntieItemFromCharacter(aref chr, int nItemIndex)
 void LAi_TieItemToCharacter(aref chr, int nItemIndex)
 {
 	if( nItemIndex<0 ) return;
-
 	string sModel = "HandsItems\cup";
 	string sLocator = "Saber_hand";
-
 	string sitm = "TiedItems.itm"+nItemIndex;
 	if( CheckAttribute(chr,sitm) )
 	{
@@ -693,6 +632,5 @@ void LAi_TieItemToCharacter(aref chr, int nItemIndex)
 			sLocator = chr.(sitm).locator;
 		}
 	}
-
 	SendMessage(chr, "lslss", MSG_CHARACTER_EX_MSG, "TieItem", nItemIndex, sModel, sLocator);
 }

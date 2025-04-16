@@ -10,7 +10,6 @@ void ProcessCommonDialogEvent(ref NPChar, aref Link, aref NextDiag)
 			link.l1 = RandPhraseSimple("I have changed my mind...", "I have nothing to say now.");
 		    link.l1.go = "exit";
 		break;
-
 		case "work_1":  // работа на благо короны - линейка нации
 			if (CheckAttribute(npchar, "notQuestLine"))
 			{

@@ -3,13 +3,10 @@ void ProcessDialogEvent()
 {
 	ref NPChar, sld;
 	aref Link, NextDiag;	
-
 	DeleteAttribute(&Dialog,"Links");
-
 	makeref(NPChar,CharacterRef);
 	makearef(Link, Dialog.Links);
 	makearef(NextDiag, NPChar.Dialog);
-
     // вызов диалога по городам -->
     NPChar.FileDialog2 = "DIALOGS\" + LanguageGetLanguage() + "\Soldier\" + NPChar.City + "_Soldier.c";
     if (LoadSegment(NPChar.FileDialog2))
@@ -34,7 +31,6 @@ void ProcessDialogEvent()
 			NextDiag.CurrentNode = NextDiag.TempNode;
 			DialogExit();
 		break;
-		
 		case "fight":
 			DialogExit();
 			NextDiag.CurrentNode = NextDiag.TempNode;
@@ -42,7 +38,6 @@ void ProcessDialogEvent()
 			if (rand(3) != 1) SetNationRelation2MainCharacter(sti(npchar.nation), RELATION_ENEMY);
 			AddDialogExitQuest("MainHeroFightModeOn");
 		break;
-		
 		case "First time":			
             NextDiag.TempNode = "First time";
 			if (GetNationRelation2MainCharacter(sti(NPChar.nation)) == RELATION_ENEMY && sti(NPChar.nation) != PIRATE)
@@ -145,61 +140,51 @@ void ProcessDialogEvent()
 									link.l1 = "And here, my friend, you can feast your eyes upon charming ladies, for you will not see them at sea.";
 									link.l1.go = "exit";
 								break;
-
 								case 1:
 									dialog.text = "Captain, what have we done to deserve this?! We aren't landlubbers, are we?";
 									link.l1 = "Quiet, sailor! Your post is an important and honorary one, so quit your whining.";
 									link.l1.go = "exit";
 								break;
-
 								case 2:
 									dialog.text = "What's up with the sea, captain? Will we ever see it again?";
 									link.l1 = "But of course, sailor! Once you are relieved from duty, you can go to the pier and enjoy the sea as much as you like.";
 									link.l1.go = "exit";
 								break;
-
 								case 3:
 									dialog.text = "I want to complain, captain: every one of us longs to ship out. We're all totally fed up with this land duty!";
 									link.l1 = "I'm tired of this whining! You drink enough on land as well as at sea! Serve where the captain ordered! Or you will be hanged as an example to others.";
 									link.l1.go = "exit";
 								break;
-
 								case 4:
 									dialog.text = "I'll tell you in confidence, captain, the new governor is a grafter and embezzler of funds. But that's really not my business...";
 									link.l1 = "Exactly, corsair. Your business is standing at your post and keeping order. And to hang the governor on the yardarm is my business. Good job!";
 									link.l1.go = "exit";
 								break;
-
 								case 5:
 									dialog.text = "Thank you for not forgetting about us, captain! We'd go through fire and water for your sake!";
 									link.l1 = "I know your type, crooks! All you really love are gold and rum. Now, there's a party at the tavern today, I'm buying. Don't forget to show up.";
 									link.l1.go = "exit";
 								break;
-
 								case 6:
 									dialog.text = "Oh, captain, it's been so long since we've last time been in a bloody fight! Corsairs simply cannot be guards, don't you think so?";
 									link.l1 = "No time for relaxing, corsair! Enemy armadas are scouring the seas near our islands, and we must be ready for a bloodbath at any time.";
 									link.l1.go = "exit";
 								break;
-
 								case 7:
 									dialog.text = "Captain, they say that the Crown has sent another squadron our way?";
 									link.l1 = "Of course, corsair. While we live, there will be no peace for us. And even in Hell we will be fighting devils!";
 									link.l1.go = "exit";
 								break;
-
 								case 8:
 									dialog.text = "Yo-ho-ho! Now that was a real party yesterday, captain! It's a pity you weren't there.";
 									link.l1 = "No big deal, I'll make up for it. And actually I don't envy you, guys.";
 									link.l1.go = "exit";
 								break;
-
 								case 9:
 									dialog.text = "I'll tell you in confidence, captain, 'cause you've always treated us well - we had some good time with a really nice chick yesterday...";
 									link.l1 = "Heh, corsair, a noose is something you really need!";
 									link.l1.go = "exit";
 								break;
-
 								case 10:
 									dialog.text = "Captain! Please relieve me from this cursed duty! I simply can't play the part of a keeper of order anymore.";
 									link.l1 = "Night watch on a ship is no cakewalk, either. Now duty is duty, whatever and wherever it is.";
@@ -239,7 +224,6 @@ void ProcessDialogEvent()
 							break;						
 						}
 					}
-
 					// --> девица в джунглях
 					if(rand(2) == 1 && CheckAttribute(pchar,"GenQuest.EncGirl") && CheckAttribute(pchar,"GenQuest.EncGirl.MeetSoldiers"))
 					{
@@ -258,7 +242,6 @@ void ProcessDialogEvent()
 						DeleteAttribute(pchar,"GenQuest.EncGirl.MeetSoldiers");
 					}
 					// <-- девица в джунглях
-
 					switch (rand(10))
 					{
 						case 0: ////////////////////////////////////////
@@ -266,61 +249,51 @@ void ProcessDialogEvent()
 							link.l1 = "Good job, soldier! Carry on!";
 							link.l1.go = "exit";
 						break;
-
 						case 1:
 							dialog.text = "Something wrong? Have you noticed any disturbance?";
 							link.l1 = "No, everything's fine. Still, your vigilance is commendable.";
 							link.l1.go = "exit";
 						break;
-
 						case 2: ///////////////////////////////////////////
 							dialog.text = "Duels and brawls are forbidden on the streets of the town, weapon may be unsheathed only in case of danger.";
 							link.l1 = "Alright, I'll keep that in mind.";
 							link.l1.go = "exit";
 						break;
-
 						case 3:
 							dialog.text = "What a fair weather! And here I am, standing like a statue for no purpose...";
 							link.l1 = RandPhraseSimple("No relaxing, soldier. The enemy is watchful.", "You should not be complaining of your duty, soldier. Keep your spirits high!");
 							link.l1.go = "exit";
 						break;
-
 						case 4: ///////////////////////////////////////////
 							dialog.text = "Find someone else to talk to, if you're in the mood for talking. I am here to keep order, not to chit-talk!";
 							link.l1 = "Good job, soldier, you know your duty well! No need to be rude, though.";
 							link.l1.go = "exit";
 						break;
-
 						case 5: ////////////////////////////////////////////
 							dialog.text = "Keeping order is not all that easy, as it might seem. It's an important and dangerous job. I remember a case in the garrison...";
 							link.l1 = LinkRandPhrase("Don't get distracted while on duty.", "No talking while on duty!", "Stand where you are. You can chit-talk at the tavern all day, when you're relieved.");
 							link.l1.go = "exit";
 						break;
-
 						case 6: ////////////////////////////////////////////
 							dialog.text = RandPhraseSimple("Do not distract me, " + GetAddress_Form(NPChar) + ", I am on duty.", "Just go by, " + GetAddress_Form(NPChar) + ", do not distract a guardsman from his duty.");
 							link.l1 = "I was just checking, if you had fallen asleep - you were standing there just like a statue.";
 							link.l1.go = "exit";
 						break;
-
 						case 7:
 							dialog.text = "Hey, " + GetAddress_Form(NPChar) + ", don't you happen to have a sip of wine to wet my throat? I am dying of thirst.";
 							link.l1 = "Duty is duty. Keep your patience until you are relieved.";
 							link.l1.go = "exit";
 						break;
-
 						case 8://///////////////////////////////////////////
 							dialog.text = ""+ GetSexPhrase("You're not the first sailor to distract me from duty. Hell, where are all those beautiful seductive widows...","Hello, beautiful! Wanna flirt with a brave soldier just a little") +"?";
 							link.l1 = RandPhraseSimple("You must have forgotten that you were on duty, not in the brothel.", "Your business is to keep order... And stop drooling already.");
 							link.l1.go = "exit";
 						break;
-
 						case 9://///////////////////////////////////////////
 							dialog.text = ""+ GetSexPhrase("You look like a strong guy, don't you? Would you like to sign up for duty at the fort's garrison? We have roomy barracks, hearty meals and free booze.","Oh, young lady, you have no idea, how pleasant it is to meet such a nice damsel in this back of beyond!") +"";
 							link.l1 = ""+ GetSexPhrase("That's certainly tempting, but I still must refuse. All that drill is just not for me.","Thank you for a compliment, soldier.") +".";
 							link.l1.go = "exit";
 						break;
-
 						case 10:
 							dialog.text = "Such heat... I would gladly give up half of my life to go back to Europe.";
 							link.l1 = RandPhraseSimple("Yeah, you don't look much like a seasoned warrior.", "A soldier's duty is never easy.");
@@ -343,7 +316,6 @@ void ProcessDialogEvent()
 				pchar.questTemp.stels.landSolder = GetDataDay();
 			}
 		break;
-		
 		case "NotPegYou":
 			dialog.text = RandPhraseSimple("Oh, I see... Everything seems to be in order, you're free to go, " + GetAddress_Form(pchar) + ".", "I must have got a bit tired of standing on watch... Everything seems to be fine, " + GetAddress_Form(pchar) + ", I am sorry.");
 			link.l1 = "That'll teach you!";
@@ -354,13 +326,11 @@ void ProcessDialogEvent()
 				pchar.questTemp.stels.landSolder = GetDataDay();
 			}
 		break;
-		
 		case "vincento":
 			dialog.text = RandPhraseSimple("Oh, I see... Everything seems to be in order, you're free to go, " + GetAddress_Form(pchar) + ".", "Let's see now... Well, everything seems in order, " + GetAddress_Form(pchar) + ", I am sorry.");
 			link.l1 = "That'll teach you!";
 			link.l1.go = "exit";
 		break;
-		
 		case "LicenceOk":
 			iTemp = GetDaysContinueNationLicence(HOLLAND);
 			if (ChangeCharacterNationReputation(pchar, sti(NPChar.nation), 0) <= -12)
@@ -419,7 +389,6 @@ void ProcessDialogEvent()
 			link.l1.go = "exit";
 			NextDiag.TempNode = "PortRoyal_Gans";
 		break;
-
 		// --> генератор "A damsel in the jungle"
 		case "GirlEnc_1":
 			dialog.text = "And just who are you, captain? Aren't you, by chance, a partner in crime of the most notorious thief in this settlement?";
@@ -428,13 +397,11 @@ void ProcessDialogEvent()
 			link.l2 = "Actually, I've "+ GetSexPhrase("got to know her","got to know her") +" recently...";
 			link.l2.go = "GirlEnc_12";
 		break;
-
 		case "GirlEnc_11":
 			dialog.text = ""+ GetSexPhrase("Sir","Miss") +", we have an order to detain her and take her to the dungeon. And if you think that you can stop us, you are mistaken.";
 			link.l1 = "Let's see, then...";
 			link.l1.go = "GirlEnc_11End";
 		break;
-
 		case "GirlEnc_11End":
 			DialogExit();
 			ChangeCharacterComplexReputation(pchar,"nobility", -2);
@@ -448,13 +415,11 @@ void ProcessDialogEvent()
 			if (rand(3) != 1) SetNationRelation2MainCharacter(sti(npchar.nation), RELATION_ENEMY);
 			AddDialogExitQuest("MainHeroFightModeOn");		
 		break;
-		
 		case "GirlEnc_12":
 			dialog.text = "Oh, really? In that case I would advise you to check your pockets. That lady is a professional, you know";
 			link.l1 = "Thank you, I will do that. How could I make such a fool of myself...";
 			link.l1.go = "GirlEnc_12End";		
 		break;		
-		
 		case "GirlEnc_12End":
 			pchar.money = sti(pchar.money) - makeint(sti(pchar.money)/20);
 			NextDiag.CurrentNode = NextDiag.TempNode;
@@ -466,7 +431,6 @@ void ProcessDialogEvent()
 			DeleteAttribute(pchar, "GenQuest.EncGirl");
 			DialogExit();
 		break;
-		
 		case "GirlEnc_2":
 			dialog.text = ""+ GetSexPhrase("Sir","Miss") +", we have an order to find that lady and bring her to her father.";
 			link.l1 = "Well, an order is an order - go ahead, then.";
@@ -474,7 +438,6 @@ void ProcessDialogEvent()
 			link.l2 = "Too late for that, because I am already taking to her father.";
 			link.l2.go = "GirlEnc_21";
 		break;
-		
 		case "GirlEnc_2End":
 			NextDiag.CurrentNode = NextDiag.TempNode;
 			sld = CharacterFromID("CangGirl");
@@ -489,7 +452,6 @@ void ProcessDialogEvent()
 			DeleteAttribute(pchar, "GenQuest.EncGirl");
 			DialogExit();			
 		break;
-		
 		case "GirlEnc_21":
 			ChangeCharacterComplexReputation(pchar,"nobility", 2);
 			if(GetSummonSkillFromName(pchar, SKILL_LEADERSHIP) < rand(100))
@@ -505,7 +467,6 @@ void ProcessDialogEvent()
 				link.l1.go = "exit";			 
 			}
 		break;
-		
 		case "GirlEnc_21End":
 			DialogExit();
 			AddQuestRecord("JungleGirl", "12");
@@ -523,7 +484,6 @@ void ProcessDialogEvent()
 			AddDialogExitQuest("MainHeroFightModeOn");				
 		break;
 		// <-- генератор "A damsel in the jungle"
-		
 		//замечение по обнаженному оружию
 		case "SoldierNotBlade":
 			dialog.text = LinkRandPhrase("Hey, what's the deal with all that weapon swinging?! Put it away this instant!", "I order you to put away your weapon at once!", "Hey, " + GetAddress_Form(NPChar) + ", stop scaring the people! Put away your weapon.");
@@ -534,7 +494,6 @@ void ProcessDialogEvent()
 			npchar.greeting = "soldier_common";
 			NextDiag.TempNode = "First Time";
 		break;
-
 		case "pirate_fight":
 			DialogExit();
 			SetNationRelation2MainCharacter(sti(npchar.nation), RELATION_ENEMY);

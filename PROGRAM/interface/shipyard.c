@@ -1,35 +1,24 @@
 /// BOAL Верфь
-
 int nCurScrollNum;
 ref xi_refCharacter;
 ref refNPCShipyard;
 int shipIndex;
-
 int nCurScrollOfficerNum;
-
 string CurTable, CurRow;
 string NPCCity;
 int iSelected; // курсор в таблице
-
 string sMessageMode, sFrom_sea, sShipId;
-
 float shipCostRate;
 bool  bShipyardOnTop, bEmptySlot;
-
 int RepairHull, RepairSail;
 int timeHull, timeRig;
-
 void InitInterface_R(string iniName, ref _shipyarder)
 {
 	GameInterface.title = "titleShipyard";
-
 	xi_refCharacter = pchar;
-
     refNPCShipyard  = _shipyarder;
     SetShipyardStore(refNPCShipyard);
-
     shipCostRate = stf(refNPCShipyard.ShipCostRate);
-
     int iTest = FindColony(refNPCShipyard.City); // город магазина
     ref rColony;
     sFrom_sea = "";
@@ -38,11 +27,8 @@ void InitInterface_R(string iniName, ref _shipyarder)
 		rColony = GetColonyByIndex(iTest);
 		sFrom_sea = rColony.from_sea; // ветка верфи, в сухопутных верфи нет, значит везде правильная
 	}
-
 	FillShipsScroll();
-
 	SendMessage(&GameInterface,"ls",MSG_INTERFACE_INIT,iniName);
-
 	SetEventHandler("InterfaceBreak","ProcessExitCancel",0);
 	SetEventHandler("exitCancel","ProcessExitCancel",0);
     SetEventHandler("ievnt_command","ProcessCommandExecute",0);
@@ -65,15 +51,11 @@ void InitInterface_R(string iniName, ref _shipyarder)
     EI_CreateFrame("SHIP_BIG_PICTURE_BORDER",20,46,134,161);
     EI_CreateHLine("SHIP_BIG_PICTURE_BORDER", 8,187,147,1, 4);
     EI_CreateHLine("SHIP_BIG_PICTURE_BORDER", 8,166,147,1, 4);
-
     SetNewGroupPicture("Money_PIC", "ICONS_CHAR", "Money");
     SetNewGroupPicture("REPAIR_Money_PIC", "ICONS_CHAR", "Money");
-    
     SetNewGroupPicture("REPAIR_Hull_PIC", "SHIP_STATE_ICONS", "Hull");
     SetNewGroupPicture("REPAIR_Sails_PIC", "SHIP_STATE_ICONS", "Sails");
-
     FillShipyardTable();
-	
 	SetCurrentNode("SHIPS_SCROLL");
 	bShipyardOnTop = false;
 	OnShipScrollChange();
@@ -83,7 +65,6 @@ void InitInterface_R(string iniName, ref _shipyarder)
 	timeHull = 0;
 	timeRig = 0;
 }
-
 void ProcessExitCancel()
 {
     // boal время на ремонт -->
@@ -99,7 +80,6 @@ void ProcessExitCancel()
 	if (sti(pchar.ship.type) == SHIP_NOTUSED) PChar.nation = GetBaseHeroNation();
 	IDoExit(RC_INTERFACE_ANY_EXIT);
 }
-
 void IDoExit(int exitCode)
 {
 	DelEventHandler("InterfaceBreak","ProcessExitCancel");
@@ -118,7 +98,6 @@ void IDoExit(int exitCode)
 	DelEventHandler("acceptaddofficer","AcceptAddOfficer");
 	DelEventHandler("ExitRepairMenu", "ExitRepairMenu");
 	DelEventHandler("BuyShipEvent","BuyShipEvent");
-
 	interfaceResultCommand = exitCode;
 	if( CheckAttribute(&InterfaceStates,"ReloadMenuExit"))
 	{
@@ -134,7 +113,6 @@ void ProcessCommandExecute()
 {
 	string comName = GetEventData();
 	string nodName = GetEventData();
-
     switch(nodName)
 	{
         case "BUTTON_SELL":
@@ -143,28 +121,24 @@ void ProcessCommandExecute()
 			    ShowMessageInfo();
 			}
 		break;
-
 		case "BUTTON_BUY":
 			if (comName=="click" || comName=="activate")
 			{
 			    ShowMessageInfo();
 			}
 		break;
-
 		case "MSG_OK":
 			if (comName=="click" || comName=="activate")
 			{
 			    MessageOk();
 			}
 		break;
-		
 		case "BUTTON_REPAIR":
 			if (comName=="click" || comName=="activate")
 			{
 			    ShowRepairMenu();
 			}
 		break;
-		
 		case "REPAIR_LEFT_H":
 			if (comName=="click" || comName=="activate")
 			{
@@ -175,7 +149,6 @@ void ProcessCommandExecute()
 			    ClickRepairArror("hull", -5);
 			}
 		break;
-		
 		case "REPAIR_RIGHT_H":
 			if (comName=="click" || comName=="activate")
 			{
@@ -186,7 +159,6 @@ void ProcessCommandExecute()
 			    ClickRepairArror("hull", 5);
 			}
 		break;
-		
 		case "REPAIR_LEFT_S":
 			if (comName=="click" || comName=="activate")
 			{
@@ -197,7 +169,6 @@ void ProcessCommandExecute()
 			    ClickRepairArror("sail", -5);
 			}
 		break;
-		
 		case "REPAIR_RIGHT_S":
 			if (comName=="click" || comName=="activate")
 			{
@@ -208,14 +179,12 @@ void ProcessCommandExecute()
 			    ClickRepairArror("sail", 5);
 			}
 		break;
-		
 		case "REPAIR_OK":
 			if (comName=="click" || comName=="activate")
 			{
 			    RepairOk();
 			}
 		break;
-		
 		case "REPAIR_ALL":
 			if (comName=="click" || comName=="activate")
 			{
@@ -233,16 +202,13 @@ void FillShipsScroll()
 	{
 		GameInterface.SHIPS_SCROLL.current = 0;
 	}
-
 	string attributeName;
 	string shipName;
 	int iShipType, cn;
 	GameInterface.SHIPS_SCROLL.ImagesGroup.t0 = "BLANK_SHIP2";
-
 	FillShipList("SHIPS_SCROLL.ImagesGroup", xi_refCharacter);
 	GameInterface.SHIPS_SCROLL.BadTex1 = 0;
 	GameInterface.SHIPS_SCROLL.BadPic1 = "Not Used2";
-
 	int m = 0;
 	for(int i = 0; i < COMPANION_MAX; i++)
 	{
@@ -255,7 +221,6 @@ void FillShipsScroll()
 				attributeName = "pic" + (m+1);
 				iShipType = sti(RealShips[iShipType].basetype);
 				shipName = ShipsTypes[iShipType].Name;
-
 				GameInterface.SHIPS_SCROLL.(attributeName).character = cn;
 				GameInterface.SHIPS_SCROLL.(attributeName).str1 = "#"+"Class "+ShipsTypes[iShipType].Class;
 				GameInterface.SHIPS_SCROLL.(attributeName).str4 = shipName;
@@ -286,19 +251,15 @@ void FillShipsScroll()
 			m++;
 		}
 	}
-
 	GameInterface.SHIPS_SCROLL.ListSize = m;
 	//GameInterface.SHIPS_SCROLL.NotUsed = 5 - m + 1;
 	GameInterface.SHIPS_SCROLL.NotUsed = 0;
 }
-
 void ProcessFrame()
 {
 	string attributeName;
 	int iCharacter;
-
 	string sNode = GetCurrentNode();
-
     if (sNode == "PASSENGERSLIST" && sti(GameInterface.PASSENGERSLIST.current)!= nCurScrollOfficerNum)
 	{
 		nCurScrollOfficerNum = sti(GameInterface.PASSENGERSLIST.current);
@@ -311,17 +272,12 @@ void ProcessFrame()
             CurTable = "";
 			NullSelectTable("TABLE_SHIPYARD"); // убрать скрол
 			bShipyardOnTop = false;
-
 			nCurScrollNum = sti(GameInterface.SHIPS_SCROLL.current);
-
 			attributeName = "pic" + (nCurScrollNum+1);
-
 			iCharacter = sti(GameInterface.SHIPS_SCROLL.(attributeName).character);
-
 			if(iCharacter > 0)
 			{
 				string sChrId = characters[iCharacter].id;
-
 				xi_refCharacter = characterFromID(sChrId);
 				bEmptySlot = false;
 				shipIndex= nCurScrollNum+ 1;
@@ -338,7 +294,6 @@ void ProcessFrame()
 			    DelBakSkillAttr(xi_refCharacter);
 			    ClearCharacterExpRate(xi_refCharacter);
 			    RefreshCharacterSkillExpRate(xi_refCharacter);
-
 			    SetEnergyToCharacter(xi_refCharacter);
 			    // boal оптимизация скилов <--
 				OnShipScrollChange();
@@ -352,7 +307,6 @@ void ProcessFrame()
 		}
 	}
 }
-
 void FillShipParam(ref _chr)
 {
     int iShip = sti(_chr.ship.type);
@@ -366,7 +320,6 @@ void FillShipParam(ref _chr)
 		ref refBaseShip = GetRealShip(iShip);
 		string sShip = refBaseShip.BaseName;
 		SetNewPicture("SHIP_BIG_PICTURE", "interfaces\ships\" + sShip + ".tga");
-
 		GameInterface.edit_box.str = _chr.ship.name;
 		SetFormatedText("SHIP_RANK", refBaseShip.Class);
 		SetShipOTHERTable("TABLE_OTHER", _chr);
@@ -382,7 +335,6 @@ void FillShipParam(ref _chr)
 	}
 	Table_UpdateWindow("TABLE_OTHER");
 }
-
 void OnShipScrollChange()
 {
 	SetNewPicture("MAIN_CHARACTER_PICTURE", "interfaces\portraits\128\face_" + xi_refCharacter.FaceId + ".tga");
@@ -395,7 +347,6 @@ void OnShipScrollChange()
 	SetFormatedText("Money_TEXT", MakeMoneyShow(sti(pchar.Money), MONEY_SIGN,MONEY_DELIVER));
     FillShipParam(xi_refCharacter);
 }
-
 void confirmShipChangeName()
 {
 	/*
@@ -404,7 +355,6 @@ void confirmShipChangeName()
 	GameInterface.edit_box.str = xi_refcharacter.ship.name;
 	SetCurrentNode("SHIP_INFO_TEXT");   */
 }
-
 void CheckForRename()
 {
 	/*if (GetShipRemovable(xi_refCharacter) == true && shipIndex!= -1)
@@ -412,22 +362,18 @@ void CheckForRename()
 		SetCurrentNode("EDIT_BOX");
 	}    */
 }
-
 void ShowInfoWindow()
 {
 	string sCurrentNode = GetCurrentNode();
 	string sHeader, sText1, sText2, sText3, sPicture;
 	string sGroup, sGroupPicture;
 	int iItem;
-
 	sPicture = "-1";
 	string sAttributeName;
 	int nChooseNum = -1;
 	int iShip;
 	ref refBaseShip;
-
 	bool  bShowHint = true;
-
 	ref rChr;
 	if (bShipyardOnTop)
 	{
@@ -453,7 +399,6 @@ void ShowInfoWindow()
 				sText1  = GetConvertStr("NoneBoat2", "ShipsDescribe.txt");
 			}
 		break;
-
 		case "SHIPS_SCROLL":
 			if (shipIndex != -1)
 			{
@@ -469,13 +414,11 @@ void ShowInfoWindow()
 				sText1  = GetConvertStr("NoneBoat2", "ShipsDescribe.txt");
 			}
 		break;
-
 		case "MAIN_CHARACTER_PICTURE":
 			// отдельная форма
 			bShowHint = false;
 			ShowRPGHint();
 		break;
-
 		case "TABLE_OTHER":
 			sHeader = XI_ConvertString(GameInterface.(CurTable).(CurRow).UserData.ID);
 		    sText1  = GetConvertStr(GameInterface.(CurTable).(CurRow).UserData.ID, "ShipsDescribe.txt");
@@ -488,10 +431,8 @@ void ShowInfoWindow()
 		    	sText2 = sText2 + NewStr() + "Damage: x"  + FloatToString(stf(Cannon.DamageMultiply), 1);
 		    	sText2 = sText2 + NewStr() + "Recharge: "  + sti(GetCannonReloadTime(Cannon)) + " sec.";
 		    	sText2 = sText2 + NewStr() + "Weight: "  + sti(Cannon.Weight) + " cent.";
-
 		    	sGroup = "GOODS";
 				sGroupPicture = GetCannonType(sti(rChr.Ship.Cannons.Type)) + "_" + GetCannonCaliber(sti(rChr.Ship.Cannons.Type));
-
 				sText3 = "Double click or Enter on this field causes the viewing equipment guns on the sides.";
 		    }
 		    if (GameInterface.(CurTable).(CurRow).UserData.ID == "Crew" && sti(rChr.ship.type) != SHIP_NOTUSED)
@@ -524,13 +465,11 @@ void ShowInfoWindow()
 		CreateTooltip("#" + sHeader, sText1, argb(255,255,255,255), sText2, argb(255,255,192,192), sText3, argb(255,192,255,192), "", argb(255,255,255,255), sPicture, sGroup, sGroupPicture, 64, 64);
 	}
 }
-
 void HideInfoWindow()
 {
 	CloseTooltip();
 	ExitRPGHint();
 }
-
 void TableSelectChange()
 {
 	string sControl = GetEventData();
@@ -539,7 +478,6 @@ void TableSelectChange()
     CurRow   =  "tr" + (iSelected);
     NullSelectTable("TABLE_OTHER");
     // не тереть скрол на верфи
-
     // заполнялка
     if (CurTable == "TABLE_SHIPYARD")
 	{
@@ -549,7 +487,6 @@ void TableSelectChange()
 		SetButtionsAccess();
 	}
 }
-
 void ExitRPGHint()
 {
 	if (sMessageMode == "RPG_Hint")
@@ -560,20 +497,16 @@ void ExitRPGHint()
 		sMessageMode = "";
 	}
 }
-
 void ShowRPGHint()
 {
 	SetSPECIALMiniTable("RPG_TABLE_SMALLSKILL", xi_refCharacter);
     SetOTHERMiniTable("RPG_TABLE_SMALLOTHER", xi_refCharacter);
     SetFormatedText("RPG_OFFICER_NAME", GetFullName(xi_refCharacter));
-
 	XI_WindowShow("RPG_WINDOW", true);
 	XI_WindowDisable("RPG_WINDOW", false);
 	XI_WindowDisable("MAIN_WINDOW", true);
 	sMessageMode = "RPG_Hint";
 }
-
-
 void NullSelectTable(string sControl)
 {
 	if (sControl != CurTable)
@@ -582,26 +515,21 @@ void NullSelectTable(string sControl)
 	    Table_UpdateWindow(sControl);
 	}
 }
-
 void ExitMsgMenu()
 {
 	XI_WindowShow("MSG_WINDOW", false);
 	XI_WindowDisable("MSG_WINDOW", true);
 	XI_WindowDisable("MAIN_WINDOW", false);
-
 	SetCurrentNode("SHIPS_SCROLL");
 	sMessageMode = "";
 }
-
 void ShowMsgMenu()
 {
 	XI_WindowShow("MSG_WINDOW", true);
 	XI_WindowDisable("MSG_WINDOW", false);
 	XI_WindowDisable("MAIN_WINDOW", true);
-
 	SetCurrentNode("MSG_CANCEL");
 }
-
 void ShowOtherClick()
 {
 	if (GameInterface.(CurTable).(CurRow).UserData.ID == "CannonType")
@@ -609,15 +537,12 @@ void ShowOtherClick()
 		ShowCannonsMenu();
 	}
 }
-
 void ShowCannonsMenu()
 {
 	XI_WindowShow("CANNONS_WINDOW", true);
 	XI_WindowDisable("CANNONS_WINDOW", false);
 	XI_WindowDisable("MAIN_WINDOW", true);
-
 	SetCurrentNode("CANNONS_CANCEL");
-
     DeleteAttribute(&GameInterface, "CANNONS_TABLE.BackUp")
     CannonsMenuRefresh();
 }
@@ -641,8 +566,6 @@ void CannonsMenuRefresh()
 		SetFormatedText("CANNONS_QTY_B", its(GetBortCannonsQty(rChr, "cannonb")));
 		SetFormatedText("CANNONS_QTY_R", its(GetBortCannonsQty(rChr, "cannonr")));
 		SetFormatedText("CANNONS_QTY_L", its(GetBortCannonsQty(rChr, "cannonl")));
-
-		
 		/// всего GetCannonsNum(xi_refCharacter)
 	}
 	else
@@ -659,25 +582,18 @@ void ExitCannonsMenu()
 {
 	HideCannonsMenu();
 }
-
 void HideCannonsMenu()
 {
 	XI_WindowShow("CANNONS_WINDOW", false);
 	XI_WindowDisable("CANNONS_WINDOW", true);
 	XI_WindowDisable("MAIN_WINDOW", false);
-
 	SetCurrentNode("TABLE_OTHER");
 	sMessageMode = "";
 }
-
 ////////////// ценообразование
-
-
-
 void FillShipyardTable()
 {
     Table_Clear("TABLE_SHIPYARD", false, true, false);
-
 	GameInterface.TABLE_SHIPYARD.hr.td1.str = "Ship";
 	GameInterface.TABLE_SHIPYARD.hr.td1.scale = 0.9;
 	GameInterface.TABLE_SHIPYARD.hr.td2.str = "Range";
@@ -690,25 +606,21 @@ void FillShipyardTable()
 	GameInterface.TABLE_SHIPYARD.hr.td5.scale = 0.9;
 	GameInterface.TABLE_SHIPYARD.select = 0;
 	GameInterface.TABLE_SHIPYARD.top = 0;
-
 	aref   arDest, arImt;
 	string sAttr;
 	int    iNum, i, iShip;
 	ref    refBaseShip;
 	string sShip;
 	string row;
-
 	makearef(arDest, refNPCShipyard.shipyard);
 	iNum = GetAttributesNum(arDest);
 	for (i = 0; i < iNum; i++)
 	{
         row = "tr" + (i+1);
-
 		arImt = GetAttributeN(arDest, i);
 		//Log_Info(GetAttributeName(arImt));
 		sAttr = GetAttributeName(arImt);
     	FillShipyardShip(refNPCShipyard, sAttr); // скинуть в стандарт корабль из ШипХХ
-
     	iShip = sti(refNPCShipyard.Ship.Type);
     	refBaseShip = GetRealShip(iShip);
 		sShip = refBaseShip.BaseName;
@@ -720,12 +632,10 @@ void FillShipyardTable()
     	GameInterface.TABLE_SHIPYARD.(row).td1.icon.height = 46;
     	GameInterface.TABLE_SHIPYARD.(row).td1.icon.offset = "0, 1";
     	GameInterface.TABLE_SHIPYARD.(row).td1.textoffset = "53,0";
-
 		string sShipType = XI_ConvertString(sShip);
 		if(bBettaTestMode && findsubstr(sShip, "GOF_", 0) == 0){
 			sShipType = "(GoF) " + sShipType;
 		}
-
 		GameInterface.TABLE_SHIPYARD.(row).td1.str = sShipType + "\n\n" + refNPCShipyard.ship.name;
 		GameInterface.TABLE_SHIPYARD.(row).td1.align = "left";
 		GameInterface.TABLE_SHIPYARD.(row).td1.scale = 0.82;
@@ -735,10 +645,8 @@ void FillShipyardTable()
 		GameInterface.TABLE_SHIPYARD.(row).td5.str = GetShipBuyPrice(iShip, refNPCShipyard);
 		GameInterface.TABLE_SHIPYARD.(row).td5.color = argb(255,255,228,80);
     }
-
 	Table_UpdateWindow("TABLE_SHIPYARD");
 }
-
 void SetButtionsAccess()
 {
     SetSelectable("BUTTON_REPAIR", false);
@@ -748,9 +656,7 @@ void SetButtionsAccess()
 	bool bMef = false;
 	bool bMir = false;
 	bool bVal = false;
-	
 	ref mc = GetMainCharacter();
-	
 	if(CheckAttribute(xi_refCharacter,"ship.type") && (sti(xi_refCharacter.ship.type) != SHIP_NOTUSED) && CheckAttribute(mc, "questTemp.HWIC.TakeQuestShip")) // тк корабля может не быть совсем !!
 	{		
 		bMef = sti(RealShips[sti(xi_refCharacter.ship.type)].basetype) == SHIP_MAYFANG;
@@ -758,7 +664,6 @@ void SetButtionsAccess()
 		bVal = sti(RealShips[sti(xi_refCharacter.ship.type)].basetype) == SHIP_VALCIRIA;
 	}
 	// <-- для мультиквеста
-
     if (bShipyardOnTop)
     {
         SetSelectable("BUTTON_REPAIR", false);
@@ -794,7 +699,6 @@ void SetButtionsAccess()
     else
     {
         SetSelectable("BUTTON_BUY", false);
-
         if (GetHullPercent(xi_refCharacter) < 100 || GetSailPercent(xi_refCharacter) < 100)
         {
             SetSelectable("BUTTON_REPAIR", true);
@@ -821,7 +725,6 @@ void SetButtionsAccess()
 		}
     }
 }
-
 //////////////// назначение капитана  //////////////////////////////////////////////////////////////////////
 void ShipChangeCaptan()
 {
@@ -830,26 +733,21 @@ void ShipChangeCaptan()
     SetCurrentNode("PASSENGERSLIST");
 	ProcessFrame();
 	SetOfficersSkills();
-
 	XI_WindowShow("OFFICERS_WINDOW", true);
 	XI_WindowDisable("OFFICERS_WINDOW", false);
 	XI_WindowDisable("MAIN_WINDOW", true);
 }
-
 void ExitOfficerMenu()
 {
 	XI_WindowShow("OFFICERS_WINDOW", false);
 	XI_WindowDisable("OFFICERS_WINDOW", true);
 	XI_WindowDisable("MAIN_WINDOW", false);
-
 	SetCurrentNode("SHIPS_SCROLL");
 }
-
 void AcceptAddOfficer()
 {
 	string  attributeName2 = "pic"+(nCurScrollOfficerNum+1);
     ref     sld;
-
     if (checkAttribute(GameInterface, "PASSENGERSLIST."+attributeName2 + ".character"))
     {
 		int iChar = sti(GameInterface.PASSENGERSLIST.(attributeName2).character);
@@ -857,19 +755,16 @@ void AcceptAddOfficer()
         sld = GetCharacter(iChar);
 		DeleteAttribute(sld, "ship");
 		sld.ship.Type = SHIP_NOTUSED;
-
 		// снимем пассажира -->
 		CheckForReleaseOfficer(iChar);
 		RemovePassenger(pchar, sld);
 		// снимем пассажира <--
 		SetCompanionIndex(pchar, -1, iChar);
-
 		xi_refCharacter = sld;
 		DoBuyShip();
 	}
 	ExitOfficerMenu();
 }
-
 void SetOfficersSkills()
 {
 	string sCharacter = "pic"+(sti(GameInterface.PASSENGERSLIST.current)+1);
@@ -891,7 +786,6 @@ void SetOfficersSkills()
     SetFormatedText("OFFICER_NAME", "");
     SetSelectable("ACCEPT_ADD_OFFICER", false);
 }
-
 void FillPassengerScroll()
 {
 	int i, howWork;
@@ -900,22 +794,15 @@ void FillPassengerScroll()
 	int _curCharIdx;
 	ref _refCurChar;
 	bool  ok;
-
 	DeleteAttribute(&GameInterface, "PASSENGERSLIST");
-
 	nCurScrollOfficerNum = -1;
 	GameInterface.PASSENGERSLIST.current = 0;
-
 	int nListSize = GetPassengersQuantity(pchar);
 	int nListSizeFree = nListSize;
-
 	GameInterface.PASSENGERSLIST.NotUsed = 6;
 	GameInterface.PASSENGERSLIST.ListSize = nListSizeFree + 2;
-
 	GameInterface.PASSENGERSLIST.ImagesGroup.t0 = "EMPTYFACE";
-
 	FillFaceList("PASSENGERSLIST.ImagesGroup", pchar, 2); // passengers
-
 	GameInterface.PASSENGERSLIST.BadTex1 = 0;
 	GameInterface.PASSENGERSLIST.BadPic1 = "emptyface";
 	int m = 0;
@@ -923,7 +810,6 @@ void FillPassengerScroll()
 	{
 		attributeName = "pic" + (m+1);
 		_curCharIdx = GetPassenger(pchar,i);
-
 		if (_curCharIdx!=-1)
 		{
 			ok = CheckAttribute(&characters[_curCharIdx], "prisoned") && sti(characters[_curCharIdx].prisoned) == true;
@@ -946,19 +832,16 @@ void DelBakSkill()
     ClearCharacterExpRate(xi_refCharacter);
     RefreshCharacterSkillExpRate(xi_refCharacter);
     SetEnergyToCharacter(xi_refCharacter);
-
     DelBakSkillAttr(pchar);
     ClearCharacterExpRate(pchar);
     RefreshCharacterSkillExpRate(pchar);
     SetEnergyToCharacter(pchar);
 }
-
 void ShowMessageInfo()
 {
 	bool   bBuy;
 	int    iMoney;
 	string add = "";
-
 	if (bShipyardOnTop) // на стороне верфи (купить)
     {
         bBuy = true;
@@ -977,7 +860,6 @@ void ShowMessageInfo()
         iMoney = GetShipSellPrice(xi_refCharacter, refNPCShipyard);
     }
 	SetFormatedText("MSG_WINDOW_CAPTION", XI_ConvertString("Ship"));
-
 	if (bBuy)
 	{
 		if (iMoney < 0) add = "-";
@@ -993,7 +875,6 @@ void ShowMessageInfo()
 	}
 	ShowMsgMenu();
 }
-
 void MessageOk()
 {
 	switch (sMessageMode)
@@ -1002,30 +883,25 @@ void MessageOk()
 	        DoSellShip(true);
 	        ExitMsgMenu();
 	    break;
-
 	    case "ShipBuy" :
 	        DoBuyShipMain();
 	    break;
 	}
 }
-
 void DoSellShip(bool _refresh)
 {
 	ref chref = xi_refCharacter;
 	if (shipIndex != -1 && sti(chref.ship.type) != SHIP_NOTUSED)
 	{
     	int sellPrice = GetShipSellPrice(chref, refNPCShipyard);
-
     	AddMoneyToCharacter(pchar, sellPrice);
         AddCharacterExpToSkill(pchar, "Commerce", sellPrice / 1600.0);
         WaitDate("",0,0,0, 0, 30);
         Statistic_AddValue(pchar, "SellShip", 1);
-
     	DeleteAttribute(chref,"ship.sails");
     	DeleteAttribute(chref,"ship.blots");
         DeleteAttribute(chref,"ship.masts");
 		DeleteAttribute(chref,"ship.hulls");
-		
         // в списке на покупку. -->
         AddShip2Shipyard(chref);
         // в списке на покупку. <--
@@ -1056,7 +932,6 @@ void DoSellShip(bool _refresh)
     	}
 	}
 }
-
 void RefreshShipLists()
 {
     xi_refCharacter = pchar;
@@ -1064,22 +939,18 @@ void RefreshShipLists()
    	SendMessage(&GameInterface,"lsl",MSG_INTERFACE_SCROLL_CHANGE,"SHIPS_SCROLL",-1);
     SetCurrentNode("SHIPS_SCROLL");
 	ProcessFrame();
-
 	FillShipyardTable();
 	bShipyardOnTop = false;
 }
-
 void AddShip2Shipyard(ref _chr)
 {
     aref    arTo, arFrom;
-
 	aref   arDest, arImt;
 	string sAttr;
 	int    iNum, i, iShip;
 	ref    refBaseShip;
 	string sShip;
 	string row;
-
     iShip = sti(_chr.ship.type);
     RealShips[iShip].StoreShip = true;  // кораль на верфи, трется отдельным методом
     RealShips[iShip].Stolen = 0; // уже не ворованный
@@ -1102,7 +973,6 @@ void AddShip2Shipyard(ref _chr)
 	DeleteAttribute(refNPCShipyard, "Ship.Cargo");  //пустой трюм
 	SetGoodsInitNull(refNPCShipyard);
     RecalculateCargoLoad(refNPCShipyard);
-
 	FillShipyardShipBack(refNPCShipyard, sAttr);
 	// бакапим атрибуты груза и матросов
 	DeleteAttribute(refNPCShipyard, "BakCargo");
@@ -1111,53 +981,41 @@ void AddShip2Shipyard(ref _chr)
 	makearef(arTo,   refNPCShipyard.BakCargo);
 	makearef(arFrom, _chr.Ship.Cargo);
 	CopyAttributes(arTo, arFrom);
-
 	refNPCShipyard.BakCrew = "";
 	makearef(arTo,   refNPCShipyard.BakCrew);
 	makearef(arFrom, _chr.Ship.Crew);
 	CopyAttributes(arTo, arFrom);
 }
-
 void DoBuyShip()
 {
     aref    arTo, arFrom;
 	int     iBuyMoney = GetShipBuyPrice(sti(refNPCShipyard.Ship.Type), refNPCShipyard);
-
  	DeleteAttribute(refNPCShipyard, "BakCargo");
  	DeleteAttribute(refNPCShipyard, "BakCrew");
 	DoSellShip(false);
 	AddMoneyToCharacter(pchar, -iBuyMoney);
-
     AddCharacterExpToSkill(pchar, "Commerce", iBuyMoney / 700.0);
     WaitDate("",0,0,0, 0, 30);
     Statistic_AddValue(pchar, "BuyShip", 1);
-
     FillShipyardShip(refNPCShipyard, sShipId); // то, что покупаем
-
     makearef(arTo,   xi_refCharacter.ship);
 	makearef(arFrom, refNPCShipyard.Ship);
 	CopyAttributes(arTo, arFrom);
-
 	DeleteAttribute(refNPCShipyard, "shipyard." + sShipId);
-
     int iShip = sti(xi_refCharacter.ship.type);
     DeleteAttribute(&RealShips[iShip], "StoreShip"); // можно тереть
-
 	if (CheckAttribute(refNPCShipyard, "BakCargo")) // есть бакап корабля
 	{
         DeleteAttribute(xi_refCharacter, "Ship.Cargo");
 		DeleteAttribute(xi_refCharacter, "Ship.Crew");
-
 		xi_refCharacter.Ship.Cargo = "";
 		makearef(arTo,   xi_refCharacter.Ship.Cargo);
 		makearef(arFrom, refNPCShipyard.BakCargo);
 		CopyAttributes(arTo, arFrom);
-
         xi_refCharacter.Ship.Crew = "";
 		makearef(arTo,   xi_refCharacter.Ship.Crew);
 		makearef(arFrom, refNPCShipyard.BakCrew);
 		CopyAttributes(arTo, arFrom);
-
 		AddCharacterCrew(xi_refCharacter, 0); // обрезать перегруз
 	    RecalculateCargoLoad(xi_refCharacter);
 	}
@@ -1168,13 +1026,11 @@ void DoBuyShip()
 	DelBakSkill();
 	RefreshShipLists();
 }
-
 void DoBuyShipMain()
 {
 	if (CheckAttribute(&GameInterface, CurTable + "." + CurRow + ".sShipId"))
 	{
 	    sShipId = GameInterface.(CurTable).(CurRow).sShipId;
-
 		if (!bEmptySlot) // был коарбль или ГГ без корабля
 		{
 		    DoBuyShip();
@@ -1187,59 +1043,48 @@ void DoBuyShipMain()
 		}
 	}
 }
-
 //////////////////// ремонт ///////////////
 void ExitRepairMenu()
 {
 	XI_WindowShow("REPAIR_WINDOW", false);
 	XI_WindowDisable("REPAIR_WINDOW", true);
 	XI_WindowDisable("MAIN_WINDOW", false);
-
 	SetCurrentNode("SHIPS_SCROLL");
 	sMessageMode = "";
 }
-
 void ShowRepairMenu()
 {
 	XI_WindowShow("REPAIR_WINDOW", true);
 	XI_WindowDisable("REPAIR_WINDOW", false);
 	XI_WindowDisable("MAIN_WINDOW", true);
-
     SetRepairData();
 	SetCurrentNode("REPAIR_CANCEL");
 }
-
 void SetRepairData()
 {
 	RepairSail = 0;
 	RepairHull = 0;
  	RepairStatShow();
 }
-
 void RepairMoneyShow()
 {
     int st = GetCharacterShipType(xi_refCharacter);
-    
 	SetFormatedText("REPAIR_WINDOW_TEXT", its(GetSailRepairCost(st, RepairSail, refNPCShipyard) + GetHullRepairCost(st, RepairHull, refNPCShipyard)));
 }
-
 void RepairStatShow()
 {
     int hp = MakeInt(GetHullPercent(xi_refCharacter));
 	int sp = MakeInt(GetSailPercent(xi_refCharacter));
-	
 	SetFormatedText("REPAIR_QTY_H", (hp+RepairHull) + "%");
 	SetFormatedText("REPAIR_QTY_S", (sp+RepairSail) + "%");
 	RepairMoneyShow();
 }
-
 void ClickRepairArror(string _type, int add)
 {
     int st = GetCharacterShipType(xi_refCharacter);
     int i;
     int hp = MakeInt(GetHullPercent(xi_refCharacter));
 	int sp = MakeInt(GetSailPercent(xi_refCharacter));
-	
 	if (_type == "hull")
 	{
 		if (add > 0)
@@ -1286,20 +1131,17 @@ void ClickRepairArror(string _type, int add)
 	}
 	RepairStatShow();
 }
-
 void RepairOk()
 {
     int st = GetCharacterShipType(xi_refCharacter);
     int hp = MakeInt(GetHullPercent(xi_refCharacter));
 	int sp = MakeInt(GetSailPercent(xi_refCharacter));
 	float ret;
-	
 	if (RepairHull > 0)
 	{
 		timeHull = timeHull + RepairHull * (8-GetCharacterShipClass(xi_refCharacter));
 	    AddCharacterExpToSkill(pchar, "Repair", (RepairHull * (7-GetCharacterShipClass(xi_refCharacter)) / 10.0));
 		AddMoneyToCharacter(pchar, -GetHullRepairCost(st, RepairHull, refNPCShipyard));
-
 		ret = ProcessHullRepair(xi_refCharacter, stf(RepairHull));
 	}
 	if (RepairSail > 0)
@@ -1307,7 +1149,6 @@ void RepairOk()
 	  	timeRig = timeRig + RepairSail * (8-GetCharacterShipClass(xi_refCharacter));
 	    AddCharacterExpToSkill(pchar, "Repair", (RepairSail * (7-GetCharacterShipClass(xi_refCharacter)) / 14.0));
 		AddMoneyToCharacter(pchar,-GetSailRepairCost(st, RepairSail, refNPCShipyard));
-
 		ret = ProcessSailRepair(xi_refCharacter, stf(RepairSail));
 	}
 	if ((hp + RepairHull) >= 100)
@@ -1331,20 +1172,17 @@ void RepairOk()
    	SendMessage(&GameInterface,"lsl",MSG_INTERFACE_SCROLL_CHANGE,"SHIPS_SCROLL",-1);
 	OnShipScrollChange();
 	SetButtionsAccess();
-	
 	if(!CheckAttribute(pchar, "questTemp.ShipyardVisit."+(NPCCity) )) 
 	{
 		pchar.questTemp.ShipyardVisit.(NPCCity) = true;
 		pchar.questTemp.ShipyardVisit.counter = sti(pchar.questTemp.ShipyardVisit.counter) + 1;
 	}	
 }
-
 void RepairAll()
 {
     ClickRepairArror("sail", 100);
     ClickRepairArror("hull", 100);
 }
-
 void BuyShipEvent()
 {
 	if (GetSelectable("BUTTON_BUY"))

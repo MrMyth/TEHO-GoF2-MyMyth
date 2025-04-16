@@ -21,7 +21,6 @@ void ProcessCommonDialogEvent(ref NPChar, aref Link, aref NextDiag)
                 link.l1.go = "Sharlie_rum_5";
 			}	
 			//<-- Бремя гасконца
-			
 			//Jason, Португалец
 			if (CheckAttribute(PChar, "questTemp.Portugal") && pchar.questTemp.Portugal == "ToMartinique" && !CheckAttribute(npchar, "quest.Portugal"))
 			{
@@ -46,14 +45,12 @@ void ProcessCommonDialogEvent(ref NPChar, aref Link, aref NextDiag)
 				link.l1.go = "LH_tavern_SP_3";
 			}
 		break;
-		
 		//--> Jason, Бремя гасконца
 		case "Sharlie_rum":
 			dialog.text = "A task? Hm... You look like you've got something inside your skull, young man. I may have something for you\nThis job may sound easy, but it requires responsibility and brains. I cannot trust these idiots to do business, they'll ruin it for sure...";
 			link.l1 = "Listen, can you please just tell me what the heck it is you want to assign me? I swear, I won't let you down or at least I'll do my best.";
 			link.l1.go = "Sharlie_rum_1";
 		break;
-		
 		case "Sharlie_rum_1":
 			switch(rand(4))
 			{
@@ -77,7 +74,6 @@ void ProcessCommonDialogEvent(ref NPChar, aref Link, aref NextDiag)
 			link.l1 = "'"+pchar.questTemp.Sharlie.Rum.Pass+"'.";
 			link.l1.go = "Sharlie_rum_2";
 		break;
-		
 		case "Sharlie_rum_2":
 			dialog.text = "Splendid. After they will load crates on the longboat, take it to Le Francois bay. I have got men who will meet you there. This is it\nThe longboat will stay at the bay and you will have to move on foot to Saint Pierre through jungles. So, are you not scared yet? I will pay five thousand pesos once it's done.";
 			link.l1 = "What made you decide I'm supposed to be scared? I'll do what you told me to do. Where's the longboat?";
@@ -85,20 +81,17 @@ void ProcessCommonDialogEvent(ref NPChar, aref Link, aref NextDiag)
 			link.l2 = "So, you propose that I take up smuggling? Hm... You know, I can't risk my name. You'll have to excuse me, we'll pretend that I didn't hear anything.";
 			link.l2.go = "Sharlie_rum_exit";
 		break;
-		
 		case "Sharlie_rum_exit":
 			dialog.text = "As you wish, monsieur. I don't have any other errands.";
 			link.l1 = "I see. Then all the best, "+npchar.name+".";
 			link.l1.go = "exit";
 			DeleteAttribute(pchar, "questTemp.Sharlie.Rum");
 		break;
-		
 		case "Sharlie_rum_3":
 			dialog.text = "The longboat will be at the pier closer to the docks at seven in the evening. Don't be late it's no less than a five or six hour trip to Lamanten Beach and the 'Ghost' will be waiting for you only until five in the morning. And take this spyglass to make easier your searches, it's junk, of course, but it's better than nothing. Lamanten beach is located at the northern part of the island, so leaving the port, keep the course due north. And don't forget the password!";
 			link.l1 = "I remember. See you soon, "+npchar.name+"!";
 			link.l1.go = "Sharlie_rum_4";
 		break;
-		
 		case "Sharlie_rum_4":
 			DialogExit();
 			AddQuestRecord("SharlieB", "1");
@@ -116,19 +109,16 @@ void ProcessCommonDialogEvent(ref NPChar, aref Link, aref NextDiag)
 			pchar.questTemp.Sharlie.Rum = "true";
 			npchar.quest.Rum = "true";
 		break;
-		
 		case "Sharlie_rum_5":
 			dialog.text = "Wonderful! I know I could rely on you. Was it hard?";
 			link.l1 = "Well, that depends on how you define hard...";
 			link.l1.go = "Sharlie_rum_6";
 		break;
-		
 		case "Sharlie_rum_6":
 			dialog.text = "Well, here's your reward is five thousand pesos. You can keep the spyglass. And also, another little present, please, take these three bottles of rum. After you try it, you'll understand why there's so much of a demand for it.";
 			link.l1 = "Thank you! It was nice working with you! See you later!";
 			link.l1.go = "Sharlie_rum_7";
 		break;
-		
 		case "Sharlie_rum_7":
 			DialogExit();
 			AddMoneyToCharacter(pchar, 5000);
@@ -138,7 +128,6 @@ void ProcessCommonDialogEvent(ref NPChar, aref Link, aref NextDiag)
 			DeleteAttribute(pchar, "questTemp.Sharlie.Rum");
 		break;
 		//<-- Бремя гасконца
-		
 		//Португалец
 		case "Portugal":
 			dialog.text = "No problem, I have a room. For 50 pesos, it's yours for three days.";
@@ -153,7 +142,6 @@ void ProcessCommonDialogEvent(ref NPChar, aref Link, aref NextDiag)
 				link.l1.go = "exit";
 			}
 		break;
-		
 		case "Portugal_1":
 			ref sld;
 			DialogExit();
@@ -172,13 +160,11 @@ void ProcessCommonDialogEvent(ref NPChar, aref Link, aref NextDiag)
 			pchar.quest.Portugal_tavernroom.win_condition.l1.location = "FortFrance_tavern_upstairs";
 			pchar.quest.Portugal_tavernroom.function = "PortugalInTavernRoom";
 		break;
-		
 		case "Portugal_2":
 			dialog.text = "I wouldn't say that he got up and left the room by himself, monsieur. Some people came by here yesterday. One of them was a one-eyed tall lanky man - an obvious bandit by how he looks, and one lisping man too, looked like a Castilian. I was just surprised, but that lisper gave me a look... just like at a louse before a pounding. And so they asked about your friend... and I told them. What else was I supposed to do?";
 			link.l1 = "I know, " + npchar.name + ", you're no hero, that's right. What else did you see? Where did they go?";
 			link.l1.go = "Portugal_3";
 		break;
-		
 		case "Portugal_3":
 			dialog.text = "That's all... wait, no! Hold on, the one-eyed man said something about a wagon. I guess they took a wagon and dragged your friend clear over the other side of the island. That's all monsieur, I swear... I would call the guard, but that lisper told me I had a beautiful wife while before his leaving... See? If they find out I told you all of this, they'll...";
 			if (pchar.money >= 1000)
@@ -189,20 +175,17 @@ void ProcessCommonDialogEvent(ref NPChar, aref Link, aref NextDiag)
 			link.l2 = "It's not a lot, but thanks anyway. Next time call the guard and don't be such a squab.";
 			link.l2.go = "Portugal_5";
 		break;
-		
 		case "Portugal_4":
 			AddMoneyToCharacter(pchar, -1000);
 			dialog.text = "Thank you, monsieur. I can give you my word that your friend has almost recovered. He at least was walking by himself. And the one man, that quiet Dutchman, he came in the from outside in that moment, saw all that mess and leaped back outside, just disappeared after.";
 			link.l1 = "I'd say he's already departed on the first ship he could take. Thank you for the information, it's time for me to go.";
 			link.l1.go = "Portugal_6";
 		break;
-		
 		case "Portugal_5":
 			dialog.text = "Not every man can be a hero with his sword unsheathed, captain.";
 			link.l1 = "Well... that's the man's choice.";
 			link.l1.go = "Portugal_6";
 		break;
-		
 		case "Portugal_6":
 			DialogExit();
 			sld = characterFromId("Avendel");
@@ -211,7 +194,6 @@ void ProcessCommonDialogEvent(ref NPChar, aref Link, aref NextDiag)
 			LAi_ActorDialog(sld, pchar, "", -1, 0);
 		break;
 		//Португалец
-		
 		// Jason Долго и счастливо
 		case "LH_tavern_SP":
 			npchar.quest.LongHappy = "true";
@@ -219,7 +201,6 @@ void ProcessCommonDialogEvent(ref NPChar, aref Link, aref NextDiag)
 			link.l1 = "You sly fox! I myself have been drinking with sea wolves for many years, I've been in different... establishments, and I know that for the money that I brought, such a port hangout can be rebuilt from the foundation. Using the opportunity, right? Okay, I have a wedding, and I'm not in the mood to bother myself with such little things - how much do you want?";
 			link.l1.go = "LH_tavern_SP_1";
 		break;
-		
 		case "LH_tavern_SP_1":
 			dialog.text = "Another 100 000 should be enough and don't worry - I'll do everything in the best possible way. Your guys will remember this party for a long time, remember my word!";
 			if (sti(Pchar.money) >= 100000+sti(pchar.questTemp.LongHappy.MarryMoney))
@@ -233,18 +214,15 @@ void ProcessCommonDialogEvent(ref NPChar, aref Link, aref NextDiag)
 				link.l1.go = "LH_tavern_SP_2";
 			}
 		break;
-		
 		case "LH_tavern_SP_2":
 			DialogExit();
 			npchar.quest.LongHappy.Nomoney = "true";
 		break;
-		
 		case "LH_tavern_SP_3":
 			dialog.text = "Nice! Your guys will remember this party for a long time, remember my word!";
 			link.l1 = "You have to really try - this is a special occasion, you understand. And yes, after celebration, don't come to me with complaints, even if your tavern will burn to the ground.";
 			link.l1.go = "LH_tavern_SP_4";
 		break;
-		
 		case "LH_tavern_SP_4":
 			DialogExit();
 			RemoveCharacterGoods(pchar, GOOD_RUM, sti(pchar.questTemp.LongHappy.MarryRum));

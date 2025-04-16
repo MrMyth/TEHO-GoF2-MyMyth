@@ -6,13 +6,10 @@ void ProcessDialogEvent()
 	aref Link, NextDiag;
 	string sTemp;
 	int iTemp;
-
 	DeleteAttribute(&Dialog,"Links");
-
 	makeref(NPChar,CharacterRef);
 	makearef(Link, Dialog.Links);
 	makearef(NextDiag, NPChar.Dialog);
-	
 	// вызов диалога по городам -->
     NPChar.FileDialog2 = "DIALOGS\" + LanguageGetLanguage() + "\Citizen\" + NPChar.City + "_Citizen.c";
     if (LoadSegment(NPChar.FileDialog2))
@@ -21,9 +18,7 @@ void ProcessDialogEvent()
 		UnloadSegment(NPChar.FileDialog2);
 	}
     // вызов диалога по городам <--
-	
 	ProcessCommonDialogRumors(NPChar, Link, NextDiag);
-	
 	switch(Dialog.CurrentNode)
 	{
 		case "First time":
@@ -61,7 +56,6 @@ void ProcessDialogEvent()
 			}
 			NextDiag.TempNode = "First time";
 		break;
-
 		case "question":
 			dialog.text = NPCStringReactionRepeat(""+GetFullName(npchar)+" at your service, good sir! What do you want to know?", 
 				"Glad to talk with you, captain!", 
@@ -73,7 +67,6 @@ void ProcessDialogEvent()
 				"Sure. Good luck!", npchar, Dialog.CurrentNode);
 			link.l1.go = DialogGoNodeRepeat("rumours_sailor", "rumours_sailor", "rumours_sailor", "exit", npchar, Dialog.CurrentNode);
 		break;
-
 		case "crew":
 			switch (drand(2))
 			{
@@ -87,7 +80,6 @@ void ProcessDialogEvent()
 			link.l2 = "I am sorry, sailor, but I've got enough men already. You should find yourself another captain.";
 			link.l2.go = "exit";
 		break;
-		
 		case "crew_1":
 			switch (sti(npchar.quest.crew.type))
 			{
@@ -109,7 +101,6 @@ void ProcessDialogEvent()
 				link.l1.go = "exit";
 			}
 		break;
-		
 		case "crew_2":
 			iTemp = sti(npchar.quest.crew.money)*sti(npchar.quest.crew.qty);
 			dialog.text = ""+FindRussianMoneyString(sti(npchar.quest.crew.money))+" for each. And then the common sailor's wage per month. We won't ask anything excessive, captain.";
@@ -121,7 +112,6 @@ void ProcessDialogEvent()
 			link.l2 = "Unfortunately, I can't afford to pay for your services. You should find yourself another captain.";
 			link.l2.go = "exit";
 		break;
-		
 		case "crew_3":
 			iTemp = sti(npchar.quest.crew.money)*sti(npchar.quest.crew.qty);
 			AddMoneyToCharacter(pchar, -iTemp);
@@ -129,7 +119,6 @@ void ProcessDialogEvent()
 			link.l1 = "Hurry up, I am not going to stay here for along time.";
 			link.l1.go = "crew_4";
 		break;
-		
 		case "crew_4":
 			DialogExit();
 			AddCharacterCrew(pchar, sti(npchar.quest.crew.qty));
@@ -148,14 +137,12 @@ void ProcessDialogEvent()
 			LAi_ActorRunToLocation(npchar, "reload", "reload1_back", "none", "", "", "", 20.0);
 			npchar.lifeday = 0;
 		break;
-
 		//замечание по обнаженному оружию от персонажей типа citizen
 		case "CitizenNotBlade":
 			dialog.text = NPCharSexPhrase(NPChar, "Hey, sheathe your sword, cap. None of us needs problems, right?", "Hey, sheathe your sword, cap. None of us needs problems, right?");
 			link.l1 = LinkRandPhrase("Fine.", "As you wish.", "As you say.");
 			link.l1.go = "exit";
 		break;
-
 		case "Exit":
 			NextDiag.CurrentNode = NextDiag.TempNode;
 			DialogExit();

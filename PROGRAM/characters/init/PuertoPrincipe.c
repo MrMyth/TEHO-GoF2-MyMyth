@@ -1,12 +1,9 @@
-
 int CreatePuertoPrincipeCharacters(int n)
 {
 	ref ch;
-	
 	///////////////////////////////////////////////////////////////////////////////
 	// ОСНОВНЫЕ ПЕРСОНАЖИ
 	///////////////////////////////////////////////////////////////////////////////
-
 	makeref(ch,Characters[n]);			//Губернатор
 	ch.id		= "Marlow";
 	ch.sex = "man";
@@ -51,7 +48,6 @@ int CreatePuertoPrincipeCharacters(int n)
 	LAi_group_MoveCharacter(ch, "PIRATE_CITIZENS");
 	LAi_SetImmortal(ch, true);
 	n = n + 1;
-
 	makeref(ch,Characters[n]);		// ОФициантка
 	ch.id		= "PuertoPrincipe_waitress";
 	ch.model	= "women_9";
@@ -68,7 +64,6 @@ int CreatePuertoPrincipeCharacters(int n)
 	LAi_group_MoveCharacter(ch, "PIRATE_CITIZENS");
 	LAi_SetImmortal(ch, true);
 	n = n + 1;
-
 	makeref(ch,Characters[n]);			//Трактирщик
 	ch.id		= "PuertoPrincipe_tavernkeeper";
 	ch.model	= "barmen_13";
@@ -86,7 +81,6 @@ int CreatePuertoPrincipeCharacters(int n)
 	LAi_group_MoveCharacter(ch, "PIRATE_CITIZENS");
 	LAi_SetImmortal(ch, true);
 	n = n + 1;
-
 	makeref(ch,Characters[n]);			//Торговец
 	ch.id		= "PuertoPrincipe_trader";
 	ch.model	= "trader_13";
@@ -104,6 +98,5 @@ int CreatePuertoPrincipeCharacters(int n)
 	LAi_SetImmortal(ch, true);
 	ch.item_date = "";
 	n = n + 1;
-
 	return n;
 }

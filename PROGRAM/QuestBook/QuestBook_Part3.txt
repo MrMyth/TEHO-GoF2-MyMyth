@@ -98,7 +98,6 @@ I managed to escape and my kidnapper with his pal are both dead. My gear must be
 Mynheer Rodenburg's generosity is impressive. There are still no clues about Santiago situation. Perhaps, I will learn more in the future, now I have seven days to prepare myself.
 #TEXT   1-47
 I was too late. Rodenburg's trust in me is ruined. Now I should expect bounty hunters...
-
 #TEXT   2-1
 Charlie Knippel ordered me to capture a heavy galleon loaded with silver which is owned by Dutch West Indian Company. I have to take the ship and her cargo to St. John's. The convoy is sailing from Willemstad to Philipsburg - I'd better be attentive in the sea.
 #TEXT   2-2
@@ -159,7 +158,6 @@ Lucas Rodenburg on the 'Meifeng' had met me near Cayman. Of course, he was waiti
 The archive is decrypted. I was wrong, Johan didn't betray Hercule, his own curiosity did. And this Joachim Merriman. It is good that I didn't meet the wizard on Curacao. I have a feeling that we shall meet anyway in the future.
 #TEXT   2-27
 Lucas is dead, so hell with him! Richard and Abigail must have already forgotten about me, hell with them too! And I am alive, with coins in my chests and a house in my possession. I also have my very own dungeon. I am starting to love this line of work.
-
 #TEXT   3-1
 Gaston ordered me to find and eliminate some Fernando Rodriguez, a Castilian hidalgo. I should look for him in the Spanish settlements.
 #TEXT   3-2
@@ -303,7 +301,6 @@ I didn't take Abigail, as she has asked me, and crazy girl rushed to St. John's 
 I was too slow interrogating Longway and he died in my cargo holds. What a shame, my brilliant plan is ruined...
 #TEXT   3-71
 I was too slow sailing to Guadeloupe. And Longway died of the tropical fever. What a shame, my brilliant plan is ruined...
-
 #QUEST Sharlie
 A Burden of The Gascon
 #TEXT   1
@@ -419,7 +416,6 @@ Father Vincento is asking to meet him at the neutral territories, inside the cha
 I decided to stay away from Vincento. His duplicity has blown away my trust. I don't believe that Maldonado was acting only by his own initiative. No need to search for Tayasal, Gino was right: I have the mask - no need to worry. I can destroy it any time.
 #TEXT   43
 Despite the fact that I did everything I had to do and that I have found Indian treasures so I have no problems with money now - I have decided to stay here, at Americas. I have become a real man here. And France... I will always be able to return there!
-
 #QUEST SharlieA
 The Missing Assistant
 #TEXT   1
@@ -432,7 +428,6 @@ Now the merchant is asking me to find a new assistant for him. There are no opti
 I had a talk with applicants who were introduced to me by the innkeeper of Le Francois and I have chosen the most suitable. Now I should deliver him to the shop's owner of Saint-Pierre. I have already invested my time and thousand pesos, so he'd better pay me in full.
 #TEXT  5
 It's done. I should return in an hour and claim my reward.
-
 #QUEST SharlieB
 Rum Matters
 #TEXT   1
@@ -449,7 +444,6 @@ Barman has paid me what he promised - five thousand pesos. I also got a spyglass
 I said a wrong password and I was literally thrown overboard. What a shame...
 #TEXT   7
 Barque is at the pier. I may sail now.
-
 #QUEST SharlieC
 The Whore-Master
 #TEXT   1
@@ -458,7 +452,6 @@ I have met some nobleman named @<sName> and he asked me to do him an unusual fav
 I had a deal with Angelica. I should talk with Lucille at eleven pm. Works for me, considering my client's wish.
 #TEXT   3
 The girl was delivered to my client's place. Well, I suppose that all are happy now: me, the nobleman and Lucille...
-
 #QUEST SharlieD
 The Spanish Engineer
 #TEXT   1
@@ -475,7 +468,6 @@ There were too many pirates, so I decided to retreat and avoid playing a hero.
 Pirates were not intractable. So I had to deal with them. The Spanish tried to get rid of me by taking one of swords and fighting me but I managed to calm him down fast enough. It is odd but he claims that he doesn't know the usurer... Whatever, it's not my business. I should take him to Saint-Pierre. I must avoid town guards until my prisoner is delivered.
 #TEXT   7
 The Spanish was delivered to the usurer's place. It is done, I have got Deluc's debt papers - I may go and release him from the prison.
-
 #QUEST SharlieF
 Cannibalism Does Not Exist
 #TEXT   1
@@ -494,7 +486,6 @@ Redskins really were cannibals and all of them are eliminated. Unfortunately, Pr
 It all turned out well. Celene with her father have returned back to the town and I received a generous reward.
 #TEXT   8
 I have taken Celene back to the town. She presented me a follicle of doubloons for her rescue. I accepted her gift, she was insisting anyway.
-
 #QUEST SharlieE
 The Stolen Jewel
 #TEXT   1
@@ -505,7 +496,6 @@ Turned out that the earrings belong to the governor's wife. Jacques Dyel du Parq
 I have sold the earrings to the local usurer for thirty five golden doubloons. Nice deal...
 #TEXT   4
 I have sole the earrings to the local merchant for four thousand pesos. Nice deal...
-
 #QUEST Trial
 The Caribbean In A Nutshell
 #TEXT   1
@@ -552,7 +542,6 @@ I failed to destroy the Puebla. Bad, too bad...
 A task, given me by Florian Shoke, is done! Now I should sail to Guadeloupe and see my old friend Gerard LeCroix in order to get my payment and another money job.
 #TEXT	22
 Gerard LeCroix has already left Basse-Terre. I can claim my reward from Simon Maurois, the financial inspirer of captain Shoke's expedition.
-
 #QUEST Saga
 The Pirate Saga
 #TEXT   1
@@ -632,14 +621,11 @@ Now I should wait for Swanson, who is preparing his general plan...
 It's in the bag! New head of Brethren of the Coast will be chosen soon and unanimously. Now it's Swanson's turn. Time to tell him good news.
 #TEXT   26
 The end of this long story. Jan presented me an excellent amulet and five shards of the Maya's calendar. Souvenirs... I should see the new head of Brethren on Isla Tesoro. He will give me details about assassination of Levasseur.
-
-
 #QUEST LSC
 The Justice Island
 #TEXT   parol
 Current @<sText> password is '@<sParol>'.
 #TEXT   1
-
 #TEXT   2
 The Justice Island is divided by spheres of influence: San Augustin and Tartarus belong to Shark Dodson and his pirates, Rivados clan owns Protector, Fury and Velasco. Narwhals control Esmeralda, San Gabriel, Phoenix and Ceres Smithy. Rest of the ships are considered as a neutral territories. An important note: the only Narwal ship available to everyone is the store on Esmeralda. Other ships are forbidden to visit. All Rivados ships are also available only to their own. If you want to visit any forbidden ship, you should know weekly passwords of each clan.
 #TEXT   3
@@ -693,7 +679,6 @@ Mary, Mary, she is one of a kind! She saw Rumba on my ship and, of course, she g
 Dexter has got enough supplies now, he won't need anymore for the next six months.
 #TEXT   26
 Henrik Vedecker was glad that I have returned his suit back. He presented me an excellent tool kit. But, I will have to bail 500 000 pesos if I'll want to use the suit again. Well, I can understand that, no offence taken.
-
 #QUEST LSC_Drink
 Drink It All
 #TEXT	1
@@ -710,7 +695,6 @@ Getting inside 'Caroline' was easy. The key worked and I have opened the chest. 
 Getting inside 'Caroline' was easy. The key worked and I have opened the chest but I wasn't able to get anything from it. Too bad that our plan failed.
 #TEXT	7
 I was too slow visiting Fazio' place and Leonard lost any hope to wait for me. Hell with him, my conscience is saved at least...
-
 #QUEST LSC_Ring
 The Mystery of the Santa Lucia
 #TEXT	1
@@ -731,7 +715,6 @@ Such a great adventure we have! Shambon is smart and he has found a hidden cache
 #TEXT	8
 We have found the gold of 'Santa Lucia'. A box of gold. Literally. No I am facing a pleasant, but tricky task - to take and hide my share before others find it.
 These golden nuggets are making me feel strange... I still remember lines from the captain's journal which were showing me a tragedy of this ship. A misty image of captain and his lover, the Indian girl Vavaya...
-
 #QUEST SharkHunt
 Shark Hunt
 #TEXT   1
@@ -857,7 +840,6 @@ Dodson is angry with Narwhals for participating in his life's attempt. He is eve
 Donald Greenspen assures me that he didn't order his men to hurt Dodson and he is ready to swear it. Well, I knew that Chad was behind all of this, I should talk with Steven now.
 #TEXT   57
 I have managed to persuade Steven to stop making a war on the Island. Good... I should return to Greenspen.
-
 #QUEST BaronReturn
 The Return of the Baron
 #TEXT   1
@@ -891,7 +873,6 @@ Danielle and Nathaniel... They have managed to save their love for so many years
 I've told Snake Eye about my trip. He was listening carefully, and supposed that statues are broken because there is no sense in moving people in circles. Shaman said that all statues must send their victims to one special place... Though I don't want to think about it. I will never come close to these statues.
 #TEXT   13
 Nathaniel was brought to Snake Eye for treatment. Shaman promised to restore Hawk. Well, I will hope. Danielle asked to stay in my crew for a while, until we will find and kill the blood enemy of Hawks - Jacob Jackman.
-
 #QUEST BarbTemptation
 Barbazon's Temptation
 #TEXT   1
@@ -957,7 +938,6 @@ Marcus Tyrex gave his Indian shard.
 I had a short negotiation with Jaques Barbazon and he gave me his Indian shard.
 #TEXT   27
 Black Pastor gave me his Indian shard in exchange for the book which he was so eager to get.
-
 #QUEST Testament
 Sharp's Testament
 #TEXT   1
@@ -987,7 +967,6 @@ Whatever, God will judge her, not me. I have fulfilled my mission, now I am goin
 All Helen's rights were proven in the court, all documents were given to the new owner of the island. She has left my crew, Helen have to get used to her new role. I have fulfilled my mission, now I am going back to Swanson: he has no reasons left to refuse helping me in killing Levasseur and taking Tortuga. But first, I will return to Island of Justice, my beloved Mary is waiting for me!
 #TEXT   13
 All Helen's rights were proven in the court, all documents were given to the new owner of the island. I have fulfilled my mission, now I am going back to Swanson: he has no reasons left to refuse helping me in killing Levasseur and taking Tortuga. Despite of her Inheritage, Helen decided to stay in my crew. At last we have explained to each other! We had to walk all that long way together to understand that our destinies are bounded forever...
-
 #QUEST Shadows
 Shadows of the Past
 #TEXT   1
@@ -1031,7 +1010,6 @@ Jessica has kept her promise and gave me what I was looking for: a letter writte
 Obviously, killing Beltrop was some sacred Jessica's vow. It was keeping her in the world of living for twenty years. It is expired now, so I did what she asked. I buried her body at Portland Bay, put a simple cross above it and read a prayer. I hope that her poor and suffering soul will find peace at last.
 #TEXT   12
 Night spent inside the church ended with a strange vision, it was so real that I still can't get it. I've met Jessica at some wonderful place. She was young, beautiful and alive, just like twenty years ago... My prayers have brought long-awaited conciliation to her and healed my body.
-
 #QUEST alex_clock
 My Boss Wants A Ship
 #TEXT   1
@@ -1046,7 +1024,6 @@ So, uninvited guests weren't talkative enough and I had to show them the door...
 Alexus presented me an excellent chronometer. I can't even imagine who could create such a miracle: all chronometers I used before can't be compared to this one. I hope that I will find a worthy way to use such an excellent tool.
 #TEXT   6
 Four months to collect materials expired. Too bad that I failed to do this in time... Whatever, it is not a heavy loss.
-
 #QUEST Terrapin
 Turtle Soup
 #TEXT   1
@@ -1090,7 +1067,6 @@ I was too slow, no doubt, I won't find Fernand Lucas there. I've lost my clue an
 I was too slow sailing to Tortuga. I've lost my clue and I am the only man to blame. Pity, I will have to storm Tortuga myself in old fashioned military way...
 #TEXT   18
 I've lost an excellent chance to kill Levasseur quietly and I am the only man to be blamed. Pity, I will have to storm Tortuga myself in old fashioned military way...
-
 #QUEST Guardoftruth
 Seeking for the Guardian of Truth
 #TEXT   1
@@ -1270,7 +1246,6 @@ Now, my top priority is to find 'Arrow of the Way'. Paterson mentioned that it i
 #TEXT   74
 The last component is found. Now I must think about using Guardian of Truth to find Ksocheatem. Because, I suppose, that finding this island would answer a lot of questions and solve a lot of riddles about Dichoso, his lost frigate, Indian treasures and my brother. Diego and Paterson were so eager to get the Guardian! It means that there is something rational in it... If there is an island, then there is a Kukulcan mask which will let me to save our course of time and to stop Kukulcan... damn it, I've never thought that one day I will be reasoning this way! Seems like I share father's Vincento uneasiness and Gino's concerns...
 I won't go to father Vincento until I find Ksocheatem. This mess about 'Santa Quiteria', 'San Martin', 'Fortune' and Miguel Dichoso is not understandable until I find the island. Gino will help me to make the Guardian work. Time to sail to Antigua!
-
 #QUEST Ksochitam
 The Mystic Ksocheatem Island
 #TEXT   1
@@ -1316,7 +1291,6 @@ As far as I understand, Maldonado was going to attack Tayasal and use the mask t
 Whatever. First, I should deliver Gino back to Antigua.
 #TEXT   17
 I've found the mysterious island. The weather is pretty ugly and I don't see a bay, suitable for landing. I will have to move near the shore and look for a place where we could drop anchors.
-
 #QUEST Tieyasal
 The Ancient City of Maya
 #TEXT   1
@@ -1389,7 +1363,6 @@ Turns out that the temple of Kukulcan opens with planting an ancient tables of I
 Urakan claims that tables of Mayan gods may serve as keys for mechanisms, doors and magic rituals.
 #TEXT   32
 Urakan doesn't know how to open a door which leads to the Itza treasury. Only his father was allowed to open it. Urakan told me his father's saying: 'Every wealth is two sided. Only those who knows both sides will be allowed to the treasures of Tayasal'.
-
 #QUEST Caleuche
 Caleuche
 #TEXT   1
@@ -1483,7 +1456,6 @@ Well, that's the end of this long story. I received from the shaman three great 
 I have spent to much time in search for the island, and the amulets of Tuttuathapak have lost their power. I failed to return the jade skull back to the temple, and Tuttuathapak refused to deal with me any further. Well, nothing to do here, it was all my fault.
 #TEXT   44
 I have found quite a curious hall in the depths of the temple. There are stone floor plates and pillars. The exit which apparently leads to the sanctuary is blocked by a massive stone door. I should find a way to open it. Investigating this hall would be a good start.
-
 #QUEST Patria
 Hero of the nation.
 #TEXT   1
@@ -1683,7 +1655,6 @@ I didn't manage to pay Stuyvesant his million in time. Just like I expected, I'm
 Baron Noel Forget has returned to the Archipelago. I should go to Capsterville's residence. It seems, something has already happened...
 #TEXT   90
 That's it. The retribution has been dealt. Chevalier Poincy has been arrested and will be escorted to court in Paris. Baron Forget will deal with the company, while I... I'm a governor-general now. And it seems, I have a long time yet to serve in the French colonies. My dream of coming back to Paris soon did not come into fruition. Or perhaps, I didn't want it that much in the first place?
-
 #QUEST GoldenGirl
 More Than Gold
 #TEXT   1
@@ -1745,7 +1716,6 @@ You must already be in Martinique. Things coming apart and yet, I can not stop t
 #TEXT   25
 It's over, I think. Sometimes we need to lose something before we can understand its value. Not everyone get a chance to return what they lost. I was a lucky one. That woman… I knew I loved her, but I am starting to understand her true value to me only now. In the meantime, Barth didn't wait for me and fled from Martinique. I don't even need to read his farewell letter to know what really happened here. Some things never changes - shadow games of Dukes and wars of Kings.
 #TEXT   26
-
 #QUEST LongHappy
 Long and happily.
 #TEXT   1

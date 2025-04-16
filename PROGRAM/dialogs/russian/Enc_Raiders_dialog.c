@@ -5,22 +5,18 @@ void ProcessDialogEvent()
 	int i;
 	string sGroup;
 	bool bOk, bOk1;
-	
 	DeleteAttribute(&Dialog,"Links");
-
 	makeref(NPChar,CharacterRef);
 	makearef(Link, Dialog.Links);
 	makearef(Diag, NPChar.Dialog);
 	int iTemp = sti(npchar.EncQty);
 	string sTemp = "Gang" + locations[FindLocation(npchar.location)].index + "_";
-
 	switch(Dialog.CurrentNode)
 	{
 		case "exit":
 			Diag.CurrentNode = Diag.TempNode;
 			DialogExit();			
 		break;
-
 		case "exit_Robbed":
 			int iMoney = makeint(makeint(Pchar.money)/20)*10;
 			AddMoneyToCharacter(pchar, -iMoney);
@@ -37,7 +33,6 @@ void ProcessDialogEvent()
 			}
 			DialogExit();			
 		break;
-
 		case "exit_fight":
 			sGroup = "RaidersGroup_" + locations[FindLocation(npchar.location)].index;
 			for(i = 0; i < iTemp; i++)
@@ -54,7 +49,6 @@ void ProcessDialogEvent()
 			DialogExit();	
 			AddDialogExitQuest("MainHeroFightModeOn");
 		break;
-
 		case "exit_RunFight":
 			AddSimpleRumour(LinkRandPhrase(RandPhraseSimple("Have you heard? That bandit " + GetFullName(npchar) + " has finally found justice. He and his boys tried to rob "+ GetSexPhrase("some captain, but he turned out to be","some lady captain, but she turned out to be") +" a tough nut. So our dear robber shited his pants, ha-ha! That will be a lesson for him! Robbing the local farmers is one thing, but a brave captain is a different story!", 
 				"Thank you, captain " + GetFullName(pchar) + ", for finally dealing with the gang of that bandit " + GetFullName(npchar) + ". Those rascals were really a pain in everyone's ass. We were scared to even send couriers to the farm for milk, they could have intercepted them and rob of all the money."), 
@@ -69,7 +63,6 @@ void ProcessDialogEvent()
 			}
 			DialogExit();
 		break;
-
 		case "exit_noFight":
 			for(i = 0; i < iTemp; i++)
 			{
@@ -81,7 +74,6 @@ void ProcessDialogEvent()
 			}		
 			DialogExit();			
 		break;
-
 		case "First Time":
 			for(i = 0; i < iTemp; i++)
 			{
@@ -117,7 +109,6 @@ void ProcessDialogEvent()
 				"I would gladly continued our conversation, but I'm afraid the patrol unit that I've just met, won't let our acquaintance come into a close friendship."));
 			Link.l3.go = "Node_3";
 		break;
-		
 		case "Node_2":
 			dialog.text = LinkRandPhrase(LinkRandPhrase("Don't play a fool! Cash on the nail and maybe then I will let you go!",
 				"Haven't you heard about the travelling pay? If you don't part with your gold, you will part with a head!",
@@ -137,7 +128,6 @@ void ProcessDialogEvent()
 				"And haven't you noticed that I am well-armed and came here not for a simple walk?"));
 			Link.l2.go = "CheckSkills";	
 		break;
-
 		case "Node_3":
 			bOk = makeint(pchar.reputation.nobility) < 11 || makeint(pchar.reputation.nobility) > 90;  
 			if(bOk || GetSummonSkillFromName(pchar, SKILL_LEADERSHIP) == 100 || CheckCharacterPerk(pchar, "Trustworthy") || CheckCharacterPerk(pchar, "SeaDogProfessional"))
@@ -171,7 +161,6 @@ void ProcessDialogEvent()
 				}
 			}
 		break;
-		
 		case "CheckSkills":
 		    bool isStrong = (GetCharacterSkillToOld(Pchar, "FencingL") >= 7) || (GetCharacterSkillToOld(Pchar, "FencingS") >= 7) || (GetCharacterSkillToOld(Pchar, "FencingH") >= 7);
 			bool z_ok = (isStrong) && (makeint(Pchar.Rank) >= 8) && (Makeint(PChar.reputation.nobility) <= 30); // Captain Beltrop & mitrokosta, 23.01.21 проверяем на оружие (новый вариант)
@@ -204,7 +193,6 @@ void ProcessDialogEvent()
 				Link.l1.go = "Exit_Fight";
 			}
 		break;
-
 		case "CheckMoney":
 			if(makeint(makeint(Pchar.money)/20)*10 >= makeint(Pchar.rank)*100)
 			{
@@ -223,7 +211,6 @@ void ProcessDialogEvent()
 				Link.l1.go = "Exit_Fight";				
 			}				
 		break;
-
 		case "OnceAgain":
 			Diag.TempNode = "OnceAgain";
 			dialog.text = LinkRandPhrase("You again? Run home to your mommy, before I am angry with you!",
@@ -234,7 +221,6 @@ void ProcessDialogEvent()
 			Link.l2 = "I thought that it wouldn't be fair. Therefore I decided to equalize the costs...";
 			Link.l2.go = "Exit_Fight";
 		break;
-				
 		case "GetLost":
 			Diag.TempNode = "GetLost";
 			dialog.text = LinkRandPhrase("What else do you need? We have already agreed that you're leaving!",
@@ -245,7 +231,6 @@ void ProcessDialogEvent()
 			Link.l2 = "I've remembered that you didn't say goodbye! So let's say - goodbye...";
 			Link.l2.go = "Exit_Fight";
 		break;
-
 		case "GetTheHellOut":
 			Diag.TempNode = "GetTheHellOut";
 			dialog.text = LinkRandPhrase("Leave me be! Help me! I want to live!",

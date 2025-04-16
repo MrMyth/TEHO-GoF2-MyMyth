@@ -1,7 +1,6 @@
 int CreateAntiguaCharacters(int n)
 {
 	ref ch;
-	
 	///////////////////////////////////////////////////////////////////////////////
 	// ОСНОВНЫЕ ПЕРСОНАЖИ
 	///////////////////////////////////////////////////////////////////////////////
@@ -29,7 +28,6 @@ int CreateAntiguaCharacters(int n)
 	//LAi_group_MoveCharacter(ch, "NONE_CITIZENS");
 	LAi_SetImmortal(ch, true);
 	n = n + 1;   // boal зачем рн тут не ведаю. Но, зная шаманство К3, пусть будет имено тут (те за номером 2)
-	
 	makeref(ch,Characters[n]);			//губернатор
 	ch.id		= "SentJons_Mayor";
 	ch.model	= "huber_10";
@@ -57,7 +55,6 @@ int CreateAntiguaCharacters(int n)
 	LAi_group_MoveCharacter(ch, "ENGLAND_CITIZENS");
 	LAi_SetImmortal(ch, true);
 	n = n + 1;
-
 	makeref(ch,Characters[n]);			//денщик Фокса
 	ch.id		= "BenjaminJons";
 	ch.model	= "Addington";
@@ -85,7 +82,6 @@ int CreateAntiguaCharacters(int n)
 	LAi_group_MoveCharacter(ch, "ENGLAND_CITIZENS");
 	LAi_SetImmortal(ch, true);
 	n = n + 1;
-
 	makeref(ch,Characters[n]);			//Священик
 	ch.id		= "SentJons_Priest";
 	ch.model	= "priest_2";
@@ -103,7 +99,6 @@ int CreateAntiguaCharacters(int n)
 	LAi_group_MoveCharacter(ch, "ENGLAND_CITIZENS");
 	LAi_SetImmortal(ch, true);
 	n = n + 1;
-
 	makeref(ch,Characters[n]);		// ОФициантка
 	ch.id		= "SentJons_waitress";
 	ch.model	= "women_11";
@@ -120,7 +115,6 @@ int CreateAntiguaCharacters(int n)
 	LAi_group_MoveCharacter(ch, "ENGLAND_CITIZENS");
 	LAi_SetImmortal(ch, true);
 	n = n + 1;
-
 	makeref(ch,Characters[n]);			//Трактирщик
 	ch.id		= "SentJons_tavernkeeper";
 	ch.model	= "barmen_11";
@@ -138,7 +132,6 @@ int CreateAntiguaCharacters(int n)
 	LAi_group_MoveCharacter(ch, "ENGLAND_CITIZENS");
 	LAi_SetImmortal(ch, true);
 	n = n + 1;
-
 	makeref(ch,Characters[n]);			//Торговец
 	ch.id		= "SentJons_trader";
 	ch.model	= "trader_11";
@@ -160,7 +153,6 @@ int CreateAntiguaCharacters(int n)
 	ch.from_sea   = "SentJons_town";
 	// настройка магазина <--
 	n = n + 1;
-
 	makeref(ch,Characters[n]);			//Корабел
 	ch.id		= "SentJons_shipyarder";
 	ch.model	= "shipowner_11";
@@ -185,7 +177,6 @@ int CreateAntiguaCharacters(int n)
 	LAi_group_MoveCharacter(ch, "ENGLAND_CITIZENS");
 	LAi_SetImmortal(ch, true);
 	n = n + 1;
-
 	makeref(ch,Characters[n]);			//Банкир
 	ch.id		= "SentJons_usurer";
 	ch.model	= "banker_11";
@@ -205,7 +196,6 @@ int CreateAntiguaCharacters(int n)
 	LAi_group_MoveCharacter(ch, "ENGLAND_CITIZENS");
 	LAi_SetImmortal(ch, true);
 	n = n + 1;
-
 	makeref(ch,Characters[n]);			//Начальник порта
 	ch.id		= "SentJons_PortMan";
 	ch.model	= "citiz_6";
@@ -222,7 +212,6 @@ int CreateAntiguaCharacters(int n)
 	LAi_SetImmortal(ch, true);
 	ch.item_date = "";
 	n = n + 1;
-	
 	makeref(ch,Characters[n]);
 	ch.name 	= "Smuggler";
 	ch.lastname = "";
@@ -239,6 +228,5 @@ int CreateAntiguaCharacters(int n)
 	LAi_SetHP(ch, 80.0, 80.0);
 	ch.greeting = "smuggler";
 	n = n + 1;
-	
 	return n;
 }

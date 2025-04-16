@@ -1,10 +1,7 @@
-
 void FillRussianNationString(int iNation, int iStep, ref sParam)
 {
 	string sNationName =  GetNationNameByType(iNation);
-
 	string sTempString = sParam;
-
 	if(iStep == 1)
 	{
 		sTempString = DialogAddParamToStr(sTempString, "sPeopleNation", XI_ConvertString("people"+sNationName));
@@ -13,7 +10,6 @@ void FillRussianNationString(int iNation, int iStep, ref sParam)
 		sTempString = DialogAddParamToStr(sTempString, "sPeopleNationDat", XI_ConvertString("people"+sNationName + "Dat"));
 		sTempString = DialogAddParamToStr(sTempString, "sPeopleNationAbl", XI_ConvertString("people"+sNationName + "Abl"));
 		sTempString = DialogAddParamToStr(sTempString, "sPeopleNationAdj", XI_ConvertString("people"+sNationName + "Adj"));
-
 		sTempString = DialogAddParamToStr(sTempString, "sNation", XI_ConvertString(sNationName));
 		sTempString = DialogAddParamToStr(sTempString, "sNationAcc", XI_ConvertString(sNationName + "Acc"));
 		sTempString = DialogAddParamToStr(sTempString, "sNationGen", XI_ConvertString(sNationName + "Gen"));
@@ -29,7 +25,6 @@ void FillRussianNationString(int iNation, int iStep, ref sParam)
 		sTempString = DialogAddParamToStr(sTempString, "sPeopleNation2Dat", XI_ConvertString("people"+sNationName + "Dat"));
 		sTempString = DialogAddParamToStr(sTempString, "sPeopleNation2Abl", XI_ConvertString("people"+sNationName + "Abl"));
 		sTempString = DialogAddParamToStr(sTempString, "sPeopleNation2Adj", XI_ConvertString("people"+sNationName + "Adj"));
-
 		sTempString = DialogAddParamToStr(sTempString, "sNation2", XI_ConvertString(sNationName));
 		sTempString = DialogAddParamToStr(sTempString, "sNation2Acc", XI_ConvertString(sNationName + "Acc"));
 		sTempString = DialogAddParamToStr(sTempString, "sNation2Gen", XI_ConvertString(sNationName + "Gen"));
@@ -45,7 +40,6 @@ void FillRussianNationString(int iNation, int iStep, ref sParam)
 		sTempString = DialogAddParamToStr(sTempString, "sPeopleNation3Dat", XI_ConvertString("people"+sNationName + "Dat"));
 		sTempString = DialogAddParamToStr(sTempString, "sPeopleNation3Abl", XI_ConvertString("people"+sNationName + "Abl"));
 		sTempString = DialogAddParamToStr(sTempString, "sPeopleNation3Adj", XI_ConvertString("people"+sNationName + "Adj"));
-
 		sTempString = DialogAddParamToStr(sTempString, "sNation3", XI_ConvertString(sNationName));
 		sTempString = DialogAddParamToStr(sTempString, "sNation3Acc", XI_ConvertString(sNationName + "Acc"));
 		sTempString = DialogAddParamToStr(sTempString, "sNation3Gen", XI_ConvertString(sNationName + "Gen"));
@@ -53,14 +47,11 @@ void FillRussianNationString(int iNation, int iStep, ref sParam)
 		sTempString = DialogAddParamToStr(sTempString, "sNation3Abl", XI_ConvertString(sNationName + "Abl"));
 		sTempString = DialogAddParamToStr(sTempString, "sNation3Adj", XI_ConvertString(sNationName + "Adj"));
 	}
-
 	sParam = sTempString;
 }
-
 void FillRussianColonyString(int iColony, int iStep, ref sParam)
 {
 	string sColony = colonies[iColony].id;
-
 	string sTempString = sParam;
 	if(iStep == 1)
 	{
@@ -68,7 +59,6 @@ void FillRussianColonyString(int iColony, int iStep, ref sParam)
 		sTempString = DialogAddParamToStr(sTempString, "sTargetColonyAcc", XI_ConvertString("colony" + sColony + "Acc"));
 		sTempString = DialogAddParamToStr(sTempString, "sTargetColonyDat", XI_ConvertString("colony" + sColony + "Dat"));
 		sTempString = DialogAddParamToStr(sTempString, "sTargetColonyGen", XI_ConvertString("colony" + sColony + "Gen"));
-
 		sTempString = DialogAddParamToStr(sTempString, "sWhereToTargetColony", XI_ConvertString("colony" + sColony + "Acc"));
 		sTempString = DialogAddParamToStr(sTempString, "sWhereFromTargetColony", XI_ConvertString("colony" + sColony + "Gen"));
 		sTempString = DialogAddParamToStr(sTempString, "sWhereTargetColony", XI_ConvertString("colony" + sColony + "Dat"));
@@ -79,19 +69,16 @@ void FillRussianColonyString(int iColony, int iStep, ref sParam)
 		sTempString = DialogAddParamToStr(sTempString, "sNextColonyAcc", XI_ConvertString("colony" + sColony + "Acc"));
 		sTempString = DialogAddParamToStr(sTempString, "sNextColonyDat", XI_ConvertString("colony" + sColony + "Dat"));
 		sTempString = DialogAddParamToStr(sTempString, "sNextColonyGen", XI_ConvertString("colony" + sColony + "Gen"));
-
 		sTempString = DialogAddParamToStr(sTempString, "sWhereToNextColony", XI_ConvertString("colony" + sColony + "Acc"));
 		sTempString = DialogAddParamToStr(sTempString, "sWhereFromNextColony", XI_ConvertString("colony" + sColony + "Gen"));
 		sTempString = DialogAddParamToStr(sTempString, "sWhereNextColony", XI_ConvertString("colony" + sColony + "Dat"));
 	}
 	sParam = sTempString;
 }
-
 void FindRussianGoodString(int iGood, ref sParam, int iStep)
 {
 	string sGoodName = Goods[iGood].name;
 	string sTempString = sParam;
-
 	if(iStep == 1)
 	{
 		sTempString = DialogAddParamToStr(sTempString, "sGood", XI_ConvertString(sGoodName));
@@ -110,19 +97,15 @@ void FindRussianGoodString(int iGood, ref sParam, int iStep)
 		sTempString = DialogAddParamToStr(sTempString, "sGood3Gen", XI_ConvertString(sGoodName + "Gen"));
 		sTempString = DialogAddParamToStr(sTempString, "sGood3Acc", XI_ConvertString(sGoodName + "Acc"));
 	}
-
 	sParam = sTempString;
 }
-
 string FindRussianDaysString(int idays)
 {
 	string sDays = idays;
 	int iLen1 = strlen(&sDays) - 1;
 	int iLen2 = strlen(&sDays) - 2;
-	
 	string sChar1 = GetSymbol(&sDays, iLen1);
 	string sChar2 = GetSymbol(&sDays, iLen2);
-
 	if(LanguageGetLanguage() != "Russian")
 	{
 		if(idays == 1 || idays == 0)
@@ -251,16 +234,13 @@ string FindRussianDaysString(int idays)
 	sDays = idays + " " + sDays;
 	return sDays;
 }
-
 string FindRussianDublonString(int imoney)
 {
 	string sMoney = imoney;
 	int iLen1 = strlen(&sMoney) - 1;
 	int iLen2 = strlen(&sMoney) - 2;
-	
 	string sChar1 = GetSymbol(&sMoney, iLen1);
 	string sChar2 = GetSymbol(&sMoney, iLen2);
-	
 	if(LanguageGetLanguage() != "Russian")
 	{
 		if(imoney == 1 || imoney == 0)
@@ -389,16 +369,13 @@ string FindRussianDublonString(int imoney)
 	sMoney = MakeMoneyShow(imoney, MONEY_SIGN,MONEY_DELIVER) + " " + sMoney;
 	return sMoney;
 }
-
 string FindRussianMoneyString(int imoney)
 {
 	string sMoney = imoney;
 	int iLen1 = strlen(&sMoney) - 1;
 	int iLen2 = strlen(&sMoney) - 2;
-	
 	string sChar1 = GetSymbol(&sMoney, iLen1);
 	string sChar2 = GetSymbol(&sMoney, iLen2);
-	
 	if(LanguageGetLanguage() != "Russian")
 	{
 		if(imoney == 1 || imoney == 0)
@@ -527,7 +504,6 @@ string FindRussianMoneyString(int imoney)
 	sMoney = MakeMoneyShow(imoney, MONEY_SIGN,MONEY_DELIVER) + " " + sMoney;
 	return sMoney;
 }
-
 // eddy. такой код наверное лучше, чем выше на три экрана :)
 string FindRussianQtyString(int _iQty)
 {
@@ -572,16 +548,13 @@ string FindRussianMonthString(int _Month)
     sTemp = _Month + " " + sTemp;
     return sTemp;
 }
-
 string GetTextOnShipsQuantity(int iShips)
 {
 	string sShips = iShips;
 	int iLen1 = strlen(&sShips) - 1;
 	int iLen2 = strlen(&sShips) - 2;
-	
 	string sChar1 = GetSymbol(&sShips, iLen1);
 	string sChar2 = GetSymbol(&sShips, iLen2);
-
 	if(LanguageGetLanguage() != "Russian")
 	{
 		if(iShips == 1 || iShips == 0)
@@ -710,17 +683,13 @@ string GetTextOnShipsQuantity(int iShips)
 	sShips = iShips + " " + sShips;
 	return sShips;
 }
-
-
 string GetTextOnSecondShipsQuantity(int iShips)
 {
  string sShips = iShips;
 	int iLen1 = strlen(&sShips) - 1;
 	int iLen2 = strlen(&sShips) - 2;
-	
 	string sChar1 = GetSymbol(&sShips, iLen1);
 	string sChar2 = GetSymbol(&sShips, iLen2);
-
 	if(LanguageGetLanguage() != "Russian")
 	{
 		if(iShips == 1 || iShips == 0)
@@ -849,15 +818,12 @@ string GetTextOnSecondShipsQuantity(int iShips)
 	sShips = iShips + " " + sShips;
 	return sShips;
 }
-
-
 string FindRussianPeoplesString(int iPeoples, string sCase)
 {
 	string sPeoples = iPeoples;
 	string sPeoplesAcc;
 	int iLen1 = strlen(&sPeoples) - 1;
 	int iLen2 = strlen(&sPeoples) - 2;
-	
 	string sChar1 = GetSymbol(&sPeoples, iLen1);
 	string sChar2 = GetSymbol(&sPeoples, iLen2);
 	if(LanguageGetLanguage() != "Russian")
@@ -1017,28 +983,23 @@ string FindRussianPeoplesString(int iPeoples, string sCase)
 			}
 		}
 	}
-
 	switch(sCase)
 	{
 		case "No":
 			sPeoples = iPeoples + " " + sPeoples;
 		break;
-
 		case "Acc":
 			sPeoples = iPeoples + " " + sPeoplesAcc;
 		break;
 	}
 	return sPeoples;
 }
-
-
 string FindRussianSlavesString(int iPeoples, string sCase)
 {
 	string sPeoples = iPeoples;
 	string sPeoplesAcc;
 	int iLen1 = strlen(&sPeoples) - 1;
 	int iLen2 = strlen(&sPeoples) - 2;
-	
 	string sChar1 = GetSymbol(&sPeoples, iLen1);
 	string sChar2 = GetSymbol(&sPeoples, iLen2);
 	if(sChar2 == "1")
@@ -1133,28 +1094,23 @@ string FindRussianSlavesString(int iPeoples, string sCase)
 			break;
 		}
 	}
-
 	switch(sCase)
 	{
 		case "No":
 			sPeoples = iPeoples + " " + sPeoples;
 		break;
-
 		case "Acc":
 			sPeoples = iPeoples + " " + sPeoplesAcc;
 		break;
 	}
 	return sPeoples;
 }
-
-
 string FindRussianSailorString(int iPeoples, string sCase)
 {
 	string sPeoples = iPeoples;
 	string sPeoplesAcc;
 	int iLen1 = strlen(&sPeoples) - 1;
 	int iLen2 = strlen(&sPeoples) - 2;
-
 	string sChar1 = GetSymbol(&sPeoples, iLen1);
 	string sChar2 = GetSymbol(&sPeoples, iLen2);
 	if(sChar2 == "1")
@@ -1208,13 +1164,11 @@ string FindRussianSailorString(int iPeoples, string sCase)
 			break;
 		}
 	}
-
 	switch(sCase)
 	{
 		case "No":
 			sPeoples = iPeoples + " " + sPeoples;
 		break;
-
 		case "Acc":
 			sPeoples = iPeoples + " " + sPeoplesAcc;
 		break;

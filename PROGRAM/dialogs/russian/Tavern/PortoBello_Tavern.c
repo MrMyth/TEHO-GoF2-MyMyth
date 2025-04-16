@@ -32,7 +32,6 @@ void ProcessCommonDialogEvent(ref NPChar, aref Link, aref NextDiag)
 				link.l1.go = "Romantic_1";
 			}
 		break;
-		
 		case "Romantic_1":
             dialog.text = "No, no one asked me.";
             link.l1 = "I understand... Tell me, does anyone rent a room from you?";
@@ -44,13 +43,11 @@ void ProcessCommonDialogEvent(ref NPChar, aref Link, aref NextDiag)
 			link.l1.go = "exit";
 			pchar.RomanticQuest = "ToRositaInBeliz";
 		break;	
-		
 		case "Portobello_rat_1":
 			dialog.text = NPCStringReactionRepeat("No, I don't know. He didn't stop by the tavern and I didn't see him in town either.", "You've already asked about that and I've answered you.", "I told you 'you've already asked about that Gontier'.", "Listen, walk away and stop bothering me! Have you completely lost your noggin?", "block", 0, npchar, Dialog.CurrentNode);
 			link.l1 = HeroStringReactionRepeat("Well then, I'll keep looking.", "Hm, I guess so...", "Yes, right, I've asked that...", "Sorry, " + npchar.name + "...", npchar, Dialog.CurrentNode);
 			link.l1.go = "exit";
 		break;		
-
 		case "trial":
 			dialog.text = "Senior Jaime Silicio? Oh, that venerable caballero is very well known in our town, especially the past couple of days! Hold on a minute, I'll go get a guy who can bring you to him... Senior Arturo! There's a guy here asking about Jaime Silicio!";
 			link.l1 = "...";
@@ -58,20 +55,17 @@ void ProcessCommonDialogEvent(ref NPChar, aref Link, aref NextDiag)
 			npchar.quest.trial = true;
 			AddDialogExitQuestFunction("Trial_TavernEnterSoldiers");
 		break;
-		
 		// Addon-2016 Jason ФМК-Гваделупа
 		case "FMQG":
 			dialog.text = "Never heard of him, pal.";
 			link.l1 = "He is an acquaintance of don Carlos de Milyar. You sure you never heard of him?";
 			link.l1.go = "FMQG_1";
 		break;
-		
 		case "FMQG_1":
 			dialog.text = "I am. If he is a friend of de Milyar - go to a governor and ask for senor Carlos. He will tell you about this trader of yours.";
 			link.l1 = "I'll do that. Thanks for an advice!";
 			link.l1.go = "FMQG_2";
 		break;
-		
 		case "FMQG_2":
 			DialogExit();
 			AddQuestRecord("FMQ_Guadeloupe", "9");
@@ -80,4 +74,3 @@ void ProcessCommonDialogEvent(ref NPChar, aref Link, aref NextDiag)
 	}
 	UnloadSegment(NPChar.FileDialog2);  // если где-то выход внутри switch  по return не забыть сделать анлод
 }
-

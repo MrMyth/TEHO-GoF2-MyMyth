@@ -1,30 +1,23 @@
 string totalInfo = "";
-
 void InitInterface(string iniName)
 {
  	StartAboveForm(true);
-	
     SendMessage(&GameInterface,"ls",MSG_INTERFACE_INIT,iniName);
-
     SetFormatedText("MAP_CAPTION", XI_ConvertString("titlePsHero"));
-
 	SetEventHandler("InterfaceBreak","ProcessBreakExit",0);
 	SetEventHandler("exitCancel","ProcessCancelExit",0);
 	//SetEventHandler("ievnt_command","ProcCommand",0);
 	SetEventHandler("evntDoPostExit","DoPostExit",0); // выход из интерфейса
 	FillTable();
 }
-
 void ProcessBreakExit()
 {
 	IDoExit( RC_INTERFACE_ANY_EXIT );
 }
-
 void ProcessCancelExit()
 {
 	IDoExit( RC_INTERFACE_ANY_EXIT );
 }
-
 void IDoExit(int exitCode)
 {
     EndAboveForm(true);
@@ -32,36 +25,27 @@ void IDoExit(int exitCode)
 	DelEventHandler("exitCancel","ProcessCancelExit");
 	//DelEventHandler("ievnt_command","ProcCommand");
 	DelEventHandler("evntDoPostExit","DoPostExit");
-
 	interfaceResultCommand = exitCode;
 	EndCancelInterface(true);
 }
-
 void ProcCommand()
 {
 	string comName = GetEventData();
 	string nodName = GetEventData();
-	
 	switch(nodName)
 	{
-
 	}
 }
-
 void DoPostExit()
 {
 	int exitCode = GetEventData();
 	IDoExit(exitCode);
 }
-
-
 void FillTable()
 {
 	ref chr;
 	int i, n;
 	string row;
-	
-	
 	n = 1;
 	// шапка -->
     GameInterface.TABLE_HERO.select = 0;
@@ -79,16 +63,13 @@ void FillTable()
 	GameInterface.TABLE_HERO).hr.td6.scale = 0.8;
 	GameInterface.TABLE_HERO.hr.td7.str = "направление";
 	GameInterface.TABLE_HERO.hr.td7.scale = 0.8;
-
 	for (i = 1; i <= PsHeroQty; i++)
 	{
 		chr = CharacterFromID("PsHero_" + i);
-
 		//временно либо офицер, либо компаньон... не работаем с ним.
 		//if (!sti(chr.PGGAi.IsPGG)) continue;
 		//помер, нефиг мертвых качать.
 		//if (LAi_IsDead(chr)) continue;
-		
 		row = "tr" + n;
 		GameInterface.TABLE_HERO.(row).td1.icon.texture = "INTERFACES\PORTRAITS\128\face_" + chr.faceId + ".tga";
 		GameInterface.TABLE_HERO.(row).td1.icon.uv = "0,0,1,1";

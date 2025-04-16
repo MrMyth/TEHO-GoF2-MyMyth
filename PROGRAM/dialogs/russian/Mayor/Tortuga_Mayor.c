@@ -22,21 +22,18 @@ void ProcessCommonDialogEvent(ref NPChar, aref Link, aref NextDiag)
                 link.l1.go = "patria_tortuga";
 			}
 		break;
-		
 		case "FMQT":
 			dialog.text = "Wh-a-at? Again? That bitch! She will regret about this, oh I swear! Kampacho will make her scream. Why are you still here? Get the hell out of here!";
 			link.l1 = "I thought...";
 			if (GetSummonSkillFromName(pchar, SKILL_LEADERSHIP) > 25) link.l1.go = "FMQT_2";
 			else link.l1.go = "FMQT_1";
 		break;
-		
 		case "FMQT_1":
 			AddMoneyToCharacter(pchar, 1000);
 			dialog.text = "Always the same! Here, take this! It's all I have in the table! Now get out!";
 			link.l1 = "Thank you, your Excellence. Getting out.";
 			link.l1.go = "FMQT_3";
 		break;
-		
 		case "FMQT_2":
 			AddMoneyToCharacter(pchar, 1000);
 			GiveItem2Character(pchar, "pistol6");
@@ -46,7 +43,6 @@ void ProcessCommonDialogEvent(ref NPChar, aref Link, aref NextDiag)
 			link.l1 = "Thank you, your Excellence. Getting out.";
 			link.l1.go = "FMQT_3";
 		break;
-		
 		case "FMQT_3":
 			DialogExit();
 			pchar.quest.FMQT_late1.over = "yes";
@@ -58,14 +54,12 @@ void ProcessCommonDialogEvent(ref NPChar, aref Link, aref NextDiag)
 			CloseQuestHeader("FMQ_Tortuga");
 			FMQT_ClearChest();
 		break;
-		
 		// Jason НСО
 		case "patria_tortuga":
 			dialog.text = "Fine, captain Charles de Maure. The baron will be treated properly and I will do what I can to help him with his task.";
 			link.l1 = "";
 			link.l1.go = "patria_tortuga_1";
 		break;
-		
 		case "patria_tortuga_1":
 			DialogExit();
 			sld = characterFromId("Noel");
@@ -78,4 +72,3 @@ void ProcessCommonDialogEvent(ref NPChar, aref Link, aref NextDiag)
 	}
 	UnloadSegment(NPChar.FileDialog2);  // если где-то выход внутри switch  по return не забыть сделать анлод
 }
-

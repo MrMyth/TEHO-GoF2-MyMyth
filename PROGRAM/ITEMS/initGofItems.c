@@ -1,12 +1,10 @@
 #include "ITEMS/initItemFunctions.c"
-
 int GofInitItems()
 {
 	InitButtons();
 	InitRandItems();
 	ref itm;
 	int n;
-
 	for(n=0; n<GOF_ITEMS_QUANTITY; n++)
 	{
 		makeref(itm,Items[n]);
@@ -25,7 +23,6 @@ int GofInitItems()
 		itm.ItemType = "VARIETY";
 	}
 	n = 0;
-
 	// � ������ ���� ��� ��� ���������� ������
 	//==================PATENTS
 	/*
@@ -45,7 +42,6 @@ int GofInitItems()
 	itm.Weight = 0.1;
 	itm.ItemType = "QUESTITEMS";
 	n++;
-
 	makeref(itm,Items[n]);
 	itm.id = "GOF_patent_fra";
 	itm.groupID = PATENT_ITEM_TYPE;
@@ -63,7 +59,6 @@ int GofInitItems()
 	itm.Weight = 0.1;
 	itm.ItemType = "QUESTITEMS";
 	n++;
-
 	makeref(itm,Items[n]);
 	itm.id = "GOF_patent_spa";
 	itm.groupID = PATENT_ITEM_TYPE;
@@ -81,7 +76,6 @@ int GofInitItems()
 	itm.Weight = 0.1;
 	itm.ItemType = "QUESTITEMS";
 	n++;
-
 	makeref(itm,Items[n]);
 	itm.id = "GOF_patent_hol";
 	itm.groupID = PATENT_ITEM_TYPE;
@@ -100,11 +94,9 @@ int GofInitItems()
 	itm.ItemType = "QUESTITEMS";
 	n++;
 	*/
-
 	/////////////////////////////////////////////////////////////////
 	//									WEAPONS   ����� ������ � ������� ������� �� ���������� ����� � ������, � �� �� ��������!!!
 	////////////////////////////////////////////////////////////////
-	
 	n = InitStdBlade(n, "GOF_rabble", "ITEMS_GOF10", 11, TGT_SOLDIER, B_POOR, "FencingL", 0, 1.00, 1.00, 1, 1, 1, 50);
 	n = initStdBlade(n, "GOF_blade5", "ITEMS_GOF6", 9, TGT_OFFICER, B_POOR, "FencingL", 0, 1.00, 1.00, 1, 1, 1, 40);
 	n = initStdBlade(n, "GOF_blade2", "ITEMS_GOF6", 10, TGT_OFFICER, B_POOR, "FencingL", 0, 1.00, 1.00, 1, 1, 1, 60);
@@ -142,7 +134,6 @@ int GofInitItems()
 	n = initStdBlade(n, "GOF_topor2", "ITEMS_GOF10", 7, TGT_OFFICER, B_GOOD, "FencingH", 0, 1.00, 1.00, 1, 1, 1, 1650);
 	n = initStdBlade(n, "GOF_tritblade", "ITEMS_GOF10", 2, TGT_OFFICER, B_EXCELLENT, "FencingH", 0, 1.00, 1.00, 1, 1, 1, 12500);
 	n = initStdBlade(n, "GOF_piranblade", "ITEMS_GOF3", 9, TGT_OFFICER, B_EXCELLENT, "FencingH", 0, 1.00, 1.00, 1, 1, 1, 12500);
-
 	// Already in TEHO
 	/*
 	makeref(itm,Items[n]);
@@ -169,8 +160,6 @@ int GofInitItems()
 	itm.ItemType = "WEAPON";
 	n++;
 	*/
-	
-
 	/*
 	makeref(itm,Items[n]);
 	itm.id = "GOF_rabble"; // �������
@@ -196,7 +185,6 @@ int GofInitItems()
 	itm.ItemType = "WEAPON";
 	n++;
 	*/
-
 	/*makeref(itm,Items[n]);
 	itm.id = "GOF_Lead1"; // ������
 	itm.groupID = BLADE_ITEM_TYPE;
@@ -220,7 +208,6 @@ int GofInitItems()
 	itm.FencingType = "FencingLight";
 	itm.ItemType = "WEAPON";
 	n++;*/
-	
 	/*
 	makeref(itm,Items[n]);
 	itm.id = "GOF_blade5";  //������
@@ -247,7 +234,6 @@ int GofInitItems()
 	itm.FencingType = "FencingLight";
 	itm.ItemType = "WEAPON";
 	n++;
-
 	makeref(itm,Items[n]);
 	itm.id = "GOF_blade2";  //������������ ������.   ������
 	itm.groupID = BLADE_ITEM_TYPE;
@@ -274,7 +260,6 @@ int GofInitItems()
 	itm.ItemType = "WEAPON";
 	n++;
 	*/
-	
 	// Already in TEHO
 	/*makeref(itm,Items[n]);
 	itm.id = "GOF_blade6";  //��������
@@ -301,7 +286,6 @@ int GofInitItems()
 	itm.FencingType = "FencingLight";
 	itm.ItemType = "WEAPON";
 	n++;*/
-	
 	/*
 	makeref(itm,Items[n]);
 	itm.id = "GOF_blade9"; //����������� ������
@@ -328,7 +312,6 @@ int GofInitItems()
 	itm.FencingType = "FencingLight";
 	itm.ItemType = "WEAPON";
 	n++;
-	
 	makeref(itm,Items[n]);
 	itm.id = "GOF_blade14";  //����������� ������
 	itm.groupID = BLADE_ITEM_TYPE;
@@ -354,7 +337,6 @@ int GofInitItems()
 	itm.FencingType = "FencingLight";
 	itm.ItemType = "WEAPON";
 	n++;
-	
 	makeref(itm,Items[n]);
 	itm.id = "GOF_blade19";   //���������� ������
 	itm.groupID = BLADE_ITEM_TYPE;
@@ -380,7 +362,6 @@ int GofInitItems()
 	itm.FencingType = "FencingLight";
 	itm.ItemType = "WEAPON";
 	n++;
-	
 	makeref(itm,Items[n]);
 	itm.id = "GOF_blade22"; //���������� ������
 	itm.groupID = BLADE_ITEM_TYPE;
@@ -396,7 +377,6 @@ int GofInitItems()
 	// boal 19.01.2004 <--
 	itm.dmg_min = 13.0;
 	itm.dmg_max = 53.0;
-
 	itm.piercing = 44;
 	itm.minlevel = 1;
 	itm.rare = 0.001;
@@ -407,7 +387,6 @@ int GofInitItems()
 	itm.FencingType = "FencingLight";
 	itm.ItemType = "WEAPON";
 	n++;
-	
 	makeref(itm,Items[n]);
 	itm.id = "GOF_blade23"; //��������� ������
 	itm.groupID = BLADE_ITEM_TYPE;
@@ -434,7 +413,6 @@ int GofInitItems()
 	itm.ItemType = "WEAPON";
 	n++;
 	*/
-	
 	/*makeref(itm,Items[n]);
 	itm.id = "GOF_arm1"; //������ �����
 	itm.groupID = BLADE_ITEM_TYPE;
@@ -460,7 +438,6 @@ int GofInitItems()
 	itm.FencingType = "FencingLight";
 	itm.ItemType = "WEAPON";
 	n++;*/
-	
 	/*
 	makeref(itm,Items[n]);
 	itm.id = "GOF_blade27"; //������ ����� �������
@@ -487,7 +464,6 @@ int GofInitItems()
 	itm.FencingType = "FencingLight";
 	itm.ItemType = "WEAPON";
 	n++;
-
 	makeref(itm,Items[n]);
 	itm.id = "GOF_cortblade";  //Sword of Cort�s <-----Officerpuppy 12/16/09
 	itm.groupID = BLADE_ITEM_TYPE;
@@ -514,8 +490,6 @@ int GofInitItems()
 	itm.FencingType = "FencingLight";
 	itm.ItemType = "WEAPON";
 	n++;
-
-
 	makeref(itm,Items[n]);
 	itm.id = "GOF_blade1"; //������ �����
 	itm.groupID = BLADE_ITEM_TYPE;
@@ -542,7 +516,6 @@ int GofInitItems()
 	itm.ItemType = "WEAPON";
 	n++;
 	*/
-
 	// Already in TEHO
 	/*makeref(itm,Items[n]);
 	itm.id = "GOF_blade4";  //���������� �����
@@ -569,7 +542,6 @@ int GofInitItems()
 	itm.FencingType = "Fencing";
 	itm.ItemType = "WEAPON";
 	n++;*/
-
 	/*
 	makeref(itm,Items[n]);
 	itm.id = "GOF_topor3";  //�������
@@ -596,7 +568,6 @@ int GofInitItems()
 	itm.FencingType = "Fencing";
 	itm.ItemType = "WEAPON";
 	n++;
-	
 	makeref(itm,Items[n]);
 	itm.id = "GOF_blade3"; //������   �������� ����� � ������� �������, ��������� ��������� ����� ��������.
 	itm.groupID = BLADE_ITEM_TYPE;
@@ -622,7 +593,6 @@ int GofInitItems()
 	itm.FencingType = "Fencing";
 	itm.ItemType = "WEAPON";
 	n++;
-	
 	makeref(itm,Items[n]);
 	itm.id = "GOF_blade7"; //������
 	itm.groupID = BLADE_ITEM_TYPE;
@@ -648,7 +618,6 @@ int GofInitItems()
 	itm.FencingType = "Fencing";
 	itm.ItemType = "WEAPON";
 	n++;
-
 	makeref(itm,Items[n]);
 	itm.id = "GOF_blade12"; //���������� �����
 	itm.groupID = BLADE_ITEM_TYPE;
@@ -674,7 +643,6 @@ int GofInitItems()
 	itm.FencingType = "Fencing";
 	itm.ItemType = "WEAPON";
 	n++;
-	
 	makeref(itm,Items[n]);
 	itm.id = "GOF_blade18"; //���������� ����� � ������ ��������� �������, ���������������� �� ������� �� �����.
 	itm.groupID = BLADE_ITEM_TYPE;
@@ -700,7 +668,6 @@ int GofInitItems()
 	itm.FencingType = "Fencing";
 	itm.ItemType = "WEAPON";
 	n++;
-	
 	makeref(itm,Items[n]);
 	itm.id = "GOF_blade30";//����
 	itm.groupID = BLADE_ITEM_TYPE;
@@ -726,7 +693,6 @@ int GofInitItems()
 	itm.FencingType = "Fencing";
 	itm.ItemType = "WEAPON";
 	n++;
-	
 	makeref(itm,Items[n]);
 	itm.id = "GOF_blade31"; //��������� �����
 	itm.groupID = BLADE_ITEM_TYPE;
@@ -752,7 +718,6 @@ int GofInitItems()
 	itm.FencingType = "Fencing";
 	itm.ItemType = "WEAPON";
 	n++;
-	
 	makeref(itm,Items[n]);
 	itm.id = "GOF_blade24"; //������
 	itm.groupID = BLADE_ITEM_TYPE;
@@ -778,7 +743,6 @@ int GofInitItems()
 	itm.FencingType = "Fencing";
 	itm.ItemType = "WEAPON";
 	n++;
-	
 	makeref(itm,Items[n]);
 	itm.id = "GOF_blade25";  //�������� �����
 	itm.groupID = BLADE_ITEM_TYPE;
@@ -804,7 +768,6 @@ int GofInitItems()
 	itm.FencingType = "Fencing";
 	itm.ItemType = "WEAPON";
 	n++;
-
 	makeref(itm,Items[n]);
 	itm.id = "GOF_blade34"; //�����
 	itm.groupID = BLADE_ITEM_TYPE;
@@ -830,7 +793,6 @@ int GofInitItems()
 	itm.FencingType = "Fencing";
 	itm.ItemType = "WEAPON";
 	n++;
-	
 	makeref(itm,Items[n]);
 	itm.id = "GOF_blade26";  //������
 	itm.groupID = BLADE_ITEM_TYPE;
@@ -857,7 +819,6 @@ int GofInitItems()
 	itm.ItemType = "WEAPON";
 	n++;
 	*/
-	
 	// Already in TEHO
 	/*makeref(itm,Items[n]);
 	itm.id = "GOF_blade32"; //������
@@ -884,7 +845,6 @@ int GofInitItems()
 	itm.FencingType = "Fencing";
 	itm.ItemType = "WEAPON";
 	n++;*/
-	
 	/*
 	makeref(itm,Items[n]);
 	itm.id = "GOF_blade10"; //���������� �����
@@ -911,7 +871,6 @@ int GofInitItems()
 	itm.FencingType = "FencingHeavy";
 	itm.ItemType = "WEAPON";
 	n++;
-
 	makeref(itm,Items[n]);
 	itm.id = "GOF_blade35";  //�����
 	itm.groupID = BLADE_ITEM_TYPE;
@@ -938,7 +897,6 @@ int GofInitItems()
 	itm.ItemType = "WEAPON";
 	n++;
 	*/
-	
 	// Already in TEHO
 	/*makeref(itm,Items[n]);
 	itm.id = "GOF_blade8";  //����������� ���
@@ -965,7 +923,6 @@ int GofInitItems()
 	itm.FencingType = "FencingHeavy";
 	itm.ItemType = "WEAPON";
 	n++;*/
-
 	/*
 	makeref(itm,Items[n]);
 	itm.id = "GOF_blade11"; //����������� �����
@@ -992,7 +949,6 @@ int GofInitItems()
 	itm.FencingType = "FencingHeavy";
 	itm.ItemType = "WEAPON";
 	n++;
-
 	makeref(itm,Items[n]);
 	itm.id = "GOF_blade13"; //�����
 	itm.groupID = BLADE_ITEM_TYPE;
@@ -1018,7 +974,6 @@ int GofInitItems()
 	itm.FencingType = "FencingHeavy";
 	itm.ItemType = "WEAPON";
 	n++;
-
 	makeref(itm,Items[n]);
 	itm.id = "GOF_topor1";  //�����
 	itm.groupID = BLADE_ITEM_TYPE;
@@ -1044,7 +999,6 @@ int GofInitItems()
 	itm.FencingType = "FencingHeavy";
 	itm.ItemType = "WEAPON";
 	n++;
-	
 	makeref(itm,Items[n]);
 	itm.id = "GOF_blade15";  //����������� ���
 	itm.groupID = BLADE_ITEM_TYPE;
@@ -1070,7 +1024,6 @@ int GofInitItems()
 	itm.FencingType = "FencingHeavy";
 	itm.ItemType = "WEAPON";
 	n++;
-
 	makeref(itm,Items[n]);
 	itm.id = "GOF_blade16"; //��������� ���
 	itm.groupID = BLADE_ITEM_TYPE;
@@ -1096,7 +1049,6 @@ int GofInitItems()
 	itm.FencingType = "FencingHeavy";
 	itm.ItemType = "WEAPON";
 	n++;
-	
 	makeref(itm,Items[n]);
 	itm.id = "GOF_blade17"; //��������
 	itm.groupID = BLADE_ITEM_TYPE;
@@ -1122,7 +1074,6 @@ int GofInitItems()
 	itm.FencingType = "FencingHeavy";
 	itm.ItemType = "WEAPON";
 	n++;
-
 	makeref(itm,Items[n]);
 	itm.id = "GOF_blade20"; //�����
 	itm.groupID = BLADE_ITEM_TYPE;
@@ -1148,7 +1099,6 @@ int GofInitItems()
 	itm.FencingType = "FencingHeavy";
 	itm.ItemType = "WEAPON";
 	n++;
-
 	makeref(itm,Items[n]);
 	itm.id = "GOF_blade21"; //��������
 	itm.groupID = BLADE_ITEM_TYPE;
@@ -1174,7 +1124,6 @@ int GofInitItems()
 	itm.FencingType = "FencingHeavy";
 	itm.ItemType = "WEAPON";
 	n++;
-
 	makeref(itm,Items[n]);
 	itm.id = "GOF_blade33"; //����������� ���
 	itm.groupID = BLADE_ITEM_TYPE;
@@ -1200,7 +1149,6 @@ int GofInitItems()
 	itm.FencingType = "FencingHeavy";
 	itm.ItemType = "WEAPON";
 	n++;
-
 	makeref(itm,Items[n]);
 	itm.id = "GOF_blade28";  //�����
 	itm.groupID = BLADE_ITEM_TYPE;
@@ -1226,7 +1174,6 @@ int GofInitItems()
 	itm.FencingType = "FencingHeavy";
 	itm.ItemType = "WEAPON";
 	n++;
-	
 	makeref(itm,Items[n]);
 	itm.id = "GOF_topor2";  //������
 	itm.groupID = BLADE_ITEM_TYPE;
@@ -1252,7 +1199,6 @@ int GofInitItems()
 	itm.FencingType = "FencingHeavy";
 	itm.ItemType = "WEAPON";
 	n++;
-
 	makeref(itm,Items[n]);
 	itm.id = "GOF_tritblade";  //Sword of Triton  <-----Officerpuppy 05/09/11
 	itm.groupID = BLADE_ITEM_TYPE;
@@ -1279,7 +1225,6 @@ int GofInitItems()
    	 itm.FencingType = "FencingHeavy";
     	itm.ItemType = "WEAPON";
 	n++;
-
 	makeref(itm,Items[n]);
 	itm.id = "GOF_piranblade";  //St. Piran's Blade  <-----Officerpuppy 06/15/11
 	itm.groupID = BLADE_ITEM_TYPE;
@@ -1308,7 +1253,6 @@ int GofInitItems()
 	n++;
 	*/
 	//GUNS
-
 	n = initStdGun(n, "GOF_pistol1", "GOF_pistol1", "ITEMS_GOF6", 1, 0.1, 1, 50, 20.0, 100.0, 3.0, 1, B_ORDINARY);
 	n = initStdGun(n, "GOF_pistol2", "GOF_pistol2", "ITEMS_GOF6", 2, 0.1, 1, 200, 30.0, 120.0, 4.0, 1, B_ORDINARY);
 	n = initStdGun(n, "GOF_pistol3", "GOF_pistol3", "ITEMS_GOF6", 3, 0.0001, 1, 400, 50.0, 175.0, 6.0, 1, B_ORDINARY);
@@ -1316,29 +1260,20 @@ int GofInitItems()
 	n = initStdGun(n, "GOF_pistol5", "GOF_pistol5", "ITEMS_GOF6", 5, 0.0001, 1, 1900, 40.0, 170.0, 3.0, 1, B_ORDINARY);
 	n = initStdGun(n, "GOF_pistol4", "GOF_pistol4", "ITEMS_GOF6", 4, 0.0001, 1, 2500, 30.0, 120.0, 6.0, 4, B_ORDINARY);
 	n = initStdGun(n, "GOF_mushket1", "GOF_mushket1", "ITEMS_GOF14", 3, 0.0001, 1, 5500, 80.0, 280.0, 13.0, 1, B_ORDINARY);
-
-
 	initGunExt("GOF_pistol1", "t1", "cartridge", "", 20.0, 100.0, 12.0, 60.0, 0.0, 0.0, 1, 1, 0, 0, 0, 0, 30, 8, 0);
 	initGunExt("GOF_pistol1", "t2", "bullet", "gunpowder", 20.0, 100.0, 12.0, 60.0, 0.0, 0.0, 1, 1, 0, 0, 0, 0, 30, 8, 1);
-
 	initGunExt("GOF_pistol2", "t1", "cartridge", "", 30.0, 120.0, 18.0, 72.0, 0.0, 0.0, 1, 1, 0, 0, 0, 0, 50, 12, 0);
 	initGunExt("GOF_pistol2", "t2", "bullet", "gunpowder", 30.0, 120.0, 18.0, 72.0, 0.0, 0.0, 1, 1, 0, 0, 0, 0, 50, 12, 1);
-
 	initGunExt("GOF_pistol3", "t1", "cartridge", "", 50.0, 175.0, 30.0, 105.0, 0.0, 0.0, 1, 1, 0, 0, 0, 0, 20, 22, 0);
 	initGunExt("GOF_pistol3", "t2", "bullet", "gunpowder", 50.0, 175.0, 30.0, 105.0, 0.0, 0.0, 1, 1, 0, 0, 0, 0, 20, 22, 1);
-
 	initGunExt("GOF_pistol6", "t1", "cartridge", "", 35.0, 110.0, 21.0, 66.0, 0.0, 0.0, 1, 1, 0, 0, 0, 0, 60, 20, 0);
 	initGunExt("GOF_pistol6", "t2", "bullet", "gunpowder", 35.0, 110.0, 21.0, 66.0, 0.0, 0.0, 1, 1, 0, 0, 0, 0, 60, 20, 1);
-
 	initGunExt("GOF_pistol5", "t1", "cartridge", "", 40.0, 170.0, 24.0, 102.0, 0.0, 0.0, 1, 1, 0, 0, 0, 0, 80, 16, 0);
 	initGunExt("GOF_pistol5", "t2", "bullet", "gunpowder", 40.0, 170.0, 24.0, 102.0, 0.0, 0.0, 1, 1, 0, 0, 0, 0, 80, 16, 1);
-
 	initGunExt("GOF_pistol4", "t1", "cartridge", "", 30.0, 120.0, 18.0, 72.0, 0.0, 0.0, 1, 1, 0, 0, 0, 0, 50, 28, 0);
 	initGunExt("GOF_pistol4", "t2", "bullet", "gunpowder", 30.0, 120.0, 18.0, 72.0, 0.0, 0.0, 1, 1, 0, 0, 0, 0, 50, 28, 1);
-
 	initGunExt("GOF_mushket1", "t1", "cartridge", "", 80.0, 280.0, 48.0, 168.0, 0.0, 0.0, 1, 1, 0, 0, 0, 0, 80, 10, 0);
 	initGunExt("GOF_mushket1", "t2", "bullet", "gunpowder", 80.0, 280.0, 48.0, 168.0, 0.0, 0.0, 1, 1, 0, 0, 0, 0, 80, 10, 1);
-
 	InitMushketExt("GOF_mushket1", 25.0,  50.0,  10.0,  25.0, "FencingH", "FencingL" );
 	/*
 	makeref(itm,Items[n]);
@@ -1363,7 +1298,6 @@ int GofInitItems()
 	itm.rare = 0.1;
 	itm.ItemType = "WEAPON";
 	n++;
-
 	makeref(itm,Items[n]);
 	itm.id = "GOF_pistol2";
 	itm.groupID = GUN_ITEM_TYPE;
@@ -1386,7 +1320,6 @@ int GofInitItems()
 	itm.rare = 0.1;
 	itm.ItemType = "WEAPON";
 	n++;
-
 	makeref(itm,Items[n]);
 	itm.id = "GOF_pistol3"; //�������
 	itm.groupID = GUN_ITEM_TYPE;
@@ -1409,7 +1342,6 @@ int GofInitItems()
 	itm.rare = 0.0001;
 	itm.ItemType = "WEAPON";
 	n++;
-
 	makeref(itm,Items[n]);
 	itm.id = "GOF_pistol6";  // 2�
 	itm.groupID = GUN_ITEM_TYPE;
@@ -1432,7 +1364,6 @@ int GofInitItems()
 	itm.rare = 0.0001;
 	itm.ItemType = "WEAPON";
 	n++;
-
 	makeref(itm,Items[n]);
 	itm.id = "GOF_pistol5"; //���������� ��������
 	itm.groupID = GUN_ITEM_TYPE;
@@ -1455,7 +1386,6 @@ int GofInitItems()
 	itm.rare = 0.0001;
 	itm.ItemType = "WEAPON";
 	n++;
-
 	makeref(itm,Items[n]);
 	itm.id = "GOF_pistol4"; // 4�
 	itm.groupID = GUN_ITEM_TYPE;
@@ -1480,7 +1410,6 @@ int GofInitItems()
 	itm.ItemType = "WEAPON";
 	n++;
 	*/
-
 	// Already in TEHO
 	/*makeref(itm,Items[n]);
 	itm.id = "GOF_mushket"; //��������
@@ -1504,7 +1433,6 @@ int GofInitItems()
 	itm.rare = 0.0001;
 	itm.ItemType = "WEAPON";
 	n++;*/
-
 	/*
   	makeref(itm,Items[n]);
 	itm.id = "GOF_mushket1"; //�������� <-----Officerpuppy 02/04/10
@@ -1529,7 +1457,6 @@ int GofInitItems()
 	itm.ItemType = "WEAPON";
 	n++;
 	*/
-
 	// <<<< ---------------  QUEST ITEMS  --------------------
 	/*
 	makeref(itm,Items[n]);
@@ -1541,7 +1468,6 @@ int GofInitItems()
 	itm.picTexture = "ITEMS_GOF4";
 	itm.price = 0;
 	n++;
-
 	makeref(itm,Items[n]);
 	itm.id = "GOF_Chest";
 	itm.name = "GOF_itmname_chest";
@@ -1552,7 +1478,6 @@ int GofInitItems()
 	itm.price = 12500; // ����� ���������� � �����
 	itm.Weight = 15; // boal
 	n++;
-
 	makeref(itm,Items[n]);
 	itm.id = "GOF_Coins";
 	itm.name = "GOF_itmname_coins";
@@ -1570,7 +1495,6 @@ int GofInitItems()
 	// boal 19.01.2004 <--
 	itm.ItemType = "QUESTITEMS";
 	n++;
-
 	makeref(itm,Items[n]);
 	itm.id = "GOF_icollection";
 	itm.name = "GOF_itmname_incas_collection";
@@ -1584,7 +1508,6 @@ int GofInitItems()
 	itm.Weight = 50;
 	// boal 19.01.2004 <--
 	n++;
-
 	// boal ��� ���������� -->
 	makeref(itm,Items[n]);
 	itm.id = "GOF_letter_1";
@@ -1597,7 +1520,6 @@ int GofInitItems()
 	itm.Weight = 0.1;
 	itm.ItemType = "QUESTITEMS";
 	n++;
-	
 	makeref(itm,Items[n]);
 	itm.id = "GOF_letter_2";
 	itm.name = "GOF_itmname_letter_2";
@@ -1609,7 +1531,6 @@ int GofInitItems()
 	itm.Weight = 0.1;
 	itm.ItemType = "QUESTITEMS";
 	n++;
-	
 	makeref(itm,Items[n]);
 	itm.id = "GOF_letter_open";
 	itm.name = "GOF_itmname_letter_open";
@@ -1621,9 +1542,7 @@ int GofInitItems()
 	itm.Weight = 0.1;
 	itm.ItemType = "QUESTITEMS";
 	n++;
-
 	// boal ��� ���������� <--
-
 	makeref(itm,Items[n]); //�������
 	itm.id = "GOF_letter_notes";
 	itm.name = "GOF_itmname_letter_notes";
@@ -1635,7 +1554,6 @@ int GofInitItems()
 	itm.Weight = 0.1;
 	itm.ItemType = "QUESTITEMS";
 	n++;
-
 	makeref(itm,Items[n]); //�������
 	itm.id = "GOF_Order";
 	itm.name = "GOF_itmname_order";
@@ -1647,7 +1565,6 @@ int GofInitItems()
 	itm.Weight = 0.1;
 	itm.ItemType = "QUESTITEMS";
 	n++;
-
 	makeref(itm,Items[n]);
 	itm.id = "GOF_letter_Albermal";
 	itm.name = "GOF_itmname_letter_Albermal";
@@ -1658,7 +1575,6 @@ int GofInitItems()
 	itm.price = 0;
 	itm.Weight = 0.1;
 	n++; 
-
 	// eddy �������� ������� <--
 	makeref(itm,Items[n]);
 	itm.id = "GOF_EngTradeLicence";
@@ -1671,7 +1587,6 @@ int GofInitItems()
 	itm.Weight = 0.1;
 	itm.ItemType = "QUESTITEMS";
 	n++;
-
 	makeref(itm,Items[n]);
 	itm.id = "GOF_FraTradeLicence";
 	itm.name = "GOF_itmname_FraTradeLicence";
@@ -1683,7 +1598,6 @@ int GofInitItems()
 	itm.Weight = 0.1;
 	itm.ItemType = "QUESTITEMS";
 	n++;
-
 	makeref(itm,Items[n]);
 	itm.id = "GOF_SpaTradeLicence";
 	itm.name = "GOF_itmname_SpaTradeLicence";
@@ -1695,7 +1609,6 @@ int GofInitItems()
 	itm.Weight = 0.1;
 	itm.ItemType = "QUESTITEMS";
 	n++;
-
 	makeref(itm,Items[n]);
 	itm.id = "GOF_HolTradeLicence";
 	itm.name = "GOF_itmname_HolTradeLicence";
@@ -1707,7 +1620,6 @@ int GofInitItems()
 	itm.Weight = 0.1;
 	itm.ItemType = "QUESTITEMS";
 	n++;
-
 	makeref(itm,Items[n]); //����� ����������� ������� ��� �������.
 	itm.id = "GOF_Trust";
 	itm.name = "GOF_itmname_Trust";
@@ -1720,7 +1632,6 @@ int GofInitItems()
 	itm.ItemType = "QUESTITEMS";
 	n++;
 	// eddy �������� ������� <--
-
 	makeref(itm,Items[n]); //��������� ������ �� ������ ����
 	itm.id = "GOF_sicretLetter";
 	itm.name = "GOF_itmname_sicretLetter";
@@ -1735,7 +1646,6 @@ int GofInitItems()
 	// boal 19.01.2004 <--
 	itm.ItemType = "QUESTITEMS";
 	n++;
-
 	makeref(itm,Items[n]);
 	itm.id = "GOF_LegransMap";
 	itm.name = "GOF_itmname_LegransMap";
@@ -1749,7 +1659,6 @@ int GofInitItems()
 	// boal 19.01.2004 <--
 	itm.ItemType = "QUESTITEMS";
 	n++;  
-
 	makeref(itm,Items[n]);
 	itm.id = "GOF_Bible";
 	itm.name = "GOF_itmname_bible";
@@ -1764,7 +1673,6 @@ int GofInitItems()
 	// boal 19.01.2004 <--
 	itm.ItemType = "QUESTITEMS";
 	n++;
-
 	makeref(itm,Items[n]);
 	itm.id = "GOF_ShipsJournal";
 	itm.name = "GOF_itmname_ShipsJournal";
@@ -1779,7 +1687,6 @@ int GofInitItems()
 	// boal 19.01.2004 <--
 	itm.ItemType = "QUESTITEMS";
 	n++;
-	
 	// ==> �������� �� ������ ��������
 	makeref(itm,Items[n]);
 	itm.id = "GOF_Powder_mummie";
@@ -1795,7 +1702,6 @@ int GofInitItems()
 	// boal 19.01.2004 <--
 	itm.ItemType = "QUESTITEMS";
 	n++;
-	
 	makeref(itm,Items[n]); // ����� ������� �� �����
 	itm.id = "GOF_DeSouzaCross";
 	itm.name = "GOF_itmname_DeSouzaCross";
@@ -1809,7 +1715,6 @@ int GofInitItems()
 	// boal 19.01.2004 <--
 	itm.ItemType = "QUESTITEMS";
 	n++;
-
 	makeref(itm,Items[n]);
 	itm.id = "GOF_DOjeronRing";
 	itm.name = "GOF_itmname_DOjeronRing";
@@ -1821,7 +1726,6 @@ int GofInitItems()
 	itm.price = 0;
 	itm.ItemType = "QUESTITEMS";
 	n++;
-
 	makeref(itm,Items[n]);
 	itm.id = "GOF_BlackLabel";
 	itm.name = "GOF_itmname_BlackLabel";
@@ -1833,7 +1737,6 @@ int GofInitItems()
 	itm.price = 0;
 	itm.ItemType = "QUESTITEMS";
 	n++;
-
 	makeref(itm,Items[n]);
 	itm.id = "GOF_Term_arm";
 	itm.name = "GOF_itmname_Term_arm";
@@ -1845,7 +1748,6 @@ int GofInitItems()
 	itm.Weight = 5.5;
 	itm.ItemType = "QUESTITEMS";
 	n++;
-
 	makeref(itm,Items[n]);
 	itm.id = "GOF_Malyava";
 	itm.name = "GOF_itmname_Malyava";
@@ -1857,7 +1759,6 @@ int GofInitItems()
 	itm.Weight = 0.1;
 	itm.ItemType = "QUESTITEMS";
 	n++;
-
 	makeref(itm,Items[n]);
 	itm.id = "GOF_PortmansBook";
 	itm.name = "GOF_itmname_PortmansBook";
@@ -1869,7 +1770,6 @@ int GofInitItems()
 	itm.Weight = 0.2;
 	itm.ItemType = "QUESTITEMS";
 	n++;
-
 	makeref(itm,Items[n]);
 	itm.id = "GOF_mushket2x2"; //��������� ��������, ������������
 	itm.groupID = GUN_ITEM_TYPE;
@@ -1892,7 +1792,6 @@ int GofInitItems()
 	itm.rare = 0.0001;
 	itm.ItemType = "WEAPON";
 	n++;
-
 	makeref(itm,Items[n]);
 	itm.id = "GOF_toporAZ"; //����������
 	itm.groupID = BLADE_ITEM_TYPE;
@@ -1918,7 +1817,6 @@ int GofInitItems()
 	itm.FencingType = "FencingHeavy";
 	itm.ItemType = "WEAPON";
 	n++;
-
 	makeref(itm,Items[n]);
 	itm.id = "GOF_map_LSC";
 	itm.groupID = MAPS_ITEM_TYPE;
@@ -1934,7 +1832,6 @@ int GofInitItems()
 	itm.MapIsland = "";
 	itm.ItemType = "MAP";
 	n++;
-
 	//homo
 	makeref(itm,Items[n]);
 	itm.id = "GOF_Griffins_Weapon"; // ������ ��������
@@ -1961,14 +1858,11 @@ int GofInitItems()
 	itm.price = 0;
 	itm.ItemType = "QUESTITEMS";
 	n++;
-
 	////////////////////////////////////////////////////////////////////////////////////////////		
 	//����� ���������� ��������� ��������, �������� � ��������� item
 	//��������� ��� �������� ������ �����, �� ����� ������� ��������� ���������
 	////////////////////////////////////////////////////////////////////////////////////////////
-
 	ItemsForLocators_start = n; //��������� ����� ��� ����. ���������
-
 	makeref(itm,Items[n]);
 	itm.id = "GOF_Rock_letter";
 	itm.name = "GOF_itmname_Rock_letter";
@@ -2012,7 +1906,6 @@ int GofInitItems()
 	// boal 19.01.2004 <--
 	itm.ItemType = "QUESTITEMS";
 	n++;  
-	
 	makeref(itm,Items[n]);
 	itm.id = "GOF_Azzy_bottle";
 	itm.name = "GOF_itmname_Azzy_bottle";
@@ -2028,7 +1921,6 @@ int GofInitItems()
 	// boal 19.01.2004 <--
 	itm.ItemType = "QUESTITEMS";
 	n++;
-
 	makeref(itm,Items[n]);
 	itm.id = "GOF_ShipyardsMap";
 	itm.name = "GOF_itmname_ShipyardsMap";
@@ -2040,7 +1932,6 @@ int GofInitItems()
 	itm.Weight = 0.1;
 	itm.ItemType = "QUESTITEMS";
 	n++;
-
 	makeref(itm,Items[n]);
 	itm.id = "GOF_MayorsRing";
 	itm.name = "GOF_itmname_MayorsRing";
@@ -2052,7 +1943,6 @@ int GofInitItems()
 	itm.price = 0;
 	itm.ItemType = "QUESTITEMS";
 	n++;
-
 	makeref(itm,Items[n]);
 	itm.id = "GOF_UsurersJew";
 	itm.name = "GOF_itmname_UsurersJew";
@@ -2065,7 +1955,6 @@ int GofInitItems()
 	itm.JevelType = xiDStr("diamond");
 	itm.ItemType = "QUESTITEMS";
 	n++;
-
 	makeref(itm,Items[n]);
 	itm.id = "GOF_OpenBook";
 	itm.name = "GOF_itmname_OpenBook";
@@ -2080,7 +1969,6 @@ int GofInitItems()
 	itm.startLocation = "PuertoPrincipe_townhall";
 	itm.startLocator = "item1";
 	n++;
-
 	makeref(itm,Items[n]);
 	itm.id = "GOF_Ladder";
 	itm.name = "GOF_itmname_Ladder";
@@ -2092,7 +1980,6 @@ int GofInitItems()
 	itm.price = 0;
 	itm.ItemType = "QUESTITEMS";
 	n++;
-
 	makeref(itm,Items[n]);
 	itm.id = "GOF_key1";
 	itm.name = "GOF_itmname_Key1";
@@ -2104,7 +1991,6 @@ int GofInitItems()
 	itm.price = 0;
 	itm.ItemType = "QUESTITEMS";
 	n++;
-
 	makeref(itm,Items[n]);
 	itm.id = "GOF_key2";
 	itm.name = "GOF_itmname_Key2";
@@ -2116,7 +2002,6 @@ int GofInitItems()
 	itm.price = 0;
 	itm.ItemType = "QUESTITEMS";
 	n++;
-
 	makeref(itm,Items[n]);
 	itm.id = "GOF_key3";
 	itm.name = "GOF_itmname_Key3";
@@ -2128,7 +2013,6 @@ int GofInitItems()
 	itm.price = 0;
 	itm.ItemType = "QUESTITEMS";
 	n++;
-
 	makeref(itm,Items[n]);  //���� �� ������� �� ������ ������
 	itm.id = "GOF_keyPanama";
 	itm.name = "GOF_itmname_keyPanama";
@@ -2140,7 +2024,6 @@ int GofInitItems()
 	itm.price = 0;
 	itm.ItemType = "QUESTITEMS";
 	n++;
-
 	makeref(itm,Items[n]);  //���� ��� ������� ���
 	itm.id = "GOF_keyQuestLSC";
 	itm.name = "GOF_itmname_keyQuestLSC";
@@ -2155,7 +2038,6 @@ int GofInitItems()
 	itm.price = 0;
 	itm.ItemType = "QUESTITEMS";
 	n++;
-
 	makeref(itm,Items[n]);	//������ ��� ������� ���
 	itm.id = "GOF_letter_LSC";
 	itm.name = "GOF_itmname_letter_LSC";
@@ -2167,7 +2049,6 @@ int GofInitItems()
 	itm.Weight = 0.1;
 	itm.ItemType = "QUESTITEMS";
 	n++;
-	
 	//homo ��������� �� ������� �����
 	makeref(itm,Items[n]);
 	itm.id = "GOF_migraine_potion"; // ��������� �� �������
@@ -2194,7 +2075,6 @@ int GofInitItems()
 	itm.price = 0;
 	itm.ItemType = "QUESTITEMS";
 	n++;
-
 	makeref(itm,Items[n]);	//����������
 	itm.id = "GOF_Pinion";
 	itm.name = "GOF_itmname_pinion";
@@ -2209,7 +2089,6 @@ int GofInitItems()
 	itm.Weight = 0.1;
 	itm.ItemType = "QUESTITEMS";
 	n++;
-
 	makeref(itm,Items[n]);
 	itm.id = "GOF_pistol7";  //������
 	itm.groupID = GUN_ITEM_TYPE;
@@ -2237,7 +2116,6 @@ int GofInitItems()
 	itm.rare = 0.0001;
 	itm.ItemType = "WEAPON";
 	n++;
-
 	makeref(itm,Items[n]);
 	itm.id = "GOF_Ascold_rabble"; // ����������
 	itm.name = "GOF_itmname_Ascold_rabble";
@@ -2254,10 +2132,8 @@ int GofInitItems()
 	// boal 19.01.2004 <--
 	itm.ItemType = "QUESTITEMS";
 	n++;
-
 	//��� �������� ������� ��������� ����� 
 	//Totems_start = n;
-
 	makeref(itm,Items[n]);
 	itm.id = "GOF_Totem_1";
 	itm.name = "GOF_itmname_Totem_1";
@@ -2276,7 +2152,6 @@ int GofInitItems()
 	// boal 19.01.2004 <--
 	itm.ItemType = "QUESTITEMS";
 	n++;  
-
 	makeref(itm,Items[n]);
 	itm.id = "GOF_Totem_2";
 	itm.name = "GOF_itmname_Totem_2";
@@ -2295,7 +2170,6 @@ int GofInitItems()
 	// boal 19.01.2004 <--
 	itm.ItemType = "QUESTITEMS";
 	n++; 
-
 	makeref(itm,Items[n]);
 	itm.id = "GOF_Totem_3";
 	itm.name = "GOF_itmname_Totem_3";
@@ -2314,7 +2188,6 @@ int GofInitItems()
 	// boal 19.01.2004 <--
 	itm.ItemType = "QUESTITEMS";
 	n++; 
-
 	makeref(itm,Items[n]);
 	itm.id = "GOF_Totem_4";
 	itm.name = "GOF_itmname_Totem_4";
@@ -2333,7 +2206,6 @@ int GofInitItems()
 	// boal 19.01.2004 <--
 	itm.ItemType = "QUESTITEMS";
 	n++; 
-
 	makeref(itm,Items[n]);
 	itm.id = "GOF_Totem_5";
 	itm.name = "GOF_itmname_Totem_5";
@@ -2352,7 +2224,6 @@ int GofInitItems()
 	// boal 19.01.2004 <--
 	itm.ItemType = "QUESTITEMS";
 	n++; 
-
 	makeref(itm,Items[n]);
 	itm.id = "GOF_Totem_6";
 	itm.name = "GOF_itmname_Totem_6";
@@ -2371,7 +2242,6 @@ int GofInitItems()
 	// boal 19.01.2004 <--
 	itm.ItemType = "QUESTITEMS";
 	n++; 
-
 	makeref(itm,Items[n]);
 	itm.id = "GOF_Totem_7";
 	itm.name = "GOF_itmname_Totem_7";
@@ -2390,7 +2260,6 @@ int GofInitItems()
 	// boal 19.01.2004 <--
 	itm.ItemType = "QUESTITEMS";
 	n++; 
-
 	makeref(itm,Items[n]);
 	itm.id = "GOF_Totem_8";
 	itm.name = "GOF_itmname_Totem_8";
@@ -2409,7 +2278,6 @@ int GofInitItems()
 	// boal 19.01.2004 <--
 	itm.ItemType = "QUESTITEMS";
 	n++; 
-
 	makeref(itm,Items[n]);
 	itm.id = "GOF_Totem_9";
 	itm.name = "GOF_itmname_Totem_9";
@@ -2428,7 +2296,6 @@ int GofInitItems()
 	// boal 19.01.2004 <--
 	itm.ItemType = "QUESTITEMS";
 	n++; 
-
 	makeref(itm,Items[n]);
 	itm.id = "GOF_Totem_10";
 	itm.name = "GOF_itmname_Totem_10";
@@ -2447,7 +2314,6 @@ int GofInitItems()
 	// boal 19.01.2004 <--
 	itm.ItemType = "QUESTITEMS";
 	n++;
-
 	makeref(itm,Items[n]);
 	itm.id = "GOF_Totem_11";	//������ ����� �� ������ ����
 	itm.name = "GOF_itmname_Totem_11";
@@ -2466,7 +2332,6 @@ int GofInitItems()
 	// boal 19.01.2004 <--
 	itm.ItemType = "QUESTITEMS";
 	n++;  
-
 	makeref(itm,Items[n]);
 	itm.id = "GOF_Totem_12";	//���������� �� �������� ������ � ��������
 	itm.name = "GOF_itmname_Totem_12";
@@ -2483,7 +2348,6 @@ int GofInitItems()
 	// boal 19.01.2004 <--
 	itm.ItemType = "QUESTITEMS";
 	n++; 
-
 	makeref(itm,Items[n]);
 	itm.id = "GOF_Totem_13";	//���� �� ���� ������� �� ������ ����
 	itm.name = "GOF_itmname_Totem_13";
@@ -2502,7 +2366,6 @@ int GofInitItems()
 	// boal 19.01.2004 <--
 	itm.ItemType = "QUESTITEMS";
 	n++; 
-
 	makeref(itm,Items[n]);
 	itm.id = "GOF_Totem_14";	//���� �� ���� ������� �� ������ ����
 	itm.name = "GOF_itmname_Totem_14";
@@ -2521,7 +2384,6 @@ int GofInitItems()
 	// boal 19.01.2004 <--
 	itm.ItemType = "QUESTITEMS";
 	n++; 
-
 	makeref(itm,Items[n]);
 	itm.id = "GOF_Totem_15";	//���������� �� ������ �������� ������
 	itm.name = "GOF_itmname_Totem_15";
@@ -2540,10 +2402,8 @@ int GofInitItems()
 	// boal 19.01.2004 <--
 	itm.ItemType = "QUESTITEMS";
 	n++; 
-
 	//Totems_end = n;
 	//��� �������� ������� �������� ����� 
-
 	makeref(itm,Items[n]);
 	itm.id = "GOF_SkullAztec";
 	itm.name = "GOF_itmname_SkullAztec";
@@ -2560,7 +2420,6 @@ int GofInitItems()
 	// boal 19.01.2004 <--
 	itm.ItemType = "QUESTITEMS";
 	n++;
-
 	makeref(itm,Items[n]);
 	itm.id = "GOF_KnifeAztec";
 	itm.name = "GOF_itmname_KnifeAztec";
@@ -2577,13 +2436,10 @@ int GofInitItems()
 	// boal 19.01.2004 <--
 	itm.ItemType = "QUESTITEMS";
 	n++;
-
 	ItemsForLocators_end = n; //�������� ����� ��� ����. ���������
 	*/
 	// <<<< ---------------  QUEST ITEMS  --------------------
-
 	// ����� //////////////////////////////////////////////////
-
 	/*
 	makeref(itm,Items[n]);
 	itm.id = "GOF_map_bad";	// to del
@@ -2603,7 +2459,6 @@ int GofInitItems()
 	itm.rare = 0.005;
 	itm.ItemType = "MAP";
 	n++;
-
 	makeref(itm,Items[n]);
 	itm.id = "GOF_map_normal";
 	itm.groupID = MAPS_ITEM_TYPE;
@@ -2622,7 +2477,6 @@ int GofInitItems()
 	itm.rare = 0.001;
 	itm.ItemType = "MAP";
 	n++;
-
 	makeref(itm,Items[n]);
 	itm.id = "GOF_Map_Best"; // Warship. �������� �����
 	itm.groupID = MAPS_ITEM_TYPE;
@@ -2637,7 +2491,6 @@ int GofInitItems()
 	itm.Weight = 0.1;
 	// boal 19.01.2004 <--
 	itm.rare = 0.001;
-
 	makeref(itm,Items[n]);
 	itm.id = "GOF_map_good";
 	itm.groupID = MAPS_ITEM_TYPE;
@@ -2656,7 +2509,6 @@ int GofInitItems()
 	itm.rare = 0.0001;
 	itm.ItemType = "MAP";
 	n++;
-		
 	// boal 270904 -->
 	makeref(itm,Items[n]);
 	itm.id = "GOF_map_bermudas";
@@ -2673,7 +2525,6 @@ int GofInitItems()
 	itm.MapIsland = "";
 	itm.ItemType = "MAP";
 	n++;
-	
 	makeref(itm,Items[n]);
 	itm.id = "GOF_map_jam";
 	itm.groupID = MAPS_ITEM_TYPE;
@@ -2689,7 +2540,6 @@ int GofInitItems()
 	itm.MapIsland = "Redmond";
 	itm.ItemType = "MAP";
 	n++;
-	
 	makeref(itm,Items[n]);
 	itm.id = "GOF_map_cayman";
 	itm.groupID = MAPS_ITEM_TYPE;
@@ -2705,7 +2555,6 @@ int GofInitItems()
 	itm.MapIsland = "Cayman";
 	itm.ItemType = "MAP";
 	n++;
-	
 	makeref(itm,Items[n]);
 	itm.id = "GOF_map_barbados";
 	itm.groupID = MAPS_ITEM_TYPE;
@@ -2721,7 +2570,6 @@ int GofInitItems()
 	itm.MapIsland = "Oxbay";
 	itm.ItemType = "MAP";
 	n++;
-	
 	makeref(itm,Items[n]);
 	itm.id = "GOF_map_TORTUGA";
 	itm.groupID = MAPS_ITEM_TYPE;
@@ -2737,7 +2585,6 @@ int GofInitItems()
 	itm.MapIsland = "Oxbay";
 	itm.ItemType = "MAP";
 	n++;
-	
 	makeref(itm,Items[n]);	////
 	itm.id = "GOF_map_Curacao";
 	itm.groupID = MAPS_ITEM_TYPE;
@@ -2753,7 +2600,6 @@ int GofInitItems()
 	itm.MapIsland = "Douwesen";
 	itm.ItemType = "MAP";
 	n++;
-	
 	makeref(itm,Items[n]);
 	itm.id = "GOF_map_martiniqua";
 	itm.groupID = MAPS_ITEM_TYPE;
@@ -2769,7 +2615,6 @@ int GofInitItems()
 	itm.MapIsland = "FalaiseDeFleur";
 	itm.ItemType = "MAP";
 	n++;
-	
 	makeref(itm,Items[n]);
 	itm.id = "GOF_map_dominica";
 	itm.groupID = MAPS_ITEM_TYPE;
@@ -2785,7 +2630,6 @@ int GofInitItems()
 	itm.MapIsland = "";
 	itm.ItemType = "MAP";
 	n++;
-	
 	makeref(itm,Items[n]);
 	itm.id = "GOF_map_trinidad";
 	itm.groupID = MAPS_ITEM_TYPE;
@@ -2801,7 +2645,6 @@ int GofInitItems()
 	itm.MapIsland = "";
 	itm.ItemType = "MAP";
 	n++;
-	
 	makeref(itm,Items[n]);
 	itm.id = "GOF_map_puerto";
 	itm.groupID = MAPS_ITEM_TYPE;
@@ -2817,7 +2660,6 @@ int GofInitItems()
 	itm.MapIsland = "IslaMuelle";
 	itm.ItemType = "MAP";
 	n++;
-	
 	makeref(itm,Items[n]);
 	itm.id = "GOF_map_cuba";
 	itm.groupID = MAPS_ITEM_TYPE;
@@ -2833,7 +2675,6 @@ int GofInitItems()
 	itm.MapIsland = "Cuba";
 	itm.ItemType = "MAP";
 	n++;
-	
 	makeref(itm,Items[n]);
 	itm.id = "GOF_map_Pearl";
 	itm.groupID = MAPS_ITEM_TYPE;
@@ -2849,7 +2690,6 @@ int GofInitItems()
 	itm.MapIsland = "";
 	itm.ItemType = "MAP";
 	n++;
-	
 	makeref(itm,Items[n]);
 	itm.id = "GOF_map_hisp";
 	itm.groupID = MAPS_ITEM_TYPE;
@@ -2865,7 +2705,6 @@ int GofInitItems()
 	itm.MapIsland = "Gaity";
 	itm.ItemType = "MAP";
 	n++;
-	
 	makeref(itm,Items[n]);
 	itm.id = "GOF_map_nevis";
 	itm.groupID = MAPS_ITEM_TYPE;
@@ -2881,7 +2720,6 @@ int GofInitItems()
 	itm.MapIsland = "";
 	itm.ItemType = "MAP";
 	n++;
-	
 	makeref(itm,Items[n]);
 	itm.id = "GOF_map_beliz";
 	itm.groupID = MAPS_ITEM_TYPE;
@@ -2897,7 +2735,6 @@ int GofInitItems()
 	itm.MapIsland = "";
 	itm.ItemType = "MAP";
 	n++;
-	
 	makeref(itm,Items[n]);	/////
 	itm.id = "GOF_map_guad";
 	itm.groupID = MAPS_ITEM_TYPE;
@@ -2913,7 +2750,6 @@ int GofInitItems()
 	itm.MapIsland = "Guadelupa";
 	itm.ItemType = "MAP";
 	n++;
-	
 	makeref(itm,Items[n]);	/////
 	itm.id = "GOF_map_santa";
 	itm.groupID = MAPS_ITEM_TYPE;
@@ -2929,7 +2765,6 @@ int GofInitItems()
 	itm.MapIsland = "";
 	itm.ItemType = "MAP";
 	n++;
-	
 	makeref(itm,Items[n]);
 	itm.id = "GOF_map_antigua";
 	itm.groupID = MAPS_ITEM_TYPE;
@@ -2945,7 +2780,6 @@ int GofInitItems()
 	itm.MapIsland = "Antigua";
 	itm.ItemType = "MAP";
 	n++;
-	
 	makeref(itm,Items[n]);
 	itm.id = "GOF_map_terks";
 	itm.groupID = MAPS_ITEM_TYPE;
@@ -2961,7 +2795,6 @@ int GofInitItems()
 	itm.MapIsland = "Terks";
 	itm.ItemType = "MAP";
 	n++;
-	
 	makeref(itm,Items[n]);
 	itm.id = "GOF_map_sm";
 	itm.groupID = MAPS_ITEM_TYPE;
@@ -2977,7 +2810,6 @@ int GofInitItems()
 	itm.MapIsland = "Sent";
 	itm.ItemType = "MAP";
 	n++;
-	
 	makeref(itm,Items[n]);
 	itm.id = "GOF_map_maine_1";
 	itm.groupID = MAPS_ITEM_TYPE;
@@ -2993,7 +2825,6 @@ int GofInitItems()
 	itm.MapIsland = "";
 	itm.ItemType = "MAP";
 	n++;
-	
 	makeref(itm,Items[n]);
 	itm.id = "GOF_map_maine_2";
 	itm.groupID = MAPS_ITEM_TYPE;
@@ -3009,7 +2840,6 @@ int GofInitItems()
 	itm.MapIsland = "";
 	itm.ItemType = "MAP";
 	n++;
-	
 	makeref(itm,Items[n]);
 	itm.id = "GOF_map_panama";
 	itm.groupID = MAPS_ITEM_TYPE;
@@ -3025,7 +2855,6 @@ int GofInitItems()
 	itm.MapIsland = "";
 	itm.ItemType = "MAP";
 	n++;
-	
 	makeref(itm,Items[n]);
 	itm.id = "GOF_map_maracaibo";
 	itm.groupID = MAPS_ITEM_TYPE;
@@ -3041,7 +2870,6 @@ int GofInitItems()
 	itm.MapIsland = "";
 	itm.ItemType = "MAP";
 	n++;
-	
 	makeref(itm,Items[n]);
 	itm.id = "GOF_map_cumana";
 	itm.groupID = MAPS_ITEM_TYPE;
@@ -3058,7 +2886,6 @@ int GofInitItems()
 	itm.ItemType = "MAP";
 	n++;
 	// boal 270904 <--
-	
 	// boal ����� ���������� ����� -->
 	makeref(itm,Items[n]);
 	itm.id = "GOF_map_full";
@@ -3075,7 +2902,6 @@ int GofInitItems()
 	itm.mapType = "Full";
 	itm.ItemType = "MAP";
 	n++;
-	
 	makeref(itm,Items[n]);
 	itm.id = "GOF_map_part1";
 	itm.groupID = MAPS_ITEM_TYPE;
@@ -3091,7 +2917,6 @@ int GofInitItems()
 	itm.mapType = "Part";
 	itm.ItemType = "MAP";
 	n++;
-
 	makeref(itm,Items[n]);
 	itm.id = "GOF_map_part2";
 	itm.groupID = MAPS_ITEM_TYPE;
@@ -3108,11 +2933,9 @@ int GofInitItems()
 	itm.ItemType = "MAP";
 	n++;*/
 	// boal ����� ���������� ����� <--
-
 	//  ���������� ������
 	ItemDeadStartCount = n;
 	trace("���������� ������ � �������� "+ItemDeadStartCount);
-	
 	/*
 	makeref(itm,Items[n]);
 	itm.id = "GOF_Statue1"; //+1
@@ -3124,7 +2947,6 @@ int GofInitItems()
 	//itm.shown = false;
 	itm.price = 10;
 	itm.Weight = 35;
-
 	itm.Monster.rare = 0.05;
 	itm.Monster.min = 1;
 	itm.Monster.max = 1;
@@ -3133,8 +2955,6 @@ int GofInitItems()
 	itm.rare = 0.001;
 	n++;
 	*/
-	
-
 	//SPYGLASSES
 	/*
 	makeref(itm,Items[n]);
@@ -3147,11 +2967,9 @@ int GofInitItems()
 	// boal 19.01.2004 -->
 	itm.price = 25;
 	itm.Weight = 1;
-
 	itm.Solder.rare = 0.1;
 	itm.Solder.min = 1;
 	itm.Solder.max = 1;
-
 	itm.Warrior.rare = 0.15;
 	itm.Warrior.min = 1;
 	itm.Warrior.max = 1;
@@ -3177,7 +2995,6 @@ int GofInitItems()
 	itm.rare = 0.1;
 	itm.ItemType = "SUPPORT";
 	n++;
-
 	makeref(itm,Items[n]);
 	itm.id = "GOF_spyglass2";
 	itm.groupID = SPYGLASS_ITEM_TYPE;
@@ -3188,11 +3005,9 @@ int GofInitItems()
 	// boal 19.01.2004 -->
 	itm.price = 150;
 	itm.Weight = 1.5;
-
 	itm.Solder.rare = 0.05;
 	itm.Solder.min = 1;
 	itm.Solder.max = 1;
-
 	itm.Warrior.rare = 0.1;
 	itm.Warrior.min = 1;
 	itm.Warrior.max = 1;
@@ -3218,7 +3033,6 @@ int GofInitItems()
 	itm.rare = 0.07;
 	itm.ItemType = "SUPPORT";
 	n++;
-
 	makeref(itm,Items[n]);
 	itm.id = "GOF_spyglass3";
 	itm.groupID = SPYGLASS_ITEM_TYPE;
@@ -3229,7 +3043,6 @@ int GofInitItems()
 	itm.price = 450;
 	// boal 19.01.2004 -->
 	itm.Weight = 2;
-
     itm.Solder_o.rare = 0.15;
     itm.Solder_o.min = 1;
     itm.Solder_o.max = 1;
@@ -3255,7 +3068,6 @@ int GofInitItems()
 	itm.rare = 0.05;
 	itm.ItemType = "SUPPORT";
 	n++;
-
 	makeref(itm,Items[n]);
 	itm.id = "GOF_spyglass4";
 	itm.groupID = SPYGLASS_ITEM_TYPE;
@@ -3268,7 +3080,6 @@ int GofInitItems()
 	itm.price = 1250;
 	// boal 19.01.2004 -->
 	itm.Weight = 4;
-
     itm.Solder_o.rare = 0.05;
     itm.Solder_o.min = 1;
     itm.Solder_o.max = 1;
@@ -3292,7 +3103,6 @@ int GofInitItems()
 	itm.rare = 0.01;
 	itm.ItemType = "SUPPORT";
 	n++;
-	
 	makeref(itm,Items[n]);
 	itm.id = "GOF_spyglass5";
 	itm.groupID = SPYGLASS_ITEM_TYPE;
@@ -3305,7 +3115,6 @@ int GofInitItems()
 	itm.price = 21250;
 	// boal 19.01.2004 -->
 	itm.Weight = 7;
-
     itm.Solder_o.rare = 0.0001;
     itm.Solder_o.min = 1;
     itm.Solder_o.max = 1;
@@ -3330,7 +3139,6 @@ int GofInitItems()
 	itm.ItemType = "SUPPORT";
 	n++;
 	*/
-
 	//POTIONS
 	/*
 	makeref(itm,Items[n]);
@@ -3344,23 +3152,18 @@ int GofInitItems()
 	// boal 19.01.2004 -->
 	itm.price = 50;
 	itm.Weight = 0.8;
-
 	itm.Solder_o.rare = 0.3;
 	itm.Solder_o.min = 2;
 	itm.Solder_o.max = 6;
-	
 	itm.Solder.rare = 0.1;
 	itm.Solder.min = 1;
 	itm.Solder.max = 3;
-	
 	itm.Warrior.rare = 0.1;
 	itm.Warrior.min = 1;
 	itm.Warrior.max = 4;
- 
 	itm.Monster.rare = 0.1;
 	itm.Monster.min = 1;
 	itm.Monster.max = 7;
-
   // boal 19.01.2004 <--
 	itm.potion.pic = 21;
 	itm.potion.tex = 0; // battle_interface\useditems1.tga
@@ -3370,7 +3173,6 @@ int GofInitItems()
 	itm.SortIndex = 2;
 	itm.ItemType = "SUPPORT";
 	n++;
-
 	makeref(itm,Items[n]);
 	itm.id = "GOF_potion2";
 	itm.name = "GOF_itmname_potion2";
@@ -3382,23 +3184,18 @@ int GofInitItems()
 	// boal 19.01.2004 -->
 	itm.price = 125;
 	itm.Weight = 1;
-
 	itm.Solder_o.rare = 0.3;
 	itm.Solder_o.min = 1;
 	itm.Solder_o.max = 3;
-
 	itm.Solder.rare = 0.1;
 	itm.Solder.min = 1;
 	itm.Solder.max = 1;
-
 	itm.Warrior.rare = 0.1;
 	itm.Warrior.min = 1;
 	itm.Warrior.max = 3;
- 
 	itm.Monster.rare = 0.1;
 	itm.Monster.min = 1;
 	itm.Monster.max = 5;
-
   // boal 19.01.2004 <--
 	itm.potion.pic = 22;
 	itm.potion.tex = 0; // battle_interface\useditems1.tga
@@ -3409,7 +3206,6 @@ int GofInitItems()
 	itm.SortIndex = 2;
 	itm.ItemType = "SUPPORT";
 	n++;
-
 	makeref(itm,Items[n]);
 	itm.id = "GOF_potion3";
 	itm.name = "GOF_itmname_potion3";
@@ -3421,15 +3217,12 @@ int GofInitItems()
 	// boal 19.01.2004 -->
 	itm.price = 100;
 	itm.Weight = 0.4;
-
 	itm.Solder_o.rare = 0.05;
 	itm.Solder_o.min = 1;
 	itm.Solder_o.max = 1;
-
 	itm.Solder.rare = 0.05;
 	itm.Solder.min = 1;
 	itm.Solder.max = 1;
-
 	itm.Warrior.rare = 0.05;
 	itm.Warrior.min = 1;
 	itm.Warrior.max = 1;
@@ -3442,7 +3235,6 @@ int GofInitItems()
 	itm.SortIndex = 2;
 	itm.ItemType = "SUPPORT";
 	n++;
-
 	makeref(itm,Items[n]);
 	itm.id = "GOF_potion4";
 	itm.name = "GOF_itmname_potion4";
@@ -3453,23 +3245,18 @@ int GofInitItems()
 	// boal 19.01.2004 -->
 	itm.price = 225;
 	itm.Weight = 0.4;
-
 	itm.Solder.rare = 0.05;
 	itm.Solder.min = 1;
 	itm.Solder.max = 1;
-	
 	itm.Solder_o.rare = 0.05;
 	itm.Solder_o.min = 1;
 	itm.Solder_o.max = 3;
-
 	itm.Monster.rare = 0.05;
 	itm.Monster.min = 1;
 	itm.Monster.max = 3;
-
 	itm.Warrior.rare = 0.05;
 	itm.Warrior.min = 1;
 	itm.Warrior.max = 1;
-
 	// boal 19.01.2004 <--
 	itm.potion.pic = 24;
 	itm.potion.tex = 0; // battle_interface\useditems1.tga
@@ -3480,7 +3267,6 @@ int GofInitItems()
 	itm.SortIndex = 2;
 	itm.ItemType = "SUPPORT";
 	n++;
-
 	//-----------ADDED BY VERRUCKT BROTHEL MOD------------------
 	makeref(itm,Items[n]);
 	itm.id = "GOF_potionrum";
@@ -3493,15 +3279,12 @@ int GofInitItems()
 	// boal 19.01.2004 -->
 	itm.price = 75;
 	itm.Weight = 2;
-
 	itm.Solder_o.rare = 0.1;
 	itm.Solder_o.min = 1;
 	itm.Solder_o.max = 1;
-
 	itm.Solder.rare = 0.2;
 	itm.Solder.min = 1;
 	itm.Solder.max = 1;
-
 	itm.Warrior.rare = 0.2;
 	itm.Warrior.min = 1;
 	itm.Warrior.max = 1;
@@ -3515,7 +3298,6 @@ int GofInitItems()
 	itm.SortIndex = 2;
 	itm.ItemType = "SUPPORT";
 	n++;
-
 	makeref(itm,Items[n]);
 	itm.id = "GOF_potionwine";
 	itm.name = "GOF_itmname_potionwine";
@@ -3526,15 +3308,12 @@ int GofInitItems()
 	// boal 19.01.2004 -->
 	itm.price = 250;
 	itm.Weight = 1;
-
 	itm.Solder_o.rare = 0.3;
 	itm.Solder_o.min = 1;
 	itm.Solder_o.max = 1;
-
 	itm.Solder.rare = 0.1;
 	itm.Solder.min = 1;
 	itm.Solder.max = 1;
-
 	itm.Warrior.rare = 0.05;
 	itm.Warrior.min = 1;
 	itm.Warrior.max = 1;
@@ -3548,7 +3327,6 @@ int GofInitItems()
 	itm.SortIndex = 2;
 	itm.ItemType = "SUPPORT";
 	n++;
-
 	makeref(itm,Items[n]);
 	itm.id = "GOF_potion5";
 	itm.name = "GOF_itmname_potion5";
@@ -3559,11 +3337,9 @@ int GofInitItems()
 	// boal 19.01.2004 -->
 	itm.price = 15;
 	itm.Weight = 0.4;
-
 	itm.Solder.rare = 0.1;
 	itm.Solder.min = 1;
 	itm.Solder.max = 9;
-
 	itm.Warrior.rare = 0.1;
 	itm.Warrior.min = 1;
 	itm.Warrior.max = 9;
@@ -3578,7 +3354,6 @@ int GofInitItems()
 	n++;
 	*/
 	//JEWELRY
-
 	/*
 	makeref(itm,Items[n]);
 	itm.id = "GOF_jewelry1";
@@ -3591,27 +3366,21 @@ int GofInitItems()
 	// boal 19.01.2004 -->
 	itm.price = 25;
 	itm.Weight = 0.2;
-
 	itm.Solder_o.rare = 0.1; 
 	itm.Solder_o.min = 1;
 	itm.Solder_o.max = 4;
-
 	itm.Monster.rare = 0.1;
 	itm.Monster.min = 1;
 	itm.Monster.max = 4;
-	
 	itm.Solder.rare = 0.05;
 	itm.Solder.min = 1;
 	itm.Solder.max = 1;
-
 	itm.Warrior.rare = 0.05;
 	itm.Warrior.min = 1;
 	itm.Warrior.max = 1;
-	
 	itm.Citizen.rare = 0.05;
 	itm.Citizen.min = 1;
 	itm.Citizen.max = 1;
-
 	itm.Citizen_f.rare = 0.05;
 	itm.Citizen_f.min = 1;
 	itm.Citizen_f.max = 1;
@@ -3619,7 +3388,6 @@ int GofInitItems()
 	itm.minlevel = 0;
 	itm.rare = 0.1;
 	n++;
-
 	makeref(itm,Items[n]);
 	itm.id = "GOF_jewelry2";
 	itm.name = "GOF_itmname_jewelry2";
@@ -3631,15 +3399,12 @@ int GofInitItems()
 	// boal 19.01.2004 -->
 	itm.price = 350;
 	itm.Weight = 0.2;
-
 	itm.Solder_o.rare = 0.1;
 	itm.Solder_o.min = 1;
 	itm.Solder_o.max = 4;
-
 	itm.Monster.rare = 0.1;
 	itm.Monster.min = 1;
 	itm.Monster.max = 4;
-
 	itm.Warrior.rare = 0.05;
 	itm.Warrior.min = 1;
 	itm.Warrior.max = 1;
@@ -3647,7 +3412,6 @@ int GofInitItems()
 	itm.minlevel = 1;
 	itm.rare = 0.05;
 	n++;
-
 	makeref(itm,Items[n]);
 	itm.id = "GOF_jewelry3";
 	itm.name = "GOF_itmname_jewelry3";
@@ -3659,15 +3423,12 @@ int GofInitItems()
 	// boal 19.01.2004 -->
 	itm.price = 275;
 	itm.Weight = 0.2;
-
 	itm.Solder_o.rare = 0.1;
 	itm.Solder_o.min = 1;
 	itm.Solder_o.max = 4;
-
 	itm.Monster.rare = 0.1;
 	itm.Monster.min = 1;
 	itm.Monster.max = 4;
-
 	itm.Warrior.rare = 0.05;
 	itm.Warrior.min = 1;
 	itm.Warrior.max = 1;
@@ -3675,7 +3436,6 @@ int GofInitItems()
 	itm.minlevel = 0;
 	itm.rare = 0.1;
 	n++;
-
 	makeref(itm,Items[n]);
 	itm.id = "GOF_jewelry4";
 	itm.name = "GOF_itmname_jewelry4";
@@ -3687,15 +3447,12 @@ int GofInitItems()
 	// boal 19.01.2004 -->
 	itm.price = 250;
 	itm.Weight = 0.2;
-
 	itm.Solder_o.rare = 0.1;
 	itm.Solder_o.min = 1;
 	itm.Solder_o.max = 4;
-
 	itm.Monster.rare = 0.1;
 	itm.Monster.min = 1;
 	itm.Monster.max = 4;
-
 	itm.Warrior.rare = 0.05;
 	itm.Warrior.min = 1;
 	itm.Warrior.max = 1;
@@ -3703,7 +3460,6 @@ int GofInitItems()
 	itm.minlevel = 0;
 	itm.rare = 0.1;
 	n++;
-
 	makeref(itm,Items[n]);
 	itm.id = "GOF_jewelry5";  // Gold
 	itm.name = "GOF_itmname_jewelry5";
@@ -3715,15 +3471,12 @@ int GofInitItems()
 	// boal 19.01.2004 -->
 	itm.price = 120;
 	itm.Weight = 0.7;
-
 	itm.Solder_o.rare = 0.2;
 	itm.Solder_o.min = 1;
 	itm.Solder_o.max = 4;
-
 	itm.Monster.rare = 0.3;
 	itm.Monster.min = 1;
 	itm.Monster.max = 4;
-
 	itm.Warrior.rare = 0.05;
 	itm.Warrior.min = 1;
 	itm.Warrior.max = 2;
@@ -3731,7 +3484,6 @@ int GofInitItems()
 	itm.minlevel = 1;
 	itm.rare = 0.05;
 	n++;
-
 	makeref(itm,Items[n]);
 	itm.id = "GOF_jewelry6";
 	itm.name = "GOF_itmname_jewelry6";
@@ -3743,19 +3495,15 @@ int GofInitItems()
 	// boal 19.01.2004 -->
 	itm.price = 50;
 	itm.Weight = 0.1;
-
 	itm.Solder.rare = 0.01;
 	itm.Solder.min = 1;
 	itm.Solder.max = 1;
-
 	itm.Warrior.rare = 0.01;
 	itm.Warrior.min = 1;
 	itm.Warrior.max = 1;
-
 	itm.Citizen.rare = 0.1;
 	itm.Citizen.min = 1;
 	itm.Citizen.max = 1;
-
 	itm.Citizen_f.rare = 0.3;
 	itm.Citizen_f.min = 1;
 	itm.Citizen_f.max = 1;
@@ -3763,7 +3511,6 @@ int GofInitItems()
 	itm.minlevel = 0;
 	itm.rare = 0.1;
 	n++;
-
 	makeref(itm,Items[n]);
 	itm.id = "GOF_jewelry7";
 	itm.name = "GOF_itmname_jewelry7";
@@ -3775,19 +3522,15 @@ int GofInitItems()
 	// boal 19.01.2004 -->
 	itm.price = 100;
 	itm.Weight = 0.1;
-
 	itm.Solder_o.rare = 0.1;
 	itm.Solder_o.min = 1;
 	itm.Solder_o.max = 1;
-
 	itm.Monster.rare = 0.05;
 	itm.Monster.min = 1;
 	itm.Monster.max = 1;
-
 	itm.Warrior.rare = 0.05;
 	itm.Warrior.min = 1;
 	itm.Warrior.max = 1;
-
 	itm.Citizen_f.rare = 0.2;
 	itm.Citizen_f.min = 1;
 	itm.Citizen_f.max = 1;
@@ -3795,7 +3538,6 @@ int GofInitItems()
 	itm.minlevel = 0;
 	itm.rare = 0.1;
 	n++;
-
 	makeref(itm,Items[n]);
 	itm.id = "GOF_jewelry8"; // +1 sneak
 	itm.name = "GOF_itmname_jewelry8";
@@ -3810,15 +3552,12 @@ int GofInitItems()
 	itm.Solder.rare = 0.1;
 	itm.Solder.min = 1;
 	itm.Solder.max = 1;
-	
 	itm.Warrior.rare = 0.15;
 	itm.Warrior.min = 1;
 	itm.Warrior.max = 1;
-
 	itm.Citizen.rare = 0.15;
 	itm.Citizen.min = 1;
 	itm.Citizen.max = 1;
-
 	itm.Citizen_f.rare = 0.25;
 	itm.Citizen_f.min = 1;
 	itm.Citizen_f.max = 1;
@@ -3826,7 +3565,6 @@ int GofInitItems()
 	itm.minlevel = 0;
 	itm.rare = 0.2;
 	n++;
-
 	makeref(itm,Items[n]);
 	itm.id = "GOF_jewelry9"; // +1 sneak
 	itm.name = "GOF_itmname_jewelry9";
@@ -3838,19 +3576,15 @@ int GofInitItems()
 	// boal 19.01.2004 -->
 	itm.price = 40;
 	itm.Weight = 0.2;
-
 	itm.Solder.rare = 0.01;
 	itm.Solder.min = 1;
 	itm.Solder.max = 1;
-
 	itm.Warrior.rare = 0.03;
 	itm.Warrior.min = 1;
 	itm.Warrior.max = 1;
-
 	itm.Citizen.rare = 0.2;
 	itm.Citizen.min = 1;
 	itm.Citizen.max = 1;
-
 	itm.Citizen_f.rare = 0.2;
 	itm.Citizen_f.min = 1;
 	itm.Citizen_f.max = 1;
@@ -3858,7 +3592,6 @@ int GofInitItems()
 	itm.minlevel = 0;
 	itm.rare = 0.2;
 	n++;
-
 	makeref(itm,Items[n]);
 	itm.id = "GOF_jewelry10";
 	itm.name = "GOF_itmname_jewelry10";
@@ -3870,24 +3603,18 @@ int GofInitItems()
 	// boal 19.01.2004 -->
 	itm.price = 85;
 	itm.Weight = 0.1;
-
 	itm.Solder_o.rare = 0.2;
 	itm.Solder_o.min = 1;
 	itm.Solder_o.max = 1;
-	
 	itm.Monster.rare = 0.3;
 	itm.Monster.min = 1;
 	itm.Monster.max = 1;
-
-
 	itm.Warrior.rare = 0.02;
 	itm.Warrior.min = 1;
 	itm.Warrior.max = 1;
-
 	itm.Citizen.rare = 0.1;
 	itm.Citizen.min = 1;
 	itm.Citizen.max = 1;
-
 	itm.Citizen_f.rare = 0.3;
 	itm.Citizen_f.min = 1;
 	itm.Citizen_f.max = 1;
@@ -3895,7 +3622,6 @@ int GofInitItems()
 	itm.minlevel = 1;
 	itm.rare = 0.1;
 	n++;
-
 	makeref(itm,Items[n]);
 	itm.id = "GOF_jewelry11";
 	itm.name = "GOF_itmname_jewelry11";
@@ -3907,24 +3633,18 @@ int GofInitItems()
 	// boal 19.01.2004 -->
 	itm.price = 45;
 	itm.Weight = 0.3;
-
 	itm.Solder_o.rare = 0.2;
 	itm.Solder_o.min = 1;
 	itm.Solder_o.max = 5;
-
 	itm.Monster.rare = 0.2;
 	itm.Monster.min = 1;
 	itm.Monster.max = 6;
-
-
 	itm.Warrior.rare = 0.05;
 	itm.Warrior.min = 1;
 	itm.Warrior.max = 6;
-
 	itm.Citizen.rare = 0.1;
 	itm.Citizen.min = 1;
 	itm.Citizen.max = 5;
-
 	itm.Citizen_f.rare = 0.1;
 	itm.Citizen_f.min = 1;
 	itm.Citizen_f.max = 5;
@@ -3932,7 +3652,6 @@ int GofInitItems()
 	itm.minlevel = 0;
 	itm.rare = 0.1;
 	n++;
-
 	makeref(itm,Items[n]);
 	itm.id = "GOF_jewelry12";
 	itm.name = "GOF_itmname_jewelry12";
@@ -3944,19 +3663,15 @@ int GofInitItems()
 	// boal 19.01.2004 -->
 	itm.price = 20;
 	itm.Weight = 0.1;
-
 	itm.Solder.rare = 0.05;
 	itm.Solder.min = 1;
 	itm.Solder.max = 5;
-
 	itm.Warrior.rare = 0.05;
 	itm.Warrior.min = 1;
 	itm.Warrior.max = 20;
-
 	itm.Citizen.rare = 0.15;
 	itm.Citizen.min = 1;
 	itm.Citizen.max = 15;
-
 	itm.Citizen_f.rare = 0.1;
 	itm.Citizen_f.min = 1;
 	itm.Citizen_f.max = 5;
@@ -3964,7 +3679,6 @@ int GofInitItems()
 	itm.minlevel = 0;
 	itm.rare = 0.2;
 	n++;
-
 	makeref(itm,Items[n]);
 	itm.id = "GOF_jewelry13";
 	itm.name = "GOF_itmname_jewelry13";
@@ -3976,19 +3690,15 @@ int GofInitItems()
 	// boal 19.01.2004 -->
 	itm.price = 75;
 	itm.Weight = 0.3;
-
 	itm.Solder_o.rare = 0.05;
 	itm.Solder_o.min = 1;
 	itm.Solder_o.max = 1;
-
 	itm.Monster.rare = 0.01;
 	itm.Monster.min = 1;
 	itm.Monster.max = 4;
-
 	itm.Warrior.rare = 0.05;
 	itm.Warrior.min = 1;
 	itm.Warrior.max = 2;
-
 	itm.Citizen_f.rare = 0.2;
 	itm.Citizen_f.min = 1;
 	itm.Citizen_f.max = 1;
@@ -3996,7 +3706,6 @@ int GofInitItems()
 	itm.minlevel = 1;
 	itm.rare = 0.1;
 	n++;
-
 	makeref(itm,Items[n]);
 	itm.id = "GOF_jewelry14";
 	itm.name = "GOF_itmname_jewelry14";
@@ -4008,19 +3717,15 @@ int GofInitItems()
 	// boal 19.01.2004 -->
 	itm.price = 100;
 	itm.Weight = 0.1;
-
 	itm.Solder_o.rare = 0.05;
 	itm.Solder_o.min = 1;
 	itm.Solder_o.max = 1;
-
 	itm.Monster.rare = 0.01;
 	itm.Monster.min = 1;
 	itm.Monster.max = 4;
-
 	itm.Warrior.rare = 0.01;
 	itm.Warrior.min = 1;
 	itm.Warrior.max = 2;
-
 	itm.Citizen_f.rare = 0.2;
 	itm.Citizen_f.min = 1;
 	itm.Citizen_f.max = 1;
@@ -4028,7 +3733,6 @@ int GofInitItems()
 	itm.minlevel = 1;
 	itm.rare = 0.05;
 	n++;
-
 	makeref(itm,Items[n]);
 	itm.id = "GOF_jewelry15"; // +1 sneak
 	itm.name = "GOF_itmname_jewelry15";
@@ -4040,19 +3744,15 @@ int GofInitItems()
 	// boal 19.01.2004 -->
 	itm.price = 150;
 	itm.Weight = 0.5;
-
 	itm.Solder_o.rare = 0.01;
 	itm.Solder_o.min = 1;
 	itm.Solder_o.max = 1;
-
 	itm.Monster.rare = 0.02;
 	itm.Monster.min = 1;
 	itm.Monster.max = 4;
-
 	itm.Warrior.rare = 0.01;
 	itm.Warrior.min = 1;
 	itm.Warrior.max = 1;
-
 	itm.Citizen_f.rare = 0.2;
 	itm.Citizen_f.min = 1;
 	itm.Citizen_f.max = 1;
@@ -4060,7 +3760,6 @@ int GofInitItems()
 	itm.minlevel = 1;
 	itm.rare = 0.05;
 	n++;
-
 	makeref(itm,Items[n]);
 	itm.id = "GOF_jewelry16";
 	itm.name = "GOF_itmname_jewelry16";
@@ -4072,15 +3771,12 @@ int GofInitItems()
 	// boal 19.01.2004 -->
 	itm.price = 5;
 	itm.Weight = 0.3;
-
 	itm.Monster.rare = 0.01;
 	itm.Monster.min = 1;
 	itm.Monster.max = 4;
-
 	itm.Warrior.rare = 0.1;
 	itm.Warrior.min = 1;
 	itm.Warrior.max = 2;
-
 	itm.Citizen_f.rare = 0.4;
 	itm.Citizen_f.min = 1;
 	itm.Citizen_f.max = 1;
@@ -4088,7 +3784,6 @@ int GofInitItems()
 	itm.minlevel = 2;
 	itm.rare = 0.05;
 	n++;
-
 	makeref(itm,Items[n]);
 	itm.id = "GOF_jewelry17";  // �������
 	itm.name = "GOF_itmname_jewelry17";
@@ -4100,19 +3795,15 @@ int GofInitItems()
 	// boal 19.01.2004 -->
 	itm.price = 55;
 	itm.Weight = 0.5;
-
 	itm.Monster.rare = 0.1;
 	itm.Monster.min = 1;
 	itm.Monster.max = 5;
-
 	itm.Warrior.rare = 0.05;
 	itm.Warrior.min = 1;
 	itm.Warrior.max = 3;
-
 	itm.Citizen.rare = 0.1;
 	itm.Citizen.min = 1;
 	itm.Citizen.max = 1;
-
 	itm.Solder.rare = 0.05;
 	itm.Solder.min = 1;
 	itm.Solder.max = 1;
@@ -4120,7 +3811,6 @@ int GofInitItems()
 	itm.minlevel = 1;
 	itm.rare = 0.05;
 	n++;
-
 	makeref(itm,Items[n]);
 	itm.id = "GOF_jewelry18";
 	itm.name = "GOF_itmname_jewelry18";
@@ -4132,19 +3822,15 @@ int GofInitItems()
 	// boal 19.01.2004 -->
 	itm.price = 165;
 	itm.Weight = 0.1;
-
 	itm.Solder_o.rare = 0.2;
 	itm.Solder_o.min = 1;
 	itm.Solder_o.max = 1;
-
 	itm.Monster.rare = 0.1;
 	itm.Monster.min = 1;
 	itm.Monster.max = 1;
-
 	itm.Warrior.rare = 0.05;
 	itm.Warrior.min = 1;
 	itm.Warrior.max = 1;
-
 	itm.Citizen_f.rare = 0.25;
 	itm.Citizen_f.min = 1;
 	itm.Citizen_f.max = 1;
@@ -4170,7 +3856,6 @@ int GofInitItems()
 	itm.ItemType = "SUPPORT";
 	n++;
 	*/
-
 	/*
 	makeref(itm,Items[n]);
 	itm.id = "GOF_mineral2";
@@ -4183,11 +3868,9 @@ int GofInitItems()
 	// boal 19.01.2004 -->
 	itm.price = 300;
 	itm.Weight = 6;
-
 	itm.Solder.rare = 0.01;
 	itm.Solder.min = 1;
 	itm.Solder.max = 1;
-	
 	itm.Citizen.rare = 0.1;
 	itm.Citizen.min = 1;
 	itm.Citizen.max = 1;
@@ -4195,7 +3878,6 @@ int GofInitItems()
 	itm.minlevel =0;
 	itm.rare = 0.02;
 	n++;
-
 	makeref(itm,Items[n]);
 	itm.id = "GOF_mineral3";
 	itm.name = "GOF_itmname_mineral3";
@@ -4207,16 +3889,13 @@ int GofInitItems()
 	// boal 19.01.2004 -->
 	itm.price = 5;
 	itm.Weight = 1;
-
 	itm.Citizen.rare = 0.1;
 	itm.Citizen.min = 1;
 	itm.Citizen.max = 4;
-	
 	// boal 19.01.2004 <--
 	itm.minlevel =0;
 	itm.rare = 0.05;
 	n++;
-
 	makeref(itm,Items[n]);
 	itm.id = "GOF_mineral4"; // ������
 	itm.name = "GOF_itmname_mineral4";
@@ -4228,19 +3907,15 @@ int GofInitItems()
 	itm.price = 12;
 	// boal 19.01.2004 -->
 	itm.Weight = 2;
-
 	itm.Solder.rare = 0.05;
 	itm.Solder.min = 1;
 	itm.Solder.max = 1;
-	
 	itm.Monster.rare = 0.005;
 	itm.Monster.min = 1;
 	itm.Monster.max = 3;
-
 	itm.Warrior.rare = 0.01;
 	itm.Warrior.min = 1;
 	itm.Warrior.max = 1;
-
 	itm.Citizen.rare = 0.05;
 	itm.Citizen.min = 1;
 	itm.Citizen.max = 1;
@@ -4248,7 +3923,6 @@ int GofInitItems()
 	itm.minlevel =0;
 	itm.rare = 0.05;
 	n++;
-
 	makeref(itm,Items[n]);
 	itm.id = "GOF_mineral5";
 	itm.name = "GOF_itmname_mineral5";
@@ -4260,11 +3934,9 @@ int GofInitItems()
 	// boal 19.01.2004 -->
 	itm.price = 1;
 	itm.Weight = 3;
-
 	itm.Monster.rare = 0.01;
 	itm.Monster.min = 1;
 	itm.Monster.max = 1;
-
 	itm.Citizen.rare = 0.1;
 	itm.Citizen.min = 1;
 	itm.Citizen.max = 1;
@@ -4272,7 +3944,6 @@ int GofInitItems()
 	itm.minlevel =0;
 	itm.rare = 0.02;
 	n++;
-
 	makeref(itm,Items[n]);
 	itm.id = "GOF_mineral6";
 	itm.name = "GOF_itmname_mineral6";
@@ -4284,19 +3955,15 @@ int GofInitItems()
 	// boal 19.01.2004 -->
 	itm.price = 10;
 	itm.Weight = 1;
-
 	itm.Solder.rare = 0.001;
 	itm.Solder.min = 1;
 	itm.Solder.max = 1;
-
 	itm.Monster.rare = 0.3;
 	itm.Monster.min = 1;
 	itm.Monster.max = 3;
-
 	itm.Warrior.rare = 0.001;
 	itm.Warrior.min = 1;
 	itm.Warrior.max = 5;
-
 	itm.Citizen.rare = 0.1;
 	itm.Citizen.min = 1;
 	itm.Citizen.max = 5;
@@ -4304,7 +3971,6 @@ int GofInitItems()
 	itm.minlevel =0;
 	itm.rare = 0.4;
 	n++;
-
 	makeref(itm,Items[n]);
 	itm.id = "GOF_mineral7";
 	itm.name = "GOF_itmname_mineral7";
@@ -4316,19 +3982,15 @@ int GofInitItems()
 	// boal 19.01.2004 -->
 	itm.price = 70;
 	itm.Weight = 0.8;
-
 	itm.Solder.rare = 0.1;
 	itm.Solder.min = 1;
 	itm.Solder.max = 1;
-
 	itm.Monster.rare = 0.1;
 	itm.Monster.min = 1;
 	itm.Monster.max = 3;
-
 	itm.Warrior.rare = 0.3;
 	itm.Warrior.min = 1;
 	itm.Warrior.max = 1;
-	
 	itm.Citizen.rare = 0.1;
 	itm.Citizen.min = 1;
 	itm.Citizen.max = 1;
@@ -4336,7 +3998,6 @@ int GofInitItems()
 	itm.minlevel =0;
 	itm.rare = 0.2;
 	n++;
-
 	makeref(itm,Items[n]);
 	itm.id = "GOF_mineral8";
 	itm.name = "GOF_itmname_mineral8";
@@ -4348,15 +4009,12 @@ int GofInitItems()
 	// boal 19.01.2004 -->
 	itm.price = 15;
 	itm.Weight = 1;
-
 	itm.Solder.rare = 0.1;
 	itm.Solder.min = 1;
 	itm.Solder.max = 1;
-
 	itm.Monster.rare = 0.1;
 	itm.Monster.min = 1;
 	itm.Monster.max = 1;
-
 	itm.Warrior.rare = 0.1;
 	itm.Warrior.min = 1;
 	itm.Warrior.max = 1;
@@ -4364,7 +4022,6 @@ int GofInitItems()
 	itm.minlevel =4;
 	itm.rare = 0.05;
 	n++;
-
 	makeref(itm,Items[n]);
 	itm.id = "GOF_mineral9";
 	itm.name = "GOF_itmname_mineral9";
@@ -4376,15 +4033,12 @@ int GofInitItems()
 	// boal 19.01.2004 -->
 	itm.price = 40;
 	itm.Weight = 1;
-
 	itm.Solder.rare = 0.1;
 	itm.Solder.min = 1;
 	itm.Solder.max = 1;
-
 	itm.Monster.rare = 0.1;
 	itm.Monster.min = 1;
 	itm.Monster.max = 3;
-
 	itm.Warrior.rare = 0.2;
 	itm.Warrior.min = 1;
 	itm.Warrior.max = 1;
@@ -4392,7 +4046,6 @@ int GofInitItems()
 	itm.minlevel =2;
 	itm.rare = 0.1;
 	n++;
-
 	makeref(itm,Items[n]);
 	itm.id = "GOF_mineral10";
 	itm.name = "GOF_itmname_mineral10";
@@ -4404,15 +4057,12 @@ int GofInitItems()
 	// boal 19.01.2004 -->
 	itm.price = 2;
 	itm.Weight = 1;
-
 	itm.Solder.rare = 0.001;
 	itm.Solder.min = 1;
 	itm.Solder.max = 5;
-
 	itm.Monster.rare = 0.001;
 	itm.Monster.min = 1;
 	itm.Monster.max = 3;
-
 	itm.Warrior.rare = 0.001;
 	itm.Warrior.min = 1;
 	itm.Warrior.max = 5;
@@ -4421,7 +4071,6 @@ int GofInitItems()
 	itm.rare = 0.1;
 	n++;
 	*/
-
 	/*
 	makeref(itm,Items[n]);
 	itm.id = "GOF_sculMa1";
@@ -4437,7 +4086,6 @@ int GofInitItems()
 	itm.minlevel =5;
 	itm.rare = 0.01;
 	n++;
-	
 	makeref(itm,Items[n]);
 	itm.id = "GOF_sculMa2";
 	itm.name = "GOF_itmname_sculMa2";
@@ -4452,7 +4100,6 @@ int GofInitItems()
 	itm.minlevel =1;
 	itm.rare = 0.01;
 	n++;
-
 	makeref(itm,Items[n]);
 	itm.id = "GOF_sculMa3";
 	itm.name = "GOF_itmname_sculMa3";
@@ -4467,7 +4114,6 @@ int GofInitItems()
 	itm.minlevel =1;
 	itm.rare = 0.01;
 	n++;
-
 	makeref(itm,Items[n]);
 	itm.id = "GOF_cat1";  // cat <-----Officerpuppy 02/04/10
 	itm.name = "GOF_itmname_cat1";
@@ -4483,7 +4129,6 @@ int GofInitItems()
 	itm.minlevel = 1;
 	itm.rare = 0.01;
 	n++;
-	
 	makeref(itm,Items[n]);
 	itm.id = "GOF_CursedCoin";  // Aztec gold <-----Officerpuppy 04/19/10
 	itm.name = "GOF_itmname_CursedCoin";
@@ -4494,14 +4139,12 @@ int GofInitItems()
 	itm.shown = 0;
 	itm.price = 500;
 	itm.Weight = 0.1;
-
 	itm.Monster.rare = 0.05;
 	itm.Monster.min = 1;
 	itm.Monster.max = 10;
 	itm.minlevel = 1;
 	itm.rare = 0.05;
 	n++;
-
 	makeref(itm,Items[n]);
 	itm.id = "GOF_Maokun";  // Mao Kun map <-----Officerpuppy 05/09/11
 	itm.name = "GOF_itmname_Maokun";
@@ -4515,7 +4158,6 @@ int GofInitItems()
 	itm.imageTga = "books\maokun";
 	itm.rare = 0.01;
 	n++;
-
 	makeref(itm,Items[n]);
 	itm.id = "GOF_Voodoo";  // Voodoo doll <-----Officerpuppy 05/09/11
 	itm.name = "GOF_itmname_Voodoo";
@@ -4526,14 +4168,12 @@ int GofInitItems()
 	itm.shown = 0;
 	itm.price = 400;
 	itm.Weight = 0.1;
-
 	itm.Monster.rare = 0.05;
 	itm.Monster.min = 1;
 	itm.Monster.max = 10;
 	itm.minlevel = 1;
 	itm.rare = 0.05;
 	n++;
-
 	makeref(itm,Items[n]);
 	itm.id = "GOF_Chalices";  // Chalices of Cartagena <-----Officerpuppy 05/09/11
 	itm.name = "GOF_itmname_Chalices";
@@ -4547,7 +4187,6 @@ int GofInitItems()
 	itm.minlevel = 1;
 	itm.rare = 0.01;
 	n++;
-
 	makeref(itm,Items[n]);
 	itm.id = "GOF_Cane";  // Cutler Beckett's cane <-----Officerpuppy 06/09/11
 	itm.name = "GOF_itmname_Cane";
@@ -4561,7 +4200,6 @@ int GofInitItems()
 	itm.minlevel = 1;
 	itm.rare = 0.01;
 	n++;
-
 	makeref(itm,Items[n]);
 	itm.id = "GOF_Keycloth";  // Drawing of the key to the Dead Man's Chest <-----Officerpuppy 06/09/11
 	itm.name = "GOF_itmname_Keycloth";
@@ -4575,7 +4213,6 @@ int GofInitItems()
 	itm.minlevel = 1;
 	itm.rare = 0.01;
 	n++;
-
 	makeref(itm,Items[n]);
 	itm.id = "GOF_Timekeeper";  // Timekeeper  <-----Officerpuppy 06/09/11
 	itm.name = "GOF_itmname_Timekeeper";
@@ -4589,7 +4226,6 @@ int GofInitItems()
 	itm.minlevel = 1;
 	itm.rare = 0.01;
 	n++;
-
 	makeref(itm,Items[n]);
 	itm.id = "GOF_Pirata";  // Pirata Codex  <-----Officerpuppy 06/09/11
 	itm.groupID = MAPS_ITEM_TYPE
@@ -4603,7 +4239,6 @@ int GofInitItems()
 	itm.rare = 0.01;
 	itm.imageTga = "books\piratacodex_1";
 	n++;
-
 	makeref(itm,Items[n]);
 	itm.id = "GOF_Malleus";  // Malleus Maleficarum  <-----Officerpuppy 06/09/11
 	itm.groupID = MAPS_ITEM_TYPE
@@ -4617,9 +4252,7 @@ int GofInitItems()
 	itm.rare = 0.01;
 	itm.imageTga = "books\Malleus_1";
 	n++;
-
 	//INDIAN TRINKETS
-
 	makeref(itm,Items[n]);
 	itm.id = "GOF_indian1"; // +1 sneak
 	itm.name = "GOF_itmname_indian1";
@@ -4631,15 +4264,12 @@ int GofInitItems()
 	// boal 19.01.2004 -->
 	itm.price = 150;
 	itm.Weight = 3;
-
 	itm.Solder.rare = 0.001;
 	itm.Solder.min = 1;
 	itm.Solder.max = 1;
-
 	itm.Monster.rare = 0.03;
 	itm.Monster.min = 1;
 	itm.Monster.max = 1;
-
 	itm.Warrior.rare = 0.001;
 	itm.Warrior.min = 1;
 	itm.Warrior.max = 1;
@@ -4647,7 +4277,6 @@ int GofInitItems()
 	itm.minlevel = 1;
 	itm.rare = 0.005;
 	n++;
-
 	makeref(itm,Items[n]);
 	itm.id = "GOF_indian2";
 	itm.name = "GOF_itmname_indian2";
@@ -4659,15 +4288,12 @@ int GofInitItems()
 	// boal 19.01.2004 -->
 	itm.price = 100;
 	itm.Weight = 1;
-
 	itm.Solder.rare = 0.02;
 	itm.Solder.min = 1;
 	itm.Solder.max = 1;
-
 	itm.Monster.rare = 0.03;
 	itm.Monster.min = 1;
 	itm.Monster.max = 3;
-
 	itm.Warrior.rare = 0.05;
 	itm.Warrior.min = 1;
 	itm.Warrior.max = 1;
@@ -4675,7 +4301,6 @@ int GofInitItems()
 	itm.minlevel = 1;
 	itm.rare = 0.05;
 	n++;
-
 	makeref(itm,Items[n]);
 	itm.id = "GOF_indian3";
 	itm.name = "GOF_itmname_indian3";
@@ -4687,19 +4312,15 @@ int GofInitItems()
 	// boal 19.01.2004 -->
 	itm.price = 50;
 	itm.Weight = 0.6;
-
 	itm.Monster.rare = 0.05;
 	itm.Monster.min = 1;
 	itm.Monster.max = 1;
-
 	itm.Warrior.rare = 0.01;
 	itm.Warrior.min = 1;
 	itm.Warrior.max = 1;
-	
 	itm.Citizen.rare = 0.1;
 	itm.Citizen.min = 1;
 	itm.Citizen.max = 1;
-	
 	itm.Citizen_f.rare = 0.1;
 	itm.Citizen_f.min = 1;
 	itm.Citizen_f.max = 1;
@@ -4707,7 +4328,6 @@ int GofInitItems()
 	itm.minlevel = 1;
 	itm.rare = 0.05;
 	n++;
-
 	makeref(itm,Items[n]);
 	itm.id = "GOF_indian4";
 	itm.name = "GOF_itmname_indian4";
@@ -4719,11 +4339,9 @@ int GofInitItems()
 	// boal 19.01.2004 -->
 	itm.price = 2;
 	itm.Weight = 2;
-
 	itm.Citizen.rare = 0.1;
 	itm.Citizen.min = 1;
 	itm.Citizen.max = 1;
-
 	itm.Citizen_f.rare = 0.1;
 	itm.Citizen_f.min = 1;
 	itm.Citizen_f.max = 1;
@@ -4731,7 +4349,6 @@ int GofInitItems()
 	itm.minlevel = 1;
 	itm.rare = 0.2;
 	n++;
-
 	makeref(itm,Items[n]);
 	itm.id = "GOF_indian5"; // +1 sneak
 	itm.name = "GOF_itmname_indian5";
@@ -4743,19 +4360,15 @@ int GofInitItems()
 	// boal 19.01.2004 -->
 	itm.price = 65;
 	itm.Weight = 1.5;
-
 	itm.Monster.rare = 0.05;
 	itm.Monster.min = 1;
 	itm.Monster.max = 1;
-
 	itm.Warrior.rare = 0.03;
 	itm.Warrior.min = 1;
 	itm.Warrior.max = 1;
-
 	itm.Citizen.rare = 0.1;
 	itm.Citizen.min = 1;
 	itm.Citizen.max = 1;
-
 	itm.Citizen_f.rare = 0.1;
 	itm.Citizen_f.min = 1;
 	itm.Citizen_f.max = 1;
@@ -4763,7 +4376,6 @@ int GofInitItems()
 	itm.minlevel = 3;
 	itm.rare = 0.05;
 	n++;
-
 	makeref(itm,Items[n]);
 	itm.id = "GOF_indian6";
 	itm.name = "GOF_itmname_indian6";
@@ -4775,11 +4387,9 @@ int GofInitItems()
 	// boal 19.01.2004 -->
 	itm.price = 300;
 	itm.Weight = 1;
-
 	itm.Monster.rare = 0.005;
 	itm.Monster.min = 1;
 	itm.Monster.max = 1;
-
 	itm.Warrior.rare = 0.001;
 	itm.Warrior.min = 1;
 	itm.Warrior.max = 1;
@@ -4787,7 +4397,6 @@ int GofInitItems()
 	itm.minlevel = 2;
 	itm.rare = 0.005;
 	n++;
-
 	makeref(itm,Items[n]);
 	itm.id = "GOF_indian7"; // +1 sneak
 	itm.name = "GOF_itmname_indian7";
@@ -4799,19 +4408,15 @@ int GofInitItems()
 	// boal 19.01.2004 -->
 	itm.price = 75;
 	itm.Weight = 3.6;
-
 	itm.Monster.rare = 0.07;
 	itm.Monster.min = 1;
 	itm.Monster.max = 1;
-
 	itm.Warrior.rare = 0.01;
 	itm.Warrior.min = 1;
 	itm.Warrior.max = 1;
-
 	itm.Citizen.rare = 0.01;
 	itm.Citizen.min = 1;
 	itm.Citizen.max = 1;
-
 	itm.Citizen_f.rare = 0.01;
 	itm.Citizen_f.min = 1;
 	itm.Citizen_f.max = 1;
@@ -4819,7 +4424,6 @@ int GofInitItems()
 	itm.minlevel = 4;
 	itm.rare = 0.03;
 	n++;
-
 	makeref(itm,Items[n]);
 	itm.id = "GOF_indian8";
 	itm.name = "GOF_itmname_indian8";
@@ -4831,19 +4435,15 @@ int GofInitItems()
 	// boal 19.01.2004 -->
 	itm.price = 70;
 	itm.Weight = 0.6;
-
 	itm.Monster.rare = 0.1;
 	itm.Monster.min = 1;
 	itm.Monster.max = 1;
-
 	itm.Warrior.rare = 0.05;
 	itm.Warrior.min = 1;
 	itm.Warrior.max = 1;
-
 	itm.Citizen.rare = 0.1;
 	itm.Citizen.min = 1;
 	itm.Citizen.max = 1;
-
 	itm.Citizen_f.rare = 0.1;
 	itm.Citizen_f.min = 1;
 	itm.Citizen_f.max = 1;
@@ -4851,7 +4451,6 @@ int GofInitItems()
 	itm.minlevel = 4;
 	itm.rare = 0.07;
 	n++;
-
 	makeref(itm,Items[n]);
 	itm.id = "GOF_indian9";
 	itm.name = "GOF_itmname_indian9";
@@ -4863,15 +4462,12 @@ int GofInitItems()
 	// boal 19.01.2004 -->
 	itm.price = 10;
 	itm.Weight = 1;
-
 	itm.Warrior.rare = 0.1;
 	itm.Warrior.min = 1;
 	itm.Warrior.max = 1;
-
 	itm.Citizen.rare = 0.2;
 	itm.Citizen.min = 1;
 	itm.Citizen.max = 1;
-
 	itm.Citizen_f.rare = 0.2;
 	itm.Citizen_f.min = 1;
 	itm.Citizen_f.max = 1;
@@ -4879,7 +4475,6 @@ int GofInitItems()
 	itm.minlevel = 5;
 	itm.rare = 0.03;
 	n++;
-
 	makeref(itm,Items[n]);
 	itm.id = "GOF_indian11";  // rats god
 	itm.name = "GOF_itmname_indian11";
@@ -4895,7 +4490,6 @@ int GofInitItems()
 	itm.minlevel = 5;
 	itm.rare = 0.001;
 	n++;
-	
 	makeref(itm,Items[n]);
 	itm.id = "GOF_indian10";
 	itm.name = "GOF_itmname_indian10";
@@ -4907,19 +4501,15 @@ int GofInitItems()
 	// boal 19.01.2004 -->
 	itm.price = 105;
 	itm.Weight = 2;
-
 	itm.Monster.rare = 0.005;
 	itm.Monster.min = 1;
 	itm.Monster.max = 1;
-
 	itm.Warrior.rare = 0.05;
 	itm.Warrior.min = 1;
 	itm.Warrior.max = 1;
-
 	itm.Citizen.rare = 0.1;
 	itm.Citizen.min = 1;
 	itm.Citizen.max = 1;
-
 	itm.Citizen_f.rare = 0.1;
 	itm.Citizen_f.min = 1;
 	itm.Citizen_f.max = 1;
@@ -4927,7 +4517,6 @@ int GofInitItems()
 	itm.minlevel = 7;
 	itm.rare = 0.03;
 	n++;
-
 	makeref(itm,Items[n]);
 	itm.id = "GOF_indian12";
 	itm.name = "GOF_itmname_indian12";
@@ -4939,23 +4528,18 @@ int GofInitItems()
 	// boal 19.01.2004 -->
 	itm.price = 615;
 	itm.Weight = 10;
-
 	itm.Monster.rare = 0.3;
 	itm.Monster.min = 1;
 	itm.Monster.max = 1;
-
 	itm.Warrior.rare = 0.1;
 	itm.Warrior.min = 1;
 	itm.Warrior.max = 1;
-
 	itm.Citizen.rare = 0.2;
 	itm.Citizen.min = 1;
 	itm.Citizen.max = 1;
-
 	itm.Citizen_f.rare = 0.2;
 	itm.Citizen_f.min = 1;
 	itm.Citizen_f.max = 1;
-
 	itm.Solder.rare = 0.001;
 	itm.Solder.min = 1;
 	itm.Solder.max = 1;
@@ -4963,7 +4547,6 @@ int GofInitItems()
 	itm.minlevel = 7;
 	itm.rare = 0.001;
 	n++;
-
 	makeref(itm,Items[n]);
 	itm.id = "GOF_indian13";
 	itm.name = "GOF_itmname_indian13";
@@ -4975,23 +4558,18 @@ int GofInitItems()
 	// boal 19.01.2004 -->
 	itm.price = 20;
 	itm.Weight = 3;
-
 	itm.Monster.rare = 0.05;
 	itm.Monster.min = 1;
 	itm.Monster.max = 1;
-
 	itm.Warrior.rare = 0.05;
 	itm.Warrior.min = 1;
 	itm.Warrior.max = 1;
-
 	itm.Citizen.rare = 0.1;
 	itm.Citizen.min = 1;
 	itm.Citizen.max = 1;
-
 	itm.Citizen_f.rare = 0.1;
 	itm.Citizen_f.min = 1;
 	itm.Citizen_f.max = 1;
-
 	itm.Solder.rare = 0.001;
 	itm.Solder.min = 1;
 	itm.Solder.max = 1;
@@ -4999,7 +4577,6 @@ int GofInitItems()
 	itm.minlevel = 1;
 	itm.rare = 0.1;
 	n++;
-
 	makeref(itm,Items[n]);
 	itm.id = "GOF_indian14";
 	itm.name = "GOF_itmname_indian14";
@@ -5011,23 +4588,18 @@ int GofInitItems()
 	// boal 19.01.2004 -->
 	itm.price = 105;
 	itm.Weight = 3;
-
 	itm.Monster.rare = 0.1;
 	itm.Monster.min = 1;
 	itm.Monster.max = 1;
-
 	itm.Warrior.rare = 0.05;
 	itm.Warrior.min = 1;
 	itm.Warrior.max = 1;
-
 	itm.Citizen.rare = 0.2;
 	itm.Citizen.min = 1;
 	itm.Citizen.max = 1;
-
 	itm.Citizen_f.rare = 0.2;
 	itm.Citizen_f.min = 1;
 	itm.Citizen_f.max = 1;
-
 	itm.Solder.rare = 0.001;
 	itm.Solder.min = 1;
 	itm.Solder.max = 1;
@@ -5035,7 +4607,6 @@ int GofInitItems()
 	itm.minlevel = 10;
 	itm.rare = 0.005;
 	n++;
-
 	makeref(itm,Items[n]);
 	itm.id = "GOF_indian15";
 	itm.name = "GOF_itmname_indian15";
@@ -5047,7 +4618,6 @@ int GofInitItems()
 	// boal 19.01.2004 -->
 	itm.price = 250;
 	itm.Weight = 30;
-
 	itm.Monster.rare = 0.005;
 	itm.Monster.min = 1;
 	itm.Monster.max = 1;
@@ -5055,7 +4625,6 @@ int GofInitItems()
 	itm.minlevel = 3;
 	itm.rare = 0.005;
 	n++;
-
 	makeref(itm,Items[n]);
 	itm.id = "GOF_indian16";
 	itm.name = "GOF_itmname_indian16";
@@ -5067,23 +4636,18 @@ int GofInitItems()
 	// boal 19.01.2004 -->
 	itm.price = 7;
 	itm.Weight = 3;
-
 	itm.Monster.rare = 0.001;
 	itm.Monster.min = 1;
 	itm.Monster.max = 1;
-
 	itm.Warrior.rare = 0.001;
 	itm.Warrior.min = 1;
 	itm.Warrior.max = 1;
-
 	itm.Citizen.rare = 0.2;
 	itm.Citizen.min = 1;
 	itm.Citizen.max = 1;
-
 	itm.Citizen_f.rare = 0.2;
 	itm.Citizen_f.min = 1;
 	itm.Citizen_f.max = 1;
-
 	itm.Solder.rare = 0.1;
 	itm.Solder.min = 1;
 	itm.Solder.max = 1;
@@ -5091,7 +4655,6 @@ int GofInitItems()
 	itm.minlevel = 3;
 	itm.rare = 0.05;
 	n++;
-
 	makeref(itm,Items[n]);
 	itm.id = "GOF_indian17"; // +1 sneak
 	itm.name = "GOF_itmname_indian17";
@@ -5103,23 +4666,18 @@ int GofInitItems()
 	// boal 19.01.2004 -->
 	itm.price = 25;
 	itm.Weight = 2;
-
 	itm.Monster.rare = 0.06;
 	itm.Monster.min = 1;
 	itm.Monster.max = 1;
-
 	itm.Warrior.rare = 0.02;
 	itm.Warrior.min = 1;
 	itm.Warrior.max = 1;
-
 	itm.Citizen.rare = 0.01;
 	itm.Citizen.min = 1;
 	itm.Citizen.max = 1;
-
 	itm.Citizen_f.rare = 0.1;
 	itm.Citizen_f.min = 1;
 	itm.Citizen_f.max = 1;
-
 	itm.Solder.rare = 0.01
 	itm.Solder.min = 1;
 	itm.Solder.max = 1;
@@ -5127,7 +4685,6 @@ int GofInitItems()
 	itm.minlevel = 1;
 	itm.rare = 0.05;
 	n++;
-
 	makeref(itm,Items[n]);
 	itm.id = "GOF_indian18";
 	itm.name = "GOF_itmname_indian18";
@@ -5139,7 +4696,6 @@ int GofInitItems()
 	// boal 19.01.2004 -->
 	itm.price = 75;
 	itm.Weight = 2;
-
 	itm.Monster.rare = 0.005;
 	itm.Monster.min = 1;
 	itm.Monster.max = 1;
@@ -5147,7 +4703,6 @@ int GofInitItems()
 	itm.minlevel = 1;
 	itm.rare = 0.001;
 	n++;
-
 	makeref(itm,Items[n]);
 	itm.id = "GOF_indian19";
 	itm.name = "GOF_itmname_indian19";
@@ -5159,7 +4714,6 @@ int GofInitItems()
 	// boal 19.01.2004 -->
 	itm.price = 1200;
 	itm.Weight = 2;
-
 	itm.Monster.rare = 0.005;
 	itm.Monster.min = 1;
 	itm.Monster.max = 1;
@@ -5167,7 +4721,6 @@ int GofInitItems()
 	itm.minlevel = 1;
 	itm.rare = 0.001;
 	n++;
-
 	makeref(itm,Items[n]);
 	itm.id = "GOF_indian20";
 	itm.name = "GOF_itmname_indian20";
@@ -5179,7 +4732,6 @@ int GofInitItems()
 	// boal 19.01.2004 -->
 	itm.price = 375;
 	itm.Weight = 2;
-
 	itm.Monster.rare = 0.005;
 	itm.Monster.min = 1;
 	itm.Monster.max = 1;
@@ -5187,7 +4739,6 @@ int GofInitItems()
 	itm.minlevel = 1;
 	itm.rare = 0.001;
 	n++;
-
 	makeref(itm,Items[n]);
 	itm.id = "GOF_indian21";
 	itm.name = "GOF_itmname_indian21";
@@ -5199,7 +4750,6 @@ int GofInitItems()
 	// boal 19.01.2004 -->
 	itm.price = 12;
 	itm.Weight = 2;
-
 	itm.Monster.rare = 0.005;
 	itm.Monster.min = 1;
 	itm.Monster.max = 1;
@@ -5207,7 +4757,6 @@ int GofInitItems()
 	itm.minlevel = 1;
 	itm.rare = 0.001;
 	n++;
-
 	makeref(itm,Items[n]);
 	itm.id = "GOF_indian22";
 	itm.name = "GOF_itmname_indian22";
@@ -5219,7 +4768,6 @@ int GofInitItems()
 	// boal 19.01.2004 -->
 	itm.price = 2;
 	itm.Weight = 2;
-
 	itm.Monster.rare = 0.005;
 	itm.Monster.min = 1;
 	itm.Monster.max = 1;
@@ -5227,9 +4775,7 @@ int GofInitItems()
 	itm.minlevel = 1;
 	itm.rare = 0.001;
 	n++;
-
 	//books
-
 	makeref(itm,Items[n]);
 	itm.id = "GOF_bookleader_1";
 	itm.groupID = MAPS_ITEM_TYPE
@@ -5245,18 +4791,14 @@ int GofInitItems()
 	itm.imageTga = "books\bookleader_1";
    	itm.minlevel = 1;
 	itm.rare = 0.03;
-	
 	itm.Warrior.rare = 0.01;
 	itm.Warrior.min = 1;
 	itm.Warrior.max = 1;
-
 	itm.Solder.rare = 0.03;
 	itm.Solder.min = 1;
 	itm.Solder.max = 1;
 	// boal 19.01.2004 <--
-
 	n++;
-
 	makeref(itm,Items[n]);
 	itm.id = "GOF_booklight_1";
 	itm.groupID = MAPS_ITEM_TYPE
@@ -5270,11 +4812,9 @@ int GofInitItems()
 	itm.price = 1000;
 	itm.Weight = 3;
 	itm.imageTga = "books\booklight_1";
-
 	itm.Warrior.rare = 0.01;
 	itm.Warrior.min = 1;
 	itm.Warrior.max = 1;
-
 	itm.Solder.rare = 0.03;
 	itm.Solder.min = 1;
 	itm.Solder.max = 1;
@@ -5282,7 +4822,6 @@ int GofInitItems()
 	itm.minlevel = 1;
 	itm.rare = 0.03;
 	n++;
-
 	makeref(itm,Items[n]);
 	itm.id = "GOF_bookfencing_1";
 	itm.groupID = MAPS_ITEM_TYPE
@@ -5296,11 +4835,9 @@ int GofInitItems()
 	itm.price = 1000;
 	itm.Weight = 3;
 	itm.imageTga = "books\bookfencing_1";
-
 	itm.Warrior.rare = 0.01;
 	itm.Warrior.min = 1;
 	itm.Warrior.max = 1;
-
 	itm.Solder.rare = 0.03;
 	itm.Solder.min = 1;
 	itm.Solder.max = 1;
@@ -5308,7 +4845,6 @@ int GofInitItems()
 	itm.minlevel = 1;
 	itm.rare = 0.03;
 	n++;
-
 	makeref(itm,Items[n]);
 	itm.id = "GOF_bookheavy_1";
 	itm.groupID = MAPS_ITEM_TYPE
@@ -5322,11 +4858,9 @@ int GofInitItems()
 	itm.price = 1000;
 	itm.Weight = 3;
 	itm.imageTga = "books\bookheavy_1";
-
 	itm.Warrior.rare = 0.01;
 	itm.Warrior.min = 1;
 	itm.Warrior.max = 1;
-
 	itm.Solder.rare = 0.03;
 	itm.Solder.min = 1;
 	itm.Solder.max = 1;
@@ -5334,7 +4868,6 @@ int GofInitItems()
 	itm.minlevel = 1;
 	itm.rare = 0.03;
 	n++;
-
 	makeref(itm,Items[n]);
 	itm.id = "GOF_bookleader_2";
 	itm.groupID = MAPS_ITEM_TYPE
@@ -5348,12 +4881,10 @@ int GofInitItems()
 	itm.price = 7500;
 	itm.Weight = 3;
 	itm.imageTga = "books\bookleader_2";
-
 	// boal 19.01.2004 <--
 	itm.minlevel = 5;
 	itm.rare = 0.005;
 	n++;
-
 	makeref(itm,Items[n]);
 	itm.id = "GOF_booklight_2";
 	itm.groupID = MAPS_ITEM_TYPE
@@ -5367,12 +4898,10 @@ int GofInitItems()
 	itm.price = 7500;
 	itm.Weight = 3;
 	itm.imageTga = "books\booklight_2";
-
 	// boal 19.01.2004 <--
 	itm.minlevel = 5;
 	itm.rare = 0.005;
 	n++;
-
 	makeref(itm,Items[n]);
 	itm.id = "GOF_bookfencing_2";
 	itm.groupID = MAPS_ITEM_TYPE
@@ -5386,12 +4915,10 @@ int GofInitItems()
 	itm.price = 7500;
 	itm.Weight = 3;
 	itm.imageTga = "books\bookfencing_2";
-
 	// boal 19.01.2004 <--
 	itm.minlevel = 5;
 	itm.rare = 0.005;
 	n++;
-
 	makeref(itm,Items[n]);
 	itm.id = "GOF_bookheavy_2";
 	itm.groupID = MAPS_ITEM_TYPE
@@ -5405,12 +4932,10 @@ int GofInitItems()
 	itm.price = 7500;
 	itm.Weight = 3;
 	itm.imageTga = "books\bookheavy_2";
-
 	// boal 19.01.2004 <--
 	itm.minlevel = 5;
 	itm.rare = 0.005;
 	n++;
-
 	makeref(itm,Items[n]);
 	itm.id = "GOF_bookleader_3";
 	itm.groupID = MAPS_ITEM_TYPE
@@ -5424,12 +4949,10 @@ int GofInitItems()
 	itm.price = 25000;
 	itm.Weight = 3;
 	itm.imageTga = "books\bookleader_3";
-
 	// boal 19.01.2004 <--
 	itm.minlevel = 10;
 	itm.rare = 0.0003;
 	n++;
-
 	makeref(itm,Items[n]);
 	itm.id = "GOF_booklight_3";
 	itm.groupID = MAPS_ITEM_TYPE
@@ -5443,12 +4966,10 @@ int GofInitItems()
 	itm.price = 25000;
 	itm.Weight = 3;
 	itm.imageTga = "books\booklight_3";
-
 	// boal 19.01.2004 <--
 	itm.minlevel = 10;
 	itm.rare = 0.0003;
 	n++;
-
 	makeref(itm,Items[n]);
 	itm.id = "GOF_bookfencing_3";
 	itm.groupID = MAPS_ITEM_TYPE
@@ -5462,12 +4983,10 @@ int GofInitItems()
 	itm.price = 25000;
 	itm.Weight = 3;
 	itm.imageTga = "books\bookfencing_3";
-
 	// boal 19.01.2004 <--
 	itm.minlevel = 10;
 	itm.rare = 0.0003;
 	n++;
-
 	makeref(itm,Items[n]);
 	itm.id = "GOF_bookheavy_3";
 	itm.groupID = MAPS_ITEM_TYPE
@@ -5481,12 +5000,10 @@ int GofInitItems()
 	itm.price = 25000;
 	itm.Weight = 3;
 	itm.imageTga = "books\bookheavy_3";
-
 	// boal 19.01.2004 <--
 	itm.minlevel = 10;
 	itm.rare = 0.0003;
 	n++;
-
 	makeref(itm,Items[n]);
 	itm.id = "GOF_bookpistols_1";
 	itm.groupID = MAPS_ITEM_TYPE
@@ -5500,11 +5017,9 @@ int GofInitItems()
 	itm.price = 1000;
 	itm.Weight = 3;
 	itm.imageTga = "books\bookpistols_1";
-
 	itm.Warrior.rare = 0.01;
 	itm.Warrior.min = 1;
 	itm.Warrior.max = 1;
-
 	itm.Solder.rare = 0.03;
 	itm.Solder.min = 1;
 	itm.Solder.max = 1;
@@ -5512,7 +5027,6 @@ int GofInitItems()
 	itm.minlevel = 1;
 	itm.rare = 0.03;
 	n++;
-
 	makeref(itm,Items[n]);
 	itm.id = "GOF_bookluck_1";
 	itm.groupID = MAPS_ITEM_TYPE
@@ -5526,11 +5040,9 @@ int GofInitItems()
 	itm.price = 1000;
 	itm.Weight = 3;
 	itm.imageTga = "books\bookluck_1";
-
 	itm.Warrior.rare = 0.01;
 	itm.Warrior.min = 1;
 	itm.Warrior.max = 1;
-
 	itm.Solder.rare = 0.03;
 	itm.Solder.min = 1;
 	itm.Solder.max = 1;
@@ -5538,7 +5050,6 @@ int GofInitItems()
 	itm.minlevel = 1;
 	itm.rare = 0.03;
 	n++;
-
 	makeref(itm,Items[n]);
 	itm.id = "GOF_bookstealth_1";
 	itm.groupID = MAPS_ITEM_TYPE
@@ -5552,11 +5063,9 @@ int GofInitItems()
 	itm.price = 1000;
 	itm.Weight = 3;
 	itm.imageTga = "books\bookstealth_1";
-
 	itm.Warrior.rare = 0.01;
 	itm.Warrior.min = 1;
 	itm.Warrior.max = 1;
-
 	itm.Solder.rare = 0.03;
 	itm.Solder.min = 1;
 	itm.Solder.max = 1;
@@ -5564,7 +5073,6 @@ int GofInitItems()
 	itm.minlevel = 1;
 	itm.rare = 0.03;
 	n++;
-
 	makeref(itm,Items[n]);
 	itm.id = "GOF_booknavigation_1";
 	itm.groupID = MAPS_ITEM_TYPE
@@ -5578,11 +5086,9 @@ int GofInitItems()
 	itm.price = 1000;
 	itm.Weight = 3;
 	itm.imageTga = "books\booknavigation_1";
-
 	itm.Warrior.rare = 0.01;
 	itm.Warrior.min = 1;
 	itm.Warrior.max = 1;
-
 	itm.Solder.rare = 0.03;
 	itm.Solder.min = 1;
 	itm.Solder.max = 1;
@@ -5590,7 +5096,6 @@ int GofInitItems()
 	itm.minlevel = 1;
 	itm.rare = 0.03;
 	n++;
-
 	makeref(itm,Items[n]);
 	itm.id = "GOF_bookpistols_2";
 	itm.groupID = MAPS_ITEM_TYPE
@@ -5604,12 +5109,10 @@ int GofInitItems()
 	itm.price = 7500;
 	itm.Weight = 3;
 	itm.imageTga = "books\bookpistols_2";
-
 	// boal 19.01.2004 <--
 	itm.minlevel = 5;
 	itm.rare = 0.005;
 	n++;
-
 	makeref(itm,Items[n]);
 	itm.id = "GOF_bookluck_2";
 	itm.groupID = MAPS_ITEM_TYPE
@@ -5623,12 +5126,10 @@ int GofInitItems()
 	itm.price = 7500;
 	itm.Weight = 3;
 	itm.imageTga = "books\bookluck_2";
-
 	// boal 19.01.2004 <--
 	itm.minlevel = 5;
 	itm.rare = 0.005;
 	n++;
-
 	makeref(itm,Items[n]);
 	itm.id = "GOF_bookstealth_2";
 	itm.groupID = MAPS_ITEM_TYPE
@@ -5642,12 +5143,10 @@ int GofInitItems()
 	itm.price = 7500;
 	itm.Weight = 3;
 	itm.imageTga = "books\bookstealth_2";
-
 	// boal 19.01.2004 <--
 	itm.minlevel = 5;
 	itm.rare = 0.005;
 	n++;
-
 	makeref(itm,Items[n]);
 	itm.id = "GOF_booknavigation_2";
 	itm.groupID = MAPS_ITEM_TYPE
@@ -5661,12 +5160,10 @@ int GofInitItems()
 	itm.price = 7500;
 	itm.Weight = 3;
 	itm.imageTga = "books\booknavigation_2";
-
 	// boal 19.01.2004 <--
 	itm.minlevel = 5;
 	itm.rare = 0.005;
 	n++;
-
 	makeref(itm,Items[n]);
 	itm.id = "GOF_bookpistols_3";
 	itm.groupID = MAPS_ITEM_TYPE
@@ -5680,12 +5177,10 @@ int GofInitItems()
 	itm.price = 25000;
 	itm.Weight = 3;
 	itm.imageTga = "books\bookpistols_3";
-
 	// boal 19.01.2004 <--
 	itm.minlevel = 10;
 	itm.rare = 0.0003;
 	n++;
-
 	makeref(itm,Items[n]);
 	itm.id = "GOF_bookluck_3";
 	itm.groupID = MAPS_ITEM_TYPE
@@ -5699,12 +5194,10 @@ int GofInitItems()
 	itm.price = 25000;
 	itm.Weight = 3;
 	itm.imageTga = "books\bookluck_3";
-
 	// boal 19.01.2004 <--
 	itm.minlevel = 10;
 	itm.rare = 0.0003;
 	n++;
-
 	makeref(itm,Items[n]);
 	itm.id = "GOF_bookstealth_3";
 	itm.groupID = MAPS_ITEM_TYPE
@@ -5718,12 +5211,10 @@ int GofInitItems()
 	itm.price = 25000;
 	itm.Weight = 3;
 	itm.imageTga = "books\bookstealth_3";
-
 	// boal 19.01.2004 <--
 	itm.minlevel = 10;
 	itm.rare = 0.0003;
 	n++;
-
 	makeref(itm,Items[n]);
 	itm.id = "GOF_booknavigation_3";
 	itm.groupID = MAPS_ITEM_TYPE
@@ -5737,12 +5228,10 @@ int GofInitItems()
 	itm.price = 25000;
 	itm.Weight = 3;
 	itm.imageTga = "books\booknavigation_3";
-
 	// boal 19.01.2004 <--
 	itm.minlevel = 10;
 	itm.rare = 0.0003;
 	n++;
-
 	makeref(itm,Items[n]);
 	itm.id = "GOF_bookaccurate_1";
 	itm.groupID = MAPS_ITEM_TYPE
@@ -5756,11 +5245,9 @@ int GofInitItems()
 	itm.price = 1000;
 	itm.Weight = 3;
 	itm.imageTga = "books\bookaccurate_1";
-
 	itm.Warrior.rare = 0.01;
 	itm.Warrior.min = 1;
 	itm.Warrior.max = 1;
-
 	itm.Solder.rare = 0.03;
 	itm.Solder.min = 1;
 	itm.Solder.max = 1;
@@ -5768,7 +5255,6 @@ int GofInitItems()
 	itm.minlevel = 1;
 	itm.rare = 0.03;
 	n++;
-
 	makeref(itm,Items[n]);
 	itm.id = "GOF_bookcannon_1";
 	itm.groupID = MAPS_ITEM_TYPE
@@ -5782,11 +5268,9 @@ int GofInitItems()
 	itm.price = 1000;
 	itm.Weight = 3;
 	itm.imageTga = "books\bookcannon_1";
-
 	itm.Warrior.rare = 0.01;
 	itm.Warrior.min = 1;
 	itm.Warrior.max = 1;
-
 	itm.Solder.rare = 0.03;
 	itm.Solder.min = 1;
 	itm.Solder.max = 1;
@@ -5794,7 +5278,6 @@ int GofInitItems()
 	itm.minlevel = 1;
 	itm.rare = 0.03;
 	n++;
-
 	makeref(itm,Items[n]);
 	itm.id = "GOF_bookgrapple_1";
 	itm.groupID = MAPS_ITEM_TYPE
@@ -5808,11 +5291,9 @@ int GofInitItems()
 	itm.price = 1000;
 	itm.Weight = 3;
 	itm.imageTga = "books\bookgrapple_1";
-
 	itm.Warrior.rare = 0.01;
 	itm.Warrior.min = 1;
 	itm.Warrior.max = 1;
-
 	itm.Solder.rare = 0.03;
 	itm.Solder.min = 1;
 	itm.Solder.max = 1;
@@ -5820,7 +5301,6 @@ int GofInitItems()
 	itm.minlevel = 1;
 	itm.rare = 0.03;
 	n++;
-
 	makeref(itm,Items[n]);
 	itm.id = "GOF_bookdefend_1";
 	itm.groupID = MAPS_ITEM_TYPE
@@ -5834,11 +5314,9 @@ int GofInitItems()
 	itm.price = 1000;
 	itm.Weight = 3;
 	itm.imageTga = "books\bookdefend_1";
-
 	itm.Warrior.rare = 0.01;
 	itm.Warrior.min = 1;
 	itm.Warrior.max = 1;
-
 	itm.Solder.rare = 0.03;
 	itm.Solder.min = 1;
 	itm.Solder.max = 1;
@@ -5846,7 +5324,6 @@ int GofInitItems()
 	itm.minlevel = 1;
 	itm.rare = 0.03;
 	n++;
-
 	makeref(itm,Items[n]);
 	itm.id = "GOF_bookaccurate_2";
 	itm.groupID = MAPS_ITEM_TYPE
@@ -5860,12 +5337,10 @@ int GofInitItems()
 	itm.price = 7500;
 	itm.Weight = 3;
 	itm.imageTga = "books\bookaccurate_2";
-
 	// boal 19.01.2004 <--
 	itm.minlevel = 5;
 	itm.rare = 0.005;
 	n++;
-
 	makeref(itm,Items[n]);
 	itm.id = "GOF_bookcannon_2";
 	itm.groupID = MAPS_ITEM_TYPE
@@ -5879,12 +5354,10 @@ int GofInitItems()
 	itm.price = 7500;
 	itm.Weight = 3;
 	itm.imageTga = "books\bookcannon_2";
-
 	// boal 19.01.2004 <--
 	itm.minlevel = 5;
 	itm.rare = 0.005;
 	n++;
-
 	makeref(itm,Items[n]);
 	itm.id = "GOF_bookgrapple_2";
 	itm.groupID = MAPS_ITEM_TYPE
@@ -5898,12 +5371,10 @@ int GofInitItems()
 	itm.price = 7500;
 	itm.Weight = 3;
 	itm.imageTga = "books\bookgrapple_2";
-
 	// boal 19.01.2004 <--
 	itm.minlevel = 5;
 	itm.rare = 0.005;
 	n++;
-
 	makeref(itm,Items[n]);
 	itm.id = "GOF_bookdefend_2";
 	itm.groupID = MAPS_ITEM_TYPE
@@ -5917,12 +5388,10 @@ int GofInitItems()
 	itm.price = 7500;
 	itm.Weight = 3;
 	itm.imageTga = "books\bookdefend_2";
-
 	// boal 19.01.2004 <--
 	itm.minlevel = 5;
 	itm.rare = 0.005;
 	n++;
-
 	makeref(itm,Items[n]);
 	itm.id = "GOF_bookaccurate_3";
 	itm.groupID = MAPS_ITEM_TYPE
@@ -5936,12 +5405,10 @@ int GofInitItems()
 	itm.price = 25000;
 	itm.Weight = 3;
 	itm.imageTga = "books\bookaccurate_3";
-
 	// boal 19.01.2004 <--
 	itm.minlevel = 10;
 	itm.rare = 0.0003;
 	n++;
-
 	makeref(itm,Items[n]);
 	itm.id = "GOF_bookcannon_3";
 	itm.groupID = MAPS_ITEM_TYPE
@@ -5955,12 +5422,10 @@ int GofInitItems()
 	itm.price = 25000;
 	itm.Weight = 3;
 	itm.imageTga = "books\bookcannon_3";
-
 	// boal 19.01.2004 <--
 	itm.minlevel = 10;
 	itm.rare = 0.0003;
 	n++;
-
 	makeref(itm,Items[n]);
 	itm.id = "GOF_bookgrapple_3";
 	itm.groupID = MAPS_ITEM_TYPE
@@ -5974,12 +5439,10 @@ int GofInitItems()
 	itm.price =25000;
 	itm.Weight = 3;
 	itm.imageTga = "books\bookgrapple_3";
-
 	// boal 19.01.2004 <--
 	itm.minlevel = 10;
 	itm.rare = 0.0003;
 	n++;
-
 	makeref(itm,Items[n]);
 	itm.id = "GOF_bookdefend_3";
 	itm.groupID = MAPS_ITEM_TYPE
@@ -5993,12 +5456,10 @@ int GofInitItems()
 	itm.price = 25000;
 	itm.Weight = 3;
 	itm.imageTga = "books\bookdefend_3";
-
 	// boal 19.01.2004 <--
 	itm.minlevel = 10;
 	itm.rare = 0.0003;
 	n++;
-
 	makeref(itm,Items[n]);
 	itm.id = "GOF_bookrepairs_1";
 	itm.groupID = MAPS_ITEM_TYPE
@@ -6012,11 +5473,9 @@ int GofInitItems()
 	itm.price = 1000;
 	itm.Weight = 3;
 	itm.imageTga = "books\bookrepairs_1";
-
 	itm.Warrior.rare = 0.01;
 	itm.Warrior.min = 1;
 	itm.Warrior.max = 1;
-
 	itm.Solder.rare = 0.03;
 	itm.Solder.min = 1;
 	itm.Solder.max = 1;
@@ -6024,7 +5483,6 @@ int GofInitItems()
 	itm.minlevel = 1;
 	itm.rare = 0.03;
 	n++;
-
 	makeref(itm,Items[n]);
 	itm.id = "GOF_bookmoney_1";
 	itm.groupID = MAPS_ITEM_TYPE
@@ -6038,11 +5496,9 @@ int GofInitItems()
 	itm.price = 1000;
 	itm.Weight = 3;
 	itm.imageTga = "books\bookmoney_1";
-
 	itm.Warrior.rare = 0.01;
 	itm.Warrior.min = 1;
 	itm.Warrior.max = 1;
-
 	itm.Solder.rare = 0.03;
 	itm.Solder.min = 1;
 	itm.Solder.max = 1;
@@ -6050,7 +5506,6 @@ int GofInitItems()
 	itm.minlevel = 1;
 	itm.rare = 0.03;
 	n++;
-
 	makeref(itm,Items[n]);
 	itm.id = "GOF_bookrepairs_2";
 	itm.groupID = MAPS_ITEM_TYPE
@@ -6064,12 +5519,10 @@ int GofInitItems()
 	itm.price = 7500;
 	itm.Weight = 3;
 	itm.imageTga = "books\bookrepairs_2";
-
 	// boal 19.01.2004 <--
 	itm.minlevel = 5;
 	itm.rare = 0.005;
 	n++;
-
 	makeref(itm,Items[n]);
 	itm.id = "GOF_bookmoney_2";
 	itm.groupID = MAPS_ITEM_TYPE
@@ -6083,12 +5536,10 @@ int GofInitItems()
 	itm.price = 7500;
 	itm.Weight = 3;
 	itm.imageTga = "books\bookmoney_2";
-
 	// boal 19.01.2004 <--
 	itm.minlevel = 5;
 	itm.rare = 0.005;
 	n++;
-
 	makeref(itm,Items[n]);
 	itm.id = "GOF_bookrepairs_3";
 	itm.groupID = MAPS_ITEM_TYPE
@@ -6102,12 +5553,10 @@ int GofInitItems()
 	itm.price = 25000;
 	itm.Weight = 3;
 	itm.imageTga = "books\bookrepairs_3";
-
 	// boal 19.01.2004 <--
 	itm.minlevel = 10;
 	itm.rare = 0.0003;
 	n++;
-
 	makeref(itm,Items[n]);
 	itm.id = "GOF_bookmoney_3";
 	itm.groupID = MAPS_ITEM_TYPE
@@ -6121,12 +5570,10 @@ int GofInitItems()
 	itm.price = 25000;
 	itm.Weight = 3;
 	itm.imageTga = "books\bookmoney_3";
-
 	// boal 19.01.2004 <--
 	itm.minlevel = 10;
 	itm.rare = 0.0003;
 	n++;
-
 	makeref(itm,Items[n]);
 	itm.id = "GOF_bookwrestling";
 	itm.groupID = MAPS_ITEM_TYPE
@@ -6140,12 +5587,10 @@ int GofInitItems()
 	itm.price = 37500;
 	itm.Weight = 3;
 	itm.imageTga = "books\bookwrestling";
-
 	// boal 19.01.2004 <--
 	itm.minlevel = 15;
 	itm.rare = 0.0002;
 	n++;
-
 		makeref(itm,Items[n]);
 	itm.id = "GOF_booklgtweapman";
 	itm.groupID = MAPS_ITEM_TYPE
@@ -6159,12 +5604,10 @@ int GofInitItems()
 	itm.price = 37500;
 	itm.Weight = 3;
 	itm.imageTga = "books\booklgtweapman";
-
 	// boal 19.01.2004 <--
 	itm.minlevel = 15;
 	itm.rare = 0.0002;
 	n++;
-
 		makeref(itm,Items[n]);
 	itm.id = "GOF_bookmedweapman";
 	itm.groupID = MAPS_ITEM_TYPE
@@ -6178,12 +5621,10 @@ int GofInitItems()
 	itm.price = 37500;
 	itm.Weight = 3;
 	itm.imageTga = "books\bookmedweapman";
-
 	// boal 19.01.2004 <--
 	itm.minlevel = 15;
 	itm.rare = 0.0002;
 	n++;
-
 			makeref(itm,Items[n]);
 	itm.id = "GOF_bookheavweapman";
 	itm.groupID = MAPS_ITEM_TYPE
@@ -6197,12 +5638,10 @@ int GofInitItems()
 	itm.price = 37500;
 	itm.Weight = 3;
 	itm.imageTga = "books\bookheavweapman";
-
 	// boal 19.01.2004 <--
 	itm.minlevel = 15;
 	itm.rare = 0.0002;
 	n++;
-
 	// ������ 07.03.05
 	makeref(itm,Items[n]);
 	itm.id = "GOF_suit_1";
@@ -6221,7 +5660,6 @@ int GofInitItems()
 	itm.rare = 0.01;
 	itm.ItemType = "SUPPORT";
 	n++;
-
 	makeref(itm,Items[n]);
 	itm.id = "GOF_suit_2";
 	itm.groupID = CIRASS_ITEM_TYPE;
@@ -6239,7 +5677,6 @@ int GofInitItems()
 	itm.rare = 0.01;
 	itm.ItemType = "SUPPORT";
 	n++;
-
 	makeref(itm,Items[n]);
 	itm.id = "GOF_suit_3";
 	itm.groupID = CIRASS_ITEM_TYPE;
@@ -6257,7 +5694,6 @@ int GofInitItems()
 	itm.rare = 0.001;
 	itm.ItemType = "SUPPORT";
 	n++;
-
 	makeref(itm,Items[n]);
 	itm.id = "GOF_suit_4";// Privateer <-----Officerpuppy 03/02/10
 	itm.groupID = CIRASS_ITEM_TYPE;
@@ -6275,7 +5711,6 @@ int GofInitItems()
 	itm.rare = 0.01;
 	itm.ItemType = "SUPPORT";
 	n++;
-
 	makeref(itm,Items[n]);
 	itm.id = "GOF_suit_5";// Capt. <-----Officerpuppy 03/02/10
 	itm.groupID = CIRASS_ITEM_TYPE;
@@ -6293,7 +5728,6 @@ int GofInitItems()
 	itm.rare = 0.01;
 	itm.ItemType = "SUPPORT";
 	n++;
-
 	makeref(itm,Items[n]);
 	itm.id = "GOF_suit_6";// Adm. <-----Officerpuppy 03/02/10
 	itm.groupID = CIRASS_ITEM_TYPE;
@@ -6311,7 +5745,6 @@ int GofInitItems()
 	itm.rare = 0.01;
 	itm.ItemType = "SUPPORT";
 	n++;
-
 	// �����
 		makeref(itm,Items[n]);
 	itm.id = "GOF_cirass1";
@@ -6330,17 +5763,14 @@ int GofInitItems()
 	// boal 19.01.2004 <--
 	itm.minlevel = 2;
 	itm.rare = 0.1;
-
 	itm.Solder.rare = 0.01;
 	itm.Solder.min = 1;
 	itm.Solder.max = 1;
-	
 	itm.Warrior.rare = 0.01;
 	itm.Warrior.min = 1;
 	itm.Warrior.max = 1;
 	itm.ItemType = "SUPPORT";
 	n++;
-
 	makeref(itm,Items[n]);
 	itm.id = "GOF_cirass2";
 	itm.groupID = CIRASS_ITEM_TYPE;
@@ -6358,17 +5788,14 @@ int GofInitItems()
 	// boal 19.01.2004 <--
 	itm.minlevel = 5;
 	itm.rare = 0.1;
-
 	itm.Solder_o.rare = 0.01;
 	itm.Solder_o.min = 1;
 	itm.Solder_o.max = 1;
-
 	itm.Warrior.rare = 0.005;
 	itm.Warrior.min = 1;
 	itm.Warrior.max = 1;
 	itm.ItemType = "SUPPORT";
 	n++;
-
 	makeref(itm,Items[n]);
 	itm.id = "GOF_cirass3";
 	itm.groupID = CIRASS_ITEM_TYPE;
@@ -6386,13 +5813,11 @@ int GofInitItems()
 	// boal 19.01.2004 <--
 	itm.minlevel = 9;
 	itm.rare = 0.1;
-
 	itm.Solder_o.rare = 0.003;
 	itm.Solder_o.min = 1;
 	itm.Solder_o.max = 1;
 	itm.ItemType = "SUPPORT";
 	n++;
-
 	makeref(itm,Items[n]);
 	itm.id = "GOF_cirass4";
 	itm.groupID = CIRASS_ITEM_TYPE;
@@ -6410,13 +5835,11 @@ int GofInitItems()
 	// boal 19.01.2004 <--
 	itm.minlevel = 11;
 	itm.rare = 0.1;
-	
 	itm.Solder_o.rare = 0.003;
 	itm.Solder_o.min = 1;
 	itm.Solder_o.max = 1;
 	itm.ItemType = "SUPPORT";
 	n++;
-			
 	makeref(itm,Items[n]);
 	itm.id = "GOF_cirass5";
 	itm.groupID = CIRASS_ITEM_TYPE;
@@ -6436,22 +5859,16 @@ int GofInitItems()
 	itm.rare = 0.001;
 	itm.ItemType = "SUPPORT";
 	n++;
-
 	*/
-
-
-
 	// trace("����� ��������� (����������� �������) "+n);
 	// trace("��������� ����������� �������: " + Items[ItemsForLocators_start].id);
 	// trace("�������� ����������� �������: " + Items[ItemsForLocators_end].id);
 	return n;
 }
-
 void InitButtons()
 {
 	/*aref lab3;
 	makearef(lab3, Locations[FindLocation("Labirint_3")]);
-
 	lab3.items.b_1.locator = "button01";
 	lab3.items.b_1.model   = "b1";
 	lab3.items.b_1.itemDeltaY  = 0.0;
@@ -6459,283 +5876,190 @@ void InitButtons()
 	lab3.items.b_1.trigged  = false;
 	*/
 }
-
 /* void GofInitRandItems()
 {
 	ref rnditem;
-
 	makeref(rnditem,RandItems[0]);
 	rnditem.id = POTION;
-
-	
 	makeref(rnditem,RandItems[1]);
 	rnditem.id = "Mineral9";  
-
 	makeref(rnditem,RandItems[2]);
 	rnditem.id = "Mineral10";  
-	
 	makeref(rnditem,RandItems[3]);
 	rnditem.id = "jewelry16";
-	
 	makeref(rnditem,RandItems[4]);
 	rnditem.id = "jewelry1";
-
 	makeref(rnditem,RandItems[5]);
 	rnditem.id = "jewelry2";
-
 	makeref(rnditem,RandItems[6]);
 	rnditem.id = "jewelry3";
-
 	makeref(rnditem,RandItems[7]);
 	rnditem.id = "jewelry5";
-
 	makeref(rnditem,RandItems[8]);
 	rnditem.id = "jewelry6";
-
 	makeref(rnditem,RandItems[9]);
 	rnditem.id = "jewelry7";
-
 	makeref(rnditem,RandItems[10]);
 	rnditem.id = "jewelry10";
-
 	makeref(rnditem,RandItems[11]);
 	rnditem.id = "jewelry11";
-
 	makeref(rnditem,RandItems[12]);
 	rnditem.id = "jewelry12";
-
 	makeref(rnditem,RandItems[13]);
 	rnditem.id = "jewelry13";
-
 	makeref(rnditem,RandItems[14]);
 	rnditem.id = "potion1";
-
 	makeref(rnditem,RandItems[15]);
 	rnditem.id = "indian4";
-
 	makeref(rnditem,RandItems[16]);
 	rnditem.id = "potion1";
-
 	makeref(rnditem,RandItems[17]);
 	rnditem.id = "potion2";
-
 	makeref(rnditem,RandItems[18]);
 	rnditem.id = "indian13";
-
 	makeref(rnditem,RandItems[19]);
 	rnditem.id = "potion3";
-
 	makeref(rnditem,RandItems[20]);
 	rnditem.id = "potion4";
-
 	// boal -->
 	makeref(rnditem,RandItems[21]);
 	rnditem.id = "pistol3";
-
 	makeref(rnditem,RandItems[22]);
 	rnditem.id = "pistol2";
-
 	makeref(rnditem,RandItems[23]);
 	rnditem.id = "pistol1";
-
 	makeref(rnditem,RandItems[24]);
 	rnditem.id = "blade8";
-
 	makeref(rnditem,RandItems[25]);
 	rnditem.id = "blade7";
-
 	makeref(rnditem,RandItems[26]);
 	rnditem.id = "blade6";
-
 	makeref(rnditem,RandItems[27]);
 	rnditem.id = "blade5";
-
 	makeref(rnditem,RandItems[28]);
 	rnditem.id = "blade4";
-
 	makeref(rnditem,RandItems[29]);
 	rnditem.id = "blade3";
-
 	makeref(rnditem,RandItems[30]);
 	rnditem.id = "blade2";
-
 	makeref(rnditem,RandItems[31]);
 	rnditem.id = "spyglass1";
-
 	makeref(rnditem,RandItems[32]);
 	rnditem.id = "spyglass2";
-
 	makeref(rnditem,RandItems[33]);
 	rnditem.id = "blade1";
-
 	makeref(rnditem,RandItems[34]);
 	rnditem.id = "jewelry17";
-
 	makeref(rnditem,RandItems[35]);
 	rnditem.id = "jewelry18";
-
 	makeref(rnditem,RandItems[36]);
 	rnditem.id = "bullet"; // boal "Mineral1";
-
 	makeref(rnditem,RandItems[37]);
 	rnditem.id = "mineral3";
-
 	makeref(rnditem,RandItems[38]);
 	rnditem.id = "Mineral4";  
-
 	makeref(rnditem,RandItems[39]);
 	rnditem.id = "Mineral5";  
-
 	makeref(rnditem,RandItems[40]);
 	rnditem.id = "Mineral6";  
-
 	makeref(rnditem,RandItems[41]);
 	rnditem.id = "Mineral7";  
-
 	makeref(rnditem,RandItems[42]);
 	rnditem.id = "potion5";
-
 	makeref(rnditem,RandItems[43]);
 	rnditem.id = "potionwine";
-
 	makeref(rnditem,RandItems[44]);
 	rnditem.id = "potionrum";
-	
 	makeref(rnditem,RandItems[45]);
 	rnditem.id = "bookleader_1";
-	
 	makeref(rnditem,RandItems[46]);
 	rnditem.id = "booklight_1";
-
 	makeref(rnditem,RandItems[47]);
 	rnditem.id = "bookfencing_1";
-	
 	makeref(rnditem,RandItems[48]);
 	rnditem.id = "bookheavy_1";
-
 	makeref(rnditem,RandItems[49]);
 	rnditem.id = "bookleader_2";
-	
 	makeref(rnditem,RandItems[50]);
 	rnditem.id = "booklight_2";
-
 	makeref(rnditem,RandItems[51]);
 	rnditem.id = "bookfencing_2";
-	
 	makeref(rnditem,RandItems[52]);
 	rnditem.id = "bookheavy_2";
-
 	makeref(rnditem,RandItems[53]);
 	rnditem.id = "bookleader_3";
-	
 	makeref(rnditem,RandItems[54]);
 	rnditem.id = "booklight_3";
-
 	makeref(rnditem,RandItems[55]);
 	rnditem.id = "bookfencing_3";
-	
 	makeref(rnditem,RandItems[56]);
 	rnditem.id = "bookheavy_3";
-	
 	makeref(rnditem,RandItems[57]);
 	rnditem.id = "bookpistols_1";
-
 	makeref(rnditem,RandItems[58]);
 	rnditem.id = "bookluck_1";
-
 	makeref(rnditem,RandItems[59]);
 	rnditem.id = "bookstealth_1";
-
 	makeref(rnditem,RandItems[60]);
 	rnditem.id = "booknavigation_1";
-
 	makeref(rnditem,RandItems[61]);
 	rnditem.id = "bookpistols_2";
-
 	makeref(rnditem,RandItems[62]);
 	rnditem.id = "bookluck_2";
-
 	makeref(rnditem,RandItems[63]);
 	rnditem.id = "bookstealth_2";
-
 	makeref(rnditem,RandItems[64]);
 	rnditem.id = "booknavigation_2";
-
 	makeref(rnditem,RandItems[65]);
 	rnditem.id = "bookpistols_3";
-
 	makeref(rnditem,RandItems[66]);
 	rnditem.id = "bookluck_3";
-
 	makeref(rnditem,RandItems[67]);
 	rnditem.id = "bookstealth_3";
-
 	makeref(rnditem,RandItems[68]);
 	rnditem.id = "booknavigation_3";
-
 	makeref(rnditem,RandItems[69]);
 	rnditem.id = "bookaccurate_1";
-
 	makeref(rnditem,RandItems[70]);
 	rnditem.id = "bookcannon_1";
-
 	makeref(rnditem,RandItems[71]);
 	rnditem.id = "bookgrapple_1";
-
 	makeref(rnditem,RandItems[72]);
 	rnditem.id = "bookdefend_1";
-
 	makeref(rnditem,RandItems[73]);
 	rnditem.id = "bookaccurate_2";
-
 	makeref(rnditem,RandItems[74]);
 	rnditem.id = "bookcannon_2";
-
 	makeref(rnditem,RandItems[75]);
 	rnditem.id = "bookgrapple_2";
-
 	makeref(rnditem,RandItems[76]);
 	rnditem.id = "bookdefend_2";
-
 	makeref(rnditem,RandItems[77]);
 	rnditem.id = "bookaccurate_3";
-
 	makeref(rnditem,RandItems[78]);
 	rnditem.id = "bookcannon_3";
-
 	makeref(rnditem,RandItems[79]);
 	rnditem.id = "bookgrapple_3";
-
 	makeref(rnditem,RandItems[80]);
 	rnditem.id = "bookdefend_3";
-
 	makeref(rnditem,RandItems[81]);
 	rnditem.id = "bookrepairs_1";
-
 	makeref(rnditem,RandItems[82]);
 	rnditem.id = "bookmoney_1";
-
 	makeref(rnditem,RandItems[83]);
 	rnditem.id = "bookrepairs_2";
-
 	makeref(rnditem,RandItems[84]);
 	rnditem.id = "bookmoney_2";
-	
 	makeref(rnditem,RandItems[85]);
 	rnditem.id = "bookrepairs_3";
-
 	makeref(rnditem,RandItems[86]);
 	rnditem.id = "bookmoney_3";
-		
 	makeref(rnditem,RandItems[87]);
 	rnditem.id = "bookwrestling";
-	
 	makeref(rnditem,RandItems[88]);
 	rnditem.id = "booklgtweapman";
-		
 	makeref(rnditem,RandItems[89]);
 	rnditem.id = "bookmedweapman";
-	
 	makeref(rnditem,RandItems[90]);
 	rnditem.id = "bookheavweapman";
 	// boal <--

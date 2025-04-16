@@ -1,7 +1,6 @@
 void EI_CreateFrame(string sNodeName, int x1, int y1, int x2, int y2)
 {
 	SendMessage(&GameInterface, "lsls", MSG_INTERFACE_MSG_TO_NODE, sNodeName, 1, "MAIN_ICONS");
-
 	// UPLEFT
 	SendMessage(&GameInterface, "lslslllll", MSG_INTERFACE_MSG_TO_NODE, sNodeName, 0, "BORDER_UPLEFT", argb(255, 128, 128, 128), x1, y1, x1 + 9, y1 + 9);
 	// URRIGHT
@@ -18,9 +17,7 @@ void EI_CreateFrame(string sNodeName, int x1, int y1, int x2, int y2)
 	SendMessage(&GameInterface, "lslslllll", MSG_INTERFACE_MSG_TO_NODE, sNodeName, 0, "BORDER_CENTER", argb(255, 128, 128, 128), x1 + 9, y1, x2 - 9, y1 + 5);
 	// DOWN
 	SendMessage(&GameInterface, "lslslllll", MSG_INTERFACE_MSG_TO_NODE, sNodeName, 0, "BORDER_CENTER", argb(255, 128, 128, 128), x1 + 9, y2 - 5, x2 - 9, y2);
-	
 }
-
 void EI_CreateFrameWithBack(string sBackNodeName, string sFrameNodeName, string sBackImage, int x1, int y1, int x2, int y2)
 {
 	// Back
@@ -29,11 +26,9 @@ void EI_CreateFrameWithBack(string sBackNodeName, string sFrameNodeName, string 
 		SendMessage(&GameInterface, "lsls", MSG_INTERFACE_MSG_TO_NODE, sBackNodeName, 1, "PAPIRUS");
 		SendMessage(&GameInterface, "lslslllll", MSG_INTERFACE_MSG_TO_NODE, sBackNodeName, 0, sBackImage, argb(255, 128, 128, 128), x1, y1, x2, y2);
 	}
-
 	// Frame
 	if (sFrameNodeName != "") { EI_CreateFrame(sFrameNodeName, x1, y1, x2, y2); }
 }
-
 // create vertical line with width = 3
 void EI_CreateVLine(string sNodeName, int x1, int y1, int y2, int iNumLines, int iWidth)
 {
@@ -43,7 +38,6 @@ void EI_CreateVLine(string sNodeName, int x1, int y1, int y2, int iNumLines, int
 		SendMessage(&GameInterface, "lslslllll", MSG_INTERFACE_MSG_TO_NODE, sNodeName, 0, "BORDER_LEFT", argb(255, 128, 128, 128), x1 + i * iWidth, y1, x1 + i * iWidth + 3, y2);
 	}
 }
-
 // create horizontal line with width = 3
 void EI_CreateHLine(string sNodeName, int x1, int y1, int x2, int iNumLines, int iHeight)
 {
@@ -53,7 +47,6 @@ void EI_CreateHLine(string sNodeName, int x1, int y1, int x2, int iNumLines, int
 		SendMessage(&GameInterface, "lslslllll", MSG_INTERFACE_MSG_TO_NODE, sNodeName, 0, "BORDER_CENTER", argb(255, 128, 128, 128), x1, y1 + i * iHeight, x2, y1 + i * iHeight + 3);
 	}
 }
-
 void EI_CreateSubstrate(string sNodeName, string sSubsrateType, int x1, int y1, int x2, int y2)
 {
 	SendMessage(&GameInterface, "lsls", MSG_INTERFACE_MSG_TO_NODE, sNodeName, 1, "MAIN_ICONS");

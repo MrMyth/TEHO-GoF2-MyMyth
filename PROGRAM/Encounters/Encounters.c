@@ -1,14 +1,10 @@
 #include "encounters\encounters.h"
 #include "encounters\encounters_map.c"
 #include "encounters\encounters_quest.c"
-
 //#include "scripts\utils.c"
-
 #define MAX_MAP_ENCOUNTERS		128
 object MapEncounters[MAX_MAP_ENCOUNTERS];
-
 extern void InitEncounters();
-
 void EncountersInit()
 {
 	if(LoadSegment("Encounters\Encounters_init.c"))
@@ -16,10 +12,8 @@ void EncountersInit()
 		InitEncounters();
 		UnloadSegment("Encounters\Encounters_init.c");
 	}
-
 	ReleaseMapEncounters();
 }
-
 int FindEncounter(int type, int nat)
 {
 	int iTypes[2]; 
@@ -27,12 +21,9 @@ int FindEncounter(int type, int nat)
 	SetArraySize(&iTypes, MAX_ENCOUNTER_TYPES * 10);
 	for(i = 0; i < MAX_ENCOUNTER_TYPES*10; i++) iTypes[i] = -1;
 	int iNumTypes = 0;
-
 	ref rCharacter = GetMainCharacter();
 	int iCharacterRank = sti(rCharacter.rank);
-	
 	int iChance = rand(250);
-	
 	for (i=0; i<MAX_ENCOUNTER_TYPES; i++)
 	{
 		if(sti(EncountersTypes[i].Type) == type)
@@ -42,7 +33,6 @@ int FindEncounter(int type, int nat)
 			if (iChance > sti(EncountersTypes[i].Chance)) { continue; }
 			// check MinRank / MaxRank
 			if(sti(EncountersTypes[i].MinRank) > iCharacterRank || sti(EncountersTypes[i].MaxRank) < iCharacterRank) { continue; }
-			
 			iTypes[iNumTypes] = i;
 			iNumTypes++;
 		}
@@ -55,17 +45,13 @@ int FindEncounter(int type, int nat)
 	while(findnum >=0 && iTypes[findnum] == -1) findnum--;
 	return iTypes[findnum];
 }
-
 int FindWarEncounter()
 {
 	int iTypes[100];
 	int iNumTypes = 0;
-
 	ref rCharacter = GetMainCharacter();
 	int iCharacterRank = sti(rCharacter.rank);
-
 	int iChance = rand(250);// boal 13.03.2004
-
 	for (int i=0; i<MAX_ENCOUNTER_TYPES; i++)
 	{
 		if (sti(EncountersTypes[i].Type) == ENCOUNTER_WAR)
@@ -88,17 +74,13 @@ int FindWarEncounter()
 	}
 	return iTypes[rand(iNumTypes-1)];
 }
-
 int FindMerchantEncounter()
 {
 	int iTypes[100];
 	int iNumTypes = 0;
-
 	ref rCharacter = GetMainCharacter();
 	int iCharacterRank = sti(rCharacter.rank);
-
 	int iChance = rand(250);// boal 13.03.2004
-
 	for (int i=0; i<MAX_ENCOUNTER_TYPES; i++)
 	{
 		if (sti(EncountersTypes[i].Type) == ENCOUNTER_TRADE)
@@ -121,17 +103,13 @@ int FindMerchantEncounter()
 	}
 	return iTypes[rand(iNumTypes - 1)];
 }
-
 int FindSpecialEncounter()
 {
 	int iTypes[100];
 	int iNumTypes = 0;
-	
 	ref rCharacter = GetMainCharacter();
 	int iCharacterRank = sti(rCharacter.rank);
-	
 	int iChance = rand(200);// boal 13.03.2004
-	
 	for (int i=0; i<MAX_ENCOUNTER_TYPES; i++)
 	{
 		if (sti(EncountersTypes[i].Type) == ENCOUNTER_SPECIAL)	
@@ -153,25 +131,19 @@ int FindSpecialEncounter()
 	}
 	return iTypes[rand(iNumTypes-1)];
 }
-
 bool Encounter_CanNation(int iEncounter, int iNation)
 {
 	string sNation = "Nation.Exclude." + Nations[iNation].Name;
 	if (!CheckAttribute(&EncountersTypes[iEncounter], sNation)) return true;
 	return !sti(EncountersTypes[iEncounter].(sNation));
 }
-
 bool Encounter_GetClassesFromRank(int iEncounter, int iRank, ref rMClassMin, ref rMClassMax, ref rWClassMin, ref rWClassMax)
 {
 	ref rEnc = &EncountersTypes[iEncounter];
-
 	rMClassMin = 0; rMClassMax = 0; 
 	rWClassMin = 0; rWClassMax = 0;
-
 	string sRank = "Rank." + iRank;
-	
 	trace("sRank : " + sRank + " iEncounter : " + iEncounter);
-	
 	if (!CheckAttribute(rEnc, sRank))
 	{
 		// find nearest rank 
@@ -179,7 +151,6 @@ bool Encounter_GetClassesFromRank(int iEncounter, int iRank, ref rMClassMin, ref
 		{
 			int iLastRank = -1;
 			int iBestRank = 1000;
-
 			aref aRanks; makearef(aRanks, rEnc.Rank);
 			int iNumRanks = GetAttributesNum(aRanks);
 			for (int i=0; i<iNumRanks; i++)
@@ -201,14 +172,10 @@ bool Encounter_GetClassesFromRank(int iEncounter, int iRank, ref rMClassMin, ref
 			return false;
 		}
 	}
-
 	rMClassMin = rEnc.(sRank).1;
 	rMClassMax = rEnc.(sRank).0;
-
 	rWClassMin = rEnc.(sRank).3;
 	rWClassMax = rEnc.(sRank).2;
-	
 	trace("rMClassMin " + rMClassMin + " rMClassMax " + rMClassMax + " rWClassMin " + rWClassMin + " rWClassMax " + rWClassMax);
-	
 	return true;
 }

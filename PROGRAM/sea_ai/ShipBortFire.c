@@ -22,7 +22,6 @@ void Ship_BortFire()
     }
     //Log_SetStringToLog("Ship_BortFire " + rCharacter.id + " "+ bortName);
 	// boal fix charge 29.11.03 <--
-	
 	// boal  05.12.03 check skill -->
 	bool  bTempNotEnoughBalls = false;
 	if (sti(rCharacter.index) == GetMainCharacterIndex())
@@ -58,9 +57,5 @@ void Ship_BortFire()
         }
     }
     // boal <--
-
 	SendMessage(&SeaOperator, "lisffffff", MSG_SEA_OPERATOR_FIRE, firedShip, bortName, dx, dy, dz, d2x, d2y, d2z);
-
 }
-
-

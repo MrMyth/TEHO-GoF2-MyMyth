@@ -4,13 +4,10 @@ void ProcessDialogEvent()
 {
 	ref NPChar, sld;
 	aref Link, NextDiag;
-
 	DeleteAttribute(&Dialog,"Links");
-
 	makeref(NPChar,CharacterRef);
 	makearef(Link, Dialog.Links);
 	makearef(NextDiag, NPChar.Dialog);
-	
     // вызов диалога по городам -->
     NPChar.FileDialog2 = "DIALOGS\" + LanguageGetLanguage() + "\Tavern\" + NPChar.City + "_Tavern.c";
     if (LoadSegment(NPChar.FileDialog2))
@@ -20,7 +17,6 @@ void ProcessDialogEvent()
 	}
     // вызов диалога по городам <--
 	ProcessCommonDialogRumors(NPChar, Link, NextDiag);//homo 25/06/06
-	
 	int iTest, iTemp;
 	string sTemp;
 	string NPCCity = NPChar.City;
@@ -31,13 +27,11 @@ void ProcessDialogEvent()
 		rColony = GetColonyByIndex(iTest);
 	}
 	bool ok;
-	
 	if(!CheckAttribute(pchar, "questTemp.TavernVisit."+(NPCCity) )) 
 	{
 		pchar.questTemp.TavernVisit.(NPCCity) = true;
 		pchar.questTemp.TavernVisit.counter = sti(pchar.questTemp.TavernVisit.counter) + 1;
 	}	
-	
 	switch(Dialog.CurrentNode)
 	{
 		case "First time":
@@ -64,7 +58,6 @@ void ProcessDialogEvent()
 				pchar.quest.pirate_in_town.function = "TownPirate_battle";
 				break;
 			}
-			
 				if(CheckAttribute(pchar, "questTemp.Sharp.Map") && CheckCharacterItem(pchar, pchar.questTemp.Sharp.Map) && sti(pchar.money) >= 1000 && sti(pchar.rank) > 7)
 			{
 			//1
@@ -81,19 +74,16 @@ void ProcessDialogEvent()
                                     "It's good that you've come around here, " + GetFullName(pchar) + ". How's Colonel Bishop doing these days?");
                 Link.l1 = "Alas, I am leaving, " + NPChar.name + ". 'Til we meet again.";
 				Link.l1.go = "exit";
-
                 if(Pchar.questTemp.CapBloodLine.stat == "WakerOffer")
                 {
             		link.l2 = "Can you tell me, my dear " + NPChar.name + ", where to find Doctor Whacker?";
             		link.l2.go = "TStep_0";
                 }
-                
                 if(Pchar.questTemp.CapBloodLine.stat == "PrepareToEscape")
                 {
             		link.l2 = "I need to discuss one matter with you.";
             		link.l2.go = "TStep_1";
                 }
-                
                 if(Pchar.questTemp.CapBloodLine.stat == "needMoney" && CheckAttribute(pchar, "questTemp.CapBloodLine.QuestRaff") && pchar.questTemp.CapBloodLine.QuestRaff == true)
                 {
             		link.l2 = "I'm interested in a man named Raphael Guinness. How can I find him?";
@@ -101,7 +91,6 @@ void ProcessDialogEvent()
                 }
                 break;
     		}
-			
 			//Jason, Бремя гасконца
 			if (CheckAttribute(pchar, "questTemp.Sharlie") && pchar.questTemp.Sharlie == "crew" && npchar.city == "FortFrance")
 			{
@@ -110,7 +99,6 @@ void ProcessDialogEvent()
 				Link.l1.go = "Sharlie_crew";
 				break;
 			}
-			
 			if (CheckAttribute(pchar, "questTemp.Sharlie") && pchar.questTemp.Sharlie == "skiper" && npchar.city == "FortFrance")
 			{
 				dialog.text = "What is it this time, monsieur?";
@@ -143,7 +131,6 @@ void ProcessDialogEvent()
 				Link.l1.go = "exit";
 				break;
 			}
-			
 			if(NPChar.quest.meeting == "0")
 			{
 				dialog.Text = GetNatPhrase(npchar, LinkRandPhrase("Welcome to tavern '" + XI_ConvertString(NPChar.City + "TavernName") + "', sir. I'm glad to see you.","At your service, sir! In the tavern '" + XI_ConvertString(NPChar.City + "TavernName") + "' we are glad to welcome new visitors.","See you for the first time for me, sir? Do not hesitate, in the tavern '" + XI_ConvertString(NPChar.City + "TavernName") + "' you always feel at home!"), LinkRandPhrase("Come in, monsieur captain. This is your first time in tavern '" + XI_ConvertString(NPChar.City + "TavernName") + "'?","Never met you before, monsieur. Let's get acquainted: I'm "+GetFullName(npchar)+", the innkeeper of '" + XI_ConvertString(NPChar.City + "TavernName") + "'.","I'm glad to welcome the new guest, Monsieur Captain! In the tavern '" + XI_ConvertString(NPChar.City + "TavernName") + "' first drink is always at my expense! I am the owner of this place, "+GetFullName(npchar)+", will welcome you."), LinkRandPhrase("Senor Captain! Welcome to the tavern '" + XI_ConvertString(NPChar.City + "TavernName") + "'!","Oh, what a shining hidalgo's visited the tavern '" + XI_ConvertString(NPChar.City + "TavernName") + "'! Is it your first time here, sir?","Greetings, caballero! I'm "+GetFullName(npchar)+", innkeeper of '" + XI_ConvertString(NPChar.City + "TavernName") + "', glad to welcome you here!"),LinkRandPhrase("Hello, mynheer captain. I am the owner of tavern '" + XI_ConvertString(NPChar.City + "TavernName") + "'. First with us?","Good afternoon, mynheer. Welcome to the tavern '" + XI_ConvertString(NPChar.City + "TavernName") + "'.","Very nice mynheer Captain! Tavern '" + XI_ConvertString(NPChar.City + "TavernName") + "' greets you! Rum, wine, ale?"));
@@ -185,7 +172,6 @@ void ProcessDialogEvent()
 				Link.l1.go = "step_node";
 			}
 			break;
-				
 			case "step_node":
 				dialog.Text = LinkRandPhrase("I am listening to you, captain.","Tavern '" + XI_ConvertString(NPChar.City + "TavernName") + "' at your service, Captain!","I listen, Cap'n! What will be your inquiry today?");
 				Link.l1 = "Are there guys on the island ready to set sail?";
@@ -197,7 +183,6 @@ void ProcessDialogEvent()
 					link.l21 = "I would like to talk about financial affairs.";
 					link.l21.go = "LoanForAll";//(перессылка в кредитный генератор)
 				}
-				
 				// Квестовый генератор священника. Квест №2. Warship -->
 				if(CheckAttribute(PChar, "GenQuest.ChurchQuest_2.AskBarmen") && PChar.location == PChar.GenQuest.ChurchQuest_2.QuestTown + "_tavern")
 		            	{
@@ -205,7 +190,6 @@ void ProcessDialogEvent()
 					link.l10.go = "Tavern_GenQuest_Church_2_1";
 				}
 				// <-- Квестовый генератор священника. Квест №2.
-				
 				//Jason --> генератор Неудачливый вор
 				if (CheckAttribute(pchar, "GenQuest.Device.Shipyarder") && NPChar.location == pchar.GenQuest.Device.Shipyarder.City + "_tavern" && pchar.GenQuest.Device.Shipyarder == "begin" && !CheckAttribute(npchar, "quest.Device"))
 				{
@@ -213,7 +197,6 @@ void ProcessDialogEvent()
 					link.l16.go = "Device_Tavern";
 				}
 				// <-- генератор Неудачливый вор
-			
 				//Jason --> генератор Место под солнцем
 				if (CheckAttribute(pchar, "GenQuest.Sunplace.Trader") && pchar.GenQuest.Sunplace.Trader == "continue" && NPChar.location == pchar.GenQuest.Sunplace.Trader.CityT + "_tavern")
 				{
@@ -221,7 +204,6 @@ void ProcessDialogEvent()
 					link.l17.go = "Sunplace_Tavern";
 				}
 				// <-- генератор Место под солнцем
-			
 				// --> Голландский гамбит
 				if (CheckAttribute(pchar, "questTemp.HWIC.Holl") && pchar.questTemp.HWIC.Holl == "JacobOnMain" && NPChar.location == pchar.questTemp.HWIC.Holl.JacobCity + "_tavern")
 				{
@@ -234,7 +216,6 @@ void ProcessDialogEvent()
 					link.l18.go = "HWICSelfFernando_Tavern";
 				}
 				// <-- Голландский гамбит
-			
 				//Jason --> гонки на гидропланах
 				if (CheckAttribute(pchar, "GenQuest.Racing.Go.Advantage") && NPChar.location == pchar.GenQuest.Racing.Go.StartCity + "_tavern")
 				{
@@ -242,7 +223,6 @@ void ProcessDialogEvent()
 					link.l19.go = "Race_Advantage";
 				}
 				// <-- гонки на гидропланах
-			
 				//Jason --> захват пассажиров
 				if (CheckAttribute(pchar, "GenQuest.Marginpassenger") && pchar.GenQuest.Marginpassenger == "take" && NPChar.location == pchar.GenQuest.Marginpassenger.Targetcity+"_tavern")
 				{
@@ -250,7 +230,6 @@ void ProcessDialogEvent()
 					link.l20.go = "Marginpassenger";
 				}
 				// <-- захват пассажиров
-			
 				link.l3 = pcharrepphrase("Is there a free room in your bug-infested hovel?", "Have you got a free room, I would stay here for a while.");
 				link.l3.go = "room";
 				Link.l4 = "Alas, I am already leaving, " + NPChar.name + ". See you.";
@@ -261,19 +240,16 @@ void ProcessDialogEvent()
 			link.l1 = "It would depend on the amount of outrageous we were talking about. Too much of it, and I might consider myself insulted, forcing me to exact equally outrageous vengeance on the offender in order to satisfy my injured honour...";
 			link.l1.go = "3_Sharp";
 		break;
-
 		case "3_Sharp":
 			dialog.text = "...I see. Hmm... So it's probably safe to assume that you'd find a price of 900 piasters offensive?";
 			link.l1 = "900? No doubt about it. I would have snapped the cheeky bastard's neck the moment he dared make such an offer. 900 piasters for a dubiously useful piece of paper is pretty much the pinnacle of impudence in my book.";
 			link.l1.go = "4_Sharp";
 		break;
-
 		case "4_Sharp":
 			dialog.text = "And what if this someone also told you that the map has your name written on it? Wouldn't that pique your interest?";
 			link.l1 = "Indeed, my interest would be piqued and my attention riveted. Our esteemed 'someone' would also now be in grave personal danger. Overcharging me for something I should probably have anyway tends to have unpredictable, but usually violent consequences for the seller.";
 			link.l1.go = "5_Sharp";
 		break;
-
 		case "5_Sharp":
 			dialog.text = "Heh... You drive a hard bargain, captain. 600 piasters, and that's my final offer. I have to make some damn profit!";
 			link.l1 = "I'm delighted to meet a man who can see the light of reason in the dark sea of madness that surrounds us. It's a deal.";
@@ -281,13 +257,11 @@ void ProcessDialogEvent()
 			link.l2 = "Still too much. Besides, there's every chance that this 'treasure map' is actually just a piece of privie paper with my name scrawled upon it.";
 			link.l2.go = "7_Sharp";
 		break;
-
 		case "6_Sharp":
 			dialog.text = "Pleasure doing business with you, Cap'n. You will not be disappointed with your purchase, I assure you.";
 			link.l1 = "Your capacity for extortion would shame Black Bart himself. This map better be worth the money, for your own sake...";
 			link.l1.go = "SL exit map_Sharp";
 		break;
-
 		case "7_Sharp":
 			dialog.text = "Suit yourself, captain. But the offer will not stand for long - there's a lot of other people who would be quite interested in it too. I'm only offering it to you at such a low price because it's got your name on it. But, if you don't want it...";
 			link.l1 = "All right, damn you! I'll buy it.";
@@ -295,14 +269,12 @@ void ProcessDialogEvent()
 			//link.l2 = "Exactly. I don't want it. Goodbye.";
 			//link.l2.go = "SL exit no map_Sharp";
 		break;
-
 		case "SL exit map_Sharp":
 			DialogExit();
 			NextDiag.CurrentNode = NextDiag.TempNode;
 			//give map, continue SL
 			AddDialogExitQuest("Story_Sharp6");
 		break;
-
 		case "SL exit no map_Sharp":
 			DialogExit();
 			NextDiag.CurrentNode = NextDiag.TempNode;
@@ -336,7 +308,6 @@ void ProcessDialogEvent()
 				link.l10.go = "Tavern_GenQuest_Church_2_1";
 			}
 			// <-- Квестовый генератор священника. Квест №2.
-			
 			//Jason --> генератор Неудачливый вор
 			if (CheckAttribute(pchar, "GenQuest.Device.Shipyarder") && NPChar.location == pchar.GenQuest.Device.Shipyarder.City + "_tavern" && pchar.GenQuest.Device.Shipyarder == "begin" && !CheckAttribute(npchar, "quest.Device"))
 			{
@@ -344,7 +315,6 @@ void ProcessDialogEvent()
 				link.l16.go = "Device_Tavern";
 			}
 			// <-- генератор Неудачливый вор
-			
 			//Jason --> генератор Место под солнцем
 			if (CheckAttribute(pchar, "GenQuest.Sunplace.Trader") && pchar.GenQuest.Sunplace.Trader == "continue" && NPChar.location == pchar.GenQuest.Sunplace.Trader.CityT + "_tavern")
 			{
@@ -352,7 +322,6 @@ void ProcessDialogEvent()
 				link.l17.go = "Sunplace_Tavern";
 			}
 			// <-- генератор Место под солнцем
-			
 			//--> Голландский гамбит
 			if (CheckAttribute(pchar, "questTemp.HWIC.Holl") && pchar.questTemp.HWIC.Holl == "JacobOnMain" && NPChar.location == pchar.questTemp.HWIC.Holl.JacobCity + "_tavern")
 				{
@@ -365,7 +334,6 @@ void ProcessDialogEvent()
 					link.l18.go = "HWICSelfFernando_Tavern";
 				}
 				//<-- Голландский гамбит
-				
 				//Jason --> гонки на гидропланах
 				if (CheckAttribute(pchar, "GenQuest.Racing.Go.Advantage") && NPChar.location == pchar.GenQuest.Racing.Go.StartCity + "_tavern")
 				{
@@ -380,17 +348,14 @@ void ProcessDialogEvent()
 					link.l20.go = "Marginpassenger";
 				}
 				// <-- захват пассажиров
-				
 			link.l3 = pcharrepphrase("Is there a free room in your bug-infested hovel?", "Have you got a free room, I would stay here for a while.");
 			link.l3.go = "room";
 			Link.l4 = "I guess I'll come back to you later.";
 			Link.l4.go = "exit";
 		break;
-		
 		case "crew hire":
 			ok = (rColony.from_sea == "") || (Pchar.location.from_sea == rColony.from_sea);
 			ok = sti(Pchar.Ship.Type) != SHIP_NOTUSED && ok;
-			
 			if (!ok)
 			{
 				Dialog.text = "And what would you need sailors for? I don't see your ship in the port.";
@@ -398,7 +363,6 @@ void ProcessDialogEvent()
 				link.l1.go = "exit";
 				break;
 			}
-			
             if (makeint(environment.time) > 22.0 || makeint(environment.time) < 7.0)
 			{
 				Dialog.text = "Usually there are many people looking to become sailors, but it's too late now - they will start to show up in the morning. Perhaps, you'd like to rent a room and wait for them?";
@@ -462,7 +426,6 @@ void ProcessDialogEvent()
 				}
 			}
 		break;
-		
 		case "exit_crew" :
 			DeleteAttribute(NPChar, "CrewHired"); //на всяк случай.
 			NextDiag.CurrentNode =  NextDiag.TempNode;
@@ -515,7 +478,6 @@ void ProcessDialogEvent()
 						link.l9.go = "CaptainComission_1";
 					}
 				}	
-
 				if(pchar.GenQuest.CaptainComission.variant == "A2" && pchar.GenQuest.CaptainComission == "Begin_1")
 				{
 					link.l9 = "Do you know where can I find the captain of a patrol " + GetStrSmallRegister(XI_ConvertString(GetBaseShipParamFromType(sti(pchar.GenQuest.CaptainComission.ShipType),"Name") + "Acc")) + " " + pchar.GenQuest.CaptainComission.Name + "?";
@@ -550,7 +512,6 @@ void ProcessDialogEvent()
 				link.l11 = "I have found by chance not far from here the ship documents....";
 				link.l11.go = "ShipLetters_4";			
 			}
-
 			// Jason --> квест губера на поиск дезертира
 			if(CheckAttribute(pchar, "GenQuest.FindFugitive") && pchar.GenQuest.FindFugitive != "Late" && sti(NPChar.nation) == PIRATE)
 			{
@@ -558,11 +519,9 @@ void ProcessDialogEvent()
 				link.l12.go = "FindFugitiveTav";
 			}
 			//<-- поиск дезертира
-
 			link.l15 = "Thank you, nothing.";
 			link.l15.go = "exit";
 		break;
-		
 		case "hold_genquest1":
 			switch(sti(pchar.GenQuest.Hold_GenQuest.TavernVariant))
 			{
@@ -573,7 +532,6 @@ void ProcessDialogEvent()
 					link.l1 = "Are you certain?";
 					link.l1.go = "hold_genquest2";					
 				break;
-				
 				case 1: 
 					switch (drand(3))
 					{
@@ -606,7 +564,6 @@ void ProcessDialogEvent()
 					link.l1 = "Thank you, I'll do just that.";
 					link.l1.go = "hold_genquest3";				
 				break;
-				
 				case 2:
 					dialog.text = LinkRandPhrase(
 						RandPhraseSimple("What did you say? " + pchar.GenQuest.Hold_GenQuest.Name + "? Hmm... Never heard of him. Are you certain that he hails from our village? I've never heard of such a person.",
@@ -617,7 +574,6 @@ void ProcessDialogEvent()
 					link.l1 = "I see. Well, thanks anyway.";	
 					link.l1.go = "hold_genquest4";
 				break;
-				
 				case 3:
 					dialog.text = "Well, where else to look for him, if not at the tavern? He's a frequent visitor there - drowns his old sins in wine, he-he. Come back a bit later - if he shows up, I'll tell him to wait for you.";	
 					link.l1 = "Thank you, I'll do that.";
@@ -626,7 +582,6 @@ void ProcessDialogEvent()
 			}
 			pchar.GenQuest.Hold_GenQuest.Speak_Tavern = true;
 		break;
-		
 		case "hold_genquest2":
 			dialog.text = "How can't I be sure if I know everyone here personally. It's not the first year I am running the tavern here. "+
 				"I have seen them all in all possible conditions. Sometimes a wife would come to pick her husband up, at times they would leave by themselves, and on some occasions I had to chuck them out. 'Am I sure?!' Of course, I am!";
@@ -637,7 +592,6 @@ void ProcessDialogEvent()
 			AddQuestUserData("HoldQuest", "sName", pchar.GenQuest.Hold_GenQuest.CapName);
 			AddDialogExitQuestFunction("Hold_GenQuest_PrisonerEscaped");
 		break;
-		
 		case "hold_genquest3":
 			Hold_GenQuest_GenerateChar();		
 			AddQuestRecord("HoldQuest", "8");
@@ -647,7 +601,6 @@ void ProcessDialogEvent()
 			SetFunctionTimerConditionParam("Hold_GenQuest_FindCharTimeIsOver", 0, 0, 1, MakeInt(24 - GetHour()), false);
 			DialogExit();
 		break;
-		
 		case "hold_genquest4":
 			AddQuestRecord("HoldQuest", "13");
 			AddQuestUserData("HoldQuest", "sName", pchar.GenQuest.Hold_GenQuest.CapName);
@@ -657,69 +610,58 @@ void ProcessDialogEvent()
 			DeleteAttribute(pchar,"GenQuest.Hold_GenQuest");			
 			DialogExit();
 		break;
-		
 		case "hold_genquest5":
 			SetFunctionTimerConditionParam("Hold_GenQuest_GetMapTimeIsOver", 0, 0, 1, MakeInt(24 - GetHour()), false);
 			DialogExit();
 			AddDialogExitQuestFunction("Hold_GenQuest_GenerateMapChar");			
 		break;
-		
 		case "CaptainComission_1":
 			dialog.text = LinkRandPhrase("He is a frequent visitor here, but right now he's not there. Come back from time to time - I will tell him to wait here for you if he shows up.","He is a frequent visitor here. If you come back later, you're certain to find him there.","Come back from time to time - he is a frequent visitor here. I will let him know that you were looking for him.");
 			link.l1 = "Thank you, I'll come back later...";
 			link.l1.go = "CaptainComission_2";
 			pchar.GenQuest.CaptainComission.Speak_Tavern = true;
 		break;
-		
 		case "CaptainComission_2":
 			pchar.quest.CapComission_ExitFromTavern.win_condition.l1 = "ExitFromLocation";
 			pchar.quest.CapComission_ExitFromTavern.win_condition.l1.location = pchar.location;
 			pchar.quest.CapComission_ExitFromTavern.function = "CaptainComission_GenerateChar";
-
 			NextDiag.CurrentNode = NextDiag.TempNode;
 			DialogExit();
 		break;
-		
 		case "CaptainComission_3":
 			dialog.text = "He's already come here, so should be somewhere around...";
 			link.l1 = "Thanks.";
 			link.l1.go = "exit";
 			DeleteAttribute(pchar,"GenQuest.CaptainComission.Speak_Tavern");
 		break;
-		
 		case "CaptainComission_Tavern1":
 			pchar.GenQuest.CaptainComission.Speak_Tavern = true;
 			dialog.text = "Is there a man who doesn't know him? The entire settlement is talking about him for several days already.";
 			link.l1 = "Could you tell me more?";
 			link.l1.go = "CaptainComission_Tavern2";
 		break;
-		
 		case "CaptainComission_Tavern2":
 			dialog.text = "In general, the captain was executed, same can be said about some of his crewmen. The rest were scattered across the archipelago absent their ranks and positions… For what? According to a judge, he had sunken a vessel during a patrol and hidden a cargo for himself\n"+
 				"But to believe in it with difficulty, because neither the owner of this vessel or goods have not been found ... So far all the bays are combing.";
 			link.l1 = "What, no one of the crew did reveal the location of the cache?";	
 			link.l1.go = "CaptainComission_Tavern3";	
 		break;
-		
 		case "CaptainComission_Tavern3":
 			dialog.text = "Not a single one!.. I still can't understand, why would the governor believe in that slander so eagerly. Captain " + pchar.GenQuest.CaptainComission.Name + " had a decent reputation, and his crew was so well-trained and disciplined, that any admiral would envy him.";
 			link.l1 = "And where should I look for the surviving crew members?";
 			link.l1.go = "CaptainComission_Tavern4";
 		break;
-		
 		case "CaptainComission_Tavern4":
 			dialog.text = "That I don't know - they all have been taken away... Although... there's still one of them remaining, but I doubt you would learn much from him. He was contused. You know, he served as a gunner under " + pchar.GenQuest.CaptainComission.Name + ". He was found unconscious in some cove two days after that accident. First he was sent to the hospital and treated like a hero, but as the plot thickened, they threw him into the dungeon and tried to interrogate him, but then decided that first he should be medically treated, anyway.";
 			link.l1 = "So he's in the settlement right now?";
 			link.l1.go = "CaptainComission_Tavern5";
 		break;
-		
 		case "CaptainComission_Tavern5":
 			pchar.GenQuest.CaptainComission.CanoneerName = "l" + rand(GetNamesCount(NAMETYPE_ORIG) - 1);
 			dialog.text = "Yes, " + GetName( NAMETYPE_ORIG, pchar.GenQuest.CaptainComission.CanoneerName, NAME_NOM) + " is his name. He drops in from time to time, begging for rum. If I see him, I'll tell him to wait here for you.";
 			link.l1 = "Thank you, I'll come back later.";
 			link.l1.go = "CaptainComission_Tavern6";
 		break;
-		
 		case "CaptainComission_Tavern6":
 			AddQuestRecord("CaptainComission2", "39");
 			AddQuestUserData("CaptainComission2", "sShipType", GetStrSmallRegister(XI_ConvertString(GetBaseShipParamFromType(sti(pchar.GenQuest.CaptainComission.ShipType),"Name") + "Gen"))); 
@@ -730,26 +672,22 @@ void ProcessDialogEvent()
 			NextDiag.CurrentNode = NextDiag.TempNode;
 			DialogExit();
 		break;
-		
 		case "CaptainComission_Tavern7":
 			DeleteAttribute(pchar,"GenQuest.CaptainComission.Speak_Tavern");
 			dialog.text = "Do I know him? Of course, I do. And what do you need him for?";
 			link.l1 = "I have business with him...";
 			link.l1.go = "CaptainComission_Tavern8";
 		break;
-		
 		case "CaptainComission_Tavern8":
 			dialog.text = "You, " + GetAddress_Form(pchar) + ", should be cautious with that 'business'. " + pchar.GenQuest.CaptainComission.Name + " is detained on suspicion of a service crime, and the governor's sleuths are now scouring the island, searching for his accomplices.";
 			link.l1 = "You don't say so! And what did he do?";
 			link.l1.go = "CaptainComission_Tavern9";
 		break;
-		
 		case "CaptainComission_Tavern9":
 			dialog.text = "I don't know whether it's true or not, but they say that he had stashed away the cargo confiscated from a passing pirate ship. And still no one found neither that pirate, nor the cargo. I still can't understand, why would the governor believe in that slander so eagerly. Captain " + pchar.GenQuest.CaptainComission.CapName + "  had a decent reputation, and he was a great soldier, you can trust my word, " + GetAddress_Form(pchar) + ".";
 			link.l1 = "Well, thanks for the warning. See you.";
 			link.l1.go = "CaptainComission_Tavern10";
 		break;
-		
 		case "CaptainComission_Tavern10":
 			if(!CheckAttribute(pchar,"GenQuest.CaptainComission.GetRumour"))
 			{
@@ -762,13 +700,11 @@ void ProcessDialogEvent()
 			}			
 			DialogExit();
 		break;
-				
 		case "EncGirl_1":
 			dialog.text = "And what do you need her for?";
 			link.l1 = "I have business with her...";
 			link.l1.go = "EncGirl_2";
 		break;
-		
 		case "EncGirl_2":
 			dialog.text = "Half the men in our settlement seem to have business with her. If our women had caught her, they would toss her beyond the town gates, naked.";
 			link.l1 = "Oh well... "+ GetSexPhrase("It seems that I got into a long line, then. Well, if anyone else comes around asking for her, tell them to stand in line behind me.","I see") +"...";
@@ -776,7 +712,6 @@ void ProcessDialogEvent()
 			pchar.quest.EncGirl_SpeakTavernKeeper.over = "yes";
 			DeleteAttribute(pchar, "GenQuest.EncGirl");
 		break;
-		
 		case "EncGirl_3":
 			dialog.text = "He is a frequent visitor here - he usually comes over in search for a job, but right now he's not there. Come back from time to time - I will tell him to wait here for you if he shows up.";
 			link.l1 = "Thank you, I'll come back later...";
@@ -786,7 +721,6 @@ void ProcessDialogEvent()
 			pchar.quest.EncGirl_ExitTavern.win_condition.l1.location = pchar.location;
 			pchar.quest.EncGirl_ExitTavern.function = "EncGirl_GenerateLover";
 		break;
-		
 		case "EncGirl_4":
 			if(sti(pchar.GenQuest.EncGirl.LoverFatherAngry) == 0)
 			{
@@ -801,19 +735,16 @@ void ProcessDialogEvent()
 				link.l1.go = "EncGirl_6";			
 			}
 		break;
-		
 		case "EncGirl_5":
 			dialog.text = "I am very grateful to you that you haven't abandoned my child in dire straits and helped him to find a way out of a delicate situation. Allow me to thank you and please accept this modest sum and a gift from me personally.";
 			link.l1 = "Thanks. Helping out this young couple was my pleasure.";
 			link.l1.go = "EncGirl_5_1";
 		break;
-		
 		case "EncGirl_6":
 			dialog.text = "Thanks? What thanks?! It's been a half a year since that blockhead was hanging around without a job - and look at him, he's got enough time for love affairs! When I was his age, I was already running my own business! Pfft! A governor has a marriageable daughter - and that dunce has brought a slut without kith or kin to my house and dared to ask for my blessing!";
 			link.l1 = "Hmm... Apparently, you don't believe in sincere feelings?";
 			link.l1.go = "EncGirl_6_1";		
 		break;
-		
 		case "EncGirl_5_1":
 			AddMoneyToCharacter(pchar, sti(pchar.GenQuest.EncGirl.sum));
 			GiveItem2Character(pchar, pchar.GenQuest.EncGirl.item);
@@ -823,13 +754,11 @@ void ProcessDialogEvent()
 			NextDiag.CurrentNode = NextDiag.TempNode;
 			DialogExit();
 		break;
-		
 		case "EncGirl_6_1":
 			dialog.text = "What feelings? What kind of feelings are you talking about? Feelings... how can one be so light-minded at your age?! Shame on you to indulge the young in their caprices and act as a procurer! Not only have you taken a girl from her home, but you also ruined my greenhorn's life. There will be no thanks to you. Farewell.";
 			link.l1 = "Alright, and all the same to you...";
 			link.l1.go = "EncGirl_6_2";
 		break;
-		
 		case "EncGirl_6_2":
 			ChangeCharacterComplexReputation(pchar,"nobility", -1);
 			AddQuestRecord("JungleGirl", "19");
@@ -840,7 +769,6 @@ void ProcessDialogEvent()
 			NextDiag.CurrentNode = NextDiag.TempNode;
 			DialogExit();		
 		break;
-				
 		case "ShipLetters_4":
 			pchar.questTemp.different.GiveShipLetters.speakTavern = true;
 			if(sti(pchar.questTemp.different.GiveShipLetters.variant) == 0)
@@ -858,7 +786,6 @@ void ProcessDialogEvent()
 				link.l2.go = "ShipLetters_end";				
 			}	
 		break;
-		
 		case "ShipLetters_end":
 			TakeItemFromCharacter(pchar, "CaptainBook"); 
 			pchar.questTemp.different = "free";
@@ -869,7 +796,6 @@ void ProcessDialogEvent()
 			NextDiag.CurrentNode = NextDiag.TempNode;
 			DialogExit();
 		break;
-		
 		//zagolski. переделка
 		case "work":
 			if (sti(NPChar.nation) != PIRATE && GetNationRelation2MainCharacter(sti(NPChar.nation)) == RELATION_ENEMY)
@@ -901,13 +827,11 @@ void ProcessDialogEvent()
 			link.l3 = "No, such work is not for me. Thanks.";
 			link.l3.go = "exit";
 		break;
-
 		case "work_1":
 				dialog.text = "They usually do not ask me about escorting. Ask the merchants in the tavern - perhaps they would need your services.";
 				link.l1 = "Fine, as you say.";
                 link.l1.go = "exit";
 		break;
-
 		case "work_2":
 			if (!CheckAttribute(npchar, "work_date") || GetNpcQuestPastDayParam(npchar, "work_date") >= 2 || bBettaTestMode)
     		{					
@@ -939,7 +863,6 @@ void ProcessDialogEvent()
                 link.l1.go = "exit";
     		}
         break;
-
         case "ConvoyAreYouSure":
 		    dialog.text = LinkRandPhrase("Who could know? You asked - I answered.", "Well, this to you most to solve. I would not vouch for anyone there.", "Solve itself, come to me all sorts. It's a tavern, and not the governor's residence.");
 			Link.l1 = "Thanks, we'll bargain, then.";
@@ -949,7 +872,6 @@ void ProcessDialogEvent()
 			AddDialogExitQuest("prepare_for_convoy_quest");
 			SaveCurrentNpcQuestDateParam(npchar, "work_date");
         break;
-
         case "PassangerAreYouSure":
 		    dialog.text = LinkRandPhrase("Who could know? You asked - I answered.", "Well, this to you most to solve. I would not vouch for anyone there.", "Solve itself, come to me all sorts. It's a tavern, and not the governor's residence.");
 			Link.l1 = "I see. Let's figure out, who is this guy.";
@@ -959,18 +881,15 @@ void ProcessDialogEvent()
 			AddDialogExitQuest("prepare_for_passenger_quest");
 			SaveCurrentNpcQuestDateParam(npchar, "work_date");
         break;
-
 		 case "fight":
 			DialogExit();
             NextDiag.CurrentNode = NextDiag.TempNode;
 			LAi_group_Attack(NPChar, Pchar);
 		break;
-
 		case "Exit":
 			NextDiag.CurrentNode = NextDiag.TempNode;
 			DialogExit();
 		break;
-
 		case "room":
    			if (chrDisableReloadToLocation || CheckAttribute(pchar, "questTemp.different.Church_NightGuard")) //кто-то должен подойти к ГГ.
 			{
@@ -1072,7 +991,6 @@ void ProcessDialogEvent()
 				link.l2.go = "room_day_next";
 			}
 		break;
-
 		case "room_day":
 			dialog.text = "That will cost you 5 pesos.";
 			if (makeint(pchar.money) >= 5)
@@ -1089,7 +1007,6 @@ void ProcessDialogEvent()
 				link.l3.go = "int_quests";
 			}
 		break;
-
 		case "room_day_next":
 			dialog.text = "That will cost you 10 pesos.";
 			if (makeint(pchar.money) >= 10)
@@ -1106,7 +1023,6 @@ void ProcessDialogEvent()
 				link.l3.go = "int_quests";
 			}
 		break;
-
 		case "room_night":
 			dialog.text = "That will cost you 5 pesos.";
 			if (makeint(pchar.money) >= 5)
@@ -1123,7 +1039,6 @@ void ProcessDialogEvent()
 				link.l3.go = "int_quests";
 			}
 		break;
-
 		case "room_night_wait":
 			DialogExit();
 			NextDiag.CurrentNode = NextDiag.TempNode;
@@ -1131,7 +1046,6 @@ void ProcessDialogEvent()
 			AddDialogExitQuest("sleep_in_tavern");
 			TavernWaitDate("wait_night");
 		break;
-
 		case "hall_night_wait":
 			if (cRand(3) == 1)
             {
@@ -1146,7 +1060,6 @@ void ProcessDialogEvent()
 				TavernWaitDate("wait_night");
 			}
 		break;
-
 		case "room_day_wait":
 			DialogExit();
 			NextDiag.CurrentNode = NextDiag.TempNode;
@@ -1159,7 +1072,6 @@ void ProcessDialogEvent()
 			}
 			else TavernWaitDate("wait_day");
 		break;
-
 		case "room_day_wait_next":
 			DialogExit();
 			NextDiag.CurrentNode = NextDiag.TempNode;
@@ -1172,7 +1084,6 @@ void ProcessDialogEvent()
 			}
 			else TavernWaitDate("wait_day");
 		break;
-
 		case "hall_day_wait":
 			if (drand(1) == 1)
             {
@@ -1187,21 +1098,17 @@ void ProcessDialogEvent()
 				TavernWaitDate("wait_day");
 			}
 		break;
-		
 		case "tavern_keeper":
 			NextDiag.TempNode = "First time";
-
 			dialog.text = "Stop this outrage in my tavern this instant - or I am calling the guards!";
 			link.l1 = "Alright, alright, I am leaving.";
 			link.l1.go = "exit_sit";
 		break;
-
 		case "exit_sit":
 			NextDiag.CurrentNode = NextDiag.TempNode;
 			DialogExit();
 			AddDialogExitQuest("exit_sit");
 		break;
-		
 		//******************* ноды квеста священника. поиск грабителей (квест № 2)**********************
 		case "Tavern_GenQuest_Church_2_1":
 			dialog.text = "I don't know much about it... You'd better ask the patrons.";
@@ -1209,20 +1116,17 @@ void ProcessDialogEvent()
 			link.l1.go = "exit";
 			DeleteAttribute(PChar, "GenQuest.ChurchQuest_2.AskBarmen");
 		break;
-			
 		//******************* ноды квеста священника. вернуть рукописи (квест № 1)**********************
 		case "Tavern_ChurchGenQuest1_Node_1":
 			dialog.text = "We don't provide services in debt, "+ GetSexPhrase("mister","miss") +".";
 			link.l1 = "I used to pay with a ringing coin. Or is here no longer accept gold or silver?";
 			link.l1.go = "Tavern_ChurchGenQuest1_Node_2";
 		break;
-			
 		case "Tavern_ChurchGenQuest1_Node_2":
 			dialog.text = "I am sorry, "+ GetSexPhrase("mister","miss") +" captain, but your friend had a debt, and I thought...";
 			link.l1 = "Think less and work faster, buddy. Now, how much does my valiant friend owe you?";
 			link.l1.go = "Tavern_ChurchGenQuest1_Node_3";
 		break;
-			
 		case "Tavern_ChurchGenQuest1_Node_3":
 			iTemp = (rand(3)+1)*100;
 			PChar.GenQuest.ChurchQuest_1.MoneyToBarmen = iTemp;
@@ -1248,7 +1152,6 @@ void ProcessDialogEvent()
 				link.l1.go = "Tavern_ChurchGenQuest1_Node_4_2";
 			}
 		break;
-			
 		case "Tavern_ChurchGenQuest1_Node_4_1":
 			DialogExit();
 			AddMoneyToCharacter(PChar, -sti(PChar.GenQuest.ChurchQuest_1.MoneyToBarmen));
@@ -1264,31 +1167,26 @@ void ProcessDialogEvent()
 			PChar.GenQuest.ChurchQuest_1.Complete = true; // Квест выполнен
 			SetFunctionTimerCondition("Church_GenQuest1_DeleteCapitan", 0, 0, 2, false);
 		break;
-			
 		case "Tavern_ChurchGenQuest1_Node_4_2":
 			dialog.text = "No, mis"+ GetSexPhrase("ter","s") +", that won't work like that.";
 			link.l1 = "What do you mean - 'that won't work like that'? A captain's debt is paid - he's fine. You have your money back - you're fine. I take his pledge - I am fine. Everyone's fine - so why 'that won't work like that'?";
 			link.l1.go = "Tavern_ChurchGenQuest1_Node_4_2_1";
 		break;
-			
 		case "Tavern_ChurchGenQuest1_Node_4_2_1":
 			dialog.text = "Because, mis"+ GetSexPhrase("ter","s") +" captain, I don't need that money. Because I know that captain all too well, so I never actually expected him to pay back and take these manuscripts from me.";
 			link.l1 = "What do you mean - you don't need money? So you planned to keep these books right from the start? But why, in God's name?!";
 			link.l1.go = "Tavern_ChurchGenQuest1_Node_4_2_2";
 		break;
-			
 		case "Tavern_ChurchGenQuest1_Node_4_2_2":
 			dialog.text = "In God's name - exactly, that's why, mis"+ GetSexPhrase("ter","s") +". My little son was very sick, and me and my wife gave a vow to make a donation to the temple, if the Creator cures the child of fever. Our Lord's mercy had no limits, the boy is alive and well, and now we must keep our vow. And just about time captain " + PChar.GenQuest.ChurchQuest_1.CapFullName + " shows up and pawns the church books. I could not allow such obscenity - paying for drinks with the Word - and therefore I decided to hand over this books to the priest of our parish.";
 			link.l1 = "Well, certainly this is a good deed, but you should also know that these books actually belong to another priest - actually, not even a priest, but a bishop and my spiritual shepherd. And he might get angry and even accurse those who would encroach upon his books. I would like to buy them from you and bring it safely.";
 			link.l1.go = "Tavern_ChurchGenQuest1_Node_4_2_3";
 		break;
-			
 		case "Tavern_ChurchGenQuest1_Node_4_2_3":
 			dialog.text = "Mis"+ GetSexPhrase("ter","s") +"... Mis"+ GetSexPhrase("ter","s") +" captain... Surely, I will give them back, and I will require no money in return. You just put in a word for us to the bishop - perhaps, he could bless us and relieve us of our vow...";
 			link.l1 = "Of course, your vow will be considered kept - after all, you've given up your profit to return the books to their rightful owner. The particular church doesn't matter, for there is only one God. Alright, give them to me, and good luck to you...";
 			link.l1.go = "Tavern_ChurchGenQuest1_Node_4_2_4";
 		break;
-			
 		case "Tavern_ChurchGenQuest1_Node_4_2_4":
 			DialogExit();
 			AddItems(PChar, "Bible", 1);	// Даем рукописи
@@ -1303,7 +1201,6 @@ void ProcessDialogEvent()
 			PChar.GenQuest.ChurchQuest_1.Complete = true; // Квест выполнен
 			SetFunctionTimerCondition("Church_GenQuest1_DeleteCapitan", 0, 0, 2, false);
 		break;
-		
 		//Jason --> генератор Неудачливый вор
 		case "Device_Tavern":
 			dialog.text = "Hmm, "+pchar.GenQuest.Device.Shipyarder.Type+"? Never heard of it before... Just what is it, actually? I've never heard about such a thing in all my time.";
@@ -1311,7 +1208,6 @@ void ProcessDialogEvent()
 			link.l1.go = "Device_Trader_1";
 			npchar.quest.Device = "true";
 		break;
-		
 		case "Device_Trader_1":
 			if (sti(pchar.GenQuest.Device.Shipyarder.Chance1) == 6)
 			{
@@ -1327,7 +1223,6 @@ void ProcessDialogEvent()
 			}
 		break;
 		// <-- генератор Неудачливый вор
-		
 		//Jason --> генератор Место под солнцем
 		case "Sunplace_Tavern":
 			if (makeint(environment.time) > 12.0 && makeint(environment.time) < 17.0)//в магазине
@@ -1343,7 +1238,6 @@ void ProcessDialogEvent()
 				link.l1.go = "Sunplace_Tavern_2";
 			}
 		break;
-		
 		case "Sunplace_Tavern_1"://магазин
 			pchar.quest.Sunplace_Store.win_condition.l1 = "location";
 			pchar.quest.Sunplace_Store.win_condition.l1.location = pchar.GenQuest.Sunplace.Trader.CityT + "_store";
@@ -1354,7 +1248,6 @@ void ProcessDialogEvent()
 			DialogExit();
 			pchar.GenQuest.Sunplace.Trader = "hunt";
 		break;
-		
 		case "Sunplace_Tavern_2"://рыбалка
 			pchar.GenQuest.Sunplace.Trader.IslandID = GetCharacterCurrentIslandId(npchar);
 			pchar.GenQuest.Sunplace.Trader.EnemyNation = npchar.nation;
@@ -1368,7 +1261,6 @@ void ProcessDialogEvent()
 			pchar.GenQuest.Sunplace.Trader = "hunt";
 		break;
 		// <-- генератор Место под солнцем	
-		
 		// Jason --> Голландский гамбит
 		case "HWICHollJacob_Tavern":
 			dialog.text = "Psssst... Why are you shouting? He's been waiting for you for quite some time. He already drank a full quart of rum. Go upstairs to the room, you will find him there.";
@@ -1378,7 +1270,6 @@ void ProcessDialogEvent()
 			pchar.questTemp.HWIC.Holl = "JacobInRoom";
 			AddDialogExitQuestFunction("Create_JacobVanBerg");
 		break;
-		
 		case "HWICSelfFernando_Tavern":
 			if (NPChar.location == pchar.questTemp.HWIC.Self.SpainCity +"_tavern")
 			{
@@ -1404,7 +1295,6 @@ void ProcessDialogEvent()
 			}
 			npchar.quest.HWICTalked = "true";
 		break;
-		
 		case "Fernando_Land":
 			pchar.quest.HWIC_Fernando.win_condition.l1 = "location";
 			pchar.quest.HWIC_Fernando.win_condition.l1.location = pchar.questTemp.HWIC.Self.SpainCity +"_town";
@@ -1412,7 +1302,6 @@ void ProcessDialogEvent()
 			AddQuestRecord("Holl_Gambit", "3-2");
 			DialogExit();
 		break;
-		
 		case "Fernando_Sea":
 			pchar.questTemp.HWIC.Self.FernandoIslandID = GetCharacterCurrentIslandId(npchar);
 			pchar.quest.HWIC_Fernando.win_condition.l1 = "location";
@@ -1422,14 +1311,12 @@ void ProcessDialogEvent()
 			DialogExit();
 		break;
 		//<-- Голландский гамбит
-		
 		//Jason --> гонки на гидропланах
 		case "Race_Advantage":
 			dialog.text = "Yes, of course. I am already aware of your victory. Here is your money.";
 			link.l1 = "Thank you, " + npchar.name + ".";
 			link.l1.go = "Race_Advantage_1";
 		break;
-		
 		case "Race_Advantage_1":
 			DialogExit();
 			AddMoneyToCharacter(pchar, sti(pchar.GenQuest.Racing.Go.Money)*2);
@@ -1439,7 +1326,6 @@ void ProcessDialogEvent()
 			DeleteAttribute(pchar, "GenQuest.Racing.Go");
 		break;
 		//<-- гонки на гидропланах
-		
 		//Jason --> захват пассажиров
 		case "Marginpassenger":
 			if (CheckAttribute(pchar, "GenQuest.Marginpassenger.lose"))
@@ -1455,7 +1341,6 @@ void ProcessDialogEvent()
 				link.l1.go = "Marginpassenger_2";
 			}
 		break;
-		
 		case "Marginpassenger_1":
 			DialogExit();
 			AddQuestRecord("Marginpassenger", "7");
@@ -1473,7 +1358,6 @@ void ProcessDialogEvent()
 			// <-- belamour gen
 			pchar.GenQuest.Marginpassenger = "cabin";
 		break;
-		
 		case "Marginpassenger_2":
 			DialogExit();
 			AddQuestRecord("Marginpassenger", "8");
@@ -1481,7 +1365,6 @@ void ProcessDialogEvent()
 			pchar.GenQuest.Marginpassenger = "street";
 		break;
 		//<-- захват пассажиров
-		
 		//Jason --> поиск дезертира
 		case "FindFugitiveTav":
 			if (NPChar.city == pchar.GenQuest.FindFugitive.City && sti(pchar.GenQuest.FindFugitive.Chance) == 0)
@@ -1497,7 +1380,6 @@ void ProcessDialogEvent()
 				link.l1.go = DialogGoNodeRepeat("exit", "", "", "", npchar, Dialog.CurrentNode);	
 			}
 		break;
-		
 		case "FindFugitiveTav_1":
 			DialogExit();
 			AddQuestRecord("MayorsQuestsList", "12-1");
@@ -1509,7 +1391,6 @@ void ProcessDialogEvent()
 			ChangeCharacterAddressGroup(sld, pchar.GenQuest.FindFugitive.City+"_town", "goto", "goto"+(rand(9)+1));
 		break;
 		//<-- поиск дезертира
-		
 		//--> Бремя гасконца
 		case "Sharlie_crew":
 			dialog.text = "Unfortunately, I can't help you right now - nobody of the people I know would serve under you. But I can give you an advice - talk to that sailor who just took the table right behind you. He and his buddies have just left one merchant ship. Perhaps, they will agree to come with you.";
@@ -1528,7 +1409,6 @@ void ProcessDialogEvent()
 			ChangeCharacterAddressGroup(sld, "FortFrance_tavern", "sit", "sit7");
 			AddQuestRecord("Sharlie", "6-1"); // mitrokosta
 		break;
-		
 		case "Sharlie_skiper":
 			dialog.text = "I cannot tell you anything specific, friend. At this moment no navigators are frequenting my place. Try to ask around in the port - perhaps, people would know more.";
 			link.l1 = "I see. Alright, I'll go talk to the people.";
@@ -1547,7 +1427,6 @@ void ProcessDialogEvent()
 			LAi_SetLoginTime(sld, 6.0, 21.99);
 		break;
 		//<-- Бремя гасконца
-		
 		// Addon 2016-1 Jason пиратская линейка
 		case "mtraxx_tortuga":
 			sld = characterFromId("Tortuga_waitress");
@@ -1555,7 +1434,6 @@ void ProcessDialogEvent()
 			link.l1 = "Take it!";
 			link.l1.go = "mtraxx_tortuga_1";
 		break;
-		
 		case "mtraxx_tortuga_1":
 			AddMoneyToCharacter(pchar, -1000);
             DialogExit();
@@ -1573,13 +1451,11 @@ void ProcessDialogEvent()
 			int n = FindLocation("Bridgetown_tavern");
             locations[n].reload.l2.disable = false;
 		break;
-		
 		case "TStep_1":
 			dialog.text = "What have you got for me, my dear Doctor?";
 			link.l1 = "Nothing special... I wouldn't mind obtaining some cutlasses and a few guns, just in case. My dearest friend, you could swing them for me, could you not? Elsewise, point out an individual who could? As you know, mainstream routes of commerce are a bit out of my league...";
 			link.l1.go = "TStep_2";
 		break;
-		
 		case "TStep_2":
 			dialog.text = "Er... Well, yes. Of course.";
 			link.l1 = "Out of your league how, exactly? You mean, you would have trouble getting your stuff?";
@@ -1590,13 +1466,11 @@ void ProcessDialogEvent()
     			link.l1.go = "TStep_4";
             }
 		break;
-		
 		case "TStep_3":
 			dialog.text = "There's nothing I can do for you, Doctor.";
 			link.l1 = "All the best to you.";
 			link.l1.go = "exit";
 		break;
-		
 		case "TStep_4":
 			dialog.text = "Why Doctor Blood, of course I've got what you need. In fact, Mr. Griffin, whose bone you so recently tended, is an old weapons dealer by trade. His house is by Governor Steed's estate. Go see him; I'm plumb certain he won't let you down.";
 			link.l1 = "Well, all the best.";
@@ -1607,7 +1481,6 @@ void ProcessDialogEvent()
 			sld = characterFromID("Griffin");
 			sld.talker = 10;
 		break;
-		
 		case "TStep_5":
             pchar.questTemp.CapBloodLine.QuestRaff = false;
 			dialog.text = "Yeah, I remember him. Actually... No, maybe that wasn't him... No, don't reckon it was...";
@@ -1619,26 +1492,22 @@ void ProcessDialogEvent()
 			link.l2 = "So is it him or not?";
 			link.l2.go = "TStep_7";
 		break;
-		
 		case "TStep_6":
             AddMoneyToCharacter(pchar, -500);
 			dialog.text = "Why... Yes, of course! I mean, of course it's him! He came by just recently, in fact. Said something about buying a ship... I'm not really sure what ship or from whom.";
 			link.l1 = "What are you sure about, then? Seems to me that five hundred piasters ought to dislodge a few more details than 'Oh yeah, he came by!'";
 			link.l1.go = "TStep_8";
 		break;
-		
 		case "TStep_7":
 			dialog.text = "No, I'm afraid it's definitely not him. I got mixed up. It happens.";
 			link.l1 = "Of all the aggravating...";
 			link.l1.go = "TStep_10";
 		break;
-		
 		case "TStep_8":
 			dialog.text = "If you hurry, you should find him at the shipyard.";
 			link.l1 = "You have my thanks.";
 			link.l1.go = "TStep_9";
 		break;
-		
 		case "TStep_9":
             AddQuestRecord("UsurerQuest", "2");
             sld = GetCharacter(NPC_GenerateCharacter("QStranger", "citiz_7", "man", "man", 10, ENGLAND, 1, false, "quest"));
@@ -1653,7 +1522,6 @@ void ProcessDialogEvent()
 			DialogExit();
 			NextDiag.CurrentNode = NextDiag.TempNode;
 		break;
-		
 		case "TStep_10":
             sld = GetCharacter(NPC_GenerateCharacter("QStranger", "citiz_7", "man", "man", 10, ENGLAND, 1, false, "quest"));
 			sld.dialog.filename = "Coas_quests\CapBloodStart\CapBloodStart_dialogs2.c";
@@ -1669,13 +1537,11 @@ void ProcessDialogEvent()
 		break;
 	}
 }
-
 string findTraderCity(ref NPChar)
 {
 	int n, nation;
     int storeArray[MAX_COLONIES];
     int howStore = 0;
-
 	for(n=0; n<MAX_COLONIES; n++)
 	{
 		nation = GetNationRelation(sti(npchar.nation), sti(colonies[n].nation));
@@ -1692,13 +1558,11 @@ string findTraderCity(ref NPChar)
 	nation = storeArray[cRand(howStore-1)];
 	return colonies[nation].id;
 }
-
 string findPassangerCity(ref NPChar)
 {
 	int n, nation;
     int storeArray[MAX_COLONIES];
     int howStore = 0;
-
 	for(n=0; n<MAX_COLONIES; n++)
 	{
 		nation = GetNationRelation(sti(npchar.nation), sti(colonies[n].nation));

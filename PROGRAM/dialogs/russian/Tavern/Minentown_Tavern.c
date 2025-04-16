@@ -4,18 +4,13 @@ void ProcessDialogEvent()
 	ref NPChar, sld;
 	aref Link, NextDiag;
 	string sLoc;
-
 	DeleteAttribute(&Dialog,"Links");
-
 	makeref(NPChar,CharacterRef);
 	makearef(Link, Dialog.Links);
 	makearef(NextDiag, NPChar.Dialog);
-	
 	ProcessCommonDialogRumors(NPChar, Link, NextDiag);
-	
 	bool bLock = (CheckAttribute(pchar, "GenQuest.BrothelLock")) && (GetCharacterIndex("Mary") != -1);
 	bool bLock1 = (CheckAttribute(pchar, "questTemp.Saga.Helena_officer")) && (IsOfficer(characterFromId("Helena")));
-
 	switch(Dialog.CurrentNode)
 	{
 		case "First time":
@@ -54,7 +49,6 @@ void ProcessDialogEvent()
 			}
 			NextDiag.TempNode = "First time";
 		break;
-		
 		case "meeting":
 			dialog.text = "Oh, I'm so happy! New faces are a rarity in our city. How about I pour you some rum and we'll have a chat...";
 			link.l1 = "This is my first time here and I'd like to find out a little bit more about this settlement.";
@@ -67,13 +61,11 @@ void ProcessDialogEvent()
 			link.l3 = "I'd like to get some shut eye. Do you have a free room?";
 			link.l3.go = "room";
 		break;
-		
 		case "info":
 			dialog.text = "Nothing interesting to tell. Same crap everyday: boredom, sun and dust. Only soldiers and Indians live here. You may also find a few adventures and bandits hungry for gold\nSometimes gentlemen, captains like yourself, visit us in order to sell slaves for ingots and to buy valuable metals. Our merchant is quite interesting man, he sells not only golden and silver nuggets, but also some gems. Not precious ones\n But he claims that people with special knowledge may find those cobblestones very useful. So check our store. The mine itself is located further beneath the mountain. You may attend it if you wish, but I recommend to avoid making guard upset\nDon't talk to convicts and God save you from stealing. Anyways, the best place in this settlement is my tavern, the only place to rest from this burning hell!";
 			link.l1 = "Thanks for the information!";			
 			link.l1.go = "exit";
 		break;
-		
 		case "drink":
 			if (CheckAttribute(pchar, "questTemp.Rum") && sti(pchar.questTemp.Rum) > 3)
 			{
@@ -97,13 +89,11 @@ void ProcessDialogEvent()
 					if(CheckAttribute(pchar, "questTemp.Rum")) DeleteAttribute(pchar, "questTemp.Rum");
 				}				
 				WaitDate("",0,0,0, 0, 30);
-				
 				dialog.text = "You're welcome, captain. Just five pesos for a pint of my best black Jamaican rum!";
 				link.l1 = RandPhraseSimple(LinkRandPhrase("All right, to your health and the prosperity of your establishment, buddy!","All right, to those at sea!","All right, to the augmented well-being of your town!"), LinkRandPhrase("All right, to a gust of production, to a gust of luck, that we all live more light-hearted and wealthy!","All right, to the wind always blowing in our backs in all affairs!","All right, to happiness, luck, joy, and... women!"));		
 				link.l1.go = "drink_1";
 			}
 		break;
-		
 		case "drink_1":
 			DialogExit();
 			LAi_Fade("", "");
@@ -118,7 +108,6 @@ void ProcessDialogEvent()
 				}
 			}
 		break;
-		
 		case "room":
 			if (CheckAttribute(pchar, "GenQuest.MinentownSex"))
 			{
@@ -141,7 +130,6 @@ void ProcessDialogEvent()
 				link.l2.go = "room_day_next";
 			}
 		break;
-
 		case "room_day":
 			dialog.text = "That'll be ten pesos. Would you like a girl for the room along with it? Only a thousand pesos for the date.";
 			if (makeint(pchar.money) >= 10)
@@ -161,7 +149,6 @@ void ProcessDialogEvent()
 			link.l3 = "Alas, I cannot afford the room.";
 			link.l3.go = "exit";
 		break;
-
 		case "room_day_next":
 			dialog.text = "That'll be ten pesos. Would you like a girl for the room along with it? Only a thousand pesos for the date.";
 			if (makeint(pchar.money) >= 10)
@@ -181,7 +168,6 @@ void ProcessDialogEvent()
 			link.l3 = "Alas, I cannot afford the room.";
 			link.l3.go = "exit";
 		break;
-
 		case "room_night":
 			dialog.text = "That'll be ten pesos. Would you like a girl for the room along with it? Only a thousand pesos for the date.";
 			if (makeint(pchar.money) >= 10)
@@ -201,7 +187,6 @@ void ProcessDialogEvent()
 			link.l3 = "Alas, I cannot afford the room.";
 			link.l3.go = "exit";
 		break;
-
 		case "room_night_wait":
 			DialogExit();
 			NextDiag.CurrentNode = NextDiag.TempNode;
@@ -209,7 +194,6 @@ void ProcessDialogEvent()
 			AddDialogExitQuest("sleep_in_tavern");
 			TavernWaitDate("wait_night");
 		break;
-
 		case "room_day_wait":
 			DialogExit();
 			NextDiag.CurrentNode = NextDiag.TempNode;
@@ -217,7 +201,6 @@ void ProcessDialogEvent()
 			AddDialogExitQuest("sleep_in_tavern");
 			TavernWaitDate("wait_day");
 		break;
-
 		case "room_day_wait_next":
 			DialogExit();
 			NextDiag.CurrentNode = NextDiag.TempNode;
@@ -225,14 +208,12 @@ void ProcessDialogEvent()
 			AddDialogExitQuest("sleep_in_tavern");
 			TavernWaitDate("wait_day");
 		break;
-		
 		case "room_girl":
 			AddMoneyToCharacter(pchar, -1010);
 			dialog.text = "Go on upstairs, senior. The girl will be waiting for you. Have a nice stay!";
 			link.l1 = "Thanks, buddy...";
 			link.l1.go = "room_girl_1";
 		break;
-		
 		case "room_girl_1":
 			DialogExit();
 			pchar.GenQuest.CannotWait = true;
@@ -249,30 +230,25 @@ void ProcessDialogEvent()
 			LAi_SetStayType(sld);
 			ChangeCharacterAddressGroup(sld, "Minentown_tavern_upstairs", "goto", "goto1");
 		break;
-		
 		case "MineFuckGirl":
 			dialog.text = "Glad to see you, white senior. And don't look at "+npchar.name+" like that, "+npchar.name+" knows how to do everything no worse than white squaw from brothel. Ah, senior so cute... Promise, you be happy.";
 			link.l1 = "All right, baby, let's see...";
 			link.l1.go = "MineFuckGirl_sex";
 		break;
-		
 		case "MineFuckGirl_sex":
 			DialogExit();
 			DoQuestCheckDelay("PlaySex_1", 0.1);
 		break;
-
  		case "Exit":
 			DialogExit();
 			NextDiag.CurrentNode = NextDiag.TempNode;
 		break;
-
 		// ============== Грабеж среди бела дня, попытка залезть в сундуки =========================
 		case "Man_FackYou":
 			dialog.text = LinkRandPhrase("Robbery in broad day light!!! What's going on here?! Wait, hold on, buddy...", "Hey, what are doing there?! Trying to rob me? Now you are fucked up...", "Wait, what the hell are you doing? Turns out that you are a thief! Consider this the end of the line, arsehole...");
 			link.l1 = LinkRandPhrase("Devil!", "Fuck!", "Ah, shit");
 			link.l1.go = "PL_Q3_fight";
 		break;
-		
 		case "fight":
             Pchar.quest.ArestInResidenceEnd.win_condition.l1          = "ExitFromLocation";
 		    Pchar.quest.ArestInResidenceEnd.win_condition.l1.location = Pchar.location;
@@ -280,7 +256,6 @@ void ProcessDialogEvent()
 		    Pchar.quest.ArestInResidenceEnd.ResidenceLocation = Pchar.location;
 			DialogExit();
 			NextDiag.CurrentNode = NextDiag.TempNode;
-
 			LAi_LockFightMode(Pchar, true); // ножками путь убегает
 		    LAi_LocationFightDisable(&Locations[FindLocation(pchar.location)], false);
 		    LAi_group_Attack(NPChar, Pchar); // не работает на бессмертного мера :(

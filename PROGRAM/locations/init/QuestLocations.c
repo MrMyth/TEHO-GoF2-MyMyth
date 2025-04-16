@@ -1,5 +1,3 @@
-
-
 int LocationInitQuestLocations(int n)
 {
     //////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
@@ -16,36 +14,28 @@ int LocationInitQuestLocations(int n)
 	locations[n].models.always.house = "farmfield";
 	locations[n].models.always.locators = "farmfield_locators";
 	locations[n].models.always.grassPatch = "farmfield_grass";
-
 	locations[n].models.always.plan = "farmfield_plan";
 	locations[n].models.always.plan.level = 9;
-
 	//Day
 	locations[n].models.day.charactersPatch = "farmfield_patch";
 	locations[n].models.day.fonar = "farmfield_fd";
-
 	//Night
 	locations[n].models.night.charactersPatch = "farmfield_patch";
 	locations[n].models.night.fonar = "farmfield_fn";
-
 	//Environment
 	locations[n].environment.weather = "true";
 	locations[n].environment.sea = "false";
-
 	locations[n].reload.l1.name = "reload1";
 	locations[n].reload.l1.go = "Tortuga_tavern";
 	locations[n].reload.l1.emerge = "reload1";
 	locations[n].reload.l1.autoreload = "0";
 	locations[n].reload.l1.label = "Town";
-
 	locations[n].reload.l2.name = "reload2";
 	locations[n].reload.l2.go = "Cob_house";
 	locations[n].reload.l2.emerge = "reload1";
 	locations[n].reload.l2.autoreload = "0";
 	locations[n].reload.l2.label = "House";
-
 	n = n + 1;
-	
 	////////////////////////////////////////////////////////////
 	/// Корабельная палуба  для карта - море
 	////////////////////////////////////////////////////////////
@@ -71,9 +61,7 @@ int LocationInitQuestLocations(int n)
 	//Environment
 	locations[n].environment.weather = "true";
 	locations[n].environment.sea = "true";
-
 	n = n + 1;
-	
 	////////////////////////////////////////////////////////////
 	/// Корабельная палуба  для море - море
 	////////////////////////////////////////////////////////////
@@ -104,7 +92,6 @@ int LocationInitQuestLocations(int n)
 	//Reload map
 	LAi_LocationFightDisable(&Locations[n], true);
 	n = n + 1;
-	
 	////////////////////////////////////////////////////////////
 	/// Квестовая корабельная палуба  для море - море
 	////////////////////////////////////////////////////////////
@@ -137,7 +124,6 @@ int LocationInitQuestLocations(int n)
 	//Reload map
 	LAi_LocationFightDisable(&Locations[n], true);
 	n = n + 1;
-
   	//////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 	// Имение Оглторпа
 	//////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
@@ -150,7 +136,6 @@ int LocationInitQuestLocations(int n)
 	//Models
 	//Always
 	locations[n].models.always.estate = "estate";
-	
 	locations[n].models.always.windows = "estate_windows";
 	Locations[n].models.always.windows.tech = "LocationWindows";	
 	Locations[n].models.always.windows.level = 66532;	
@@ -160,7 +145,6 @@ int LocationInitQuestLocations(int n)
     Locations[n].models.always.vlight.uvslide.v1 = 0.0;
 	Locations[n].models.always.vlight.tech = "LocationWaterFall";
 	Locations[n].models.always.vlight.level = 99950;
-	
 	locations[n].models.always.locators = "estate_locators";
 	locations[n].models.always.grassPatch = "estate_grass";
 	//Day
@@ -182,14 +166,12 @@ int LocationInitQuestLocations(int n)
 	locations[n].reload.l1.emerge = "reload1";
 	locations[n].reload.l1.autoreload = "0";
 	locations[n].reload.l1.label = "Bedroom";
-
 	locations[n].reload.l2.name = "reload5";
 	locations[n].reload.l2.go = "EstateOffice";
 	locations[n].reload.l2.emerge = "reload1";
 	locations[n].reload.l2.autoreload = "0";
 	locations[n].reload.l2.label = "Cabinet";
 	locations[n].locators_radius.item.item1 = 1.0;
-	
 	locations[n].private1.key = "key3";
 	locations[n].private1.key.delItem = true;
 	locations[n].private1.items.GOF_blade2 = 1;
@@ -230,7 +212,6 @@ int LocationInitQuestLocations(int n)
 	locations[n].reload.l1.autoreload = "0";
 	locations[n].reload.l1.label = "Estate";
 	n = n + 1;
-	
 		//////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 	// Кабинет #1 Оглторпа
 	//////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
@@ -252,7 +233,6 @@ int LocationInitQuestLocations(int n)
    	Locations[n].models.always.vlight.uvslide.v1 = 0.0;
 	Locations[n].models.always.vlight.tech = "LocationWaterFall";
 	Locations[n].models.always.vlight.level = 99950;
-	
 	locations[n].models.always.locators = "estateOffice_locators";
 	locations[n].models.always.grassPatch = "estateOffice_grass";
 	//Day
@@ -272,7 +252,6 @@ int LocationInitQuestLocations(int n)
 	locations[n].reload.l1.autoreload = "0";
 	locations[n].reload.l1.label = "Estate";
 	n = n + 1;
-
 	//////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 	// Подводная Локация
 	//////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
@@ -288,29 +267,21 @@ int LocationInitQuestLocations(int n)
 	//Always	
 	Locations[n].models.always.UnderWater = "UnderWater";
 	Locations[n].models.always.UnderWater.tech = "DLightModel";	
-	
 	Locations[n].models.always.outside = "UnderWater_outside";
 	Locations[n].models.always.outside.tech = "DLightModel";
-			
 	Locations[n].models.always.reflect = "UnderWater_reflect";
 	Locations[n].models.always.reflect .tech = "DLightModel";	
 	Locations[n].models.always.reflect.sea_reflection = 1;
-		
 	Locations[n].models.always.sails = "UnderWater_sails";	
 	Locations[n].models.always.sails.tech = "DLightModel";
-		
 	Locations[n].models.always.plants = "UnderWater_plants";	
 	Locations[n].models.always.plants.tech = "DLightModel";
 	//Locations[n].models.always.plants.tech = "LocationWindows";
 	//Locations[n].models.always.plants.level = 66532;
-		
 	Locations[n].models.always.plan1 = "Plan1";
 	Locations[n].models.always.plan1.sea_reflection = 1;
-		
 	Locations[n].models.always.plan2 = "Plan2";
-		
 	Locations[n].models.always.locators = "UnderWater_locators";	
-	
 	Locations[n].models.always.grassPatch = "UnderWater_grass";
 	Locations[n].models.always.grassPatch.texture = "grass\algaeU2.tga.tx";						
 	//Day
@@ -329,9 +300,7 @@ int LocationInitQuestLocations(int n)
 	locations[n].reload.l1.emerge = "reload73";
 	locations[n].reload.l1.autoreload = "0";
 	locations[n].reload.l1.label = "LSC Town";
-
 	locations[n].DisableOfficers = "1";
-
 	locations[n].locators_radius.reload.reload1 = 2.0;
 	locations[n].locators_radius.item.dolly2 = 1.0;
 	locations[n].locators_radius.item.item1 = 0.6;
@@ -339,20 +308,17 @@ int LocationInitQuestLocations(int n)
 	locations[n].locators_radius.item.item3 = 0.6;
 	locations[n].locators_radius.item.item4 = 0.6;
 	locations[n].locators_radius.item.item5 = 0.6;
-
 	//в сундуках
 	locations[n].private1.items.gold_dublon = 154;
 	locations[n].private1.items.jewelry5 = 166;
 	locations[n].private1.items.jewelry6 = 211;
 	locations[n].private1.items.jewelry10 = 3;
-	
 	locations[n].private2.money = 38745;
 	locations[n].private2.items.jewelry1 = 90;
 	locations[n].private2.items.jewelry2 = 65;
 	locations[n].private2.items.jewelry3 = 144;
 	locations[n].private2.items.jewelry4 = 48;
 	locations[n].private2.items.jewelry8 = 72;
-
 	locations[n].private3.key = "key3";
 	locations[n].private3.skel = true;
 	locations[n].private3.money = 58931;
@@ -365,23 +331,19 @@ int LocationInitQuestLocations(int n)
 	locations[n].private3.items.jewelry50 = 21;
 	locations[n].private3.items.jewelry52 = 954;
 	locations[n].private3.items.jewelry53 = 2087;
-
 	locations[n].private4.key = "key3";
 	locations[n].private4.skel = true;
 	locations[n].private4.items.icollection = 2;
 	locations[n].private4.items.Chest = 3;
 	locations[n].private4.items.jewelry8 = 57;
 	locations[n].private4.items.talisman8 = 1;
-
 	locations[n].private5.money = 60802;
 	locations[n].private5.items.jewelry5 = 220;
 	locations[n].private5.items.jewelry6 = 310;
-
 	locations[n].private6.items.gold_dublon = 100;
 	locations[n].private6.items.jewelry5 = 10;
 	locations[n].private6.items.jewelry6 = 2000;
 	locations[n].private6.items.jewelry10 = 33;
-
 	locations[n].private7.key = "key_betancur"; // сундук Бетанкура
 	locations[n].private7.key.delItem = true;
 	locations[n].private7.money = 100000; 
@@ -391,9 +353,7 @@ int LocationInitQuestLocations(int n)
 	locations[n].private7.items.jewelry6 = 1000;
 	locations[n].private7.items.jewelry10 = 19;
 	locations[n].private7.items.talisman1 = 1;
-
 	n = n + 1;
-	
 	//////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 	// Спецлокация
 	//////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
@@ -415,10 +375,8 @@ int LocationInitQuestLocations(int n)
 	//Environment
 	locations[n].environment.weather = "true";
 	locations[n].environment.sea = "true";
-	
 	LAi_LocationFightDisable(&Locations[n], true);
 	n = n + 1;
-	
 	///////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 	/// резервные локации
 	///////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
@@ -461,14 +419,12 @@ int LocationInitQuestLocations(int n)
 	locations[n].reload.l1.autoreload = "1";
 	locations[n].reload.l1.label = "";
 	locations[n].locators_radius.reload.Reload1_back = 2.0;
-
 	locations[n].reload.l2.name = "reload2_back";
 	locations[n].reload.l2.go = "";
 	locations[n].reload.l2.emerge = "";
 	locations[n].reload.l2.autoreload = "1";
 	locations[n].reload.l2.label = "";
 	locations[n].locators_radius.reload.Reload2_back = 2.0;
-
 	locations[n].reload.l3.name = "reload3_back";
 	locations[n].reload.l3.go = "";
 	locations[n].reload.l3.emerge = "";
@@ -476,7 +432,6 @@ int LocationInitQuestLocations(int n)
 	locations[n].reload.l3.label = "";
 	locations[n].locators_radius.reload.Reload3_back = 2.0;
 	n = n + 1;
-	
 	//////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 	// резервная локация 2
 	//////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
@@ -496,14 +451,11 @@ int LocationInitQuestLocations(int n)
 	locations[n].models.always.room.level = 65538;
 	locations[n].models.day.locators = "murdoch_room_locators";
 	locations[n].models.night.locators = "murdoch_room_Nlocators";
-
 	Locations[n].models.always.windows = "murdoch_room_windows";
 	Locations[n].models.always.windows.tech = "LocationWindows";
 	locations[n].models.always.windows.level = 65539;
-
 	locations[n].models.always.back = "..\inside_back";
 	locations[n].models.always.back.level = 65529;
-	
 	//Day
 	locations[n].models.day.charactersPatch = "murdoch_room_patch";
 	//Night
@@ -517,9 +469,7 @@ int LocationInitQuestLocations(int n)
 	locations[n].reload.l1.emerge = "";
 	locations[n].reload.l1.autoreload = "0";
 	locations[n].reload.l1.label = "";
-	
 	n = n + 1;
-	
 	//////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 	// резервная локация 3
 	//////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
@@ -559,14 +509,12 @@ int LocationInitQuestLocations(int n)
 	locations[n].reload.l1.autoreload = "1";
 	locations[n].reload.l1.label = "";
 	locations[n].locators_radius.reload.Reload1_back = 2.0;
-
 	locations[n].reload.l2.name = "reload2_back";
 	locations[n].reload.l2.go = "";
 	locations[n].reload.l2.emerge = "";
 	locations[n].reload.l2.autoreload = "1";
 	locations[n].reload.l2.label = "";
 	locations[n].locators_radius.reload.Reload2_back = 2.0;
-
 	locations[n].reload.l3.name = "reload3_back";
 	locations[n].reload.l3.go = "";
 	locations[n].reload.l3.emerge = "";
@@ -574,7 +522,6 @@ int LocationInitQuestLocations(int n)
 	locations[n].reload.l3.label = "";
 	locations[n].locators_radius.reload.Reload3_back = 2.0;
 	n = n + 1;
-	
 	//////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 	// резервная локация 4 // Jason „олго и счастливо
 	//////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
@@ -594,14 +541,11 @@ int LocationInitQuestLocations(int n)
 	locations[n].models.always.room.level = 65538;
 	locations[n].models.day.locators = "murdoch_room_locators";
 	locations[n].models.night.locators = "murdoch_room_Nlocators";
-
 	Locations[n].models.always.windows = "murdoch_room_windows";
 	Locations[n].models.always.windows.tech = "LocationWindows";
 	locations[n].models.always.windows.level = 65539;
-
 	locations[n].models.always.back = "..\inside_back";
 	locations[n].models.always.back.level = 65529;
-	
 	//Day
 	locations[n].models.day.charactersPatch = "murdoch_room_patch";
 	//Night
@@ -615,9 +559,7 @@ int LocationInitQuestLocations(int n)
 	locations[n].reload.l1.emerge = "";
 	locations[n].reload.l1.autoreload = "0";
 	locations[n].reload.l1.label = "";
-	
 	n = n + 1;
-	
 	//////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 	// резервная локация 5
 	//////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
@@ -657,14 +599,12 @@ int LocationInitQuestLocations(int n)
 	locations[n].reload.l1.autoreload = "1";
 	locations[n].reload.l1.label = "";
 	locations[n].locators_radius.reload.Reload1_back = 2.0;
-
 	locations[n].reload.l2.name = "reload2_back";
 	locations[n].reload.l2.go = "";
 	locations[n].reload.l2.emerge = "";
 	locations[n].reload.l2.autoreload = "1";
 	locations[n].reload.l2.label = "";
 	locations[n].locators_radius.reload.Reload2_back = 2.0;
-
 	locations[n].reload.l3.name = "reload3_back";
 	locations[n].reload.l3.go = "";
 	locations[n].reload.l3.emerge = "";
@@ -672,7 +612,6 @@ int LocationInitQuestLocations(int n)
 	locations[n].reload.l3.label = "";
 	locations[n].locators_radius.reload.Reload3_back = 2.0;
 	n = n + 1;
-	
 	//////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 	// резервная локация 6
 	//////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
@@ -692,14 +631,11 @@ int LocationInitQuestLocations(int n)
 	locations[n].models.always.room.level = 65538;
 	locations[n].models.day.locators = "murdoch_room_locators";
 	locations[n].models.night.locators = "murdoch_room_Nlocators";
-
 	Locations[n].models.always.windows = "murdoch_room_windows";
 	Locations[n].models.always.windows.tech = "LocationWindows";
 	locations[n].models.always.windows.level = 65539;
-
 	locations[n].models.always.back = "..\inside_back";
 	locations[n].models.always.back.level = 65529;
-	
 	//Day
 	locations[n].models.day.charactersPatch = "murdoch_room_patch";
 	//Night
@@ -713,9 +649,7 @@ int LocationInitQuestLocations(int n)
 	locations[n].reload.l1.emerge = "";
 	locations[n].reload.l1.autoreload = "0";
 	locations[n].reload.l1.label = "";
-	
 	n = n + 1;
-	
 	//////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 	// резервная локация 7
 	//////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
@@ -755,14 +689,12 @@ int LocationInitQuestLocations(int n)
 	locations[n].reload.l1.autoreload = "1";
 	locations[n].reload.l1.label = "";
 	locations[n].locators_radius.reload.Reload1_back = 2.0;
-
 	locations[n].reload.l2.name = "reload2_back";
 	locations[n].reload.l2.go = "";
 	locations[n].reload.l2.emerge = "";
 	locations[n].reload.l2.autoreload = "1";
 	locations[n].reload.l2.label = "";
 	locations[n].locators_radius.reload.Reload2_back = 2.0;
-
 	locations[n].reload.l3.name = "reload3_back";
 	locations[n].reload.l3.go = "";
 	locations[n].reload.l3.emerge = "";
@@ -770,7 +702,6 @@ int LocationInitQuestLocations(int n)
 	locations[n].reload.l3.label = "";
 	locations[n].locators_radius.reload.Reload3_back = 2.0;
 	n = n + 1;
-	
 	//////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 	// резервная локация 8
 	//////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
@@ -790,14 +721,11 @@ int LocationInitQuestLocations(int n)
 	locations[n].models.always.room.level = 65538;
 	locations[n].models.day.locators = "murdoch_room_locators";
 	locations[n].models.night.locators = "murdoch_room_Nlocators";
-
 	Locations[n].models.always.windows = "murdoch_room_windows";
 	Locations[n].models.always.windows.tech = "LocationWindows";
 	locations[n].models.always.windows.level = 65539;
-
 	locations[n].models.always.back = "..\inside_back";
 	locations[n].models.always.back.level = 65529;
-	
 	//Day
 	locations[n].models.day.charactersPatch = "murdoch_room_patch";
 	//Night
@@ -811,9 +739,7 @@ int LocationInitQuestLocations(int n)
 	locations[n].reload.l1.emerge = "";
 	locations[n].reload.l1.autoreload = "0";
 	locations[n].reload.l1.label = "";
-	
 	n = n + 1;
-	
 	//////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 	// резервная локация 9
 	//////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
@@ -853,14 +779,12 @@ int LocationInitQuestLocations(int n)
 	locations[n].reload.l1.autoreload = "1";
 	locations[n].reload.l1.label = "";
 	locations[n].locators_radius.reload.Reload1_back = 2.0;
-
 	locations[n].reload.l2.name = "reload2_back";
 	locations[n].reload.l2.go = "";
 	locations[n].reload.l2.emerge = "";
 	locations[n].reload.l2.autoreload = "1";
 	locations[n].reload.l2.label = "";
 	locations[n].locators_radius.reload.Reload2_back = 2.0;
-
 	locations[n].reload.l3.name = "reload3_back";
 	locations[n].reload.l3.go = "";
 	locations[n].reload.l3.emerge = "";
@@ -868,7 +792,6 @@ int LocationInitQuestLocations(int n)
 	locations[n].reload.l3.label = "";
 	locations[n].locators_radius.reload.Reload3_back = 2.0;
 	n = n + 1;
-	
 	//////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 	// резервная локация 10
 	//////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
@@ -888,14 +811,11 @@ int LocationInitQuestLocations(int n)
 	locations[n].models.always.room.level = 65538;
 	locations[n].models.day.locators = "murdoch_room_locators";
 	locations[n].models.night.locators = "murdoch_room_Nlocators";
-
 	Locations[n].models.always.windows = "murdoch_room_windows";
 	Locations[n].models.always.windows.tech = "LocationWindows";
 	locations[n].models.always.windows.level = 65539;
-
 	locations[n].models.always.back = "..\inside_back";
 	locations[n].models.always.back.level = 65529;
-	
 	//Day
 	locations[n].models.day.charactersPatch = "murdoch_room_patch";
 	//Night
@@ -909,9 +829,7 @@ int LocationInitQuestLocations(int n)
 	locations[n].reload.l1.emerge = "";
 	locations[n].reload.l1.autoreload = "0";
 	locations[n].reload.l1.label = "";
-	
 	n = n + 1;
-	
 	//////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 	// резервная локация 11
 	//////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
@@ -951,14 +869,12 @@ int LocationInitQuestLocations(int n)
 	locations[n].reload.l1.autoreload = "1";
 	locations[n].reload.l1.label = "";
 	locations[n].locators_radius.reload.Reload1_back = 2.0;
-
 	locations[n].reload.l2.name = "reload2_back";
 	locations[n].reload.l2.go = "";
 	locations[n].reload.l2.emerge = "";
 	locations[n].reload.l2.autoreload = "1";
 	locations[n].reload.l2.label = "";
 	locations[n].locators_radius.reload.Reload2_back = 2.0;
-
 	locations[n].reload.l3.name = "reload3_back";
 	locations[n].reload.l3.go = "";
 	locations[n].reload.l3.emerge = "";
@@ -966,7 +882,6 @@ int LocationInitQuestLocations(int n)
 	locations[n].reload.l3.label = "";
 	locations[n].locators_radius.reload.Reload3_back = 2.0;
 	n = n + 1;
-	
 	//////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 	// резервная локация 12
 	//////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
@@ -986,14 +901,11 @@ int LocationInitQuestLocations(int n)
 	locations[n].models.always.room.level = 65538;
 	locations[n].models.day.locators = "murdoch_room_locators";
 	locations[n].models.night.locators = "murdoch_room_Nlocators";
-
 	Locations[n].models.always.windows = "murdoch_room_windows";
 	Locations[n].models.always.windows.tech = "LocationWindows";
 	locations[n].models.always.windows.level = 65539;
-
 	locations[n].models.always.back = "..\inside_back";
 	locations[n].models.always.back.level = 65529;
-	
 	//Day
 	locations[n].models.day.charactersPatch = "murdoch_room_patch";
 	//Night
@@ -1007,9 +919,7 @@ int LocationInitQuestLocations(int n)
 	locations[n].reload.l1.emerge = "";
 	locations[n].reload.l1.autoreload = "0";
 	locations[n].reload.l1.label = "";
-	
 	n = n + 1;
-	
 	//////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 	// резервная локация 13
 	//////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
@@ -1049,14 +959,12 @@ int LocationInitQuestLocations(int n)
 	locations[n].reload.l1.autoreload = "1";
 	locations[n].reload.l1.label = "";
 	locations[n].locators_radius.reload.Reload1_back = 2.0;
-
 	locations[n].reload.l2.name = "reload2_back";
 	locations[n].reload.l2.go = "";
 	locations[n].reload.l2.emerge = "";
 	locations[n].reload.l2.autoreload = "1";
 	locations[n].reload.l2.label = "";
 	locations[n].locators_radius.reload.Reload2_back = 2.0;
-
 	locations[n].reload.l3.name = "reload3_back";
 	locations[n].reload.l3.go = "";
 	locations[n].reload.l3.emerge = "";
@@ -1064,7 +972,6 @@ int LocationInitQuestLocations(int n)
 	locations[n].reload.l3.label = "";
 	locations[n].locators_radius.reload.Reload3_back = 2.0;
 	n = n + 1;
-	
 	//////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 	// резервная локация 14
 	//////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
@@ -1084,14 +991,11 @@ int LocationInitQuestLocations(int n)
 	locations[n].models.always.room.level = 65538;
 	locations[n].models.day.locators = "murdoch_room_locators";
 	locations[n].models.night.locators = "murdoch_room_Nlocators";
-
 	Locations[n].models.always.windows = "murdoch_room_windows";
 	Locations[n].models.always.windows.tech = "LocationWindows";
 	locations[n].models.always.windows.level = 65539;
-
 	locations[n].models.always.back = "..\inside_back";
 	locations[n].models.always.back.level = 65529;
-	
 	//Day
 	locations[n].models.day.charactersPatch = "murdoch_room_patch";
 	//Night
@@ -1105,9 +1009,7 @@ int LocationInitQuestLocations(int n)
 	locations[n].reload.l1.emerge = "";
 	locations[n].reload.l1.autoreload = "0";
 	locations[n].reload.l1.label = "";
-	
 	n = n + 1;
-	
 	//////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 	// резервная локация 15
 	//////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
@@ -1147,14 +1049,12 @@ int LocationInitQuestLocations(int n)
 	locations[n].reload.l1.autoreload = "1";
 	locations[n].reload.l1.label = "";
 	locations[n].locators_radius.reload.Reload1_back = 2.0;
-
 	locations[n].reload.l2.name = "reload2_back";
 	locations[n].reload.l2.go = "";
 	locations[n].reload.l2.emerge = "";
 	locations[n].reload.l2.autoreload = "1";
 	locations[n].reload.l2.label = "";
 	locations[n].locators_radius.reload.Reload2_back = 2.0;
-
 	locations[n].reload.l3.name = "reload3_back";
 	locations[n].reload.l3.go = "";
 	locations[n].reload.l3.emerge = "";
@@ -1162,7 +1062,6 @@ int LocationInitQuestLocations(int n)
 	locations[n].reload.l3.label = "";
 	locations[n].locators_radius.reload.Reload3_back = 2.0;
 	n = n + 1;
-	
 	//////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 	// резервная локация 16
 	//////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
@@ -1182,14 +1081,11 @@ int LocationInitQuestLocations(int n)
 	locations[n].models.always.room.level = 65538;
 	locations[n].models.day.locators = "murdoch_room_locators";
 	locations[n].models.night.locators = "murdoch_room_Nlocators";
-
 	Locations[n].models.always.windows = "murdoch_room_windows";
 	Locations[n].models.always.windows.tech = "LocationWindows";
 	locations[n].models.always.windows.level = 65539;
-
 	locations[n].models.always.back = "..\inside_back";
 	locations[n].models.always.back.level = 65529;
-	
 	//Day
 	locations[n].models.day.charactersPatch = "murdoch_room_patch";
 	//Night
@@ -1203,9 +1099,7 @@ int LocationInitQuestLocations(int n)
 	locations[n].reload.l1.emerge = "";
 	locations[n].reload.l1.autoreload = "0";
 	locations[n].reload.l1.label = "";
-	
 	n = n + 1;
-	
 	//////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 	// резервная локация 17
 	//////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
@@ -1245,14 +1139,12 @@ int LocationInitQuestLocations(int n)
 	locations[n].reload.l1.autoreload = "1";
 	locations[n].reload.l1.label = "";
 	locations[n].locators_radius.reload.Reload1_back = 2.0;
-
 	locations[n].reload.l2.name = "reload2_back";
 	locations[n].reload.l2.go = "";
 	locations[n].reload.l2.emerge = "";
 	locations[n].reload.l2.autoreload = "1";
 	locations[n].reload.l2.label = "";
 	locations[n].locators_radius.reload.Reload2_back = 2.0;
-
 	locations[n].reload.l3.name = "reload3_back";
 	locations[n].reload.l3.go = "";
 	locations[n].reload.l3.emerge = "";
@@ -1260,7 +1152,6 @@ int LocationInitQuestLocations(int n)
 	locations[n].reload.l3.label = "";
 	locations[n].locators_radius.reload.Reload3_back = 2.0;
 	n = n + 1;
-	
 	//////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 	// резервная локация 18
 	//////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
@@ -1280,14 +1171,11 @@ int LocationInitQuestLocations(int n)
 	locations[n].models.always.room.level = 65538;
 	locations[n].models.day.locators = "murdoch_room_locators";
 	locations[n].models.night.locators = "murdoch_room_Nlocators";
-
 	Locations[n].models.always.windows = "murdoch_room_windows";
 	Locations[n].models.always.windows.tech = "LocationWindows";
 	locations[n].models.always.windows.level = 65539;
-
 	locations[n].models.always.back = "..\inside_back";
 	locations[n].models.always.back.level = 65529;
-	
 	//Day
 	locations[n].models.day.charactersPatch = "murdoch_room_patch";
 	//Night
@@ -1301,9 +1189,7 @@ int LocationInitQuestLocations(int n)
 	locations[n].reload.l1.emerge = "";
 	locations[n].reload.l1.autoreload = "0";
 	locations[n].reload.l1.label = "";
-	
 	n = n + 1;
-	
 	//////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 	// резервная локация 19
 	//////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
@@ -1343,14 +1229,12 @@ int LocationInitQuestLocations(int n)
 	locations[n].reload.l1.autoreload = "1";
 	locations[n].reload.l1.label = "";
 	locations[n].locators_radius.reload.Reload1_back = 2.0;
-
 	locations[n].reload.l2.name = "reload2_back";
 	locations[n].reload.l2.go = "";
 	locations[n].reload.l2.emerge = "";
 	locations[n].reload.l2.autoreload = "1";
 	locations[n].reload.l2.label = "";
 	locations[n].locators_radius.reload.Reload2_back = 2.0;
-
 	locations[n].reload.l3.name = "reload3_back";
 	locations[n].reload.l3.go = "";
 	locations[n].reload.l3.emerge = "";
@@ -1358,7 +1242,6 @@ int LocationInitQuestLocations(int n)
 	locations[n].reload.l3.label = "";
 	locations[n].locators_radius.reload.Reload3_back = 2.0;
 	n = n + 1;
-	
 	//////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 	// резервная локация 20
 	//////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
@@ -1378,14 +1261,11 @@ int LocationInitQuestLocations(int n)
 	locations[n].models.always.room.level = 65538;
 	locations[n].models.day.locators = "murdoch_room_locators";
 	locations[n].models.night.locators = "murdoch_room_Nlocators";
-
 	Locations[n].models.always.windows = "murdoch_room_windows";
 	Locations[n].models.always.windows.tech = "LocationWindows";
 	locations[n].models.always.windows.level = 65539;
-
 	locations[n].models.always.back = "..\inside_back";
 	locations[n].models.always.back.level = 65529;
-	
 	//Day
 	locations[n].models.day.charactersPatch = "murdoch_room_patch";
 	//Night
@@ -1399,9 +1279,7 @@ int LocationInitQuestLocations(int n)
 	locations[n].reload.l1.emerge = "";
 	locations[n].reload.l1.autoreload = "0";
 	locations[n].reload.l1.label = "";
-	
 	n = n + 1;
-	
 	//////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 	// резервная локация 21
 	//////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
@@ -1441,14 +1319,12 @@ int LocationInitQuestLocations(int n)
 	locations[n].reload.l1.autoreload = "1";
 	locations[n].reload.l1.label = "";
 	locations[n].locators_radius.reload.Reload1_back = 2.0;
-
 	locations[n].reload.l2.name = "reload2_back";
 	locations[n].reload.l2.go = "";
 	locations[n].reload.l2.emerge = "";
 	locations[n].reload.l2.autoreload = "1";
 	locations[n].reload.l2.label = "";
 	locations[n].locators_radius.reload.Reload2_back = 2.0;
-
 	locations[n].reload.l3.name = "reload3_back";
 	locations[n].reload.l3.go = "";
 	locations[n].reload.l3.emerge = "";
@@ -1456,7 +1332,6 @@ int LocationInitQuestLocations(int n)
 	locations[n].reload.l3.label = "";
 	locations[n].locators_radius.reload.Reload3_back = 2.0;
 	n = n + 1;
-	
 	//////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 	// резервная локация 22
 	//////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
@@ -1476,14 +1351,11 @@ int LocationInitQuestLocations(int n)
 	locations[n].models.always.room.level = 65538;
 	locations[n].models.day.locators = "murdoch_room_locators";
 	locations[n].models.night.locators = "murdoch_room_Nlocators";
-
 	Locations[n].models.always.windows = "murdoch_room_windows";
 	Locations[n].models.always.windows.tech = "LocationWindows";
 	locations[n].models.always.windows.level = 65539;
-
 	locations[n].models.always.back = "..\inside_back";
 	locations[n].models.always.back.level = 65529;
-	
 	//Day
 	locations[n].models.day.charactersPatch = "murdoch_room_patch";
 	//Night
@@ -1497,9 +1369,7 @@ int LocationInitQuestLocations(int n)
 	locations[n].reload.l1.emerge = "";
 	locations[n].reload.l1.autoreload = "0";
 	locations[n].reload.l1.label = "";
-	
 	n = n + 1;
-	
 	//////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 	// резервная локация 23
 	//////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
@@ -1539,14 +1409,12 @@ int LocationInitQuestLocations(int n)
 	locations[n].reload.l1.autoreload = "1";
 	locations[n].reload.l1.label = "";
 	locations[n].locators_radius.reload.Reload1_back = 2.0;
-
 	locations[n].reload.l2.name = "reload2_back";
 	locations[n].reload.l2.go = "";
 	locations[n].reload.l2.emerge = "";
 	locations[n].reload.l2.autoreload = "1";
 	locations[n].reload.l2.label = "";
 	locations[n].locators_radius.reload.Reload2_back = 2.0;
-
 	locations[n].reload.l3.name = "reload3_back";
 	locations[n].reload.l3.go = "";
 	locations[n].reload.l3.emerge = "";
@@ -1554,7 +1422,6 @@ int LocationInitQuestLocations(int n)
 	locations[n].reload.l3.label = "";
 	locations[n].locators_radius.reload.Reload3_back = 2.0;
 	n = n + 1;
-	
 	//////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 	// резервная локация 24
 	//////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
@@ -1574,14 +1441,11 @@ int LocationInitQuestLocations(int n)
 	locations[n].models.always.room.level = 65538;
 	locations[n].models.day.locators = "murdoch_room_locators";
 	locations[n].models.night.locators = "murdoch_room_Nlocators";
-
 	Locations[n].models.always.windows = "murdoch_room_windows";
 	Locations[n].models.always.windows.tech = "LocationWindows";
 	locations[n].models.always.windows.level = 65539;
-
 	locations[n].models.always.back = "..\inside_back";
 	locations[n].models.always.back.level = 65529;
-	
 	//Day
 	locations[n].models.day.charactersPatch = "murdoch_room_patch";
 	//Night
@@ -1595,9 +1459,7 @@ int LocationInitQuestLocations(int n)
 	locations[n].reload.l1.emerge = "";
 	locations[n].reload.l1.autoreload = "0";
 	locations[n].reload.l1.label = "";
-	
 	n = n + 1;
-	
 	//////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 	// резервная локация 25
 	//////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
@@ -1637,14 +1499,12 @@ int LocationInitQuestLocations(int n)
 	locations[n].reload.l1.autoreload = "1";
 	locations[n].reload.l1.label = "";
 	locations[n].locators_radius.reload.Reload1_back = 2.0;
-
 	locations[n].reload.l2.name = "reload2_back";
 	locations[n].reload.l2.go = "";
 	locations[n].reload.l2.emerge = "";
 	locations[n].reload.l2.autoreload = "1";
 	locations[n].reload.l2.label = "";
 	locations[n].locators_radius.reload.Reload2_back = 2.0;
-
 	locations[n].reload.l3.name = "reload3_back";
 	locations[n].reload.l3.go = "";
 	locations[n].reload.l3.emerge = "";
@@ -1652,7 +1512,6 @@ int LocationInitQuestLocations(int n)
 	locations[n].reload.l3.label = "";
 	locations[n].locators_radius.reload.Reload3_back = 2.0;
 	n = n + 1;
-	
 	//////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 	// резервная локация 26
 	//////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
@@ -1672,14 +1531,11 @@ int LocationInitQuestLocations(int n)
 	locations[n].models.always.room.level = 65538;
 	locations[n].models.day.locators = "murdoch_room_locators";
 	locations[n].models.night.locators = "murdoch_room_Nlocators";
-
 	Locations[n].models.always.windows = "murdoch_room_windows";
 	Locations[n].models.always.windows.tech = "LocationWindows";
 	locations[n].models.always.windows.level = 65539;
-
 	locations[n].models.always.back = "..\inside_back";
 	locations[n].models.always.back.level = 65529;
-	
 	//Day
 	locations[n].models.day.charactersPatch = "murdoch_room_patch";
 	//Night
@@ -1693,9 +1549,7 @@ int LocationInitQuestLocations(int n)
 	locations[n].reload.l1.emerge = "";
 	locations[n].reload.l1.autoreload = "0";
 	locations[n].reload.l1.label = "";
-	
 	n = n + 1;
-	
 	//////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 	// резервная локация 27
 	//////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
@@ -1735,14 +1589,12 @@ int LocationInitQuestLocations(int n)
 	locations[n].reload.l1.autoreload = "1";
 	locations[n].reload.l1.label = "";
 	locations[n].locators_radius.reload.Reload1_back = 2.0;
-
 	locations[n].reload.l2.name = "reload2_back";
 	locations[n].reload.l2.go = "";
 	locations[n].reload.l2.emerge = "";
 	locations[n].reload.l2.autoreload = "1";
 	locations[n].reload.l2.label = "";
 	locations[n].locators_radius.reload.Reload2_back = 2.0;
-
 	locations[n].reload.l3.name = "reload3_back";
 	locations[n].reload.l3.go = "";
 	locations[n].reload.l3.emerge = "";
@@ -1750,7 +1602,6 @@ int LocationInitQuestLocations(int n)
 	locations[n].reload.l3.label = "";
 	locations[n].locators_radius.reload.Reload3_back = 2.0;
 	n = n + 1;
-	
 	//////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 	// резервная локация 28
 	//////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
@@ -1770,14 +1621,11 @@ int LocationInitQuestLocations(int n)
 	locations[n].models.always.room.level = 65538;
 	locations[n].models.day.locators = "murdoch_room_locators";
 	locations[n].models.night.locators = "murdoch_room_Nlocators";
-
 	Locations[n].models.always.windows = "murdoch_room_windows";
 	Locations[n].models.always.windows.tech = "LocationWindows";
 	locations[n].models.always.windows.level = 65539;
-
 	locations[n].models.always.back = "..\inside_back";
 	locations[n].models.always.back.level = 65529;
-	
 	//Day
 	locations[n].models.day.charactersPatch = "murdoch_room_patch";
 	//Night
@@ -1791,9 +1639,7 @@ int LocationInitQuestLocations(int n)
 	locations[n].reload.l1.emerge = "";
 	locations[n].reload.l1.autoreload = "0";
 	locations[n].reload.l1.label = "";
-	
 	n = n + 1;
-	
 	//////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 	// резервная локация 29
 	//////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
@@ -1833,14 +1679,12 @@ int LocationInitQuestLocations(int n)
 	locations[n].reload.l1.autoreload = "1";
 	locations[n].reload.l1.label = "";
 	locations[n].locators_radius.reload.Reload1_back = 2.0;
-
 	locations[n].reload.l2.name = "reload2_back";
 	locations[n].reload.l2.go = "";
 	locations[n].reload.l2.emerge = "";
 	locations[n].reload.l2.autoreload = "1";
 	locations[n].reload.l2.label = "";
 	locations[n].locators_radius.reload.Reload2_back = 2.0;
-
 	locations[n].reload.l3.name = "reload3_back";
 	locations[n].reload.l3.go = "";
 	locations[n].reload.l3.emerge = "";
@@ -1848,7 +1692,6 @@ int LocationInitQuestLocations(int n)
 	locations[n].reload.l3.label = "";
 	locations[n].locators_radius.reload.Reload3_back = 2.0;
 	n = n + 1;
-	
 	//////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 	// резервная локация 30
 	//////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
@@ -1868,14 +1711,11 @@ int LocationInitQuestLocations(int n)
 	locations[n].models.always.room.level = 65538;
 	locations[n].models.day.locators = "murdoch_room_locators";
 	locations[n].models.night.locators = "murdoch_room_Nlocators";
-
 	Locations[n].models.always.windows = "murdoch_room_windows";
 	Locations[n].models.always.windows.tech = "LocationWindows";
 	locations[n].models.always.windows.level = 65539;
-
 	locations[n].models.always.back = "..\inside_back";
 	locations[n].models.always.back.level = 65529;
-	
 	//Day
 	locations[n].models.day.charactersPatch = "murdoch_room_patch";
 	//Night
@@ -1889,9 +1729,7 @@ int LocationInitQuestLocations(int n)
 	locations[n].reload.l1.emerge = "";
 	locations[n].reload.l1.autoreload = "0";
 	locations[n].reload.l1.label = "";
-	
 	n = n + 1;
-	
 	//////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 	// резервная локация 31
 	//////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
@@ -1931,14 +1769,12 @@ int LocationInitQuestLocations(int n)
 	locations[n].reload.l1.autoreload = "1";
 	locations[n].reload.l1.label = "";
 	locations[n].locators_radius.reload.Reload1_back = 2.0;
-
 	locations[n].reload.l2.name = "reload2_back";
 	locations[n].reload.l2.go = "";
 	locations[n].reload.l2.emerge = "";
 	locations[n].reload.l2.autoreload = "1";
 	locations[n].reload.l2.label = "";
 	locations[n].locators_radius.reload.Reload2_back = 2.0;
-
 	locations[n].reload.l3.name = "reload3_back";
 	locations[n].reload.l3.go = "";
 	locations[n].reload.l3.emerge = "";
@@ -1946,7 +1782,6 @@ int LocationInitQuestLocations(int n)
 	locations[n].reload.l3.label = "";
 	locations[n].locators_radius.reload.Reload3_back = 2.0;
 	n = n + 1;
-	
 	//////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 	// резервная локация 32
 	//////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
@@ -1966,14 +1801,11 @@ int LocationInitQuestLocations(int n)
 	locations[n].models.always.room.level = 65538;
 	locations[n].models.day.locators = "murdoch_room_locators";
 	locations[n].models.night.locators = "murdoch_room_Nlocators";
-
 	Locations[n].models.always.windows = "murdoch_room_windows";
 	Locations[n].models.always.windows.tech = "LocationWindows";
 	locations[n].models.always.windows.level = 65539;
-
 	locations[n].models.always.back = "..\inside_back";
 	locations[n].models.always.back.level = 65529;
-	
 	//Day
 	locations[n].models.day.charactersPatch = "murdoch_room_patch";
 	//Night
@@ -1987,9 +1819,7 @@ int LocationInitQuestLocations(int n)
 	locations[n].reload.l1.emerge = "";
 	locations[n].reload.l1.autoreload = "0";
 	locations[n].reload.l1.label = "";
-	
 	n = n + 1;
-	
 	//////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 	// резервная локация 33
 	//////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
@@ -2029,14 +1859,12 @@ int LocationInitQuestLocations(int n)
 	locations[n].reload.l1.autoreload = "1";
 	locations[n].reload.l1.label = "";
 	locations[n].locators_radius.reload.Reload1_back = 2.0;
-
 	locations[n].reload.l2.name = "reload2_back";
 	locations[n].reload.l2.go = "";
 	locations[n].reload.l2.emerge = "";
 	locations[n].reload.l2.autoreload = "1";
 	locations[n].reload.l2.label = "";
 	locations[n].locators_radius.reload.Reload2_back = 2.0;
-
 	locations[n].reload.l3.name = "reload3_back";
 	locations[n].reload.l3.go = "";
 	locations[n].reload.l3.emerge = "";
@@ -2044,7 +1872,6 @@ int LocationInitQuestLocations(int n)
 	locations[n].reload.l3.label = "";
 	locations[n].locators_radius.reload.Reload3_back = 2.0;
 	n = n + 1;
-	
 	//////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 	// резервная локация 34
 	//////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
@@ -2064,14 +1891,11 @@ int LocationInitQuestLocations(int n)
 	locations[n].models.always.room.level = 65538;
 	locations[n].models.day.locators = "murdoch_room_locators";
 	locations[n].models.night.locators = "murdoch_room_Nlocators";
-
 	Locations[n].models.always.windows = "murdoch_room_windows";
 	Locations[n].models.always.windows.tech = "LocationWindows";
 	locations[n].models.always.windows.level = 65539;
-
 	locations[n].models.always.back = "..\inside_back";
 	locations[n].models.always.back.level = 65529;
-	
 	//Day
 	locations[n].models.day.charactersPatch = "murdoch_room_patch";
 	//Night
@@ -2085,9 +1909,7 @@ int LocationInitQuestLocations(int n)
 	locations[n].reload.l1.emerge = "";
 	locations[n].reload.l1.autoreload = "0";
 	locations[n].reload.l1.label = "";
-	
 	n = n + 1;
-	
 	//////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 	// резервная локация 35
 	//////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
@@ -2127,14 +1949,12 @@ int LocationInitQuestLocations(int n)
 	locations[n].reload.l1.autoreload = "1";
 	locations[n].reload.l1.label = "";
 	locations[n].locators_radius.reload.Reload1_back = 2.0;
-
 	locations[n].reload.l2.name = "reload2_back";
 	locations[n].reload.l2.go = "";
 	locations[n].reload.l2.emerge = "";
 	locations[n].reload.l2.autoreload = "1";
 	locations[n].reload.l2.label = "";
 	locations[n].locators_radius.reload.Reload2_back = 2.0;
-
 	locations[n].reload.l3.name = "reload3_back";
 	locations[n].reload.l3.go = "";
 	locations[n].reload.l3.emerge = "";
@@ -2142,7 +1962,6 @@ int LocationInitQuestLocations(int n)
 	locations[n].reload.l3.label = "";
 	locations[n].locators_radius.reload.Reload3_back = 2.0;
 	n = n + 1;
-	
 	//////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 	// резервная локация 36
 	//////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
@@ -2162,14 +1981,11 @@ int LocationInitQuestLocations(int n)
 	locations[n].models.always.room.level = 65538;
 	locations[n].models.day.locators = "murdoch_room_locators";
 	locations[n].models.night.locators = "murdoch_room_Nlocators";
-
 	Locations[n].models.always.windows = "murdoch_room_windows";
 	Locations[n].models.always.windows.tech = "LocationWindows";
 	locations[n].models.always.windows.level = 65539;
-
 	locations[n].models.always.back = "..\inside_back";
 	locations[n].models.always.back.level = 65529;
-	
 	//Day
 	locations[n].models.day.charactersPatch = "murdoch_room_patch";
 	//Night
@@ -2183,9 +1999,7 @@ int LocationInitQuestLocations(int n)
 	locations[n].reload.l1.emerge = "";
 	locations[n].reload.l1.autoreload = "0";
 	locations[n].reload.l1.label = "";
-	
 	n = n + 1;
-	
 	//////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 	// резервная локация 37
 	//////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
@@ -2225,14 +2039,12 @@ int LocationInitQuestLocations(int n)
 	locations[n].reload.l1.autoreload = "1";
 	locations[n].reload.l1.label = "";
 	locations[n].locators_radius.reload.Reload1_back = 2.0;
-
 	locations[n].reload.l2.name = "reload2_back";
 	locations[n].reload.l2.go = "";
 	locations[n].reload.l2.emerge = "";
 	locations[n].reload.l2.autoreload = "1";
 	locations[n].reload.l2.label = "";
 	locations[n].locators_radius.reload.Reload2_back = 2.0;
-
 	locations[n].reload.l3.name = "reload3_back";
 	locations[n].reload.l3.go = "";
 	locations[n].reload.l3.emerge = "";
@@ -2240,7 +2052,6 @@ int LocationInitQuestLocations(int n)
 	locations[n].reload.l3.label = "";
 	locations[n].locators_radius.reload.Reload3_back = 2.0;
 	n = n + 1;
-	
 	//////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 	// резервная локация 38
 	//////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
@@ -2260,14 +2071,11 @@ int LocationInitQuestLocations(int n)
 	locations[n].models.always.room.level = 65538;
 	locations[n].models.day.locators = "murdoch_room_locators";
 	locations[n].models.night.locators = "murdoch_room_Nlocators";
-
 	Locations[n].models.always.windows = "murdoch_room_windows";
 	Locations[n].models.always.windows.tech = "LocationWindows";
 	locations[n].models.always.windows.level = 65539;
-
 	locations[n].models.always.back = "..\inside_back";
 	locations[n].models.always.back.level = 65529;
-	
 	//Day
 	locations[n].models.day.charactersPatch = "murdoch_room_patch";
 	//Night
@@ -2281,9 +2089,7 @@ int LocationInitQuestLocations(int n)
 	locations[n].reload.l1.emerge = "";
 	locations[n].reload.l1.autoreload = "0";
 	locations[n].reload.l1.label = "";
-	
 	n = n + 1;
-	
 	//////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 	// резервная локация 39
 	//////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
@@ -2323,14 +2129,12 @@ int LocationInitQuestLocations(int n)
 	locations[n].reload.l1.autoreload = "1";
 	locations[n].reload.l1.label = "";
 	locations[n].locators_radius.reload.Reload1_back = 2.0;
-
 	locations[n].reload.l2.name = "reload2_back";
 	locations[n].reload.l2.go = "";
 	locations[n].reload.l2.emerge = "";
 	locations[n].reload.l2.autoreload = "1";
 	locations[n].reload.l2.label = "";
 	locations[n].locators_radius.reload.Reload2_back = 2.0;
-
 	locations[n].reload.l3.name = "reload3_back";
 	locations[n].reload.l3.go = "";
 	locations[n].reload.l3.emerge = "";
@@ -2338,7 +2142,6 @@ int LocationInitQuestLocations(int n)
 	locations[n].reload.l3.label = "";
 	locations[n].locators_radius.reload.Reload3_back = 2.0;
 	n = n + 1;
-	
 	//////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 	// резервная локация 40
 	//////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
@@ -2358,14 +2161,11 @@ int LocationInitQuestLocations(int n)
 	locations[n].models.always.room.level = 65538;
 	locations[n].models.day.locators = "murdoch_room_locators";
 	locations[n].models.night.locators = "murdoch_room_Nlocators";
-
 	Locations[n].models.always.windows = "murdoch_room_windows";
 	Locations[n].models.always.windows.tech = "LocationWindows";
 	locations[n].models.always.windows.level = 65539;
-
 	locations[n].models.always.back = "..\inside_back";
 	locations[n].models.always.back.level = 65529;
-	
 	//Day
 	locations[n].models.day.charactersPatch = "murdoch_room_patch";
 	//Night
@@ -2379,9 +2179,7 @@ int LocationInitQuestLocations(int n)
 	locations[n].reload.l1.emerge = "";
 	locations[n].reload.l1.autoreload = "0";
 	locations[n].reload.l1.label = "";
-	
 	n = n + 1;
-	
 	//////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 	// резервная локация 41
 	//////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
@@ -2421,14 +2219,12 @@ int LocationInitQuestLocations(int n)
 	locations[n].reload.l1.autoreload = "1";
 	locations[n].reload.l1.label = "";
 	locations[n].locators_radius.reload.Reload1_back = 2.0;
-
 	locations[n].reload.l2.name = "reload2_back";
 	locations[n].reload.l2.go = "";
 	locations[n].reload.l2.emerge = "";
 	locations[n].reload.l2.autoreload = "1";
 	locations[n].reload.l2.label = "";
 	locations[n].locators_radius.reload.Reload2_back = 2.0;
-
 	locations[n].reload.l3.name = "reload3_back";
 	locations[n].reload.l3.go = "";
 	locations[n].reload.l3.emerge = "";
@@ -2436,7 +2232,6 @@ int LocationInitQuestLocations(int n)
 	locations[n].reload.l3.label = "";
 	locations[n].locators_radius.reload.Reload3_back = 2.0;
 	n = n + 1;
-	
 	//////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 	// резервная локация 42
 	//////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
@@ -2456,14 +2251,11 @@ int LocationInitQuestLocations(int n)
 	locations[n].models.always.room.level = 65538;
 	locations[n].models.day.locators = "murdoch_room_locators";
 	locations[n].models.night.locators = "murdoch_room_Nlocators";
-
 	Locations[n].models.always.windows = "murdoch_room_windows";
 	Locations[n].models.always.windows.tech = "LocationWindows";
 	locations[n].models.always.windows.level = 65539;
-
 	locations[n].models.always.back = "..\inside_back";
 	locations[n].models.always.back.level = 65529;
-	
 	//Day
 	locations[n].models.day.charactersPatch = "murdoch_room_patch";
 	//Night
@@ -2477,9 +2269,7 @@ int LocationInitQuestLocations(int n)
 	locations[n].reload.l1.emerge = "";
 	locations[n].reload.l1.autoreload = "0";
 	locations[n].reload.l1.label = "";
-	
 	n = n + 1;
-	
 	//////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 	// резервная локация 43
 	//////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
@@ -2519,14 +2309,12 @@ int LocationInitQuestLocations(int n)
 	locations[n].reload.l1.autoreload = "1";
 	locations[n].reload.l1.label = "";
 	locations[n].locators_radius.reload.Reload1_back = 2.0;
-
 	locations[n].reload.l2.name = "reload2_back";
 	locations[n].reload.l2.go = "";
 	locations[n].reload.l2.emerge = "";
 	locations[n].reload.l2.autoreload = "1";
 	locations[n].reload.l2.label = "";
 	locations[n].locators_radius.reload.Reload2_back = 2.0;
-
 	locations[n].reload.l3.name = "reload3_back";
 	locations[n].reload.l3.go = "";
 	locations[n].reload.l3.emerge = "";
@@ -2534,7 +2322,6 @@ int LocationInitQuestLocations(int n)
 	locations[n].reload.l3.label = "";
 	locations[n].locators_radius.reload.Reload3_back = 2.0;
 	n = n + 1;
-	
 	//////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 	// резервная локация 44
 	//////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
@@ -2554,14 +2341,11 @@ int LocationInitQuestLocations(int n)
 	locations[n].models.always.room.level = 65538;
 	locations[n].models.day.locators = "murdoch_room_locators";
 	locations[n].models.night.locators = "murdoch_room_Nlocators";
-
 	Locations[n].models.always.windows = "murdoch_room_windows";
 	Locations[n].models.always.windows.tech = "LocationWindows";
 	locations[n].models.always.windows.level = 65539;
-
 	locations[n].models.always.back = "..\inside_back";
 	locations[n].models.always.back.level = 65529;
-	
 	//Day
 	locations[n].models.day.charactersPatch = "murdoch_room_patch";
 	//Night
@@ -2575,9 +2359,7 @@ int LocationInitQuestLocations(int n)
 	locations[n].reload.l1.emerge = "";
 	locations[n].reload.l1.autoreload = "0";
 	locations[n].reload.l1.label = "";
-	
 	n = n + 1;
-	
 	//////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 	// резервная локация 45
 	//////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
@@ -2617,14 +2399,12 @@ int LocationInitQuestLocations(int n)
 	locations[n].reload.l1.autoreload = "1";
 	locations[n].reload.l1.label = "";
 	locations[n].locators_radius.reload.Reload1_back = 2.0;
-
 	locations[n].reload.l2.name = "reload2_back";
 	locations[n].reload.l2.go = "";
 	locations[n].reload.l2.emerge = "";
 	locations[n].reload.l2.autoreload = "1";
 	locations[n].reload.l2.label = "";
 	locations[n].locators_radius.reload.Reload2_back = 2.0;
-
 	locations[n].reload.l3.name = "reload3_back";
 	locations[n].reload.l3.go = "";
 	locations[n].reload.l3.emerge = "";
@@ -2632,7 +2412,6 @@ int LocationInitQuestLocations(int n)
 	locations[n].reload.l3.label = "";
 	locations[n].locators_radius.reload.Reload3_back = 2.0;
 	n = n + 1;
-	
 	//////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 	// резервная локация 46
 	//////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
@@ -2652,14 +2431,11 @@ int LocationInitQuestLocations(int n)
 	locations[n].models.always.room.level = 65538;
 	locations[n].models.day.locators = "murdoch_room_locators";
 	locations[n].models.night.locators = "murdoch_room_Nlocators";
-
 	Locations[n].models.always.windows = "murdoch_room_windows";
 	Locations[n].models.always.windows.tech = "LocationWindows";
 	locations[n].models.always.windows.level = 65539;
-
 	locations[n].models.always.back = "..\inside_back";
 	locations[n].models.always.back.level = 65529;
-	
 	//Day
 	locations[n].models.day.charactersPatch = "murdoch_room_patch";
 	//Night
@@ -2673,9 +2449,7 @@ int LocationInitQuestLocations(int n)
 	locations[n].reload.l1.emerge = "";
 	locations[n].reload.l1.autoreload = "0";
 	locations[n].reload.l1.label = "";
-	
 	n = n + 1;
-	
 	//////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 	// резервная локация 47
 	//////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
@@ -2715,14 +2489,12 @@ int LocationInitQuestLocations(int n)
 	locations[n].reload.l1.autoreload = "1";
 	locations[n].reload.l1.label = "";
 	locations[n].locators_radius.reload.Reload1_back = 2.0;
-
 	locations[n].reload.l2.name = "reload2_back";
 	locations[n].reload.l2.go = "";
 	locations[n].reload.l2.emerge = "";
 	locations[n].reload.l2.autoreload = "1";
 	locations[n].reload.l2.label = "";
 	locations[n].locators_radius.reload.Reload2_back = 2.0;
-
 	locations[n].reload.l3.name = "reload3_back";
 	locations[n].reload.l3.go = "";
 	locations[n].reload.l3.emerge = "";
@@ -2730,7 +2502,6 @@ int LocationInitQuestLocations(int n)
 	locations[n].reload.l3.label = "";
 	locations[n].locators_radius.reload.Reload3_back = 2.0;
 	n = n + 1;
-	
 	//////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 	// резервная локация 48
 	//////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
@@ -2750,14 +2521,11 @@ int LocationInitQuestLocations(int n)
 	locations[n].models.always.room.level = 65538;
 	locations[n].models.day.locators = "murdoch_room_locators";
 	locations[n].models.night.locators = "murdoch_room_Nlocators";
-
 	Locations[n].models.always.windows = "murdoch_room_windows";
 	Locations[n].models.always.windows.tech = "LocationWindows";
 	locations[n].models.always.windows.level = 65539;
-
 	locations[n].models.always.back = "..\inside_back";
 	locations[n].models.always.back.level = 65529;
-	
 	//Day
 	locations[n].models.day.charactersPatch = "murdoch_room_patch";
 	//Night
@@ -2771,9 +2539,7 @@ int LocationInitQuestLocations(int n)
 	locations[n].reload.l1.emerge = "";
 	locations[n].reload.l1.autoreload = "0";
 	locations[n].reload.l1.label = "";
-	
 	n = n + 1;
-	
 	//////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 	// резервная локация 49
 	//////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
@@ -2813,14 +2579,12 @@ int LocationInitQuestLocations(int n)
 	locations[n].reload.l1.autoreload = "1";
 	locations[n].reload.l1.label = "";
 	locations[n].locators_radius.reload.Reload1_back = 2.0;
-
 	locations[n].reload.l2.name = "reload2_back";
 	locations[n].reload.l2.go = "";
 	locations[n].reload.l2.emerge = "";
 	locations[n].reload.l2.autoreload = "1";
 	locations[n].reload.l2.label = "";
 	locations[n].locators_radius.reload.Reload2_back = 2.0;
-
 	locations[n].reload.l3.name = "reload3_back";
 	locations[n].reload.l3.go = "";
 	locations[n].reload.l3.emerge = "";
@@ -2828,7 +2592,6 @@ int LocationInitQuestLocations(int n)
 	locations[n].reload.l3.label = "";
 	locations[n].locators_radius.reload.Reload3_back = 2.0;
 	n = n + 1;
-	
 	//////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 	// резервная локация 50
 	//////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
@@ -2848,14 +2611,11 @@ int LocationInitQuestLocations(int n)
 	locations[n].models.always.room.level = 65538;
 	locations[n].models.day.locators = "murdoch_room_locators";
 	locations[n].models.night.locators = "murdoch_room_Nlocators";
-
 	Locations[n].models.always.windows = "murdoch_room_windows";
 	Locations[n].models.always.windows.tech = "LocationWindows";
 	locations[n].models.always.windows.level = 65539;
-
 	locations[n].models.always.back = "..\inside_back";
 	locations[n].models.always.back.level = 65529;
-	
 	//Day
 	locations[n].models.day.charactersPatch = "murdoch_room_patch";
 	//Night
@@ -2869,8 +2629,6 @@ int LocationInitQuestLocations(int n)
 	locations[n].reload.l1.emerge = "";
 	locations[n].reload.l1.autoreload = "0";
 	locations[n].reload.l1.label = "";
-	
 	n = n + 1;
-	
 	return n;
 }

@@ -26,13 +26,11 @@ void ProcessCommonDialogEvent(ref NPChar, aref Link, aref NextDiag)
 				link.l1.go = "mtraxx";
 			}
 		break;
-		
 		case "Havana_ratP_1":
 			dialog.text = NPCStringReactionRepeat("Yes, he was here. But he has gone already. Ask our tavern keeper about him, he has rented a room in the tavern.", "You have already asked about this and I've answered.", "I tell you that you have already asked about this Gontier..", "I ask you to don't bother me!", "block", 0, npchar, Dialog.CurrentNode);
 			link.l1 = HeroStringReactionRepeat("Thanks. I'll do that.", "Hm, well ...", "Yes, I have really asked ...", "Pardon, " + npchar.name + "...", npchar, Dialog.CurrentNode);
 			link.l1.go = "exit";
 		break;
-		
 		// калеуче
 		case "caleuche":
 			dialog.text = "Can't tell you anything about him. Even if he arrived there, he never registered anywhere.";
@@ -40,7 +38,6 @@ void ProcessCommonDialogEvent(ref NPChar, aref Link, aref NextDiag)
 			link.l1.go = "exit";
 			npchar.quest.caleuche = "true";
 		break;
-		
 		// Addon 2016-1 Jason пиратская линейка
 		case "mtraxx":
 			dialog.text = "Let's see... Schooner 'Cantavro' set sail two days ago. Mission - patrolling... however, the location is not listed. It is a military vessel, so destination point is known only to its captain and the fort commandant. I would suggest you talking with the commandant directly, you can find him at the fort, if you wish to know more. Unfortunately, that is all I can do for you.";

@@ -4,15 +4,11 @@ void ProcessDialogEvent()
 {
 	ref NPChar, sld;
 	aref Link, NextDiag;
-
 	DeleteAttribute(&Dialog,"Links");
-
 	makeref(NPChar,CharacterRef);
 	makearef(Link, Dialog.Links);
 	makearef(NextDiag, NPChar.Dialog);
-	
 	ProcessCommonDialogRumors(NPChar, Link, NextDiag);
-	
 	switch(Dialog.CurrentNode)
 	{
 		case "First time":
@@ -47,19 +43,16 @@ void ProcessDialogEvent()
 			}
 			NextDiag.TempNode = "First time";
 		break;
-		
 		case "meeting": // первая встреча
 			dialog.text = "We all live in peace here, white brother. Curanai not call white brother the paleface dog. Not all paleface - dogs. I can call a lot Indians the redskin dog.";
 			link.l1 = "Hm. I take it that you are a philosopher...";
 			link.l1.go = "meeting_1";
 		break;
-		
 		case "meeting_1":
 			dialog.text = "Curanai don't understand you, white brother. What means philosopher?";
 			link.l1 = "It doesn't matter, redskin brother. I just like the way you think. You say your name is Curanai? My name is "+GetFullName(pchar)+". Glad to meet you.";
 			link.l1.go = "meeting_2";
 		break;
-		
 		case "meeting_2":
 			dialog.text = "Curanai glad to know white brother's name.";
 			link.l1 = "Fine. See you around!";
@@ -68,7 +61,6 @@ void ProcessDialogEvent()
 			link.l3.go = "int_quests"; //информационный блок
 			NextDiag.TempNode = "First time";
 		break;
-		
 		case "trade":
 			DialogExit();
 			if (!CheckAttribute(npchar, "trade_date") || GetNpcQuestPastDayParam(npchar, "trade_date") >= 4)
@@ -78,7 +70,6 @@ void ProcessDialogEvent()
 			}
 			LaunchItemsTrade(npchar, 0);
 		break;
-		
 //--------------------------------------- блок вопросов и ответов ---------------------------------------------
 		case "int_quests":
 			dialog.text = "Ask, paleface brother, Curanai answer.";
@@ -105,28 +96,24 @@ void ProcessDialogEvent()
 			link.l10 = "No questions. Pardon...";
 			link.l10.go = "exit";
 		break;
-		
 		case "ansewer_1":
 			dialog.text = "I and several warriors of my tribe decide to sail to little isle close to our land, visible in clear day. We made a raft of bamboo and sail. But storm took us suddenly and moved us in the open sea. We not realize how fast our land and isle disappeared\nWe sailed the sea many-many nights and days. All my brothers died from thirst and hunger. I left alone - spirits took pity on Curanai and brought a raft to this island. I survived.";
 			link.l1 = "Yeah... Sad story.";
 			link.l1.go = "int_quests";
 			npchar.quest.answer_1 = "true";
 		break;
-		
 		case "ansewer_2":
 			dialog.text = "Curanai fishing. Curanai hit fish with harpoon. Rarely-rarely hit big crab. Then Curanai happy - crab is tasty, very tasty. One nipper enough for few days. And Curanai also dive bottom to one place. No big crabs there. Curanai pick yellow stone, blue stone, black stone and pearl. Big and small. Then Curanai sell them to paleface.";
 			link.l1 = "I see...";
 			link.l1.go = "int_quests";
 			npchar.quest.answer_2 = "true";
 		break;
-		
 		case "ansewer_3":
 			dialog.text = "Curanai want go home. But where is my home? Curanai doesn't know where his village and how to get it.";
 			link.l1 = "Hm. What can I say...";
 			link.l1.go = "int_quests";
 			npchar.quest.answer_3 = "true";
 		break;
-		
 		case "ansewer_4":
 			dialog.text = "Narwhal and Rivados fight often one versus another. We live in peace and don't hurt anyone. Sometimes palefaces drink fire water and swearing but no killing. There are two officer-warriors, one hates another. One day one kill another. Curanai know.";
 			link.l1 = "I see...";
@@ -134,7 +121,6 @@ void ProcessDialogEvent()
 			npchar.quest.answer_4 = "true";
 		break;
 // <-- блок вопросов и ответов
-		
 //----------------------------------------- специальные реакции -----------------------------------------------
 		//обнаружение ГГ в сундуках
 		case "Man_FackYou":
@@ -142,14 +128,12 @@ void ProcessDialogEvent()
 			link.l1 = "Shit!";
 			link.l1.go = "fight";
 		break;
-		
 		case "Woman_FackYou":
 			dialog.text = "What?! Decided to check my chests? You won't get away with it!";
 			link.l1 = "Foolish girl!";
 			link.l1.go = "exit_setOwner";
 			LAi_group_Attack(NPChar, Pchar);
 		break;
-		
 		case "fight":
 			NextDiag.CurrentNode = NextDiag.TempNode;
 			DialogExit();
@@ -157,13 +141,11 @@ void ProcessDialogEvent()
 			LAi_group_Attack(NPChar, Pchar);
 			AddDialogExitQuest("MainHeroFightModeOn");
 		break;
-		
 		case "exit_setOwner":
 			LAi_SetOwnerTypeNoGroup(npchar);
 			NextDiag.CurrentNode = NextDiag.TempNode;
 			DialogExit();
 		break;
-		
 		//замечание по обнаженному оружию
 		case "LSCNotBlade":
 			dialog.text = LinkRandPhrase("Listen, you'd better take your weapon away. It makes me nervous.", "You know, running with blade is not tolerated here. Take it away.", "Listen, don't play a medieval knight running with a sword around. Take it away, it doesn't suit you...");
@@ -171,7 +153,6 @@ void ProcessDialogEvent()
 			link.l1.go = "exit";
 			NextDiag.TempNode = "First Time";
 		break;	
-		
 		case "CitizenNotBlade":
 			if (loadedLocation.type == "town")
 			{
@@ -187,7 +168,6 @@ void ProcessDialogEvent()
 			NextDiag.TempNode = "First Time";
 		break;
 // <-- специальные реакции
-		
 		case "Exit":
 			NextDiag.CurrentNode = NextDiag.TempNode;
 			DialogExit();

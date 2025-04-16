@@ -1,4 +1,3 @@
-
 void CreateReloadPaths(string groupID)
 {
 	if(CheckAttribute(&objFastReloadTable,"Paths.table") && objFastReloadTable.Paths.table == groupID) return;
@@ -6,11 +5,9 @@ void CreateReloadPaths(string groupID)
 	objFastReloadTable.Paths.table = groupID;
 	objFastReloadTable.Paths.shipLocation = pchar.location.from_sea;
 	aref tbl; makearef(tbl,objFastReloadTable.Paths.table);
-
 	int i,j,n, iMax, iMax2;
 	string outLocName,goLocName;
 	aref reloadList,curReload;
-
 	// запишем все переходы в локациях используемой группы
 	for(i=0; i<MAX_LOCATIONS; i++)
 	{
@@ -42,7 +39,6 @@ void CreateReloadPaths(string groupID)
 			}
 		}
 	}
-
 	// заполним все пути перехода из одной локации в другую
 	aref outLoc,goLoc, tmpLoc;
 	bool yesChange = true;
@@ -86,18 +82,15 @@ void CreateReloadPaths(string groupID)
 		}
 	}
 }
-
 // получить идентификатор следующей локации для перехода из одной локации в другую
 // возвращает true, если поиск пути завершен
 bool GetNextLocationForPath(string outLocName, string goLocName, ref nextLocName, ref reloadName)
 {
 	aref tbl; 
 	makearef(tbl,objFastReloadTable.Paths.table);
-
 	string finalLocation = goLocName;
 	nextLocName = "";
 	reloadName = "";
-
 // to_do
 /*	if(goLocName == "Duel_field")
 	{
@@ -114,13 +107,11 @@ bool GetNextLocationForPath(string outLocName, string goLocName, ref nextLocName
 			reloadName = tbl.(outLocName).(goLocName).outLocator;
 			break;
 		}
-
 		// Обратный путь так же не прописан
 		if( !CheckAttribute(tbl,goLocName+"."+outLocName) ) 
 		{
 			break;
 		}
-
 		// Из искомой локации мы можем непосредственно попасть в стартовую локацию
 		if( tbl.(goLocName).(outLocName) == finalLocation )
 		{
@@ -128,23 +119,18 @@ bool GetNextLocationForPath(string outLocName, string goLocName, ref nextLocName
 			reloadName = tbl.(goLocName).(outLocName).goLocator;
 			break;
 		}
-
 		if( goLocName == tbl.(goLocName).(outLocName) ) 
 		{
 			break;
 		}
-
 		goLocName = tbl.(goLocName).(outLocName)
 	}
-
 	if(nextLocName=="" || nextLocName==finalLocation) 
 	{
 		return true;
 	}
-
 	return false;
 }
-
 string GetFastReloadName(string outLocName, string goLocName)
 {
 	aref tbl; makearef(tbl,objFastReloadTable.Paths.table);
@@ -154,17 +140,14 @@ string GetFastReloadName(string outLocName, string goLocName)
 		return tbl.(goLocName).(outLocName).outLocator;
 	return "";
 }
-
 bool CheckQuestPresents(string locationName)
 {
 	int  n,m;
 	aref quest;
 	string sQuestName;
 	aref conditions;
-
 	aref quests;	makearef(quests,pchar.quest);
 	int  nQuestsNum = GetAttributesNum(quests);
-
 	for(n = 0; n < nQuestsNum; n++)
 	{
 		quest = GetAttributeN(quests,n);
@@ -182,7 +165,6 @@ bool CheckQuestPresents(string locationName)
 	}
 	return false;
 }
-
 bool CheckConditionPresents(aref conditions, string locationName)
 {
 	int n;
@@ -206,7 +188,6 @@ bool CheckConditionPresents(aref conditions, string locationName)
 	}
 	return false;
 }
-
 void PlayerFastTravel(int startLocIdx, string finishLocName, string locatorname)
 {
 	if(startLocIdx<0 || startLocIdx>=MAX_LOCATIONS || finishLocName=="")
@@ -214,15 +195,12 @@ void PlayerFastTravel(int startLocIdx, string finishLocName, string locatorname)
 		return;
 	}
 	string checkLocation, nextLocName, reloadName;
-
 	checkLocation = Locations[startLocIdx].id;
-	
 	if(checkLocation==finishLocName)
 	{
 		Log_SetStringToLog(XI_ConvertString("You are already there"));
 		return;
 	}
-
 	while(checkLocation!=finishLocName)
 	{
 		if( checkLocation!=Locations[startLocIdx].id && CheckQuestPresents(checkLocation) )
@@ -244,7 +222,6 @@ void PlayerFastTravel(int startLocIdx, string finishLocName, string locatorname)
 		}
 		checkLocation = nextLocName;
 	}
-
 	if(checkLocation!=Locations[startLocIdx].id)
 	{
 		/*if(checkLocation == "Duel_field")
@@ -268,7 +245,6 @@ void PlayerFastTravel(int startLocIdx, string finishLocName, string locatorname)
 			DoReloadCharacterToLocation(checkLocation,"reload",reloadName);
 		}
 	}
-
 	if(checkLocation!=finishLocName)
 	{
 		if(checkLocation==Locations[startLocIdx].id)
@@ -279,11 +255,9 @@ void PlayerFastTravel(int startLocIdx, string finishLocName, string locatorname)
 		{
 			Log_SetStringToLog(XI_ConvertString("Your walk was interrupted"));
 		}
-
 		Log_SetStringToLog(XI_ConvertString("Looks like something is going to happen here"));
 	}
 }
-
 int GetLocationNation(aref arLocation)
 {
 	if( CheckAttribute(arLocation,"ItsNation") )	return sti(arLocation.ItsNation);
@@ -302,7 +276,6 @@ int GetLocationNation(aref arLocation)
 	}
 	return -1;
 }
-
 bool GetFortReloadFromTable(string tblName, ref refIslName, ref refLocName)
 {
 	switch (tblName)
@@ -420,14 +393,12 @@ bool GetFortReloadFromTable(string tblName, ref refIslName, ref refLocName)
 	refLocName = "";
 	return false;
 }
-
 void SetTownCapturedState(string townName, bool captured)
 {
 	aref arTown,arTownsList;
 	makearef(arTownsList,objTownStateTable.towns);
 	int i,q;
 	q = GetAttributesNum(arTownsList);
-
 	for(i=0; i<q; i++)
 	{
 		arTown = GetAttributeN(arTownsList,i);
@@ -439,7 +410,6 @@ void SetTownCapturedState(string townName, bool captured)
 	}
 	trace("WARNING!!! Town name " + townName + " not found");
 }
-
 void SetLocationCapturedState(string locationID, bool captured)
 {
 	int locIdx = FindLocation(locationID);
@@ -452,7 +422,6 @@ void SetLocationCapturedState(string locationID, bool captured)
 		SetTownCapturedState(Locations[locIdx].townsack,captured);
 	}
 }
-
 bool IsLocationCaptured(string locationID)
 {
 	int locIdx = FindLocation(locationID);
@@ -461,18 +430,15 @@ bool IsLocationCaptured(string locationID)
 		trace("WARNING!!! location ID " + locationID + " not found");
 		return false;
 	}
-
 	if( !CheckAttribute(&Locations[locIdx],"townsack") )
 	{
 		return false;
 	}
-
 	string townName = Locations[locIdx].townsack;
 	aref arTown,arTownsList;
 	makearef(arTownsList,objTownStateTable.towns);
 	int i,q;
 	q = GetAttributesNum(arTownsList);
-
 	for(i=0; i<q; i++)
 	{
 		arTown = GetAttributeN(arTownsList,i);
@@ -481,10 +447,8 @@ bool IsLocationCaptured(string locationID)
 			return sti(arTown.captured);
 		}
 	}
-
 	return false;
 }
-
 void SetFortCharacterCaptured(ref chref, bool captured)
 {
 	string sToLocation = "";
@@ -498,17 +462,14 @@ void SetFortCharacterCaptured(ref chref, bool captured)
 	}
 	SetLocationCapturedState(sToLocation,captured);
 }
-
 void RecalculateHireCrew(int locIdx)
 {
 	if(locIdx<0 || !CheckAttribute(&Locations[locIdx],"townsack")) return;
-
 	string townName = Locations[locIdx].townsack;
 	aref arTown,arTownsList;
 	makearef(arTownsList,objTownStateTable.towns);
 	int i,q;
 	q = GetAttributesNum(arTownsList);
-
 	for(i=0; i<q; i++)
 	{
 		arTown = GetAttributeN(arTownsList,i);
@@ -517,32 +478,26 @@ void RecalculateHireCrew(int locIdx)
 			break;
 		}
 	}
-
 	if(i>=q)  return;
 	aref arData;
 	if(!CheckAttribute(arTown,"crew.data")) return;
 	makearef(arData,arTown.crew.data);
-
 	int nYear = 1;
 	int nMonth = 1;
 	int nDay = 1;
 	if( CheckAttribute(arData,"year") ) nYear = sti(arData.year);
 	if( CheckAttribute(arData,"month") ) nMonth = sti(arData.month);
 	if( CheckAttribute(arData,"day") ) nDay = sti(arData.day);
-
 	int pastDays = GetPastTime( "day", nYear,nMonth,nDay,0.0,
 		GetDataYear(),GetDataMonth(),GetDataDay(),0.0 );
 	if(pastDays<10) return;
-
 	arData.year = GetDataYear();
 	arData.month = GetDataMonth();
 	arData.day = GetDataDay();
-
 	int nPastQ = 0;
 	int nPastM = MORALE_NORMAL;
 	if(CheckAttribute(arTown,"crew.quantity"))	nPastQ = sti(arTown.crew.quantity);
 	if(CheckAttribute(arTown,"crew.morale"))	nPastM = sti(arTown.crew.morale);
-
 	int nNeedCrew = 0;
 	int cn;
 	for(i=0; i<COMPANION_MAX; i++)
@@ -553,7 +508,6 @@ void RecalculateHireCrew(int locIdx)
 			nNeedCrew += GetMaxCrewQuantity(GetCharacter(cn));
 		}
 	}
-
 	if(nPastQ>nNeedCrew)
 	{	nPastM = MORALE_NORMAL + rand(MORALE_MAX-MORALE_NORMAL);
 		nPastQ = nNeedCrew + rand(nNeedCrew);
@@ -562,11 +516,9 @@ void RecalculateHireCrew(int locIdx)
 	{	nPastM = MORALE_NORMAL/3 + rand(MORALE_NORMAL/3*2);
 		nPastQ = nNeedCrew/2 + rand(nNeedCrew);
 	}
-
 	arTown.crew.quantity = nPastQ;
 	arTown.crew.morale = nPastM;
 }
-
 void RecalculateJumpTable()
 {
 	string outGroupName = "";
@@ -575,12 +527,10 @@ void RecalculateJumpTable()
 	objFastReloadTable.Paths.table = "";
 	CreateReloadPaths(outGroupName);
 }
-
 bool CheckFastJump(string sFromLocation, string sToLocation)
 {
 	if(sFromLocation==sToLocation) return false;
 	string curLocName, nextLocName, reloadName;
-
 	bool bNoBreak = true;
 	curLocName = sFromLocation;
 	while(bNoBreak && curLocName!=sToLocation)
@@ -596,15 +546,12 @@ bool CheckFastJump(string sFromLocation, string sToLocation)
 		}
 		curLocName = nextLocName;
 	}
-
 	return true;
 }
-
 bool IsEnableLocToLocReload(string sFromLocName, string sToLocName, string locatorName)
 {
 	aref tbl;
 	makearef(tbl,objFastReloadTable.Paths.table);
 	if( !CheckAttribute(tbl,sFromLocName) ) return false;
-
 	return chrCheckReload( &Locations[sti(tbl.(sFromLocName))], locatorName );
 }

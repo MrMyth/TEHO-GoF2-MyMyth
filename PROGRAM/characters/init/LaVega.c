@@ -1,12 +1,9 @@
-
 int CreateLaVegaCharacters(int n)
 {
 	ref ch;
-	
 	///////////////////////////////////////////////////////////////////////////////
 	// ОСНОВНЫЕ ПЕРСОНАЖИ
 	///////////////////////////////////////////////////////////////////////////////
-
 	makeref(ch,Characters[n]);			
 	ch.id		= "Terrax";
 	ch.model	= "Terrax";
@@ -35,7 +32,6 @@ int CreateLaVegaCharacters(int n)
 	LAi_group_MoveCharacter(ch, "PIRATE_CITIZENS");
 	LAi_SetImmortal(ch, true);
 	n = n + 1;
-
 	makeref(ch,Characters[n]);		// ОФициантка
 	ch.id		= "LaVega_waitress";
 	ch.model	= "women_8";
@@ -52,7 +48,6 @@ int CreateLaVegaCharacters(int n)
 	LAi_group_MoveCharacter(ch, "PIRATE_CITIZENS");
 	LAi_SetImmortal(ch, true);
 	n = n + 1;
-
 	makeref(ch,Characters[n]);			//Трактирщик
 	ch.id		= "LaVega_tavernkeeper";
 	ch.model	= "barmen_14";
@@ -70,7 +65,6 @@ int CreateLaVegaCharacters(int n)
 	LAi_group_MoveCharacter(ch, "PIRATE_CITIZENS");
 	LAi_SetImmortal(ch, true);
 	n = n + 1;
-
 	makeref(ch,Characters[n]);			//Торговец
 	ch.id		= "LaVega_trader";
 	ch.model	= "trader_14";
@@ -88,6 +82,5 @@ int CreateLaVegaCharacters(int n)
 	LAi_SetImmortal(ch, true);
 	ch.item_date = "";
 	n = n + 1;
-
 	return n;
 }

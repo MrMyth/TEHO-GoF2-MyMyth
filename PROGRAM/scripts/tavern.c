@@ -33,7 +33,6 @@ void TavernWaitDate(string date)
 	RefreshLandTime();
 	// boal <--
 }
-
 void TavernWaitDate_LSC(string date)
 {
 	int iTime, iAddTime, iTmp;

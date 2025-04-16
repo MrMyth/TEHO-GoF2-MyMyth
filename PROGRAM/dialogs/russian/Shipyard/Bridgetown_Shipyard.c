@@ -16,7 +16,6 @@ void ProcessCommonDialogEvent(ref NPChar, aref Link, aref NextDiag)
                 link.l1.go = "ShipyardDone";
 			}
 		break;
-		
 		case "ShipyardDone":
 			dialog.text = "Yes, go ahead and sell them. I've always got enough six-pounders, but I've always got a problem with heavy cannons, so I'll pay you a decent price if of course they are still in working condition.";
 			link.l1 = "Wow, great! I'm going to give orders.";
@@ -38,4 +37,3 @@ void ProcessCommonDialogEvent(ref NPChar, aref Link, aref NextDiag)
 	}
 	UnloadSegment(NPChar.FileDialog2);  // если где-то выход внутри switch  по return не забыть сделать анлод
 }
-

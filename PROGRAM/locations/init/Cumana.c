@@ -1,7 +1,5 @@
-
 int LocationInitCumana(int n)
 {
-	
 	//////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 	// ГОРОД
 	//////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
@@ -31,10 +29,8 @@ int LocationInitCumana(int n)
 	locations[n].models.always.seabed = "Cumana_sb";
 	locations[n].models.always.locators = "Cumana_locators";
 	locations[n].models.always.grassPatch = "Cumana_grass";
-	
 	locations[n].models.always.plan = "plan1";
 	locations[n].models.always.plan.level = 9;
-	
 	//WindMill Fan
 	locations[n].models.always.MillFan = "MillFan";
 	Locations[n].models.always.MillFan.locator.group = "WindMill";
@@ -42,7 +38,6 @@ int LocationInitCumana(int n)
 	Locations[n].models.always.MillFan.rotate.x = 0.0;
 	Locations[n].models.always.MillFan.rotate.y = 0.0;
 	Locations[n].models.always.MillFan.rotate.z = 0.3;
-
 	//Day
 	locations[n].models.day.fonar = "Cumana_fd";
 	locations[n].models.day.charactersPatch = "Cumana_patch_day";
@@ -54,7 +49,6 @@ int LocationInitCumana(int n)
 	locations[n].environment.weather = "true";
 	locations[n].environment.sea = "true";
 	//Reload map
-
     // --> Типовые городские локации, четкая фиксация на 10 номеров.
 	locations[n].reload.l1.name = "reload1_back";
 	locations[n].reload.l1.go = "Cumana";
@@ -62,174 +56,147 @@ int LocationInitCumana(int n)
 	locations[n].reload.l1.autoreload = "0";
 	locations[n].reload.l1.label = "Sea";
 	locations[n].locators_radius.reload.reload1_back = 1.8;
-
 	locations[n].reload.l2.name = "reload11_back";
 	locations[n].reload.l2.go = "Cumana";
 	locations[n].reload.l2.emerge = "reload_1";
 	locations[n].reload.l2.autoreload = "0";
 	locations[n].reload.l2.label = "Sea";
 	locations[n].locators_radius.reload.reload1_back = 1.8;
-
 	locations[n].reload.l9.name = "reload2_back";
 	locations[n].reload.l9.go = "Cumana";
 	locations[n].reload.l9.emerge = "reload_1";
 	locations[n].reload.l9.autoreload = "0";
 	locations[n].reload.l9.label = "Sea";
 	locations[n].locators_radius.reload.reload1_back = 1.8;
-
 	locations[n].reload.l3.name = "reload3_back";
 	locations[n].reload.l3.go = "Cumana_townhall";
 	locations[n].reload.l3.emerge = "reload1";
 	locations[n].reload.l3.autoreload = "0";
 	locations[n].reload.l3.label = "Residence";
 	locations[n].reload.l3.close_for_night = 1;
-
 	locations[n].reload.lR1.name = "reloadR1";
 	locations[n].reload.lR1.go = "Cumana_TownhallRoom";
 	locations[n].reload.lR1.emerge = "reload2";
 	locations[n].reload.lR1.autoreload = "0";
 	locations[n].reload.lR1.label = "Residence";
 	locations[n].reload.lR1.close_for_night = 1;
-
 	locations[n].reload.l4.name = "reload4_back";
 	locations[n].reload.l4.go = "Cumana_tavern";
 	locations[n].reload.l4.emerge = "reload1";
 	locations[n].reload.l4.autoreload = "0";
 	locations[n].reload.l4.label = "Tavern";
-
 	locations[n].reload.l5.name = "reload5_back";
 	locations[n].reload.l5.go = "Cumana_shipyard";
 	locations[n].reload.l5.emerge = "reload1";
 	locations[n].reload.l5.autoreload = "0";
 	locations[n].reload.l5.label = "Shipyard";
 	locations[n].reload.l5.close_for_night = 1;
-
 	locations[n].reload.l6.name = "reload6_back";
 	locations[n].reload.l6.go = "Cumana_store";
 	locations[n].reload.l6.emerge = "reload1";
 	locations[n].reload.l6.autoreload = "0";
 	locations[n].reload.l6.label = "Store";
 	locations[n].reload.l6.close_for_night = 1;
-
 	locations[n].reload.l7.name = "reload7_back";
 	locations[n].reload.l7.go = "Cumana_church";
 	locations[n].reload.l7.emerge = "reload1";
 	locations[n].reload.l7.autoreload = "0";
 	locations[n].reload.l7.label = "Church";
 	//locations[n].reload.l7.close_for_night = 1;
-
 	locations[n].reload.l8.name = "reload8_back";
 	locations[n].reload.l8.go = "Cumana_bank";
 	locations[n].reload.l8.emerge = "reload1";
 	locations[n].reload.l8.autoreload = "0";
 	locations[n].reload.l8.label = "Usurer House";
 	locations[n].reload.l8.close_for_night = 1;
-
 	locations[n].reload.l10.name = "reload10_back";
 	locations[n].reload.l10.go = "Cumana_PortOffice";
 	locations[n].reload.l10.emerge = "reload1";
 	locations[n].reload.l10.autoreload = "0";
 	locations[n].reload.l10.label = "PortOffice";
 	locations[n].reload.l10.close_for_night = 1;
-
 	locations[n].reload.gate.name = "gate_back";
 	locations[n].reload.gate.go = "Cumana_ExitTown";
 	locations[n].reload.gate.emerge = "reload3";
 	locations[n].reload.gate.autoreload = "0";
 	locations[n].reload.gate.label = "ExitTown";
-	
 	locations[n].reload.jail.name = "reload_jail";
 	locations[n].reload.jail.go = "Cumana_prison";
 	locations[n].reload.jail.emerge = "reload1";
 	locations[n].reload.jail.autoreload = "0";
 	locations[n].reload.jail.label = "Prison";
-
     // --> Комоны, загрушки. Номера с начинаются с 20.
 	locations[n].reload.l20.name = "houseS4";
 	locations[n].reload.l20.go = "CommonStoneHouse";
 	locations[n].reload.l20.emerge = "reload1";
 	locations[n].reload.l20.autoreload = "0";
 	locations[n].reload.l20.label = "House";
-
 	locations[n].reload.l21.name = "houseSp2";
 	locations[n].reload.l21.go = "CommonDoubleflourHouse_1";
 	locations[n].reload.l21.emerge = "reload1";
 	locations[n].reload.l21.autoreload = "0";
 	locations[n].reload.l21.label = "House";
-	
 	locations[n].reload.l22.name = "houseSp21";
 	locations[n].reload.l22.go = "CommonRoom_MH3";
 	locations[n].reload.l22.emerge = "reload1";
 	locations[n].reload.l22.autoreload = "0";
 	locations[n].reload.l22.label = "House";
-	
 	locations[n].reload.l23.name = "houseS5";
 	locations[n].reload.l23.go = "CommonFlamHouse";
 	locations[n].reload.l23.emerge = "reload1";
 	locations[n].reload.l23.autoreload = "0";
 	locations[n].reload.l23.label = "House";
-	
 	locations[n].reload.l24.name = "houseF1";
 	locations[n].reload.l24.go = "CommonRoom_MH2";
 	locations[n].reload.l24.emerge = "reload1";
 	locations[n].reload.l24.autoreload = "0";
 	locations[n].reload.l24.label = "House";
-
 	locations[n].reload.l25.name = "houseSp1";
 	locations[n].reload.l25.go = "CommonDoubleflourHouse_2";
 	locations[n].reload.l25.emerge = "reload1";
 	locations[n].reload.l25.autoreload = "0";
 	locations[n].reload.l25.label = "House";
-	
 	locations[n].reload.l26.name = "houseS3";
 	locations[n].reload.l26.go = "CommonPirateHouse";
 	locations[n].reload.l26.emerge = "reload1";
 	locations[n].reload.l26.autoreload = "0";
 	locations[n].reload.l26.label = "House";
-	
 	locations[n].reload.l27.name = "houseS2";
 	locations[n].reload.l27.go = "CommonCobHouse";
 	locations[n].reload.l27.emerge = "reload1";
 	locations[n].reload.l27.autoreload = "0";
 	locations[n].reload.l27.label = "House";
-	
 	locations[n].reload.l28.name = "houseS1";
 	locations[n].reload.l28.go = "CommonFlamHouse";
 	locations[n].reload.l28.emerge = "reload1";
 	locations[n].reload.l28.autoreload = "0";
 	locations[n].reload.l28.label = "House";
-	
 	locations[n].reload.l29.name = "houseSp4";
 	locations[n].reload.l29.go = "CommonDoubleflourHouse_1";
 	locations[n].reload.l29.emerge = "reload1";
 	locations[n].reload.l29.autoreload = "0";
 	locations[n].reload.l29.label = "House";
-	
 	locations[n].reload.l30.name = "houseSp3";
 	locations[n].reload.l30.go = "CommonStoneHouse";
 	locations[n].reload.l30.emerge = "reload1";
 	locations[n].reload.l30.autoreload = "0";
 	locations[n].reload.l30.label = "House";
-	
 	locations[n].reload.l31.name = "houseH1";
 	locations[n].reload.l31.go = "CommonRoom_MH10";
 	locations[n].reload.l31.emerge = "reload1";
 	locations[n].reload.l31.autoreload = "0";
 	locations[n].reload.l31.label = "House";
-	
 	locations[n].reload.l32.name = "houseF3";
 	locations[n].reload.l32.go = "CommonRoom_MH";
 	locations[n].reload.l32.emerge = "reload1";
 	locations[n].reload.l32.autoreload = "0";
 	locations[n].reload.l32.label = "House";
-
 	locations[n].reload.l33.name = "houseF2";
 	locations[n].reload.l33.go = "CommonRoom_MH4";
 	locations[n].reload.l33.emerge = "reload1";
 	locations[n].reload.l33.autoreload = "0";
 	locations[n].reload.l33.label = "House";
 	n = n + 1;
-
   	//////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 	// ТАВЕРНА
 	//////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
@@ -268,7 +235,6 @@ int LocationInitCumana(int n)
 	locations[n].reload.l1.emerge = "reload4";
 	locations[n].reload.l1.autoreload = "0";
 	locations[n].reload.l1.label = "Street";
-
 	locations[n].reload.l2.name = "reload2_back";
 	locations[n].reload.l2.go = "Cumana_tavern_upstairs";
 	locations[n].reload.l2.emerge = "reload1";
@@ -277,7 +243,6 @@ int LocationInitCumana(int n)
 	locations[n].reload.l2.disable = 1; // закроем, но связку сделаем для квестовых нужд.
 	LAi_LocationFightDisable(&locations[n], true);
 	n = n + 1;
-
 	//////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 	// КОМНАТА В ТАВЕРНЕ
 	//////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
@@ -300,7 +265,6 @@ int LocationInitCumana(int n)
 	locations[n].models.always.window = "tavern_room_window";
 	locations[n].models.always.window.tech = "LocationWindows";
 	locations[n].models.always.window.level = 65539;
-
 	locations[n].models.always.back = "..\inside_back";
 	locations[n].models.always.back.level = 65529;
 	//Day
@@ -318,7 +282,6 @@ int LocationInitCumana(int n)
 	locations[n].reload.l1.label = "Tavern";
 	locations[n].locators_radius.reload.reload1 = 0.8;
 	n = n + 1;
-
  	//////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 	// МАГАЗИН
 	//////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
@@ -364,7 +327,6 @@ int LocationInitCumana(int n)
 	locations[n].reload.l2.label = "Room";
 	LAi_LocationFightDisable(&locations[n], true);
 	n = n + 1;
-
  	//////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 	// РОСТОВЩИК
 	//////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
@@ -402,7 +364,6 @@ int LocationInitCumana(int n)
 	locations[n].reload.l1.emerge = "reload8";
 	locations[n].reload.l1.autoreload = "0";
 	locations[n].reload.l1.label = "Street";
-
 	locations[n].reload.l2.name = "reload2";
 	locations[n].reload.l2.go = "CommonResidence_5";
 	locations[n].reload.l2.emerge = "reload1";
@@ -410,7 +371,6 @@ int LocationInitCumana(int n)
 	locations[n].reload.l2.label = "Room";
 	LAi_LocationFightDisable(&locations[n], true);
 	n = n + 1;
-
  	//////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 	// ВЕРФЬ
 	//////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
@@ -448,7 +408,6 @@ int LocationInitCumana(int n)
 	locations[n].reload.l1.emerge = "reload5";
 	locations[n].reload.l1.autoreload = "0";
 	locations[n].reload.l1.label = "Street";
-
 	locations[n].reload.l2.name = "reload2";
 	locations[n].reload.l2.go = "CommonPackhouse_2";
 	locations[n].reload.l2.emerge = "reload1";
@@ -456,7 +415,6 @@ int LocationInitCumana(int n)
 	locations[n].reload.l2.label = "Room";
 	locations[n].locators_radius.item.item1 = 1.0;
 	n = n + 1;
-
  	//////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 	// РЕЗИДЕНЦИЯ
 	//////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
@@ -497,20 +455,17 @@ int LocationInitCumana(int n)
 	locations[n].reload.l1.emerge = "reload3";
 	locations[n].reload.l1.autoreload = "0";
 	locations[n].reload.l1.label = "Street";
-
 	locations[n].reload.l2.name = "reload3";
 	locations[n].reload.l2.go = "CommonResidence_4";
 	locations[n].reload.l2.emerge = "reload1";
 	locations[n].reload.l2.autoreload = "0";
 	locations[n].reload.l2.label = "Room";
-
 	locations[n].reload.l3.name = "reload2"; //кабинет налево от входа
 	locations[n].reload.l3.go = "Cumana_TownhallRoom";
 	locations[n].reload.l3.emerge = "reload1";
 	locations[n].reload.l3.autoreload = "0";
 	locations[n].reload.l3.label = "TownhallRoom";
 	n = n + 1;
-
 	//////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 	locations[n].id = "Cumana_TownhallRoom"; //кабинет со спальней и выходом в город сбоку
 	locations[n].id.label = "TownhallRoom";
@@ -530,7 +485,6 @@ int LocationInitCumana(int n)
 	locations[n].models.always.window = "BigHouseBack_windows";
 	locations[n].models.always.window.tech = "LocationWindows";
 	locations[n].models.always.window.level = 65539;
-
 	locations[n].models.always.back = "..\inside_back";
 	locations[n].models.always.back.level = 65529;
 	//Day
@@ -548,20 +502,17 @@ int LocationInitCumana(int n)
 	locations[n].reload.l1.emerge = "reload2";
 	locations[n].reload.l1.autoreload = "0";
 	locations[n].reload.l1.label = "Townhall";
-
 	locations[n].reload.l2.name = "reload2";
 	locations[n].reload.l2.go = "Cumana_town"; 
 	locations[n].reload.l2.emerge = "reloadR1"; 
 	locations[n].reload.l2.autoreload = "0";
 	locations[n].reload.l2.label = "Street";
-
 	locations[n].reload.l3.name = "reload3";
 	locations[n].reload.l3.go = "CommonBedroom"; 
 	locations[n].reload.l3.emerge = "reload1";
 	locations[n].reload.l3.autoreload = "0";
 	locations[n].reload.l3.label = "Bedroom";
 	n = n + 1;
-
 	//////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 	// ЦЕРКОВЬ
 	//////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
@@ -601,7 +552,6 @@ int LocationInitCumana(int n)
 	locations[n].reload.l1.label = "Street";
 	LAi_LocationFightDisable(&locations[n], true);
 	n = n + 1;
-
  	//////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 	// ПОРТОВЫЙ ОФИС
 	//////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
@@ -621,11 +571,9 @@ int LocationInitCumana(int n)
 	locations[n].models.always.housePortOffice = "PortOffice";
 	locations[n].models.always.housePortOffice.level = 65538;
 	locations[n].models.always.locators = "PortOffice_locators";
-
 	Locations[n].models.always.PortOffice = "PortOffice_windows";
 	Locations[n].models.always.PortOffice.tech = "LocationWindows";
 	locations[n].models.always.PortOffice.level = 65539;
-
 	locations[n].models.always.back = "..\inside_back";
 	locations[n].models.always.back.level = 65529;
 	//Day
@@ -643,7 +591,6 @@ int LocationInitCumana(int n)
 	locations[n].reload.l1.label = "Street";
 	LAi_LocationFightDisable(&locations[n], true);
 	n = n + 1;
-	
 	////////////////////// prison ////////////////////////////
 	Locations[n].id = "Cumana_prison";
 	locations[n].id.label = "Prison";
@@ -676,12 +623,9 @@ int LocationInitCumana(int n)
 	Locations[n].reload.l1.go = "Cumana_town";
 	Locations[n].reload.l1.emerge = "reload_jail";
 	Locations[n].reload.l1.autoreload = "0";
-	
 	locations[n].locators_radius.box.box1 = 0.8;
 	locations[n].box1.QuestClosed = true;
 	n = n + 1;
-
-
 	//////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 	// Выход из города
 	//////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
@@ -699,12 +643,9 @@ int LocationInitCumana(int n)
 	locations[n].filespath.models = "locations\Outside\Jungles\TownExitT";
 	Locations[n].models.always.townExit = "townExitT";
 	Locations[n].models.always.townWalls = "townExitT_wood";
-	
 	Locations[n].models.always.locators = "townExitT_locators";
-		
 	Locations[n].models.always.grassPatch = "townExitT_grass";
 	Locations[n].models.always.grassPatch.texture = "grass\grassshore.tga.tx";
-	
 	Locations[n].models.always.l1 = "plan1";
 	Locations[n].models.always.l1.level = 9;
 	Locations[n].models.always.l1.tech = "LocationModelBlend";
@@ -730,21 +671,18 @@ int LocationInitCumana(int n)
 	locations[n].reload.l1.autoreload = "1";
 	locations[n].reload.l1.label = "Jungle";
 	locations[n].locators_radius.reload.reload1_back = 2;
-
 	locations[n].reload.l2.name = "reload1_back";
 	locations[n].reload.l2.go = "Cumana_Fort";
 	locations[n].reload.l2.emerge = "reload1";
 	locations[n].reload.l2.autoreload = "1";
 	locations[n].reload.l2.label = "Cumana Fort";
 	locations[n].locators_radius.reload.reload2_back = 2;
-
 	locations[n].reload.l3.name = "reload3";
 	locations[n].reload.l3.go = "Cumana_town";
 	locations[n].reload.l3.emerge = "gate_back";
 	locations[n].reload.l3.autoreload = "0";
 	locations[n].reload.l3.label = "Cumana";
 	n = n + 1;
-
 	//////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 	// Джунгли
 	//////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
@@ -785,14 +723,12 @@ int LocationInitCumana(int n)
 	locations[n].reload.l1.autoreload = "1";
 	locations[n].reload.l1.label = "ExitTown";
 	locations[n].locators_radius.reload.reload1_back = 2;
-
 	locations[n].reload.l2.name = "reload2_back";
 	locations[n].reload.l2.go = "Cumana_Jungle_02";
 	locations[n].reload.l2.emerge = "reload2";
 	locations[n].reload.l2.autoreload = "1";
 	locations[n].reload.l2.label = "Jungle";
 	locations[n].locators_radius.reload.reload2_back = 2;
-
 	locations[n].reload.l3.name = "reload3_back";
 	locations[n].reload.l3.go = "Cumana_CaveEntrance";
 	locations[n].reload.l3.emerge = "reload2";
@@ -800,7 +736,6 @@ int LocationInitCumana(int n)
 	locations[n].reload.l3.label = "Jungle";
 	locations[n].locators_radius.reload.reload3_back = 2;
 	n = n + 1;
-
 	//////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 	// Вход в пещеру
 	//////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
@@ -841,7 +776,6 @@ int LocationInitCumana(int n)
 	locations[n].reload.l1.autoreload = "0";
 	locations[n].reload.l1.label = "Cave";
 	locations[n].locators_radius.reload.reload1_back = 1.3;
-
 	locations[n].reload.l2.name = "reload2_back";
 	locations[n].reload.l2.go = "Cumana_jungle_01";
 	locations[n].reload.l2.emerge = "reload3";
@@ -849,7 +783,6 @@ int LocationInitCumana(int n)
 	locations[n].reload.l2.label = "Jungle";
 	locations[n].locators_radius.reload.reload2_back = 2.0;
 	n = n + 1;
-
 	//////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 	// Пещера
 	//////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
@@ -866,10 +799,8 @@ int LocationInitCumana(int n)
 	locations[n].filespath.models = "locations\inside\cavernMedium1";
 	locations[n].models.always.cavernMedium1 = "cavernMedium1";
 	locations[n].models.always.cavernMedium1.sea_reflection = 1;
-	
 	locations[n].models.always.lamps = "cavernMedium1_lamps";	
 	locations[n].models.always.locators = "cavernMedium1_locators";	
-
 	locations[n].locators_radius.item.duhi1 = 0.0;
 /*	
 	Locations[n].models.always.rays = "cavernMedium1_rays";
@@ -894,7 +825,6 @@ int LocationInitCumana(int n)
 	locations[n].reload.l1.name = "reload1_back";
 	locations[n].reload.l1.go = "Cumana_CaveEntrance";
 	locations[n].reload.l1.emerge = "reload1";
-
 	locations[n].reload.l2.name = "reload2";
 	locations[n].reload.l2.go = "Cumana_Jungle_02";
 	locations[n].reload.l2.emerge = "reloadW";
@@ -902,7 +832,6 @@ int LocationInitCumana(int n)
 	locations[n].reload.l2.label = "Jungle";
 	locations[n].locators_radius.item.CheckReload1 = 3.5;
 	n = n + 1;
-
 	//////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 	// Джунгли
 	//////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
@@ -929,7 +858,6 @@ int LocationInitCumana(int n)
 	Locations[n].models.always.l3 = "plan3";
 	Locations[n].models.always.l3.level = 7;
 	Locations[n].models.always.l3.tech = "LocationModelBlend";	
-
 	locations[n].models.always.well_small = "well_small";
 	Locations[n].models.always.well_small.locator.group = "reload";
 	Locations[n].models.always.well_small.locator.name ="reloadW_back";
@@ -948,14 +876,12 @@ int LocationInitCumana(int n)
 	locations[n].reload.l1.autoreload = "1";
 	locations[n].reload.l1.label = "Jungle";
 	locations[n].locators_radius.reload.reload1_back = 2.0;
-
 	locations[n].reload.l2.name = "reload2_back";
 	locations[n].reload.l2.go = "Cumana_Jungle_01";
 	locations[n].reload.l2.emerge = "reload2";
 	locations[n].reload.l2.autoreload = "1";
 	locations[n].reload.l2.label = "Jungle";
 	locations[n].locators_radius.reload.reload2_back = 2.0;
-
 	locations[n].reload.l3.name = "reloadW_back";
 	locations[n].reload.l3.go = "Cumana_Cave";
 	locations[n].reload.l3.emerge = "reload2";
@@ -963,7 +889,6 @@ int LocationInitCumana(int n)
 	locations[n].reload.l3.label = "Jungle";
 	locations[n].locators_radius.reload.reloadW_back = 2.3;
 	n = n + 1;
-	
 	//////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 	// Джунгли
 	//////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
@@ -1004,7 +929,6 @@ int LocationInitCumana(int n)
 	locations[n].reload.l1.autoreload = "1";
 	locations[n].reload.l1.label = "Jungle";
 	locations[n].locators_radius.reload.reload1_back = 2.0;
-
 	locations[n].reload.l2.name = "reload2_back";
 	locations[n].reload.l2.go = "Shore19";
 	locations[n].reload.l2.emerge = "reload1";
@@ -1012,7 +936,6 @@ int LocationInitCumana(int n)
 	locations[n].reload.l2.label = "Shore19";
 	locations[n].locators_radius.reload.reload2_back = 2.0;
 	n = n + 1;
-
 	//////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 	// бухта Карупано
 	//////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
@@ -1032,10 +955,8 @@ int LocationInitCumana(int n)
 	locations[n].models.always.shore06.sea_reflection = 1;
 	Locations[n].models.always.shore06seabed = "shore06_sb";
 	Locations[n].models.always.locators = "shore06_locators";
-		
 	Locations[n].models.always.grassPatch = "shore06_grass";
 	Locations[n].models.always.grassPatch.texture = "grass\grassshore.tga.tx";
-	
 	Locations[n].models.always.l1 = "plan1";
 	Locations[n].models.always.l1.level = 9;
 	Locations[n].models.always.l1.tech = "LocationModelBlend";
@@ -1059,7 +980,6 @@ int LocationInitCumana(int n)
 	locations[n].reload.l1.autoreload = "1";
 	locations[n].reload.l1.label = "Jungle";
 	locations[n].locators_radius.reload.reload1_back = 2;
-
 	locations[n].reload.l2.name = "boat";
 	locations[n].reload.l2.go = "Cumana";
 	locations[n].reload.l2.emerge = "reload_3";
@@ -1067,7 +987,6 @@ int LocationInitCumana(int n)
 	locations[n].reload.l2.label = "Sea";
     locations[n].locators_radius.reload.boat = 9.0;
 	n = n + 1;
-
  	//////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 	// пляж Лос Текес (c проходом к руднику)
 	//////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
@@ -1088,10 +1007,8 @@ int LocationInitCumana(int n)
 	locations[n].models.always.shore02.sea_reflection = 1;
 	Locations[n].models.always.shore02seabed = "shore02_sb";
 	Locations[n].models.always.locators = "shore02_lcommon"; //заглушечный файл локаторов
-		
 	Locations[n].models.always.grassPatch = "shore02_grass";
 	Locations[n].models.always.grassPatch.texture = "grass\grassshore.tga.tx";
-	
 	Locations[n].models.always.l1 = "plan1";
 	Locations[n].models.always.l1.level = 9;
 	Locations[n].models.always.l1.tech = "LocationModelBlend";
@@ -1115,7 +1032,6 @@ int LocationInitCumana(int n)
 	locations[n].reload.l1.autoreload = "1";
 	locations[n].reload.l1.label = "Jungle";
     locations[n].locators_radius.reload.reload1 = 2.0;
-
 	locations[n].reload.l2.name = "boat";
 	locations[n].reload.l2.go = "Cumana";
 	locations[n].reload.l2.emerge = "reload_2";
@@ -1123,7 +1039,6 @@ int LocationInitCumana(int n)
 	locations[n].reload.l2.label = "Sea";
     locations[n].locators_radius.reload.boat = 9.0;
 	n = n + 1;
-	
 /////////////////////////////////////////////////////////////////////////////////////////////////////////////
 /////////////////проход к руднику
 ////////////////////////////////////////////////////////////////////////////////////////////////////////////
@@ -1164,7 +1079,6 @@ int LocationInitCumana(int n)
 	locations[n].reload.l1.autoreload = "1";
 	locations[n].reload.l1.label = "Shore20";
 	locations[n].locators_radius.reload.reload1_back = 2.0;
-
 	locations[n].reload.l2.name = "reload2_back";
 	locations[n].reload.l2.go = "Minentown_ExitTown";
 	locations[n].reload.l2.emerge = "reload2";
@@ -1172,7 +1086,6 @@ int LocationInitCumana(int n)
 	locations[n].reload.l2.label = "Jungle";
 	locations[n].locators_radius.reload.reload2_back = 2.0;
 	n = n + 1;
-	
 /////////////////////////////////////////////////////////////////////////////////////////////////////////////
 /////////////////выход к руднику
 ////////////////////////////////////////////////////////////////////////////////////////////////////////////
@@ -1190,12 +1103,9 @@ int LocationInitCumana(int n)
 	locations[n].filespath.models = "locations\Outside\Jungles\TownExitW";
 	Locations[n].models.always.townExit = "townExitW";
 	Locations[n].models.always.townWalls = "townExitW_wood";
-	
 	Locations[n].models.always.locators = "townExitW_locators";
-		
 	Locations[n].models.always.grassPatch = "townExitW_grass";
 	Locations[n].models.always.grassPatch.texture = "grass\grassshore.tga.tx";
-	
 	Locations[n].models.always.l1 = "plan1";
 	Locations[n].models.always.l1.level = 9;
 	Locations[n].models.always.l1.tech = "LocationModelBlend";
@@ -1215,20 +1125,17 @@ int LocationInitCumana(int n)
 	locations[n].environment.weather = "true";
 	locations[n].environment.sea = "false";
 	//Reload map
-
 	locations[n].reload.l1.name = "reload2_back";
 	locations[n].reload.l1.go = "Cumana_jungle_mine";
 	locations[n].reload.l1.emerge = "reload2";
 	locations[n].reload.l1.autoreload = "1";
 	locations[n].reload.l1.label = "Jungle";
 	locations[n].locators_radius.reload.reload2_back = 2.0;
-
 	locations[n].reload.l2.name = "reload4";
 	locations[n].reload.l2.go = "Minentown_town";
 	locations[n].reload.l2.emerge = "gate_back";
 	locations[n].reload.l2.autoreload = "0";
 	locations[n].reload.l2.label = "Minentown";
-	
 	locations[n].reload.l3.name = "reload3_back";
 	locations[n].reload.l3.go = "Mangarosa_land";
 	locations[n].reload.l3.emerge = "reload1";
@@ -1236,7 +1143,6 @@ int LocationInitCumana(int n)
 	locations[n].reload.l3.label = "Jungle";
 	locations[n].locators_radius.reload.reload3_back = 2.0;
 	n = n + 1;
-	
 /////////////////////////////////////////////////////////////////////////////////////////////////////////////
 /////////////////Рудник
 ////////////////////////////////////////////////////////////////////////////////////////////////////////////
@@ -1276,96 +1182,80 @@ int LocationInitCumana(int n)
     locations[n].reload.l1.emerge = "reload4";  
     locations[n].reload.l1.autoreload = "0";
     locations[n].reload.l1.label = "ExitMine";
-
 	Locations[n].reload.l2.name = "reload1_back";
     Locations[n].reload.l2.go = "Minentown_mine";
     Locations[n].reload.l2.emerge = "reload1";
     Locations[n].reload.l2.autoreload = "1";
     Locations[n].reload.l2.label = "mines";
-	
 	Locations[n].reload.l3.name = "reload3_back";
 	Locations[n].reload.l3.go = "Minentown_townhall";
 	Locations[n].reload.l3.emerge = "reload1";
 	Locations[n].reload.l3.autoreload = "0";
 	Locations[n].reload.l3.label = "Townhall";
 	locations[n].reload.l11.close_for_night = 1;
-
 	Locations[n].reload.l4.name = "reload4_back";
 	Locations[n].reload.l4.go = "Minentown_tavern";
 	Locations[n].reload.l4.emerge = "reload1";
 	Locations[n].reload.l4.autoreload = "0";
 	Locations[n].reload.l4.label = "tavern";
-
 	Locations[n].reload.l5.name = "reload7_back";
 	Locations[n].reload.l5.go = "Minentown_church";
 	Locations[n].reload.l5.emerge = "reload1";
 	Locations[n].reload.l5.autoreload = "0";
 	Locations[n].reload.l5.label = "Church";
-
 	Locations[n].reload.l6.name = "reload6_back";
 	Locations[n].reload.l6.go = "Minentown_store";  
 	Locations[n].reload.l6.emerge = "reload1";
 	Locations[n].reload.l6.autoreload = "0";
 	Locations[n].reload.l6.label = "Store";
 	locations[n].reload.l11.close_for_night = 1;
-	
 	// дома-коммоны
 	Locations[n].reload.l7.name = "houseS1"; // хороший 1 этажный
 	Locations[n].reload.l7.go = "CommonCobHouse";
 	Locations[n].reload.l7.emerge = "reload1";
 	Locations[n].reload.l7.autoreload = "0";
 	Locations[n].reload.l7.label = "House";
-	
 	Locations[n].reload.l8.name = "houseH1"; // лачуга
 	Locations[n].reload.l8.go = "CommonRoom_MH";
 	Locations[n].reload.l8.emerge = "reload1";
 	Locations[n].reload.l8.autoreload = "0";
 	Locations[n].reload.l8.label = "House";
-	
 	Locations[n].reload.l9.name = "bedroom"; // спальня
 	Locations[n].reload.l9.go = "CommonBedroom"; 
 	Locations[n].reload.l9.emerge = "reload1";
 	Locations[n].reload.l9.autoreload = "0";
 	Locations[n].reload.l9.label = "House";
-	
 	Locations[n].reload.l10.name = "houseSp1"; // 2 этажный 
 	Locations[n].reload.l10.go = "CommonDoubleflourHouse_1";
 	Locations[n].reload.l10.emerge = "reload1";
 	Locations[n].reload.l10.autoreload = "0";
 	Locations[n].reload.l10.label = "House";
-	
 	Locations[n].reload.l11.name = "houseH2";
 	Locations[n].reload.l11.go = "CommonRoom_MH2"; 
 	Locations[n].reload.l11.emerge = "reload1";
 	Locations[n].reload.l11.autoreload = "0";
 	Locations[n].reload.l11.label = "House";
-	
 	Locations[n].reload.l12.name = "houseH3";
 	Locations[n].reload.l12.go = "CommonHut";
 	Locations[n].reload.l12.emerge = "reload1";
 	Locations[n].reload.l12.autoreload = "0";
 	Locations[n].reload.l12.label = "House";
-	
 	Locations[n].reload.l13.name = "houseH4";
 	Locations[n].reload.l13.go = "CommonRoom_MH3";
 	Locations[n].reload.l13.emerge = "reload1";
 	Locations[n].reload.l13.autoreload = "0";
 	Locations[n].reload.l13.label = "House";
-	
 	Locations[n].reload.l14.name = "houseH5";
 	Locations[n].reload.l14.go = "CommonRoom_MH4";
 	Locations[n].reload.l14.emerge = "reload1";
 	Locations[n].reload.l14.autoreload = "0";
 	Locations[n].reload.l14.label = "House";
-	
 	Locations[n].reload.l15.name = "houseH6";
 	Locations[n].reload.l15.go = "CommonRoom_MH5";
 	Locations[n].reload.l15.emerge = "reload1";
 	Locations[n].reload.l15.autoreload = "0";
 	Locations[n].reload.l15.label = "House";
-	
 	n = n + 1;
-	
 ////////////////////////////////////////////////////////////////////////////////////////////////////////////
 //	Шахта
 ////////////////////////////////////////////////////////////////////////////////////////////////////////////
@@ -1404,7 +1294,6 @@ int LocationInitCumana(int n)
 	Locations[n].reload.l1.autoreload = "1";
 	locations[n].reload.l1.label = "Street";
 	n = n + 1;
-	
 	//////////////////////////////////////////////////////////////////////////////////////////////////////
 	//////// Резиденция
 	/////////////////////////////////////////////////////////////////////////////////////////////////////
@@ -1427,7 +1316,6 @@ int LocationInitCumana(int n)
 	locations[n].models.always.window = "SmallResidence_windows";
 	locations[n].models.always.window.tech = "LocationWindows";
 	locations[n].models.always.window.level = 65539;
-
 	locations[n].models.always.back = "..\inside_back";
 	locations[n].models.always.back.level = 65529;
 	//Day
@@ -1445,7 +1333,6 @@ int LocationInitCumana(int n)
 	locations[n].reload.l1.label = "Street";
 	LAi_LocationFightDisable(&locations[n], true);
 	n = n + 1;
-	
 	//////////////////////////////////////////////////////////////////////////////////////////////////////
 	//////// Таверна
 	/////////////////////////////////////////////////////////////////////////////////////////////////////
@@ -1482,7 +1369,6 @@ int LocationInitCumana(int n)
 	locations[n].reload.l1.emerge = "reload4_back";
 	locations[n].reload.l1.autoreload = "0";
     locations[n].reload.l1.label = "Street";
-
 	locations[n].reload.l2.name = "reload2_back";
 	locations[n].reload.l2.go = "Minentown_tavern_upstairs";
 	locations[n].reload.l2.emerge = "reload1";
@@ -1491,7 +1377,6 @@ int LocationInitCumana(int n)
 	locations[n].reload.l2.disable = 1; // закроем, но связку сделаем для квестовых нужд.	
 	LAi_LocationFightDisable(&locations[n], true);
 	n = n + 1;
-
 	//////////////////////////////////////////////////////////////////////////////////////////////////////////
 	////// Комната в таверне 
 	//////////////////////////////////////////////////////////////////////////////////////////////////////////
@@ -1514,7 +1399,6 @@ int LocationInitCumana(int n)
 	locations[n].models.always.window = "tavern_room_window";
 	locations[n].models.always.window.tech = "LocationWindows";
 	locations[n].models.always.window.level = 65539;
-
 	locations[n].models.always.back = "..\inside_back";
 	locations[n].models.always.back.level = 65529;
 	//Day
@@ -1532,7 +1416,6 @@ int LocationInitCumana(int n)
 	locations[n].reload.l1.label = "Tavern";
 	locations[n].locators_radius.reload.reload1 = 0.8;
 	n = n + 1;
-	
 	//////////////////////////////////////////////////////////////////////////////////////////////////////
 	//////// Магазин
 	/////////////////////////////////////////////////////////////////////////////////////////////////////
@@ -1554,7 +1437,6 @@ int LocationInitCumana(int n)
 	locations[n].models.always.window = "StoreSmall_window";
 	locations[n].models.always.window.tech = "LocationWindows";
 	locations[n].models.always.window.level = 50;
-
 	locations[n].models.always.back = "..\inside_back";
 	//Day
 	locations[n].models.day.charactersPatch = "StoreSmall_patch";
@@ -1571,7 +1453,6 @@ int LocationInitCumana(int n)
     locations[n].reload.l1.label = "Street";
 	LAi_LocationFightDisable(&locations[n], true);
 	n = n + 1;
-	
 	//////////////////////////////////////////////////////////////////////////////////////////////////////
 	//////// Церковь
 	/////////////////////////////////////////////////////////////////////////////////////////////////////
@@ -1593,7 +1474,6 @@ int LocationInitCumana(int n)
 	locations[n].models.always.window = "church_IM_window";
 	locations[n].models.always.window.tech = "LocationWindows";
 	locations[n].models.always.window.level = 50;
-
 	locations[n].models.always.back = "..\inside_back";
 	//Day
 	locations[n].models.day.charactersPatch = "church_IM_patch";
@@ -1630,10 +1510,8 @@ int LocationInitCumana(int n)
 	locations[n].models.always.shore03.sea_reflection = 1;
 	Locations[n].models.always.shore03seabed = "shore03_sb";
 	Locations[n].models.always.locators = "shore03_lcommon"; //заглушечный файл локаторов
-		
 	Locations[n].models.always.grassPatch = "shore03_grass";
 	Locations[n].models.always.grassPatch.texture = "grass\grassshore.tga.tx";
-	
 	Locations[n].models.always.l1 = "plan1";
 	Locations[n].models.always.l1.level = 9;
 	Locations[n].models.always.l1.tech = "LocationModelBlend";
@@ -1657,7 +1535,6 @@ int LocationInitCumana(int n)
 	locations[n].reload.l1.autoreload = "1";
 	locations[n].reload.l1.label = "Jungle";
     locations[n].locators_radius.reload.reload1 = 2.0;
-
 	locations[n].reload.l2.name = "boat";
 	locations[n].reload.l2.go = "Cumana";
 	locations[n].reload.l2.emerge = "reload_4";
@@ -1665,6 +1542,5 @@ int LocationInitCumana(int n)
 	locations[n].reload.l2.label = "Sea";
     locations[n].locators_radius.reload.boat = 9.0;
 	n = n + 1;
-	
 	return n;
 }

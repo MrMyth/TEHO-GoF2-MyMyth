@@ -4,20 +4,16 @@ void ProcessDialogEvent()
 	aref Link, Diag;
 	int i;
 	string sTemp;
-	
 	DeleteAttribute(&Dialog,"Links");
-
 	makeref(NPChar,CharacterRef);
 	makearef(Link, Dialog.Links);
 	makearef(Diag, NPChar.Dialog);
-	
 	switch(Dialog.CurrentNode)
 	{
 		case "exit":
 			Diag.CurrentNode = Diag.TempNode;
 			DialogExit();			
 		break;
-
 		case "Exit_Fight":	
 			LAi_LocationFightDisable(&Locations[FindLocation(pchar.location)], false);
 			LAi_SetPlayerType(pchar); 
@@ -32,7 +28,6 @@ void ProcessDialogEvent()
 			LAi_group_SetRelation("EnemyFight", LAI_GROUP_PLAYER, LAI_GROUP_ENEMY);
 			LAi_group_FightGroups("EnemyFight", LAI_GROUP_PLAYER, true);
 			LAi_group_SetCheck("EnemyFight", "OpenTheDoors");
-			
 			if(pchar.GenQuest.EncGirl == "RapersTreasure")
 			{
 				LAi_group_SetCheckFunction("EnemyFight", "EncGirl_RapersAfter");
@@ -47,7 +42,6 @@ void ProcessDialogEvent()
 			DialogExit();
 			AddDialogExitQuest("MainHeroFightModeOn");
 		break;
-
 		case "exit_noFight":
 			LAi_LocationFightDisable(&Locations[FindLocation(pchar.location)], false);
 			for(i = 1; i <= 3; i++)
@@ -64,7 +58,6 @@ void ProcessDialogEvent()
 			DialogExit();	
 			AddDialogExitQuest("OpenTheDoors");			
 		break;
-		
 		case "First time":
 			for(i = 1; i <= 3; i++)
 			{
@@ -130,13 +123,11 @@ void ProcessDialogEvent()
 				}
 			}			
 		break;
-		
 		case "Node_Fight":
 			dialog.text = RandPhraseSimple(""+ GetSexPhrase("Well, you've certainly chosen not the right time for a walk...","So, you decided to be a hero?") +" Deal with h"+ GetSexPhrase("im","er") +", boys!","You "+ GetSexPhrase("slime","filth") +"! You dare to stand in our way?! Cut h"+ GetSexPhrase("im","er") +"!");
 			link.l1 = "I've seen more threatening people!";
 			link.l1.go = "Exit_Fight";
 		break;
-		
 		case "Node_3":
 			pchar.GenQuest.EncGirl.price = 1100*(rand(4)+5) + 200 * sti(pchar.rank);
 			dialog.text = "You should know that she cost us quite a bit! And if you are so noble, you can take her for " + sti(pchar.GenQuest.EncGirl.price) + " pesos."+ GetSexPhrase(" You'll have good time with her, he-he...","") +"";
@@ -150,7 +141,6 @@ void ProcessDialogEvent()
 									 "Whom are you trying to put on, you scarecrow!");
 			link.l2.go = "Node_Fight";
 		break;
-		
 		case "Node_4": // бандюки уходят, девица остается - ГГ ее выкупил у бандюков
 			LAi_LocationFightDisable(&Locations[FindLocation(pchar.location)], false);
 			AddMoneyToCharacter(pchar, -makeint(sti(pchar.GenQuest.EncGirl.price))); 
@@ -171,7 +161,6 @@ void ProcessDialogEvent()
 			DialogExit();
 			AddDialogExitQuestFunction("EncGirl_Saved");
 		break;
-		
 		case "Node_5":
 			dialog.text = "Why do you believe her in the first place? What violence? She ran away from home, and we've been sent by our boss to find her.";
 			link.l1 = RandPhraseSimple("Well, that's a different story, then. Go chase your runaway.","Oh, I see. Well, keep chasing her, then - and I've got business to do.");
@@ -181,13 +170,11 @@ void ProcessDialogEvent()
 			link.l3 = "I'll take her home by myself, to avoid something bad. Who are her parents?";
 			link.l3.go = "Node_7";
 		break;
-		
 		case "Node_6":
 			dialog.text = "Wanna die? That's your choice...";
 			link.l1 = "Look who's talking.";
 			link.l1.go = "Exit_Fight";
 		break;
-		
 		case "Node_7":
 			sGlobalTemp = "Saved_CangGirl";
 			if(pchar.GenQuest.EncGirl.city == "Panama") i = drand(2);
@@ -220,7 +207,6 @@ void ProcessDialogEvent()
 			link.l1.go = "Node_12";
 			pchar.GenQuest.EncGirl = "toParents";
 		break;
-		
 		case "Node_12":
 			LAi_LocationFightDisable(&Locations[FindLocation(pchar.location)], false);
 			pchar.quest.LandEnc_RapersBadExit.over = "yes";
@@ -239,13 +225,11 @@ void ProcessDialogEvent()
 			DialogExit();
 			AddDialogExitQuestFunction("EncGirl_Saved");
 		break;
-		
 		case "Node_8":
 			dialog.text = "And so we meet again. Where is your companion? Oh, well, actually I don't need her, if you're here.";
 			link.l1 = "Gentlemen, I really think that you had already received just enough money to leave the lass alone.";
 			link.l1.go = "Node_9";
 		break;
-		
 		case "Node_9":
 			if(drand(1) == 0)
 			{	
@@ -283,32 +267,27 @@ void ProcessDialogEvent()
 			link.l1 = "Well, I surely didn't apply for guarding the treasures of your captain, but I cannot show you the place... Because I don't know where this place is.";
 			link.l1.go = "Node_10";
 		break;
-		
 		case "Node_10":
 			dialog.text = "You're lying!!! I can smell the scent of gold coming out of this cave! Show me the place if you don't want to die!";
 			link.l1 = "I see that my words failed to convince you. Perhaps, my blade will be more expressive?";
 			link.l1.go = "Node_11";
 		break;
-		
 		case "Node_11":
 			pchar.GenQuest.EncGirl = "RapersTreasure";
 			dialog.text = "You "+ GetSexPhrase("cur","filth") +"! Get out of my way!";
 			link.l1 = "Argh!";
 			link.l1.go = "exit_fight";
 		break;
-		
 		case "EncGirl_Berglar":
 			dialog.text = "Hello, good "+ GetSexPhrase("man","lady") +". We have complaints about you.";
 			link.l1 = "Complaints from whom? From that whore?";
 			link.l1.go = "EncGirl_Berglar1";
 		break;
-		
 		case "EncGirl_Berglar1":
 			dialog.text = "Watch your tongue, okay? I will not allow you to insult my sister! First you molested her in the jungle, then brought her here "+ GetSexPhrase("for more indecency","brought me here and robbed me") +".";
 			link.l1 = "Hey, buddy - do I really have to listen to all of that?";
 			link.l1.go = "EncGirl_Berglar2";
 		break;
-		
 		case "EncGirl_Berglar2":
 			pchar.GenQuest.EncGirl.BerglarSum = makeint(sti(pchar.money)/5) + 5000;
 			if(sti(pchar.GenQuest.EncGirl.BerglarSum) > 250000) pchar.GenQuest.EncGirl.BerglarSum = 220000 + rand(30000);
@@ -332,7 +311,6 @@ void ProcessDialogEvent()
 				link.l2.go = "EncGirl_Berglar4";				
 			}			
 		break;
-		
 		case "EncGirl_Berglar3":
 			AddMoneyToCharacter(pchar, -makeint(sti(pchar.GenQuest.EncGirl.BerglarSum)));
 			dialog.text = "Very good. Good riddance.";
@@ -340,27 +318,23 @@ void ProcessDialogEvent()
 			link.l1.go = "exit";
 			AddDialogExitQuestFunction("EncGirlFack_outRoom");			
 		break;
-		
 		case "EncGirl_Berglar3_1":
 			dialog.text = "Of course I won't, of course... Well, Goodbye to you, "+ GetSexPhrase("buddy","lass") +"."+ GetSexPhrase(" And keep in mind - you're not that handsome that any girl would have fallen for you the instant she saw you. That will be a lesson to you.","") +"";
 			link.l1 = ""+ GetSexPhrase("That's for sure!..","Get lost already!") +"";
 			link.l1.go = "exit";
 			AddDialogExitQuestFunction("EncGirlFack_outRoomRaped");			
 		break;
-		
 		case "EncGirl_Berglar4":
 			dialog.text = "You look like "+ GetSexPhrase("such a noble man","such a well brought-up lady") +", why the bad language?";
 			link.l1 = "It suits me the most...";
 			link.l1.go = "exit";
 			AddDialogExitQuestFunction("EncGirlFack_fight");
 		break;
-		
 		case "Node_2":
 			dialog.text = "Well, you asked for it! Should we tickle h"+ GetSexPhrase("im","er") +" with steel, boys?";
 			Link.l1 = "Pray before you die!";
 			Link.l1.go = "Exit_Fight";
 		break;
-
 		case "OnceAgain":
 			Diag.TempNode = "OnceAgain";
 			dialog.text = "So, you'd like to join or what? "+ GetSexPhrase("Get lost - there's not enough for us","Get lost - one lass is good enough for us") +"!";

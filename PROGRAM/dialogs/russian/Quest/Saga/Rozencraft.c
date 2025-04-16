@@ -5,13 +5,10 @@ void ProcessDialogEvent()
 	aref Link, NextDiag;
 	int iTemp;
 	string sTemp;
-	
 	DeleteAttribute(&Dialog,"Links");
-
 	makeref(NPChar,CharacterRef);
 	makearef(Link, Dialog.Links);
 	makearef(NextDiag, NPChar.Dialog);
-	
 	switch(Dialog.CurrentNode)
 	{
 		case "First time":
@@ -20,7 +17,6 @@ void ProcessDialogEvent()
 			link.l1.go = "exit";			
 			NextDiag.TempNode = "First time";
 		break;
-		
 		case "rozencraft":
 			if (pchar.questTemp.Saga.Oyster == "cantalk")
 			{
@@ -35,45 +31,38 @@ void ProcessDialogEvent()
 				link.l1.go = "rozencraft_no";
 			}
 		break;
-		
 		case "rozencraft_no":
 			dialog.text = "Who told you that bullshit, mister? I am not waiting anyone or anything. My vessel is patrolling local area by the order of Willemstad governor. So would you be kindly to leave my ship, you must be mistaken.";
 			link.l1 = "Hm... I see. I am sorry for troubling you.";
 			link.l1.go = "rozencraft_no_1";
 		break;
-		
 		case "rozencraft_no_1":
 			DialogExit();
 			AddQuestRecord("Testament", "8");
 			NextDiag.CurrentNode = "rozencraft_no_repeat";
 		break;
-		
 		case "rozencraft_no_repeat":
 			dialog.text = "Haven't we had a talk already, mister?";
 			link.l1 = "Yes, yes. I am leaving to my ship already.";
 			link.l1.go = "exit";
 			NextDiag.TempNode = "rozencraft_no_repeat";
 		break;
-		
 		case "rozencraft_1":
 			dialog.text = "And who are you?";
 			link.l1 = "Don't you care who to trade with? I have brought ironwood to sell. How much?";
 			link.l1.go = "rozencraft_2";
 		break;
-		
 		case "rozencraft_2":
 			dialog.text = "According to the agreement - forty doubloons per a piece.";
 			link.l1 = "Hm...";
 			link.l1.go = "rozencraft_3";
 		break;
-		
 		case "rozencraft_3":
 			npchar.quest.bakaut = GetSquadronGoods(pchar, GOOD_SANDAL);
 			dialog.text = "Pal, we had a deal with Molligan. This is a good price, you won't find better. So don't behave like a farmer in the shop. How much ironwood do you have?";
 			link.l1 = ""+FindRussianQtyString(sti(npchar.quest.bakaut))+".";
 			link.l1.go = "rozencraft_4";
 		break;
-		
 		case "rozencraft_4":
 			iTemp = sti(npchar.quest.bakaut);
 			if(iTemp >= 90)
@@ -103,7 +92,6 @@ void ProcessDialogEvent()
 			link.l1 = "Fine, fine, calm down.";
 			link.l1.go = "rozencraft_5";
 		break;
-		
 		case "rozencraft_5":
 			DialogExit();
 			npchar.DontDeskTalk = true; // чтоб не доставал, в генераторе - снимаем
@@ -134,14 +122,12 @@ void ProcessDialogEvent()
 			}
 			NextDiag.CurrentNode = "rozencraft_no_repeat";
 		break;
-		
 	// ------------------------------------генератор сбыта бакаута-----------------------------------------------
 		case "bakaut":
 			dialog.text = "Oh, my old friend! Got some ironwood to sell?";
 			link.l1 = "Exactly, Michael. Let's trade.";
 			link.l1.go = "bakaut_0";
 		break;
-		
 		case "bakaut_0":
 			dialog.text = "How much do you have? I need a batch not less than "+FindRussianQtyString(sti(pchar.GenQuest.Bakaut.Value))+".";
 			if (GetSquadronGoods(pchar, GOOD_SANDAL) >= sti(pchar.GenQuest.Bakaut.Value))
@@ -155,7 +141,6 @@ void ProcessDialogEvent()
 				link.l1.go = "bakaut_no";
 			}
 		break;
-		
 		case "bakaut_no":
 			if (!CheckAttribute(npchar, "quest.bakaut_angry"))
 			{
@@ -181,7 +166,6 @@ void ProcessDialogEvent()
 			npchar.DontDeskTalk = true;
 			pchar.quest.Bakaut_Rozencraft_Find.over = "yes"; //снять прерывание
 		break;
-		
 		case "bakaut_no_1":
 			DialogExit();
 			NextDiag.CurrentNode = "rozencraft_no_repeat";
@@ -192,7 +176,6 @@ void ProcessDialogEvent()
 			AddQuestRecord("Bakaut", "3");
 			CloseQuestHeader("Bakaut");
 		break;
-		
 		case "bakaut_no_2":
 			DialogExit();
 			NextDiag.CurrentNode = "rozencraft_no_repeat";
@@ -201,7 +184,6 @@ void ProcessDialogEvent()
 			AddQuestRecord("Bakaut", "4");
 			CloseQuestHeader("Bakaut");
 		break;
-		
 		case "bakaut_1":
 			iTemp = GetSquadronGoods(pchar, GOOD_SANDAL);
 			if (iTemp > sti(pchar.GenQuest.Bakaut.Value)+20)
@@ -219,7 +201,6 @@ void ProcessDialogEvent()
 				npchar.quest.bakaut = iTemp;
 			}
 		break;
-		
 		case "bakaut_2":
 			LAi_Fade("", "");
 			WaitDate("",0,0,0,1,10);
@@ -227,7 +208,6 @@ void ProcessDialogEvent()
 			link.l1 = "See you again, mister. Our collaboration is very profitable for me. Good bye!";
 			link.l1.go = "bakaut_3";
 		break;
-		
 		case "bakaut_3":
 			DialogExit();
 			iTemp = sti(npchar.quest.bakaut);
@@ -244,11 +224,9 @@ void ProcessDialogEvent()
 			AddQuestUserData("Bakaut", "sDublon1", iTemp*40-iTemp*30);
 			CloseQuestHeader("Bakaut");
 		break;
-		
 		case "Exit":
 			NextDiag.CurrentNode = NextDiag.TempNode;
 			DialogExit();
 		break;
-		
 	}
 }

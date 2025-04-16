@@ -21,7 +21,6 @@ void ProcessCommonDialogEvent(ref NPChar, aref Link, aref NextDiag)
 				link.l1.go = "guardoftruth";
 			}
 		break;
-		
 		//Цена чахотки
 		case "Consumption":
 			dialog.text = "No. Nothing at all.";
@@ -29,7 +28,6 @@ void ProcessCommonDialogEvent(ref NPChar, aref Link, aref NextDiag)
 			link.l1.go = "exit";
 			npchar.quest.Consumption = "true";
 		break;
-		
 		case "guardoftruth":
 			dialog.text = "Hm. No. He didn't stop by for a repair and he didn't tell me anything at all. And if anything of that had occurred I can't remember it.";
 			link.l1 = "All right. Sorry, friend...";
@@ -39,4 +37,3 @@ void ProcessCommonDialogEvent(ref NPChar, aref Link, aref NextDiag)
 	}
 	UnloadSegment(NPChar.FileDialog2);  // если где-то выход внутри switch  по return не забыть сделать анлод
 }
-

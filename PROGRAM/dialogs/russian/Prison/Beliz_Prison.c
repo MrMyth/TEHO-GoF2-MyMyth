@@ -24,26 +24,22 @@ void ProcessCommonDialogEvent(ref NPChar, aref Link, aref NextDiag)
 				link.l1.go = "caleuche_7";
 			}
 		break;
-		
 		// Калеуче
 		case "caleuche":
 			dialog.text = "Your source was telling the truth. These bandits have become a real pain in the ass for us. Do you want to tell anything about them?";
 			link.l1 = "Beside that they've stolen one important thing for me - nothing. I hoped that you would be able to tell me something about them. Maybe, one of them was caught and he is now ready to testify...";
 			link.l1.go = "caleuche_1";
 		break;
-		
 		case "caleuche_1":
 			dialog.text = "Sorry to disappoint you, captain, but I have no information about them. I only know that they are hiding somewhere in the jungle, and they have accomplices in the town, that's all. Now, if you learn anything new about them, please tell me immediately.";
 			link.l1 = "Alright, officer. I'll do that.";
 			link.l1.go = "caleuche_2";
 		break;
-		
 		case "caleuche_2":
 			DialogExit();
 			AddQuestRecord("Caleuche", "10");
 			pchar.questTemp.Caleuche.Bandos = "seek";
 		break;
-		
 		case "caleuche_3":
 			string sTime;
 			if (GetQuestPastDayParam("questTemp.Caleuche.belizbandos") == 0) sTime = "in three days";
@@ -53,19 +49,16 @@ void ProcessCommonDialogEvent(ref NPChar, aref Link, aref NextDiag)
 			link.l1 = "I have found one of their informers in the town. He told me that their gang is preparing to attack a ship, which is supposed to arrive to the cove of Chetumal. The villains are gathering at "+sTime+" at night near a cave not far from Belize. To get there, just need to take the left path at the fork in the jungle.";
 			link.l1.go = "caleuche_4";
 		break;
-		
 		case "caleuche_4":
 			dialog.text = "At the cave? Excellent news. I will order to prepare an ambush for these villains. If you got it right and your informer was telling the truth, we will catch these bastards, and then I'll solicit before the governor to reward you.";
 			link.l1 = "Thanks! I'll come to see you in three days, when it's over.";
 			link.l1.go = "caleuche_5";
 		break;
-		
 		case "caleuche_5":
 			dialog.text = "Alright. That’s fine.";
 			link.l1 = "See you soon, officer.";
 			link.l1.go = "caleuche_6";
 		break;
-		
 		case "caleuche_6":
 			DialogExit();
 			AddQuestRecord("Caleuche", "15");
@@ -73,7 +66,6 @@ void ProcessCommonDialogEvent(ref NPChar, aref Link, aref NextDiag)
 			pchar.questTemp.Caleuche.BelizChance = drand(3);
 			SetFunctionTimerCondition("Caleuche_BelizRegard", 0, 0, 3, false); // таймер
 		break;
-		
 		case "caleuche_7":
 			if (sti(pchar.questTemp.Caleuche.BelizChance) < 3)
 			{
@@ -88,38 +80,32 @@ void ProcessCommonDialogEvent(ref NPChar, aref Link, aref NextDiag)
 				link.l1.go = "caleuche_8";
 			}
 		break;
-		
 		case "caleuche_8":
 			dialog.text = "Where you told me. At the one to the right at the fork...";
 			link.l1 = "TO THE LEFT! To the left on the fork!";
 			link.l1.go = "caleuche_9";
 		break;
-		
 		case "caleuche_9":
 			dialog.text = "But I perfectly remember that you said 'to the right'.";
 			link.l1 = "Oh my Lord! To the left! TO! THE! LEFT! You let them slip away, and it was your fault!!!";
 			link.l1.go = "caleuche_10";
 		break;
-		
 		case "caleuche_10":
 			AddQuestRecord("Caleuche", "16");
 			dialog.text = "Then you must have mumbled something under your nose. I can hear quite well, you know.";
 			link.l1 = "Alright, officer, I am not going to argue. I just wanted to help. Farewell.";
 			link.l1.go = "caleuche_11";
 		break;
-		
 		case "caleuche_11":
 			DialogExit();
 			DeleteAttribute(pchar, "questTemp.Caleuche.BelizChance");
 			DeleteAttribute(pchar, "questTemp.Caleuche.BelizRegard");
 		break;
-		
 		case "caleuche_12":
 			dialog.text = "I reported to the governor of your role in the elimination of the gang. He valued your contribution very highly and authorized me to present you with a reward: a monetary premium and a trophy arquebus.";
 			link.l1 = "Thank you!";
 			link.l1.go = "caleuche_13";
 		break;
-		
 		case "caleuche_13":
 			Log_Info("You have received a chest with doubloons");
 			Log_Info("You have received an arquebus");

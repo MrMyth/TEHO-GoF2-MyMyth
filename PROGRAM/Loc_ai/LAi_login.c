@@ -1,8 +1,5 @@
-
 int LAi_loginedcharacters[MAX_CHARS_IN_LOC];
 int LAi_numloginedcharacters = 0;
-
-
 bool LAi_CharacterLogin(aref chr, string locID)
 {
 	string func;
@@ -122,7 +119,6 @@ bool LAi_CharacterLogin(aref chr, string locID)
 		chr.chr_ai.energy = LAI_DEFAULT_ENERGY; // to_do to max
 	}*/
 	SetEnergyToCharacter(chr);  // boal
-	
 	//Проверяем хитпойнты
 	float hp = stf(chr.chr_ai.hp);
 	float hpmax = stf(chr.chr_ai.hp_max);
@@ -161,7 +157,6 @@ bool LAi_CharacterLogin(aref chr, string locID)
 	if(LAi_CheckCharacter(chr, "LAi_CharacterLogin") == false) return false;
 	//Выставляем скилл для сражения
 	//LAi_AdjustFencingSkill(chr);
-	
 	//Логиним персонажа
 	func = chr.chr_ai.type;
 	bool res = true;
@@ -173,7 +168,6 @@ bool LAi_CharacterLogin(aref chr, string locID)
 	if(res == false) return false;
 	chr.chr_ai.login = true;
 	LAi_AddLoginedCharacter(chr);
-
 	/*if(CheckAttribute(chr, "quest.type"))
 	{
 		if(chr.quest.type == "trader")
@@ -203,7 +197,6 @@ bool LAi_CharacterLogin(aref chr, string locID)
 	}
 	return true;
 }
-
 void LAi_CharacterPostLogin(ref location)
 {
 	//Расставляем последователей
@@ -277,10 +270,8 @@ void LAi_CharacterPostLogin(ref location)
 		LandHunterReactionResult(location);
 		//обновить базу абордажников для нефритового черепа
 		CopyPassForAztecSkull();
-
 	}
 }
-
 bool LAi_CharacterLogoff(aref chr)
 {
 	chr.chr_ai.login = false;	
@@ -297,14 +288,12 @@ bool LAi_CharacterLogoff(aref chr)
 	if(res == false) return false;
 	return true;
 }
-
 void LAi_AddLoginedCharacter(aref chr)
 {
 	int index = sti(chr.index);
 	LAi_loginedcharacters[LAi_numloginedcharacters] = index;
 	LAi_numloginedcharacters = LAi_numloginedcharacters + 1;
 }
-
 void LAi_DelLoginedCharacter(aref chr)
 {
 	int index = sti(chr.index);
@@ -318,7 +307,6 @@ void LAi_DelLoginedCharacter(aref chr)
 	}
 	if(LAi_numloginedcharacters < 0) LAi_numloginedcharacters = 0;
 }
-
 bool LAi_login_CheckTime(float start, float end)
 {
 	float curTime = GetTime();
@@ -331,7 +319,6 @@ bool LAi_login_CheckTime(float start, float end)
 	}
 	return false;
 }
-
 void LAi_PostLoginInit(aref chr)
 {
 	if(!IsEntity(&chr)) return;

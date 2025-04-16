@@ -1,25 +1,19 @@
 #event_handler("frame", "UpdateSky");
-
 object Sky;
-
 float fPrevCameraAX = 0;
-
 void WhrDeleteSkyEnvironment()
 {
 	if(isEntity(&Sky))
 	{
 		DeleteClass(&Sky);
 	}
-	
 	DeleteAttribute(&Sky, "");
 }
-
 void WhrCreateSkyEnvironment()
 {
 	aref aCurWeather = GetCurrentWeather();
 	aref aSky;
 	makearef(aSky, aCurWeather.Sky);
-
 	DeleteAttribute(&Sky, "")
 	if(!isEntity(&Sky))
 	{
@@ -31,12 +25,10 @@ void WhrCreateSkyEnvironment()
 	}
 	FillSkyDir(&Sky);
 	//Sky.Dir = Whr_GetString(aSky, "Dir");
-
 	Sky.Color = Whr_GetColor(aSky, "Color");
 	Sky.RotateSpeed = Whr_GetFloat(aSky, "Rotate"); // Warship 02.06.09 - ротация неба ниже
 	Sky.Angle = Whr_GetFloat(aSky, "Angle");
 	Sky.Size = Whr_GetFloat(aSky, "Size");
-
     if(bSeaActive) 
 	{
         Sky.Size = Whr_GetFloat(aSky, "Size");
@@ -55,13 +47,11 @@ void WhrCreateSkyEnvironment()
 	}
 	Sky.isDone = "";
 }
-
 // Warship 02.06.09 - апдейт параметров неба (например, скорость ротации в зависимости от силы ветра)
 void UpdateSky()
 {
 	float windSpeed = 5.0;
 	float timeScale = 1.0 + TimeScaleCounter * 0.25; // Текущее ускорение времени
-
 	// Вычисление делителя для ускорения, чтоб на x8 бешенно не крутились
 	if(timeScale <= 2)
 	{
@@ -71,12 +61,10 @@ void UpdateSky()
 	{
 		timeScale /= 2.0;
 	}
-	
 	if(CheckAttribute(Weather, "Wind.Speed"))
 	{
 		windSpeed = stf(Weather.Wind.Speed);
 	}
-	
 	if(CheckAttribute(&InterfaceStates,"ROTATESKY") && sti(InterfaceStates.ROTATESKY) == 1) // belamour ( ROTATE_SKY == 1)
 	{	
 		// Sky.RotateSpeed == 0.05 - это уже много
@@ -87,14 +75,12 @@ void UpdateSky()
 		Sky.RotateSpeed = 0.0;
 	}	
 }
-
 void FillSkyDir(aref aSky)
 {
 	int i, nStart, nDur;
 	string satr;
 	aref aCurWeather = GetCurrentWeather();
 	string sDir;
-
 	DeleteAttribute(aSky,"Dir");
 	if( iBlendWeatherNum < 0 )
 	{
@@ -106,7 +92,6 @@ void FillSkyDir(aref aSky)
 			if (!CheckAttribute(&Weathers[i], "Hour")) {continue;}
 			if (CheckAttribute(&Weathers[i], "Skip") && sti(Weathers[i].Skip)==true) {continue;}
 			if (CheckAttribute(&Weathers[i], "Storm")&& sti(Weathers[i].Storm)==true) {continue;}
-
 			satr = "d" + sti(Weathers[i].Hour.Min);
 			if( satr=="d24" ) {continue;}
             //navy -->
@@ -126,7 +111,6 @@ void FillSkyDir(aref aSky)
 		aSky.Dir = GetTime();
 	}
 }
-
 /*
 void MoveSkyToLayers(int sExecuteLayer, int sRealizeLayer)
 {
@@ -134,19 +118,16 @@ void MoveSkyToLayers(int sExecuteLayer, int sRealizeLayer)
 	LayerDelObject(REALIZE,&Sky);
 	LayerDelObject(SEA_EXECUTE,&Sky);
 	LayerDelObject(SEA_REALIZE,&Sky);
-	
         LayerAddObject(sExecuteLayer,&Sky,2);
         LayerAddObject(sRealizeLayer,&Sky,3);
 }
 */
-
 void MoveSkyToLayers(string sExecuteLayer, string sRealizeLayer)		// Mirsaneli add from GoF 1.2
 {
 	LayerDelObject("execute",&Sky);
 	LayerDelObject("realize",&Sky);
 	LayerDelObject(SEA_EXECUTE,&Sky);
 	LayerDelObject(SEA_REALIZE,&Sky);
-
 	//#20180615-01
 	if(bSeaActive) {
         LayerAddObject(sExecuteLayer,&Sky,2);

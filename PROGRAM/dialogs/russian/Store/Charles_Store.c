@@ -1,7 +1,6 @@
 // диалог по городам
 void ProcessCommonDialogEvent(ref NPChar, aref Link, aref NextDiag)
 {
-
 	switch (Dialog.CurrentNode)
 	{
 		case "quests":
@@ -23,7 +22,6 @@ void ProcessCommonDialogEvent(ref NPChar, aref Link, aref NextDiag)
                 link.l2.go = "patria_goods_3";
 			}
 		break;
-		
 		case "patria_goods":
 			dialog.text = "Right, you are correct, captain, I have your goods. Are you sure that you want to take them?";
 			link.l1 = "Yes.";
@@ -31,13 +29,11 @@ void ProcessCommonDialogEvent(ref NPChar, aref Link, aref NextDiag)
 			link.l2 = "Hang on, I need to check if there is enough space in the hold first.";
 			link.l2.go = "exit";
 		break;
-		
 		case "patria_goods_1":
 			dialog.text = "Perfect. I'll order the carriers to deliver it to the dock.";
 			link.l1 = "Deal!";
 			link.l1.go = "patria_goods_2";
 		break;
-		
 		case "patria_goods_2":
 			DialogExit();
 			WaitDate("", 0, 0, 0, 4, 10); //крутим время
@@ -50,7 +46,6 @@ void ProcessCommonDialogEvent(ref NPChar, aref Link, aref NextDiag)
 			SetCharacterGoods(pchar, GOOD_CHOCOLATE, GetCargoGoods(pchar, GOOD_CHOCOLATE) + 500);
 			SetCharacterGoods(pchar, GOOD_SANDAL, GetCargoGoods(pchar, GOOD_SANDAL) + 50);
 		break;
-		
 		case "patria_goods_3":
 			dialog.text = "Yes, exactly. I keep it here by the baron's decree. Are you sure you want to take them?";
 			link.l1 = "Yes.";
@@ -58,13 +53,11 @@ void ProcessCommonDialogEvent(ref NPChar, aref Link, aref NextDiag)
 			link.l2 = "Hang on, I need to check if there is enough space in the hold first.";
 			link.l2.go = "exit";
 		break;
-		
 		case "patria_goods_4":
 			dialog.text = "Perfect. I'll order the carriers to deliver it to the dock.";
 			link.l1 = "Deal!";
 			link.l1.go = "patria_goods_5";
 		break;
-		
 		case "patria_goods_5":
 			DialogExit();
 			WaitDate("", 0, 0, 0, 4, 10); //крутим время
@@ -83,4 +76,3 @@ void ProcessCommonDialogEvent(ref NPChar, aref Link, aref NextDiag)
 	}
 	UnloadSegment(NPChar.FileDialog2);
 }
-

@@ -1,8 +1,4 @@
-
-
 #define LAI_TYPE_MONKEY		"monkey"
-
-
 //Инициализация
 void LAi_type_monkey_Init(aref chr)
 {
@@ -50,7 +46,6 @@ void LAi_type_monkey_Init(aref chr)
 	EndChangeCharacterActions(chr);
 	SendMessage(&chr, "lsl", MSG_CHARACTER_EX_MSG, "SetFightWOWeapon", true);
 }
-
 //Процессирование типа персонажа
 void LAi_type_monkey_CharacterUpdate(aref chr, float dltTime)
 {
@@ -106,19 +101,16 @@ void LAi_type_monkey_CharacterUpdate(aref chr, float dltTime)
 		}
 	}
 }
-
 //Загрузка персонажа в локацию
 bool LAi_type_monkey_CharacterLogin(aref chr)
 {
 	return true;
 }
-
 //Выгрузка персонажа из локацию
 bool LAi_type_monkey_CharacterLogoff(aref chr)
 {
 	return true;
 }
-
 //Завершение работы темплейта
 void LAi_type_monkey_TemplateComplite(aref chr, string tmpl)
 {
@@ -134,28 +126,23 @@ void LAi_type_monkey_TemplateComplite(aref chr, string tmpl)
 		}
 	}
 }
-
 //Сообщить о желании завести диалог
 void LAi_type_monkey_NeedDialog(aref chr, aref by)
 {
 }
-
 //Запрос на диалог, если возвратить true то в этот момент можно начать диалог
 bool LAi_type_monkey_CanDialog(aref chr, aref by)
 {
 	return false;
 }
-
 //Начать диалог
 void LAi_type_monkey_StartDialog(aref chr, aref by)
 {
 }
-
 //Закончить диалог
 void LAi_type_monkey_EndDialog(aref chr, aref by)
 {
 }
-
 //Персонаж атаковал другого персонажа
 void LAi_type_monkey_Attack(aref attack, aref enemy, float attackDmg, float hitDmg)
 {
@@ -172,24 +159,18 @@ void LAi_type_monkey_Attack(aref attack, aref enemy, float attackDmg, float hitD
 		Log_SetStringToLog(XI_ConvertString("You've been poisoned"));
 	}
 }
-
 //Персонаж атоковал заблокировавшегося персонажа
 void LAi_type_monkey_Block(aref attack, aref enemy, float attackDmg, float hitDmg)
 {
 }
-
 //Персонаж выстрелил
 void LAi_type_monkey_Fire(aref attack, aref enemy, float kDist, bool isFindedEnemy)
 {
 }
-
-
 //Персонаж атакован
 void LAi_type_monkey_Attacked(aref chr, aref by)
 {
-	
 }
-
 void LAi_type_monkey_Return(aref chr)
 {
 	bool isSet = false;

@@ -17,7 +17,6 @@ void ProcessCommonDialogEvent(ref NPChar, aref Link, aref NextDiag)
 			}
 			//<-- Бремя гасконца
 		break;
-		
 		case "puancie":
 			dialog.text = "Aha, well, I am informed about that debt... Do you have the required sum with you?";
 			if (sti(pchar.money) >= 1000000)
@@ -31,19 +30,16 @@ void ProcessCommonDialogEvent(ref NPChar, aref Link, aref NextDiag)
 				link.l1.go = "puancie_exit";
 			}
 		break;
-		
 		case "puancie_exit":
 			dialog.text = "Than come back when you'll have and don't bother the Chevalier.";
 			link.l1 = "...";
 			link.l1.go = "exit";
 		break;
-		
 		case "puancie_1":
 			dialog.text = "Come through the door on the right then. Chevalier will receive you.";
 			link.l1 = "Thanks!";
 			link.l1.go = "puancie_2";
 		break;
-		
 		case "puancie_2":
 			DialogExit();
 			npchar.quest.saga = "true";
@@ -58,4 +54,3 @@ void ProcessCommonDialogEvent(ref NPChar, aref Link, aref NextDiag)
 	}
 	UnloadSegment(NPChar.FileDialog2);  // если где-то выход внутри switch  по return не забыть сделать анлод
 }
-

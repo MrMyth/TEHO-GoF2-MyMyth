@@ -4,13 +4,10 @@ void ProcessDialogEvent()
 {
 	ref NPChar;
 	aref Link, NextDiag;	
-
 	DeleteAttribute(&Dialog,"Links");
-
 	makeref(NPChar,CharacterRef);
 	makearef(Link, Dialog.Links);
 	makearef(NextDiag, NPChar.Dialog);
-
     // вызов диалога по городам -->
     NPChar.FileDialog2 = "DIALOGS\" + LanguageGetLanguage() + "\Lighthouse\" + NPChar.City + "_Lighthouse.c";
     if (LoadSegment(NPChar.FileDialog2))
@@ -20,7 +17,6 @@ void ProcessDialogEvent()
 	}
     // вызов диалога по городам <--
 	ProcessCommonDialogRumors(NPChar, Link, NextDiag);
-	
     int iTest, iTemp;
 	string sTemp;
 	bool ok;
@@ -57,14 +53,12 @@ void ProcessDialogEvent()
 			}
 			NextDiag.TempNode = "First time";
 		break;
-		
 		case "Lightman_meeting":
 			dialog.text = "Now you know. I used to be a sailor, just like you, but it's been long ago since I last set foot on a ship's deck. Now this lighthouse is in my care, and I am also selling some stuff...";
 			link.l1 = "And what exactly are you selling?";
 			link.l1.go = "trade_info";
 			NextDiag.TempNode = "First time";
 		break;
-		
 		case "Lightman_talk":
 			dialog.text = " What has brought you here this time?";
 			link.l1 = RandPhraseSimple("Can you tell me, if anything interesting has recently happened in your colony?","I haven't been on land for quite a while... What's going on here?");
@@ -100,13 +94,11 @@ void ProcessDialogEvent()
 			link.l4.go = "quests";
 			NextDiag.TempNode = "First time";
 		break;
-		
 		case "trade_info":
 			dialog.text = "Sometimes I go to the shore and collect shells, there is one pretty place not far from here, so you can always buy pearls from me. Every storm brings amber, I sell it too, although it will cost you a lot\nSometimes the waves bring all kinds of interesting trinkets from sunken ships and my old buddies bring me special items. I am interested in enchanted amulets, wise men pay good coin for those\nI also offer weapons on special occasion, don't ask me where I get it. A town merchant buys all the crap from me, good stuff I sell myself after I repair and clean it\nI am interested in rum. I am not talking about the piss they serve in local tavern for two pesos per mug. I am talking about real bottled Jamaican rum. It heals and resurrects people. I will pay ten times more for every bottle you bring. Think about it.";
 			link.l1 = "Listen, "+npchar.name+", you said that you had old sailor friends, who bring you ensorcelled amulets. Is it possible to order a certain amulet from you? I will pay for it handsomely.";
 			link.l1.go = "Trade_artefact";
 		break;
-		
 		case "Trade_lighthouse":
 			//иногда продает корабельные товары // Addon-2016 Jason
 			npchar.quest.goods = GOOD_COFFEE + drand(sti(GOOD_PAPRIKA - GOOD_COFFEE));
@@ -135,7 +127,6 @@ void ProcessDialogEvent()
 				LaunchItemsTrade(npchar, 0);
 			}
 		break;
-		
 		case "Trade_lighthouse_double":
 			DialogExit();
 			if (!CheckAttribute(npchar, "trade_date") || GetNpcQuestPastDayParam(npchar, "trade_date") >= 10)
@@ -145,7 +136,6 @@ void ProcessDialogEvent()
 			}
 			LaunchItemsTrade(npchar, 0);
 		break;
-		
 		case "Trade_goods":
 			AddCharacterGoods(pchar, sti(npchar.quest.goods), sti(npchar.quest.goodsqty));
 			AddMoneyToCharacter(pchar, -sti(npchar.quest.goodscost));
@@ -171,7 +161,6 @@ void ProcessDialogEvent()
 				link.l1.go = "exit_artefact";
 			}
 		break;
-		
 		case "exit_artefact":
 			if (CheckAttribute(npchar, "artefact")) dialog.text = "As you wish. Come see me if you change your mind.";
 			else dialog.text = "Would you like to see what I have for sale today, captain? If you don't find anything worthy, come again soon - I might have something else up for sale.";
@@ -184,7 +173,6 @@ void ProcessDialogEvent()
 			link.l4 = "Have a nice day, "+npchar.name+"! It was nice to meet you! I'll drop in some other time...";
 			link.l4.go = "exit";
 		break;
-		
 		case "Trade_artefact_1":
 			dialog.text = "Make your pick.";
 			iTemp = 1;
@@ -202,7 +190,6 @@ void ProcessDialogEvent()
 			link.l12 = "Unfortunately, nothing from this list interests me so far.";
 			link.l12.go = "exit";
 		break;
-		
 		//группа indian
 		case "indian_1":
 			dialog.text = "A voodoo doll? You're fond of firearms? Good...";
@@ -210,77 +197,66 @@ void ProcessDialogEvent()
 			link.l1.go = "Trade_artefact_2";
 			npchar.quest.art = "indian_1";
 		break;
-		
 		case "indian_2":
 			dialog.text = "A gunpowder tester? Sharpshooting is a key to success in any skirmish. Nice...";
 			link.l1 = "When should I come back to pick up my order?";
 			link.l1.go = "Trade_artefact_2";
 			npchar.quest.art = "indian_2";
 		break;
-		
 		case "indian_3":
 			dialog.text = "A ritual knife? You like slashing your enemies with powerful swings of a heavy broadsword? That's for you, then. Good... ";
 			link.l1 = "When should I come back to pick up my order?";
 			link.l1.go = "Trade_artefact_2";
 			npchar.quest.art = "indian_3";
 		break;
-		
 		case "indian_4":
 			dialog.text = "A pole axe? A top-down strike of a huge axe will crush any enemy! Good...";
 			link.l1 = "When should I come back to pick up my order?";
 			link.l1.go = "Trade_artefact_2";
 			npchar.quest.art = "indian_4";
 		break;
-		
 		case "indian_5":
 			dialog.text = "A tsantsa? Now that thing can scare even the most reckless pirate. Good...";
 			link.l1 = "When should I come back to pick up my order?";
 			link.l1.go = "Trade_artefact_2";
 			npchar.quest.art = "indian_5";
 		break;
-		
 		case "indian_6":
 			dialog.text = "A coral head? The grapeshot of your cannons will fly straight to the target! Good...";
 			link.l1 = "When should I come back to pick up my order?";
 			link.l1.go = "Trade_artefact_2";
 			npchar.quest.art = "indian_6";
 		break;
-		
 		case "indian_7":
 			dialog.text = "Humpback? Tirelessness is warrior's best friend. Good...";
 			link.l1 = "When should I come back to pick up my order?";
 			link.l1.go = "Trade_artefact_2";
 			npchar.quest.art = "indian_7";
 		break;
-		
 		case "indian_8":
 			dialog.text = "Xiuhtecuhtli? Let the enemy ship's hull crumble to dust! Good...";
 			link.l1 = "When should I come back to pick up my order?";
 			link.l1.go = "Trade_artefact_2";
 			npchar.quest.art = "indian_8";
 		break;
-		
 		case "indian_9":
 			dialog.text = "Baldo? Put Baldo on - and all cannonballs will fly straight to the target! Good...";
 			link.l1 = "When should I come back to pick up my order?";
 			link.l1.go = "Trade_artefact_2";
 			npchar.quest.art = "indian_9";
 		break;
-		
 		case "indian_10":
 			dialog.text = "Cascavella? Snake's venom is the most dangerous thing. Good...";
 			link.l1 = "When should I come back to pick up my order?";
 			link.l1.go = "Trade_artefact_2";
 			npchar.quest.art = "indian_10";
 		break;
-		
 		case "indian_11":
 			dialog.text = "Ngombo mask? Put down vigilance of your enemies, ha-ha! Good...";
 			link.l1 = "When should I come back to pick up my order?";
 			link.l1.go = "Trade_artefact_2";
 			npchar.quest.art = "indian_11";
 		break;
-		
 		//группа amulet
 		case "amulet_1":
 			dialog.text = "Ngombo shield? If you didn't manage to dodge a bullet, this amulet can save your live. Good...";
@@ -288,77 +264,66 @@ void ProcessDialogEvent()
 			link.l1.go = "Trade_artefact_2";
 			npchar.quest.art = "amulet_1";
 		break;
-		
 		case "amulet_2":
 			dialog.text = "Euchologion? A good pray can even divert a bullet. Good...";
 			link.l1 = "When should I come back to pick up my order?";
 			link.l1.go = "Trade_artefact_2";
 			npchar.quest.art = "amulet_2";
 		break;
-		
 		case "amulet_3":
 			dialog.text = "A crucifix? This one will greatly aid a Christian in close combat. Good...";
 			link.l1 = "When should I come back to pick up my order?";
 			link.l1.go = "Trade_artefact_2";
 			npchar.quest.art = "amulet_3";
 		break;
-		
 		case "amulet_4":
 			dialog.text = "El Trozo? This one will make a mortal wound just a scratch. Good...";
 			link.l1 = "When should I come back to pick up my order?";
 			link.l1.go = "Trade_artefact_2";
 			npchar.quest.art = "amulet_4";
 		break;
-		
 		case "amulet_5":
 			dialog.text = "Sogbo? And let the cannons always be ready for battle! Good...";
 			link.l1 = "When should I come back to pick up my order?";
 			link.l1.go = "Trade_artefact_2";
 			npchar.quest.art = "amulet_5";
 		break;
-		
 		case "amulet_6":
 			dialog.text = "Madonna? The visage of the Most Holy Virgin possesses powerful healing properties. Good...";
 			link.l1 = "When should I come back to pick up my order?";
 			link.l1.go = "Trade_artefact_2";
 			npchar.quest.art = "amulet_6";
 		break;
-		
 		case "amulet_7":
 			dialog.text = "Holy water? Even a weakling sprinkled with holy water will become an epic hero! Good...";
 			link.l1 = "When should I come back to pick up my order?";
 			link.l1.go = "Trade_artefact_2";
 			npchar.quest.art = "amulet_7";
 		break;
-		
 		case "amulet_8":
 			dialog.text = "An anchor? And may your ship stay afloat even under a volley of cannonballs, ha-ha! Good...";
 			link.l1 = "When should I come back to pick up my order?";
 			link.l1.go = "Trade_artefact_2";
 			npchar.quest.art = "amulet_8";
 		break;
-		
 		case "amulet_9":
 			dialog.text = "Encolpion? You sails shall fear no wind, while you possess this amulet. Good...";
 			link.l1 = "When should I come back to pick up my order?";
 			link.l1.go = "Trade_artefact_2";
 			npchar.quest.art = "amulet_9";
 		break;
-		
 		case "amulet_10":
 			dialog.text = "Wonderworker? May the Lord watch over you crew both on land and at sea! Good...";
 			link.l1 = "When should I come back to pick up my order?";
 			link.l1.go = "Trade_artefact_2";
 			npchar.quest.art = "amulet_10";
 		break;
-		
 		case "amulet_11":
 			dialog.text = "Cimaruta? Musket bullets shall fly over your head, causing no harm! Good...";
 			link.l1 = "When should I come back to pick up my order?";
 			link.l1.go = "Trade_artefact_2";
 			npchar.quest.art = "amulet_11";
 		break;
-		
 		//группа obereg
 		case "obereg_1":
 			dialog.text = "Teredo? Every shipwright dreams of that one. Good...";
@@ -366,77 +331,66 @@ void ProcessDialogEvent()
 			link.l1.go = "Trade_artefact_2";
 			npchar.quest.art = "obereg_1";
 		break;
-		
 		case "obereg_2":
 			dialog.text = "Xochipilli? That will save some time darning the sails. Good...";
 			link.l1 = "When should I come back to pick up my order?";
 			link.l1.go = "Trade_artefact_2";
 			npchar.quest.art = "obereg_2";
 		break;
-		
 		case "obereg_3":
 			dialog.text = "A monkey? A pack mule, I'd say! Good...";
 			link.l1 = "When should I come back to pick up my order?";
 			link.l1.go = "Trade_artefact_2";
 			npchar.quest.art = "obereg_3";
 		break;
-		
 		case "obereg_4":
 			dialog.text = "Gypsy's fan? Put the blinkers on a patroller's eyes! Good...";
 			link.l1 = "When should I come back to pick up my order?";
 			link.l1.go = "Trade_artefact_2";
 			npchar.quest.art = "obereg_4";
 		break;
-		
 		case "obereg_5":
 			dialog.text = "A jade turtle? That's your ace in a deck of cards! Good...";
 			link.l1 = "When should I come back to pick up my order?";
 			link.l1.go = "Trade_artefact_2";
 			npchar.quest.art = "obereg_5";
 		break;
-		
 		case "obereg_6":
 			dialog.text = "A monkey's fist? As they say - make them respect you! Good...";
 			link.l1 = "When should I come back to pick up my order?";
 			link.l1.go = "Trade_artefact_2";
 			npchar.quest.art = "obereg_6";
 		break;
-		
 		case "obereg_7":
 			dialog.text = "A fisherman? That's every navigator's dream. Good...";
 			link.l1 = "When should I come back to pick up my order?";
 			link.l1.go = "Trade_artefact_2";
 			npchar.quest.art = "obereg_7";
 		break;
-		
 		case "obereg_8":
 			dialog.text = "Merchant's beads? Money likes being counted, doesn't it? Good...";
 			link.l1 = "When should I come back to pick up my order?";
 			link.l1.go = "Trade_artefact_2";
 			npchar.quest.art = "obereg_8";
 		break;
-		
 		case "obereg_9":
 			dialog.text = "Ehecatl? Any low-speed old tub will fly faster than wind! Good...";
 			link.l1 = "When should I come back to pick up my order?";
 			link.l1.go = "Trade_artefact_2";
 			npchar.quest.art = "obereg_9";
 		break;
-		
 		case "obereg_10":
 			dialog.text = "Seafarer's earring? Give that one to your helmsman! Good...";
 			link.l1 = "When should I come back to pick up my order?";
 			link.l1.go = "Trade_artefact_2";
 			npchar.quest.art = "obereg_10";
 		break;
-		
 		case "obereg_11":
 			dialog.text = "Pilgrim? Head wind becomes tail wind. Good...";
 			link.l1 = "When should I come back to pick up my order?";
 			link.l1.go = "Trade_artefact_2";
 			npchar.quest.art = "obereg_11";
 		break;
-		
 		case "Trade_artefact_2":
 			dialog.text = "In two months, no sooner. I think by that time they will have brought it to me. So I'll be waiting for you with the money in two months.";
 			link.l1 = "Great! I'll be there! Thank you, "+npchar.name+"!";
@@ -448,7 +402,6 @@ void ProcessDialogEvent()
 			ReOpenQuestHeader(sTemp);
 			AddQuestUserData(sTemp, "sAml", XI_ConvertString(npchar.quest.art)); // dlc
 		break;
-		
 		case "Trade_artefact_3":
 			if (CheckAttribute(npchar, "art_date") && GetNpcQuestPastDayParam(npchar, "art_date") >= sti(npchar.quest.artday))
 			{
@@ -471,7 +424,6 @@ void ProcessDialogEvent()
 			link.l1.go = "exit";
 			}
 		break;
-		
 		case "Trade_artefact_4":
 			RemoveItems(pchar, "gold_dublon", 100); // Addon-2016 Jason
 			Log_Info("You have given 100 doubloons");
@@ -479,7 +431,6 @@ void ProcessDialogEvent()
 			link.l1 = "Thank you, "+npchar.name+"!";
 			link.l1.go = "Trade_artefact_5";
 		break;
-		
 		case "Trade_artefact_5":
 			DialogExit();
 			Log_Info("You have received "+XI_ConvertString(npchar.quest.art)+"");
@@ -490,7 +441,6 @@ void ProcessDialogEvent()
 			AddQuestRecord(sTemp, "2");
 			CloseQuestHeader(sTemp);
 		break;
-		
 		// --> калеуче
 		case "caleuche":
 			PlaySound("interface\important_item.wav");
@@ -499,7 +449,6 @@ void ProcessDialogEvent()
 			link.l1.go = "caleuche_1";
 			npchar.quest.caleuche = "true";
 		break;
-		
 		case "caleuche_1":
 			if (npchar.id == pchar.questTemp.Caleuche.Amuletmaster)
 			{
@@ -514,80 +463,67 @@ void ProcessDialogEvent()
 				link.l1.go = "exit";
 			}
 		break;
-		
 		case "caleuche_2":
 			dialog.text = "There is Carib village on Dominica, local chief is named Moknitekuvri. They have a shaman named Tuttuathapak, highly respected Indian. He's not one of the Caribs, he's from that place about which I've told you already. He can tell you more about this amulet than me. But be careful - Tuttuathapak hates white people. Very hates. After all, they once enslaved him and took him away from his home...";
 			link.l1 = "I take it he's got to the Caribbean that way?";
 			link.l1.go = "caleuche_3";
 		break;
-		
 		case "caleuche_3":
 			dialog.text = "Yes. This is quite an interesting story. The ship, which carried Indian slaves, was trapped by a dead calm near Marie Galante and half of a crew died from sudden fever. Yet not a single Indian got ill!\nAfterwards, a captain got mad and set his vessel on fire. As a result, the imprisoned Indian started a riot and slaughtered the crew. Do you guess who was their leader?";
 			link.l1 = "I do...";
 			link.l1.go = "caleuche_4";
 		break;
-		
 		case "caleuche_4":
 			dialog.text = "That's it. I bet it was a spell of shaman that made the sea as calm as deadman, and infected the crew with deadly disease. This Indian is very smart and very dangerous. If you go to him - behave politely and watch your tongue - otherwise there will be a lot of troubles for you. Also, he won't even talk to you without an offering for him.";
 			link.l1 = "And what kind of offering might he demand?";
 			link.l1.go = "caleuche_5";
 		break;
-		
 		case "caleuche_5":
 			dialog.text = "You won't bribe him with some crap. As I know, he sends his Carib soldiers to settlements of white to buy firearm weapon. Bring him a musket as a gift and then, I think, he will be pleased and will give you a bit of his attention.";
 			link.l1 = "Thank you! I'll do as you say... Say, buddy, how do you know all of this?";
 			link.l1.go = "caleuche_6";
 		break;
-		
 		case "caleuche_6":
 			dialog.text = "My friend was a sailor on the ill-fated ship. Fortunately, he managed to survive in that hell... I saw on him such an amulet as yours, seems like late captain also grabbed Indian's belongings. I am sure that your amulet is from his collection - when the captain got crazy and set on fire his ship, his sailors killed him and then looted the chests in the cabin.";
 			link.l1 = "Understood. Then I just have to go with a gift to Dominica. Thanks for your help and for the interesting story!";
 			link.l1.go = "caleuche_7";
 		break;
-		
 		case "caleuche_7":
 			dialog.text = "Good luck, my friend, and be careful with this red-skin devil...";
 			link.l1 = "...";
 			link.l1.go = "caleuche_8";
 		break;
-		
 		case "caleuche_8":
 			DialogExit();
 			AddQuestRecord("Caleuche", "2");
 			pchar.questTemp.Caleuche = "dominica"; 
 			Caleuche_CreateShamane();
 		break;
-		
 		case "caleuche_9":
 			dialog.text = "Yes? You've had a talk with Tuttuathapak, am I right?";
 			link.l1 = "Exactly. And now I want to find two more amulets. You said I was the third, who showed you this artifact. And who were the other two?";
 			link.l1.go = "caleuche_10";
 		break;
-		
 		case "caleuche_10":
 			dialog.text = "One is my friend, the sailor from that ship which brought Tuttuathapak to Caribbean isles. Since that incident, he hasn't laid a foot on any ship's deck. I have not seen him for a while, but I know where he lives. Look for him in the West Main, in Belize - he is a hunter and now and wanders around jungles. Name's Fergus Hooper.";
 			link.l1 = "Okay. And the second?";
 			link.l1.go = "caleuche_11";
 		break;
-		
 		case "caleuche_11":
 			dialog.text = "I know about the second just a bit. Whether his name is Jack, or Jackson, and whether he is a privateer, or small businessman, or simply an adventurer. He owns xebec with a strange name... hmm... her name is... Damn, I've forgotten! But the name is some kind of demonic. I asked him what it meant, and he said it was a bird-woman, born by sea gods. Pah! Godless...";
 			link.l1 = "Nerd... So don't you remember her name?";
 			link.l1.go = "caleuche_12";
 		break;
-		
 		case "caleuche_12":
 			dialog.text = "No, may thunder strike me, I do not remember. Oh, and when he introduced himself, he mentioned that he was from Barbados.";
 			link.l1 = "That's something! Okay, I'll try to find this lover of feathered women until he will be found by someone else... Thanks, buddy, you helped me a lot!";
 			link.l1.go = "caleuche_13";
 		break;
-		
 		case "caleuche_13":
 			dialog.text = "You're welcome, cap, drop by sometimes.";
 			link.l1 = "Sure!";
 			link.l1.go = "caleuche_14";
 		break;
-		
 		case "caleuche_14":
 			DialogExit();
 			AddQuestRecord("Caleuche", "7");
@@ -597,7 +533,6 @@ void ProcessDialogEvent()
 			pchar.quest.caleuche_prepare_beliz.win_condition.l1.location = "Beliz";
 			pchar.quest.caleuche_prepare_beliz.function = "Caleuche_PrepareBeliz";
 		break;
-		
 		case "fight":
 			DialogExit();
 			NextDiag.CurrentNode = NextDiag.TempNode;
@@ -606,18 +541,15 @@ void ProcessDialogEvent()
 			LAi_SetOwnerType(NPChar); // belamour иначе обижается навсегда
 			AddDialogExitQuest("MainHeroFightModeOn");
 		break;
-		
 		case "Exit":
 			NextDiag.CurrentNode = NextDiag.TempNode;
 			DialogExit();
 		break;
-		
 		case "exit_setOwner":
 			LAi_SetOwnerTypeNoGroup(npchar);
 			NextDiag.CurrentNode = NextDiag.TempNode;
 			DialogExit();
 		break;
-		
 		case "Man_FackYou"://реакция на попытку залезть в сундук
 			dialog.text = LinkRandPhrase("You're "+ GetSexPhrase(" a thief, my dear! Guards, seize him"," thief! Guards seize her") +"!!!", "Wow! I gazed away a little, and you're right in the chest with your head already! Hold the thief!", "Guards! Robbery! Stop the thief!");
 			link.l1 = "Argh, shit!";

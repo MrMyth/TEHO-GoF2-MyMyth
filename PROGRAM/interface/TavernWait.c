@@ -1,5 +1,4 @@
 int iHourWait = 0;
-
 void InitInterface(string iniName)
 {
 	SendMessage(&GameInterface,"ls",MSG_INTERFACE_INIT,iniName);
@@ -15,12 +14,10 @@ void InitInterface(string iniName)
 	SendMessage(&GameInterface, "lslf", MSG_INTERFACE_MSG_TO_NODE, "HOURS_SLIDE", 0, 0.5);
 	SetCurrentNode("HOURS_SLIDE");
 }
-
 void ProcCommand()
 {
 	string comName = GetEventData();
 	string nodName = GetEventData();
-
 	switch(nodName)
 	{
 		case "HOURS_SLIDE":
@@ -32,37 +29,30 @@ void ProcCommand()
 					SetCurrentNode("CANCEL_BTN");
 			}
 		break;
-	
 		case "OK_BTN":
 			if(comName=="activate" || comName=="click")
 				WaitProcess(iHourWait);
-				
 			if(comName=="rightstep")
 				SetCurrentNode("CANCEL_BTN");
-			
 			if(comName=="upstep")
 				SetCurrentNode("HOURS_SLIDE");
 		break;
-			
 		case "CANCEL_BTN":
 			if(comName=="leftstep")
 			{
 				if(GetSelectable("OK_BTN"))
 					SetCurrentNode("OK_BTN");
 			}
-		
 			if(comName=="upstep")
 				SetCurrentNode("HOURS_SLIDE");
 		break;
 	}
 }
-
 void ProcSlideChange()
 {
 	string 	sNodeName 	= GetEventData();
 	int 	iVal 		= GetEventData(); // int GameInterface.nodes.<node_name>.value
 	float 	fVal 		= GetEventData(); // float GameInterface.nodes.<node_name>.value
-
 	if(sNodeName == "HOURS_SLIDE")
 	{
 		iHourWait = sti(fVal*24);
@@ -70,14 +60,12 @@ void ProcSlideChange()
 		SetFormatedText("INFO_TEXT", GetCorrectHourString(iHourWait));
 	}
 }
-
 void WaitProcess(int _iHour)
 {
 	ExitCancel();
 	pchar.quest.waithours = _iHour;
 	DoQuestFunctionDelay("WaitNextHours", 0.1);
 }
-
 void IDoExit(int exitCode, bool bClear)
 {
 	EngineLayersOffOn(false);
@@ -89,12 +77,10 @@ void IDoExit(int exitCode, bool bClear)
 	interfaceResultCommand = exitCode;
 	EndCancelInterface(bClear);
 }
-
 void ExitCancel()
 {
 	IDoExit(RC_INTERFACE_TAVERN_WAIT, true);
 }
-
 void CanWait()
 {
 	if(iHourWait <= 0 || chrDisableReloadToLocation)
@@ -102,11 +88,9 @@ void CanWait()
 	else
 		SetSelectable("OK_BTN", true);
 }
-
 string GetCorrectHourString(int _hour)
 {
 	string sRetStr = "";
-	
 	switch(_hour)
 	{
 		case "0": 	sRetStr = "Less than one hour"; 				break;
@@ -135,6 +119,5 @@ string GetCorrectHourString(int _hour)
 		case "23": 	sRetStr = "About 23 hours . . ."; 	break;
 		case "24": 	sRetStr = "About 1 day . . ."; 	break;
 	}
-
 	return sRetStr;
 }

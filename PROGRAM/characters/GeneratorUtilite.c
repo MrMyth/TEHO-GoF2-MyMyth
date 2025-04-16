@@ -1,11 +1,6 @@
 // BOAL методы для генератора НПС
-
 // здесь можно объявить глобальные переменные
-
 int m_rank_bonus, e_rank_bonus;
-
-
-
 // генерим НПС приблизительного ранга
 void SetFantomParamFromRank(ref NPchar, int  rank, bool setEquip)
 {
@@ -17,16 +12,12 @@ void SetFantomParamFromRank(ref NPchar, int  rank, bool setEquip)
 	    LAi_NPC_Equip(NPchar, sti(NPchar.rank), true, true);
     }
 }
-
-
 // расчитать скилы заданного ранга, типа как от ГГ в будущем (ранг у НПС будет приблизительно, зависит от сложности)
 void CalculateSkillsFromRank(ref NPchar, int  rank)
 {
     float  iMiddleK;
-    
 	// вычислим средний скил к этому рангу
 	iMiddleK = 6 + rank*GetCharacterRankRate(GetMainCharacter()) / 14.0;
-	
 	CalculateAppropriateSkillsParam(Npchar, iMiddleK, 5);
 }
 // расчет скилов от среднего скила
@@ -34,14 +25,12 @@ void CalculateAppropriateSkillsParam(ref NPchar, float  MiddleK, int _complex)
 {
     //trace("CalculateAppropriateSkillsParam " + NPchar.id);
     float  fValue;
-    
     fValue = (20 * _complex / 4.0);
     Npchar.skill.FencingL 	  = makeint(MiddleK + (frandSmall(fValue) + frandSmall((20* _complex / 3.2)) - 24));
     Npchar.skill.FencingS     = makeint(MiddleK + (frandSmall(fValue) + frandSmall((20* _complex / 3.0)) - 20));
     Npchar.skill.FencingH     = makeint(MiddleK + (frandSmall(fValue) + frandSmall((20* _complex / 3.5)) - 28));
     Npchar.skill.Pistol       = makeint(MiddleK + (frandSmall(fValue) + frandSmall(fValue) - 30));
     Npchar.skill.Fortune      = makeint(MiddleK + (frandSmall(fValue) + frandSmall(fValue) - 30));
-
     Npchar.skill.Leadership   = makeint(MiddleK + (frandSmall(fValue) + frandSmall(fValue) - 30));
     Npchar.skill.Commerce     = makeint(MiddleK + (frandSmall(fValue) + frandSmall(fValue) - 30));
     Npchar.skill.Sailing      = makeint(MiddleK + (frandSmall(fValue) + frandSmall(fValue) - 30));
@@ -51,9 +40,7 @@ void CalculateAppropriateSkillsParam(ref NPchar, float  MiddleK, int _complex)
     Npchar.skill.Repair       = makeint(MiddleK + (frandSmall(fValue) + frandSmall(fValue) - 30));
     Npchar.skill.Defence      = makeint(MiddleK + (frandSmall(fValue) + frandSmall(fValue) - 30));
     Npchar.skill.Sneak        = makeint(MiddleK + (frandSmall(fValue) + frandSmall(fValue) - 30));
-
     CorrectSkillParam(Npchar);
-
     SetRankFromSkill(Npchar);
 }
 void CalculateAppropriateSkills(ref NPchar)
@@ -62,12 +49,10 @@ void CalculateAppropriateSkills(ref NPchar)
     bool    ok;
     int     rank, i, j, k, sum, rank_bonus, base_rank;
     string  sTemp;
-    
     SetRandSPECIAL(Npchar);
     if (false)
     {
     	MiddleK = GetMiddleMainSkill();
-
         CalculateAppropriateSkillsParam(Npchar, MiddleK, MOD_SKILL_ENEMY_RATE);
     }
     else
@@ -80,35 +65,28 @@ void CalculateAppropriateSkills(ref NPchar)
 			rank_bonus = sti(NPchar.RankBonus);
 		    sTemp = "RankBonus: " + rank_bonus;
 		}
-
 		base_rank = 0;
 		if (CheckAttribute(NPchar, "BaseRank"))
 		{       
 			base_rank = sti(NPchar.BaseRank);
 			sTemp += " BaseRank: " + base_rank;
 		}
-
 		if (sti(Pchar.rank) > base_rank) base_rank = sti(Pchar.rank);
-		
 		MiddleK = base_rank;
-		
         ok =  (MOD_SKILL_ENEMY_RATE > 5) && (bNewCodeOn);
         if (!ok)
         {
         	ok =  (MOD_SKILL_ENEMY_RATE <= 5) && (!bNewCodeOn); // наоборот - есть - сложнее станет
         }
         ok =  (!CheckAttribute(NPchar, "OurMan")) || (ok);
-
   		if (!CheckAttribute(NPchar, "BaseRank") && ok)// токо Компы и не двойной учет для моря
   		{
             MiddleK = MiddleK + (MOD_SKILL_ENEMY_RATE-5) * 1.5;
             sTemp += " ComplexBonus = " + FloatToString((MOD_SKILL_ENEMY_RATE-5) * 1.5, 1);
   		}
   		rank = MakeInt(MiddleK + frandSmall(4) + frandSmall(4) + frandSmall(4) + frandSmall(4) - 8 + rank_bonus);
-
 		if (rank < 1) rank = 1;
 		if (rank > 300) rank = 300;
-
     	NPchar.rank = rank;
     	if (CheckAttribute(NPchar, "OurMan"))
     	{
@@ -123,7 +101,6 @@ void CalculateAppropriateSkills(ref NPchar)
         {
     	   //Log_TestInfo("Fantom_gen: " + sTemp);
     	}
-    	
     	if (rank > (1400 / GetCharacterRankRate(Npchar)))
 		{
             SetSelfSkill(Npchar, SKILL_MAX, SKILL_MAX, SKILL_MAX, SKILL_MAX, SKILL_MAX);
@@ -133,7 +110,6 @@ void CalculateAppropriateSkills(ref NPchar)
         CalculateSkillsFromRank(Npchar, rank);
     }
 }
-
 void SetRankFromSkill(ref Npchar)
 {
     Npchar.rank = 1 + makeint( (sti(Npchar.skill.FencingL) + sti(Npchar.skill.FencingH) + sti(Npchar.skill.Fortune) +
@@ -146,12 +122,10 @@ void SetRankFromSkill(ref Npchar)
         Npchar.rank = 1;
     }
 }
-
 void CorrectSkillParam(ref Npchar)
 {
     int i;
     string  skillName;
-
     for (i=1; i<15; i++)
     {
         skillName = GetSkillNameByIdx(i);
@@ -162,16 +136,13 @@ void CorrectSkillParam(ref Npchar)
 float GetMiddleMainSkill()
 {
     float MiddleK;
-
     MiddleK = makefloat(GetSkillSum(Pchar) / 14.0) ;
-
     return  MiddleK;
 }
 int GetSkillSum(ref Npchar)
 {
     int i, sum;
     string  skillName;
-    
 	sum = 0;
     for (i=1; i<15; i++)
     {
@@ -180,12 +151,10 @@ int GetSkillSum(ref Npchar)
     }
     return sum;
 }
-
 int GetSPECIALSum(ref Npchar)
 {
     int i, sum;
     string  skillName;
-
 	sum = 0;
     for (i=15; i<22; i++)
     {
@@ -195,12 +164,10 @@ int GetSPECIALSum(ref Npchar)
     return sum;
 }
 // boal new formula 10.12.03 // очень важная раздача скилов, зависит от сложности <--
-
 void SetFantomParam(ref _pchar)
 {
     SetFantomParamCommon(_pchar);
 }
-
 void SetFantomParamCommon(ref _pchar)
 {
     CalculateAppropriateSkills(_pchar);
@@ -211,7 +178,6 @@ void SetFantomParamCommon(ref _pchar)
     LAi_NPC_Equip(_pchar, sti(_pchar.rank), true, true);
     //AntiCheat(_pchar);
 }
-
 void SetFantomParamEncout(ref _pchar)  // выдача сабель и НР отдельно
 {
     CalculateAppropriateSkills(_pchar);
@@ -226,18 +192,15 @@ void SetFantomParamEncout(ref _pchar)  // выдача сабель и НР от
     // тут трем накопивщиеся сабли и корабли 290704 BOAL <--
     //AntiCheat(_pchar);
 }
-
 void SetSeaFantomParam(ref _pchar, string type)
 {
 	ref MChar;
-
 	MChar = GetMainCharacter();
 	if (CheckAttribute(MChar, "EnemyRank"))
 	{
 		Log_TestInfo("If you see this, feel free to kick Gray: " + MChar.EnemyRank);
 		DeleteAttribute(MChar, "EnemyRank");
 	}
-		
 	switch(type)
 	{
 		case "pirate"	:
@@ -253,12 +216,10 @@ void SetSeaFantomParam(ref _pchar, string type)
 			_pchar.PhantomType = "hunter";
 		break;	
 	}
-
 	Fantom_SetRandomSkills(_pchar, type); // там вызов CalculateAppropriateSkills(_pchar); + бонус от класса корабля
 	Fantom_SetRandomMoney(_pchar, type);
 	Fantom_SetRandomCrewExp(_pchar, type);
 	DeleteAttribute(_pchar, "items");
-
 	SetFantomHP(_pchar);
 	LAi_NPC_Equip(_pchar, sti(_pchar.rank), true, true);
 	//AntiCheat(_pchar);
@@ -269,11 +230,8 @@ void Fantom_SetRandomSkills(ref rFantom, string sFantomType)
 {
 	aref aFSkills;
 	int iSClass;
-	
     makearef(aFSkills, rFantom.Skill);
-
 	CalculateAppropriateSkills(rFantom);
-
 	if(sFantomType == "special")	
 	{
 		iSClass = 2 + rand(4);
@@ -338,7 +296,6 @@ void SetFantomHP(ref _pchar)
 	LAi_SetHP(_pchar, hp, hp);
 	LAi_SetCurHPMax(_pchar);
 }
-
 void SetMonsterLoginHP(ref _pchar) // жизнь у монстров больше (рейдеры тоже тут), как и пассажиры - потенциально читовые офицеры!!
 {
 	int hp;
@@ -357,7 +314,6 @@ void SetMonsterLoginHP(ref _pchar) // жизнь у монстров больш�
 		LAi_SetCurHPMax(_pchar);
 	}
 }
-
 /// метод расчета от опыта солдат, дает бонус в НР (или пенальти)
 bool GetBoardingHP(ref mchr, ref echr, ref float_boarding_player_hp, ref float_boarding_enemy_hp)
 {
@@ -365,7 +321,6 @@ bool GetBoardingHP(ref mchr, ref echr, ref float_boarding_player_hp, ref float_b
 	float moral;
 	float exp;
 	b_p_hp = LAi_GetCharacterMaxHP(mchr) / 3.0;  // треть от НР кэпа идет в базу бонуса
-	
 	exp = GetCrewExp(mchr, "Soldiers") / GetCrewExpRate() - 0.7;
 	moral = 0;
 	if(CheckAttribute(mchr, "ship.crew.morale"))
@@ -376,7 +331,6 @@ bool GetBoardingHP(ref mchr, ref echr, ref float_boarding_player_hp, ref float_b
 	}
 	exp = exp + moral;  // может быть минус
 	b_p_hp = b_p_hp*exp; 
-	
 	b_e_hp = 0;  // не будем рандом городить рандомом, опыт и еще скилы кэпа, все это не зависит от ГГ, а вот ГГ бонус от опыта даем
 	/*
 	b_e_hp = LAi_GetCharacterMaxHP(echr) / 3.0;
@@ -393,7 +347,6 @@ bool GetBoardingHP(ref mchr, ref echr, ref float_boarding_player_hp, ref float_b
 	 */
 	float_boarding_player_hp   =  b_p_hp;
 	float_boarding_enemy_hp    =  b_e_hp;
-	
 	return true;
 }
 void AddCharHP(ref _pchar, int _bonus)
@@ -403,11 +356,9 @@ void AddCharHP(ref _pchar, int _bonus)
 	LAi_SetHP(_pchar, hp, hp);
 	LAi_SetCurHPMax(_pchar);
 }
-
 // в коде далее
 // boarding_player_hp = boarding_player_hp + GetBoarding_player_hp_Bonus;
 // boarding_enemy_hp = boarding_enemy_hp + GetBoarding_enemy_hp_Bonus;
-
 int GetBoarding_player_hp_Bonus(int mcrew, int ecrew) // бонус от перевеса, когда if (mcrew > ecrew)
 {
     m_rank_bonus = 0;
@@ -427,7 +378,6 @@ int GetBoarding_player_hp_Bonus(int mcrew, int ecrew) // бонус от пер�
 		return makeint(5 * MOD_SKILL_ENEMY_RATE * makefloat((mcrew - ecrew) / makefloat(ecrew)));
 	}
 }
-
 int GetBoarding_enemy_hp_Bonus(int mcrew, int ecrew) // бонус от перевеса
 {
     m_rank_bonus = 0;
@@ -447,12 +397,10 @@ int GetBoarding_enemy_hp_Bonus(int mcrew, int ecrew) // бонус от пере
 		return makeint(6 * MOD_SKILL_ENEMY_RATE * makefloat((ecrew - mcrew) / makefloat(mcrew)));
 	}
 }
-
 float GetBoarding_player_hp(float b_p_hp) // итоговое здоровье нашего матроса
 {
 	return b_p_hp; // нафиг случайность иначе мрут сильно + 6*rand(11 - MOD_SKILL_ENEMY_RATE) - 20;
 }
-
 float GetBoarding_enemy_hp(float b_e_hp) // итоговое здоровье матроса врага
 {
 	return b_e_hp + 4*(MOD_SKILL_ENEMY_RATE - 5); // нафиг случайность + 6*rand(MOD_SKILL_ENEMY_RATE+1) - 20;
@@ -497,14 +445,12 @@ void SetMushketerParamFortOur(ref _pchar)
 void SetFantomParamAbordEnemy(ref _pchar)
 {
 	ref MChar;
-
 	MChar = GetMainCharacter();
 	if (CheckAttribute(MChar, "EnemyRank"))
 	{
 		_pchar.BaseRank = MChar.EnemyRank;
 	}
 	_pchar.RankBonus = e_rank_bonus;
-
 	SetFantomParamCommon(_pchar);
 	DeleteAttribute(_pchar, "BaseRank");
 	DeleteAttribute(_pchar, "RankBonus");
@@ -527,14 +473,12 @@ void SetMushketerParamAbordEnemy(ref _pchar)
 void SetFantomParamFortEnemy(ref _pchar)
 {
 	ref MChar;
-
 	MChar = GetMainCharacter();
 	if (CheckAttribute(MChar, "EnemyRank"))
 	{
 		_pchar.BaseRank = MChar.EnemyRank;
 	}
 	_pchar.RankBonus = e_rank_bonus;
-
 	SetFantomParamCommon(_pchar);
 	DeleteAttribute(_pchar, "BaseRank");
 	DeleteAttribute(_pchar, "RankBonus");
@@ -553,7 +497,6 @@ void SetMushketerParamFortEnemy(ref _pchar)
 	DeleteAttribute(_pchar, "BaseRank");
 	DeleteAttribute(_pchar, "RankBonus");
 }
-
 //крутые парни -->
 void SetFantomParamHunter(ref sld)
 {
@@ -562,7 +505,6 @@ void SetFantomParamHunter(ref sld)
     TakeNItems(sld,"potion2", 2);
 }
 //крутые парни <--
-
 // boal 20.03.2004 <--
 void AntiCheat(ref _pchar)
 {
@@ -574,7 +516,6 @@ void AntiCheat(ref _pchar)
     }
     SetRankFromSkill(mc);*/
 }
-
 void CheckAntiCheat()
 {
  	if (CheckAttribute(PChar, "SystemInfo.CRC"))
@@ -585,17 +526,14 @@ void CheckAntiCheat()
 		}
 	}
 }
-
 void SetAntiCheat()
 {
 	PChar.SystemInfo.CRC = GetCRCCheatSum(PChar);
 }
-
 float GetCRCCheatSum(ref _PChar)
 {
 	return makefloat(GetSPECIALSum(_PChar) + GetSkillSum(_PChar) + sti(_PChar.Ship.Type) + stf(_PChar.Health.HP) + sti(_PChar.rank) + sti(_PChar.Money) + stf(_PChar.chr_ai.hp));
 }
-
 ////////////////////////////////////////
 //   SEA
 ////////////////////////////////////////
@@ -603,7 +541,6 @@ float Sea_TurnRateMagicNumber();
 {
     return 244.444; //162.962; //244.444; *2/3
 }
-
 //#define WIND_NORMAL_POWER		18.0 // делитель для силы ветра на циферблате - влияет на мах скорость
 /*
 float Sea_ApplyMaxSpeedZ(aref arCharShip, float fWindDotShip) //float fTRFromSailDamage,
@@ -623,7 +560,6 @@ float Sea_ApplyMaxSpeedZ(aref arCharShip, float fWindDotShip) //float fTRFromSai
     { //против ветра
         fMaxSpeedZ = fMaxSpeedZ * (0.75 - fWindDotShip/3.2 - pow(abs(fWindDotShip), fWindAgainstSpeed)); // тут есть влияние кода в ЕХЕ
     }
-
     return fMaxSpeedZ;
 }
 */
@@ -634,11 +570,9 @@ float Sea_ApplyMaxSpeedZ(aref arCharShip, float fWindDotShip, ref rCharacter) //
     float   fWindAgainstSpeed;
     float   BtWindR;
     float   fkoeff;
-	
 	fMaxSpeedZ 			= stf(arCharShip.MaxSpeedZ);	
 	fWindAgainstSpeed   = FindShipWindAgainstSpeed(rCharacter);
 	arCharShip.WindAgainstSpeed = Radian2Degree(acos(1.0 - fWindAgainstSpeed));     // 41.4 - 126.8 градусов без амулета
-
      // LDH 16Jan17 - new sailing model for fore and aft rigged ships
      // LDH 18Feb17 - added mod toggle
 	//if (ENHANCED_SAILING_MODE && stf(rShip.WindAgainstSpeed) >= 1.0)   // fore and aft rigged ships with mod enabled
@@ -663,7 +597,6 @@ float Sea_ApplyMaxSpeedZ(aref arCharShip, float fWindDotShip, ref rCharacter) //
 		// Jason: добавляю в формулу поправочный коэффициент. Без этого коэффициента корабли с косыми парусами превращаются в калек - никогда не достигают своей макс скорости согласно ТТХ даже на оптимальном курсе. Против ветра их скорость возрастает прямо пропорционально бейдевинду, в противном случае нахуя бейд вообще нужен вместе с повышалкой, если он только вредит в итоге. Таким образом при движении против ветра имеем следующее: чем выше бейд корабля - тем выше его скорость на тупых углах и тем более тупой угол можно взять до критического падения скорости.
 		fkoeff = stf(fWindAgainstSpeed); // собственно бейдевинд + повышалка
 		if (stf(fkoeff) < 1) fkoeff = 1; // движение прямых парусов против ветра оставляем без изменений
-
 		if(fWindDotShip < BtWindR) // по ветру
 		{
 			fMaxSpeedZ = fMaxSpeedZ * (1.0 + 0.974 * (fWindDotShip - BtWindR) / (1.0 + BtWindR));
@@ -675,31 +608,24 @@ float Sea_ApplyMaxSpeedZ(aref arCharShip, float fWindDotShip, ref rCharacter) //
     }
 	return fMaxSpeedZ;
 }
-
 // LDH 17Feb17 - for fore and aft rigged ships, sail faster between beam and best course arrow
 // only used when sailing against the wind
 float AgainstWindFactor(ref rCharacter)
 {
 	float Wind = Radian2Degree(NormalizeAngle(stf(Weather.Wind.Angle)));
 	float Ship = Radian2Degree(NormalizeAngle(stf(rCharacter.ship.Ang.y)));
-
 	float Diff = abs(Ship - Wind);		// difference between your heading and the direction the wind is blowing
 	if (Diff > 180.0) Diff = abs(Diff - 360.0);
-
 	float BestCourse = FindShipWindAgainstSpeed(rCharacter);	// best course angle, includes Pilgrim's amulet
 	BestCourse = Radian2Degree(acos(1.0 - BestCourse));
-
 	float Factor = 1.0;						// Normal calculation for sailing closer to the wind than your best course arrows
 	if (Diff < BestCourse) Factor = 0.5;	// Ship sails faster between wind on the beam and best course arrows
-
 	return Factor;
 }
-
 // LDH 25Feb17
 float NormalizeAngle(float Angle)
 {
 	while (Angle >= PIm2) Angle -= PIm2;
 	while (Angle < 0.0)   Angle += PIm2;
-
 	return Angle;
 }

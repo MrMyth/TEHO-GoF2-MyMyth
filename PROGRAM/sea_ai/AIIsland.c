@@ -2,7 +2,6 @@ void Island_Start()
 {
 	SendMessage(&Island, "l", MSG_ISLAND_START);
 }
-
 void Island_Reload(string sIslandID, string sNewIslandModel)
 {
 	int iIslandID = FindIsland(sIslandID);
@@ -17,7 +16,6 @@ void Island_Reload(string sIslandID, string sNewIslandModel)
 		SendMessage(&Island, "lss", MSG_ISLAND_LOAD_GEO, "islands", sNewIslandModel);
 	}
 }
-
 //navy -->
 string Island_FindNearestLocator(string group, float x, float z)
 {
@@ -32,11 +30,9 @@ string Island_FindNearestLocator(string group, float x, float z)
 	{
 		return retStr;
 	}
-
 	makearef(arGroup, Islands[iIslandID].(group));
 	iNum = GetAttributesNum(arGroup);
 	if (iNum < 1) return retStr;
-
 	for (i = 0; i < iNum; i++)
 	{
 		arLocator = GetAttributeN(arGroup, i);

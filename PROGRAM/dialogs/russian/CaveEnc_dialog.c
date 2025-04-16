@@ -5,14 +5,11 @@ void ProcessDialogEvent()
 	aref Link, NextDiag;
 	int i;
 	string sTemp, sGroup;
-
 	DeleteAttribute(&Dialog,"Links");
-
 	makeref(NPChar,CharacterRef);
 	makearef(Link, Dialog.Links);
 	makearef(NextDiag, NPChar.Dialog);
 	sTemp = "CaveBandos" + locations[FindLocation(npchar.location)].index + "_";
-	
 	switch(Dialog.CurrentNode)
 	{
 		case "First time":
@@ -21,7 +18,6 @@ void ProcessDialogEvent()
 			link.l1.go = "exit";			
 			NextDiag.TempNode = "First time";
 		break;
-		
 		case "CaveBanditosSit":
 			if (drand(2) == 1) 
 			{
@@ -37,20 +33,17 @@ void ProcessDialogEvent()
 			}
 			NextDiag.TempNode = "CaveBanditosSit";
 		break;
-		
 		case "CaveBanditosStay":
 			dialog.text = LinkRandPhrase("Whoa, good heavens! No need to go hunting the prey - it's already here... Hey, guys - let's shake this fop, will we?","No one invited you here, buddy... But it's so good that you are here, anyway. Let's see now, just how hefty your purse is!","No one dragged you here by force, he-he... But if you're already here, guess we'll tickle you a bit to see what drops out of your pockets...");
 			link.l1 = LinkRandPhrase("Now I will make shorter your tongue a bit...","I hope your skills with a saber match your wits, flapjaw!","Well, seems that it's time to make a couple more holes in your perishable body...");
 			link.l1.go = "fight";
 		break;
-		
 		case "CaveBanditosTreasure":
 			dialog.text = NPCStringReactionRepeat("Get lost, buddy. It's nothing to do for you here!", "Hey, I am asking in a friendly way: get lost. You never know what can happen...", "Last warning: if you don't get lost right now, you'll regret you came here.", "That's it, buddy, you asked for troubles.", "block", 1, npchar, Dialog.CurrentNode);
 			link.l1 = HeroStringReactionRepeat("Don't tell me what to do, alright?", "And what's so special down there? Just a cave, nothing more...", "Oh, come on now...", "Ha! Well, let's see who's better, maggot!", npchar, Dialog.CurrentNode); 
 			link.l1.go = DialogGoNodeRepeat("exit", "exit", "exit", "fight", npchar, Dialog.CurrentNode);
 			NextDiag.TempNode = "CaveBanditosTreasure";
 		break;
-		
 		case "CaveCaribSit":
 			if (drand(2) == 2) 
 			{
@@ -66,13 +59,11 @@ void ProcessDialogEvent()
 			}
 			NextDiag.TempNode = "CaveCaribSit";
 		break;
-		
 		case "CaveCaribStay":
 			dialog.text = LinkRandPhrase("Foul paleface has come to our cave! Whe-hee! I will cut out your tongue and fry it!","Stupid paleface has come to the jaguar's lair. Brothers, cut this cursed white cur!","Insolent paleface dares come to my cave? Then he never makes it out alive!");
 			link.l1 = LinkRandPhrase("I will cut off your freaking head...","Now the world will become several cannibals less...","Well, prepare to meet your ancestors, red-skin. In the Hell!");
 			link.l1.go = "fight";
 		break;
-		
 		case "exit_talk":
 			DialogExit();
 			sGroup = "CaveGroup_" + locations[FindLocation(pchar.location)].index;
@@ -83,7 +74,6 @@ void ProcessDialogEvent()
 			}
 			LAi_CharacterEnableDialog(npchar);
 		break;
-		
 		case "fight":
 			DialogExit();
 			sGroup = "CaveGroup_" + locations[FindLocation(pchar.location)].index;
@@ -101,7 +91,6 @@ void ProcessDialogEvent()
 			chrDisableReloadToLocation = true;
 			AddDialogExitQuest("MainHeroFightModeOn");
 		break;
-		
 		case "Exit":
 			NextDiag.CurrentNode = NextDiag.TempNode;
 			DialogExit();

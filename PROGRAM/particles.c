@@ -1,6 +1,5 @@
 object Particles;
 #event_handler("CreateParticleSystemPost", "CreateParticleSystemEvent");
-
 void InitParticles()
 {
 	Particles.Server = false;
@@ -12,25 +11,21 @@ void InitParticles()
 		Trace("Can't create 'particles' class");
 	}
 }
-
 void PauseParticles(bool bPause)
 {
 	if (!CreateParticleEntity()) return;
 	SendMessage(&Particles, "ll", PS_PAUSEALL, bPause);
 }
-
 void DeleteParticles()
 {
 	SendMessage(&Particles,"l", PS_CLEARALL);
 	Particles.winddirection.x = frnd();
 	Particles.winddirection.z = frnd();
 }
-
 void DeleteParticleSystem(int id)
 {
 	SendMessage(&Particles,"ll",PS_DELETE,id);
 }
-
 int CreateParticleSystem(string name,float x,float y,float z,
 		float ax,float ay,float az,int lifetime)
 {
@@ -39,7 +34,6 @@ int CreateParticleSystem(string name,float x,float y,float z,
 	pid = SendMessage(&Particles,"lsffffffl",PS_CREATE,name,x,y,z,ax,ay,az,lifetime);
 	return pid;
 }
-
 void CreateParticleSystemEvent()
 {
 	string name = GetEventData();
@@ -52,7 +46,6 @@ void CreateParticleSystemEvent()
 	int lifetime = GetEventData();
 	CreateParticleSystem(name, x, y, z, ax, ay, az, lifetime);
 }
-
 bool CreateParticleEntity()
 {
 	if(IsEntity(&Particles) == false)
@@ -66,18 +59,15 @@ bool CreateParticleEntity()
 	}
 	return true;
 }
-
 void MoveParticlesToLayers(int sExecuteLayer, int sRealizeLayer)
 {
 	LayerDelObject(EXECUTE, &Particles);
 	LayerDelObject(REALIZE, &Particles);
 	LayerDelObject(SEA_EXECUTE, &Particles);
 	LayerDelObject(SEA_REALIZE, &Particles);
-
 	LayerAddObject(sExecuteLayer, &Particles, 0);
 	LayerAddObject(sRealizeLayer, &Particles, 65536);
 }
-
 int CreateParticleSystemX(string name,float x,float y,float z,
 		float ax,float ay,float az,int lifetime)
 {
@@ -86,7 +76,6 @@ int CreateParticleSystemX(string name,float x,float y,float z,
 	pid = SendMessage(&Particles,"lsffffffl",PS_CREATEX,name,x,y,z,ax,ay,az,lifetime);
 	return pid;
 }
-
 int CreateBlast(float x,float y,float z)
 {
 	int iRes;
@@ -97,7 +86,6 @@ int CreateBlast(float x,float y,float z)
 	LayerAddObject(SEA_REALIZE,blast,3);
 	return iRes;
 }
-
 int CreateBlastX(float x,float y,float z,float ax,float ay,float az)
 {
 	int iRes;

@@ -2,7 +2,6 @@ void InitCharactersTables()
 {
 	InitMoraleTable();
 }
-
 void InitMoraleTable()
 {
 	MoraleTable[MORALET_TREACHEROUS]	= "Treacherous";
@@ -15,7 +14,6 @@ void InitMoraleTable()
 	MoraleTable[MORALET_HIGH]			= "High";
 	MoraleTable[MORALET_EXCELLENT]		= "Excellent";
 	MoraleTable[MORALET_HEROIC]			= "Heroic";
-
 	LoyalityTable[MORALET_TREACHEROUS]	= "LoyalityMinimum";
 	LoyalityTable[MORALET_AWFUL]		= "LoyalityAwful";
 	LoyalityTable[MORALET_LOW]			= "LoyalityLow";
