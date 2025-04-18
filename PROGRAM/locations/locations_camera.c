@@ -61,14 +61,6 @@ bool locCameraFree()
 	return res;
 }
 
-bool locCameraModern()
-{
-	if(IsEntity(&locCamera) == 0) return false;
-	bool res = SendMessage(&locCamera, "l", MSG_CAMERA_MODERN);
-	locCameraCurMode = LOCCAMERA_MODERN;
-	return res;
-}
-
 //
 bool locCameraLock(float ax)
 {
