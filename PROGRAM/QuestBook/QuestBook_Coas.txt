@@ -306,8 +306,12 @@ I set sail near @<sIsland>, but I couldn't meet with the flute, let alone board 
 #TEXT  13
 In the waters of @<sIsland>, I sink a local merchant flute. This is fine; it's working. I will continue. I will make those merchants give me my money. As always, I need to collect rumors and be attentive.
 #TEXT  14
+<<<<<<< HEAD
 It's done. I received not fifty, but two-hundred thousand for that business with the xebec. Doesn't that just warm a pirate's heart?
 #QUEST BerglarsGang
 Brigands and Assassins
 #TEXT  1
 Following a sequence of strange attacks, at length I found some information on the approximate location of the leader of the gang of murderers. I should look for him somewhere in the pearl trade settlements.
+=======
+It's done. I received not fifty, but two-hundred thousand for that business with the xebec. Doesn't that just warm a pirate's heart?
+>>>>>>> parent of f09c749 (Add Bergals quest and clean)

@@ -6,19 +6,7 @@ bool    bOk;
 /////////////////////////////////////////////////////////////////////////////////////////////////////////
 ////  разное с оптимизации   начало
 /////////////////////////////////////////////////////////////////////////////////////////////////////////
-void Birglars_fight(string qName)
-{
-	if (GetCharacterIndex("Berglar" + pchar.quest.(qName).city) != -1)
-	{
-		LAi_SetFightMode(pchar, false);
-		LAi_LockFightMode(pchar, true);		
-		sTemp = "berglar" + pchar.quest.(qName).city;
-		pchar.questTemp.tugs.(sTemp) = "over";
-		sld = characterFromId("Berglar" + pchar.quest.(qName).city);
-		LAi_SetActorType(sld);
-		LAi_ActorDialog(sld, pchar, "", 2.0, 0);
-	}
-}
+
 //освободить флаг на дачу миниквестов
 void SmallQuests_free(string qName)
 {

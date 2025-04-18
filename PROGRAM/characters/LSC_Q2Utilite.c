@@ -1529,15 +1529,15 @@ void BerglarsInit()
 	LAi_SetCitizenType(sld);
 	LAi_group_MoveCharacter(sld, "ENGLAND_CITIZENS");
 	//=============> грабитель на Мартинике
-	pchar.questTemp.tugs.berglarFortFrance = "Maracaibo_Cave"; //указание где забивать стрелу
+	pchar.questTemp.tugs.berglarFortFrance = "FortFrance_Dungeon"; //указание где забивать стрелу
 	pchar.questTemp.tugs.berglarFortFrance.hp = 180; //сколько HP
-	pchar.questTemp.tugs.berglarFortFrance.locator = "gate_back"; //выходной локатор
-	sld = GetCharacter(NPC_GenerateCharacter("BerglarMaracaibo", "citiz_11", "man", "man", 23, SPAIN, -1, false, "quest"));
+	pchar.questTemp.tugs.berglarFortFrance.locator = "basement1"; //выходной локатор
+	sld = GetCharacter(NPC_GenerateCharacter("BerglarFortFrance", "citiz_11", "man", "man", 23, FRANCE, -1, false, "quest"));
 	sld.name 	= "Gaytano";
 	sld.lastname = "Lemier";
 	sld.rank = 25;
-	sld.city = "Maracaibo";
-	sld.location	= "Maracaibo_town";
+	sld.city = "FortFrance";
+	sld.location	= "FortFrance_town";
 	sld.location.group = "goto";
 	sld.location.locator = "goto5";
 	sld.dialog.filename  = "Coas_quests\Berglars\Berglars.c";
