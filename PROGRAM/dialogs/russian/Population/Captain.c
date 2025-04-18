@@ -4,11 +4,15 @@ void ProcessDialogEvent()
 {
 	ref NPChar, sld;
 	aref Link, NextDiag;
+
 	DeleteAttribute(&Dialog,"Links");
+
 	makeref(NPChar,CharacterRef);
 	makearef(Link, Dialog.Links);
 	makearef(NextDiag, NPChar.Dialog);
+	
 	ProcessCommonDialogRumors(NPChar, Link, NextDiag);
+	
 	switch(Dialog.CurrentNode)
 	{
 		case "First time":
@@ -54,6 +58,7 @@ void ProcessDialogEvent()
 			}
 			NextDiag.TempNode = "First time";
 		break;
+
 		case "question":
 			dialog.text = NPCStringReactionRepeat(""+GetFullName(npchar)+" at you service, good sir! What would you like to know?", 
 				"Glad to talk with you, captain!", 
@@ -65,6 +70,7 @@ void ProcessDialogEvent()
 				"Sure. Good luck!", npchar, Dialog.CurrentNode);
 			link.l1.go = DialogGoNodeRepeat("rumours_landcaptain", "rumours_landcaptain", "rumours_landcaptain", "exit", npchar, Dialog.CurrentNode);
 		break;
+		
 		//квестовая часть
 			case "march":
 				dialog.text = "No, captain there are a lot of eyes and ears on sreets and in the tavern and we don't need them, trust me. This proposal is all about taking something from someone so... let's have a talk on my ship.";
@@ -73,6 +79,7 @@ void ProcessDialogEvent()
 				link.l2 = "It looks quite suspicious to me... No, I'd better reject your invitation... Farewell, sir!";
 				link.l2.go = "exit_quest";
 			break;
+			
 			case "march_1":
 				//генерируем и запоминаем параметры в пчар, т.к. через нпчар не хочет нормально работать :(
 				pchar.GenQuest.MarchCap.Startisland = Islands[GetCharacterCurrentIsland(PChar)].id;
@@ -91,6 +98,7 @@ void ProcessDialogEvent()
 				link.l1 = "I see, I will try to be in time. See you!";
 				link.l1.go = "march_2";
 			break;
+			
 			case "march_2":
 			DialogExit();
 				LAi_SetActorType(npchar);
@@ -107,22 +115,26 @@ void ProcessDialogEvent()
 				pchar.quest.MarchCap_Create.function = "MarchCap_Create";
 				log_Testinfo(pchar.GenQuest.MarchCap.Startisland);
 			break;
+			
 		//замечание по обнаженному оружию от персонажей типа citizen
 		case "CitizenNotBlade":
 			dialog.text = NPCharSexPhrase(NPChar, "Listen, as a citizen of this town I'm asking you to return your blade into its sheath.", "Listen, as a citizen of this town I'm asking you to return your blade into its sheath.");
 			link.l1 = LinkRandPhrase("Fine.", "As you wish.", "As you say...");
 			link.l1.go = "exit";
 		break;
+		
 		case "exit_quest":
 			DialogExit();
 			LAi_CharacterDisableDialog(npchar);
 		break;
+		
 		case "Exit":
 			NextDiag.CurrentNode = NextDiag.TempNode;
 			DialogExit();
 		break;
 	}
 }
+
 int SelectCaptainShipType()
 {
 	int iType;
@@ -131,5 +143,6 @@ int SelectCaptainShipType()
 	if (sti(pchar.rank) >= 8 && sti(pchar.rank) < 12) iType =  SHIP_CORVETTE + drand(makeint(SHIP_POLACRE -  SHIP_CORVETTE));
 	if (sti(pchar.rank) >= 5 && sti(pchar.rank) < 8) iType = SHIP_BRIGANTINE + drand(makeint(SHIP_GALEON_L - SHIP_BRIGANTINE));
 	if (sti(pchar.rank) < 5) iType = SHIP_CAREERLUGGER + drand(makeint(SHIP_SLOOP - SHIP_CAREERLUGGER));
+	
 	return iType;
 }

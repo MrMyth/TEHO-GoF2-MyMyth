@@ -1,6 +1,11 @@
+
 #include "locations\locations_loader.c"
 #include "locations\locations_camera.c"
+
+
 extern void InitLocations();
+
+
 native int NativeFindCharacter(ref charactersArray, string id);
 native int NativeFindLocation(ref charactersArray, string id);
 native int NativeFindLoadCharacter();
@@ -12,7 +17,10 @@ native void SystemDelay(int millsec);
 native void ExecuteTechnique(string techName);
 native string GetNextLineString();
 native void SetReloadNextTipsImage();
+
 #libriary "ScriptLocationLibrary"
+
+
 void LocationInit()
 {
 	locCameraInit();
@@ -34,39 +42,50 @@ void LocationTestProcess()
 	ReloadProgressEnd();
 }
 */
+
 int FindLoadedLocation()
 {
 	return NativeFindLoadCharacter();
 }
+
 bool SetLocatorGroupRadius(ref loc, string grpName, float rad)
 {
 	return SendMessage(loc, "lsf", MSG_LOCATION_GRP_RADIUS, grpName, rad);
 }
+
 bool SetLocatorRadius(ref loc, string grpName, string locName, float rad)
 {
 	return SendMessage(loc, "lssf", MSG_LOCATION_LOC_RADIUS, grpName, locName, rad);
 }
+
+
 bool VisibleLocatorsGroup(string group, float kRadius, float viewLabelsDist, int a, int r, int g, int b)
 {
+	
 	int i = FindLoadedLocation();
 	if(i < 0) return false;
 	int color = argb(a, r, g, b);
 	return SendMessage(&Locations[i], "lsffl", MSG_LOCATION_VIEWLGROUP, group, kRadius, viewLabelsDist, color);
 }
+
 void HideLocatorsGroup(string group)
 {
 	int i = FindLoadedLocation();
 	if(i < 0) return;
 	SendMessage(&Locations[i], "ls", MSG_LOCATION_HIDELGROUP, group);
 }
+
 bool WaitNight()
 {
 	return true;
 }
+
+
 bool WaitNightPause(bool paused)
 {
 	return true;
 }
+
 void LocationWaitNihgtEndFadeOut()
 {
 	bool isFadeIn = GetEventData();
@@ -78,6 +97,7 @@ void LocationWaitNihgtEndFadeOut()
 	SetEventHandler("FaderEvent_EndFadeIn", "LocationWaitNihgtEndFadeIn", 0);
 	DelEventHandler("FaderEvent_EndFade", "LocationWaitNihgtEndFadeOut");
 }
+
 void LocationWaitNihgtEndFadeIn()
 {
 	bool isFadeIn = GetEventData();
@@ -93,15 +113,19 @@ void LocationWaitNihgtEndFadeIn()
 		PostEvent("LocationWaitNihgtEnd", 1);
 	}	
 }
+
 //navy -->
 void LocationMakeClone(string _locId)
 {
 	ref rOrg, rClone;
 	int iOrg, iClone;
+
 	iOrg = FindLocation(_locId);
 	iClone = FindLocation("Clone_location");
+
 	makeref(rOrg, Locations[iOrg]);
 	makeref(rClone, Locations[iClone]);
+
 	DeleteAttribute(rClone, "");
 	CopyAttributes(rClone, rOrg);
 	rClone.id = "Clone_location";
@@ -110,10 +134,12 @@ void LocationMakeClone(string _locId)
 //а так не работает... :) проверка только на аттрибут ;)	
 //	rClone.habitues = false;
 	DeleteAttribute(rClone, "habitues");
+
 	pchar.questTemp.LocationClone = true;
 	pchar.questTemp.LocationClone.id = rOrg.id;
 }
 //navy <--
+
 // Warship -->
 // Подключить к локации еще одну модельку
 // Ввел доп. проверки в иф, чтобы можно было этим методом "прилеплять" к локации модели еще при инициализации
@@ -133,6 +159,7 @@ bool Location_AddNewModel(String _LocID, String _GroupName, String _LocatorName,
 	if(_Now) LocLoadModel(rLoc, "models." + _Type + "." +_Model, ""); // Грузим модель динамически!
 	return true;
 }
+
 // Удалить модель из локации (удалится токо позле перегруза локации)
 bool Location_DeleteModel(String _LocID, String sType, String _Model)
 {
@@ -142,6 +169,7 @@ bool Location_DeleteModel(String _LocID, String sType, String _Model)
 	DeleteAttribute(rLoc, "models." + sType + "." +_Model);
 	return true;
 }
+
 // Находится ли перс в заданном локаторе?
 bool IsCharacterInLocator(ref rChar, string LocGroup, string LocName)
 {
@@ -152,6 +180,7 @@ bool IsCharacterInLocator(ref rChar, string LocGroup, string LocName)
 	}
 	return false;
 }
+
 bool Location_AddReload(string _LocID, int iNum, string _name, string _go, string _emerge, bool _autoreload, string _label, float _radius)
 {
 	int iLoc =  FindLocation(_LocID);

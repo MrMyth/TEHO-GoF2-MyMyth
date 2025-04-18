@@ -1,9 +1,12 @@
+
 int CreateSantaCatalinaCharacters(int n)
 {
 	ref ch;
+	
 	///////////////////////////////////////////////////////////////////////////////
 	// ОСНОВНЫЕ ПЕРСОНАЖИ
 	///////////////////////////////////////////////////////////////////////////////
+	
 	makeref(ch,Characters[n]);			//Губернатор
 	ch.id = "SantaCatalina_Mayor";
 	ch.model	= "huber_12";
@@ -31,6 +34,7 @@ int CreateSantaCatalinaCharacters(int n)
 	LAi_group_MoveCharacter(ch, "ENGLAND_CITIZENS");
 	LAi_SetImmortal(ch, true);
 	n = n + 1;
+
 	makeref(ch,Characters[n]);			//Священик
 	ch.id = "SantaCatalina_Priest";
 	ch.model	= "priest_2";
@@ -48,6 +52,7 @@ int CreateSantaCatalinaCharacters(int n)
 	LAi_group_MoveCharacter(ch, "ENGLAND_CITIZENS");
 	LAi_SetImmortal(ch, true);
 	n = n + 1;
+
 	makeref(ch,Characters[n]);		// ОФициантка
 	ch.id = "SantaCatalina_waitress";
 	ch.model	= "women_16";
@@ -64,6 +69,7 @@ int CreateSantaCatalinaCharacters(int n)
 	LAi_group_MoveCharacter(ch, "ENGLAND_CITIZENS");
 	LAi_SetImmortal(ch, true);
 	n = n + 1;
+
 	makeref(ch,Characters[n]);			//Трактирщик
 	ch.id = "SantaCatalina_tavernkeeper";
 	ch.model	= "barmen_10";
@@ -81,6 +87,7 @@ int CreateSantaCatalinaCharacters(int n)
 	LAi_group_MoveCharacter(ch, "ENGLAND_CITIZENS");
 	LAi_SetImmortal(ch, true);
 	n = n + 1;
+
 	makeref(ch,Characters[n]);			//Торговец
 	ch.id = "SantaCatalina_trader";
 	ch.model	= "trader_10";
@@ -98,6 +105,7 @@ int CreateSantaCatalinaCharacters(int n)
 	LAi_SetImmortal(ch, true);
 	ch.item_date = "";
 	n = n + 1;
+
 	makeref(ch,Characters[n]);			//Корабел
 	ch.id = "SantaCatalina_shipyarder";
 	ch.model	= "shipowner_10";
@@ -122,6 +130,7 @@ int CreateSantaCatalinaCharacters(int n)
 	LAi_group_MoveCharacter(ch, "ENGLAND_CITIZENS");
 	LAi_SetImmortal(ch, true);
 	n = n + 1;
+
 	makeref(ch,Characters[n]);			//Банкир
 	ch.id		= "SantaCatalina_usurer";
 	ch.model	= "banker_10";
@@ -141,6 +150,7 @@ int CreateSantaCatalinaCharacters(int n)
 	LAi_group_MoveCharacter(ch, "ENGLAND_CITIZENS");
 	LAi_SetImmortal(ch, true);
 	n = n + 1;
+
 	makeref(ch,Characters[n]);			//Начальник порта
 	ch.id		= "SantaCatalina_PortMan";
 	ch.model	= "citiz_7";
@@ -157,6 +167,7 @@ int CreateSantaCatalinaCharacters(int n)
 	LAi_SetImmortal(ch, true);
 	ch.item_date = "";
 	n = n + 1;
+
     makeref(ch,Characters[n]);
 	ch.name 	= "Smuggler";
 	ch.lastname = "";
@@ -173,5 +184,6 @@ int CreateSantaCatalinaCharacters(int n)
 	LAi_SetHP(ch, 80.0, 80.0);
 	ch.greeting = "smuggler";
 	n = n + 1;
+	
 	return n;
 }

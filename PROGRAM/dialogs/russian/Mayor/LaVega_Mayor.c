@@ -4,10 +4,13 @@ void ProcessDialogEvent()
 	ref NPChar, sld;
 	aref Link, NextDiag;
 	string sLoc;
+
 	DeleteAttribute(&Dialog,"Links");
+
 	makeref(NPChar,CharacterRef);
 	makearef(Link, Dialog.Links);
 	makearef(NextDiag, NPChar.Dialog);
+
 // ------------------------------------------блок angry-----------------------------------------------
     if (CheckAttribute(npchar, "angry") && !CheckAttribute(npchar, "angry.ok"))
     {
@@ -30,6 +33,7 @@ void ProcessDialogEvent()
         }
     }
 // ------------------------------------------блок angry-----------------------------------------------
+
 	switch(Dialog.CurrentNode)
 	{
 		// ----------------------------------- Диалог первый - первая встреча
@@ -44,10 +48,12 @@ void ProcessDialogEvent()
 			link.l1.go = "exit";
 			NextDiag.TempNode = "First time";
 		break;
+
  		case "Exit":
 			DialogExit();
 			NextDiag.CurrentNode = NextDiag.TempNode;
 		break;
+
         case "I_know_you_good":
             dialog.text = NPCStringReactionRepeat(GetFullName(pchar) + ", I am glad to see you! What do you wish?",
                          "What else?", " You again? Don't bother people if you have nothing to do!",
@@ -59,12 +65,14 @@ void ProcessDialogEvent()
 			link.l1.go = "exit";
 			NextDiag.TempNode = "I_know_you_good";
 		break;
+
 		// ============== Грабеж среди бела дня, попытка залезть в сундуки =========================
 		case "Man_FackYou":
 			dialog.text = LinkRandPhrase("Thievery!!! Are you serious?! You are done, pal...", "Wait, what the hell? Turns out that you are a thief! You're done...");
 			link.l1 = LinkRandPhrase("Shit!", "Carramba!!", "Damn it!!");
 			link.l1.go = "PL_Q3_fight";
 		break;
+					
 		// ======================== блок нод angry ===============>>>>>>>>>>>>>>>
 		case "AngryRepeat_1":
             dialog.text = RandPhraseSimple(""+ GetSexPhrase("Go away","Get away ") +" from here!", "Get out of my home!");

@@ -7,10 +7,13 @@ void ProcessDialogEvent()
 	int iTemp, iTest;
 	string sTemp, sTitle;
 	float locx, locy, locz;
+
 	DeleteAttribute(&Dialog,"Links");
+
 	makeref(NPChar,CharacterRef);
 	makearef(Link, Dialog.Links);
 	makearef(NextDiag, NPChar.Dialog);
+	
 	// вызов диалога по городам -->
     NPChar.FileDialog2 = "DIALOGS\" + LanguageGetLanguage() + "\Citizen\" + NPChar.City + "_Citizen.c";
     if (LoadSegment(NPChar.FileDialog2))
@@ -19,13 +22,16 @@ void ProcessDialogEvent()
 		UnloadSegment(NPChar.FileDialog2);
 	}
     // вызов диалога по городам <--
+	
 	ProcessCommonDialogRumors(NPChar, Link, NextDiag);
+	
 	iTest = FindColony(NPChar.City); // 170712
     ref rColony;
 	if (iTest != -1)
 	{
 		rColony = GetColonyByIndex(iTest);
 	}
+	
 	switch(Dialog.CurrentNode)
 	{
 		case "First time":
@@ -43,6 +49,7 @@ void ProcessDialogEvent()
 				link.l1.go = DialogGoNodeRepeat("exit", "", "", "fight", npchar, Dialog.CurrentNode);
 			break;
 			}
+			
 			//--> проверка репутации - дворяне гнобят супернегодяев
 			if (sti(pchar.reputation.nobility) < 10)
 			{
@@ -57,6 +64,7 @@ void ProcessDialogEvent()
 				link.l1.go = DialogGoNodeRepeat("exit", "", "", "fight", npchar, Dialog.CurrentNode);
 			break;
 			}
+			
 			//--> диалог первой встречи
             if(NPChar.quest.meeting == "0")
 			{
@@ -118,12 +126,14 @@ void ProcessDialogEvent()
 			}
 			NextDiag.TempNode = "First time";
 		break;
+
 		case "question":
 			dialog.text = LinkRandPhrase("Go on.","What do you want?","Questions? Fine, sailor, I am listening.");
 			link.l1 = LinkRandPhrase("Won't you tell me the last gossip of your town?","Have anything interesting happened here recently?","Any news from the archipelago, sir?");
 			link.l1.go = "rumours_nobleman";
 			NextDiag.TempNode = "First time";
 		break;
+
 //--------------------------------------------дворянин-пассажир---------------------------------------------------
 		case "passenger":
 			if (drand(19) > 9) SetPassengerParameter("Noblepassenger", false);
@@ -134,17 +144,20 @@ void ProcessDialogEvent()
 			link.l2 = "I'm sorry, "+GetAddress_FormToNPC(NPChar)+", but I am sailing in the different direction. I can't help you.";
 			link.l2.go = "passenger_exit";
 		break;
+		
 		case "passenger_exit":
 			dialog.text = "Too bad. Well, I'll wait for another ship. Farewell.";
 			link.l1 = "See you.";
 			link.l1.go = "exit";
 			DeleteAttribute(pchar, "GenQuest.Noblepassenger");
 		break;
+		
 		case "passenger_1":
 			dialog.text = "Great! I am tired of waiting. You will get your payment when we get there.";
 			link.l1 = "Go to my ship, "+GetAddress_FormToNPC(NPChar)+". We are leaving soon.";
 			link.l1.go = "passenger_2";
 		break;
+		
 		case "passenger_2":
 			DialogExit();
 			pchar.GenQuest.Noblepassenger.id = npchar.id;
@@ -157,6 +170,7 @@ void ProcessDialogEvent()
 			AddPassenger(pchar, npchar, false);
 			SetCharacterRemovable(npchar, false);
 			sTitle = npchar.index+"Citizpassenger";
+
 // LDH 13Sep17 - do not add to an existing Citizpassenger record -->
 // "Rename" the quest record by copying it to a new name and deleting the old record
 			if (CheckAttribute(pchar, "questinfo."+sTitle))
@@ -164,15 +178,19 @@ void ProcessDialogEvent()
 				string sTempLDH = frand(1);
 				sTempLDH = strcut(sTempLDH, 2, 5);    // 4 random digits
 				string sTitle1 = sTitle+sTempLDH;
+
 				aref arTo, arFrom;
 				makearef(arFrom, pchar.questinfo.(sTitle));
 				makearef(arTo,   pchar.questinfo.(sTitle1));
 				CopyAttributes(arTo, arFrom);
 				pchar.questinfo.(sTitle1) = "";
+
 				DeleteAttribute(pchar, "questinfo."+sTitle);
+
 				Trace("Duplicate Citizpassenger record "+sTitle+" copied to "+sTitle1+" **");
 			}
 // <--
+
 			AddQuestRecordEx(sTitle, "Citizpassenger", "1");
 			AddQuestUserDataForTitle(sTitle, "sType", "nobleman");
 			AddQuestUserDataForTitle(sTitle, "sName", GetFullName(npchar));
@@ -188,12 +206,14 @@ void ProcessDialogEvent()
 			pchar.quest.Noblepassenger.function = "Noblepassenger_complete";
 			SetFunctionTimerCondition("Noblepassenger_Over", 0, 0, sti(pchar.GenQuest.Noblepassenger.DaysQty), false);
 		break;
+		
 		case "passenger_3":
 			pchar.quest.Noblepassenger_Over.over = "yes"; //снять таймер
 			dialog.text = "Here we are, most excellent! This travel on your ship was quite satisfying. My thanks. Take your money, sir.";
 			link.l1 = "Good luck, "+GetAddress_FormToNPC(NPChar)+"! Farewell.";
 			link.l1.go = "passenger_4";
 		break;
+		
 		case "passenger_4":
 			chrDisableReloadToLocation = false;//открыть локацию
 			DialogExit();
@@ -214,6 +234,7 @@ void ProcessDialogEvent()
 			DeleteAttribute(Pchar, "GenQuest.Noblepassenger");
 		break;
 //<-- дворянин-пассажир
+
 //-------------------------------------------------помощь деньгами------------------------------------------------
 		case "donation":
 			sTemp = DonationText();
@@ -221,6 +242,7 @@ void ProcessDialogEvent()
 			link.l1 = "How much do you need?";
 			link.l1.go = "donation_1";
 		break;
+		
 		case "donation_1":
 			iTemp = drand(4)+1;
 			pchar.GenQuest.Nobledonation.Money = iTemp*1000+rand(iTemp)*150;
@@ -233,6 +255,7 @@ void ProcessDialogEvent()
 			link.l2 = "I'd be glad to help, but my pockets are empty as well - not a single spare peso.";
 			link.l2.go = "donation_exit";
 		break;
+		
 		case "donation_exit":
 			DialogExit();
 			ChangeOfficersLoyality("bad_all", 1);
@@ -240,12 +263,14 @@ void ProcessDialogEvent()
 			npchar.lifeday = 0;
 			DeleteAttribute(pchar, "GenQuest.Nobledonation");
 		break;
+		
 		case "donation_2":
 			AddMoneyToCharacter(pchar, -sti(pchar.GenQuest.Nobledonation.Money));
 			dialog.text = "My gratitude, "+GetAddress_Form(NPChar)+"! You have saved me! I have friends in governor's residence and I will tell them about your generosity. Thousand thanks again!";
 			link.l1 = "You're welcome, sir. I am sure that you would do the same to me.";
 			link.l1.go = "donation_3";
 		break;
+		
 		case "donation_3":
 			DialogExit();
 			ChangeOfficersLoyality("good_all", rand(2)+1);
@@ -255,6 +280,7 @@ void ProcessDialogEvent()
 			DeleteAttribute(pchar, "GenQuest.Nobledonation");
 		break;
 //<-- помощь деньгами
+
 //-------------------------------------------------семейная реликвия---------------------------------------------
 		case "lombard":
 			LombardText();
@@ -262,6 +288,7 @@ void ProcessDialogEvent()
 			link.l1 = "And how can I help you with that, "+GetAddress_FormToNPC(NPChar)+"?";
 			link.l1.go = "lombard_1";
 		break;
+		
 		case "lombard_1":
 			dialog.text = "I'm asking you to talk with our banker. Offer him money, vouch for me... or do something else. Unfortunately, I have no one to ask, all of my buddies have suddenly gone 'bankrupt'. In three months "+pchar.GenQuest.Noblelombard.Text+", and I will repay you all of your costs, doubly repay. You have my word!";
 			link.l1 = "Fine, I'll try to help you in this case.";
@@ -269,17 +296,20 @@ void ProcessDialogEvent()
 			link.l2 = "Unfortunately, I am a 'bankrupt' too right now. So I can't help you, I am so sorry!";
 			link.l2.go = "lombard_exit";
 		break;
+		
 		case "lombard_exit":
 			DialogExit();
 			LAi_CharacterDisableDialog(npchar);
 			npchar.lifeday = 0;
 			DeleteAttribute(pchar, "GenQuest.Noblelombard");
 		break;
+		
 		case "lombard_2":
 			dialog.text = "Thank you for your understanding. I'll be waiting for you in the tavern. Come there as soon as possible.";
 			link.l1 = "...";
 			link.l1.go = "lombard_3";
 		break;
+		
 		case "lombard_3":
 			DialogExit();
 			pchar.GenQuest.Noblelombard = "true"
@@ -302,6 +332,7 @@ void ProcessDialogEvent()
 			AddQuestUserData("Noblelombard", "sCity", XI_ConvertString("Colony"+pchar.GenQuest.Noblelombard.City));
 			AddQuestUserData("Noblelombard", "sName", pchar.GenQuest.Noblelombard.Name);
 		break;
+		
 		case "lombard_4":
 			if (CheckAttribute(pchar, "GenQuest.Noblelombard.Regard"))
 			{
@@ -327,12 +358,14 @@ void ProcessDialogEvent()
 				NextDiag.TempNode = "lombard_4";
 			}
 		break;
+		
 		case "lombard_fail":
 			pchar.quest.Noblelombard_Over.over = "yes"; //снять таймер
 			dialog.text = "Meh, "+GetAddress_Form(NPChar)+"... Now you are also a witness of an irrepressible greed of these damned bloodthirsty usurers. Remember about that when you will be willing to borrow money from them like I did. Thank you for your trying at least...";
 			link.l1 = "Never liked them. Well, who likes usurers? I am sorry, "+GetAddress_FormToNPC(NPChar)+". Farewell.";
 			link.l1.go = "lombard_fail_1";
 		break;
+		
 		case "lombard_fail_1":
 			DialogExit();
 			LAi_CharacterDisableDialog(npchar);
@@ -344,16 +377,19 @@ void ProcessDialogEvent()
 			DeleteAttribute(sld, "quest.noblelombard");
 			DeleteAttribute(Pchar, "GenQuest.Noblelombard");
 		break;
+		
 		case "lombard_5":
 			dialog.text = "Incredible! You've just saved me, "+GetAddress_Form(NPChar)+"! I will never forget it. I assure you that all of your costs will be doubly repaid. Come to see our banker in three months. I will open a deposit for your name.";
 			link.l1 = "Fine, I'll do as you say. See you!";
 			link.l1.go = "lombard_6";
 		break;
+		
 		case "lombard_6":
 			dialog.text = "Thanks again, captain. Good luck!";
 			link.l1 = "...";
 			link.l1.go = "lombard_7";
 		break;
+		
 		case "lombard_7":
 			DialogExit();
 			LAi_CharacterDisableDialog(npchar);
@@ -365,6 +401,7 @@ void ProcessDialogEvent()
 			SetFunctionTimerCondition("Noblelombard_Regard", 0, 0, 90, false); //таймер
 		break;
 //<-- семейная реликвия
+
 //------------------------------------------привезти рабов под заказ--------------------------------------------
 		case "slaves":
 			npchar.quest.slaves.price = 3+drand(1);//цена на рабов в дублонах
@@ -376,16 +413,19 @@ void ProcessDialogEvent()
 			link.l2 = "Pardon me, but I'm not a slave trader. Not my type of work.";
 			link.l2.go = "exit_slaves";
 		break;
+		
 		case "exit_slaves":
 			DialogExit();
 			LAi_CharacterDisableDialog(npchar);
 			npchar.lifeday = 0;
 		break;
+		
 		case "slaves_1":
 			dialog.text = "Very well then. I'll be waiting for you with the cargo. You can find me in a church from eleven AM till one PM every day. I am busy or away at the rest of the day.";
 			link.l1 = "Fine. I'll remember that. See you, "+GetAddress_FormToNPC(NPChar)+".";
 			link.l1.go = "slaves_2";
 		break;
+		
 		case "slaves_2":
 			DialogExit();
 			sGlobalTemp = npchar.id;
@@ -405,6 +445,7 @@ void ProcessDialogEvent()
 			AddQuestUserData(sTitle, "sQty", sti(npchar.quest.slaves.qty));
 			AddQuestUserData(sTitle, "sMoney", sti(npchar.quest.slaves.money));
 		break;
+		
 		case "slaves_3":
 			if (GetNpcQuestPastDayParam(npchar, "slaves_date") < 180)
 			{
@@ -428,16 +469,19 @@ void ProcessDialogEvent()
 				link.l1.go = "slaves_8";
 			}
 		break;
+		
 		case "slaves_4":
 			dialog.text = "Excellent. I will send a barque for them immediately.";
 			link.l1 = "How about my payment?";
 			link.l1.go = "slaves_5";
 		break;
+		
 		case "slaves_5":
 			dialog.text = "Don't worry, I remember about it. Here, take the sum, "+sti(npchar.quest.slaves.price)+" doubloons for a head.";
 			link.l1 = "Thanks, sir. It was nice to have a business with you!";
 			link.l1.go = "slaves_6";
 		break;
+		
 		case "slaves_6":
 			RemoveCharacterGoods(pchar, GOOD_SLAVES, sti(npchar.quest.slaves.qty));
 			TakeNItems(pchar, "gold_dublon", sti(npchar.quest.slaves.money));
@@ -447,6 +491,7 @@ void ProcessDialogEvent()
 			link.l1 = "Good luck, "+GetAddress_FormToNPC(NPChar)+".";
 			link.l1.go = "slaves_7";
 		break;
+		
 		case "slaves_7":
 			DialogExit();
 			npchar.lifeday = 0;
@@ -463,6 +508,7 @@ void ProcessDialogEvent()
 			AddQuestRecordEx(sTitle, "Nobleslaves", "2");
 			CloseQuestHeader(sTitle);
 		break;
+
 		case "slaves_8":
 			DialogExit();
 			npchar.lifeday = 0;
@@ -473,16 +519,19 @@ void ProcessDialogEvent()
 			CloseQuestHeader(sTitle);
 		break;
 //<-- привезти рабов под заказ
+
 		//замечание по обнаженному оружию от персонажей типа citizen
 		case "CitizenNotBlade":
 			dialog.text = NPCharSexPhrase(NPChar, "Listen, as a citizen of this town I'm asking you to sheathe your blade.", "Listen, as a citizen of this town I'm asking you to sheathe your blade.");
 			link.l1 = LinkRandPhrase("Fine.", "As you wish.", "Okay.");
 			link.l1.go = "exit";
 		break;
+
 		case "Exit":
 			NextDiag.CurrentNode = NextDiag.TempNode;
 			DialogExit();
 		break;
+
 		case "fight":
 			DialogExit();
 			NextDiag.CurrentNode = NextDiag.TempNode;
@@ -496,6 +545,7 @@ void ProcessDialogEvent()
 		break;
 	}
 }
+
 string DonationText()
 {
 	string sText;
@@ -510,6 +560,7 @@ string DonationText()
 	}
 	return sText;
 }
+
 void LombardText()
 {
 	switch (drand(5))

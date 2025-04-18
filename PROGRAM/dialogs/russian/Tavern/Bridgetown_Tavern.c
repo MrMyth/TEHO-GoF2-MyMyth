@@ -38,12 +38,14 @@ void ProcessCommonDialogEvent(ref NPChar, aref Link, aref NextDiag)
 				link.l1.go = "guardoftruth";
 			}
 		break;
+		
 		//Голландский гамбит /за Англию/
 		case "TavernDone":
 			dialog.text = "Here's your drink. The best rum for our dear guest! Is this a special occasion or have you just dropped by to rinse your throat?";
 			link.l1 = "You can say it's a special occasion. I'm taking some slaves to Blueweld. I've recently modified my new brig specifically for this purpose. So, I stopped by a plantation and spoke with the overseer, he ordered a decent batch of 'ebony' from me. So wait me back in your tavern soon. Will deliver merchandise to Blueweld and then I'll be doing business here on Barbados, he-he...";
 			link.l1.go = "TavernDone_1";
 		break;
+		
 		case "TavernDone_1":
 			dialog.text = "Really? Well, there's no shame in drinking for a good deal! So, you say you're going to do business on Barbados, haha?! That's great...";
 			link.l1 = "All right... I'll go look for a place I can sit down.";
@@ -60,11 +62,13 @@ void ProcessCommonDialogEvent(ref NPChar, aref Link, aref NextDiag)
 				pchar.quest.VanBergAttack_Check.function = "VanBergAttackCheck";
 			}
 		break;
+		
 		case "Tonzag_Letter":
 			dialog.text = "Gaston has left the town two day after your 'trader' performance. Put on a show here, ha! Your deception was exposed quickly, this town is small and gossips travel fast. This made Gaston to take leave. No one has seen him again here since then. He has left a letter for you, though\nAsked to give it personally to you in case you show up here before him. Actually, you are not the first man looking for Gaston. There was some narrow-eyed big man and an old one, looked like Spanish or Portuguese, I can't tell for sure. But I can't forget his face, something with him was very wrong...";
 			link.l1 = "Give me that letter... Thanks!";
 			link.l1.go = "Tonzag_Letter_1";
 		break;
+		
 		case "Tonzag_Letter_1":
 			DialogExit();
 			AddQuestRecord("Holl_Gambit", "2-22");
@@ -77,6 +81,7 @@ void ProcessCommonDialogEvent(ref NPChar, aref Link, aref NextDiag)
 			pchar.quest.Knippel_Shore.win_condition.l1.location = "Shore24";
 			pchar.quest.Knippel_Shore.function = "KnippelOnCuracao";
 		break;
+		
 		//Голландский гамбит /против всех/
 		case "Tonzag_check"://начинаем проверять нашего ГГ по всем статьям
 			if(sti(pchar.reputation.nobility) > 41)//высокая репа
@@ -106,6 +111,7 @@ void ProcessCommonDialogEvent(ref NPChar, aref Link, aref NextDiag)
 			link.l1 = "I'm all ears.";
 			link.l1.go = "Tonzag_task";
 		break;
+		
 		case "Tonzag_task":
 			pchar.questTemp.HWIC.Self.SpainCity = FindSpainCity();
 			log_Testinfo(pchar.questTemp.HWIC.Self.SpainCity);
@@ -117,6 +123,7 @@ void ProcessCommonDialogEvent(ref NPChar, aref Link, aref NextDiag)
 			npchar.quest.HWICTake = "true";
 			pchar.questTemp.HWIC.CanTake.Self = "true";//признак, что против всех уже бралась
 		break;
+		
 		case "Tonzag_exit":
 			dialog.text = "Then get lost and forget what we've talked about.";
 			link.l1 = "Have a nice stay.";
@@ -124,11 +131,13 @@ void ProcessCommonDialogEvent(ref NPChar, aref Link, aref NextDiag)
 			DeleteAttribute(pchar, "questTemp.HWIC.Self");//откат к двум другим вариантам
 			pchar.questTemp.HWIC.Fail3 = "true";
 		break;
+		
 		case "Tonzag_task_1":
 			dialog.text = "Your reward will be 30 000 pesos, good money. Besides, you may take every coin you will find on his body. Now let's discuss details. Name's don Fernando Rodriguez, 35 years old, tall, swarthy, dressed like a military. Good sailor and experienced fencer\nCan't tell where to find him, all I know that he is somewhere in the Caribbean\nSearch every Spanish city until you got him. You have two months. One last thing: I am aware what he is carrying with him, so don't even think to hide any item from me. Questions?";
 			link.l1 = "I don't have any questions. I'm on my way!";
 			link.l1.go = "Tonzag_task_2";	
 		break;
+		
 		case "Tonzag_task_2":
 			DialogExit();
 			pchar.questTemp.HWIC.Self = "start";
@@ -137,6 +146,7 @@ void ProcessCommonDialogEvent(ref NPChar, aref Link, aref NextDiag)
 			ReOpenQuestHeader("Holl_Gambit"); // данила . чтобы вышел из архива																				  
 			Log_TestInfo(""+XI_ConvertString("Colony"+pchar.questTemp.HWIC.Self.SpainCity)+"");
 		break;
+		
 		case "Task_check":
 			dialog.text = "Do you have a finger with the ring on it with you? Let me see it.";
 			if (CheckCharacterItem(pchar, "Finger"))
@@ -150,6 +160,7 @@ void ProcessCommonDialogEvent(ref NPChar, aref Link, aref NextDiag)
 				link.l1.go = "Task_fail";	
 			}
 		break;
+		
 		case "Task_fail":
 			dialog.text = "The finger with the ring was an obligatory condition in the contract. It was supposed to serve as confirmation of the client's death. Who knows if Rodriquez swam to the shore from out of the sunken ship? Did you check? No. You've basically failed the assignment, so our agreement is over. All the best.";
 			link.l1 = "But I did away with him. He's gone! Oh, fuck you... There's plenty of other stuff to do on the archipelago. Bye.";
@@ -159,12 +170,14 @@ void ProcessCommonDialogEvent(ref NPChar, aref Link, aref NextDiag)
 			CloseQuestHeader("Holl_Gambit");
 			DeleteAttribute(pchar, "questTemp.HWIC.Self");//зачищаем для возможности отката к голландскому варианту
 		break;
+		
 		case "Task_check_1":
 			RemoveItems(PChar, "Finger", 1);
 			dialog.text = "Wonderful! I'll keep the finger myself. Now for the contents of his pockets. Let's have a look what you've brought.";
 			link.l1 = "Go ahead, have a look...";
 			link.l1.go = "Task_check_2";	
 		break;
+		
 		case "Task_check_2":
 			if (CheckCharacterItem(pchar, "jewelry7") && CheckCharacterItem(pchar, "totem_05") && CheckCharacterItem(pchar, "amulet_1"))
 			{
@@ -183,6 +196,7 @@ void ProcessCommonDialogEvent(ref NPChar, aref Link, aref NextDiag)
 				DeleteAttribute(pchar, "questTemp.HWIC.Self");//зачищаем для возможности отката к голландскому варианту
 			}
 		break;
+		
 		case "Task_complete":
 			RemoveItems(PChar, "jewelry7", 1);
 			RemoveItems(PChar, "totem_05", 1);
@@ -192,6 +206,7 @@ void ProcessCommonDialogEvent(ref NPChar, aref Link, aref NextDiag)
 			link.l1 = "I'm all ears. Who's the next client?";
 			link.l1.go = "Fleetwood_house";	
 		break;
+		
 		//2 задание
 		case "Fleetwood_house":
 			PlaySound("VOICE\Russian\hambit\Ercule Tongzag-05.wav");
@@ -199,17 +214,20 @@ void ProcessCommonDialogEvent(ref NPChar, aref Link, aref NextDiag)
 			link.l1 = "Hm... Interesting. I understood what I need to do. I'm ready to get going!";
 			link.l1.go = "Fleetwood_house_1";	
 		break;
+		
 		case "Fleetwood_house_1":
 			GiveItem2Character(pchar, "key3");
 			dialog.text = "Be careful. Don't sneak into the house before the date I've indicated to you. Otherwise, the best case scenario is they'll just kick you out of there or in the worst case, you'll end up behind bars. Repeat to me the date and time.";
 			link.l1 = "In exactly ten days, between one and three a.m.";
 			link.l1.go = "Fleetwood_house_2";	
 		break;
+		
 		case "Fleetwood_house_2":
 			dialog.text = "Okay. You can go. Good luck!";
 			link.l1 = "Thank you, Gaston.";
 			link.l1.go = "Fleetwood_house_3";
 		break;
+		
 		case "Fleetwood_house_3":
 			DialogExit();
 			AddQuestRecord("Holl_Gambit", "3-10");
@@ -238,6 +256,7 @@ void ProcessCommonDialogEvent(ref NPChar, aref Link, aref NextDiag)
 			pchar.quest.Fleetwood_Soldier.win_condition.l1.location = "SentJons_houseSP3";
 			pchar.quest.Fleetwood_Soldier.function = "Fleetwood_Soldier";//если надумает раньше заявиться
 		break;
+		
 		case "guardoftruth":
 			dialog.text = LinkRandPhrase("No, I haven't. We have herbalists and physicians, but none of them with such a name.","This is the first time I've heard such a weird name. No, we've never had a visit from the man you speak of.","We don't have any kind of alchemists at all. We've got physicians, but none with such a weird name.");
 			link.l1 = "I see. That's too bad. I'll keep looking!";
@@ -247,11 +266,13 @@ void ProcessCommonDialogEvent(ref NPChar, aref Link, aref NextDiag)
 	}
 	UnloadSegment(NPChar.FileDialog2);  // если где-то выход внутри switch  по return не забыть сделать анлод
 }
+
 string FindSpainCity()//Jason выбрать радномный испанский город - пусть побегает
 {
 	int n, nation;
     int storeArray[MAX_COLONIES];
     int howStore = 0;
+
 	for(n=0; n<MAX_COLONIES; n++)
 	{
 		if (colonies[n].nation == SPAIN && colonies[n].id != "Panama" && colonies[n].id != "Minentown" && colonies[n].id != "SanAndres" && colonies[n].nation != "none")

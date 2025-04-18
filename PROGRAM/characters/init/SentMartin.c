@@ -1,9 +1,12 @@
+
 int CreateSentMartinCharacters(int n)
 {
 	ref ch;
+	
 	///////////////////////////////////////////////////////////////////////////////
 	// ОСНОВНЫЕ ПЕРСОНАЖИ
 	///////////////////////////////////////////////////////////////////////////////
+	
 	makeref(ch,Characters[n]);			//Губернатор
 	ch.id		= "Marigo_Mayor";
 	ch.model	= "huber_27";
@@ -31,6 +34,7 @@ int CreateSentMartinCharacters(int n)
 	LAi_group_MoveCharacter(ch, "HOLLAND_CITIZENS");
 	LAi_SetImmortal(ch, true);
 	n = n + 1;
+
 	makeref(ch,Characters[n]);			//Священик
 	ch.id		= "Marigo_Priest";
 	ch.model	= "priest_4";
@@ -48,6 +52,7 @@ int CreateSentMartinCharacters(int n)
 	LAi_group_MoveCharacter(ch, "HOLLAND_CITIZENS");
 	LAi_SetImmortal(ch, true);
 	n = n + 1;
+
 	makeref(ch,Characters[n]);		// ОФициантка
 	ch.id		= "Marigo_waitress";
 	ch.model	= "women_13";
@@ -64,6 +69,7 @@ int CreateSentMartinCharacters(int n)
 	LAi_group_MoveCharacter(ch, "HOLLAND_CITIZENS");
 	LAi_SetImmortal(ch, true);
 	n = n + 1;
+
 	makeref(ch,Characters[n]);			//Трактирщик
 	ch.id		= "Marigo_tavernkeeper";
 	ch.model	= "barmen_12";
@@ -81,6 +87,8 @@ int CreateSentMartinCharacters(int n)
 	LAi_group_MoveCharacter(ch, "HOLLAND_CITIZENS");
 	LAi_SetImmortal(ch, true);
 	n = n + 1;
+
+
 	makeref(ch,Characters[n]);			//Торговец
 	ch.id		= "Marigo_trader";
 	ch.model	= "trader_12";
@@ -98,6 +106,7 @@ int CreateSentMartinCharacters(int n)
 	LAi_SetImmortal(ch, true);
 	ch.item_date = "";
 	n = n + 1;
+
 	makeref(ch,Characters[n]);			//Корабел
 	ch.id		= "Marigo_shipyarder";
 	ch.model	= "shipowner_12";
@@ -122,6 +131,7 @@ int CreateSentMartinCharacters(int n)
 	LAi_group_MoveCharacter(ch, "HOLLAND_CITIZENS");
 	LAi_SetImmortal(ch, true);
 	n = n + 1;
+
 	makeref(ch,Characters[n]);			//Банкир
 	ch.id		= "Marigo_usurer";
 	ch.model	= "banker_12";
@@ -141,6 +151,7 @@ int CreateSentMartinCharacters(int n)
 	LAi_group_MoveCharacter(ch, "HOLLAND_CITIZENS");
 	LAi_SetImmortal(ch, true);
 	n = n + 1;
+
 	makeref(ch,Characters[n]);			//Начальник порта
 	ch.id		= "Marigo_PortMan";
 	ch.model	= "citiz_8";
@@ -157,6 +168,7 @@ int CreateSentMartinCharacters(int n)
 	LAi_SetImmortal(ch, true);
 	ch.item_date = "";
 	n = n + 1;
+
 	makeref(ch,Characters[n]);			//Хозяйка борделя
 	ch.id		= "Marigo_Hostess";
 	ch.name		= "Johanna"
@@ -175,6 +187,7 @@ int CreateSentMartinCharacters(int n)
 	LAi_SetOwnerType(ch);
 	LAi_group_MoveCharacter(ch, "HOLLAND_CITIZENS");
 	n = n + 1;
+
     makeref(ch,Characters[n]);
 	ch.name 	= "Smuggler";
 	ch.lastname = "";
@@ -191,5 +204,6 @@ int CreateSentMartinCharacters(int n)
 	LAi_SetHP(ch, 80.0, 80.0);
 	ch.greeting = "smuggler";
 	n = n + 1;
+	
 	return n;
 }

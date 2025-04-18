@@ -1,5 +1,6 @@
 #define DIR_SAIL_WAR_DIST 		4000000.0 // 2000 ^ 2
 #define DSENC_SECONDS_TIMEOUT 	8
+
 string totalInfo = "";
 bool isSkipable = false;
 bool bEncType   = false;
@@ -20,6 +21,7 @@ int origEID, altEID;
 string dirOff, findType;
 object grpTrans[2];
 int grpTNnum = 0;
+
 void InitInterface(string iniName)
 {
 	EngineLayersOffOn(true);
@@ -33,20 +35,27 @@ void InitInterface(string iniName)
     altEncID 			= "";
 	bQuestCheckProcessFreeze = true;
     bEncType 			= false;
+
     GameInterface.title = "title_map";
+
     SendMessage(&GameInterface,"ls",MSG_INTERFACE_INIT,iniName);
+
     SetFormatedText("MAP_CAPTION", XI_ConvertString("title_map"));
+
 	SetEventHandler("InterfaceBreak","ProcessBreakExit",0);
 	SetEventHandler("exitCancel","ProcessCancelExit",0);
 	SetEventHandler("ievnt_command","ProcCommand",0);
 	SetEventHandler("evntDoPostExit","DoPostExit",0);
 	SetEventHandler("frame","IProcessFrame",0);
+
 	EI_CreateFrame("INFO_BORDERS", 250,152,550,342);
+
 	//DSENC_TIMEOUT = GetFPS() * DSENC_SECONDS_TIMEOUT;
 	DSENC_TIMEOUT = 60 * DSENC_SECONDS_TIMEOUT;
 	DSENC_TIMEOUT2 = makeint(DSENC_TIMEOUT / 4);
 	grpTNnum = 0;
 }
+
 void IProcessFrame() 
 {
     nTimeout++;
@@ -84,12 +93,14 @@ void IProcessFrame()
             grpTNnum = 0;
 			GetBearing();
             origEID = doDescribe(grpTNnum);
+
             if(altEncID != "") 
 			{
                 assignByID(altEncID);
                 grpTNnum++;
                 altEID = doDescribe(grpTNnum);
             }
+
             SetFormatedText("INFO_TEXT",totalInfo);
             SendMessage(&GameInterface,"lsl",MSG_INTERFACE_MSG_TO_NODE,"INFO_TEXT",5); 
         }
@@ -146,11 +157,13 @@ void evtDirSail(aref rRawG, aref encDataForS, int iNumMerchantS, int iNumWarS,
     dstScale 			= fScale;
     isShipEncounterType++;
 }
+
 void assignByID(string eID)
 {
     encID = eID;
     makearef(rRawGroup, worldmap.encounters.(eID));
     makearef(encDataForSlot, rRawGroup.encdata);
+
     if(CheckAttribute(encDataForSlot, "NumMerchantShips"))
     {
         iNumMerchantShips = sti(encDataForSlot.NumMerchantShips);
@@ -163,13 +176,16 @@ void assignByID(string eID)
     z 	= stf(rRawGroup.z) * dstScale;
     ay 	= stf(rRawGroup.ay);
 }
+
 int doDescribe(int gNum)
 {
 	string loadScr = "";
+	
     int mapEncSlot = FindFreeMapEncounterSlot();
     if(mapEncSlot < 0) return;
     rEncounter = GetMapEncounterRef(mapEncSlot);
     CopyAttributes(rEncounter, encDataForSlot);
+
     if (!CheckAttribute(rEncounter, "RealEncounterType"))
     {
         ProcessCancelExit();
@@ -179,6 +195,7 @@ int doDescribe(int gNum)
     grpTrans[gNum].grpIDTrn = rEncounter.GroupName;
     iEncounterType = sti(rEncounter.RealEncounterType);
     iRealEncounterType = iEncounterType;
+	
     //Get description
     if (isShipEncounterType > 1 && gNum > 0 && iRealEncounterType < ENCOUNTER_TYPE_BARREL)
     {
@@ -206,50 +223,62 @@ int doDescribe(int gNum)
 		{
 			totalInfo = totalInfo + GetTextOnShipsQuantity(iNumMerchantShips) + XI_ConvertString("of traders");
 		}
+		
 		if(iRealEncounterType >= ENCOUNTER_TYPE_MERCHANT_GUARD_SMALL && iRealEncounterType <= ENCOUNTER_TYPE_MERCHANT_GUARD_LARGE)
 		{
 			totalInfo = totalInfo + GetTextOnShipsQuantity(iNumMerchantShips) + XI_ConvertString("merchants in accompaniment") + GetTextOnSecondShipsQuantity(iNumWarShips) + XI_ConvertString("guards");
 		}
+		
 		if(iRealEncounterType >= ENCOUNTER_TYPE_ESCORT_SMALL && iRealEncounterType <= ENCOUNTER_TYPE_ESCORT_LARGE)
 		{
 			totalInfo = totalInfo + XI_ConvertString("Trade caravan") + GetTextOnShipsQuantity(iNumMerchantShips) + XI_ConvertString("merchants in accompaniment") + GetTextOnSecondShipsQuantity(iNumWarShips) + XI_ConvertString("guards");
 		}
+		
 		if(iRealEncounterType == ENCOUNTER_TYPE_MERCHANT_CROWN)
 		{
 			totalInfo = totalInfo + XI_ConvertString("Crown caravan") + GetTextOnShipsQuantity(iNumMerchantShips) + XI_ConvertString("merchants in accompaniment") + GetTextOnSecondShipsQuantity(iNumWarShips) + XI_ConvertString("guards");
 		}
+		
 		if(iRealEncounterType == ENCOUNTER_TYPE_MERCHANT_EXPEDITION)
 		{
 			totalInfo = totalInfo + XI_ConvertString("Trade expedition") + GetTextOnShipsQuantity(iNumMerchantShips) + XI_ConvertString("merchants in accompaniment") + GetTextOnSecondShipsQuantity(iNumWarShips) + XI_ConvertString("guards");
 		}
+
 		if(iRealEncounterType >= ENCOUNTER_TYPE_PATROL_SMALL && iRealEncounterType <= ENCOUNTER_TYPE_PATROL_LARGE)
 		{
 			totalInfo = totalInfo + XI_ConvertString("Patrol") + GetTextOnShipsQuantity(iNumWarShips);
 		}
+
 		if(iRealEncounterType >= ENCOUNTER_TYPE_PIRATE_SMALL && iRealEncounterType <= ENCOUNTER_TYPE_PIRATE_SCOUNDREL)
 		{
 			totalInfo = totalInfo + XI_ConvertString("Pirates") + GetTextOnShipsQuantity(iNumWarShips);
 		}
+
 		if(iRealEncounterType >= ENCOUNTER_TYPE_SQUADRON && iRealEncounterType <= ENCOUNTER_TYPE_ARMADA)
 		{
 			totalInfo = totalInfo + XI_ConvertString("Naval squadron") + GetTextOnShipsQuantity(iNumWarShips);
 		}
+
 		if(iRealEncounterType == ENCOUNTER_TYPE_CROWN_ARMADA)
 		{
 			totalInfo = totalInfo + XI_ConvertString("Crown Armada") + GetTextOnShipsQuantity(iNumWarShips);
 		}
+		
 		if(iRealEncounterType == ENCOUNTER_TYPE_PUNITIVE_SQUADRON)
 		{
 			totalInfo = totalInfo + XI_ConvertString("Punitive expedition") + GetTextOnShipsQuantity(iNumWarShips);
 		}
+
 		if(iRealEncounterType == ENCOUNTER_TYPE_WAR_PRIVATEER)
 		{
 			totalInfo = totalInfo + XI_ConvertString("Privateer") + GetTextOnShipsQuantity(iNumWarShips);
 		}
+		
 		if(iRealEncounterType == ENCOUNTER_TYPE_BARREL)
 		{
 			totalInfo = totalInfo + XI_ConvertString("SailingItems");
 		}
+	
 		if(iRealEncounterType == ENCOUNTER_TYPE_BOAT)
 		{
 			totalInfo = totalInfo + XI_ConvertString("ShipWreck");
@@ -259,6 +288,7 @@ int doDescribe(int gNum)
     {
         totalInfo = totalInfo + "Error: rEncounter.Nation < 0.";
     }
+	
 	if(iRealEncounterType != ENCOUNTER_TYPE_BARREL && iRealEncounterType != ENCOUNTER_TYPE_BOAT)
 	{
 		switch(sti(rEncounter.Nation))
@@ -280,12 +310,15 @@ int doDescribe(int gNum)
 			break;
 		}
 	}	
+	
     if(GetNationRelation2MainCharacter(sti(rEncounter.Nation)) != RELATION_ENEMY)
     {
         isSkipable = true;
     }
+	
 	Log_TestInfo("isShipEncounterType :" + isShipEncounterType);
 	GetBearing();
+	
 	if (isShipEncounterType > 1)
 	{
 		switch (rand(1))
@@ -327,16 +360,20 @@ int doDescribe(int gNum)
 					loadScr = "loading\sea_3.tga";
 				break;
 			}
+
 			SetNewPicture("INFO_PICTURE", loadScr); 
 			totalInfo = XI_ConvertString("NavalSignal") + dirOff + XI_ConvertString("dir sail someone sails") + totalInfo;
 		}	
 	}	
+
     return mapEncSlot;
 }
+
 void GetBearing()
 {
     encounterbearing = GetAngleY(x - RTplayerShipX, z - RTplayerShipZ);
 	float offShip = encounterbearing - stf(pchar.Ship.Ang.y);
+
 	int nBear = ClosestDirE(offShip);
 	switch(nBear)
     {
@@ -366,6 +403,7 @@ void GetBearing()
         break;
     }
 }
+
 string uniqueGName(string gname)
 {
     bool bFound = true;
@@ -380,36 +418,45 @@ string uniqueGName(string gname)
     }
     return sTemp;
 }
+
 bool canFindGroup(string gname)
 {
     int nFnd = 	Group_FindGroup(gname);
     if(nFnd > -1) return true;
+
     return false;
 }
+
 void locDirSail(int evtID)
 {
     int i, nCheckShipCnt;
     bShipsSpawned = true;
+
     ref rCharacter, rGroup;
     rEncounter = GetMapEncounterRef(evtID);
     CopyAttributes(rEncounter, encDataForSlot);
+    
     if (!CheckAttribute(rEncounter, "RealEncounterType") || CheckAttribute(rRawGroup, "dirSailEnc"))
     {
         return;
     }
     iEncounterType = sti(rEncounter.RealEncounterType);
     iRealEncounterType = iEncounterType;
+
 	object oResult;
 	int iFantomIndex;
     int iAloneCharIndex = -1;
+
     x = stf(pchar.Ship.Pos.x) + 2500 * sin(encounterbearing);
     z = stf(pchar.Ship.Pos.z) + 2500 * cos(encounterbearing);
+
     encStringID = "encounters." + encID;
     if(!CheckAttribute(&worldMap, encStringID + ".quest"))
     {
         worldMap.(encStringID).needDelete = "Reload delete non quest encounter";
     }
     Sea_FreeTaskList();
+
     int iCompanionsQ;
     int cn;
     string sGName;
@@ -426,6 +473,7 @@ void locDirSail(int evtID)
         rGroup = Group_GetGroupByID(sGName);
         iCompanionsQ = GetCompanionQuantity(&Characters[iAloneCharIndex]);
         nCheckShipCnt += iCompanionsQ;
+        
         if (CheckAttribute(rGroup, "AlreadyLoaded") || nCheckShipCnt > MAX_SHIPS_IN_LOCATION)
         {
             sQuestSeaCharId = "";
@@ -433,6 +481,7 @@ void locDirSail(int evtID)
             return;
         }
         Group_AddCharacter(sGName, rEncounter.CharacterID);
+
         if(iCompanionsQ > 1)
         {
             for(int k = 1; k < COMPANION_MAX; k++)
@@ -473,20 +522,25 @@ void locDirSail(int evtID)
         }
     }
     rRawGroup.dirSailEnc = true;
+
     if (CheckAttribute(rEncounter, "qID"))
     {
         Trace("checkWMEnctr: Login quest encounter " + rEncounter.qID);
         Group_SetAddressNone(rEncounter.qID);
         Group_SetXZ_AY(rEncounter.qID, x, z, ay);
         Sea_LoginGroup(rEncounter.qID);
+
         return;
     }
 	Trace("Sea_AddGroup2TaskList  : " + sGName);
     Sea_AddGroup2TaskList(sGName);
+
     rGroup = Group_FindOrCreateGroup(sGName);
+
     Group_SetXZ_AY(sGName, x, z, ay);
     Group_SetType(sGName, rEncounter.Type);
     Group_DeleteAtEnd(sGName);
+
     // copy task attributes from map encounter to fantom group
     if (CheckAttribute(rEncounter, "Task"))
     {
@@ -502,24 +556,32 @@ void locDirSail(int evtID)
         rGroup.Task.Target.Pos.z = rEncounter.Task.Pos.z;
     }
     if (CheckAttribute(rEncounter, "Lock") && sti(rEncounter.Lock)) { Group_LockTask(sGName); }
+
     int iNation = sti(rEncounter.Nation);
     int iNumFantomShips = Fantom_GenerateEncounterExt(sGName, &oResult, iEncounterType, iNumWarShips, iNumMerchantShips, iNation);
+	
 	trace("Fantom_GenerateEncounterExt : sGName " + sGName + " iEncounterType " + iEncounterType + " iNumWarShips " + iNumWarShips + " iNumMerchantShips " + iNumMerchantShips + "  iNation " + iNation);
+
     if (iNumFantomShips)
     {
         for (int j=0; j<iNumFantomShips; j++)
         {
             iFantomIndex = seaFantoms[seaFantomsNum - iNumFantomShips + j];
+
             ref rFantom = &Characters[iFantomIndex];
 			rFantom.SeaFantom = true;
             DeleteAttribute(rFantom, "items");
+			
 			DeleteAttribute(rFantom, "DontRansackCaptain");
 			DeleteAttribute(rFantom, "surrendered");
 			DeleteAttribute(rFantom, "AlwaysFriend");
+			
             rFantom.id = "fenc_" + iFantomIndex;
             rFantom.location = sIslandID;
+			
             // set commander to group
             if (j==0) { Group_SetGroupCommander(sGName, Characters[iFantomIndex].id); }
+
             // set random character and ship names, face id
             rFantom.sex = "man";
             rFantom.model.animation = "man";
@@ -531,6 +593,7 @@ void locDirSail(int evtID)
             rFantom.MainCaptanId = Characters[iFantomIndex - j].id;
             rFantom.WatchFort = true;
             rFantom.AnalizeShips = true;
+
             if (CheckAttribute(rFantom, "Ship.Mode"))
             {
                 SetCaptanModelByEncType(rFantom, rFantom.Ship.Mode);
@@ -541,16 +604,20 @@ void locDirSail(int evtID)
             }
             SetRandomNameToCharacter(rFantom);
             SetRandomNameToShip(rFantom);
+
             SetSeaFantomParam(rFantom, rEncounter.Type);
+			
 			if(j == 0 && rFantom.EncType == "pirate")
 			{
 				rFantom.Flags.Pirate = rand(2);
 			}
+
             Fantom_SetCannons(rFantom, rEncounter.Type);
             Fantom_SetSails(rFantom, rEncounter.Type);
             rFantom.SeaAI.Group.Name = sGName;
             rFantom.Experience = 0;
             rFantom.Skill.FreeSkill = 0;
+
             DeleteAttribute(rFantom, "ShipSails.gerald_name");
             if (j == 0 || GetCharacterShipClass(rFantom) == 1)
             {
@@ -568,11 +635,13 @@ void locDirSail(int evtID)
 */			
         }
     }
+		
 	// set tasks 2 all groups
 	for (i=0; i<GetArraySize(&sTaskList)-2; i++)
 	{
 		string sGroupID = sTaskList[i];
 		//Log_Info("sGroupID " + sGroupID);
+
 		rGroup = Group_GetGroupByID(sGroupID);
 		string sTranTrg = "";
 		if(CheckAttribute(rGroup, "Task.Target")) 
@@ -611,6 +680,7 @@ void locDirSail(int evtID)
 		}
 		rCharacter = Group_GetGroupCommanderR(rGroup);
 		int iRelation = GetRelation(nMainCharacterIndex, sti(rCharacter.index));
+
 		// set relations to all characters in this group
 		int qq = 0;
 		while (true)
@@ -622,14 +692,17 @@ void locDirSail(int evtID)
 	}
 	RefreshBattleInterface();
 }
+
 void ProcessBreakExit()
 {
 	IDoExit( RC_INTERFACE_DIRSAILENC );
 }
+
 void ProcessCancelExit()
 {
 	IDoExit( RC_INTERFACE_DIRSAILENC );
 }
+
 void IDoExit(int exitCode)
 {
 	DelEventHandler("InterfaceBreak","ProcessBreakExit");
@@ -637,6 +710,7 @@ void IDoExit(int exitCode)
 	DelEventHandler("ievnt_command","ProcCommand");
 	DelEventHandler("evntDoPostExit","DoPostExit");
 	DelEventHandler("frame","IProcessFrame");
+
 	if (sQuestSeaCharId != "")
     {
         wdmEnterSeaQuest(sQuestSeaCharId);
@@ -651,10 +725,12 @@ void IDoExit(int exitCode)
 	EndCancelInterface(true);
 	PostEvent("StopQuestCheckProcessFreeze", 100);
 }
+
 void ProcCommand()
 {
 	string comName = GetEventData();
 	string nodName = GetEventData();
+
 	switch(nodName)
 	{
 		case "B_OK":
@@ -665,11 +741,13 @@ void ProcCommand()
 		break;
 	}
 }
+
 void DoPostExit()
 {
 	int exitCode = GetEventData();
 	IDoExit(exitCode);
 }
+
 void findWarring(string fType)
 {
     aref WME;
@@ -677,6 +755,7 @@ void findWarring(string fType)
     int nWME = GetAttributesNum(WME);
     int tShips, nShips;
     float dist;
+
     nShips = iNumShips + iNumMerchantShips + iNumWarShips;
     for(i = 0; i < nWME, i++)
     {
@@ -687,9 +766,12 @@ void findWarring(string fType)
         encID = GetAttributeName(rRawGroup);
         if(!CheckAttribute(rRawGroup, "type") || rRawGroup.type != fType) continue;
         if(encID == origEncID) continue;
+
         if(!CheckAttribute(rRawGroup, "encdata")) continue;
         if(CheckAttribute(rRawGroup, "needDelete")) continue;
+
         makearef(encDataForSlot, rRawGroup.encdata);
+
         if(CheckAttribute(encDataForSlot, "NumMerchantShips"))
         {
             iNumMerchantShips = sti(encDataForSlot.NumMerchantShips);
@@ -705,8 +787,10 @@ void findWarring(string fType)
 		z = stf(rRawGroup.z)* dstScale;
 		ay = stf(rRawGroup.ay);
         dist = GetDistance2DRel(origX, origZ, x, z);
+
         if(dist > DIR_SAIL_WAR_DIST)
             continue;
+
         altEncID = encID;
         isShipEncounterType++;
         break;

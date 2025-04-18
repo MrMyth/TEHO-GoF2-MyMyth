@@ -4,10 +4,13 @@ void ProcessDialogEvent()
 	aref Link, NextDiag;
 	string sTemp,sTemp1, str, str1;
 	int	s1,s2,s3,s4,s5,p1, iColony, crewWhoreCost, charWhoreCost = 0;
+
 	DeleteAttribute(&Dialog,"Links");
+
 	makeref(NPChar,CharacterRef);
 	makearef(Link, Dialog.Links);
 	makearef(NextDiag, NPChar.Dialog);
+		
     // вызов диалога по городам -->
     NPChar.FileDialog2 = "DIALOGS\" + LanguageGetLanguage() + "\Brothel\" + NPChar.City + "_Brothel.c";
     if (LoadSegment(NPChar.FileDialog2))
@@ -18,6 +21,7 @@ void ProcessDialogEvent()
     // вызов диалога по городам <--
 	crewWhoreCost = 50 + 7 * MOD_SKILL_ENEMY_RATE - drand(40);
 	charWhoreCost = 2460 + sti(pchar.rank) * 40;
+	
 	switch(Dialog.CurrentNode)
 	{
 		// ============= хозяйка борделя =============
@@ -53,6 +57,7 @@ void ProcessDialogEvent()
 				npchar.quest.Badboy = "true";
 				break;
 			}
+			
 			if (CheckAttribute(pchar, "GenQuest.Badboy.Complete") || CheckAttribute(pchar, "GenQuest.Badboy.Continue"))
 			{
 				if (npchar.City == pchar.GenQuest.Badboy.Brothel.City)
@@ -64,6 +69,7 @@ void ProcessDialogEvent()
 				}
 			}
 			// <-- Заносчивый аристократ
+			
 			//--> Jason Португалец
 			if (CheckAttribute(pchar, "questTemp.HWIC.Detector"))
 			{
@@ -118,6 +124,7 @@ void ProcessDialogEvent()
 				}
 				break;
 			}
+			
 			if (npchar.quest.meeting == "0")
 			{
 				dialog.text = RandPhraseSimple(TimeGreeting() + ". Welcome to my house of love. My name is " + npchar.name + ", and I am the boss here. "+ GetSexPhrase("What can I do for you, " + GetAddress_Form(NPChar) + "?","Frankly, I am a bit surprised to see you here, " + GetAddress_Form(NPChar) + ", but I assure you that we render services not only for men.") +"",
@@ -170,12 +177,14 @@ void ProcessDialogEvent()
 			link.l9.go = "exit";
 			NextDiag.TempNode = "First time";
 		break;
+		
 		case "ShipLetters_1":
 				pchar.questTemp.different.GiveShipLetters.speakBrothelMadam = true;
 				dialog.text = RandPhraseSimple("What do you want, handsome?","I am listening to you, captain.");
 				link.l1 = "Listen, " + npchar.name + ", I found these papers in a private room of your institution ...";
 				link.l1.go = "ShipLetters_2";				
 		break;
+		
 		case "ShipLetters_2":
 			if(sti(pchar.questTemp.different.GiveShipLetters.variant) == 0)
 			{
@@ -192,6 +201,7 @@ void ProcessDialogEvent()
 				link.l2.go = "ShipLetters_3";										
 			}	
 		break;
+		
 		case "ShipLetters_3":
 			TakeItemFromCharacter(pchar, "CaptainBook"); 
 			pchar.questTemp.different = "free";
@@ -202,6 +212,7 @@ void ProcessDialogEvent()
 			NextDiag.CurrentNode = NextDiag.TempNode;
 			DialogExit();
 		break;
+		
         case "Hostess_1":
 			if (!CheckAttribute(npchar, "quest.selected"))
 			{
@@ -227,6 +238,7 @@ void ProcessDialogEvent()
 				Link.l1.go = "exit";	
 			}
 		break;
+
         case "Hostess_NotChoice":
 			sld = GetFreeHorseRef(npchar.city);
 			location = &locations[FindLocation(npchar.city + "_Brothel")];
@@ -254,6 +266,7 @@ void ProcessDialogEvent()
 				}
 			}
 		break;
+		
         case "Hostess_NotChoice_agree":
 			sld = &characters[sti(npchar.quest.choiceIdx)];
 			if (sti(pchar.money) >= (sti(sld.quest.price) + charWhoreCost))
@@ -285,6 +298,7 @@ void ProcessDialogEvent()
 						sld.dialog.currentnode = "Horse_4";
 					}
 				}
+				
 				// генератор найденных бумаг
 				if ((rand(4) == 1) && (pchar.questTemp.different == "free") && (!CheckCharacterItem(pchar, "CaptainBook")) && GetNpcQuestPastDayWOInit(npchar, "questShipLetters") > 10) 
 				{					
@@ -304,6 +318,7 @@ void ProcessDialogEvent()
 					pchar.questTemp.different.GiveShipLetters.price3 = s3;
 					pchar.questTemp.different.GiveShipLetters.price4 = s4;
 					pchar.questTemp.different.GiveShipLetters.price5 = s5;
+										
 					sld = ItemsFromID("CaptainBook");
 					sld.CityName = XI_ConvertString("Colony" + npchar.city + "Gen");
 					//ложим бумаги в итем								
@@ -315,9 +330,11 @@ void ProcessDialogEvent()
 					sld.endLocation = pchar.questTemp.different.GiveShipLetters.city + sTemp1;
 					pchar.questTemp.different.GiveShipLetters.item = true; //флаг -  бумаги валяются в итемах
 					Log_QuestInfo("The papers are in location " + sld.startLocation + ", in locator " + sld.startLocator + " p1 : " + p1);
+					
 					pchar.quest.CheckShipLetters.win_condition.l1 = "location";
 					pchar.quest.CheckShipLetters.win_condition.l1.location = sld.endLocation;
 					pchar.quest.CheckShipLetters.function = "CheckShipLetters";
+					
 					SetTimerFunction("GiveShipLetters_null", 0, 0, p1); //освобождаем разрешалку на миниквесты 
 					SaveCurrentNpcQuestDateParam(npchar, "questShipLetters");					
 				}
@@ -344,12 +361,14 @@ void ProcessDialogEvent()
 				Link.l1.go = "exit";
 			}
 		break;
+
         case "Hostess_Choice":
 			dialog.text = "I am always happy when girls and customers develop warm feelings for each other... Tell me her name.";
 			Link.l1.edit = 9;
 			Link.l1 = "";
 			Link.l1.go = "Hostess_Choice_1";	
 		break;
+		
         case "Hostess_Choice_1":
 			sld = CheckHorsesName(npchar.city, 9);
 			if (sld.id == "none")
@@ -370,6 +389,7 @@ void ProcessDialogEvent()
 				npchar.quest.choiceIdx = sld.index;
 			}
 		break;
+		
         case "Hostess_Choice_2":
 			dialog.text = "Then perhaps, you should tell me her name once again, and maybe I'll realize, about who you are talking about.";
 			Link.l1.edit = 9;
@@ -386,6 +406,7 @@ void ProcessDialogEvent()
 			link.l2 = "Guess they can manage without it...";
 			link.l2.go = "exit";
 		break;
+		
 		case "ForCrew_1":
 		    if (sti(Pchar.money) >= GetCrewQuantity(pchar)*crewWhoreCost && GetCrewQuantity(pchar)>0)
 		    {
@@ -403,6 +424,7 @@ void ProcessDialogEvent()
 			    link.l1.go = "exit";
 		    }
 		break;
+		
 		case "Woman_FackYou":
 			dialog.text = "Dear, just what are you doing?! And looked like a decent captain... You won't 'fly' away this time, handsome. Guards will cut off your wings...";
 			link.l1 = "Shut up, old hag.";
@@ -410,22 +432,26 @@ void ProcessDialogEvent()
 			LAi_group_Attack(NPChar, Pchar);
 			if (rand(3) != 1) SetNationRelation2MainCharacter(sti(npchar.nation), RELATION_ENEMY);
 		break;
+		
 		//поиски кольца губернатора
 		case "TakeMayorsRing_H1":
 			dialog.text = "I haven't found any ring.";
 			link.l1 = "And your girls?";
 			link.l1.go = "TakeMayorsRing_H2";
 		break;
+		
 		case "TakeMayorsRing_H2":
 			dialog.text = "They have not too. If a customer forgets or loses anything, my girls bring it to me. But no one have brought me the governor's ring.";
 			link.l1 = "I see... But could it be that they decided to keep it for themselves?";
 			link.l1.go = "TakeMayorsRing_H3";
 		break;
+		
 		case "TakeMayorsRing_H3":
 			dialog.text = "Unlikely. Girls are allowed to keep gifts from the customers, but that's all.";
 			link.l1 = "I see. Well, thanks, " + npchar.name + ".";
 			link.l1.go = "exit";
 		break;
+		
 		case "Hostess_inSexRoom":
 			dialog.text = "Oh, here you are...";
 			link.l1 = "Here I am, my lady!";
@@ -436,6 +462,7 @@ void ProcessDialogEvent()
 			AddCharacterExpToSkill(pchar, "Leadership", 100);
             AddCharacterHealth(pchar, 5);
 		break;
+		
 		// ================================== рядовой состав =======================================
         case "Horse_talk":
 			if (LAi_grp_playeralarm > 0)
@@ -477,6 +504,7 @@ void ProcessDialogEvent()
 				SaveCurrentNpcQuestDateParam(npchar, "TakeMayorsRing");
 			}
 			//<<-- квест поиска кольца мэра
+			
 			// Addon 2016-1 Jason пиратская линейка
 			if (pchar.location == "santodomingo_brothel" && CheckAttribute(pchar, "questTemp.Mtraxx") && pchar.questTemp.Mtraxx == "jewelry_1" && npchar.id == "HorseGen_"+reload_location_index+"_2")
 			{
@@ -485,11 +513,13 @@ void ProcessDialogEvent()
 			}
 			NextDiag.TempNode = "Horse_talk";
 		break;
+		
         case "Horse_1":
 			dialog.text = "She's in her office. You can get there from here through the door opposite to the exit on the street, or from the street on the other side of the house. Her name is " + characters[GetCharacterIndex(npchar.city + "_Hostess")].name + ".";
 			Link.l1 = "I see, "+ GetSexPhrase("sweetheart","darling") +", thanks.";
 			Link.l1.go = "exit";			
 		break;
+		
         case "Horse_2":
 			if (rand(1))
 			{
@@ -508,6 +538,7 @@ void ProcessDialogEvent()
 				npchar.quest.choice = 2; //ГГ послали
 			}
 		break;
+		
         case "Horse_3":
 			dialog.text = characters[GetCharacterIndex(npchar.city + "_Hostess")].name + " completes all formalities in her cabinet. Go see her"+ GetSexPhrase(", my hero,","") +" and say my name - " + npchar.name + ". I'll be waiting for you...";
 			Link.l1 = "I see, darling, I'll be back soon...";
@@ -515,6 +546,7 @@ void ProcessDialogEvent()
 			npchar.quest.choice = 1; //она согласная
 			SetNPCQuestDate(npchar, "quest.choice");
 		break;
+		
         case "Horse_4": 
 			dialog.text = NPCStringReactionRepeat("You have already paid.", 
 				"I told you 'go upstairs'.", 
@@ -525,6 +557,7 @@ void ProcessDialogEvent()
 			link.l1.go = "exit";
 			NextDiag.TempNode = "Horse_4";
 		break;
+		
 		//===>> реакция на попытки пофлиртовыть, если флирт уже был
         case "HorseChoice_0": 
 			if (!CheckAttribute(npchar, "quest.sexHappend"))
@@ -544,6 +577,7 @@ void ProcessDialogEvent()
 				Link.l1.go = "exit";
 			}
 		break;
+		
         case "HorseChoice_1": 
 			if (!CheckAttribute(npchar, "quest.sexHappend"))
 			{
@@ -574,6 +608,7 @@ void ProcessDialogEvent()
 				Link.l2.go = "HorseChoice_1_Add";
 			}
 		break;
+		
         case "HorseChoice_2": 
 			if (!CheckAttribute(npchar, "quest.sexHappend"))
 			{
@@ -592,12 +627,14 @@ void ProcessDialogEvent()
 				Link.l1.go = "exit";
 			}
 		break;
+		
         case "HorseChoice_1_Add":
 			dialog.text = "I can't say It made me happy... A pity.";
 			Link.l1 = "I am sorry...";
 			Link.l1.go = "exit";
 			npchar.quest.choice = 0;
 		break;
+		
 		//===>> секс
         case "Horse_ReadyFack":
 			// Addon 2016-1 Jason пиратская линейка
@@ -651,6 +688,7 @@ void ProcessDialogEvent()
 			AddCharacterExpToSkill(pchar, "FencingS", -15);
 			AddCharacterExpToSkill(pchar, "Pistol", -15);
 		break;
+
         case "Horse_AfterSex":
 			if (CheckAttribute(pchar, "questTemp.ReasonToFast") && pchar.questTemp.ReasonToFast == "Begin")
 			{
@@ -674,6 +712,7 @@ void ProcessDialogEvent()
 						Link.l1 = RandPhraseSimple("Yeah, I liked it a lot.", ""+ GetSexPhrase("We had a great time, you were gorgeous!","Everything was simply terrific!") +"");	
 						Link.l1.go = "exit";
 					break;
+					
 					case "2":
 						dialog.text = RandPhraseSimple("Well, that's it, you have to go.", "Your time is over,"+ GetSexPhrase(" caprain,","") +".");
 						Link.l1 = RandPhraseSimple("Yeah, see you...", "Goodbye and thank you...");
@@ -683,6 +722,7 @@ void ProcessDialogEvent()
 				NextDiag.TempNode = "Horse_AfterSex_2";
 			}	
 		break;
+		
         case "Horse_AfterSex_2":
 			if(CheckAttribute(pchar,"GenQuest.EncGirl") && pchar.GenQuest.EncGirl == "Bag_BrothelRoom" && !CheckCharacterItem(pchar, "leather_bag"))
 			{
@@ -698,11 +738,13 @@ void ProcessDialogEvent()
 				NextDiag.TempNode = "Horse_AfterSex_2";
 			}	
 		break;
+		
 		case "EncGirl_GetBag":
 			dialog.text = "Was it that brown chest with a grip?";
 			link.l1 = "Yeah, something like that...";
 			link.l1.go = "EncGirl_GetBag1";	
 		break;
+		
 		case "EncGirl_GetBag1":
 			dialog.text = "Since the owner of that chest never showed up again, madame has taken it to her boudoir.";
 			link.l1 = "Thanks, babe. Goodbye.";
@@ -710,18 +752,21 @@ void ProcessDialogEvent()
 			pchar.GenQuest.EncGirl = "Bag_BrothelHostess";
 			NextDiag.TempNode = "Horse_AfterSex_2";
 		break;
+		
 		// --> генератор - "A reason to hurry"
 		case "Horse_ReasonToFast_1":
 			dialog.text = "Then drop in anytime, I'll always be glad to see you. You're so "+ GetSexPhrase("gentle, not like those others","gentle, not like those rednecks") +" no hello, no goodbye, and even often try to hurt...";
 			link.l1 = "What do you mean by that?";
 			link.l1.go = "Horse_ReasonToFast_2";
 		break;
+		
 		case "Horse_ReasonToFast_2":
 			pchar.questTemp.ReasonToFast.speakHorse = true;
 			dialog.text = "There was a master sergeant just before you. Usually he doesn't pay us a visit, but this time some devil has brought him here. Moreover, he has picked me... He was groaning while being over me for a few minutes, and then called me a low-skilled and rushed to some cove. He took off so quickly that he almost left his pants down there, ha-ha-ha...";
 			link.l1 = "Don't you know, "+ GetSexPhrase("beauty","darling") +", who men really are? He had told his wife that he would go to the brothel for 'inspection', then he told his mistress that he was in a hurry to his wife, but the only thing he always wanted is going to patrol that cove. "+ GetSexPhrase("Ha-ha-ah!..","Ha-ha-ha!") +"";
 			link.l1.go = "Horse_ReasonToFast_3";
 		break;
+		
 		case "Horse_ReasonToFast_3":
 			NextDiag.TempNode = "Horse_AfterSex_2";			
 			ReOpenQuestHeader("ReasonToFast");
@@ -743,15 +788,18 @@ void ProcessDialogEvent()
 			DialogExit();		
 		break;
 		// <-- генератор "A reason to hurry"
+		
 		case "exit_setOwner":
 			LAi_SetOwnerTypeNoGroup(npchar);
 			NextDiag.CurrentNode = NextDiag.TempNode;
 			DialogExit();
 		break;
+		
 		case "Exit":
 			NextDiag.CurrentNode = NextDiag.TempNode;
 			DialogExit();
 		break;
+		
 		//поиски кольца мэра
 		case "TakeMayorsRing_S1":
 			if (CheckAttribute(pchar, "questTemp.different.TakeMayorsRing.item")) //если валяется в итемах
@@ -780,21 +828,25 @@ void ProcessDialogEvent()
 				}
 			}
 		break;
+
 		case "TakeMayorsRing_S2":
 			dialog.text = "I am sorry, but the ring was given to me as a present! So I am not obliged to return it.";
 			link.l1 = "A present?! And who gave it to you?";
 			link.l1.go = "TakeMayorsRing_S3";
 		break;
+		
 		case "TakeMayorsRing_S3":
 			dialog.text = "The governor himself, of course!";
 			link.l1 = "But he was... tipsy, to say the least. He can't remember a thing.";
 			link.l1.go = "TakeMayorsRing_S4";
 		break;
+		
 		case "TakeMayorsRing_S4":
 			dialog.text = "And what do I have to do with it? If he was drunk, it's his problem, not mine!";
 			link.l1 = "Do you really need to quarrel with him? It's a wedding ring, and you know it... Just give it back, such a small thing is not worth any trouble.";
 			link.l1.go = "TakeMayorsRing_S5";
 		break;
+		
 		case "TakeMayorsRing_S5":
 			if (rand(1) && sti(pchar.money)>5000)
 			{
@@ -814,6 +866,7 @@ void ProcessDialogEvent()
 				AddQuestUserData("SeekMayorsRing", "sName", GetFullName(npchar));
 			}
 		break;
+		
 		case "TakeMayorsRing_S6":
 			dialog.text = "Here you go...";
 			link.l1 = "Fine, then. Thanks for help, darling.";
@@ -825,6 +878,7 @@ void ProcessDialogEvent()
 			AddQuestUserData("SeekMayorsRing", "sCity", XI_ConvertString("Colony" + npchar.city + "Gen"));
 			AddQuestUserData("SeekMayorsRing", "sName", GetFullName(npchar));
 		break;
+		
 		//Jason --> Заносчивый аристократ
 		case "Badboy":
 			pchar.GenQuest.Badboy.Brothel.City = npchar.city; //город квестодателя
@@ -837,6 +891,7 @@ void ProcessDialogEvent()
 			link.l2 = "I think I can arrange that. Tell me, where can I find that scrapegrace?";
 			link.l2.go = "Badboy_1";
 		break;
+		
 		case "Badboy_1":
 			dialog.text = "By this time usually he is already at the tavern. He gets drunk there and then comes over to visit.";
 			link.l1 = "I see. Well, I'll probably meet him there.";
@@ -882,16 +937,19 @@ void ProcessDialogEvent()
 			pchar.GenQuest.Badboy.Brothel.Type = iType; //запомним тип
 			pchar.GenQuest.Badboy.Brothel = "true";
 		break;
+		
 		case "Badboy_complete":
 			dialog.text = "Oh, you're a real man, aren't you? I always knew that I could count on you..";
 			link.l1 = "I am always happy to help such a nice lady and her... wards.";
 			link.l1.go = "Badboy_complete_1";
 		break;
+		
 		case "Badboy_complete_1":
 			dialog.text = "You are not only brave, but also very gallant. I would like to thank you in a special way - in a way only a woman can thank a man. You will never forget this, I promise. Come upstairs, brave sailor...";
 			link.l1 = "...";
 			link.l1.go = "Badboy_complete_2";
 		break;
+		
 		case "Badboy_complete_2":
 			pchar.questTemp.different.HostessSex.city = pchar.GenQuest.Badboy.Brothel.City;
 			AddDialogExitQuestFunction("SexWithHostess_goToRoom");
@@ -911,17 +969,20 @@ void ProcessDialogEvent()
 			SaveCurrentQuestDateParam("questTemp.Badboy");
 		break;
 		// <-- Заносчивый аристократ
+		
 		//Португалец
 		case "Portugal":
 			dialog.text = "There is one man and he owes me some money... I don't know how to say...";
 			link.l1 = "No words! I'll find him and shake him out to the last peso just for one look of your fathomless eyes! Just tell me his name!";
 			link.l1.go = "Portugal_1";
 		break;
+		
 		case "Portugal_1":
 			dialog.text = "No, no, you haven't correctly understood me, Captain! This man... do not do anything bad to him. Just remind him of his debts. His name is Hugo Avendell, and I suppose you will find him there, where very cheap booze is sold. Only God's sake, do not apply force to him!\nJust say... remind him that he promised to pay. I don't want to contact the guard, but I have friends officers, so tell him that I'm waiting, and with all due respect to him, no later than tomorrow, I'll be forced to take action. Just remind him of his promise.";
 			link.l1 = "Your word is my law, madame. I will gladly fulfill your request.";
 			link.l1.go = "Portugal_2";
 		break;
+		
 		case "Portugal_2":
 			DialogExit();
 			//создаем Хьюго
@@ -958,6 +1019,7 @@ void ProcessDialogEvent()
 			SetFunctionTimerCondition("Portugal_BeginOver", 0, 0, 2, false);
 			pchar.questTemp.Portugal = "begin";
 		break;
+		
 		case "Portugal_exit":
 			dialog.text = "Thank you, captain. I do hope that he would show a due prudence.";
 			link.l1 = "I am certain of that, madame. Now allow me to take my leave.";
@@ -966,59 +1028,70 @@ void ProcessDialogEvent()
 			sld.lifeday = 0;
 			pchar.questTemp.Portugal = "end";
 		break;
+		
 		case "Portugal_3":
 			AddMoneyToCharacter(pchar, -10000);
 			dialog.text = "Oh no! Don't tell me you've done something terrible to him... He had no money, and I knew it! We just grew up in the same small town, I would never turn to the guards! I just wanted to scare him a bit... to shake him up before he would drown in the bottle!";
 			link.l1 = "Hmm... Nevertheless, here's your money. And don't worry about Hugo, he's fine... At least he will if he sobers up.";
 			link.l1.go = "Portugal_4";
 		break;
+		
 		case "Portugal_4":
 			dialog.text = "Oh, Captain, you don't understand! He was one of... well, you know, they are called bounty hunters - mercenaries, they track down pirates and robbers and eliminate them. But, he was not the most fortunate, to say the least\nNot so long ago, he finally splurged and lost his crew and ship, since then he has been floating at the bottom of his mug, day after day. I, for old memory, allow him to come here sometimes. He's so... so pitiful now. He was the most handsome man in our town on the coast of La Manche, and look at him now\nI know that he promised you something, and you paid out of pocket! I'll give you this money, just don't do anything bad to him, I beg you, captain!";
 			link.l1 = "Okay, okay, madame, I got it. Keep the money, it's yours. As for you friend, I promise that I will not hurt him. And now allow me to take my leave, I've got some business to do. Also, I was happy to help such a beautiful lady.";
 			link.l1.go = "Portugal_5";
 		break;
+		
 		case "Portugal_5":
 			DialogExit();
 			sld = characterFromId("Avendel");
 			sld.dialog.currentnode = "Avendel_tavern_7";
 			pchar.questTemp.Portugal = "AvendelTavern";
 		break;
+		
 		// Addon 2016-1 Jason пиратская линейка
 		case "mtraxx":
             dialog.text = "Shush, keep your voice low... Go ask Madame Lolita to have a date with me. Then come upstairs, where we can talk freely. And not a word until then... Hey, sailor, go pay to Madame before touching me! (giggles)";
 			link.l1 = "On my way, sweetheart...";
 			link.l1.go = "mtraxx_1";
 		break;
+		
 		case "mtraxx_1":
            DialogExit();
 		   pchar.questTemp.Mtraxx = "jewelry_2";
 		break;
+		
 		case "mtraxx_2":
 			pchar.quest.Mtraxx_JewelrySDMOver.over = "yes"; //снять таймер
             dialog.text = "Nah, not me. I'll tell you the whole story, just don't interrupt me.";
 			link.l1 = "I am all ears!";
 			link.l1.go = "mtraxx_3";
 		break;
+		
 		case "mtraxx_3":
             dialog.text = "Alright then. About a week ago, a military ship arrived to Santo Domingo. It was damaged, either in a storm or a fight, so the repairs began right away, and the crew moved to the fort. Its captain, however, spent all his free time right here. For two days straight he had been drinking and relaxing accompanied by one of our girls. It was she who got the gemstone, and not just one. She bragged about it to no end - Lolita lets us keep customers' presents\nSilly girl didn't even know the true value of the gift, whereas I sized it up straight away. When she told me of how the drunk captain boasted about a mountain filled with ambers, I promptly sent a letter to Tyrex...";
 			link.l1 = "";
 			link.l1.go = "mtraxx_4";
 		break;
+		
 		case "mtraxx_4":
             dialog.text = "By the captain's next arrival I set everything up so his favorite girl was busy with another client, and got the 'job' for myself. I tried to get the coordinates out of him, alas, to no avail. He just kept boasting how he would become as rich as Crassus and get back to the Old World\nNot a single word about the location. The only thing I found out was that his ship was repaired and it was going to sail to Havana, where he would try arranging for a mission in the right direction, he isn't the ship's owner after all.";
 			link.l1 = "So, he is in Havana now?";
 			link.l1.go = "mtraxx_5";
 		break;
+		
 		case "mtraxx_5":
             dialog.text = "Sailed off two days ago at dawn. You are the seaman here, you do the counting.";
 			link.l1 = "Captain's name, his ship's type and name, anything?";
 			link.l1.go = "mtraxx_6";
 		break;
+		
 		case "mtraxx_6":
             dialog.text = "What do, you take me for a fool? His name is Esberdo Cabanas, captain of the Cantavro. I think sailors called it a schooner.";
 			link.l1 = "And that's all you know?";
 			link.l1.go = "mtraxx_7";
 		break;
+		
 		case "mtraxx_7":
             dialog.text = "What more do you want? I'm sure you could catch up with him before Havana. Don't waste time though, I don't think he'll take a long rest before leaving Cuba towards his stash, and then it's a lost cause. On a second thought, you could stay for an hour or two, you did pay for it after all.";
 			link.l1 = "Good point, darling. Two hours won't make much of a difference...";
@@ -1046,11 +1119,13 @@ void ProcessDialogEvent()
 			AddCharacterExpToSkill(pchar, "FencingS", -15);
 			AddCharacterExpToSkill(pchar, "Pistol", -15);
 		break;
+		
 		case "mtraxx_R":
             dialog.text = "O-oh... What a pity. And I thought you are here on vacantion. My girls miss brave corsairs so much. Very well then, speak, what's the task?..";
 			link.l1 = "Marcus tasked me to drive a helluva party in your establishment for two days, to drink all the wine and screw every girl. When will we begin?";
 			link.l1.go = "mtraxx_R1";
 		break;
+		
 		case "mtraxx_R1":
             dialog.text = "Ah, Charlie Prince, your humour is as sharp as your sabre! You almost got upset... Girls! We have a guest, a special guest! Bring wine and meals!";
 			if (sti(pchar.money) >= 31000)
@@ -1066,6 +1141,7 @@ void ProcessDialogEvent()
 				chrDisableReloadToLocation = false;
 			}
 		break;
+		
 		case "mtraxx_R2":
 			AddMoneyToCharacter(pchar, -30000);
             dialog.text = "I wish all our customers were as sweet, handsome and generous as you are... We'll give you a perfect relaxation. Girls!";
@@ -1075,6 +1151,7 @@ void ProcessDialogEvent()
 		break;
 	}
 }
+
 ref GetFreeHorseRef(string City)
 {
 	ref rCharacter;
@@ -1092,6 +1169,7 @@ ref GetFreeHorseRef(string City)
 	if (howStore == 0) return &NullCharacter;
 	return &characters[storeArray[rand(howStore-1)]];
 }
+
 ref CheckHorsesName(string City, int num)
 {
 	ref rCharacter;

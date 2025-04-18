@@ -3,13 +3,17 @@ void ProcessDialogEvent()
 {
 	ref NPChar, sld;
 	aref Link, NextDiag, arCapBase, arCapLocal;
+
 	DeleteAttribute(&Dialog,"Links");
+
 	makeref(NPChar,CharacterRef);
 	makearef(Link, Dialog.Links);
 	makearef(NextDiag, NPChar.Dialog);
+
 	// доп повека
 	if (!CheckAttribute(NPChar, "Portman")) NPChar.Portman = 0;
 	if (!CheckAttribute(NPChar, "PortManPrice")) NPChar.PortManPrice = (0.06 + frnd()*0.1);
+
     // вызов диалога по городам -->
     NPChar.FileDialog2 = "DIALOGS\" + LanguageGetLanguage() + "\PortMan\" + NPChar.City + "_PortMan.c";
     if (LoadSegment(NPChar.FileDialog2))
@@ -19,51 +23,62 @@ void ProcessDialogEvent()
 	}
     // вызов диалога по городам <--
 	ProcessCommonDialogRumors(NPChar, Link, NextDiag);//homo 25/06/06
+
     int i, cn, iTemp;
     ref chref;
 	ref rRealShip;
     string attrL, sTitle, sCapitainId, s1;
 	string sColony;
+    
 	String sLastSpeakDate = LastSpeakDate();
+	
 	// Warship 25.07.09 Генер "Сгоревшее судно". Даты отказа ГГ - если отказал, то предложит снова только на след сутки
 	if(CheckAttribute(NPChar, "Quest.BurntShip.LastQuestDate") && NPChar.Quest.BurntShip.LastQuestDate != sLastSpeakDate)
 	{
 		DeleteAttribute(NPChar, "Quest.BurntShip");
 	}
+    
     bool ok;
     int iTest = FindColony(NPChar.City); // город магазина
     ref rColony;
     string sFrom_sea = "";
 	npchar.quest.qty = CheckCapitainsList(npchar); //для списка кэпов
+
 	if (iTest != -1)
 	{
 		rColony = GetColonyByIndex(iTest);
 		sFrom_sea = rColony.from_sea;
 	}
+	
 	attrL = Dialog.CurrentNode;
+	
 	if(HasSubStr(attrL, "ShipStockManBack_"))
  	{
         i = findsubstr(attrL, "_" , 0);
 	 	NPChar.ShipToStoreIdx = strcut(attrL, i+1, strlen(attrL)-1); // индех в конце
  	    Dialog.CurrentNode = "ShipStockManBack";
  	}
+    
 	if(HasSubStr(attrL, "BurntShip19_"))
 	{
 		i = findsubstr(attrL, "_" , 0);
 	 	NPChar.Quest.BurntShip.ShipCompanionIndex = strcut(attrL, i + 1, strlen(attrL) - 1); // индех в конце
  	    Dialog.CurrentNode = "BurntShip19";
 	}
+    
 	switch(Dialog.CurrentNode)
 	{
         case "Exit":
 			NextDiag.CurrentNode = NextDiag.TempNode;
 			DialogExit();
 		break;
+		
 		case "fight":
 			DialogExit();
             NextDiag.CurrentNode = NextDiag.TempNode;
 			LAi_group_Attack(NPChar, Pchar);
 		break;
+		
 		case "First time":
 			NextDiag.TempNode = "First time";
 			if (LAi_grp_playeralarm > 0)
@@ -126,6 +141,7 @@ void ProcessDialogEvent()
 			}
 			Link.l1.go = "node_2";
 		break;
+		
 		case "node_2":
 			// Церковный генератор 1
 			if(CheckAttribute(PChar, "GenQuest.ChurchQuest_1.AskPortMan") && PChar.GenQuest.ChurchQuest_1.AskPortMan_InColony == NPChar.city)
@@ -178,6 +194,7 @@ void ProcessDialogEvent()
 					Link.l1.go = "Fraht_complete";
 					break;
 				}
+			
 				if (CheckAttribute(PChar, "questTemp.WPU.Fraht.TargetPortmanID") && pchar.questTemp.WPU.Fraht == "lost" && pchar.questTemp.WPU.Fraht.Nation == npchar.nation)
 				{
 					if (pchar.questTemp.WPU.Fraht.TargetPortmanID == npchar.id)
@@ -196,6 +213,7 @@ void ProcessDialogEvent()
 				}
 // <-- фрахт
 //-------------------------------------------//Jason, почта---------------------------------------------------	
+		
 				if (CheckAttribute(PChar, "questTemp.WPU.Postcureer.TargetPortmanID") && pchar.questTemp.WPU.Postcureer != "lost" && pchar.questTemp.WPU.Postcureer.TargetPortmanID == npchar.id)
 				{
 					dialog.text = "Excellent. I am at your service, " + GetFullName(PChar) + ".";
@@ -203,6 +221,7 @@ void ProcessDialogEvent()
 					Link.l1.go = "Postcureer_complete";
 					break;
 				}
+			
 				if (CheckAttribute(PChar, "questTemp.WPU.Postcureer.TargetPortmanID") && pchar.questTemp.WPU.Postcureer == "lost" && pchar.questTemp.WPU.Postcureer.TargetPortmanID == npchar.id)
 				{
 					dialog.text = "Oh, so you've come at last. Frankly, we already thought you were dead... Well, it's a good thing you are just a dunderhead, but still not a dead man.";
@@ -210,6 +229,7 @@ void ProcessDialogEvent()
 					Link.l1.go = "Postcureer_complete_bad";
 					break;
 				}
+			
 				if (CheckAttribute(PChar, "questTemp.WPU.Postcureer.fail") && pchar.questTemp.WPU.Postcureer.StartCity == npchar.city)
 				{
 					dialog.text = "What's happened? You look like death warmed up.";
@@ -290,6 +310,7 @@ void ProcessDialogEvent()
 					break;
 				}
 // <-- эскорт
+		
 			dialog.text = "Excellent. I am at your service, " + GetFullName(PChar) + ".";
 			if (npchar.city != "Panama") // Captain Beltrop, 24.12.2020, запрет брать задания и ставить корабли в ПУ Панамы
 			{
@@ -318,6 +339,7 @@ void ProcessDialogEvent()
 			}
 			link.l6 = "I would like to know about captains, who registered at your port authority.";
 			link.l6.go = "CapitainList";
+			
 			link.l8 = "I'm on another matter.";
 			// Warship 26.07.09 Генер "Сгоревшее судно"
 			if(CheckAttribute(NPChar, "Quest.BurntShip") && !CheckAttribute(NPChar, "Quest.BurntShip.LastQuestDate"))
@@ -392,11 +414,13 @@ void ProcessDialogEvent()
 			Link.l15 = "Thank you. Goodbye.";
 			Link.l15.go = "exit";
 		break;
+
 		case "Church_GenQuest1_Node_FillFullInfo":
 			dialog.text = "Your problem can be easily solved. You can see any official of the navigation service, and he will provide you with all information regarding the route of your friend's ship.";
 			link.l1 = "Unfortunately, it's not all that easy. My friend has renamed his ship in your port... for religious reasons.";
 			link.l1.go = "Church_GenQuest1_Node_FillFullInfo_2";
 		break;
+			
 		case "Church_GenQuest1_Node_FillFullInfo_2":
 			dialog.text = "I see. That makes things a bit more difficult. I need to rummage through the records in the ship's register, and that will take some time. And time is money, as you should know.";
 			if(sti(pchar.money) >= 1000)
@@ -411,6 +435,7 @@ void ProcessDialogEvent()
 				link.l1.go = "exit";
 			}
 		break;
+			
 		case "Church_GenQuest1_Node_FillFullInfo_3":
 			sColony = GetColonyExpect2Colonies(NPChar.city, PChar.GenQuest.ChurchQuest_1.QuestTown);
 			PChar.GenQuest.ChurchQuest_1.CapGoToColony = sColony;
@@ -425,6 +450,7 @@ void ProcessDialogEvent()
 				link.l1.go = "Church_GenQuest1_Node_FillFullInfo_4";
 				AddMoneyToCharacter(pchar, -1000);
 		break;
+			
 		case "Church_GenQuest1_Node_FillFullInfo_4":
 			DialogExit();
 			NextDiag.CurrentNode = NextDiag.TempNode;
@@ -436,22 +462,26 @@ void ProcessDialogEvent()
 			PChar.GenQuest.ChurchQuest_1.AskPortMan_InColony = PChar.GenQuest.ChurchQuest_1.CapGoToColony;
 			PChar.GenQuest.ChurchQuest_1.CapFullInfo = true;
 		break;
+			
 		case "Church_GenQuest1_Node_FillInfoOfCapColony_1":
 			dialog.text = "What exactly did you want to know?";
 			link.l1 = "Can you tell me, if that captain's ship visited your port?";
 			link.l1.go = "Church_GenQuest1_Node_FillInfoOfCapColony_2";
 		break;
+						
 		case "Church_GenQuest1_Node_FillInfoOfCapColony_2":
 			PChar.GenQuest.ChurchQuest_1.CapGoToColony = GetColonyExpect2Colonies(NPChar.city, PChar.GenQuest.ChurchQuest_1.QuestTown);
 			dialog.text = "Hmm... And may I know, why are you asking?";
 			link.l1 = "I have business with him. But if he didn't call at your port or you don't...";
 			link.l1.go = "Church_GenQuest1_Node_FillInfoOfCapColony_3";
 		break;
+			
 		case "Church_GenQuest1_Node_FillInfoOfCapColony_3":
 			dialog.text = "He did. But praise to all the Saints, just this morning he rid us of his company and headed to " + XI_ConvertString("Colony" + PChar.GenQuest.ChurchQuest_1.CapGoToColony + "Acc") + ". And I confess sincerely sorry anyone who will have to deal with him.";
 			link.l1 = "In that case wish me luck - and thank you for your help.";
 			link.l1.go = "Church_GenQuest1_Node_FillInfoOfCapColony_4";
 		break;
+			
 		case "Church_GenQuest1_Node_FillInfoOfCapColony_4":
 			DialogExit();
 			NextDiag.CurrentNode = NextDiag.TempNode;
@@ -466,21 +496,25 @@ void ProcessDialogEvent()
 				PChar.GenQuest.ChurchQuest_1.NextColonyIsLast = true; // Флаг - следующая колония будет последней
 			}
 		break;
+			
 		case "Church_GenQuest1_Node_CapOnThisColony_1":
 			dialog.text = "What do you want to know, "+ GetSexPhrase("mister","miss") +" " + GetFullName(PChar) + "?";
 			link.l1 = "Could you tell we whether this captain called at your port or not?";
 			link.l1.go = "Church_GenQuest1_Node_CapOnThisColony_2";
 		break;
+			
 		case "Church_GenQuest1_Node_CapOnThisColony_2":
 			dialog.text = "Hmm, he sure did. And I must say that I am impatiently waiting for that blessed moment when he finally leaves this long-suffered port.";
 			link.l1 = "You mean to say that his ship is still here?";
 			link.l1.go = "Church_GenQuest1_Node_CapOnThisColony_3";
 		break;
+			
 		case "Church_GenQuest1_Node_CapOnThisColony_3":
 			dialog.text = "Yes, gracious "+ GetSexPhrase("sir","lady") +". The entire port, starting with the worst of the loaders and ending with the head of the pilot service, is praying for his swift departure. His ship has just left the dry dock, where it was promptly repaired, but by that time its gallant captain already fell out with every carpenter and rejected three batches of selected planks for the ship's skin. But tomorrow our most gracious and all-seeing Lord shall rid us of that... of that plague, of that sore in the aspect of man!";
 			link.l1 = "Now, calm down, mister " + NPChar.Name + ", and think about that someone's going to have a harder time still. You have already passed this trial, while I have yet to meet that captain of yours. And now, if you excuse me...";
 			link.l1.go = "Church_GenQuest1_Node_CapOnThisColony_4";
 		break;
+			
 		case "Church_GenQuest1_Node_CapOnThisColony_4":
 			DialogExit();
 			NextDiag.CurrentNode = NextDiag.TempNode;
@@ -498,6 +532,7 @@ void ProcessDialogEvent()
 			sld = CharacterFromID("ChurchGenQuest1_Cap");
 			sld.DeckDialogNode = "ChurchGenQuest_1_DeckDialog_1";
 		break;
+						
 		case "ShipLetters_out1":
 			dialog.text = "Let me take a look! Yes, indeed, in my documents this set is labeled as void. It's very kind of you that you've found a moment to come see me and hand me these papers. Off the wind, captain!";
 			link.l1 = "Thanks!";
@@ -511,6 +546,7 @@ void ProcessDialogEvent()
 			NextDiag.CurrentNode = NextDiag.TempNode;
 			DialogExit(); 
 		break;
+				
 		case "ShipLetters_Portman1_1":
 			pchar.questTemp.different.GiveShipLetters.speakPortman = true;
 			s1 = "Let me take a look! Yes, this vessel and its captain are both registered in my documents. ";
@@ -521,6 +557,7 @@ void ProcessDialogEvent()
 			link.l2 = "Well, a modest sum, but then again it was no big deal, either. Yes, I accept your offer, "  + npchar.name +".";
 			link.l2.go = "ShipLetters_Portman1_2";
 		break;
+		
 		case "ShipLetters_Portman1_2" :
 			TakeItemFromCharacter(pchar, "CaptainBook"); 
 			addMoneyToCharacter(pchar, sti(pchar.questTemp.different.GiveShipLetters.price1)); 			
@@ -532,6 +569,7 @@ void ProcessDialogEvent()
 			NextDiag.CurrentNode = NextDiag.TempNode;
 			DialogExit(); 
 		break;
+		
 		case "ShipLetters_Portman2":
 			dialog.text = "Will you accept my offer?";
 			link.l1 = "Of course, not!";
@@ -539,6 +577,7 @@ void ProcessDialogEvent()
 			link.l2 = "Perhaps. Although I'm sure that these papers are more expensive.";
 			link.l2.go = "ShipLetters_Portman2_1";
 		break;
+		
 		case "ShipLetters_Portman2_1":
 			TakeItemFromCharacter(pchar, "CaptainBook"); 
 			addMoneyToCharacter(pchar, sti(pchar.questTemp.different.GiveShipLetters.price1)); 			
@@ -550,22 +589,26 @@ void ProcessDialogEvent()
 			NextDiag.CurrentNode = NextDiag.TempNode;
 			DialogExit(); 		
 		break;
+
 		case "EncGirl_1":
 			dialog.text = "I am all ears.";
 			link.l1 = "I've brought your fugitive.";
 			link.l1.go = "EncGirl_2";
 		break;
+		
 		case "EncGirl_2":
 			dialog.text = "Oh, captain, thank you so much! How is she? Is she hurt? Why did she run away? Why?\nDoesn't she understand? The groom is a wealthy and important man! Youth is naive and foolish... cruel even. Remember that!";
 			link.l1 = "Well, you are her father and the final decision is yours, but I would not hurry with the wedding...";
 			link.l1.go = "EncGirl_3";
 		break;
+		
 		case "EncGirl_3":
 			dialog.text = "What do you know? Do you have your own children? No? When you've got one, come to see me and we will talk\nI promised a reward to anyone who take her back to the family.";
 			link.l1 = "Thanks. You should keep an eye on her. I have a hunch that she won't stop at that.";
 			link.l1.go = "exit";
 			AddDialogExitQuestFunction("EncGirl_ToLoverParentsExit");
 		break;
+		
 		case "EncGirl_4":
 			if(sti(pchar.GenQuest.EncGirl.LoverFatherAngry) == 0)
 			{
@@ -580,16 +623,19 @@ void ProcessDialogEvent()
 				link.l1.go = "EncGirl_6";			
 			}
 		break;
+		
 		case "EncGirl_5":
 			dialog.text = "I am very grateful to you that you haven't abandoned my child in dire straits and helped him to find a way out of a delicate situation. Allow me to thank you and please, accept this modest sum and a gift from me personally.";
 			link.l1 = "Thanks. Helping out this young couple was my pleasure.";
 			link.l1.go = "EncGirl_5_1";
 		break;
+		
 		case "EncGirl_6":
 			dialog.text = "Thanks? What thanks?! It's been a half a year since that blockhead has been hanging around without a job - and look at him, he's got enough time for love affairs! When I was his age, I was already running my own business! Pff! A governor has a marriageable daughter - and that dunce has brought a slut without kith or kin to my house and dared to ask for my blessing!";
 			link.l1 = "Hmm... Apparently, you don't believe in sincere feelings?";
 			link.l1.go = "EncGirl_6_1";		
 		break;
+		
 		case "EncGirl_5_1":
 			AddMoneyToCharacter(pchar, sti(pchar.GenQuest.EncGirl.sum));
 			GiveItem2Character(pchar, pchar.GenQuest.EncGirl.item);
@@ -599,11 +645,13 @@ void ProcessDialogEvent()
 			NextDiag.CurrentNode = NextDiag.TempNode;
 			DialogExit();
 		break;
+		
 		case "EncGirl_6_1":
 			dialog.text = "What feelings? What kind of feelings are you talking about? Feelings... how can one be so light-minded at your age?! Shame on you to indulge the young in their caprices and act as a procurer! You not only have taken a girl from her home, but you also ruined my greenhorn's life. There will be no thanks to you. Farewell.";
 			link.l1 = "Alright, and all the same to you...";
 			link.l1.go = "EncGirl_6_2";
 		break;
+		
 		case "EncGirl_6_2":
 			ChangeCharacterComplexReputation(pchar,"nobility", -1);
 			AddQuestRecord("JungleGirl", "19");
@@ -614,6 +662,7 @@ void ProcessDialogEvent()
 			NextDiag.CurrentNode = NextDiag.TempNode;
 			DialogExit();		
 		break;
+		
 		case "node_4":
 			//--> проверка миниквестов начальника порта. 
 			if (npchar.quest == "PortmansJornal") //взят квест на судовой журнал
@@ -676,6 +725,7 @@ void ProcessDialogEvent()
 				break;
 			}
 			//<-- проверка миниквестов начальника порта. 
+
 			//--> дача миниквестов начальника порта. 
 			if (rand(2) < 2 && pchar.questTemp.different == "free" && GetNpcQuestPastDayWOInit(npchar, "quest.meeting") > 7)
 			{
@@ -687,6 +737,7 @@ void ProcessDialogEvent()
 				SaveCurrentNpcQuestDateParam(npchar, "quest.meeting");
 				break;
 			}
+			
 			// Warship 25.07.09 Генер "Сгоревшее судно"
 			if(dRand(4) == 2 && !CheckAttribute(NPChar, "Quest.BurntShip"))
 			{
@@ -698,12 +749,14 @@ void ProcessDialogEvent()
 				break;
 			}
 			//<-- дача миниквестов начальника порта.
+
 			dialog.text = "The governor cares for the well-being of his city, so he always has jobs. There can be interested merchants at the tavern, and the store is freighting captains as well.";
 			Link.l1 = "I have one more question.";
 			Link.l1.go = "node_2";
 			Link.l2 = "Thank you. Goodbye.";
 			Link.l2.go = "exit";
 		break;
+
 ///Jason-----------------------новые генераторы накопительного типа для портмана----------------------------
 		int iTime, idaysQty, iGoods, iGoodsQty, amount;
 		case "Work_check"://фейс-контроль - общая проверка профпригодности ГГ и выбор задания
@@ -753,6 +806,7 @@ void ProcessDialogEvent()
 				link.l1.go = "exit";
 			}
 		break;
+	
 		case "Check_other"://выбор между почтовым курьером, эскортом и ничем
 		SaveCurrentNpcQuestDateParam(npchar, "work_date"); // mitrokosta безусловно сохраняем
 		int nTask = 0;
@@ -787,6 +841,7 @@ void ProcessDialogEvent()
 						}
 					}
 				break;
+
 				case "escort":
 					if (pchar.questTemp.WPU.Escort == "begin" || pchar.questTemp.WPU.Escort == "late" || pchar.questTemp.WPU.Escort == "win" || CheckAttribute(pchar, "questTemp.WPU.Escort.LevelUp")) { // если заняты
 						dialog.text = "Unfortunately, I can't offer you anything of that kind. Drop in again in a couple of days.";
@@ -822,7 +877,9 @@ void ProcessDialogEvent()
 		link.l1 = "Alright, I'll do just that.";
 		link.l1.go = "exit";
 		break;
+
 ///--> ------фрахт со свободным выбором пункта назначения, оплаты и вида груза из предложенного списка---------
+
 		case "Fraht_begin":
 			if (drand(4) < 4)
 			{
@@ -858,6 +915,7 @@ void ProcessDialogEvent()
 				Link.l1.go = "exit";
 			}
 		break;
+	
 		int iFrahtGoods1, iFrahtGoods2, iFrahtGoods3, iFrahtGoods;
 		int iFrahtGoodsQty1, iFrahtGoodsQty2, iFrahtGoodsQty3;
 		case "Fraht_choise":
@@ -919,6 +977,7 @@ void ProcessDialogEvent()
 			Link.l4.go = "exit";
 			SaveCurrentNpcQuestDateParam(npchar, "work_date");
 		break;
+	
 		case "Fraht_Choise_1":
 			dialog.text = "Well, great! I'll process the necessary documents, and you can prepare your ship for loading.";
 			link.l1 = "I will do my best!";
@@ -941,6 +1000,7 @@ void ProcessDialogEvent()
 			pchar.questTemp.WPU.Fraht.GoodsQty = sti(pchar.questTemp.WPU.Fraht.GoodsQty1);
 			pchar.questTemp.WPU.Fraht.Money = sti(pchar.questTemp.WPU.Fraht.Money1);
 		break;
+	
 		case "Fraht_Choise_2":
 			dialog.text = "Well, great! I'll process the necessary documents, and you can prepare your ship for loading.";
 			link.l1 = "I will do my best!";
@@ -963,6 +1023,7 @@ void ProcessDialogEvent()
 			pchar.questTemp.WPU.Fraht.GoodsQty = sti(pchar.questTemp.WPU.Fraht.GoodsQty2);
 			pchar.questTemp.WPU.Fraht.Money = sti(pchar.questTemp.WPU.Fraht.Money2);
 		break;
+	
 		case "Fraht_Choise_3":
 			dialog.text = "Well, great! I'll process the necessary documents, and you can prepare your ship for loading.";
 			link.l1 = "I will do my best!";
@@ -985,6 +1046,7 @@ void ProcessDialogEvent()
 			pchar.questTemp.WPU.Fraht.GoodsQty = sti(pchar.questTemp.WPU.Fraht.GoodsQty3);
 			pchar.questTemp.WPU.Fraht.Money = sti(pchar.questTemp.WPU.Fraht.Money3);
 		break;
+	
 		case "Fraht_Forcemajor":
 			pchar.questTemp.WPU.Fraht = "begin";
 			sld = characterFromId(pchar.questTemp.WPU.Fraht.TargetPortmanID);
@@ -996,6 +1058,7 @@ void ProcessDialogEvent()
 			if (pchar.questTemp.WPU.Fraht.Chance == 2) FrahtHunterOnSea();//создание ДУ в акватории
 			DialogExit();
 		break;
+	
 		case "Fraht_complete":
 		ok = (rColony.from_sea == "") || (Pchar.location.from_sea == rColony.from_sea);
 		if(sti(Pchar.Ship.Type) != SHIP_NOTUSED && ok)//проверка на наличие корабля в порту
@@ -1020,6 +1083,7 @@ void ProcessDialogEvent()
 			link.l1.go = "exit";
 		}
 		break;
+	
 		case "Fraht_complete_1":
 			if (pchar.questTemp.WPU.Fraht == "late")//опоздали
 			{
@@ -1036,6 +1100,7 @@ void ProcessDialogEvent()
 			link.l1 = "Thanks!";
 			link.l1.go = "Fraht_complete_2";
 		break;
+	
 		case "Fraht_complete_2":
 			if (pchar.questTemp.WPU.Fraht == "begin")
 			{
@@ -1066,11 +1131,13 @@ void ProcessDialogEvent()
 			Group_DeleteGroup("Fraht_Attack");
 			DialogExit();
 		break;
+	
 		case "Fraht_complete_bad":
 			dialog.text = "Have you delivered the cargo? Pretty. Actually, we had to purchase it by ourselves to turn in to the recipient! And it was quite costly, mind you. So, if you want to re-establish your goodwill, you will have to compensate our expenses and also pay the penalty. As for the cargo, you can keep it - we have no need of it anymore.";
 			link.l1 = "Yes, sure. How much?";
 			link.l1.go = "Fraht_complete_bad_1";
 		break;
+	
 		case "Fraht_complete_bad_1":
 			pchar.questTemp.WPU.Fraht.GoodsAverigeCost = sti(pchar.questTemp.WPU.Fraht.GoodsAverigeCost)*3;
 			dialog.text = "Three times the cost of the goods. This amounts to " + FindRussianMoneyString(sti(pchar.questTemp.WPU.Fraht.GoodsAverigeCost)) + ".";
@@ -1082,6 +1149,7 @@ void ProcessDialogEvent()
 			link.l2 = "Are you crazy? Demanding such an outrageous sum is the limit of greed! You won't get anything from me!";
 			link.l2.go = "Fraht_complete_fail";
 		break;
+	
 		case "Fraht_complete_pay":
 			AddMoneyToCharacter(pchar, -sti(pchar.questTemp.WPU.Fraht.GoodsAverigeCost));
 			dialog.text = "A wise decision. Now I can see that you're indeed a serious person. I guess we can still work together in the future.";
@@ -1113,6 +1181,7 @@ void ProcessDialogEvent()
 			AddCharacterExpToSkill(pchar, "Leadership", 70);//авторитет
 			AddCharacterExpToSkill(pchar, "Fortune", 70);//везение
 		break;
+	
 		case "Fraht_complete_fail":
 			dialog.text = "Oh, I see... Well, in that case you should never show your face again at any port authority of " + NationNameGenitive(sti(pchar.questTemp.WPU.Fraht.Nation)) + "! Get lost!";
 			link.l1 = "I surely didn't miss much...";
@@ -1136,13 +1205,16 @@ void ProcessDialogEvent()
 			pchar.questTemp.WPU.Fraht = "fail";
 			ChangeCharacterComplexReputation(pchar,"nobility", -10);
 		break;
+	
 		case "Fraht_complete_3":
 			dialog.text = "Hurry up, the recipient already knows that your ship has arrived and he worries about his cargo.";
 			link.l1 = "In that case I will not waste any more time!";
 			link.l1.go = "exit";
 		break;
 	//фрахт <--
+	
 /// -------------------------------работа курьером по доставке почты-------------------------------------
+
 		case "Postcureer":
 			pchar.questTemp.WPU.Postcureer.City = findCurrentCity2(npchar);
 			pchar.questTemp.WPU.Postcureer.StartCity = npchar.city;//город квестодателя
@@ -1157,6 +1229,7 @@ void ProcessDialogEvent()
 			link.l2 = "Hmm... But I'm not going that way. Sorry, but I have to refuse.";
 			link.l2.go = "exit";
 		break;
+	
 		case "Postcureer_1":
 			dialog.text = "Excellent! I am counting on you. Here's the package.";
 			link.l1 = "I will set sail at once!";
@@ -1194,6 +1267,7 @@ void ProcessDialogEvent()
 			AddQuestUserData("Postcureer", "sTargetColony",XI_ConvertString("Colony"+pchar.questTemp.WPU.Postcureer.City)); // belamour gen
 			SetFunctionTimerCondition("PostcureerTime_Over", 0, 0, sti(pchar.questTemp.WPU.Postcureer.DaysQty), false);
 		break;
+	
 		case "Postcureer_complete":
 			if (pchar.questTemp.WPU.Postcureer == "late")//опоздали
 			{
@@ -1210,6 +1284,7 @@ void ProcessDialogEvent()
 			link.l1 = "Thanks!";
 			link.l1.go = "Postcureer_complete_1";
 		break;
+	
 		case "Postcureer_complete_1":
 			if (pchar.questTemp.WPU.Postcureer == "begin")
 			{
@@ -1240,6 +1315,7 @@ void ProcessDialogEvent()
 			SaveCurrentNpcQuestDateParam(npchar, "work_date");
 			DialogExit();
 		break;
+	
 		case "Postcureer_complete_bad":
 			dialog.text = "And what shall we do with it now? People were waiting for it god knows when, and you've brought it just today. Alright, give it to me - perhaps, there will yet be some use out of it. And I hope you understand that no payment at all is due now.";
 			link.l1 = "Of course, I do. Take your bundle. Farewell.";
@@ -1251,7 +1327,9 @@ void ProcessDialogEvent()
 			Group_DeleteGroup("Fraht_Attack");
 			pchar.questTemp.WPU.Postcureer = "fail";
 		break;
+	
 /// ---------------------------работа в качестве эскорта для торговых кораблей----------------------------
+
 		case "escort":
 			pchar.questTemp.WPU.Escort.ShipName1 = GenerateRandomNameToShip(sti(npchar.nation));//имена кораблей
 			pchar.questTemp.WPU.Escort.ShipName2 = GenerateRandomNameToShip(sti(npchar.nation));
@@ -1269,6 +1347,7 @@ void ProcessDialogEvent()
 			link.l2 = "Hmm... But I'm not going that way. Sorry, but I have to refuse.";
 			link.l2.go = "exit";
 		break;
+	
 		case "escort_1":
 			dialog.text = "Go ahead. Those ships are at your command at this point.";
 			link.l1 = "I am setting sail, then!";
@@ -1296,6 +1375,7 @@ void ProcessDialogEvent()
 			AddQuestUserData("Escort", "sTargetColony",XI_ConvertString("Colony"+pchar.questTemp.WPU.Escort.City)); // belamour gen
 			SetFunctionTimerCondition("EscortTime_Over", 0, 0, sti(pchar.questTemp.WPU.Escort.DaysQty), false);
 		break;
+	
 		case "escort_add_ships":
 			int iGoods1, iGoods2, iSpace1, iSpace2, ShipType, Rank;
 			int iNation = pchar.questTemp.WPU.Escort.ShipNation;
@@ -1352,6 +1432,7 @@ void ProcessDialogEvent()
 			if (pchar.questTemp.WPU.Escort.Chance < 2) FrahtHunterOnSea();//создание перехватчиков в акватории
 			DialogExit();
 		break;
+	
 		case "Escort_complete":
 		ok = (rColony.from_sea == "") || (Pchar.location.from_sea == rColony.from_sea);
 		if(sti(Pchar.Ship.Type) != SHIP_NOTUSED && ok)//проверка на наличие корабля в порту
@@ -1414,6 +1495,7 @@ void ProcessDialogEvent()
 			link.l1.go = "exit";
 		}
 		break;
+	
 		case "Escort_complete_1":
 			pchar.quest.Escort_fail.over = "yes";//снять прерывание
 			if (pchar.questTemp.WPU.Escort == "begin")
@@ -1452,6 +1534,7 @@ void ProcessDialogEvent()
 			Group_DeleteGroup("Fraht_Attack");
 			DialogExit();
 		break;
+	
 		case "escort_bonus":
 			pchar.questTemp.WPU.Escort.ShipName1 = GenerateRandomNameToShip(sti(npchar.nation));//имена кораблей
 			pchar.questTemp.WPU.Escort.ShipName2 = GenerateRandomNameToShip(sti(npchar.nation));
@@ -1475,6 +1558,7 @@ void ProcessDialogEvent()
 			link.l2 = "Hmm... But I'm not going that way. Sorry, but I have to refuse.";
 			link.l2.go = "exit";
 		break;
+	
 		case "escort_bonus_1":
 			dialog.text = "Excellent! Take command of the squadron.";
 			link.l1 = "I am setting sail, then!";
@@ -1511,6 +1595,7 @@ void ProcessDialogEvent()
 			pchar.questTemp.WPU.Fraht.GoodsAverigeCost = sti(Goods[iGoods].Cost)*sti(pchar.questTemp.WPU.Escort.GoodsQty);//средняя стоимость товара
 			SetFunctionTimerCondition("EscortTime_Over", 0, 0, sti(pchar.questTemp.WPU.Escort.DaysQty), false);
 		break;
+	
 		case "Escort_complete_fail":
 			dialog.text = "Unbelievable! And what did we need you for? How could you allow this to happen?! I hope you understand that a reward is now out of question.";
 			link.l1 = "Of course, I do... Well, best regards.";
@@ -1531,6 +1616,7 @@ void ProcessDialogEvent()
 			AddCharacterExpToSkill(pchar, "Fortune", 50);//везение
 			Group_DeleteGroup("Fraht_Attack");
 		break;
+	
 		case "EscortBonus_complete_fail":
 			if (GetCharacterIndex("EscortCaptain_1") == -1) RemoveCharacterCompanion(pchar, characterFromID("EscortCaptain_2"));
 			else RemoveCharacterCompanion(pchar, characterFromID("EscortCaptain_1"));//удалим компаньона
@@ -1592,6 +1678,7 @@ void ProcessDialogEvent()
 				break;
 			}
 		break;
+	
 		case "EscortBonus_complete_fail_1"://потеряли корабль, время и груз в норме или частично
 			AddQuestRecord("Escort", "12");
 			AddQuestUserData("Escort", "sMoney", FindRussianMoneyString(sti(pchar.questTemp.WPU.Escort.BonusMoney)));
@@ -1611,6 +1698,7 @@ void ProcessDialogEvent()
 			Group_DeleteGroup("Fraht_Attack");
 			DialogExit();
 		break;
+	
 		case "EscortBonus_complete_fail_2"://потеряли корабль и груз, время норма или нет, мир
 			AddQuestRecord("Escort", "13");
 			AddQuestUserData("Escort", "sMoney", FindRussianMoneyString(sti(pchar.questTemp.WPU.Fraht.GoodsAverigeCost)));
@@ -1630,6 +1718,7 @@ void ProcessDialogEvent()
 			Group_DeleteGroup("Fraht_Attack");
 			DialogExit();
 		break;
+	
 		case "EscortBonus_complete_fail_3"://потеряли корабль и груз, время норма или нет, война
 			dialog.text = "Oh, I see... Well, in that case you should never show your face again at any port authority of " + NationNameGenitive(sti(pchar.questTemp.WPU.Escort.Nation)) + "! Get lost!";
 			link.l1 = "I surely didn't miss much...";
@@ -1650,11 +1739,13 @@ void ProcessDialogEvent()
 			SaveCurrentNpcQuestDateParam(npchar, "work_date");
 			Group_DeleteGroup("Fraht_Attack");
 		break;
+	
 		case "Escort_fail"://потеряли 2 корабля
 			dialog.text = "This is very, very bad! What have we hired you for, can you tell me? To guard the ships? Or just to hang around?";
 			link.l1 = "I understand. The enemy was simply too strong, and... but what's the point of arguing - what had happened, had already happened. But the cargo - the cargo is still there! So let's sort it out.";
 			link.l1.go = "Escort_fail_complete";
 		break;
+	
 		case "Escort_fail_complete":
 			iFrahtGoods = makeint(pchar.questTemp.WPU.Escort.Goods);
 			amount = sti(pchar.questTemp.WPU.Escort.GoodsQty) - GetSquadronGoods(pchar, sti(pchar.questTemp.WPU.Escort.Goods));
@@ -1669,6 +1760,7 @@ void ProcessDialogEvent()
 			link.l1 = "Absolutely correct, " + GetAddress_FormToNPC(NPChar) + ".";
 			link.l1.go = "Escort_fail_complete_1";
 		break;
+	
 		case "Escort_fail_complete_1":
 			DeleteAttribute(pchar, "questTemp.WPU.Escort.Bonus");
 			pchar.questTemp.WPU.Escort.Money = makeint(sti(pchar.questTemp.WPU.Escort.BonusMoney)/2);
@@ -1687,6 +1779,7 @@ void ProcessDialogEvent()
 			link.l1 = "Well, it's something at least.";
 			link.l1.go = "Escort_fail_complete_2";
 		break;
+	
 		case "Escort_fail_complete_2":
 			if (pchar.questTemp.WPU.Escort == "begin")
 			{
@@ -1715,6 +1808,7 @@ void ProcessDialogEvent()
 			Group_DeleteGroup("Fraht_Attack");
 			DialogExit();
 		break;
+	
 //-------------------------------------задания 2 уровня для курьера---------------------------------------------
 		case "Postcureer_LevelUp":
 			pchar.questTemp.WPU.Postcureer.City = findCurrentCity2(npchar);//целевой город
@@ -1733,6 +1827,7 @@ void ProcessDialogEvent()
 			{
 				pchar.questTemp.WPU.Postcureer.EnemyNation = GetEnemyNationToMainCharacter();
 			}
+
 			switch (rand(3))
 			{
 				case 0:
@@ -1747,6 +1842,7 @@ void ProcessDialogEvent()
 					pchar.questTemp.WPU.Current.Item = "letter_2";//предмет
 					pchar.questTemp.WPU.Current.Itemdescr = "itmdescr_letter_2_PortmanLevelUp1";//описание
 				break;
+			
 				case 1:
 					dialog.text = "You will need to deliver these papers for the store owner of "+XI_ConvertString("Colony"+pchar.questTemp.WPU.Postcureer.City+"Gen")+" not later than "+FindRussianDaysString(sti(pchar.questTemp.WPU.Postcureer.DaysQty))+". This is the latest summary of the prices in stores all over the archipelago - a valuable commercial document. Care should be taken - competitors may well arrange a hunt. Payment for the delivery - "+FindRussianMoneyString(sti(pchar.questTemp.WPU.Postcureer.Money))+".";
 					link.l1 = "I agree!";
@@ -1759,6 +1855,7 @@ void ProcessDialogEvent()
 					pchar.questTemp.WPU.Current.Item = "letter_2";//предмет
 					pchar.questTemp.WPU.Current.Itemdescr = "itmdescr_letter_2_PortmanLevelUp2";//описание
 				break;
+			
 				case 2:
 					dialog.text = "You will need to deliver this bundle of documents for the usurer in the town of "+XI_ConvertString("Colony"+pchar.questTemp.WPU.Postcureer.City+"Gen")+" no later than "+FindRussianDaysString(sti(pchar.questTemp.WPU.Postcureer.DaysQty))+". Here is a very important information about currency exchange rates and stock prices. Be very careful - this package is already interested in some shady characters. Payment fro the delivery - "+FindRussianMoneyString(sti(pchar.questTemp.WPU.Postcureer.Money))+".";
 					link.l1 = "I agree!";
@@ -1771,6 +1868,7 @@ void ProcessDialogEvent()
 					pchar.questTemp.WPU.Current.Item = "letter_2";//предмет
 					pchar.questTemp.WPU.Current.Itemdescr = "itmdescr_letter_2_PortmanLevelUp3";//описание
 				break;
+			
 				case 3:
 					dialog.text = "You should deliver this bundle to the dock master in the town of "+XI_ConvertString("Colony"+pchar.questTemp.WPU.Postcureer.City+"Gen")+" no later than "+FindRussianDaysString(sti(pchar.questTemp.WPU.Postcureer.DaysQty))+". It contains blueprints for the new "+RandPhraseSimple(LinkRandPhrase("brig","corvette","frigate"), LinkRandPhrase("flute","pinnace","galleon"))+", employing unique technological designs. I hope you do understand that there are other... interested parties, so you'll have to act discreetly. Payment for the delivery - "+FindRussianMoneyString(sti(pchar.questTemp.WPU.Postcureer.Money))+".";
 					link.l1 = "I agree!";
@@ -1784,6 +1882,7 @@ void ProcessDialogEvent()
 				break;
 			}
 		break;
+	
 		case "Postcureer_LevelUp_Go":
 			dialog.text = "Then take the documents and set sail. Best of luck... and may the Almighty be watching over you.";
 			link.l1 = "Thanks!";
@@ -1813,12 +1912,14 @@ void ProcessDialogEvent()
 			AddQuestUserData("Postcureer", "sText", pchar.questTemp.WPU.Current.Add);
 			SetFunctionTimerCondition("PostcureerTime_Over", 0, 0, sti(pchar.questTemp.WPU.Postcureer.DaysQty), false);
 		break;
+	
 		case "Postcureer_LevelDown":
 			dialog.text = "Pity, indeed... Actually, offers of that kind are usually not tossed up. But it's your call, anyway.";
 			link.l1 = "Yes, that's my call, " + GetAddress_FormToNPC(NPChar) + ".";
 			link.l1.go = "exit";
 			pchar.questTemp.WPU.Postcureer.count = sti(pchar.questTemp.WPU.Postcureer.count) - 1;//за отказ от спецзадания счетчик скрутим
 		break;
+	
 		case "Forsmajor_choose":
 			switch (sti(pchar.questTemp.WPU.Postcureer.Chance))
 			{
@@ -1828,18 +1929,22 @@ void ProcessDialogEvent()
 					pchar.quest.Postcureer_Hunter.function = "PostcureerGopHuntersOnLand";
 					TraderHunterOnMap();
 				break;
+		
 				case 1://создание скоростного перехватчика на глобалке
 					EnemyNationHunterOnMap(true);
 				break;
+		
 				case 2://запуск ДУ на глобалке и в порту прибытия
 					TraderHunterOnMap();
 					FrahtHunterOnSea();
 				break;
+		
 				case 3://наемники в стартовом городе
 					pchar.quest.Postcureer_Hunter.win_condition.l1 = "Location";
 					pchar.quest.Postcureer_Hunter.win_condition.l1.location = pchar.questTemp.WPU.Postcureer.StartCity + "_town";
 					pchar.quest.Postcureer_Hunter.function = "PostcureerProfHuntersOnLand";
 				break;
+		
 				case 4://агент
 					pchar.quest.Postcureer_Hunter.win_condition.l1 = "Location";
 					pchar.quest.Postcureer_Hunter.win_condition.l1.location = pchar.questTemp.WPU.Postcureer.StartCity + "_town";
@@ -1848,11 +1953,13 @@ void ProcessDialogEvent()
 			}
 			DialogExit();
 		break;
+
 		case "Postcureer_complete_fail":
 			dialog.text = "Damn it! So they've tracked you, after all. A pity you're not a soldier, captain - in that case things might have turned out differently... What did they look like?";
 			link.l1 = "Two strong stout men in black with half-masks on their faces, armed with poleaxes and double-barreled guns...";
 			link.l1.go = "Postcureer_complete_fail_1";
 		break;
+
 		case "Postcureer_complete_fail_1":
 			dialog.text = "I will notify the governor immediately to start looking for them. Alright, see you, " + GetAddress_Form(NPChar) + ". Again, it's a pity you're not a soldier...";
 			link.l1 = "I am really sorry, " + GetAddress_FormToNPC(NPChar) + ", for what's happened. Well, farewell.";
@@ -1868,7 +1975,9 @@ void ProcessDialogEvent()
 			DeleteAttribute(pchar, "questTemp.WPU.Postcureer.fail");
 			pchar.questTemp.WPU.Postcureer = "complete";
 		break;
+	
 //----------------------------------------задания 2 уровня фрахт------------------------------------------
+
 	case "Fraht_LevelUp":
 		rColony = GetColonyByIndex(FindColony(npchar.city));
 		pchar.questTemp.WPU.Fraht.StartCity = npchar.city;//город квестодателя
@@ -1891,6 +2000,7 @@ void ProcessDialogEvent()
 				link.l2.go = "Fraht_LevelDown";
 				SetNull2StoreGood(rColony, sti(pchar.questTemp.WPU.Fraht.Goods));
 			break;
+		
 			case 1:
 				pchar.questTemp.WPU.Fraht.Goods = GOOD_EBONY + drand(makeint(GOOD_CINNAMON - GOOD_EBONY));
 				iGoods = pchar.questTemp.WPU.Fraht.Goods;
@@ -1907,6 +2017,7 @@ void ProcessDialogEvent()
 				link.l2.go = "Fraht_LevelDown";
 				SetNull2StoreGood(rColony, sti(pchar.questTemp.WPU.Fraht.Goods));
 			break;
+		
 			case 2:
 				pchar.questTemp.WPU.Fraht.Goods = GOOD_BOMBS + drand(makeint(GOOD_POWDER - GOOD_BOMBS));
 				iGoods = pchar.questTemp.WPU.Fraht.Goods;
@@ -1923,6 +2034,7 @@ void ProcessDialogEvent()
 				link.l2.go = "Fraht_LevelDown";
 				SetNull2StoreGood(rColony, sti(pchar.questTemp.WPU.Fraht.Goods));
 			break;
+		
 			case 3:
 				pchar.questTemp.WPU.Fraht.Goods = GOOD_MEDICAMENT;
 				iGoods = pchar.questTemp.WPU.Fraht.Goods;
@@ -1939,6 +2051,7 @@ void ProcessDialogEvent()
 				link.l2.go = "Fraht_LevelDown";
 				SetNull2StoreGood(rColony, sti(pchar.questTemp.WPU.Fraht.Goods));
 			break;
+		
 			case 4:
 				pchar.questTemp.WPU.Fraht.Goods = GOOD_FOOD;
 				iGoods = pchar.questTemp.WPU.Fraht.Goods;
@@ -1957,10 +2070,12 @@ void ProcessDialogEvent()
 			break;
 		}
 	break;
+		
 	case "Fraht_LevelDown":
 		DialogExit();
 		pchar.questTemp.WPU.Fraht.count = sti(pchar.questTemp.WPU.Fraht.count)-1;//скрутим счетчик
 	break;
+		
 	case "Fraht_LevelUp_Go":
 		dialog.text = "Excellent! I am very glad that you agreed. I hope to see you again soon.";
 		link.l1 = "Of course, " + GetAddress_FormToNPC(NPChar) + ".";
@@ -1979,6 +2094,7 @@ void ProcessDialogEvent()
 		AddQuestUserData("Fraht", "sText", pchar.questTemp.WPU.Current1.Add);
 		SetFunctionTimerCondition("FrahtTimeLevelUp_Over", 0, 0, 30, false);
 	break;
+	
 	case "Fraht_completeLevelUp":
 	ok = (rColony.from_sea == "") || (Pchar.location.from_sea == rColony.from_sea);
 	if(sti(Pchar.Ship.Type) != SHIP_NOTUSED && ok)//проверка на наличие корабля в порту
@@ -2005,6 +2121,7 @@ void ProcessDialogEvent()
 		link.l1.go = "exit";
 	}
 	break;
+	
 	case "Fraht_completeLevelUp_1":
 		pchar.quest.FrahtTimeLevelUp_Over.over = "yes";//снять таймер
 		AddQuestRecord("Fraht", "2");
@@ -2023,7 +2140,9 @@ void ProcessDialogEvent()
 		ChangeCharacterNationReputation(pchar, sti(pchar.questTemp.WPU.Fraht.Nation), 2);
 		DialogExit();
 	break;
+	
 //----------------------------------------задания 2 уровня эскорт ------------------------------------------
+
 	case "Escort_LevelUp":
 		pchar.questTemp.WPU.Escort.LevelUp = "true";//установим атрибут
 		pchar.questTemp.WPU.Escort.StartCity = npchar.city;//город квестодателя
@@ -2076,6 +2195,7 @@ void ProcessDialogEvent()
 			break;
 		}
 	break;
+	
 	case "Escort_LevelUp_exit":
 		dialog.text = "A pity, indeed. I was actually counting on you...";
 		link.l1 = "I am sorry, too. Well, until we meet again, " + GetAddress_FormToNPC(NPChar) + ".";
@@ -2084,11 +2204,13 @@ void ProcessDialogEvent()
 		DeleteAttribute(pchar, "questTemp.WPU.Escort.LevelUp");
 		DeleteAttribute(pchar, "questTemp.WPU.Escort.TargetPortmanID");
 	break;
+	
 	case "Escort_LevelUp_0":
 		dialog.text = "Excellent! I knew I could count on you. Please try to be as quick as possible I think, "+FindRussianDaysString(pchar.questTemp.WPU.Escort.DaysQty)+" will be enough to get to "+XI_ConvertString("Colony"+pchar.questTemp.WPU.Escort.City+"Gen")+". Here, take this credentials to verify your identity. Tailwind, captain!";
 		link.l1 = "Don't worry, I will not let you down.";
 		link.l1.go = "Escort_LevelUp_0_go";
 	break;
+	
 	case "Escort_LevelUp_0_go":
 		ReOpenQuestHeader("Escort");
 		AddQuestRecord("Escort", "19");
@@ -2102,6 +2224,7 @@ void ProcessDialogEvent()
 		pchar.questTemp.WPU.Escort.LevelUp_0 = "true";
 		pchar.questTemp.WPU.Escort.count = sti(pchar.questTemp.WPU.Escort.count)+1;
 	break;
+	
 	case "Escort_LUGo_0":
 	ok = (rColony.from_sea == "") || (Pchar.location.from_sea == rColony.from_sea);
 	if(sti(Pchar.Ship.Type) != SHIP_NOTUSED && ok)//проверка на наличие корабля в порту
@@ -2118,6 +2241,7 @@ void ProcessDialogEvent()
 		link.l1.go = "exit";
 	}
 	break;
+	
 	case "Escort_LUGo_01"://добавляем компаньона
 		int iShipType = sti(pchar.questTemp.WPU.Escort.ShipType);
 		sTemp = pchar.questTemp.WPU.Escort.ShipName;
@@ -2150,6 +2274,7 @@ void ProcessDialogEvent()
 		if (sti(pchar.questTemp.WPU.Escort.Chance) == 0) EnemyNationHunterOnMap(true);//скоростной перехватчик
 		else FrahtHunterOnSea();
 	break;
+	
 	case "Escort_LUGo_complete":
 	ok = (rColony.from_sea == "") || (Pchar.location.from_sea == rColony.from_sea);
 	if(sti(Pchar.Ship.Type) != SHIP_NOTUSED && ok)//проверка на наличие корабля в порту
@@ -2167,6 +2292,7 @@ void ProcessDialogEvent()
 		link.l1.go = "exit";
 	}
 	break;
+	
 	case "Escort_LUGo_complete_1":
 		RemoveCharacterCompanion(Pchar, characterFromID("ArsenalShipCaptain"));
 		sld = characterFromId("ArsenalShipCaptain");
@@ -2187,11 +2313,13 @@ void ProcessDialogEvent()
 		AddCharacterExpToSkill(pchar, "Leadership", 100);//авторитет
 		SaveCurrentNpcQuestDateParam(npchar, "work_date");
 	break;
+	
 	case "Escort_LevelUp_1":
 		dialog.text = "Then I wish you safe journey. And please, don't delay with your search! The sailors of that vessel might be in need of immediate help.";
 		link.l1 = "I got it. I am going to set sail today!";
 		link.l1.go = "Escort_LevelUp_1_select";
 	break;
+	
 	case "Escort_LevelUp_1_select"://выберем приключение
 		switch (rand(2))
 		{
@@ -2235,6 +2363,7 @@ void ProcessDialogEvent()
 		pchar.questTemp.WPU.Escort = "begin";
 		pchar.questTemp.WPU.Escort.count = sti(pchar.questTemp.WPU.Escort.count)+1;
 	break;
+	
 	case "Escort_LU1WM_complete":
 	ok = (rColony.from_sea == "") || (Pchar.location.from_sea == rColony.from_sea);
 	if(sti(Pchar.Ship.Type) != SHIP_NOTUSED && ok)//проверка на наличие корабля в порту
@@ -2250,6 +2379,7 @@ void ProcessDialogEvent()
 		link.l1.go = "exit";
 	}
 	break;
+	
 	case "Escort_LU1WM_complete_1":
 		sld = characterFromId("WMCaptain");
 		sld.lifeday = 0;
@@ -2272,6 +2402,7 @@ void ProcessDialogEvent()
 		AddCharacterExpToSkill(pchar, "Fortune", 100);//везение
 		SaveCurrentNpcQuestDateParam(npchar, "work_date");
 	break;
+	
 	case "Escort_LU1VSP_complete":
 	ok = (rColony.from_sea == "") || (Pchar.location.from_sea == rColony.from_sea);
 	if(sti(Pchar.Ship.Type) != SHIP_NOTUSED && ok)//проверка на наличие корабля в порту
@@ -2287,6 +2418,7 @@ void ProcessDialogEvent()
 		link.l1.go = "exit";
 	}
 	break;
+	
 	case "Escort_LU1VSP_complete_1":
 		sld = characterFromId("WMCaptain");
 		sld.lifeday = 0;
@@ -2308,16 +2440,19 @@ void ProcessDialogEvent()
 		AddCharacterExpToSkill(pchar, "Fortune", 100);//везение
 		SaveCurrentNpcQuestDateParam(npchar, "work_date");
 	break;
+	
 	case "Escort_LU1VSP_completeSink":
 		dialog.text = "What a tragic end... God rest their souls.";
 		link.l1 = "I've done everything I could, " + GetAddress_FormToNPC(NPChar) + ". The situation was made even worse by the storm.";
 		link.l1.go = "Escort_LU1VSP_completeSink_1";
 	break;
+	
 	case "Escort_LU1VSP_completeSink_1":
 		dialog.text = "I do believe, " + GetAddress_Form(NPChar) + ", that you had undertaken everything you could to save the ship and those unfortunate sailors. But alas... Well, please take your reward - 10000 pesos - and thank you for your service.";
 		link.l1 = "Nothing to thank me for, " + GetAddress_FormToNPC(NPChar) + ". I am really sorry. Well, goodbye.";
 		link.l1.go = "Escort_LU1VSP_completeSink_2";
 	break;
+	
 	case "Escort_LU1VSP_completeSink_2":
 		DialogExit();
 		AddMoneyToCharacter(pchar, 10000);
@@ -2334,11 +2469,13 @@ void ProcessDialogEvent()
 		AddCharacterExpToSkill(pchar, "Fortune", 50);//везение
 		SaveCurrentNpcQuestDateParam(npchar, "work_date");
 	break;
+	
 	case "Escort_LU1S_complete":
 		dialog.text = "Yeah, he already told me that you had been fighting with the red-skinned pagans and then with a pirate ship, like a hero. Excellent job, " + GetAddress_Form(NPChar) + "! You have once again proved that you are the one I can rely on\nGet your reward - 40,000 pesos. Do not forget to look up to me - people like you can be considered the essential and I always find a job for you..";
 		link.l1 = "Nice to hear that, " + GetAddress_FormToNPC(NPChar) + "! Of course, our collaboration shall continue. Best regards!";
 		link.l1.go = "Escort_LU1S_complete_1";
 	break;
+	
 	case "Escort_LU1S_complete_1":
 		sld = characterFromId("WMCaptain");
 		sld.lifeday = 0;
@@ -2360,11 +2497,13 @@ void ProcessDialogEvent()
 		AddCharacterExpToSkill(pchar, "Fortune", 100);//везение
 		SaveCurrentNpcQuestDateParam(npchar, "work_date");
 	break;
+	
 	case "Escort_LevelUp_2":
 		dialog.text = "I knew that I could count on you. Best of luck to you, captain! The entire colony wishes you a sound of victory!";
 		link.l1 = "I will try to live up to your expectations. Now I am going to set sail, and may God help us!";
 		link.l1.go = "Escort_LevelUp_2_go";
 	break;
+	
 	case "Escort_LevelUp_2_go":
 		ReOpenQuestHeader("Escort");
 		AddQuestRecord("Escort", "41");
@@ -2378,6 +2517,7 @@ void ProcessDialogEvent()
 		pchar.questTemp.WPU.Escort = "begin";
 		DialogExit();
 	break;
+	
 	case "Escort_LU2_complete":
 		switch (sti(pchar.questTemp.WPU.Escort.LevelUp_2.Qty))
 		{
@@ -2401,6 +2541,7 @@ void ProcessDialogEvent()
 			break;
 		}
 	break;
+	
 	case "Escort_LU2_complete_1":
 		iTemp = sti(pchar.questTemp.WPU.Escort.LevelUp_2.Qty);
 		DialogExit();
@@ -2428,11 +2569,13 @@ void ProcessDialogEvent()
 		DeleteAttribute(pchar, "questTemp.WPU.Escort.TargetPortmanID");
 		SaveCurrentNpcQuestDateParam(npchar, "work_date");
 	break;
+	
 		case "PortmanQuest_NF":
 			dialog.text = "Hmm, that's bad. In that case your further work for me is out of question.";
 			link.l1 = "Understood. Here is what I wanted to say...";
 			link.l1.go = "node_2";
 		break;
+		
 		//сгоревшее судно
 		case "BurntShip2":
 			dialog.text = "A pity, captain... It's a pity that you are not willing to help me.";
@@ -2440,40 +2583,51 @@ void ProcessDialogEvent()
 			link.l1.go = "exit";
 			NPChar.Quest.BurntShip.LastQuestDate = sLastSpeakDate;
 		break;
+		
 		case "BurntShip4":
 			dialog.text = "What's up with you, captain?! Aren't you ashamed?! How could I?! I know my shit, I've been on service for many years. There are insurance contracts, and the insurance company is willing to pay, and I assure you that the sum insured is quite decent.";
 			link.l1 = "What's your problem, mister? A gunpowder room detonated of fire, and there were casualties, and now you have to stand trial for your negligence?";
 			link.l1.go = "BurntShip5";
 		break;
+		
 		case "BurntShip5":
 			sCapitainId = GenerateRandomName(sti(NPChar.nation), "man");
+			
 			dialog.text = "No! Of course no! Lord save my soul, otherwise I would lose my head. The cargo hold was absolutely empty, thank you Lord, the Blessed Virgin Mary!\n" +
 				"And the problem is that the ship belongs to... or rather belonged to known to all Caribbean Mr. " + sCapitainId + ". And it was built in Europe by special order, with extraordinary characteristics. " +
 				"And this ship owner was very proud and boasted everywhere, a kind of blockhead, God forgive me... What do I have to tell him now? I'd better kill myself, I swear...";
 			link.l1 = "Oh, now I see that's a problem, indeed. And what was so special about it? What specialties did that ship have that its owner was so proud of?";
 			link.l1.go = "BurntShip6";
+			
 			NPChar.Quest.BurntShip.ShipOwnerName = sCapitainId;
 		break;
+		
 		case "BurntShip6":
 			BurntShipQuest_FillStartParams(NPChar);
+			
 			attrL = NPChar.Quest.BurntShip.ShipAttribute;
 			iTest = sti(NPChar.Quest.BurntShip.ShipType);
+			
 			switch(attrL)
 			{
 				case "speedrate":
 					attrL = "His " + GetStrSmallRegister(XI_ConvertString(ShipsTypes[iTest].Name + "Acc")) + "'s wind speed was more than " + NPChar.Quest.BurntShip.ShipNeededValue + " knots. That was the privateer's pride... And now he'd just tell his boys to hang me on a yard. What devil has brought him to our harbor together with that pirate tub...";
 				break;
+				
 				case "turnrate":
 					attrL = "His " + GetStrSmallRegister(XI_ConvertString(ShipsTypes[iTest].Name + "Acc")) + "'s maneuverability was more than " + NPChar.Quest.BurntShip.ShipNeededValue + " units. That was the soldier's pride... And now he'd just have me flogged to death. What devil advised him to leave his tub there...";
 				break;
+				
 				case "capacity":
 					attrL = "His " + GetStrSmallRegister(XI_ConvertString(ShipsTypes[iTest].Name + "Acc")) + "' had a deadweight of over " + NPChar.Quest.BurntShip.ShipNeededValue + " units. Greed is bad, I'll tell ya. And now he'd just have me quartered in court. What devil advised him to leave his tub there...";
 				break;
 			}
+			
 			dialog.text = attrL;
 			link.l1 = "And what do people at the docks say? Is it really impossible to build another one here?";
 			link.l1.go = "BurntShip7";
 		break;
+		
 		case "BurntShip7":
 			dialog.text = "No one can. I even went to a nearby island for the request. They say that there is a notable master on Isla Tesoro, who is able to do almost everything in shipbuilding. But where we are and where is Isla Tesoro. All I left to do is counting on help of free captains like you. Maybe, it won't be difficult for you to find such ship for me. And I will take care of the rest\n" +
 				"I will thank you generously, and the insurance company will do the same as well. The matter is extraordinary, you know. Who would ever want to upset such a powerful man?";
@@ -2482,16 +2636,19 @@ void ProcessDialogEvent()
 			link.l2 = "No, pal, I cannot be involved in such affair. Not to mention that there are no warranties that a vessels with such parameters exists at all. I am sorry...";
 			link.l2.go = "BurntShip2";
 		break;
+		
 		case "BurntShip8":
 			dialog.text = "Thanks God, there is still time. The owner sailed off to Europe and will be back no sooner than in half a year.";
 			link.l1 = "Well, guess I'll manage it. I'll bring you a similar vessel. But keep in mind - if you choose to be too scant, I'll burn it right in fron of your ears!";
 			link.l1.go = "BurntShip9";
 		break;
+		
 		case "BurntShip9":
 			dialog.text = "What are you saying, captain? Surely, I understand that you would need time - it's not to find some kind of tub in the nearest puddle... You just bring us the vessel, and we'll do our best, you can be sure of it...";
 			link.l1 = "I hope so... Well, wait for me and for the good news. Farewell.";
 			link.l1.go = "BurntShip9_exit";
 		break;
+		
 		case "BurntShip9_exit":
 			attrL = "BurntShipQuest_TimeIsOver_" + NPChar.Id;
 			PChar.Quest.(attrL).win_condition.l1 = "Timer";
@@ -2500,20 +2657,26 @@ void ProcessDialogEvent()
 			PChar.Quest.(attrL).win_condition.l1.date.year = GetAddingDataYear(0, 6, 0);
 			PChar.Quest.(attrL).function = "BurntShipQuest_TimeIsOver";
 			PChar.Quest.(attrL).PortmanId = NPChar.id;
+			
 			attrL = NPChar.Quest.BurntShip.ShipAttribute;
+			
 			iTest = sti(NPChar.Quest.BurntShip.ShipType);
+			
 			switch(attrL)
 			{
 				case "speedrate":
 					attrL = "speed. The wind speed of the " + GetStrSmallRegister(XI_ConvertString(ShipsTypes[iTest].name + "Gen")) + " must be at least " + NPChar.Quest.BurntShip.ShipNeededValue;
 				break;
+				
 				case "turnrate":
 					attrL = "manoeuvrability. Manoeuvrability of the " + GetStrSmallRegister(XI_ConvertString(ShipsTypes[iTest].name + "Gen")) + " must be not less than " + NPChar.Quest.BurntShip.ShipNeededValue;
 				break;
+				
 				case "capacity":
 					attrL = "hold. Hold of the " + GetStrSmallRegister(XI_ConvertString(ShipsTypes[iTest].name + "Gen")) + " has to be not less than " + NPChar.Quest.BurntShip.ShipNeededValue;
 				break;
 			}
+			
 			sTitle = "BurntShipQuest" + NPChar.location;
 			ReOpenQuestHeader(sTitle);
 			AddQuestRecordEx(sTitle, "BurntShipQuest", "1");
@@ -2521,20 +2684,25 @@ void ProcessDialogEvent()
 			AddQuestUserData(sTitle, "portmanName", GetFullName(NPChar));
 			AddQuestUserData(sTitle, "cityName", XI_ConvertString("Colony" + NPChar.city + "Gen"));
 			AddQuestUserData(sTitle, "text", attrL);
+			
 			NPChar.Quest.BurntShip.LastPortmanName = GetFullName(NPChar); // Запомнм имя
+			
 			DialogExit();
 		break;
+		
 		// Вариант, когда не уложились в сроки
 		case "BurntShip10":
 			dialog.text = "What were you going to talk about?";
 			link.l1 = "And where is the former harbour master, mister " + NPChar.Quest.BurntShip.LastPortmanName + "? I have business with him.";
 			link.l1.go = "BurntShip11";
 		break;
+		
 		case "BurntShip11":
 			dialog.text = "He's no longer around. Imagine - he burnt down a vessel belonging to one well-known person and pocketed the insurance money. While the authorities were sorting this all out, he resigned and slipped away to Europe. Quite a swindler, isn't he?";
 			link.l1 = "Yeah, I've heard that story. I am sorry, but I have to go.";
 			link.l1.go = "BurntShip11_exit";
 		break;
+		
 		case "BurntShip11_exit":
 			AddCharacterExpToSkill(pchar, "Sailing", 100);
 			AddCharacterExpToSkill(pchar, "Fortune", 100);
@@ -2542,10 +2710,13 @@ void ProcessDialogEvent()
 			AddQuestRecordEx(sTitle, "BurntShipQuest", "2");
 			AddQuestUserData(sTitle, "portmanName", NPChar.Quest.BurntShip.LastPortmanName);
 			CloseQuestHeader(sTitle);
+			
 			DeleteAttribute(NPChar, "Quest.BurntShip");
 			NPChar.Quest.BurntShip.LastQuestDate = sLastSpeakDate;
+			
 			DialogExit();
 		break;
+		
 		// Не просрочено - проверяем корабль
 		case "BurntShip12":
 			dialog.text = "What were you going to talk about?";
@@ -2554,32 +2725,42 @@ void ProcessDialogEvent()
 			link.l2 = "You know, " + GetFullName(NPChar) + ", I still haven't found a single ship similar to what you need. I guess I'll abandon this job. Sorry if I let you down...";
 			link.l2.go = "BurntShip13";
 		break;
+		
 		case "BurntShip13":
 			dialog.text = "A pity, captain... It's a pity that you are not willing to help me.";
 			link.l1 = "That's not a matter of my will, my good man. You must understand. Farewell.";
 			link.l1.go = "BurntShip13_exit";
 		break;
+		
 		case "BurntShip13_exit":
 			sTitle = "BurntShipQuest" + NPChar.location;
 			CloseQuestHeader(sTitle);
+			
 			ChangeCharacterComplexReputation(pchar,"nobility", -5);
 			DeleteAttribute(NPChar, "Quest.BurntShip");
 			NPChar.Quest.BurntShip.LastQuestDate = sLastSpeakDate;
+			
 			DialogExit();
 		break;
+		
 		case "BurntShip14":
 			dialog.text = "Oh, really! And what's the name of our new ship?";
+			
 			sTitle = NPChar.Quest.BurntShip.ShipAttribute;
 			ok = (sFrom_sea == "") || (Pchar.location.from_sea == sFrom_sea);
+			
 			if(sti(Pchar.Ship.Type) != SHIP_NOTUSED && ok)
 			{
 				for(i = 1; i < COMPANION_MAX; i++)
 				{
 					cn = GetCompanionIndex(PChar, i);
+					
 					if(cn > 0)
 					{
 						chref = GetCharacter(cn);
+						
 						sld = &RealShips[sti(chref.ship.type)];
+						
 						if(GetRemovable(chref) && sti(sld.basetype) == sti(NPchar.Quest.BurntShip.ShipType) &&
 							stf(sld.(sTitle)) >= stf(NPChar.Quest.BurntShip.ShipNeededValue))
 						{
@@ -2590,9 +2771,11 @@ void ProcessDialogEvent()
 					}
 				}
 			}
+			
 			link.l99 = "Excuse me, I'll come again later.";
 			link.l99.go = "exit";
 		break;
+		
 		case "BurntShip15":
 			AddCharacterExpToSkill(pchar, "Leadership", 100);
 			AddCharacterExpToSkill(pchar, "Sailing", 100);
@@ -2601,38 +2784,50 @@ void ProcessDialogEvent()
 			link.l99 = "Haven't you forgotten what I promised that I'd do something bad with the ship if you tried to cheat on me?";
 			link.l99.go = "BurntShip16";
 		break;
+		
 		case "BurntShip16":
 			dialog.text = "No, no, of course, not! I will stay true to my word, don't you worry. You see, due to the upcoming expenses with the disuising of the ship I had lent the insurance money on interest. I hope you understand...";
 			link.l1 = "I'll understand it when the money is in my chest. Until we meet again.";
 			link.l1.go = "BurntShip16_exit";
 		break;
+		
 		case "BurntShip16_exit":
 			sTitle = "BurntShipQuest" + NPChar.location;
 			AddQuestRecordEx(sTitle, "BurntShipQuest", "3");
+			
 			NPChar.Quest.BurntShip.TwoDaysWait = true;
 			SaveCurrentNpcQuestDateParam(NPChar, "Quest.BurntShip.TwoDaysWait"); // Запомним дату
+			
 			sTitle = "BurntShipQuest" + NPChar.Id;
 			PChar.Quest.(sTitle).over = "yes"; // Завершаем прерывание на время
+			
 			DialogExit();
 		break;
+		
 		case "BurntShip17":
 			dialog.text = "What were you going to talk about?";
 			link.l1 = "I came to collect my reward. I still have the vessel you need.";
 			link.l1.go = "BurntShip18";
 		break;
+		
 		case "BurntShip18":
 			dialog.text = "Would you please remind me its name? My memory is not like it used to be - you know, all that hassle...";
+			
 			sTitle = NPChar.Quest.BurntShip.ShipAttribute;
 			ok = (sFrom_sea == "") || (Pchar.location.from_sea == sFrom_sea);
+			
 			if(sti(Pchar.Ship.Type) != SHIP_NOTUSED && ok)
 			{
 				for(i = 1; i < COMPANION_MAX; i++)
 				{
 					cn = GetCompanionIndex(PChar, i);
+					
 					if(cn > 0)
 					{
 						chref = GetCharacter(cn);
+						
 						sld = &RealShips[sti(chref.ship.type)];
+						
 						if(GetRemovable(chref) && sti(sld.basetype) == sti(NPchar.Quest.BurntShip.ShipType) &&
 							stf(sld.(sTitle)) >= stf(NPChar.Quest.BurntShip.ShipNeededValue))
 						{
@@ -2643,14 +2838,17 @@ void ProcessDialogEvent()
 					}
 				}
 			}
+			
 			link.l99 = "Excuse me, I'll come again later.";
 			link.l99.go = "exit";
 		break;
+		
 		case "BurntShip19":
 			sld = &Characters[GetCompanionIndex(PChar, sti(NPChar.Quest.BurntShip.ShipCompanionIndex))];
 			cn = GetShipSellPrice(sld, CharacterFromID(NPChar.city + "_shipyarder")) * 2;
 			rRealShip = GetRealShip(GetCharacterShipType(sld));
 			if (sti(rRealShip.Stolen)) cn *= 3;
+			
 			dialog.text = "Yes, perfect. I am ready to hand you your reward, " + FindRussianMoneyString(cn) + ". That's how the insurance company appraised the burned vessel. The insurance sum is paid in credit chests - no money in cash, sorry.";
 			link.l1 = "Oh no, such sum doesn't suit me. I am sure that this ship is much more expensive.";
 			link.l1.go = "BurntShip21";
@@ -2658,6 +2856,7 @@ void ProcessDialogEvent()
 			link.l2.go = "BurntShip20_exit";
 			NPChar.Quest.BurntShip.Money = cn;
 		break;
+		
 		case "BurntShip20_exit":
 			TakeNItems(pchar, "chest", makeint(sti(NPChar.Quest.BurntShip.Money)/12000));
 			Log_Info("You have received credit chests");
@@ -2667,30 +2866,40 @@ void ProcessDialogEvent()
 			AddQuestUserData(sTitle, "sSex", GetSexPhrase("","а"));
 			AddQuestUserData(sTitle, "money", NPChar.Quest.BurntShip.Money);
 			CloseQuestHeader(sTitle);
+			
 			ChangeCharacterComplexReputation(pchar,"nobility", 3);
+			
 			sld = &Characters[GetCompanionIndex(PChar, sti(NPChar.Quest.BurntShip.ShipCompanionIndex))];
 			RemoveCharacterCompanion(PChar, sld);
 			AddPassenger(PChar, sld, false);
+			
 			DeleteAttribute(NPChar, "Quest.BurntShip");
 			NPChar.Quest.BurntShip.LastQuestDate = sLastSpeakDate;
+			
 			DialogExit();
 		break;
+		
 		case "BurntShip21":
 			dialog.text = "What are you saying, captain?! Trust me, I know what I am talking about. You could have bought two such ships for that money!";
 			link.l1 = "I guess I will keep it. You know, I just took a liking in it... Farewell.";
 			link.l1.go = "BurntShip21_exit";
 		break;
+		
 		case "BurntShip21_exit":
 			ChangeCharacterComplexReputation(pchar,"nobility", -5);
+			
 			sTitle = "BurntShipQuest" + NPChar.location;
 			AddQuestRecordEx(sTitle, "BurntShipQuest", "5");
 			AddQuestUserData(sTitle, "sSex", GetSexPhrase("","а"));
 			AddQuestUserData(sTitle, "money", NPChar.Quest.BurntShip.Money);
 			CloseQuestHeader(sTitle);
+			
 			DeleteAttribute(NPChar, "Quest.BurntShip");
 			NPChar.Quest.BurntShip.LastQuestDate = sLastSpeakDate;
+			
 			DialogExit();
 		break;
+		
 		//--> миниквесты портмана
 		case "PortmanQuest":
 			if (cRand(5) == 2)
@@ -2772,6 +2981,7 @@ void ProcessDialogEvent()
 			AddQuestUserData(sTitle, "sShipTypeName", GetStrSmallRegister(XI_ConvertString(npchar.quest.PortmansSeekShip.shipTapeName+"Acc")));
 			AddQuestUserData(sTitle, "sShipName", npchar.quest.PortmansSeekShip.shipName);
 		break;
+
 		case "SeekShip_break":
 			dialog.text = "A pity - but we could hardly count on success.";
 			link.l1 = "Yes, it's been too long since the ship was stolen.";
@@ -2798,6 +3008,7 @@ void ProcessDialogEvent()
 			npchar.quest = ""; //освобождаем личный флаг квеста для портмана
 			ChangeCharacterComplexReputation(pchar,"nobility", -7);
 		break;	
+
 		case "SeekShip_good":
 			if (npchar.quest == "SeekShip_sink")
 			{
@@ -2834,6 +3045,7 @@ void ProcessDialogEvent()
 			DeleteAttribute(npchar, "quest.PortmansSeekShip");
 			npchar.quest = ""; //освобождаем личный флаг квеста для портмана
 		break;
+
 		//------------------------------> инфа по базе квествых кэпов
 		//ВНИМАНИЕ. в квестбук должна заносится типовая строка по примеру   PortmansBook_Delivery  #TEXT   5
 		//в список портмана заносим тайтл, заголовок и номер строки из quest_text.txt
@@ -2991,6 +3203,7 @@ void ProcessDialogEvent()
 			DeleteAttribute(arCapBase, sCapitainId); 
 		break;
 		//<--------------------------- инфа по базе квествых кэпов
+
 		case "ShipStock_1":
 			if (CheckAttribute(pchar, "questTemp.HWIC.Holl") && pchar.questTemp.HWIC.Holl == "JacobTakeShip" && !CheckAttribute(npchar, "quest.HWICHoll"))
 			{
@@ -3025,6 +3238,7 @@ void ProcessDialogEvent()
 	        	        {
 	        		        chref = GetCharacter(cn);
 	                        if (!GetRemovable(chref)) continue;
+	
 	        		        attrL = "l"+i;
 	        		        Link.(attrL)    = XI_ConvertString(RealShips[sti(chref.Ship.Type)].BaseName) + " '" + chref.Ship.Name + "'.";
 	        		        Link.(attrL).go = "ShipStockMan_" + i;
@@ -3041,6 +3255,7 @@ void ProcessDialogEvent()
 				}
 			}
 		break;
+
 		case "ShipStockMan_1":
             NPChar.ShipToStoreIdx = GetCompanionIndex(PChar, 1);
 			dialog.text = "Let's take a look at that ship.";
@@ -3049,6 +3264,7 @@ void ProcessDialogEvent()
 			Link.l2 = "No, I've changed my mind.";
 			Link.l2.go = "exit";
 		break;
+
 		case "ShipStockMan_2":
             NPChar.ShipToStoreIdx = GetCompanionIndex(PChar, 2);
 			dialog.text = "Let's take a look at that ship.";
@@ -3057,6 +3273,7 @@ void ProcessDialogEvent()
 			Link.l2 = "No, I've changed my mind.";
 			Link.l2.go = "exit";
 		break;
+
 		case "ShipStockMan_3":
             NPChar.ShipToStoreIdx = GetCompanionIndex(PChar, 3);
 			dialog.text = "Let's take a look at that ship.";
@@ -3065,6 +3282,7 @@ void ProcessDialogEvent()
 			Link.l2 = "No, I've changed my mind.";
 			Link.l2.go = "exit";
 		break;
+		
 		case "ShipStockMan_4":
             NPChar.ShipToStoreIdx = GetCompanionIndex(PChar, 4);
 			dialog.text = "Let's take a look at that ship.";
@@ -3073,6 +3291,7 @@ void ProcessDialogEvent()
 			Link.l2 = "No, I've changed my mind.";
 			Link.l2.go = "exit";
 		break;
+
 		case "ShipStock_2":
             chref = GetCharacter(sti(NPChar.ShipToStoreIdx));
 			NPChar.MoneyForShip = GetPortManPriceExt(NPChar, chref);
@@ -3090,11 +3309,13 @@ void ProcessDialogEvent()
 			Link.l2 = "No, I've changed my mind.";
 			Link.l2.go = "exit";
 		break;
+
 		case "ShipStock_NoMoney":
 			dialog.text = "And it will suit me, too, as soon as you raise the necessary sum.";
 			Link.l1 = "Oops... I'll come back later.";
 			Link.l1.go = "exit";
 		break;
+
 		case "ShipStock_3":
             AddMoneyToCharacter(pchar, -makeint(NPChar.MoneyForShip));
             chref = GetCharacter(sti(NPChar.ShipToStoreIdx));
@@ -3108,12 +3329,15 @@ void ProcessDialogEvent()
             chref.location = "";
             chref.location.group = "";
             chref.location.locator = "";
+
             NPChar.Portman    = sti(NPChar.Portman) + 1;
             pchar.ShipInStock = sti(pchar.ShipInStock) + 1;
+
 			dialog.text = "Alright. You can take your ship back anytime you need.";
 			Link.l1 = "Thanks.";
 			Link.l1.go = "exit";
 		break;
+
 		case "ShipStockReturn_1":
             ok = (sFrom_sea == "") || (Pchar.location.from_sea == sFrom_sea);
 		    if (sti(Pchar.Ship.Type) != SHIP_NOTUSED && ok)
@@ -3136,6 +3360,7 @@ void ProcessDialogEvent()
 	        		        }
 	            		}
 	                }
+	
 	    			Link.l9 = "No, I've changed my mind.";
 	    			Link.l9.go = "exit";
 				}
@@ -3153,6 +3378,7 @@ void ProcessDialogEvent()
     			Link.l1.go = "exit";
 			}
 		break;
+
         case "ShipStockManBack":
             chref = GetCharacter(sti(NPChar.ShipToStoreIdx));
 			// --> mitrokosta сюрприз для хитрецов поставивших бунтовщика в ПУ
@@ -3180,6 +3406,7 @@ void ProcessDialogEvent()
 			Link.l2 = "No, I've changed my mind.";
 			Link.l2.go = "exit";
 		break;
+		
 		case "ShipStockManBack2":
 			NextDiag.CurrentNode = NextDiag.TempNode;
 			DialogExit();
@@ -3190,6 +3417,7 @@ void ProcessDialogEvent()
 			NPChar.Portman    = sti(NPChar.Portman) - 1;
             pchar.ShipInStock = sti(pchar.ShipInStock) - 1;
 		break;
+		
 		//--> Jason Голландский гамбит
 		case "ShipStock_HWICHoll":
 			if (GetCompanionQuantity(pchar) > 1)
@@ -3205,6 +3433,7 @@ void ProcessDialogEvent()
 				link.l1.go = "ShipStock_HWICHoll_1";	
 			}
 		break;
+		
 		case "ShipStock_HWICHoll_1":
 			dialog.text = "Yes. Now there's no need for you to worry about your ship - we'll take care of her. You can return to mynheer Rodenburg.";
 			link.l1 = "Thank you. Goodbye.";
@@ -3212,6 +3441,7 @@ void ProcessDialogEvent()
 			npchar.quest.HWICHoll = "done";
 			pchar.Ship.Type = SHIP_NOTUSED;//все одно сгорит
 		break;
+		
 		case "ShipStock_HWICEng":
 			if (GetCompanionQuantity(pchar) > 1)
 			{
@@ -3234,6 +3464,7 @@ void ProcessDialogEvent()
 				}
 			}
 		break;
+		
 		case "ShipStock_HWICEng_1":
 			dialog.text = "Alright. We will take care of your vessel and provide an officer of the watch for the entire time your ship stays here.";
 			link.l1 = "Thanks!";
@@ -3249,6 +3480,7 @@ void ProcessDialogEvent()
 			link.l1.go = "exit";
 			NextDiag.TempNode = "Escort_companion";
 		break;
+		
 		// --> mitrokosta сюрприз для хитрецов поставивших бунтовщика в ПУ
 		case "ShipStockManMutiny":
 			chref = GetCharacter(sti(NPChar.ShipToStoreIdx));
@@ -3262,9 +3494,11 @@ void ProcessDialogEvent()
 			//link.l2 = "What a surprise... Did " + NPCharSexPhrase(chref, "he", "she") + " tell you, where they went, by any chance?";
 			//link.l2.go = "ShipStockManMutiny2";
 		break;
+		
 		case "ShipStockManMutiny1":
 			chref = GetCharacter(sti(NPChar.ShipToStoreIdx));
 			chref.lifeday = 0;
+
 			dialog.text = "I'm sorry, " + GetAddress_Form(NPChar) + ". You should be more careful with your subordinates.";
 			link.l1 = "I know, I'm an idiot. Goodbye, " + GetAddress_Form(NPChar) + ".";
 			link.l1.go = "exit";
@@ -3272,6 +3506,7 @@ void ProcessDialogEvent()
 		// <--
 	}
 }
+
 float BurntShipQuest_GetMaxNeededValue(int iShipType, string _param)
 {
 	float NeededValue = makefloat(GetBaseShipParamFromType(iShipType, _param));
@@ -3289,6 +3524,7 @@ float BurntShipQuest_GetMaxNeededValue(int iShipType, string _param)
 	}
 	return NeededValue;
 }
+
 // Warship 25.07.09 Генер "A burnt vessel". Начальные иниты для портмана - тип разыскиваемого судна, выдающаяся характеристика и т.д.
 void BurntShipQuest_FillStartParams(ref _npchar)
 {
@@ -3296,17 +3532,21 @@ void BurntShipQuest_FillStartParams(ref _npchar)
 	int shipType, temp;
 	float neededValue;
 	String shipAttribute;
+	
 	// TODO Пересмотреть зависимость от ранга
 	if(rank <= 5)
 	{
 		shipType = SHIP_LUGGER + rand(1);
+		
 		switch(shipType)
 		{
 			case SHIP_LUGGER:
 				shipAttribute = "speedrate";
 			break;
+			
 			case SHIP_SLOOP:
 				temp = rand(2);
+				
 				if(temp == 2)
 				{
 					shipAttribute = "speedrate";
@@ -3325,9 +3565,11 @@ void BurntShipQuest_FillStartParams(ref _npchar)
 			break;
 		}
 	}
+	
 	if(rank > 5 && rank <= 15)
 	{
 		shipType = SHIP_SCHOONER + rand(2);
+		
 		switch(shipType)
 		{
 			case SHIP_SCHOONER:
@@ -3340,22 +3582,27 @@ void BurntShipQuest_FillStartParams(ref _npchar)
 					shipAttribute = "turnrate";
 				}
 			break;
+			
 			case SHIP_BARKENTINE:
 				shipAttribute = "capacity";
 			break;
+			
 			case SHIP_SHNYAVA:
 				shipAttribute = "capacity";
 			break;
 		}
 	}
+	
 	if(rank > 15 && rank <= 25)
 	{
 		shipType = SHIP_FLEUT + rand(3);
+		
 		switch(shipType)
 		{
 			case SHIP_FLEUT:
 				shipAttribute = "turnrate";
 			break;
+			
 			case SHIP_CARAVEL:
 				if(rand(1) == 1)
 				{
@@ -3366,9 +3613,11 @@ void BurntShipQuest_FillStartParams(ref _npchar)
 					shipAttribute = "turnrate";
 				}
 			break;
+			
 			case SHIP_PINNACE:
 				shipAttribute = "capacity";
 			break;
+			
 			case SHIP_CARACCA:
 				if(rand(1) == 1)
 				{
@@ -3379,11 +3628,14 @@ void BurntShipQuest_FillStartParams(ref _npchar)
 					shipAttribute = "turnrate";
 				}
 			break;
+			
 		}
 	}
+	
 	if(rank > 25 && rank <= 35)
 	{
 		shipType = SHIP_SCHOONER_W + rand(2);
+		
 		switch(shipType)
 		{
 			case SHIP_SCHOONER_W:
@@ -3396,9 +3648,11 @@ void BurntShipQuest_FillStartParams(ref _npchar)
 					shipAttribute = "turnrate";
 				}
 			break;
+			
 			case SHIP_GALEON_L:
 				shipAttribute = "capacity";
 			break;
+			
 			case SHIP_CORVETTE:
 				if(rand(1) == 1)
 				{
@@ -3411,13 +3665,16 @@ void BurntShipQuest_FillStartParams(ref _npchar)
 			break;
 		}
 	}
+	
 	if(rank > 35)
 	{
 		shipType = SHIP_GALEON_H + rand(1);
+		
 		switch(shipType)
 		{
 			case SHIP_GALEON_H:
 				temp = rand(2);
+				
 				if(temp == 0)
 				{
 					shipAttribute = "speedrate";
@@ -3434,17 +3691,22 @@ void BurntShipQuest_FillStartParams(ref _npchar)
 					}
 				}
 			break;
+			
 			case SHIP_FRIGATE:
 				shipAttribute = "turnrate";
 			break;
 		}
 	}
+	
 	neededValue = BurntShipQuest_GetMaxNeededValue(shipType, shipAttribute);
+	
 	Log_TestInfo("shipType == " + shipType);
 	Log_TestInfo("ShipAttribute == " + shipAttribute);
 	Log_TestInfo("ShipNeededValue == " + neededValue);
+	
 	_npchar.Quest.BurntShip.ShipType = shipType;
 	_npchar.Quest.BurntShip.ShipAttribute = shipAttribute;
+	
 	if(shipAttribute != "capacity") // Чтобы трюм с десятичными не писался
 	{
 		_npchar.Quest.BurntShip.ShipNeededValue = FloatToString(neededValue, 2);
@@ -3454,6 +3716,7 @@ void BurntShipQuest_FillStartParams(ref _npchar)
 		_npchar.Quest.BurntShip.ShipNeededValue = MakeInt(neededValue);
 	}
 }
+
 void SetJornalCapParam(ref npchar)
 {
 	//созадем рассеянного кэпа
@@ -3545,6 +3808,7 @@ int CheckCapitainsList(ref npchar)
 	if (bResult > 5) bResult = 5;
 	return bResult;
 }
+
 void SetSeekShipCapParam(ref npchar)
 {
 	//создаем кэпа-вора
@@ -3634,6 +3898,7 @@ void SetSeekShipCapParam(ref npchar)
     NullCharacter.capitainBase.(sTemp).checkTime.control_month = GetDataMonth();
     NullCharacter.capitainBase.(sTemp).checkTime.control_year = GetDataYear();
 }
+
 string GenQuestPortman_GenerateGem() // камни
 {
 	string itemID;
@@ -3660,11 +3925,13 @@ string GenQuestPortman_GenerateGem() // камни
 	}
 	return itemID;
 }
+
 string findTraderCity_PU(ref NPChar)
 {
 	int n, nation;
     int storeArray[MAX_COLONIES];
     int howStore = 0;
+
 	for(n=0; n<MAX_COLONIES; n++)
 	{
 		nation = GetNationRelation(sti(npchar.nation), sti(colonies[n].nation));
@@ -3678,11 +3945,13 @@ string findTraderCity_PU(ref NPChar)
 	nation = storeArray[cRand(howStore-1)];
 	return colonies[nation].id;
 }
+
 string findPassangerCity_PU(ref NPChar)
 {
 	int n, nation;
     int storeArray[MAX_COLONIES];
     int howStore = 0;
+
 	for(n=0; n<MAX_COLONIES; n++)
 	{
 		nation = GetNationRelation(sti(npchar.nation), sti(colonies[n].nation));
@@ -3696,12 +3965,14 @@ string findPassangerCity_PU(ref NPChar)
 	nation = storeArray[cRand(howStore-1)];
 	return colonies[nation].id;
 }
+
 // --> Jason, новые мини-квесты
 string findCurrentCity1(ref NPChar)//выбираем целевой город 1
 {
 	int n, nation;
     int storeArray[MAX_COLONIES];
     int howStore = 0;
+
 	for(n=0; n<MAX_COLONIES; n++)
 	{
 		nation = GetNationRelation(sti(pchar.nation), sti(colonies[n].nation));
@@ -3715,11 +3986,13 @@ string findCurrentCity1(ref NPChar)//выбираем целевой город 
 	nation = storeArray[dRand(howStore-1)];
 	return colonies[nation].id;
 }
+
 string findCurrentCity2(ref NPChar)//выбираем целевой город 2
 {
 	int n, nation;
     int storeArray[MAX_COLONIES];
     int howStore = 0;
+
 	for(n=0; n<MAX_COLONIES; n++)
 	{
 		nation = GetNationRelation(sti(pchar.nation), sti(colonies[n].nation));
@@ -3733,11 +4006,13 @@ string findCurrentCity2(ref NPChar)//выбираем целевой город 
 	nation = storeArray[abs(dRand(howStore-1)-3)];
 	return colonies[nation].id;
 }
+
 string findCurrentCity3(ref NPChar)//выбираем целевой город 3
 {
 	int n, nation;
     int storeArray[MAX_COLONIES];
     int howStore = 0;
+
 	for(n=0; n<MAX_COLONIES; n++)
 	{
 		nation = GetNationRelation(sti(pchar.nation), sti(colonies[n].nation));
@@ -3751,6 +4026,7 @@ string findCurrentCity3(ref NPChar)//выбираем целевой город 
 	nation = storeArray[abs(dRand(howStore-1)-7)];
 	return colonies[nation].id;
 }
+
 int Escort_ShipType()
 {
 	int iShipType;
@@ -3762,4 +4038,5 @@ int Escort_ShipType()
 	}
 	return iShipType;
 }
+
 //<-- новые мини-квесты

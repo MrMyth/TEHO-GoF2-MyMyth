@@ -1,4 +1,8 @@
+
+
 #define LAI_TMPL_WALK	"walk"
+
+
 bool LAi_tmpl_walk_InitTemplate(aref chr)
 {
 	SendMessage(&chr, "lsl", MSG_CHARACTER_EX_MSG, "LockFightMode", false);
@@ -60,6 +64,8 @@ bool LAi_tmpl_walk_InitTemplate(aref chr)
 	}
 	return true;
 }
+
+
 //Процессирование шаблона персонажа
 void LAi_tmpl_walk_CharacterUpdate(aref chr, float dltTime)
 {
@@ -123,26 +129,32 @@ void LAi_tmpl_walk_CharacterUpdate(aref chr, float dltTime)
 		}
 	}
 }
+
 //Персонаж выполнил команду  go to point
 void LAi_tmpl_walk_EndGoToPoint(aref chr)
 {
 	LAi_tmpl_walk_endgo(chr);
 }
+
 //Персонаж провалил команду  go to point
 void LAi_tmpl_walk_FailureGoToPoint(aref chr)
 {
 	LAi_tmpl_walk_endgo(chr);
 }
+
+
 //Персонаж выполнил команду  run to point
 void LAi_tmpl_walk_EndRunToPoint(aref chr)
 {
 	LAi_tmpl_walk_endgo(chr);
 }
+
 //Персонаж провалил команду  run to point
 void LAi_tmpl_walk_FailureRunToPoint(aref chr)
 {
 	LAi_tmpl_walk_endgo(chr);
 }
+
 //Персонаж не может добраться до точки назначения
 void LAi_tmpl_walk_BusyPos(aref chr, float x, float y, float z)
 {
@@ -152,61 +164,76 @@ void LAi_tmpl_walk_BusyPos(aref chr, float x, float y, float z)
 		CharacterTurnByPoint(chr, x, y, z);
 	}
 }
+
 //Персонаж начал перемещение за другим
 void LAi_tmpl_walk_FollowGo(aref chr)
 {
 	LAi_tmpl_walk_endgo(chr);
 }
+
 //Персонаж начал дошёл до другого персонажа
 void LAi_tmpl_walk_FollowStay(aref chr)
 {
 	LAi_tmpl_walk_endgo(chr);
 }
+
 //Персонаж провалил команду  follow character
 void LAi_tmpl_walk_FailureFollow(aref chr)
 {
 	LAi_tmpl_walk_endgo(chr);
 }
+
+
 //Персонаж начал перемещение за другим
 void LAi_tmpl_walk_FightGo(aref chr)
 {
 	LAi_tmpl_walk_endgo(chr);
 }
+
 //Персонаж начал дошёл до другого персонажа
 void LAi_tmpl_walk_FightStay(aref chr)
 {
 	LAi_tmpl_walk_endgo(chr);
 }
+
 //Персонаж провалил команду  Fight
 void LAi_tmpl_walk_FailureFight(aref chr)
 {
 	LAi_tmpl_walk_endgo(chr);
 }
+
 //Можно ли стрелять
 bool LAi_tmpl_walk_IsFire(aref chr)
 {
 	return false;
 }
+
 //Можно ли использовать оружие
 bool LAi_tmpl_walk_IsFight(aref chr)
 {
 	return false;
 }
+
+
 //Персонаж выполнил команду  escape
 void LAi_tmpl_walk_EndEscape(aref chr)
 {
 	LAi_tmpl_walk_endgo(chr);
 }
+
 //Персонаж скользит вдоль патча
 void LAi_tmpl_walk_EscapeSlide(aref chr)
 {
 	LAi_tmpl_walk_endgo(chr);
 }
+
 //Персонаж провалил команду  escape
 void LAi_tmpl_walk_FailureEscape(aref chr)
 {
 	LAi_tmpl_walk_endgo(chr);
 }
+
+
 //Персонаж толкается с другими персонажами
 void LAi_tmpl_walk_ColThreshold(aref chr)
 {
@@ -233,25 +260,31 @@ void LAi_tmpl_walk_ColThreshold(aref chr)
 		}
 	}
 }
+
+
 //Персонаж закончил проигрывать анимацию
 void LAi_tmpl_walk_EndAction(aref chr)
 {
 	LAi_tmpl_walk_endgo(chr);
 }
+
 //Персонажа просят освободить место
 void LAi_tmpl_walk_FreePos(aref chr, aref who)
 {
 	LAi_tmpl_walk_go(chr);
 }
+
 //------------------------------------------------------------------------------------------
 //Внутреннии функции
 //------------------------------------------------------------------------------------------
+
 void LAi_tmpl_walk_go(aref chr)
 {
 	chr.chr_ai.tmpl.maxtime = 8 + rand(50);
 	chr.chr_ai.tmpl.time = 0;
 	LAi_tmpl_walk_go_notime(chr);
 }
+
 void LAi_tmpl_walk_go_notime(aref chr)
 {
 	string loc;
@@ -284,6 +317,8 @@ void LAi_tmpl_walk_go_notime(aref chr)
 	chr.chr_ai.tmpl.state = "goto";
 	chr.chr_ai.tmpl.locator = loc;
 }
+
+
 void LAi_tmpl_walk_endgo(aref chr)
 {
 	if(stf(chr.chr_ai.tmpl.time) > stf(chr.chr_ai.tmpl.maxtime))
@@ -302,6 +337,7 @@ void LAi_tmpl_walk_endgo(aref chr)
 		LAi_tmpl_walk_go_notime(chr);
 	}
 }
+
 void LAi_tmpl_walk_nowstay(aref chr)
 {
 	//Переходим в режим ожидания
@@ -314,6 +350,7 @@ void LAi_tmpl_walk_nowstay(aref chr)
 		CharacterTurnByLoc(chr, "goto", chr.chr_ai.tmpl.locator);
 	}
 }
+
 bool LAi_tmpl_walk_neareststaycheck(aref chr)
 {
 	int num = FindNearCharacters(chr, 4.0, -1.0, -1.0, 0.01, false, false);
@@ -330,3 +367,5 @@ bool LAi_tmpl_walk_neareststaycheck(aref chr)
 	if(cnt > 1) return false;
 	return true;
 }
+
+

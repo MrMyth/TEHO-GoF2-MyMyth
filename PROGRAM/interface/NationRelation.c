@@ -1,6 +1,8 @@
 /// BOAL меню наций
 int curNationIdx;
+
 bool bPlayerColonies = false; // Vex: adding colony management
+
 void InitInterface(string iniName)
 {
     InterfaceStack.SelectMenu_node = "LaunchNationRelation"; // запоминаем, что звать по Ф2
@@ -21,8 +23,10 @@ void InitInterface(string iniName)
 	int     deltaX = 170;
 	int     deltaY = 220;
 	int     max_nt = MAX_NATIONS;
+	
 	ref chref = GetMainCharacter();
     int j;
+    
 	if (bBettaTestMode)
 	{   // со столбцом ГГ
 		SetNewPicture("ICON_1", "interfaces\PORTRAITS\64\face_" + chref.faceId+ ".tga");
@@ -71,6 +75,7 @@ void InitInterface(string iniName)
 		sx=75;
     	sy=120;
 		sz = 60;
+		
 		deltaX = 140;
 		deltaY = 200;
 		for (i=0; i< max_nt; i++)
@@ -104,8 +109,10 @@ void InitInterface(string iniName)
     SetEventHandler("ievnt_command","ProcessCommandExecute",0);
     SetEventHandler("MouseRClickUP","HideInfo",0);
 	SetEventHandler("ShowInfoWindow","ShowInfoWindow",0);
+
 	// Vex: adding colony management -->
 	bPlayerColonies = PlayerHasColonies();
+	
 	CreateString(true, "buttonColonyManagement", XI_ConvertString("buttonColonyManagement"), "INTERFACE_TITLE", COLOR_NORMAL, 700, 15, SCRIPT_ALIGN_LEFT, 0.7);
 	if (bPlayerColonies==true)
 	{
@@ -117,38 +124,49 @@ void InitInterface(string iniName)
 		ChangeStringColor("buttonColonyManagement", greyColor);
 	}
 	// <-- Vex: adding colony management
+    
     /////////////
     CreateString(true,"titul", XI_ConvertString("Hunter_type"),"DIALOG2",COLOR_NORMAL,609,100,SCRIPT_ALIGN_LEFT,1.0);
+    
     CreateString(true,"EngH","","INTERFACE_ULTRASMALL",COLOR_NORMAL,700,134,SCRIPT_ALIGN_CENTER,1.0);
     CreateString(true,"FraH","","INTERFACE_ULTRASMALL",COLOR_NORMAL,700,190,SCRIPT_ALIGN_CENTER,1.0);
     CreateString(true,"SpaH","","INTERFACE_ULTRASMALL",COLOR_NORMAL,700,246,SCRIPT_ALIGN_CENTER,1.0);
     CreateString(true,"HolH","","INTERFACE_ULTRASMALL",COLOR_NORMAL,700,302,SCRIPT_ALIGN_CENTER,1.0);
+
     CalculateHunter();
+    
     CreateString(true,"Flag1","Flag on the ship","DIALOG2",COLOR_NORMAL,630,432,SCRIPT_ALIGN_LEFT,1.0);
     curNationIdx = sti(chref.nation);
     SetNewNation(0);
     XI_RegistryExitKey("IExit_F2");
 }
+
 void CalculateHunter()
 {
+
      ref mc = GetMainCharacter();
+
      CreateImage("Eng", "NATIONS", "ENGLAND",  610, 136, 640,168 );
      CreateImage("Fra", "NATIONS", "FRANCE",  610, 192, 640, 224);
      CreateImage("Spa", "NATIONS", "SPAIN",  610, 248, 640, 282);
      CreateImage("Hol", "NATIONS", "HOLLAND",  610, 304, 640, 336);
+
      GameInterface.strings.EngH = XI_ConvertString("England");
      GameInterface.strings.FraH = XI_ConvertString("France");
      GameInterface.strings.SpaH = XI_ConvertString("Spain");
      GameInterface.strings.HolH = XI_ConvertString("Holland");
+
      SetFormatedText("Eng_TEXT", GetNationReputation(pchar, ENGLAND));
      SetFormatedText("Fra_TEXT", GetNationReputation(pchar, FRANCE));
      SetFormatedText("Spa_TEXT", GetNationReputation(pchar, SPAIN));
      SetFormatedText("HOL_Text", GetNationReputation(pchar, HOLLAND));
 }
+
 void ProcessExitCancel()
 {
 	IDoExit(RC_INTERFACE_ANY_EXIT);
 }
+
 void IDoExit(int exitCode)
 {
 	DelEventHandler("InterfaceBreak","ProcessExitCancel");
@@ -157,6 +175,7 @@ void IDoExit(int exitCode)
     DelEventHandler("ievnt_command","ProcessCommandExecute");
     DelEventHandler("MouseRClickUP","HideInfo");
 	DelEventHandler("ShowInfoWindow","ShowInfoWindow");
+
 	interfaceResultCommand = exitCode;
 	if( CheckAttribute(&InterfaceStates,"ReloadMenuExit"))
 	{
@@ -168,20 +187,24 @@ void IDoExit(int exitCode)
 		EndCancelInterface(true);
 	}
 }
+
 void ShowInfoWindow()
 {
 	string sHeader = "TEST";
 	string sNode = GetCurrentNode();
+
 	string sText1, sText2, sText3, sPicture, sGroup, sGroupPicture;
 	sPicture = "none";
 	sGroup = "none";
 	sGroupPicture = "none";
+
 	switch(sNode)
 	{
 		case "FlagPic":
 			sHeader = XI_ConvertString("Nation");
 			sText1 = GetRPGText("Nation_hint");
 		break;
+		
 		case "INFO_CLICK":
 			sHeader = XI_ConvertString("Hunter_type");
 			sText1 = GetRPGText("Hunter_hint");
@@ -189,18 +212,22 @@ void ShowInfoWindow()
 	}
 	CreateTooltip("#" + sHeader, sText1, argb(255,255,255,255), sText2, argb(255,255,192,192), sText3, argb(255,255,255,255), "", argb(255,255,255,255), sPicture, sGroup, sGroupPicture, 64, 64);
 }
+
 void HideInfo()
 {
 	CloseTooltip();
 	SetCurrentNode("OK_BUTTON");
 }
+
 void FlagsProcess()
 {
 	// boal 04.04.2004 -->
 	bool bTmpBool = true;
 	int i, cn;
 	ref chref;
+	
 	if (CheckAttribute(pchar, "DisableChangeFlagMode")) return; // нефиг менять файл за 3 секунды сразу
+	
 	if (!bBettaTestMode)
 	{
     	//if(LAi_group_IsActivePlayerAlarm()) bTmpBool = false;
@@ -231,6 +258,7 @@ void FlagsProcess()
 	Sea_ClearCheckFlag(); // сбросить всем в море проверку смотрения на флаг.
 	pchar.DisableChangeFlagMode = true; //закрываем Флаг
 	DoQuestFunctionDelay("FreeChangeFlagMode", 15.0); // ролик + запас
+	
 	switch (curNationIdx)
 	{
     	case ENGLAND:	EnglandProcess();	break;
@@ -240,10 +268,12 @@ void FlagsProcess()
     	case HOLLAND:	HollandProcess();	break;
 	}
 }
+
 void ProcessCommandExecute()
 {
 	string comName = GetEventData();
 	string nodName = GetEventData();
+
 	// Vex: adding colony management -->
 	if(nodName == "I_COLONIES" || nodName == "I_COLONIES_2")
 	{
@@ -252,6 +282,7 @@ void ProcessCommandExecute()
 		}
 	}
 	// <-- Vex: adding colony management
+
     switch(nodName)
 	{
         case "LEFTCHANGE_NATION":
@@ -263,6 +294,7 @@ void ProcessCommandExecute()
 				}
     		}
     	break;
+
     	case "RIGHTCHANGE_NATION":
     		if(comName=="activate" || comName=="click")
     		{
@@ -336,11 +368,13 @@ void SetNewNation(int add)
 {
     ref   mchar = GetMainCharacter();
     bool  ok, ok2;
+    
     curNationIdx = curNationIdx + add;
     if (curNationIdx < 0) curNationIdx = 4;
     if (curNationIdx > 4) curNationIdx = 0;
     //CreateImage("FlagPic", "NATIONS",GetNationNameByType(curNationIdx), 648, 455, 715, 522);
     SetNewGroupPicture("FlagPic", "NATIONS", GetNationNameByType(curNationIdx));
+    
     if (IsCharacterPerkOn(mchar,"FlagPir")  ||
 	    IsCharacterPerkOn(mchar,"FlagEng")  ||
 		IsCharacterPerkOn(mchar,"FlagFra")  ||
@@ -375,35 +409,44 @@ void PirateProcess()
     //DoQuestCheckDelay("pir_flag_rise", 1.0);
     PChar.GenQuest.VideoAVI        = "Pirate";
     PChar.GenQuest.VideoAfterQuest = "pir_flag_rise";
+
     DoQuestCheckDelay("PostVideo_Start", 0.2);
 	ProcessExitCancel();
 }
+
 void EnglandProcess()
 {
     //DoQuestCheckDelay("eng_flag_rise", 1.0);
     PChar.GenQuest.VideoAVI        = "England";
     PChar.GenQuest.VideoAfterQuest = "eng_flag_rise";
+
     DoQuestCheckDelay("PostVideo_Start", 0.2);
     ProcessExitCancel();
 }
+
 void FranceProcess()
 {
     PChar.GenQuest.VideoAVI        = "France";
     PChar.GenQuest.VideoAfterQuest = "fra_flag_rise";
+
     DoQuestCheckDelay("PostVideo_Start", 0.2);
 	ProcessExitCancel();
 }
+
 void SpainProcess()
 {
     PChar.GenQuest.VideoAVI        = "Spain";
     PChar.GenQuest.VideoAfterQuest = "spa_flag_rise";
+
     DoQuestCheckDelay("PostVideo_Start", 0.2);
     ProcessExitCancel();
 }
+
 void HollandProcess()
 {
     PChar.GenQuest.VideoAVI        = "Holland";
     PChar.GenQuest.VideoAfterQuest = "hol_flag_rise";
+
     DoQuestCheckDelay("PostVideo_Start", 0.2);
 	ProcessExitCancel();
 }

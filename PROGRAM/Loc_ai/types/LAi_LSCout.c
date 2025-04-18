@@ -1,12 +1,18 @@
 /*
 Тип: стоячий, всегда стоит, отвечает на диалоги, боиться, если безоружен
+
 	Используемые шаблоны:
 		stay
 		dialog
 		goto
 		afraid
 */
+
+
+
 #define LAI_TYPE_LSCOUT		"LSCout"
+
+
 //Инициализация
 void LAI_type_LSCout_Init(aref chr)
 {
@@ -43,12 +49,14 @@ void LAI_type_LSCout_Init(aref chr)
 	LAi_SetDefaultStayAnimation(chr);
 	SendMessage(&chr, "lsl", MSG_CHARACTER_EX_MSG, "SetFightWOWeapon", false);
 }
+
 //Процессирование типа персонажа
 void LAI_TYPE_LSCout_CharacterUpdate(aref chr, float dltTime)
 {
 	//Log_SetEternalString("Темплейт: " + chr.chr_ai.tmpl + "   Стейт: " + chr.chr_ai.tmpl.state);
 	//Если болтаем, то ничего пока не меняем
 	if(chr.chr_ai.tmpl == LAI_TMPL_DIALOG) return;
+	
 	if(chr.chr_ai.tmpl != LAI_TMPL_FIGHT && chr.chr_ai.tmpl != LAI_TMPL_AFRAID)
 	{
 		bool isDialog = false;		
@@ -177,6 +185,7 @@ void LAI_TYPE_LSCout_CharacterUpdate(aref chr, float dltTime)
 					}
 				}
 			}
+
 		}else{
 			//Начинаем атаку
 			if(LAi_IsSetBale(chr))
@@ -240,16 +249,19 @@ void LAI_TYPE_LSCout_CharacterUpdate(aref chr, float dltTime)
 		}
 	}
 }
+
 //Загрузка персонажа в локацию
 bool LAI_TYPE_LSCout_CharacterLogin(aref chr)
 {
 	return true;
 }
+
 //Выгрузка персонажа из локацию
 bool LAI_TYPE_LSCout_CharacterLogoff(aref chr)
 {
 	return true;
 }
+
 //Завершение работы темплейта
 void LAI_TYPE_LSCout_TemplateComplite(aref chr, string tmpl)
 {	
@@ -260,10 +272,12 @@ void LAI_TYPE_LSCout_TemplateComplite(aref chr, string tmpl)
 		chr.chr_ai.type.locator = "";
 	}
 }
+
 //Сообщить о желании завести диалог
 void LAI_TYPE_LSCout_NeedDialog(aref chr, aref by)
 {
 }
+
 //Запрос на диалог, если возвратить true то в этот момент можно начать диалог
 bool LAI_TYPE_LSCout_CanDialog(aref chr, aref by)
 {
@@ -288,6 +302,7 @@ bool LAI_TYPE_LSCout_CanDialog(aref chr, aref by)
 	}
 	return false;
 }
+
 //Начать диалог
 void LAI_TYPE_LSCout_StartDialog(aref chr, aref by)
 {
@@ -296,6 +311,7 @@ void LAI_TYPE_LSCout_StartDialog(aref chr, aref by)
 	CharacterTurnByChr(chr, by);
 	LAi_tmpl_SetActivatedDialog(chr, by);
 }
+
 //Закончить диалог
 void LAI_TYPE_LSCout_EndDialog(aref chr, aref by)
 {
@@ -316,10 +332,14 @@ void LAI_TYPE_LSCout_EndDialog(aref chr, aref by)
 		LAI_TYPE_LSCout_Stay(chr);
 	}
 }
+
+
 //Персонаж выстрелил
 void LAI_TYPE_LSCout_Fire(aref attack, aref enemy, float kDist, bool isFindedEnemy)
 {
 }
+
+
 //Персонаж атакован
 void LAI_TYPE_LSCout_Attacked(aref chr, aref by)
 {
@@ -331,6 +351,7 @@ void LAI_TYPE_LSCout_Attacked(aref chr, aref by)
 	if(!LAi_group_IsEnemy(chr, by)) return;
     //boal fix ai -->
     float dist = -1.0;
+	
 	if(!GetCharacterDistByChr3D(chr, by, &dist)) return;
 	if(dist < 0.0) return;
 	if(dist > 20.0) return;
@@ -350,6 +371,7 @@ void LAI_TYPE_LSCout_Attacked(aref chr, aref by)
 	}
     // boal <--
 }
+
 //Остановится
 void LAI_TYPE_LSCout_Stay(aref chr)
 {
@@ -357,6 +379,7 @@ void LAI_TYPE_LSCout_Stay(aref chr)
 	chr.chr_ai.type.state = "stay";
 	LAi_tmpl_stay_InitTemplate(chr);
 }
+
 //Отправить персонажа в новую точку
 void LAI_TYPE_LSCout_Goto(aref chr)
 {
@@ -384,6 +407,8 @@ void LAI_TYPE_LSCout_Goto(aref chr)
 		chr.chr_ai.type.locator = newloc;
 	}	
 }
+
+
 //Установка локаторов в ГПК
 // - На каждый корабль устанавливается по 5 или 10 локаторов goto
 // - формат локаторов - goto01_0. goto - база в имени локатора, 01 - номер судна (от 01 до 16), 1 - номер локатора (0-5 или 0-9)

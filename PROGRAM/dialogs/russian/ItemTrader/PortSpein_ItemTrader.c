@@ -16,6 +16,7 @@ void ProcessCommonDialogEvent(ref NPChar, aref Link, aref NextDiag)
 				link.l1.go = "Consumption";
 			}			
 		break;
+		
 		//Цена чахотки
 		case "Consumption":
 			dialog.text = "Look, don't bother me, I am trading... What an idiotic question...";
@@ -26,3 +27,4 @@ void ProcessCommonDialogEvent(ref NPChar, aref Link, aref NextDiag)
 	}
 	UnloadSegment(NPChar.FileDialog2);  // если где-то выход внутри switch  по return не забыть сделать анлод
 }
+

@@ -1,4 +1,5 @@
 // перенес багфиксеры и т.д.
+
 extern int InitStdBlade( 	int		ItemIndex, 
 					string 	ModelID, 
 					string 	picTexture,
@@ -13,6 +14,7 @@ extern int InitStdBlade( 	int		ItemIndex,
 					int     GenerationQty, 
 					bool 	isGenerablePrice,
 					int     Price);
+
 extern int InitStdGun(	int		ItemIndex, 
 				string 	id, 
 				string 	ModelID, 
@@ -26,6 +28,7 @@ extern int InitStdGun(	int		ItemIndex,
 				float 	Weight,
 				int 	Charges, 
 				int 	Quality );
+
 extern void InitGunExt(string id,			
 				string sAttr,       
 				string sBullet,     
@@ -45,6 +48,7 @@ extern void InitGunExt(string id,
 				float  Accuracy,    
 				int    ChargeSpeed, 
 				bool   isDefault );
+
 void ApplyMigration(ref migrationState) {
 	if(!CheckAttribute(pchar, "fix30032020")) {
 		if(Migration_LoadSegment(migrationState, "items\initItems.c")) {
@@ -57,6 +61,7 @@ void ApplyMigration(ref migrationState) {
 					GenerateGenerableItems();
 				}
 			}
+			
 			n = GetItemIndex("howdah");
 			if (n < 0) {
 				n = GetItemIndex("Reserve_item_12");
@@ -69,6 +74,7 @@ void ApplyMigration(ref migrationState) {
 			}
     	}
 	}
+	
 	if(!CheckAttribute(pchar,"questTemp.BigPatch_BugsFixer"))
 	{
 		log_Testinfo("Отработал багфиксер Большого Патча");
@@ -116,6 +122,7 @@ void ApplyMigration(ref migrationState) {
 				LAi_group_MoveCharacter(sld, "FRANCE_CITIZENS");
 			}
 		}
+		
 		// belamour правка входа-выхода резиденции куманы
 		n = Findlocation("Cumana_TownhallRoom");
 		locations[n].reload.l2.name = "reload2";
@@ -123,33 +130,41 @@ void ApplyMigration(ref migrationState) {
 		locations[n].reload.l2.emerge = "reloadR1"; 
 		locations[n].reload.l2.autoreload = "0";
 		locations[n].reload.l2.label = "Street";
+
 		locations[n].reload.l3.name = "reload3";
 		locations[n].reload.l3.go = "CommonBedroom"; 
 		locations[n].reload.l3.emerge = "reload1";
 		locations[n].reload.l3.autoreload = "0";
 		locations[n].reload.l3.label = "Street";
+		
 		n = Findlocation("Cumana_Town");
 		locations[n].reload.lR1.name = "reloadR1";
 		locations[n].reload.lR1.go = "Cumana_TownhallRoom";
 		locations[n].reload.lR1.emerge = "reload2"; 
+		
 		// mitrokosta -->
 		// снятие лишних прерываний на Тореро и Пуэблу
 		if (!CheckAttribute(pchar, "questTemp.Trial")) {
 			pchar.quest.Trial_Puebla_barque_abordage.over = "yes";
 			pchar.quest.Trial_Puebla_barque_Sink.over = "yes";
 		}
+		
 		if (!CheckAttribute(pchar, "questTemp.Mtraxx.Ignasio.Check")) {
 			pchar.quest.mtraxx_corrida_sink.over = "yes";
 			pchar.quest.mtraxx_corrida_capture.over = "yes";
 		}
+		
 		// нужно для совместимости с моими правками мятежных оффов
 		if (CheckAttribute(pchar, "questTemp.MunityOfficerIDX")) {
 			DeleteAttribute(pchar, "questTemp.MunityOfficerIDX");
 		}
+		
 		// второй шанс для карт диоса
 		PrepareAdmiralMaps();
+		
 		// фикс бухты губернатора
 		locations[FindLocation("Shore75")].reload.l2.emerge = "reload_1";
+		
 		// фикс поломки поручения капитана из-за дюнкерка, без ни
 		aref arQuest;
 		if (CheckAttribute(pchar, "GenQuest.CaptainComission")) {
@@ -158,6 +173,7 @@ void ApplyMigration(ref migrationState) {
 				DeleteAttribute(pchar, "GenQuest.CaptainComission");
 			}
 		}
+		
 		// фикс закрытой на ночь церкви Сент-Джонса
 		DeleteAttribute(&locations[FindLocation("SentJons_town")], "reload.l7.close_for_night");
 		// <--
@@ -185,11 +201,13 @@ void ApplyMigration(ref migrationState) {
 			}
 		}
 		// <-- belamour
+		
 		// mitrokosta фикс регаты без НИ
 		if (!CheckAttribute(pchar, "questTemp.Regata") && CheckAttribute(pchar, "quest.Regata_PU")) {
 			pchar.quest.Regata_PU.over = "yes";
 		}
 	}
+	
 	log_Testinfo("Отработал третий багфиксер Большого Патча");
 	DeleteAttribute(pchar,"questTemp.BigPatch_BugsFixer");
 	DeleteAttribute(pchar,"questTemp.BigPatch_BugsFixer2");
@@ -211,6 +229,7 @@ void ApplyMigration(ref migrationState) {
 	gun.type.(sAttr).DmgMax_C		= 40.0;
 	sAttr = "t2";
 	gun.type.(sAttr).ChargeSpeed    = 30.0;
+	
 	if (!CheckAttribute(pchar, "BigPatchControlReset")) {
 		ControlsInit(GetTargetPlatform(),false); // mitrokosta принудительный сброс настроек
 	}

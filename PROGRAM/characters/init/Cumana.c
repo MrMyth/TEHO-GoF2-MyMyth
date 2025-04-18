@@ -1,9 +1,12 @@
+
 int CreateCumanaCharacters(int n)
 {
 	ref ch;
+	
 	///////////////////////////////////////////////////////////////////////////////
 	// ОСНОВНЫЕ ПЕРСОНАЖИ
 	///////////////////////////////////////////////////////////////////////////////
+
 	makeref(ch,Characters[n]);			//Губернатор
 	ch.id		= "Cumana_Mayor";
 	ch.model	= "huber_26";
@@ -32,6 +35,7 @@ int CreateCumanaCharacters(int n)
 	LAi_SetImmortal(ch, true);
     LAi_LoginInCaptureTown(ch, true); //TO_DO eddy, снести
 	n = n + 1;
+
 	makeref(ch,Characters[n]);			//Священик
 	ch.id		= "Cumana_Priest";
 	ch.model	= "priest_2";
@@ -49,6 +53,7 @@ int CreateCumanaCharacters(int n)
 	LAi_group_MoveCharacter(ch, "SPAIN_CITIZENS");
 	LAi_SetImmortal(ch, true);
 	n = n + 1;
+
 	makeref(ch,Characters[n]);		// ОФициантка
 	ch.id		= "Cumana_waitress";
 	ch.model	= "women_16";
@@ -65,6 +70,7 @@ int CreateCumanaCharacters(int n)
 	LAi_group_MoveCharacter(ch, "SPAIN_CITIZENS");
 	LAi_SetImmortal(ch, true);
 	n = n + 1;
+
 	makeref(ch,Characters[n]);			//Трактирщик
 	ch.id		= "Cumana_tavernkeeper";
 	ch.model	= "barmen_6";
@@ -82,6 +88,8 @@ int CreateCumanaCharacters(int n)
 	LAi_group_MoveCharacter(ch, "SPAIN_CITIZENS");
 	LAi_SetImmortal(ch, true);
 	n = n + 1;
+
+
 	makeref(ch,Characters[n]);			//Торговец
 	ch.id = "Cumana_trader";
 	ch.model	= "trader_6";
@@ -99,6 +107,7 @@ int CreateCumanaCharacters(int n)
 	LAi_SetImmortal(ch, true);
 	ch.item_date = "";
 	n = n + 1;
+
 	makeref(ch,Characters[n]);			//Корабел
 	ch.id		= "Cumana_shipyarder";
 	ch.model	= "shipowner_6";
@@ -123,6 +132,7 @@ int CreateCumanaCharacters(int n)
 	LAi_group_MoveCharacter(ch, "SPAIN_CITIZENS");
 	LAi_SetImmortal(ch, true);
 	n = n + 1;
+	
 	makeref(ch,Characters[n]);			//Банкир
 	ch.id		= "Cumana_usurer";
 	ch.model	= "banker_6";
@@ -142,6 +152,7 @@ int CreateCumanaCharacters(int n)
 	LAi_group_MoveCharacter(ch, "SPAIN_CITIZENS");
 	LAi_SetImmortal(ch, true);
 	n = n + 1;
+
 	makeref(ch,Characters[n]);			//Начальник порта
 	ch.id		= "Cumana_PortMan";
 	ch.model	= "citiz_3";
@@ -158,6 +169,7 @@ int CreateCumanaCharacters(int n)
 	LAi_SetImmortal(ch, true);
 	ch.item_date = "";
 	n = n + 1;
+
     makeref(ch,Characters[n]);
 	ch.name 	= "Smuggler";
 	ch.lastname = "";
@@ -174,6 +186,7 @@ int CreateCumanaCharacters(int n)
 	LAi_SetHP(ch, 80.0, 80.0);
 	ch.greeting = "smuggler";
 	n = n + 1;
+	
 	//////////////////////////////  Рудник  ///////////////////////
 	makeref(ch,Characters[n]);			//Комендант
 	ch.id		= "Minentown_Mayor";
@@ -202,6 +215,7 @@ int CreateCumanaCharacters(int n)
 	LAi_SetImmortal(ch, true);
     LAi_LoginInCaptureTown(ch, true);
 	n = n + 1;
+	
 	makeref(ch,Characters[n]);			//Торговец
 	ch.id = "Minentown_trader";
 	ch.model	= "off_spa_3";
@@ -224,6 +238,7 @@ int CreateCumanaCharacters(int n)
 	ch.Merchant.type = "minentown";
 	ch.money = TRADER_MIN_MONEY + rand(TRADER_NORM);
 	n = n + 1;
+	
 	makeref(ch,Characters[n]);			//Трактирщик
 	ch.id		= "Minentown_tavernkeeper";
 	ch.model	= "barmen_14";
@@ -243,6 +258,7 @@ int CreateCumanaCharacters(int n)
 	LAi_group_MoveCharacter(ch, "SPAIN_CITIZENS");
 	LAi_SetImmortal(ch, true);
 	n = n + 1;
+	
 	makeref(ch,Characters[n]);			//Священник
 	ch.id		= "Minentown_Priest";
 	ch.model	= "monk_5";
@@ -260,5 +276,6 @@ int CreateCumanaCharacters(int n)
 	LAi_group_MoveCharacter(ch, "SPAIN_CITIZENS");
 	LAi_SetImmortal(ch, true);
 	n = n + 1;
+	
 	return n;
 }

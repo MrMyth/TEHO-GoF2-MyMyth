@@ -16,22 +16,26 @@ void ProcessCommonDialogEvent(ref NPChar, aref Link, aref NextDiag)
                 link.l1.go = "G_Girl";
 			}
 		break;
+		
 		// Jason Дороже золота
 		case "G_Girl":
 			dialog.text = "Information? About what, again?";
 			link.l1 = "The brigantine, your Excellency. Transporting… mail. Documents of great importance and such. I heard about the investigation and, obviously, as a loyal friend of British Crown, I'd like to help.";
 			link.l1.go = "G_Girl_1";
 		break;
+		
 		case "G_Girl_1":
 			dialog.text = "Splendid! Baronet Cortney will be thrilled to receive you! I will set up a meeting immediately.";
 			link.l1 = "Thank you, sir. I am in a rush here and I'd appreciate if it will go quick.";
 			link.l1.go = "G_Girl_2";
 		break;
+		
 		case "G_Girl_2":
 			dialog.text = "Don't you worry, you will be having all the time in the world. Guards! Seize him!";
 			link.l1 = "Thank... wait, what? Is this a joke?!";
 			link.l1.go = "G_Girl_3";
 		break;
+		
 		case "G_Girl_3":
 			DialogExit();
 			GoldenGirl_AntiguaArest();
@@ -39,3 +43,4 @@ void ProcessCommonDialogEvent(ref NPChar, aref Link, aref NextDiag)
 	}
 	UnloadSegment(NPChar.FileDialog2);  // если где-то выход внутри switch  по return не забыть сделать анлод
 }
+

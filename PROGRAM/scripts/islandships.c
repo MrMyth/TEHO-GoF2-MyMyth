@@ -2,11 +2,13 @@
 void GenerateIslandShips(string sIslandID)
 {
 	//if (!TestRansackCaptain) return; // to_do
+	
 	int iColonyQuantity = sti(Islands[FindIsland(sIslandID)].colonyquantity);
 	int iNation;
 	int iShipsQuantity;
 	int iChar;
 	int iType = 0;
+
 	for (int i = 0; i< MAX_COLONIES; i++)
 	{
 		if (Colonies[i].island == sIslandID)
@@ -16,6 +18,7 @@ void GenerateIslandShips(string sIslandID)
 				if (!CheckAttribute(&colonies[i], "GenShipDate") || GetNpcQuestPastDayParam(&colonies[i], "GenShipDate") > 0)
 				{
                     SaveCurrentNpcQuestDateParam(&colonies[i], "GenShipDate"); // дата заполнения
+                    
 					iNation = sti(Colonies[i].nation);
 					float fChecker = frand(1.0);
 					if (fChecker < 0.8)
@@ -25,6 +28,7 @@ void GenerateIslandShips(string sIslandID)
 						{
 							iChar = GenerateCharacter(iNation, WITH_SHIP, "soldier", MAN, -1, WARRIOR); //-1 - это 1 день
 							PlaceCharacterShip(iChar, iNation, sIslandID, i);
+
                             characters[iChar].IslandShips = Colonies[i].id; // номер города, чтоб тереть по захвату города to_do
 							if (iNation == PIRATE)
 							{ // нащ город
@@ -56,18 +60,25 @@ void GenerateIslandShips(string sIslandID)
 		}
 	}
 }
+
 void PlaceCharacterShip(int iChar, int iNation, string sIslandID, int iColonyIdx)
 {
 	int iColonyNum = sti(colonies[iColonyIdx].num);
+	
 	string sColonyID = colonies[iColonyIdx].id;
+	
 	string sGroup = "IslandGroup" + iChar;
+	
 	Group_AddCharacter(sGroup, characters[iChar].id);
 	Group_SetGroupCommander(sGroup, characters[iChar].id);	
 	string sLocatorGroup = "IslandShips" + iColonyNum;
 	string sLocator = "Ship_"+(rand(5)+1);
 	Group_SetAddress(sGroup, sIslandID, sLocatorGroup, sLocator);
+
 	//trace("sLocatorGroup is " + sLocatorGroup + " sLocator is " + sLocator);
+
 	int iTask = rand(1);
+	
 	float x, z;
 	if (iTask == 0)
 	{
@@ -80,6 +91,7 @@ void PlaceCharacterShip(int iChar, int iNation, string sIslandID, int iColonyIdx
 		Ship_SetTaskDrift(SECONDARY_TASK, iChar);
 		//Group_SetTaskNone(sGroup);
 	}
+
 	if (sti(characters[iChar].nation) != PIRATE && GetNationRelation2Character(iNation, nMainCharacterIndex) == RELATION_ENEMY)
 	{
 		Group_SetTaskAttack(sGroup, PLAYER_GROUP);

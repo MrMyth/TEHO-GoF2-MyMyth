@@ -1,8 +1,10 @@
 // общие методы
 int nCurScrollNum;
 ref xi_refCharacter;
+
 string CurTable, CurRow;
 int iSelected; // курсор в таблице
+
 void FillCharactersScroll()
 {
 	int i;
@@ -12,20 +14,29 @@ void FillCharactersScroll()
 	int _curCharIdx;
 	ref _refCurChar;
 	aref pRef, pRef2;
+
  	DeleteAttribute(&GameInterface, "CHARACTERS_SCROLL");
+
 	nCurScrollNum = -1;
 	GameInterface.CHARACTERS_SCROLL.current = 0;
 	makearef(pRef,pchar.Fellows.Passengers);
+
 	int nOffSize = 6;
 	//int nListSize = GetFreePassengersQuantity(pchar);
+
 	GameInterface.CHARACTERS_SCROLL.NotUsed = 0;
+
 	GameInterface.CHARACTERS_SCROLL.ImagesGroup.t0 = "EMPTYFACE";
+
 	FillFaceList("CHARACTERS_SCROLL.ImagesGroup", pchar, 0); // officers
 	FillFaceList("CHARACTERS_SCROLL.ImagesGroup", pchar, 1); // companions
 	FillFaceList("CHARACTERS_SCROLL.ImagesGroup", pchar, 2); // passengers
+
 	GameInterface.CHARACTERS_SCROLL.BadTex1 = 0;
 	GameInterface.CHARACTERS_SCROLL.BadPic1 = "emptyface";
+
 	int m = 0;
+
 	attributeName = "pic" + (m+1);
 	makearef(pRef2,GameInterface.CHARACTERS_SCROLL.(attributeName));
 	GameInterface.CHARACTERS_SCROLL.(attributeName).character = GetCharacterIndex(pchar.id);
@@ -36,7 +47,9 @@ void FillCharactersScroll()
 	pRef2.str3 = "#" + pchar.lastname;
 	//pRef2.str4 = "#" + pchar.quest.OfficerPrice;
 	pRef2.str5 = "#" + pchar.rank;
+
 	m = m + 1;
+
 	for(i=0; i<nOffSize;i++)
 	{
 		attributeName = "pic" + (m+1);
@@ -91,6 +104,7 @@ void FillCharactersScroll()
 		}
 		m++;
 	}
+
 	for(int k=1; k<4; k++)
 	{
 		attributeName = "pic" + (m+1);
@@ -120,6 +134,7 @@ void FillCharactersScroll()
 		}
 		m++;
 	}
+
 	int iCompanionQuantity = getCompanionQuantity(pchar);
 	if(iCompanionQuantity > 1)
 	{
@@ -149,11 +164,13 @@ void FillCharactersScroll()
 			}
 		}
 	}
+
 	for(i=0; i<GetPassengersQuantity(pchar); i++)
 	{
 		attributeName = "pic" + (m+1);
 		PsgAttrName = "id"+(i+1);
 		_curCharIdx = GetPassenger(pchar, i);
+
 		if (_curCharIdx!=-1 && !CheckAttribute(&characters[_curCharIdx], "isfree")) // нужно ставить isfree для офицеров, чтоб два раза не попадали.
 		{
 			makearef(pRef2,GameInterface.CHARACTERS_SCROLL.(attributeName));
@@ -191,6 +208,7 @@ void FillCharactersScroll()
 	}
 	GameInterface.CHARACTERS_SCROLL.ListSize = m;
 }
+
 void NullSelectTable(string sControl)
 {
 	if (sControl != CurTable)

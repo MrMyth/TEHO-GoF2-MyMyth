@@ -1,3 +1,4 @@
+
 int LocationInitPearl(int n)
 {
 	//////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
@@ -41,22 +42,27 @@ int LocationInitPearl(int n)
 	Locations[n].reload.l1.label = "Jungle";
 	Locations[n].reload.l1.autoreload = 1;
 	Locations[n].locators_radius.reload.reload1_back = 2;
+	
 	Locations[n].reload.l2.name = "reload2";
 	Locations[n].reload.l2.go = "Miskito_shack1";
 	Locations[n].reload.l2.emerge = "reload1";
 	Locations[n].reload.l2.label = "shack";
 	Locations[n].reload.l2.autoreload = "0";
+	
 	Locations[n].reload.l3.name = "reload3";
 	Locations[n].reload.l3.go = "Miskito_shack2";
 	Locations[n].reload.l3.emerge = "reload1";
 	Locations[n].reload.l3.label = "shack";
 	Locations[n].reload.l3.autoreload = "0";
+	
 	Locations[n].reload.l4.name = "reload4";
 	Locations[n].reload.l4.go = "Miskito_shack3";
 	Locations[n].reload.l4.emerge = "reload1";
 	Locations[n].reload.l4.label = "shack";
 	Locations[n].reload.l4.autoreload = "0";
+
 	n = n + 1;
+	
 	//////////////////////////////////////////////////////////////////////////////////////////////////
 	//// хижина №1 - большая
 	/////////////////////////////////////////////////////////////////////////////////////////////////
@@ -75,6 +81,7 @@ int LocationInitPearl(int n)
 	locations[n].models.always.Hut_1_inside = "Hut_1_inside";
 	locations[n].models.always.Hut_1_inside.level = 65538;
 	Locations[n].models.always.locators = "Hut_1_inside_locators";
+
 	locations[n].models.always.back = "..\inside_back";
 	locations[n].models.always.back.level = 65529;
 	//Day
@@ -90,7 +97,9 @@ int LocationInitPearl(int n)
 	locations[n].reload.l1.emerge = "reload2";
 	locations[n].reload.l1.autoreload = "0";
 	locations[n].reload.l1.label = "Street";
+	
 	n = n + 1;
+	
 	//////////////////////////////////////////////////////////////////////////////////////////////////
 	//// хижина №2 Змеиного Глаза
 	/////////////////////////////////////////////////////////////////////////////////////////////////
@@ -129,7 +138,9 @@ int LocationInitPearl(int n)
 	locations[n].reload.l1.emerge = "reload3";
 	locations[n].reload.l1.autoreload = "0";
 	locations[n].reload.l1.label = "Street";
+	
 	n = n + 1;
+	
 	//////////////////////////////////////////////////////////////////////////////////////////////////
 	//// хижина №3
 	/////////////////////////////////////////////////////////////////////////////////////////////////
@@ -168,7 +179,9 @@ int LocationInitPearl(int n)
 	locations[n].reload.l1.emerge = "reload4";
 	locations[n].reload.l1.autoreload = "0";
 	locations[n].reload.l1.label = "Street";
+	
 	n = n + 1;
+
 	//////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 	// залив Папагайо
 	//////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
@@ -188,8 +201,10 @@ int LocationInitPearl(int n)
 	locations[n].models.always.shore07.sea_reflection = 1;
 	Locations[n].models.always.shore07seabed = "shore07_sb";
 	Locations[n].models.always.locators = "shore07_locators";
+		
 	Locations[n].models.always.grassPatch = "shore07_grass";
 	Locations[n].models.always.grassPatch.texture = "grass\grassshore.tga.tx";
+	
 	Locations[n].models.always.l1 = "plan1";
 	Locations[n].models.always.l1.level = 9;
 	Locations[n].models.always.l1.tech = "LocationModelBlend";
@@ -213,7 +228,9 @@ int LocationInitPearl(int n)
 	locations[n].reload.l1.autoreload = "1";
 	locations[n].reload.l1.label = "Jungle";
 	locations[n].locators_radius.reload.reload1_back = 2;
+
 	n = n + 1;
+
 	//////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 	// Джунгли
 	//////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
@@ -254,12 +271,14 @@ int LocationInitPearl(int n)
 	locations[n].reload.l1.autoreload = "1";
 	locations[n].reload.l1.label = "Jungle";
 	locations[n].locators_radius.reload.reload1_back = 2;
+
 	locations[n].reload.l2.name = "reload2_back";
 	locations[n].reload.l2.go = "Shore49";
 	locations[n].reload.l2.emerge = "reload1";
 	locations[n].reload.l2.autoreload = "1";
 	locations[n].reload.l2.label = "Shore49";
     locations[n].locators_radius.reload.reload2_back = 2;
+
 	locations[n].reload.l3.name = "reload3_back";
 	locations[n].reload.l3.go = "Shore50";
 	locations[n].reload.l3.emerge = "reload1";
@@ -267,6 +286,7 @@ int LocationInitPearl(int n)
 	locations[n].reload.l3.label = "Shore50";
 	locations[n].locators_radius.reload.reload3_back = 2;
 	n = n + 1;
+
 	//////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 	// залив Никоя
 	//////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
@@ -286,8 +306,10 @@ int LocationInitPearl(int n)
 	locations[n].models.always.shore03.sea_reflection = 1;
 	Locations[n].models.always.shore03seabed = "shore03_sb";
 	Locations[n].models.always.locators = "shore03_locators";
+		
 	Locations[n].models.always.grassPatch = "shore03_grass";
 	Locations[n].models.always.grassPatch.texture = "grass\grassshore.tga.tx";
+	
 	Locations[n].models.always.l1 = "plan1";
 	Locations[n].models.always.l1.level = 9;
 	Locations[n].models.always.l1.tech = "LocationModelBlend";
@@ -311,7 +333,9 @@ int LocationInitPearl(int n)
 	locations[n].reload.l1.autoreload = "1";
 	locations[n].reload.l1.label = "Jungle";
 	locations[n].locators_radius.reload.reload1_back = 2;
+
 	n = n + 1;
+
  	//////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 	// Джунгли
 	//////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
@@ -352,12 +376,14 @@ int LocationInitPearl(int n)
 	locations[n].reload.l1.autoreload = "1";
 	locations[n].reload.l1.label = "Jungle";
 	locations[n].locators_radius.reload.reload1_back = 2;
+
 	locations[n].reload.l2.name = "reload2_back";
 	locations[n].reload.l2.go = "Miskito_village"; //поселение ловцов
 	locations[n].reload.l2.emerge = "reload1";
 	locations[n].reload.l2.autoreload = "1";
 	locations[n].reload.l2.label = "Village";
 	locations[n].locators_radius.reload.reload2_back = 2;
+
 	locations[n].reload.l3.name = "reload3_back";
 	locations[n].reload.l3.go = "Pearl_Jungle_01";
 	locations[n].reload.l3.emerge = "reload1";
@@ -365,6 +391,7 @@ int LocationInitPearl(int n)
 	locations[n].reload.l3.label = "ExitTown";
 	locations[n].locators_radius.reload.reload3_back = 2;
 	n = n + 1;
+	
 	//////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 	// Джунгли
 	//////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
@@ -410,21 +437,25 @@ int LocationInitPearl(int n)
 	locations[n].reload.l1.autoreload = "1";
 	locations[n].reload.l1.label = "Jungle";
 	locations[n].locators_radius.reload.reload1_back = 2.0;
+
 	locations[n].reload.l2.name = "reload2_back";
 	locations[n].reload.l2.go = "Pearl_Jungle_04";
 	locations[n].reload.l2.emerge = "reload2";
 	locations[n].reload.l2.autoreload = "1";
 	locations[n].reload.l2.label = "Jungle";
 	locations[n].locators_radius.reload.reload2_back = 2.0;
+
 	locations[n].reload.l3.name = "reload3_back";
 	locations[n].reload.l3.go = "Pearl_GrotEntrance";
 	locations[n].reload.l3.emerge = "reload2";
 	locations[n].reload.l3.autoreload = "1";
 	locations[n].reload.l3.label = "Jungle";
 	locations[n].locators_radius.reload.reload3_back = 2.0;
+	
 	locations[n].locators_radius.item.dolly1 = 1.0;
 	locations[n].locators_radius.item.button01 = 1.2;
 	n = n + 1;
+
 	//////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 	// Вход в грот
 	//////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
@@ -468,6 +499,7 @@ int LocationInitPearl(int n)
 	locations[n].reload.l3.autoreload = "0";
 	locations[n].reload.l3.label = "Grot";
 	locations[n].locators_radius.reload.reload1_back = 1.3;
+
 	locations[n].reload.l2.name = "reload2_back";
 	locations[n].reload.l2.go = "Pearl_Jungle_03";
 	locations[n].reload.l2.emerge = "reload3";
@@ -475,6 +507,7 @@ int LocationInitPearl(int n)
 	locations[n].reload.l2.label = "Jungle";
 	locations[n].locators_radius.reload.reload2_back = 2.0;
 	n = n + 1;
+
 	//////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 	// Грот
 	//////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
@@ -495,6 +528,7 @@ int LocationInitPearl(int n)
 	locations[n].models.always.grotto1alpha.level = 65532;
 	locations[n].models.always.chest = "chest";	
 	locations[n].models.always.locators = "grotto1_locators";
+
 	locations[n].locators_radius.item.duhi1 = 0.0;
 /*	
 	Locations[n].models.always.rays = "grotto1_rays";
@@ -519,6 +553,7 @@ int LocationInitPearl(int n)
 	locations[n].reload.l1.label = "Cave entrance";
 	locations[n].locators_radius.reload.reload1_back = 2;
 	n = n + 1;
+	
 	//////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 	// Джунгли
 	//////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
@@ -559,6 +594,7 @@ int LocationInitPearl(int n)
 	locations[n].reload.l1.autoreload = "1";
 	locations[n].reload.l1.label = "Jungle";
 	locations[n].locators_radius.reload.reload1_back = 2.0;
+
 	locations[n].reload.l2.name = "reload2_back";
 	locations[n].reload.l2.go = "Pearl_Jungle_03";
 	locations[n].reload.l2.emerge = "reload2";
@@ -566,6 +602,7 @@ int LocationInitPearl(int n)
 	locations[n].reload.l2.label = "Jungle";
 	locations[n].locators_radius.reload.reload2_back = 2.0;
 	n = n + 1;
+
 	//////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 	// залив Коронадо
 	//////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
@@ -585,8 +622,10 @@ int LocationInitPearl(int n)
 	locations[n].models.always.shore09.sea_reflection = 1;
 	Locations[n].models.always.shore09seabed = "shore09_sb";
 	Locations[n].models.always.locators = "shore09_locators";
+		
 	Locations[n].models.always.grassPatch = "shore09_grass";
 	Locations[n].models.always.grassPatch.texture = "grass\grassshore.tga.tx";
+	
 	Locations[n].models.always.l1 = "plan1";
 	Locations[n].models.always.l1.level = 9;
 	Locations[n].models.always.l1.tech = "LocationModelBlend";
@@ -610,7 +649,9 @@ int LocationInitPearl(int n)
 	locations[n].reload.l1.autoreload = "1";
 	locations[n].reload.l1.label = "Jungle";
 	locations[n].locators_radius.reload.reload1_back = 2;
+
 	n = n + 1;
+
 	//////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 	// Джунгли
 	//////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
@@ -652,12 +693,14 @@ int LocationInitPearl(int n)
 	locations[n].reload.l1.autoreload = "1";
 	locations[n].reload.l1.label = "Village";
 	locations[n].locators_radius.reload.reload1_back = 2;
+
 	locations[n].reload.l2.name = "reload2_back";
 	locations[n].reload.l2.go = "Pearl_CaveEntrance";
 	locations[n].reload.l2.emerge = "reload2";
 	locations[n].reload.l2.autoreload = "1";
 	locations[n].reload.l2.label = "Cave entrance";
 	locations[n].locators_radius.reload.reload2_back = 2;
+
 	locations[n].reload.l3.name = "reload3_back";
 	locations[n].reload.l3.go = "Shore51";
 	locations[n].reload.l3.emerge = "reload1";
@@ -665,6 +708,7 @@ int LocationInitPearl(int n)
 	locations[n].reload.l3.label = "Shore51";
 	locations[n].locators_radius.reload.reload3_back = 2;
 	n = n + 1;
+
 	//////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 	// Вход в пещеру
 	//////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
@@ -709,6 +753,7 @@ int LocationInitPearl(int n)
 	locations[n].reload.l1.autoreload = "0";
 	locations[n].reload.l1.label = "Cave";
 	locations[n].locators_radius.reload.reload1_back = 1.3;
+
 	locations[n].reload.l2.name = "reload2_back";
 	locations[n].reload.l2.go = "Pearl_Jungle_06"; //выход с Санта Каталины
 	locations[n].reload.l2.emerge = "reload2";
@@ -757,22 +802,27 @@ int LocationInitPearl(int n)
 	Locations[n].reload.l1.label = "Jungle";
 	Locations[n].reload.l1.autoreload = 1;
 	Locations[n].locators_radius.reload.reload1_back = 2;
+
 	Locations[n].reload.l2.name = "reload2";
 	Locations[n].reload.l2.go = "Bravo_shack1";
 	Locations[n].reload.l2.emerge = "reload1";
 	Locations[n].reload.l2.label = "shack";
 	Locations[n].reload.l2.autoreload = "0";
+
 	Locations[n].reload.l3.name = "reload3";
 	Locations[n].reload.l3.go = "Bravo_shack2";
 	Locations[n].reload.l3.emerge = "reload1";
 	Locations[n].reload.l3.label = "shack";
 	Locations[n].reload.l3.autoreload = "0";
+
 	Locations[n].reload.l4.name = "reload4";
 	Locations[n].reload.l4.go = "Bravo_shack3";
 	Locations[n].reload.l4.emerge = "reload1";
 	Locations[n].reload.l4.label = "shack";
 	Locations[n].reload.l4.autoreload = "0";
+
 	n = n + 1;
+	
 	//////////////////////////////////////////////////////////////////////////////////////////////////
 	//// хижина №1 - большая
 	/////////////////////////////////////////////////////////////////////////////////////////////////
@@ -791,6 +841,7 @@ int LocationInitPearl(int n)
 	locations[n].models.always.Hut_1_inside = "Hut_1_inside";
 	locations[n].models.always.Hut_1_inside.level = 65538;
 	Locations[n].models.always.locators = "Hut_1_inside_locators";
+
 	locations[n].models.always.back = "..\inside_back";
 	locations[n].models.always.back.level = 65529;
 	//Day
@@ -806,7 +857,9 @@ int LocationInitPearl(int n)
 	locations[n].reload.l1.emerge = "reload2";
 	locations[n].reload.l1.autoreload = "0";
 	locations[n].reload.l1.label = "Street";
+	
 	n = n + 1;
+	
 	//////////////////////////////////////////////////////////////////////////////////////////////////
 	//// хижина №2 
 	/////////////////////////////////////////////////////////////////////////////////////////////////
@@ -845,7 +898,9 @@ int LocationInitPearl(int n)
 	locations[n].reload.l1.emerge = "reload3";
 	locations[n].reload.l1.autoreload = "0";
 	locations[n].reload.l1.label = "Street";
+	
 	n = n + 1;
+	
 	//////////////////////////////////////////////////////////////////////////////////////////////////
 	//// хижина №3
 	/////////////////////////////////////////////////////////////////////////////////////////////////
@@ -884,6 +939,8 @@ int LocationInitPearl(int n)
 	locations[n].reload.l1.emerge = "reload4";
 	locations[n].reload.l1.autoreload = "0";
 	locations[n].reload.l1.label = "Street";
+	
 	n = n + 1;
+
 	return n;
 }

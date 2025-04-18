@@ -5,19 +5,27 @@ int move_i, dir_i, dir_i_start;
 bool openExit;
 int  money_i, moneyOp_i;
 string money_s;
+
 ref npchar;
+
 int iRate, iMoneyP, iMoneyN, iChest, iExpRate;
 int bStartGame;
 int iHeroLose, iHeroWin;
 int iTurnGame; // count for time
+
 object  DiceState;
+
 bool  bLockClick;
 bool  bSetRandDice; // жухло компа
+
 string ResultStr;
+
 void InitInterface(string iniName)
 {
     GameInterface.title = "";
+
     SendMessage(&GameInterface,"ls",MSG_INTERFACE_INIT,iniName);
+
 	SetEventHandler("InterfaceBreak","ProcessBreakExit",0);
 	SetEventHandler("exitCancel","ProcessCancelExit",0);
 	SetEventHandler("ievnt_command","ProcessCommandExecute",0);
@@ -42,18 +50,27 @@ void InitInterface(string iniName)
 	7) одна пара 2- одинаковых
 	8) ничего нет
 	*/
+	
     sgxy = 50;
     ssxy = 70;
+    
     scx = 82;
     scy = 77;
+    
     spx = 274;
     spy = 222;
+    
     openExit = false;  // можно ли прервать игру
+    
     pchar = GetMainCharacter();
+    
     iRate  = sti(pchar.GenQuest.Dice.iRate); // ставки золотых
+    
     npchar = GetCharacter(sti(pchar.GenQuest.Dice.npcharIdx));
+    
 	iMoneyP = sti(pchar.Money); // mitrokosta реальные деньги смотрим только в начале и в конце
 	iMoneyN = sti(npchar.Money);
+    
 	// mitrokosta фикс опыта за некратные ставки -->
 	if (iRate >= 50) {
             money_s = "silver";
@@ -74,6 +91,7 @@ void InitInterface(string iniName)
             iExpRate = 8;
 	}
 	// <--
+    
     if (money_s == "gold")
     {
         smxy = sgxy;
@@ -83,10 +101,14 @@ void InitInterface(string iniName)
         smxy = ssxy;
     }
 	CreateImage("DiceCup","DICE","cup", 460, 40, 460 + spx, 40 + spy); // выше всех
+	
 	CreateImage("GOLD","GOLD","GOLD", 482,444,524,486);
+	
     SetNewPicture("ICON_2", "interfaces\PORTRAITS\64\face_" + pchar.faceId+ ".tga");
+    
     CreateString(true,"Money","",FONT_NORMAL,COLOR_MONEY,613,508,SCRIPT_ALIGN_CENTER,1.1);
     CreateString(true,"MoneyInChest","",FONT_NORMAL,COLOR_MONEY,615,452,SCRIPT_ALIGN_CENTER,1.3);
+    
     if (rand(1) == 1)
     {
         dir_i  = -1;  // кто ходит - комп
@@ -96,6 +118,7 @@ void InitInterface(string iniName)
         dir_i  = 1;  // кто ходит - ГГ
     }
     dir_i_start = dir_i; // запомним кто начал
+    
     CreateString(true,"Beta_MoneyN", "", "INTERFACE_ULTRASMALL",COLOR_NORMAL, 530, 250, SCRIPT_ALIGN_LEFT,1.0);
     CreateString(true,"Beta_DiceN", "", "INTERFACE_ULTRASMALL",COLOR_NORMAL, 80, 170, SCRIPT_ALIGN_LEFT,1.0);
     CreateString(true,"Beta_DiceP", "", "INTERFACE_ULTRASMALL",COLOR_NORMAL, 80, 465, SCRIPT_ALIGN_LEFT,1.0);
@@ -107,14 +130,17 @@ void InitInterface(string iniName)
     // новая игра
     NewGameBegin(true);
 }
+
 void ProcessBreakExit()
 {
 	Exit();
 }
+
 void ProcessCancelExit()
 {
 	Exit();
 }
+
 void Exit()
 {
     if (openExit || bBettaTestMode)
@@ -128,11 +154,13 @@ void Exit()
     	DelEventHandler("My_eNewNextGame","NewNextGame");
     	DelEventHandler("My_eCompTurn","CompTurn");
     	DelEventHandler("My_eCheckGame","CheckGame");
+
         if (sti(pchar.GenQuest.Dice.SitType) == true)
     	{
             DoQuestCheckDelay("exit_sit", 0.6);
     	}
         interfaceResultCommand = RC_INTERFACE_SALARY_EXIT;
+
 		AddMoneyToCharacter(pchar, iMoneyP - sti(pchar.Money)); // mitrokosta раздача денег теперь в конце
 		AddMoneyToCharacter(npchar, iMoneyN - sti(npchar.Money));
     	Statistic_AddValue(Pchar, "GameDice_Win", iHeroWin);
@@ -142,23 +170,29 @@ void Exit()
     	Statistic_AddValue(Pchar, "GameDice_Lose", iHeroLose);
 		Achievment_SetStat(pchar, 26, iHeroLose);
 		NPChar.Quest.HeroLose = (iHeroWin < iHeroLose); //navy -- в итоге проиграл или выйграл. (не по деньгам.)
+
     	bQuestCheckProcessFreeze = true;
     	WaitDate("",0,0,0, 0, iTurnGame*15);
     	bQuestCheckProcessFreeze = false;
     	RefreshLandTime();
     	EndCancelInterface(true);
+
 	}
 	else
     {
         PlaySound("interface\knock.wav");
     }
+
 }
+
 void ProcessCommandExecute()
 {
 	string comName = GetEventData();
 	string nodName = GetEventData();
 	ref chr = GetMainCharacter();
+
     if (bLockClick) return;
+    
 	switch(nodName)
 	{
     	case "B_PACK":
@@ -190,6 +224,7 @@ void ProcessCommandExecute()
                 }
     		}
     	break;
+    	
     	case "B_ICON_1":
     		if(comName=="activate" || comName=="click")
     		{
@@ -206,18 +241,21 @@ void ProcessCommandExecute()
 				PlaySound("interface\knock.wav");
     		}
     	break;
+    	
     	case "B_ICON_2":
     		if(comName=="activate" || comName=="click")
     		{
                 //PlaySound("interface\knock.wav");
     		}
     	break;
+    	
     	case "B_HeroDice1":
     		if(comName=="activate" || comName=="click")
     		{
                 ClickHeroDice(1);
     		}
     	break;
+    	
     	case "B_HeroDice2":
     		if(comName=="activate" || comName=="click")
     		{
@@ -244,6 +282,7 @@ void ProcessCommandExecute()
     	break;
 	}
 }
+
 void MoveImg()
 {
     move_i++;
@@ -257,6 +296,7 @@ void MoveImg()
         if (move_i <= 20)
         {
             CreateImage("DiceCup","DICE","cup", 460 - (20 - move_i)*25, 40 + (20 - move_i)*15, 460 - (20 - move_i)*15 + spx, 40 +(20 - move_i)*25 + spy);
+            
             if (move_i == 20) // все - собрать кубики в линеку
 			{
             	PostEvent("My_eventMoveImg", 2000);
@@ -287,6 +327,7 @@ void MoveImg()
         }
     }
 }
+
 void PutNextCoin()
 {
     CreateImage("Money_"+money_i,"CARDS",money_s, 530+money_i*3, 310-money_i*3, 530+money_i*3 + smxy, 310-money_i*3 + smxy);
@@ -295,6 +336,7 @@ void PutNextCoinOp()
 {
     CreateImage("Money_"+(28+moneyOp_i),"CARDS",money_s, 630+moneyOp_i*3, 310-moneyOp_i*3, 630+moneyOp_i*3 + smxy, 310-moneyOp_i*3 + smxy);
 }
+
 void RedrawDeck(bool _newGame, bool _clearDice)
 {
     // монетки с запасом
@@ -317,16 +359,20 @@ void RedrawDeck(bool _newGame, bool _clearDice)
 		CreateImage("HeroDice3","DICE","", 220, 486, 220 + scx, 486 + scy);
 		CreateImage("HeroDice4","DICE","", 300, 486, 300 + scx, 486 + scy);
 		CreateImage("HeroDice5","DICE","", 380, 486, 380 + scx, 486 + scy);
+
 		CreateImage("CompDice1","DICE","", 60, 42, 60 + scx, 42 + scy);
 		CreateImage("CompDice2","DICE","",  140, 42,  140 + scx, 42 + scy);
 		CreateImage("CompDice3","DICE","", 220, 42, 220 + scx, 42 + scy);
 		CreateImage("CompDice4","DICE","", 300, 42, 300 + scx, 42 + scy);
 		CreateImage("CompDice5","DICE","", 380, 42, 380 + scx, 42 + scy);
     }
+
     ShowMoney();
+    
     SetNextTip();
     BetaInfo();
 }
+
 void SetNextTip()
 {
     if (dir_i == 1)
@@ -336,6 +382,7 @@ void SetNextTip()
     {
     }
 }
+
 void BetaInfo()
 {
     if (bBettaTestMode)
@@ -348,11 +395,13 @@ void BetaInfo()
 		if (CheckAttribute(NPchar, "Quest.DiceCheats")) GameInterface.strings.Beta_WinLose = GameInterface.strings.Beta_WinLose + " Cheats " + NPchar.Quest.DiceCheats;
     }
 }
+
 // сдать карту
 void StartGame()
 {
 	int i;
 	move_i = 0;
+
     PlaySound("interface\took_item.wav");
 	if (dir_i == -1) // комп первый
 	{
@@ -382,11 +431,13 @@ void StartGame()
     PlaySound("interface\took_item.wav");
     ShowMoney();
 }
+
 void ShowMoney()
 {
     GameInterface.strings.Money        = MakeMoneyShow(iMoneyP,MONEY_SIGN,MONEY_DELIVER);
     GameInterface.strings.MoneyInChest = MakeMoneyShow(iChest,MONEY_SIGN,MONEY_DELIVER);
 }
+
 void NewGameBegin(bool _newGame)
 {
     InitDiceState();
@@ -420,14 +471,17 @@ void EndGameCount(int who)
 		iMoneyN += iChest;
     }
 }
+
 // проверить деньги для след игры
 bool CheckNextGame()
 {
     bool ret = true;
     if (iRate*6 > iMoneyN) ret = false;
     if (iRate*6 > iMoneyP) ret = false;
+    
     return ret;
 }
+
 void PutDiceOnTable()
 {
     int ix, iy;
@@ -462,6 +516,7 @@ void PutDiceOnTable()
 	    CreateImage("Dice5","DICE","dice_"+DiceState.Desk.d5+"_" + rand(2), 350+ix, 260+iy, 350 +ix+ + scx, 260 +iy+ scy);
     }
 }
+
 void ClearDiceOnTable()
 {
     CreateImage("Dice1","","", 0, 0, 0, 0);
@@ -470,19 +525,23 @@ void ClearDiceOnTable()
     CreateImage("Dice4","","", 0, 0, 0, 0);
     CreateImage("Dice5","","", 0, 0, 0, 0);
 }
+
 void InitDiceState()
 {
 	DeleteAttribute(&DiceState, "");
+	
 	DiceState.Desk.d1 = "";
     DiceState.Desk.d2 = "";
     DiceState.Desk.d3 = "";
     DiceState.Desk.d4 = "";
     DiceState.Desk.d5 = "";
+    
     DiceState.Desk.d1.Mix = true; //сброс
     DiceState.Desk.d2.Mix = true;
     DiceState.Desk.d3.Mix = true;
     DiceState.Desk.d4.Mix = true;
     DiceState.Desk.d5.Mix = true;
+    
     DiceState.Hero.d1 = "";
     DiceState.Hero.d2 = "";
     DiceState.Hero.d3 = "";
@@ -491,11 +550,13 @@ void InitDiceState()
     DiceState.Hero.Result.Type  = ""; // тип комбинации
     DiceState.Hero.Result.Rate1 = ""; // значение старшей пары
     DiceState.Hero.Result.Rate2 = "";
+    
     DiceState.Hero.d1.Mix = false;
     DiceState.Hero.d2.Mix = false;
     DiceState.Hero.d3.Mix = false;
     DiceState.Hero.d4.Mix = false;
     DiceState.Hero.d5.Mix = false;
+    
     DiceState.Comp.d1 = "";
     DiceState.Comp.d2 = "";
     DiceState.Comp.d3 = "";
@@ -505,12 +566,14 @@ void InitDiceState()
     DiceState.Comp.Result.Rate1 = ""; // значение старшей пары
     DiceState.Comp.Result.Rate2 = ""; // значение младшей пары (если есть, для сравнения фул и две пары, когда старшие равны)
     DiceState.Comp.Result.d1 = ""; // 1-6 колво фишек
+    
     DiceState.Comp.d1.Mix = false;
     DiceState.Comp.d2.Mix = false;
     DiceState.Comp.d3.Mix = false;
     DiceState.Comp.d4.Mix = false;
     DiceState.Comp.d5.Mix = false;
 }
+
 void ClickHeroDice(int d)
 {
 	if (bLockClick) return;
@@ -534,10 +597,12 @@ void ClickHeroDice(int d)
         PlaySound("interface\knock.wav");
     }
 }
+
 void SetLineAfterDeck()
 {
     int i;
     ClearDiceOnTable();
+
 	if (dir_i == -1) // комп первый
 	{
         for (i = 1; i<=5; i++)
@@ -548,6 +613,7 @@ void SetLineAfterDeck()
 	            DiceState.Comp.(sGlobalTemp)     = DiceState.Desk.(sGlobalTemp);
 	            DiceState.Comp.(sGlobalTemp).Mix = false;
 	            if (bStartGame >0 ) DiceState.Desk.(sGlobalTemp).Mix = false;
+
 			}
 		}
 		SortDiceOnHand("Comp");
@@ -574,9 +640,11 @@ void SetLineAfterDeck()
 	}
 	CheckGame();
 }
+
 bool CheckGame()
 {
     int i;
+
 	if (dir_i == -1) // комп первый
 	{
 		dir_i = 1;
@@ -629,6 +697,7 @@ bool CheckGame()
 	BetaInfo();
 	return true;
 }
+
 void PutCompLine()
 {
 	int i;
@@ -641,6 +710,7 @@ void PutCompLine()
 		}
 	}
 }
+
 void PutHeroLine()
 {
 	int i;
@@ -653,6 +723,7 @@ void PutHeroLine()
 		}
 	}
 }
+
 bool CheckCupForDice()
 {
     int i;
@@ -760,6 +831,7 @@ void RecalcDiceOnHand(string _whom)
 			iOk = 5;
 			sTemp = "d" + k;
 			if (sti(DiceState.(_whom).(sTemp)) == sti(DiceState.(_whom).Result.Rate1)) continue;
+			
 			for (i = 1; i<=5; i++)
 			{
 		        sGlobalTemp = "d"+i;
@@ -837,6 +909,7 @@ void RecalcDiceOnHand(string _whom)
 			iOk = 5;
 			sTemp = "d" + k;
 			if (sti(DiceState.(_whom).(sTemp)) == sti(DiceState.(_whom).Result.Rate2)) continue;
+
 			for (i = 1; i<=5; i++)
 			{
 		        sGlobalTemp = "d"+i;
@@ -897,9 +970,11 @@ void SortDiceOnHand(string _whom)
     string sTemp;
     /*
 	Поиск наименьшего (простой выбор).
+
   При первом проходе находим наименьший элемент и ставим его на первое место,
 потом наименьший из оставшихся...
 	*/
+	
 	for (k = 1; k<=4; k++)
 	{
         sGlobalTemp = "d"+k;
@@ -949,11 +1024,14 @@ int GetResult()
 	}
 	return 0; // ничья
 }
+
+
 bool EndTurnGame()
 {
     string sTemp;
     int   ok = 0;
     bool  ret = true;
+
 	ok = GetResult();
 	sTemp = "I have " + GetTypeName(sti(DiceState.Comp.Result.Type)) + ". You have " + GetTypeName(sti(DiceState.Hero.Result.Type)) + ".";
     if (ok == 0)
@@ -976,6 +1054,7 @@ bool EndTurnGame()
     SetFormatedText("INFO_TEXT", sTemp);
     return ret;
 }
+
 void ContinueGame()
 {
 	if (CheckNextGame())
@@ -1005,6 +1084,7 @@ void ContinueGame()
 	    bLockClick = true;
 	}
 }
+
 void NewNextGame()
 {
     RedrawDeck(true, false);
@@ -1021,38 +1101,48 @@ void NewNextGame()
 	}
 	SetFormatedText("INFO_TEXT",ResultStr);
 }
+
 string GetTypeName(int _type)
 {
 	string ret = "nothing";
+	
 	switch (_type)
 	{
 	    case 1:
 	        ret = "poker";
 	    break;
+	    
 	    case 2:
 	        ret = "street";
 	    break;
+	    
 	    case 3:
 	        ret = "care";
 	    break;
+	    
 	    case 4:
 	        ret = "full";
 	    break;
+	    
 	    case 5:
 	        ret = "triad";
 	    break;
+	    
 	    case 6:
 	        ret = "two pairs";
 	    break;
+	    
 	    case 7:
 	        ret = "pair";
 	    break;
 	}
 	return ret;
 }
+
 void SetDiceForTableRand()
 {
 	int i;
+
 	for (i = 1; i<=5; i++)
 	{
         sGlobalTemp = "d"+i;
@@ -1067,6 +1157,7 @@ void CompTurn()
 {
     int i, d, j;
     bool ok, ok2, ok3, b;
+    
 	// если комп ходит последним и у него уже больше, то нафиг ему бросать???
 	ok = true;
 	if (GetResult() == -1 && dir_i_start == 1 && bStartGame == 3) // пропуск хода
@@ -1086,6 +1177,7 @@ void CompTurn()
             PostEvent("My_eventMoveImg", 500);
             return;
     	}
+
     	// две пары бросаем на фул (один кубик)
         ok3 = (sti(DiceState.Comp.Result.Type) == 6) && (sti(DiceState.Hero.Result.Type) >= 5);
         ok  = (sti(DiceState.Comp.Result.Type) == 6) && (sti(DiceState.Hero.Result.Type) == 4) && (sti(DiceState.Hero.Result.Rate1) <= sti(DiceState.Comp.Result.Rate2));
@@ -1120,6 +1212,7 @@ void CompTurn()
             		}
     			}
     		}
+
     		if (ok)
     		{
                 move_i = 0;
@@ -1128,6 +1221,7 @@ void CompTurn()
     	        return;
     		}
         }
+
         // супер жухло!!!!! -->
         if (sti(DiceState.Comp.Result.Type) > sti(DiceState.Hero.Result.Type) && GetCharacterSkillToOld(pchar, SKILL_FORTUNE) < rand(12) && rand(4) > 1)
         {
@@ -1146,6 +1240,7 @@ void CompTurn()
                 d = rand(5) + 1;
             }
             if (d > 6) d = 6;
+
     		for (i = 1; i<=5; i++)
     		{
     	        sGlobalTemp = "d"+i;
@@ -1170,12 +1265,15 @@ void CompTurn()
 	SetFormatedText("INFO_TEXT","I am good.");
 	PostEvent("My_eCheckGame", 800);
 }
+
 bool ClickCompDice(int d)
 {
     sGlobalTemp = "d"+d;
+    
 	if (iMoneyN >= iRate && sti(DiceState.Comp.(sGlobalTemp).Mix) == false)
 	{
 		CreateImage("CompDice" + d ,"","", 0,0,0,0);
+
 		DiceState.Comp.(sGlobalTemp).Mix = true;
 		DiceState.Desk.(sGlobalTemp).Mix = true;
   		PutNextCoinOp();
@@ -1194,11 +1292,13 @@ void RecalcAIDice(string _whom)
     int    i;
 	string sTemp;
 	bool   ok;
+	
 	for (i = 1; i<=6; i++)
 	{
         sGlobalTemp = "d"+i;
         DiceState.(_whom).Result.(sGlobalTemp) = 0;
 	}
+	
 	for (i = 1; i<=5; i++)
 	{
         sGlobalTemp = "d" + i;

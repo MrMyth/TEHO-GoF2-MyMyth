@@ -4,16 +4,20 @@ void SeaHunterCheck()
 	int    j, i;
 	string typeHunter, sGroup, sCapId;
 	ref    sld;
+	
 	SetTimerCondition("SeaHunterCheck", 0, 0, 6+rand(20), true);
     for (j=0; j< MAX_NATIONS; j++)
     {
         if (j == PIRATE) continue;
         // открыть, если не нужны мирные охотники if(NationsRelations2MainCharacter[j] != RELATION_ENEMY) continue;
+
         typeHunter = NationShortName(j);
+
         if (ChangeCharacterNationReputation(pchar, j, 0) <= -10)// Минус это НЗГ
         {
             sCapId = typeHunter + "Hunter0";
             sGroup = "Sea_" + sCapId + "1";
+            
 			Group_DeleteGroup(sGroup);
 			Group_FindOrCreateGroup(sGroup);
             for (i = 1; i <= 7; i++)
@@ -30,9 +34,12 @@ void SeaHunterCheck()
 				sld.hunter = "hunter";
 				//sld.mapEnc.worldMapShip = "Manowar_gold";
                 Group_AddCharacter(sGroup, sCapId + i);
+                
                 if (i == 1 || GetCharacterShipClass(sld) == 1) SetRandGeraldSail(sld, sti(sld.Nation));
+                
                 if (abs(ChangeCharacterNationReputation(pchar, j, 0)) < (i * 15)) break; // добавим капитана только когда положенно
             }
+
             Group_SetGroupCommander(sGroup, sCapId+ "1");
             Group_SetTaskAttackInMap(sGroup, PLAYER_GROUP);
             Group_LockTask(sGroup);
@@ -40,25 +47,31 @@ void SeaHunterCheck()
         }
     }
 }
+
 void SetShipHunter(ref Hunter)
 {
     int ShipsHunter, hcrew;
+
 	if(makeint(pchar.rank) >= 20)
 	{
 		ShipsHunter = SHIP_GALEON_H + rand(2));
 	}
+	
     if(makeint(pchar.rank) >= 12 && makeint(pchar.rank) < 20)
     {
         ShipsHunter = SHIP_GALEON_L + rand(3));
     }
+
     if(makeint(pchar.rank) >= 7 && makeint(pchar.rank) < 12)
     {
         ShipsHunter = SHIP_BRIGANTINE + rand(2);
     }
+	
 	if(makeint(pchar.rank) >= 5 && makeint(pchar.rank) < 8) // Addon-2016 Jason
     {
         ShipsHunter = SHIP_SCHOONER_W;
     }
+
     if(makeint(pchar.rank) < 5)
     {
         ShipsHunter = SHIP_CAREERLUGGER + rand(2);
@@ -70,10 +83,12 @@ void SetShipHunter(ref Hunter)
     hcrew = GetMaxCrewQuantity(Hunter);
     SetCrewQuantity(Hunter, hcrew);
     SetCrewQuantityFull(Hunter); // to_do
+    
     DeleteAttribute(Hunter,"ship.sails");
     DeleteAttribute(Hunter,"ship.masts");
     DeleteAttribute(Hunter,"ship.blots");
 	DeleteAttribute(Hunter,"ship.hulls");
+
     if (Hunter.nation == PIRATE)
     {
         Fantom_SetCannons(Hunter, "pirate");
@@ -94,6 +109,7 @@ void LandHunterReactionResult(ref loc)  // отработает после вх�
 	string typeHunter, sTemp, sCapId;
 	ref    sld;
 	bool   ok;
+	
 	//if (actLoadFlag) return; // идет лоад
 	if (LAi_IsCapturedLocation) return;
 	if (chrDisableReloadToLocation) return; // идет некий другой квест с запретом выхода
@@ -105,11 +121,13 @@ void LandHunterReactionResult(ref loc)  // отработает после вх�
 	}
 	if (CheckAttribute(Pchar, "GenQuest.HunterLongPause")) return; // Addon 2016-1 Jason пиратская линейка
 	if (LAi_grp_alarmactive == true)  return;  // уже ГГ кто-то бьет
+	
 	//if (GetQuestPastDayParam("Land_HunterTimerHasBeen") == 0) return; // сегодня уже были
 	for (j=0; j< MAX_NATIONS; j++)
     {
         if (j == PIRATE) continue;
         // открыть, если не нужны мирные охотники if(NationsRelations2MainCharacter[j] != RELATION_ENEMY) continue;
+
         typeHunter = NationShortName(j);
         if (GetQuestPastDayParam("Land_HunterTimer" + typeHunter) > (7 + rand(7)))
         {
@@ -131,6 +149,7 @@ void LandHunterReactionResult(ref loc)  // отработает после вх�
 	                sld.dialog.filename = "Hunter_dialog.c";
 	                sld.greeting = "hunter";
 	                sld.location = "none"; // вот где порылась собака!!!!!!!!!!!
+	
 	                SetModelPirate(sld);
 	                k = 0;
 					while (!CheckNPCModelUniq(sld) && k < 10)
@@ -152,8 +171,10 @@ void LandHunterReactionResult(ref loc)  // отработает после вх�
 	                LAi_group_MoveCharacter(sld, sTemp);
 	                if (abs(ChangeCharacterNationReputation(pchar, j, 0)) < (i * 9)) break; // число от НЗГ
 	            }
+	            
 				LAi_group_SetRelation(sTemp, LAI_GROUP_PLAYER, LAI_GROUP_NEITRAL);
 				LAi_group_SetRelation(sTemp, LAI_GROUP_PLAYER_OWN, LAI_GROUP_NEITRAL);
+				
 				LAi_group_ClearAllTargets();
 				LAi_SetFightModeForOfficers(false); 
 				if (ok)

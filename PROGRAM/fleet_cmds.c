@@ -8,13 +8,17 @@
 - L: паруса в боевой режим всем
 - P: защищать флагмана всем
 */
+
 bool FLT_CdreCommand = false;			
+
 void FLT_SendCommand(string sComm)
 {
 	int nShipType;
 	ref rChr;
 	int i;
+
 	FLT_CdreCommand = true;						
+
 	for (i = 1; i < COMPANION_MAX; i++)
 	{
 		int cn;									
@@ -23,6 +27,7 @@ void FLT_SendCommand(string sComm)
 		makeref(rChr, Characters[cn]);			
 		nShipType = GetCharacterShipType(rChr);
 		if (nShipType == SHIP_NOTUSED) continue;
+
 		switch (sComm)
 		{
 			case "FLT_LoadBalls"	:

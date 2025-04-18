@@ -16,6 +16,7 @@ void ProcessCommonDialogEvent(ref NPChar, aref Link, aref NextDiag)
 				link.l1.go = "Consumption";
 			}
 		break;
+		
 		//Цена чахотки
 		case "Consumption":
 			dialog.text = "I don't know. And I don't wanna know. I don't recommend you to know either. And now, you'll have to excuse me, but I have business I must return to. I guess that you probably have business to take care of as well? Take care of it.";
@@ -33,3 +34,4 @@ void ProcessCommonDialogEvent(ref NPChar, aref Link, aref NextDiag)
 	}
 	UnloadSegment(NPChar.FileDialog2);  // если где-то выход внутри switch  по return не забыть сделать анлод
 }
+

@@ -4,10 +4,13 @@ void ProcessDialogEvent()
 {
 	ref NPChar, sld;
 	aref Link, NextDiag;
+	
 	DeleteAttribute(&Dialog,"Links");
+
 	makeref(NPChar,CharacterRef);
 	makearef(Link, Dialog.Links);
 	makearef(NextDiag, NPChar.Dialog);
+
     // вызов диалога по городам -->
     NPChar.FileDialog2 = "DIALOGS\" + LanguageGetLanguage() + "\Church\" + NPChar.City + "_Church.c";
     if (LoadSegment(NPChar.FileDialog2))
@@ -15,18 +18,23 @@ void ProcessDialogEvent()
         ProcessCommonDialog(NPChar, Link, NextDiag);
 		UnloadSegment(NPChar.FileDialog2);
 	}
+	
     // вызов диалога по городам <--
 	ProcessCommonDialogRumors(NPChar, Link, NextDiag);//homo 16/06/06
+    
     string iDay, iMonth, lastspeak_date, eggStr;
     string sTemp, sTitle;
+
 	iDay           = environment.date.day;
 	iMonth         = environment.date.month;
 	lastspeak_date = iday + " " + iMonth;
 	int iMoneyToCharacter;
+
 	if (!CheckAttribute(npchar, "quest.HealthMonth"))
     {
         npchar.quest.HealthMonth = "";
     }
+	
     if (!CheckAttribute(npchar, "quest.BadMeeting"))
     {	
         npchar.quest.BadMeeting = "";
@@ -35,33 +43,40 @@ void ProcessDialogEvent()
     {
         npchar.quest.GhostShipMonth = "";
     }
+    
 	if (!CheckAttribute(NPChar, "GenQuest.ChurchQuest_2.GiveQuestDateParam"))
 	{
 		NPChar.GenQuest.ChurchQuest_2.GiveQuestDateParam = "";
 	}
+	
 	if(!CheckAttribute(NPChar, "GenQuest.ChurchQuest_2.GiveQuestDay"))
 	{
 		NPChar.GenQuest.ChurchQuest_2.GiveQuestDay = "";
 	}
+	
 	if (!CheckAttribute(NPChar, "GenQuest.ChurchQuest_1.GiveQuestDateParam"))
 	{
 		NPChar.GenQuest.ChurchQuest_1.GiveQuestDateParam = "";
 	}
+	
 	if(!CheckAttribute(NPChar, "GenQuest.ChurchQuest_1.GiveQuestDay"))
 	{
 		NPChar.GenQuest.ChurchQuest_1.GiveQuestDay = "";
 	}
+	
 	switch(Dialog.CurrentNode)
 	{
 		case "Exit":
 			NextDiag.CurrentNode = NextDiag.TempNode;
 			DialogExit();
 		break;
+		
 		case "fight":
 			DialogExit();
 			NextDiag.CurrentNode = NextDiag.TempNode;
 			LAi_group_Attack(NPChar, Pchar);
 		break;
+		
 		case "First time":
 			if (LAi_grp_playeralarm > 0)
 			{
@@ -113,6 +128,7 @@ void ProcessDialogEvent()
 			}
 			NextDiag.TempNode = "First time";
 		break;
+		
 		case "node_2":
 			dialog.text = "Oh, you blasphemer! Go away! Don't dare to defile our Lord's temple with your presence!";
 			link.l1 = "I wasn't even going to stay here.";
@@ -120,6 +136,7 @@ void ProcessDialogEvent()
 			ChangeCharacterComplexReputation(pchar,"nobility", -0.25);
 			npchar.quest.BadMeeting = lastspeak_date;
 		break;
+
 		case "node_3":
 			dialog.text = "May the Lord bless you and your affairs... Have you come to me for a particular reason?";
     		link.l1 = RandPhraseSimple("I'd like to make a donation.", "I want to donate to a good cause.");
@@ -129,6 +146,7 @@ void ProcessDialogEvent()
     		link.l3 = RandPhraseSimple("I have business with you, " + RandPhraseSimple("padre.", "holy Father."),
                                            "I arrived on business, " + RandPhraseSimple("padre.", "holy Father."));
     		link.l3.go = "work";
+			
 			//--> Сага
 			// Картахена, Чика Гонсалес
 			if(CheckAttribute(pchar, "questTemp.Saga") && pchar.questTemp.Saga == "cartahena" && pchar.location == "Cartahena_church" && sti(pchar.money) >= 1000)
@@ -169,6 +187,7 @@ void ProcessDialogEvent()
 				link.l4.go = "prayer";
 			}
 			//<-- Сага
+			
 			// Warship, 30.05.11. Миниквест из дел чести "Divine justice".
 			if(CheckAttribute(Pchar, "QuestTemp.AffairOfHonor.GodJudgement.CanSpeakPriest") && AffairOfHonor_GetCurQuest() == "GodJudgement" &&
 				NPChar.city == PChar.QuestTemp.AffairOfHonor.GodJudgement.CityId)
@@ -176,9 +195,11 @@ void ProcessDialogEvent()
 				link.l5 = "Terrible things are happening, holy Father.";
 				link.l5.go = "AffairOfHonor_GodJudgement_1";
 			}
+			
 			link.l6 = "Excuse me, but I have to go.";
 			link.l6.go = "exit";
 		break;
+
 		case "AffairOfHonor_GodJudgement_1":
 			dialog.text = "Don't worry, my son. The Lord will see you suffering and He will extend a helping hand. Always carry a cross on you to strengthen your faith.";
 			Link.l1 = "Thank you, holy Father.";
@@ -186,6 +207,7 @@ void ProcessDialogEvent()
 			AddItems(PChar, "amulet_3", 15);
 			DeleteAttribute(Pchar, "QuestTemp.AffairOfHonor.GodJudgement.CanSpeakPriest");
 		break;
+
 // Jason-------------------------------------------------Сага----------------------------------------------
 		//--> Чика Гонсалес
 		case "saga" :
@@ -193,22 +215,26 @@ void ProcessDialogEvent()
 			Link.l1 = "Here you go, Father - please take these coins.";
 			Link.l1.go = "saga_1";
 		break;
+		
 		case "saga_1" :
 			AddMoneyToCharacter(pchar, -1000);
 			dialog.text = "Thank you, my son. What's the name of the senora, whose soul I shall pray for?";
 			Link.l1 = "Her name is Chica Gonzales, and she left this world many years ago.";
 			Link.l1.go = "saga_2";
 		break;
+		
 		case "saga_2" :
 			dialog.text = "That's strange... Did something happen to Alvarez, and he asked you about this?";
 			Link.l1 = "And who is this Alvarez and what's so strange about my request?";
 			Link.l1.go = "saga_3";
 		break;
+		
 		case "saga_3" :
 			dialog.text = "Well how! Each month guard of our lighthouse, Alvarez, for two decades, orders prayer service for the peace of the soul of this lady. Anyone but him still hasn't cared about Lady Gonzales. And you come here. So I thought. However, it is not my business. Certainly, I will be glad to humbly carry out your wishes to help the stray soul to find calmness and road to paradise.";
 			Link.l1 = "Thank you, holy Father.";
 			Link.l1.go = "saga_4";
 		break;
+		
 		case "saga_4" :
 			DialogExit();
 			AddQuestRecord("Saga", "15");
@@ -222,6 +248,7 @@ void ProcessDialogEvent()
 			}
 		break;
 		// <-- Чика Гонсалес
+		
 		// --> исцеление от заклятий
 		case "treatment":
 			dialog.text = "Jessica? I remember her. Poor sinner. But didn't she die?";
@@ -229,31 +256,37 @@ void ProcessDialogEvent()
 			link.l1.go = "treatment_1";
 			DeleteAttribute(pchar, "questTemp.Saga.JessTreatment");
 		break;
+		
 		case "treatment_1":
 			dialog.text = "Who placed these spells upon you, my son? Tell me honestly.";
 			link.l1 = "She... she did. Jessica.";
 			link.l1.go = "treatment_2";
 		break;
+		
 		case "treatment_2":
 			dialog.text = "God save us! That's what I thought. Delving into pagan rites may cast even the strongest souls into the abyss of darkness... But... did she really die? Or... not completely?";
 			link.l1 = "You're extremely insightful, Father. Now she's totally dead.";
 			link.l1.go = "treatment_3";
 		break;
+		
 		case "treatment_3":
 			dialog.text = "This poor sinner confessed quite a few times with me. Hate completely destroyed her from the inside. I knew what she was up to. I attempted to stop her, tried to make her follow the straight and narrow, but all my efforts were in vain. I warned her about the terrible danger and dire consequences of the unholy deeds...";
 			link.l1 = "Yes, holy Father. What I had seen, was terrible indeed. But... how can I be cured?";
 			link.l1.go = "treatment_4";
 		break;
+		
 		case "treatment_4":
 			dialog.text = "By the power of prayer, my son. By the power of the holy cleansing prayer at our temple. You will have to pray for very long, and not for yourself only. You'll have to pray for her as well.";
 			link.l1 = "For Jessica?";
 			link.l1.go = "treatment_5";
 		break;
+		
 		case "treatment_5":
 			dialog.text = "Yes. For yourself and for her soul. Come here by ten at night, so that no one would be distracting you. You'll have to pray all night through. Bring with you twenty thick wax candles, light them up and pray until they all burn out.";
 			link.l1 = "And then I'll be healed?";
 			link.l1.go = "treatment_6";
 		break;
+		
 		case "treatment_6":
 			dialog.text = "Everything is in the hands of the Lord. I will teach you how to pray and leave there Holy Scripture for you. The power of holy prayer shall destroy foul spells which befell you, and also cleanse the soul of poor Jessica.";
 			if (GetCharacterItem(pchar, "mineral3") >= 20)
@@ -267,15 +300,18 @@ void ProcessDialogEvent()
 				link.l1.go = "treatment_7";
 			}
 		break;
+		
 		case "treatment_7":
 			dialog.text = "All right, my son. I'll be waiting for you. Don't waste time!";
 			link.l1 = "I'll be here soon...";
 			link.l1.go = "treatment_8";
 		break;
+		
 		case "treatment_8":
 			DialogExit();
 			npchar.quest.candle = "true";
 		break;
+		
 		case "candle":
 			dialog.text = "Have you brought twenty candles, my son?";
 			if (GetCharacterItem(pchar, "mineral3") >= 20)
@@ -290,11 +326,13 @@ void ProcessDialogEvent()
 				link.l1.go = "exit";
 			}
 		break;
+		
 		case "treatment_9":
 			dialog.text = "Well, my son. Give them to me and come back tomorrow after ten o'clock in the evening. I will teach you the necessary prayers and leave you in the church at night.";
 			link.l1 = "Thanks, holy Father. See you tomorrow!";
 			link.l1.go = "treatment_10";
 		break;
+		
 		case "treatment_10":
 			DialogExit();
 			RemoveItems(pchar, "mineral3", 20);
@@ -303,27 +341,32 @@ void ProcessDialogEvent()
 			npchar.quest.prayer = "true";
 			SaveCurrentNpcQuestDateParam(npchar, "prayer_date");
 		break;
+		
 		case "prayer":
 			dialog.text = "I have prepared for you the texts of the prayers, my son. I also leave there your twenty candles and the Holy Scripture. Light the candles and start praying. Pray without a stop; pray for your recovery and for the soul of this poor sinner Jessica. If you forget something or if you don't understand something - it doesn't really matter. Pray from your heart, your sincere desire is what matters to our Lord.";
 			link.l1 = "Thank you, Father. I got it.";
 			link.l1.go = "prayer_1";
 		break;
+		
 		case "prayer_1":
 			dialog.text = "I will come back in the morning. I will be praying for you too...";
 			link.l1 = "Thank you, holy Father.";
 			link.l1.go = "prayer_2";
 		break;
+		
 		case "prayer_2":
 			DialogExit();
 			LAi_SetActorType(npchar);
 			LAi_ActorGoToLocation(npchar, "reload", "reload1", "none", "", "", "Saga_BarbadosTreatment", -1);
 			chrDisableReloadToLocation = true;//закрыть локацию
 		break;
+		
 		case "seektreatment":
 			dialog.text = "What pagan spells have stricken you, my son?";
 			link.l1 = "I don't know how they are called. I am weak and sluggish; I cannot run around, and it is very difficult for me to fight.";
 			link.l1.go = "seektreatment_1";
 		break;
+		
 		case "seektreatment_1":
 			if (sti(pchar.questTemp.Saga.JessSeekTreatment) == 3)
 			{
@@ -338,11 +381,13 @@ void ProcessDialogEvent()
 				link.l1.go = "seektreatment_2";
 			}
 		break;
+		
 		case "seektreatment_2":
 			dialog.text = "Don't despair, my son. The Lord will hear you and He will send you help. But I would recommend you to ask around in other holy abodes - perhaps there are priests who know how to remove pagan enchantments.";
 			link.l1 = "Thank you, Father! I will be healed - even if I have to visit every church on the archipelago!";
 			link.l1.go = "seektreatment_3";
 		break;
+		
 		case "seektreatment_3":
 			dialog.text = "Go, my son, and may the Lord watch over you.";
 			link.l1 = "Goodbye, padre.";
@@ -350,11 +395,13 @@ void ProcessDialogEvent()
 			npchar.quest.seektreatment = "true";
 			pchar.questTemp.Saga.JessSeekTreatment = sti(pchar.questTemp.Saga.JessSeekTreatment)+1;
 		break;
+		
 		case "seektreatment_4":
 			dialog.text = "Only the Lord can help you - and you yourself, my son. A priest can only teach you what to do and how. Come see him.";
 			link.l1 = "Thank you, padre! You have saved me! I will immediately sail to Barbados!";
 			link.l1.go = "seektreatment_5";
 		break;
+		
 		case "seektreatment_5":
 			dialog.text = "Go now, and may the Lord watch over you.";
 			link.l1 = "Goodbye, Father.";
@@ -362,26 +409,31 @@ void ProcessDialogEvent()
 			DeleteAttribute(pchar, "questTemp.Saga.JessSeekTreatment");
 			pchar.questTemp.Saga.JessFindTreatment = "true";
 		break;
+		
 		case "findtreatment":
 			dialog.text = "What pagan curses have befallen you, my son? Let me guess: you cannot run, a saber is too heavy for you and your movements are slow and sluggish?";
 			link.l1 = "How did you know it, Father?";
 			link.l1.go = "findtreatment_1";
 		break;
+		
 		case "findtreatment_1":
 			dialog.text = "Judging by your step as you approached me, my son, it was not too hard to see it. May the Lord be merciful to our sinful souls... Tell me, my son, and be honest - who has placed these enchantments upon you?";
 			link.l1 = "You need a name, Father?";
 			link.l1.go = "findtreatment_2";
 		break;
+		
 		case "findtreatment_2":
 			dialog.text = "If you know the name, then speak it.";
 			link.l1 = "Her name was... Jessica Rose.";
 			link.l1.go = "findtreatment_3";
 		break;
+		
 		case "findtreatment_3":
 			dialog.text = "God save us! Delving into pagan rites may cast even the strongest souls into the abyss of darkness... What happened with her, with this poor soul?";
 			link.l1 = "She died, Father.";
 			link.l1.go = "findtreatment_4";
 		break;
+		
 		case "findtreatment_4":
 			dialog.text = "But... did she really die? Or... not completely?";
 			link.l1 = "You're extremely insightful, holy Father. Now she's totally dead.";
@@ -390,6 +442,7 @@ void ProcessDialogEvent()
 			DeleteAttribute(pchar, "questTemp.Saga.JessFindTreatment"); // если было
 		break;
 		//<-- Сага
+		
 		// Church GenQuest_2 -->	
 		case "GenQuest_Church_2_Start_1":
 			dialog.text = "...and Lord's mercy! May the universal darkness consume their souls for their sins...";
@@ -398,6 +451,7 @@ void ProcessDialogEvent()
 			link.l2 = "Well... shit. Farewell then.";
 			link.l2.go = "exit";
 		break;
+			
 		case "GenQuest_Church_2_Start_2":
 			dialog.text = "Oh, "+ GetSexPhrase("my son","my daughter") +", terrible sacrilege, the most foul of crimes had just come to pass! Stealing from the church!!! It's like dipping one's hand into the pocket of the Lord Himself!";
 			link.l1 = "Oh, I see... How did it happen?";
@@ -405,16 +459,19 @@ void ProcessDialogEvent()
 			link.l2 = LinkRandPhrase("It's very sad and all stuff, but I really have go...", "My condolences, padre, but I have to go...", "You must have been relying on the Almighty too much. You should have used safer locks. Well, I have to go...");
 			link.l2.go = "exit";
 		break;
+			
 		case "GenQuest_Church_2_Start_3":
 			dialog.text = "Under cloud of night, some scoundrels snatched everything collected by the parish! These blasphemers have taken even the sacrificial chalice!";
 			link.l1 = "O tempora, o mores... But, I hope, you have undertaken something on a hot scent?";
 			link.l1.go = "GenQuest_Church_2_Start_4";
 		break;
+			
 		case "GenQuest_Church_2_Start_4":
 			dialog.text = "But of course! I have excommunicated these blasphemous robbers, and now I am pronouncing an anathema against them!";
 			link.l1 = "I don't doubt that it is the most effective measure. But I meant something more practical. To organize pursuit, for example.";
 			link.l1.go = "GenQuest_Church_2_Start_5";
 		break;
+			
 		case "GenQuest_Church_2_Start_5":
 			dialog.text = "Ah, what can do the simple priest bound by the vow of non-resistance to the evil? These scoundrels certainly are already far from here, drinking away in taverns amassed by robbery, or give way to the debauch and dissipation in the cuddles of fallen women! I do hope, they will meet their end there!";
 			link.l1 = RandPhraseSimple("I am sure, that such end is much more attractive, than to be hanged. However, I will not distruct you anymore. All the best.", "Well, one time, sooner or later, we will all go to the forefathers, but I wouldn't refuse from such an end. However, I have to go. Good luck.");
@@ -422,11 +479,13 @@ void ProcessDialogEvent()
 			link.l2 = LinkRandPhrase("Holy Father", "Padre", "Father") + ", but I am unconnected any vows and with readiness I will help Lord to approach the time of retribution.";
 			link.l2.go = "GenQuest_Church_2_Start_5_1";
 		break;
+		
 		case "GenQuest_Church_2_Start_5_1": //выше - выход из диалога без подтверждения - странно, однако
 			dialog.text = "I will be praying for you, my son! Go now and give these swindlers what they deserve!";
 			link.l1 = "Have no doubt, Padre";
 			link.l1.go = "GenQuest_Church_2_Start_6";
 		break;
+			
 		case "GenQuest_Church_2_Start_6":
 			DialogExit();
 			NextDiag.CurrentNode = NextDiag.TempNode;
@@ -446,11 +505,13 @@ void ProcessDialogEvent()
 			AddQuestUserDataForTitle(sQuestTitle, "sCity", XI_ConvertString("Colony" + NPChar.City + "Gen"));
 			AddQuestUserData(sQuestTitle, "sName", NPChar.name);
 		break;
+			
 		case "GenQuest_Church_2_Thief_2":
 			dialog.text = "Well, perhaps, the all-good Creator sends his foolish children pestilence and hunger to punish them for their sins...";
 				link.l1 = "For pride, for example, or greed... Why have you turned pale, padre?";
 				link.l1.go = "GenQuest_Church_2_Thief_3";
 			break;
+			
 		case "GenQuest_Church_2_Thief_3":
 			if(rand(1) == 0) // Священник искренне раскаивается...
 			{
@@ -465,16 +526,19 @@ void ProcessDialogEvent()
 					link.l1.go = "GenQuest_Church_2_Thief_4_2_1";
 			}
 		break;
+			
 		case "GenQuest_Church_2_Thief_4_1_1":
 			dialog.text = ""+ GetSexPhrase("My son","My daughter") +"... God forgive me... such money, such temptation... the man is weak, truly weak! I couldn't stand it... I was out of my mind... I prayed day and night, did penance, I was rigorously fasting, I was mortifying my flesh... Unworthy, I was begging the Heavens only to spare those poor men, whom I had tempted, driven by my own greed...";
 			link.l1 = LinkRandPhrase("Father", "Padre", "Father") + ", calm down. They haven't told anything about it... and they won't be telling it, that's for sure. By the way, they have voluntarily returned to me the Communion chalice, which I brought back to you.";
 			link.l1.go = "GenQuest_Church_2_Thief_4_1_2";
 		break;
+			
 		case "GenQuest_Church_2_Thief_4_1_2":
 			dialog.text = "My Lord, I thank You! My God, You've heard the prayers of your unworthy servant, a stumbled sinner bogged down in filth and vices...";
 			link.l1 = "Anyone could have stumbled... But since your repentance seems sincere, I'd say so: you're a decent man and a good priest. If you stand before the court, there will be no good out of it. And it is up to you to decide whether to stay in Lord's service or not - only He can tell you that and guide you...";
 			link.l1.go = "GenQuest_Church_2_Thief_4_1_3";
 		break;
+			
 		case "GenQuest_Church_2_Thief_4_1_3":
 			if(rand(1) == 0) // Священник хочет всучить ГГ бабло
 			{
@@ -496,6 +560,7 @@ void ProcessDialogEvent()
 			}
 			ChurchGenQuest2_RemoveCup();
 		break;
+			
 		case "GenQuest_Church_2_Thief_4_1_4":
 			DialogExit();
 			NextDiag.CurrentNode = NextDiag.TempNode;
@@ -508,6 +573,7 @@ void ProcessDialogEvent()
 			DeleteAttribute(PCHar, "GenQuest.ChurchQuest_2");
 			NPChar.GenQuest.ChurchQuest_2.GiveQuestDateParam = iMonth;
 		break;
+			
 		case "GenQuest_Church_2_Thief_4_1_5":
 			DialogExit();
 			NextDiag.CurrentNode = NextDiag.TempNode;
@@ -520,12 +586,14 @@ void ProcessDialogEvent()
 			DeleteAttribute(PCHar, "GenQuest.ChurchQuest_2");
 			NPChar.GenQuest.ChurchQuest_2.GiveQuestDateParam = iMonth;
 		break;
+			
 		case "GenQuest_Church_2_Thief_4_1_6":
 			iMoneyToCharacter = sti(PChar.GenQuest.ChurchQuest_2.MoneyToCharacter);
 			dialog.text = "Oh, child, I am truly sorry... I hope this small contribution of " + FindRussianMoneyString(iMoneyToCharacter) + " should be enough to cover your expenses?";
 			link.l1 = "Yes, " + LinkRandPhrase("padre.", "Father.") + ", that's enough, thanks.";
 			link.l1.go = "GenQuest_Church_2_Thief_4_1_6_1";
 		break;
+			
 		case "GenQuest_Church_2_Thief_4_1_6_1":
 			DialogExit();
 			NextDiag.CurrentNode = NextDiag.TempNode;
@@ -538,16 +606,19 @@ void ProcessDialogEvent()
 			DeleteAttribute(PCHar, "GenQuest.ChurchQuest_2");
 			NPChar.GenQuest.ChurchQuest_2.GiveQuestDateParam = iMonth;
 		break;
+			
 		case "GenQuest_Church_2_Thief_4_2_1":
 			dialog.text = "I don't quite understand your insinuations, "+ GetSexPhrase("my son","my daughter") +", what are you talking about?!";
 			link.l1 = "I am talking about terrible things that greed can do to a man and that I got from shake-rags allegedly robbing your church... Did you want to say anything?";
 			link.l1.go = "GenQuest_Church_2_Thief_4_2_2";
 		break;
+			
 		case "GenQuest_Church_2_Thief_4_2_2":
 			dialog.text = "I'd tell you, child, that you are talking to a clergy and you should show a little bit more respect, or you could end up regretting it. As for this chalice - I've never seen it before, but if you are willing to donate it to the parish, then...";
 			link.l1 = "Hold your horses, padre. You won't have it until you explain yourself.";
 			link.l1.go = "GenQuest_Church_2_Thief_4_2_3";
 		break;
+			
 		case "GenQuest_Church_2_Thief_4_2_3":
 			if(rand(1) == 0) // Просто несколько разные варианты диалога
 			{
@@ -564,6 +635,7 @@ void ProcessDialogEvent()
 				link.l2.go = "GenQuest_Church_2_Thief_4_2_4_2_2";
 			}
 		break;
+			
 		case "GenQuest_Church_2_Thief_4_2_4_1":
 			dialog.text = "Mmmm... "+ GetSexPhrase("My son... Mister... Sir...","My daughter... Miss... Lady...") +" " + PChar.name + "... I am ready to bend before you... consider our disagreements, so to say... and compensate your expenses with this modest sum of " + FindRussianMoneyString(iMoneyToCharacter) + "... of course, if you are not going to involve others in this affair...";
 			// При этом варианте репу плюсуем
@@ -573,6 +645,7 @@ void ProcessDialogEvent()
 			link.l2 = "I am not going to involve anyone. Take the chalice! This gold I take only because I expended in you plenty of time and money.";
 			link.l2.go = "GenQuest_Church_2_Thief_4_2_4_1_2";
 		break;
+			
 		case "GenQuest_Church_2_Thief_4_2_4_1_1":
 			DialogExit();
 			iMoneyToCharacter = PChar.GenQuest.ChurchQuest_2.MoneyToCharacter;
@@ -591,6 +664,7 @@ void ProcessDialogEvent()
 			DeleteAttribute(PCHar, "GenQuest.ChurchQuest_2");
 			NPChar.GenQuest.ChurchQuest_2.GiveQuestDateParam = iMonth;
 		break;
+			
 		case "GenQuest_Church_2_Thief_4_2_4_1_2":
 			DialogExit();
 			NextDiag.CurrentNode = NextDiag.TempNode;
@@ -603,6 +677,7 @@ void ProcessDialogEvent()
 			DeleteAttribute(PCHar, "GenQuest.ChurchQuest_2");
 			NPChar.GenQuest.ChurchQuest_2.GiveQuestDateParam = iMonth;
 		break;
+			
 		case "GenQuest_Church_2_Thief_4_2_4_2_1":
 			DialogExit();
 			NextDiag.CurrentNode = NextDiag.TempNode;
@@ -617,6 +692,7 @@ void ProcessDialogEvent()
 			DeleteAttribute(PCHar, "GenQuest.ChurchQuest_2");
 			NPChar.GenQuest.ChurchQuest_2.GiveQuestDateParam = iMonth;
 		break;
+			
 		case "GenQuest_Church_2_Thief_4_2_4_2_2":
 			DialogExit();
 			NextDiag.CurrentNode = NextDiag.TempNode;
@@ -629,6 +705,7 @@ void ProcessDialogEvent()
 			DeleteAttribute(PCHar, "GenQuest.ChurchQuest_2");
 			NPChar.GenQuest.ChurchQuest_2.GiveQuestDateParam = iMonth;
 		break;
+			
 		case "GenQuest_Church_2_Finally_Complete_1":
 			// ничего не принесли священнику.
 			if(CheckAttribute(PChar, "GenQuest.ChurchQuest_2.Complete.Without_All"))
@@ -680,6 +757,7 @@ void ProcessDialogEvent()
 				link.l2.go = "GenQuest_Church_2_Finally_Complete_1_3_1";
 			}
 		break;
+			
 		case "GenQuest_Church_2_Finally_Complete_1_3_1": // ГГ решил заныкать деньги...
 			if(rand(1) == 0)	// Священник верит ГГ но не дает денег...
 			{
@@ -714,6 +792,7 @@ void ProcessDialogEvent()
 					link.l2.go = "GenQuest_Church_2_Finally_Complete_1_3_1_2";
 			}
 		break;
+			
 		case "GenQuest_Church_2_Finally_Complete_1_3_1_3":
 			if(rand(6) == 3)
 			{
@@ -726,6 +805,7 @@ void ProcessDialogEvent()
 				link.l1 = "How is that?! Padre!..";
 				link.l1.go = "GenQuest_Church_2_Finally_Complete_1_3_1_3_2";
 			break;
+			
 		case "GenQuest_Church_2_Finally_Complete_1_3_1_3_1":
 			DialogExit();
 			NextDiag.CurrentNode = NextDiag.TempNode;
@@ -738,6 +818,7 @@ void ProcessDialogEvent()
 			DeleteAttribute(PCHar, "GenQuest.ChurchQuest_2");
 			NPChar.GenQuest.ChurchQuest_2.GiveQuestDateParam = iMonth;
 		break;
+			
 		case "GenQuest_Church_2_Finally_Complete_1_3_1_3_2":
 			DialogExit();
 			NextDiag.CurrentNode = NextDiag.TempNode;
@@ -753,6 +834,7 @@ void ProcessDialogEvent()
 			npchar.quest.BadMeeting = lastspeak_date;
 			NPChar.GenQuest.ChurchQuest_2.GiveQuestDateParam = iMonth;
 		break;
+			
 		case "GenQuest_Church_2_Finally_Complete_1_4_1":
 			if(rand(1) == 0) // Поверил.
 			{
@@ -767,11 +849,13 @@ void ProcessDialogEvent()
 				link.l1.go = "GenQuest_Church_2_Finally_Complete_1_4_1_2";
 			}
 			break;
+			
 		case "GenQuest_Church_2_Finally_Complete_1_4_1_2":
 			dialog.text = "Get out and thank the Almighty, who had given me a meek heart. It's the only reason that you're still not marked like a thief and rogue!";
 			link.l1 = "How is that?! " + LinkRandPhrase("Holy Father", "Padre", "Father") + "!..";
 			link.l1.go = "GenQuest_Church_2_Finally_Complete_1_4_1_2_1";
 		break;
+			
 		case "GenQuest_Church_2_Finally_Complete_1_4_1_2_1":
 			DialogExit();
 			NextDiag.CurrentNode = NextDiag.TempNode;
@@ -784,6 +868,7 @@ void ProcessDialogEvent()
 			NPChar.quest.BadMeeting = lastspeak_date;
 			NPChar.GenQuest.ChurchQuest_2.GiveQuestDateParam = iMonth;
 		break;
+			
 		case "GenQuest_Church_2_Finally_Complete_1_3_1_1":
 			DialogExit();
 			iMoneyToCharacter = PChar.GenQuest.ChurchQuest_2.MoneyToCharacter;
@@ -797,6 +882,7 @@ void ProcessDialogEvent()
 			DeleteAttribute(PChar, "GenQuest.ChurchQuest_2");
 			NPChar.GenQuest.ChurchQuest_2.GiveQuestDateParam = iMonth;
 		break;
+			
 		case "GenQuest_Church_2_Finally_Complete_1_3_1_2":
 			DialogExit();
 			NextDiag.CurrentNode = NextDiag.TempNode;
@@ -808,11 +894,13 @@ void ProcessDialogEvent()
 			DeleteAttribute(PChar, "GenQuest.ChurchQuest_2");
 			NPChar.GenQuest.ChurchQuest_2.GiveQuestDateParam = iMonth;
 		break;
+			
 		case "GenQuest_Church_2_Finally_Complete_1_1_1":
 			dialog.text = "Oh, "+ GetSexPhrase("my son","my daughter") +". Your words plunged me into deep sorrow - but not despair, because desperation is a mortal sin! The Lord has visited us with another trial in order to strengthen our faith.";
 			link.l1 = "Amen, Father...";
 			link.l1.go = "GenQuest_Church_2_Finally_Complete_1_1_2";
 		break;
+			
 		case "GenQuest_Church_2_Finally_Complete_1_1_2":
 			DialogExit();
 			NextDiag.CurrentNode = NextDiag.TempNode;
@@ -823,16 +911,19 @@ void ProcessDialogEvent()
 			DeleteAttribute(PChar, "GenQuest.ChurchQuest_2");
 			NPChar.GenQuest.ChurchQuest_2.GiveQuestDateParam = iMonth;
 		break;
+			
 		case "GenQuest_Church_2_Finally_Complete_1_2_1":
 			dialog.text = "Lord, I thank You! Indeed, you were His tool, my child! I knew that our Celestial Father would show you the way and provide all the help you needed. I was praying without a break, and...";
 			link.l1 = "You know, padre, in affairs like this one, weapons are surely more useful than prayers. But, apparently, your prayers indeed were heard.";
 			link.l1.go = "GenQuest_Church_2_Finally_Complete_1_2_2";
 		break;
+			
 		case "GenQuest_Church_2_Finally_Complete_1_2_2":
 			dialog.text = ""+ GetSexPhrase("My son","My daughter") +", I want to reward you deservedly, you"+ GetSexPhrase(", like a true knight of Mother Church,","") +" did everything in power overca...";
 			link.l1 = "Padre, you are really exaggerating my humble achievements. I will now leave you to praise our Lord...";
 			link.l1.go = "GenQuest_Church_2_Finally_Complete_1_2_3";
 		break;
+			
 		case "GenQuest_Church_2_Finally_Complete_1_2_3":
 			DialogExit();
 			NextDiag.CurrentNode = NextDiag.TempNode;
@@ -848,6 +939,7 @@ void ProcessDialogEvent()
 			NPChar.GenQuest.ChurchQuest_2.GiveQuestDateParam = iMonth;
 		break;
 		// <-- квесты церкви
+
 		case "donation":
 			dialog.Text = "Of course, "+ GetSexPhrase("my son","my daughter") +". How much you would like to donate to the Holy Church?";
 			Link.l1 = "I am sorry, holy Father, but I've changed my mind.";
@@ -875,6 +967,7 @@ void ProcessDialogEvent()
 			}
 			//<<-- квест пожертвования хозяйки борделя
 		break;
+
 		case "No donation":
 			dialog.Text = "Hmm... Well, this is your decision, and you are free to change your mind. And don't forget that this will be accounted on the Day of Judgement.";
 			Link.l1 = "As many other things will, too. Let's change the subject.";
@@ -882,6 +975,7 @@ void ProcessDialogEvent()
 			Link.l2 = "I am sorry, Father, but it's time for me to leave.";
 			Link.l2.go = "exit";
 		break;
+
 		case "donation paid_100":
 			AddMoneyToCharacter(pchar, -100);
 			pchar.questTemp.donate = makeint(pchar.questTemp.donate) + 100;
@@ -892,6 +986,7 @@ void ProcessDialogEvent()
 			Link.l2.go = "exit";
 			AddDialogExitQuest("donation");
 		break;
+
 		case "donation paid_1000":
 			AddMoneyToCharacter(pchar, -1000);
 			pchar.questTemp.donate = makeint(pchar.questTemp.donate) + 1000;
@@ -902,6 +997,7 @@ void ProcessDialogEvent()
 			Link.l2.go = "exit";
 			AddDialogExitQuest("donation");
 		break;
+
 		case "donation paid_5000":
 			AddMoneyToCharacter(pchar, -5000);
 			pchar.questTemp.donate = makeint(pchar.questTemp.donate) + 5000;
@@ -912,6 +1008,7 @@ void ProcessDialogEvent()
 			Link.l2.go = "exit";
 			AddDialogExitQuest("donation");
 		break;
+
 		case "ispoved":
 			dialog.text = "Of course, "+ GetSexPhrase("my son","my daughter") +", I am listening to you.";
 			link.l1 = "I've changed my mind. Maybe next time.";
@@ -919,11 +1016,13 @@ void ProcessDialogEvent()
 			link.l2 = "I am so full of sins, Father. A day will not be enough to list all my misdeeds...";
 			link.l2.go = "ispoved_1";
 		break;
+
 		case "ispoved_1":
 			dialog.text = "Everyone of us is a sinner, my child...";
 			link.l1 = "Yes, but on my conscience the load of thousands of deaths lies a severe burden. I robbed and drowned ships...";
 			link.l1.go = "ispoved_2";
 		break;
+
 		case "ispoved_2":
 			dialog.text = "I hope there were none among those that sailed under the flag of " + NationNameGenitive(sti(NPChar.nation)) + "?";
 			link.l1 = "No, of course not, Father.";
@@ -931,17 +1030,20 @@ void ProcessDialogEvent()
 			link.l2 = "All sorts of them, Father...";
 			link.l2.go = "ispoved_4";
 		break;
+
 		case "ispoved_3":
 			dialog.text = "Then our Lord shall absolve you of those sins. Because this is a cruel age, and by destroying the enemies of your sovereign you are saving the lives of his loyal subjects.";
 			link.l1 = "Thank you, Father, that was a great consolation... I'll be going now.";
 			link.l1.go = "exit";
 		break;
+
 		case "ispoved_4":
 			dialog.text = "The Lord shall not absolve you of such a sin! Pray and repent, repent and pray! There's only one way for you now - to the cloister!";
 			link.l1 = "The cloister will have to wait. Not in this life, at the least. Farewell...";
 			link.l1.go = "exit";
 			npchar.quest.BadMeeting = lastspeak_date;
 		break;
+
         case "work":
         	if(CheckAttribute(PChar, "GenQuest.ChurchQuest_1.AskOwner") && NPChar.location == PChar.GenQuest.ChurchQuest_1.ToColony + "_church")
         	{
@@ -968,6 +1070,7 @@ void ProcessDialogEvent()
                 link.l4 = "I need healing.";
                 link.l4.go = "healthAdd_1";
             }
+            
 			//квест мэра - на связь с нашим шпионом
 			if (CheckAttribute(pchar, "GenQuest.Intelligence") && pchar.GenQuest.Intelligence.SpyId == npchar.id && pchar.GenQuest.Intelligence == "")
 			{
@@ -996,6 +1099,7 @@ void ProcessDialogEvent()
 			link.l99 = "I changed mind, I have a lot to do.";
 			link.l99.go = "exit";
 		break;
+
 		case "prihod":
 			if(!CheckAttribute(PChar, "GenQuest.ChurchQuest_1.StartQuest") && !CheckAttribute(PChar, "GenQuest.ChurchQuest_2.StartQuest") && NPChar.GenQuest.ChurchQuest_1.GiveQuestDateParam != iMonth && NPChar.GenQuest.ChurchQuest_1.GiveQuestDay != lastspeak_date && NPChar.location != "Panama_church" && rand(5) == 1)
 		    {
@@ -1014,12 +1118,14 @@ void ProcessDialogEvent()
 			DeleteAttribute(npchar, "quest.add");
 			NPChar.GenQuest.ChurchQuest_1.GiveQuestDay = lastspeak_date;	// Если не дал сегодня, то токо на след день.
 		break;
+		
 		// Church GenQuest_1 -->
 		case "GenQuest_Church_1_Start_1":
 			dialog.text = "Well, I have one delicate mission, which would require not only purity of intentions, but also great bravery and considerable discretion...";
 			link.l1 = LinkRandPhrase("Father", "Padre", "Father") + ", I will be happy to render any service to you, even if for this purpose I will have to head right into the hell! May God forgive me for my unholy words.";
 			link.l1.go = "GenQuest_Church_1_Start_2";
 		break;
+			
 		case "GenQuest_Church_1_Start_2":
 			PChar.GenQuest.ChurchQuest_1.QuestTown = NPChar.City;
 			Church_GenQuest1_InitStartParam(NPChar);
@@ -1029,6 +1135,7 @@ void ProcessDialogEvent()
 			link.l2 = LinkRandPhrase("Father", "Padre", "Father") + ", your mission doesn't seem too complicated to me. I'll head there at once.";
 			link.l2.go = "GenQuest_Church_1_Start_3";
 		break;
+			
 		case "GenQuest_Church_1_Start_3":	// Квест взят
 			DialogExit();
 			NextDiag.CurrentNode = NextDiag.TempNode;
@@ -1044,6 +1151,7 @@ void ProcessDialogEvent()
 			AddQuestUserData(sQuestTitle, "sName", NPChar.name);
 			AddQuestUserData(sQuestTitle, "sOwnerCity", XI_ConvertString("Colony" + PChar.GenQuest.ChurchQuest_1.ToColony + "Gen"));
 		break;
+			
 		case "GenQuest_Church_1_Dialog_1":
 			if(CheckAttribute(PChar, "GenQuest.ChurchQuest_1.2A_Scene"))	// Сцена 2а
 			{
@@ -1058,16 +1166,19 @@ void ProcessDialogEvent()
 				link.l1.go = "GenQuest_Church_1_Dialog_1_2";
 			}
 		break;
+			
 		case "GenQuest_Church_1_Dialog_1_1": // Сцена 2а
 			dialog.text = "I understand, my child, but doesn't we pray to our Lord every day: 'and forgive us our trespasses, as we forgive those who trespass against us'? And the church of " + XI_ConvertString("Colony" + PChar.GenQuest.ChurchQuest_1.QuestTown + "Gen") + " more rich than my modest parish.";
 			link.l1 = "You're certainly right, Father, but I've just thought of other lines in the Holy Scripture: 'seek not for an easy path, for it is there where the Devil lies in wait for us, and his voice is all the more subtle and the temptation is all the more strong, the easier the path!' And padre " + PChar.GenQuest.ChurchQuest_1.PriestName + " was already going to send a message regarding your forgetfulness to the archbishop - I only just dissuaded him from that.";
 			link.l1.go = "GenQuest_Church_1_Dialog_1_1_1";
 		break;
+			
 		case "GenQuest_Church_1_Dialog_1_1_1":
 			dialog.text = "T-T-To the a-archbishop?! Because of such a little matter!.. Why? Really? I was going to send these works to my beloved brother in Christ anyway - it's just there wasn't a good opportunity to deliver them to him. But in you, "+ GetSexPhrase("my son","my daughter") +", I have seen a truly deserving servant of our Lord. Here - take these books and manuscripts and please deliver them to Father " + PChar.GenQuest.ChurchQuest_1.PriestName + " safe and sound. And also add to that my most sincere gratitude.";
 			link.l1 = "Of course, " + LinkRandPhrase("Father", "Padre", "Father") + ". Of course...";
 			link.l1.go = "GenQuest_Church_1_Dialog_1_1_2";
 		break;
+			
 		case "GenQuest_Church_1_Dialog_1_1_2":
 			DialogExit();
 			NextDiag.CurrentNode = NextDiag.TempNode;
@@ -1082,6 +1193,7 @@ void ProcessDialogEvent()
 			items[FindItem("Bible")].City = XI_ConvertString("Colony" + PChar.GenQuest.ChurchQuest_1.QuestTown + "Gen"); // Переменная. Потом удалить!
 			// <-- Предмет "рукопись"
 		break;
+			
 		case "GenQuest_Church_1_Dialog_1_2":	// Сцена 2б-а и 2б-б
 			// Генерим кэпа -->
 			sld = GetCharacter(NPC_GenerateCharacter("ChurchGenQuest1_Cap", "mercen_" + (rand(14)+14), "man", "man", 15, NPChar.nation, -1, true, "quest"));
@@ -1105,6 +1217,7 @@ void ProcessDialogEvent()
 			PChar.GenQuest.ChurchQuest_1.NoCapColony = NPChar.city;
 			PChar.GenQuest.ChurchQuest_1.CapColony = GetColonyExpect2Colonies(NPChar.city, PChar.GenQuest.ChurchQuest_1.QuestTown);
 			// <-- Генерим кэпа
+			
 			if(CheckAttribute(PChar, "GenQuest.ChurchQuest_1.2BA_Scene")) // Сцена 2б-а
 			{
 				dialog.text = "But, "+ GetSexPhrase("my son","my daughter") +"... You see, the thing is that last week I met a captain of vessel '" + sld.Ship.Name + "', where I was called to make communion of a dying sailor. To my great joy, captain " + GetFullName(sld) + " told me that he was going to " + XI_ConvertString("Colony" + GetColonyExpect2Colonies(NPChar.city, PChar.GenQuest.ChurchQuest_1.QuestTown)) + ". And although he didn't warrant any terms, he still agreed to help and assured me that the port of " + XI_ConvertString("Colony" + PChar.GenQuest.ChurchQuest_1.QuestTown + "Gen") + " he will certainly visit. So I took advantage of opportunity, sent away books with that kind man and handed their further fate to Lord.";
@@ -1118,11 +1231,13 @@ void ProcessDialogEvent()
 				link.l1.go = "GenQuest_Church_1_Dialog_1_2_2_1";
 			}
 		break;
+			
 		case "GenQuest_Church_1_Dialog_1_2_1":	// 2б-а
 			dialog.text = "I trust people, "+ GetSexPhrase("my son","my daughter") +", every single one of us is created in our Lord's image and likeness, and His sacred fire is burning in every soul!";
 			link.l1 = "Ugh. That's a weighty argument, for sure. Well... Then bless me, Father, and wish me luck in my search for that captain.";
 			link.l1.go = "GenQuest_Church_1_Dialog_1_2_1_1";
 		break;
+			
 		case "GenQuest_Church_1_Dialog_1_2_1_1":
 			DialogExit();
 			NextDiag.CurrentNode = NextDiag.TempNode;
@@ -1134,26 +1249,31 @@ void ProcessDialogEvent()
 			AddQuestUserData(sQuestTitle, "sCapName", PChar.GenQuest.ChurchQuest_1.CapFullName);
 			AddQuestUserData(sQuestTitle, "sShipName", PChar.GenQuest.ChurchQuest_1.CapShipName);
 		break;
+			
 		case "GenQuest_Church_1_Dialog_1_2_2_1":
 			dialog.text = "You should trust people, "+ GetSexPhrase("my son","my daughter") +". As for his ship - I don't have anything to say.";
 			link.l1 = "And you have given precious manuscripts to some captain without even bothering to know the name of his ship?!!";
 			link.l1.go = "GenQuest_Church_1_Dialog_1_2_2_2";
 		break;
+			
 		case "GenQuest_Church_1_Dialog_1_2_2_2":
 			dialog.text = "You see, "+ GetSexPhrase("my son","my daughter") +", captain " + PChar.GenQuest.ChurchQuest_1.CapFullName + " is a very God-fearing...";
 			link.l1 = "Well, I already heard that.";
 			link.l1.go = "GenQuest_Church_1_Dialog_1_2_2_3";
 		break;
+			
 		case "GenQuest_Church_1_Dialog_1_2_2_3":
 			dialog.text = "Patience, "+ GetSexPhrase("young man","young lady") +"! Captain " + PChar.GenQuest.ChurchQuest_1.CapFullName + " is a very God-fearing person, and until this day his vessel bore a name, which a clergy should never say even in thought, let alone aloud! And today during his confession I had pointed this out to him. For, like the Bible says, the purity of the soul must be preserved by us, sinners, more than the purity of the body, for our Lord denies His Kingdom to the foul-mouthed...";
 			link.l1 = "I see, " + LinkRandPhrase("Father", "Padre", "Father") + ", I see! " + PChar.GenQuest.ChurchQuest_1.CapFullName + ", a notorious gambler and drunkard, well-known across all the Caribbean, decided to rename his old tub on your suggestion?";
 			link.l1.go = "GenQuest_Church_1_Dialog_1_2_2_4";
 		break;
+			
 		case "GenQuest_Church_1_Dialog_1_2_2_4":
 			dialog.text = "You're very insightful, "+ GetSexPhrase("my son","my daughter") +". I don't know the new name of this ship, but certainly it's something exalted.";
 			link.l1 = "Oh, " + RandPhraseSimple("Father", "Padre", "Father") + "... Thank you for everything. And pray for my sinful soul...";
 			link.l1.go = "GenQuest_Church_1_Dialog_1_2_2_5";
 		break;
+			
 		case "GenQuest_Church_1_Dialog_1_2_2_5":
 			DialogExit();
 			NextDiag.CurrentNode = NextDiag.TempNode;
@@ -1163,16 +1283,19 @@ void ProcessDialogEvent()
 			AddQuestRecordEx(sQuestTitle, "ChurchGenQuest1", "3_2");
 			AddQuestUserData(sQuestTitle, "sCapName", PChar.GenQuest.ChurchQuest_1.CapFullName);
 		break;
+			
 		case "GenQuest_Church_1_Complete_1":
 			dialog.text = "Oh, my child! I have been praying zealously, and everything seems to have resolved it the best way possible! For your help and faith, "+ GetSexPhrase("my son","my daughter") +", paradise and angelic singing will certainly be waiting for...";
 			link.l1 = RandPhraseSimple("Padre.", "Father.") + ", I am not going to meet Saint Peter any time soon, God forbid. As for the living - they do require many material things beside promises of heavenly bliss...";
 			link.l1.go = "GenQuest_Church_1_Complete_2";
 		break;
+			
 		case "GenQuest_Church_1_Complete_2":
 			dialog.text = "Yes, yes, "+ GetSexPhrase("my son","my daughter") +", of course. I will reward you deservedly. Here, take this and remember that our Lord punishes those foolish souls, who crave too much for earthly blessings and worship the yellow devil!";
 			link.l1 = "Thank you, " + LinkRandPhrase("Father", "Padre", "holy Father") + ". Please take your long-expected books and manuscripts and pray for my sinful soul... Farewell!";
 			link.l1.go = "GenQuest_Church_1_Complete_3";
 		break;
+			
 		case "GenQuest_Church_1_Complete_3":
 			DialogExit();
 			NextDiag.CurrentNode = NextDiag.TempNode;
@@ -1198,6 +1321,7 @@ void ProcessDialogEvent()
 			NPChar.GenQuest.ChurchQuest_1.GiveQuestDateParam = iMonth;
 			break;
 		// <-- Church GenQuest_1
+
         case "healthAdd_1":
             if (GetHealthMaxNum(pchar) == 6) // отлично
             {
@@ -1214,11 +1338,13 @@ void ProcessDialogEvent()
 			link.l2 = "And why does my health get worse?";
     		link.l2.go = "healthAdd_info";
 		break;
+
 		case "healthAdd_info":
 			dialog.text = "That's very simple, "+ GetSexPhrase("my son","my daughter") +", you take damage each time you're wounded. That doesn't slip by without a trace. Your health gets worse with every wound, and, as a result, you become weaker. Your crew, seeing a weak captain, loses respect to you. But you become more careful and ability of defence increases temporally. A rest and minimization of wounds will help you to stay full of strength.";
 			link.l1 = "Thank you for the enlightenment.";
 			link.l1.go = "exit";
 		break;
+
 		case "healthAdd_2":
 			dialog.text = "Prayers and abstaining from violence, "+ GetSexPhrase("my son","my daughter") +". Then the Lord will give you back what you have lost.";
 			link.l1 = "But could you pray for me?";
@@ -1226,6 +1352,7 @@ void ProcessDialogEvent()
 			link.l2 = "So there is no way? Hmm... You've truly reassured me, thanks.";
 			link.l2.go = "exit";
 		break;
+
 		case "healthAdd_3":
             if (npchar.quest.HealthMonth != iMonth)
             {
@@ -1242,6 +1369,7 @@ void ProcessDialogEvent()
     			link.l1.go = "exit";
 			}
 		break;
+
 		case "healthAdd_4":
 			dialog.text = "10000 pesos will be a sufficient payment for the miracle of healing.";
 			link.l1 = pcharrepphrase("What?!! Are you totally crazy? I'd pay such a sum once I robbed a couple of churches!", "That's too much for me. True they say - health cannot be bought for money.");
@@ -1252,6 +1380,7 @@ void ProcessDialogEvent()
     			link.l2.go = "healthAdd_5";
 			}
 		break;
+
 		case "healthAdd_5":
             AddMoneyToCharacter(pchar, -100000);
             AddCharacterMaxHealth(pchar, 4); // можно не проверять, тк явно меньше 51
@@ -1260,6 +1389,7 @@ void ProcessDialogEvent()
 			link.l1 = "Thanks. If anything happen, I'll come to see you again in a month.";
 			link.l1.go = "exit";
 		break;
+		
 		//квест пожертвования хозяйки борделя
 		case "HostessChurch":
 			dialog.text = "And who is that kind soul donating the money?";
@@ -1269,6 +1399,7 @@ void ProcessDialogEvent()
 			link.l2.go = "HostessChurch_notCall";
 			pchar.questTemp.different = "HostessChurch_return"; //флаг на возвращение
 		break;
+		
 		case "HostessChurch_call":
 			if (isBadReputation(pchar, 5)) 
 			{
@@ -1301,6 +1432,7 @@ void ProcessDialogEvent()
 				}
 			}
 		break;
+		
 		case "HostessChurch_notCall":
 			if (rand(10) < GetCharacterSPECIAL(pchar, "Charisma"))
 			{
@@ -1315,6 +1447,7 @@ void ProcessDialogEvent()
 				link.l1.go = "HostessChurch_bad_2";
 			}
 		break;
+
 		case "HostessChurch_ok":
 			dialog.text = "I accept it, "+ GetSexPhrase("my son","my daughter") +". Go and tell that your fallen woman.";
 			link.l1 = "Alright, padre. Thank you.";
@@ -1324,6 +1457,7 @@ void ProcessDialogEvent()
 			//флаг удачная или неудачная попытка дачи
 			characters[GetCharacterIndex(pchar.questTemp.different.HostessChurch.city + "_Hostess")].questChurch = "yes";
 		break;
+		
 		case "HostessChurch_ok_1":
 			dialog.text = "I accept it, "+ GetSexPhrase("my son","my daughter") +". Tell about it that donator of yours.";
 			link.l1 = "Alright, padre. Thank you.";
@@ -1333,6 +1467,7 @@ void ProcessDialogEvent()
 			//флаг удачная или неудачная попытка дачи
 			characters[GetCharacterIndex(pchar.questTemp.different.HostessChurch.city + "_Hostess")].questChurch = "yes";
 		break;
+		
 		case "HostessChurch_bad":
 			dialog.text = "Get out, scion of Hell, and don't dare to show your face here again!";
 			link.l1 = "Heh, as you wish.";
@@ -1342,6 +1477,7 @@ void ProcessDialogEvent()
 			//флаг удачная или неудачная попытка дачи
 			characters[GetCharacterIndex(pchar.questTemp.different.HostessChurch.city + "_Hostess")].questChurch = "no";
 		break;
+		
 		case "HostessChurch_bad_1":
 			dialog.text = "This is my decision. Go in peace, "+ GetSexPhrase("my son","my daughter") +".";
 			link.l1 = "Farewell, padre.";
@@ -1350,6 +1486,7 @@ void ProcessDialogEvent()
 			//флаг удачная или неудачная попытка дачи
 			characters[GetCharacterIndex(pchar.questTemp.different.HostessChurch.city + "_Hostess")].questChurch = "no";
 		break;
+		
 		case "HostessChurch_bad_2":
 			dialog.text = "That's what you think, blasphemer! Leave the temple this instant and don't dare to show your face here again!";
 			link.l1 = "Oh, really? Nevermind, I'm leaving...";
@@ -1359,6 +1496,7 @@ void ProcessDialogEvent()
 			//флаг удачная или неудачная попытка дачи
 			characters[GetCharacterIndex(pchar.questTemp.different.HostessChurch.city + "_Hostess")].questChurch = "no";
 		break;
+
 		//--> Jason Церковная депеша
 		case "Monkletter":
 			if (CheckAttribute(pchar, "GenQuest.Monkletter.Late"))
@@ -1374,11 +1512,13 @@ void ProcessDialogEvent()
 				link.l1.go = "Monkletter_3";
 			}
 		break;
+		
 		case "Monkletter_1":
 			dialog.text = "We are all in God's hands, my son... Man proposes, but God disposes. Hand me these papers and go in peace.";
 			link.l1 = "Here you go, padre. All the best to you!";
 			link.l1.go = "Monkletter_2";
 		break;
+		
 		case "Monkletter_2":
 			DialogExit();
 			RemoveItems(PChar, "letter_church", 1);//заменить на нужный
@@ -1387,11 +1527,13 @@ void ProcessDialogEvent()
 			ChangeCharacterComplexReputation(pchar, "nobility", -1);
 			DeleteAttribute(pchar, "GenQuest.Monkletter");
 		break;
+		
 		case "Monkletter_3":
 			dialog.text = "God's blessing, my son. May the Almighty watch over you in your travels!";
 			link.l1 = "Goodbye, Father.";
 			link.l1.go = "Monkletter_4";
 		break;
+		
 		case "Monkletter_4":
 			pchar.quest.Monkletter_Over.over = "yes"; //снять таймер
 			DialogExit();
@@ -1406,12 +1548,14 @@ void ProcessDialogEvent()
 			DeleteAttribute(pchar, "GenQuest.Monkletter");
 		break;
 		//<-- Церковная депеша
+		
 		//--> Jason Доставить молитвенники
 		case "Churchbooks":
 			dialog.text = "You've been sent to take from us prayer books for the church of "+XI_ConvertString("Colony"+pchar.GenQuest.Churchbooks.StartCity+"Gen")+"? Well. I have a package with thirty prayer books. Take it, my son.";
 			link.l1 = "Thank you, padre. Goodbye!";
 			link.l1.go = "Churchbooks_1";
 		break;
+		
 		case "Churchbooks_1":
 			dialog.text = "May the Lord watch over you in your travels! Go in peace...";
 			link.l1 = "...";
@@ -1420,6 +1564,7 @@ void ProcessDialogEvent()
 			pchar.GenQuest.Churchbooks = "return";
 			GiveItem2Character(pchar, "prayer_book");//поставить соотв.предмет
 		break;
+		
 		case "Churchbooks_2":
 			if (CheckAttribute(pchar, "GenQuest.Churchbooks.Late"))
 			{
@@ -1434,6 +1579,7 @@ void ProcessDialogEvent()
 				link.l1.go = "Churchbooks_4";
 			}
 		break;
+		
 		case "Churchbooks_3":
 			dialog.text = "It's all in God's hands, my son. Go in peace!";
 			link.l1 = "Goodbye, padre.";
@@ -1443,11 +1589,13 @@ void ProcessDialogEvent()
 			CloseQuestHeader("Churchbooks");
 			DeleteAttribute(pchar, "GenQuest.Churchbooks");
 		break;
+		
 		case "Churchbooks_4":
 			dialog.text = "God's blessing, my son. May the Almighty keep you from harm on your ways!";
 			link.l1 = "Goodbye, Father.";
 			link.l1.go = "Churchbooks_5";
 		break;
+		
 		case "Churchbooks_5":
 			pchar.quest.Churchbooks_Over.over = "yes"; //снять таймер patch-5
 			DialogExit();
@@ -1464,6 +1612,7 @@ void ProcessDialogEvent()
 		break;
 	}
 }
+
 void ChurchGenQuest2_RemoveCup()
 {
 	RemoveItems(PChar, "Bible", 1);
@@ -1475,6 +1624,7 @@ void ChurchGenQuest2_RemoveCup()
 	rItem.picTexture = "ITEMS_9";
 	BackItemDescribe("Bible");
 }
+
 void Church_GenQuest1_InitStartParam(ref chr)
 {
 	string sColony = SelectNotEnemyColony(chr); 
@@ -1482,6 +1632,7 @@ void Church_GenQuest1_InitStartParam(ref chr)
 	PChar.GenQuest.ChurchQuest_1.ToColony = sColony;
 	PChar.GenQuest.ChurchQuest_1.ToIsland = colonies[FindColony(sColony)].Island;
 	PChar.GenQuest.ChurchQuest_1.ToName = characters[GetCharacterIndex(sColony + "_Priest")].Name;
+	
 	// Чтоб жизнь медом не казалась... Какие сцены будут в квесте, определяем в самом начале.
 	int iRand = Rand(2);
 	switch(iRand)
@@ -1490,10 +1641,12 @@ void Church_GenQuest1_InitStartParam(ref chr)
 			PChar.GenQuest.ChurchQuest_1.2A_Scene = true;
 			Log_TestInfo("Церковный генератор 1: ключевая сцена - 2А (просто забрать у священника рукописи)."); 
 		break;
+		
 		case "1":
 			PChar.GenQuest.ChurchQuest_1.2BA_Scene = true;
 			Log_TestInfo("Церковный генератор 1: ключевая сцена - 2Б-А (поиск кэпа. О нем есть полная инфа).");
 		break;
+		
 		case "2": // Этот флаг уже не проверяем, т.к. если нет тех, что выше, по-любому есть этот
 			PChar.GenQuest.ChurchQuest_1.2BB_Scene = true;
 			Log_TestInfo("Церковный генератор 1: ключевая сцена - 2Б-Б (поиск кэпа. Название шипа неизвестно.)"); 

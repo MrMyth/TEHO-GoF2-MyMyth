@@ -38,16 +38,19 @@ void ProcessCommonDialogEvent(ref NPChar, aref Link, aref NextDiag)
                 link.l1.go = "mtraxx_jew";
 			}
         break;
+        
 		case "Tortuga_ratT_1":
 			dialog.text = "Francois Gontier? Who is he? I don't know any man by that name.";
 			link.l1 = "He's the captain of the corvette '" + pchar.questTemp.Slavetrader.ShipName + "'.";
 			link.l1.go = "Tortuga_ratT_2";
         break;
+		
 		case "Tortuga_ratT_2":
 			dialog.text = "I don't have the slightest clue, buddy. And no corvette by that name has docked at our port, I can say that for sure.";
 			link.l1 = "Okay then, have you seen any outsiders lately in town?";
 			link.l1.go = "Tortuga_ratT_3";
         break;
+		
 		case "Tortuga_ratT_3":
 			dialog.text = "Good question! This is a port town, not a village. Strangers come every day. Though, I have heard about five odd lads, they always stay close together and keep their blades ready\nA patrol even run a check on them with no result. But I am sure that they didn't arrive here on a corvette, no such vessel was seen around, savvy?";
 			link.l1 = "Hm... All right then, I see. Thank you, " + npchar.name + ".";
@@ -55,12 +58,14 @@ void ProcessCommonDialogEvent(ref NPChar, aref Link, aref NextDiag)
 			AddQuestRecord("Slavetrader", "21_8");
 			pchar.questTemp.Slavetrader = "wait1";//затычка
         break;
+		
 		// суп из черепахи
 		case "terrapin":
 			dialog.text = "Well, Monsieur Thibaut is a famous individual on Tortuga. His mansion is located near the port authority. When leaving my tavern, head straight toward the port. Approaching the arch leading to the port, turn left on the crossroads and go all the way down to the end of the street where you'll run into a two-story stone building with a red roof. That is Monsieur Thibaut's mansion.";
 			link.l1 = "Thank you! I'll go visit him...";
 			link.l1.go = "terrapin_1";
 		break;
+		
 		case "terrapin_1":
 			DialogExit();
 			pchar.questTemp.Terrapin = "house";
@@ -68,11 +73,13 @@ void ProcessCommonDialogEvent(ref NPChar, aref Link, aref NextDiag)
 			ChangeCharacterAddressGroup(sld, "Tortuga_houseS2", "barmen", "stay");
 			LAi_SetOwnerType(sld);
 		break;
+		
 		case "terrapin_2":
 			dialog.text = "Monsieur Thibaut is high in demand today, a messenger from the governor just ran over here. He was interested too. Is that too hard to find him? He's been renting a room from me on the second floor for quite some time, although he has a whole mansion to live in. I don't know what he needs it for, but he comes in a lot more often than he leaves. And he's only there during the evenings.";
 			link.l1 = "Maybe, he's here right now.";
 			link.l1.go = "terrapin_3";
 		break;
+		
 		case "terrapin_3":
 			if (stf(environment.time) < 20.0 && stf(environment.time) > 8.0)
 			{
@@ -87,6 +94,7 @@ void ProcessCommonDialogEvent(ref NPChar, aref Link, aref NextDiag)
 				link.l1.go = "terrapin_4";
 			}
 		break;
+		
 		case "terrapin_4":
 			DialogExit();
 			pchar.questTemp.Terrapin = "tavern";
@@ -115,16 +123,19 @@ void ProcessCommonDialogEvent(ref NPChar, aref Link, aref NextDiag)
 				}
 			}
 		break;
+		
 		case "guardoftruth":
 			dialog.text = "No clue about the ship's name, was it 'Santa Margarita' or 'Castilian Whore' but they brought here a captured Spanish galleon. By the way, captured by a sloop! Gaius Marchais, a captain, had been bragging for two days in a tavern - first voyage and such prize!\nYeah, very heroic deed, to board a galleon filled with church rats absent soldiers. It seems that papists forgot what they say about those who help themselves...";
 			link.l1 = "Yes, God helps him who helps himself, that's for sure. How do I get a glimpse of that lucky cap? Is he here, on Tortuga?";
 			link.l1.go = "guardoftruth_1";
 		break;
+		
 		case "guardoftruth_1":
 			dialog.text = "Ah, who the hell knows. I haven't seen him in my saloon for a long time. As soon as he got sober he brought a trophy galleon to bay and ran around it like a mad man. I have no idea where Marchais is now. Maybe he's on Tortuga or maybe he's at sea.";
 			link.l1 = "Alright. Well, thanks for the story, buddy!";
 			link.l1.go = "guardoftruth_2";			
 		break;
+		
 		case "guardoftruth_2":
 			dialog.text = "Any time, Monsieur "+pchar.name+", any information for our beloved captain, savior of St. Pierre! Stop by later!";
 			link.l1 = "...";
@@ -132,6 +143,7 @@ void ProcessCommonDialogEvent(ref NPChar, aref Link, aref NextDiag)
 			AddQuestRecord("Guardoftruth", "8");
 			pchar.questTemp.Guardoftruth = "tortuga1";
 		break;
+		
 		// Addon 2016-1 Jason Пиратская линейка
 		case "mtraxx_jew":
             dialog.text = "Seems like Gaspard is getting more and more popular among your kind. His house is by the wall. Turn left from the tavern and head to the port, but don't go there, turn left again, go straight and then turn right. A two-storied house.";
@@ -142,3 +154,4 @@ void ProcessCommonDialogEvent(ref NPChar, aref Link, aref NextDiag)
 	}
 	UnloadSegment(NPChar.FileDialog2);  // если где-то выход внутри switch  по return не забыть сделать анлод
 }
+

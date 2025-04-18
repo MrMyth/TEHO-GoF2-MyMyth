@@ -1,10 +1,14 @@
+
+
 #define LAI_TMPL_GOTO	"goto"
+
 /*
 	Возможные состояния:
 		"stay"		ожидает задания
 		"goto"		идёт к локатору
 		"falure"	задача невыполнима
 */
+
 bool LAi_tmpl_goto_InitTemplate(aref chr)
 {
 	SendMessage(&chr, "lsl", MSG_CHARACTER_EX_MSG, "LockFightMode", false);
@@ -55,6 +59,7 @@ bool LAi_tmpl_goto_InitTemplate(aref chr)
 	}
 	return true;
 }
+
 //Направить персонажа в заданный локатор
 void LAi_tmpl_goto_SetLocator(aref chr, string group, string locator, float timeout)
 {
@@ -66,16 +71,19 @@ void LAi_tmpl_goto_SetLocator(aref chr, string group, string locator, float time
 	chr.chr_ai.tmpl.time = "0";
 	LAi_tmpl_goto_Restart(chr);
 }
+
 bool LAi_tmpl_goto_IsStay(aref chr)
 {
 	if(chr.chr_ai.tmpl.state != "goto") return true;
 	return false;
 }
+
 bool LAi_tmpl_goto_IsWait(aref chr)
 {
 	if(stf(chr.chr_ai.tmpl.wait) > 0.0) return true;
 	return false;
 }
+
 //Процессирование шаблона персонажа
 void LAi_tmpl_goto_CharacterUpdate(aref chr, float dltTime)
 {
@@ -83,6 +91,7 @@ void LAi_tmpl_goto_CharacterUpdate(aref chr, float dltTime)
 	makearef(tmpl, chr.chr_ai.tmpl);
 	if(tmpl.state == "goto")
 	{
+
 		float time = stf(tmpl.wait);
 		if(time > 0.0)
 		{
@@ -117,6 +126,7 @@ void LAi_tmpl_goto_CharacterUpdate(aref chr, float dltTime)
 		}
 	}
 }
+
 //Персонаж выполнил команду  go to point
 void LAi_tmpl_goto_EndGoToPoint(aref chr)
 {
@@ -140,10 +150,12 @@ void LAi_tmpl_goto_EndGoToPoint(aref chr)
 		ChangeCharacterAddress(chr, "None", "");
 	}
 }
+
 //Персонаж провалил команду  go to point
 void LAi_tmpl_goto_FailureGoToPoint(aref chr)
 {
 	Trace("Template <goto> -> failure for chr.id = " + chr.id);
+
 	if(LAi_tmpl_goto_Teleport(chr))
 	{
 		LAi_tmpl_goto_Complite(chr);
@@ -152,16 +164,20 @@ void LAi_tmpl_goto_FailureGoToPoint(aref chr)
 		SetCharacterTask_Stay(chr);
 	}
 }
+
+
 //Персонаж выполнил команду  run to point
 void LAi_tmpl_goto_EndRunToPoint(aref chr)
 {
 	LAi_tmpl_goto_Restart(chr);
 }
+
 //Персонаж провалил команду  run to point
 void LAi_tmpl_goto_FailureRunToPoint(aref chr)
 {
 	LAi_tmpl_goto_Restart(chr);
 }
+
 //Персонаж не может добраться до точки назначения
 void LAi_tmpl_goto_BusyPos(aref chr, float x, float y, float z)
 {
@@ -174,51 +190,63 @@ void LAi_tmpl_goto_BusyPos(aref chr, float x, float y, float z)
 		SetCharacterTask_Stay(chr);
 	}
 }
+
 //Персонаж начал перемещение за другим
 void LAi_tmpl_goto_FollowGo(aref chr)
 {
 	LAi_tmpl_goto_Restart(chr);
 }
+
 //Персонаж начал дошёл до другого персонажа
 void LAi_tmpl_goto_FollowStay(aref chr)
 {
 	LAi_tmpl_goto_Restart(chr);
 }
+
 //Персонаж провалил команду  follow character
 void LAi_tmpl_goto_FailureFollow(aref chr)
 {
 	LAi_tmpl_goto_Restart(chr);
 }
+
+
 //Персонаж начал перемещение за другим
 void LAi_tmpl_goto_FightGo(aref chr)
 {
 	LAi_tmpl_goto_Restart(chr);
 }
+
 //Персонаж начал дошёл до другого персонажа
 void LAi_tmpl_goto_FightStay(aref chr)
 {
 	LAi_tmpl_goto_Restart(chr);
 }
+
 //Персонаж провалил команду  Fight
 void LAi_tmpl_goto_FailureFight(aref chr)
 {
 	LAi_tmpl_goto_Restart(chr);
 }
+
 //Можно ли стрелять
 bool LAi_tmpl_goto_IsFire(aref chr)
 {	
 	return false;
 }
+
 //Можно ли использовать оружие
 bool LAi_tmpl_goto_IsFight(aref chr)
 {
 	return false;
 }
+
+
 //Персонаж выполнил команду  escape
 void LAi_tmpl_goto_EndEscape(aref chr)
 {
 	LAi_tmpl_goto_Restart(chr);
 }
+
 //Персонаж скользит вдоль патча
 void LAi_tmpl_goto_EscapeSlide(aref chr)
 {
@@ -228,11 +256,14 @@ void LAi_tmpl_goto_EscapeSlide(aref chr)
 		LAi_type_carrier_GoTo(chr);
 	}
 }
+
 //Персонаж провалил команду  escape
 void LAi_tmpl_goto_FailureEscape(aref chr)
 {
 	LAi_tmpl_goto_Restart(chr);
 }
+
+
 //Персонаж толкается с другими персонажами
 void LAi_tmpl_goto_ColThreshold(aref chr)
 {
@@ -249,15 +280,21 @@ void LAi_tmpl_goto_ColThreshold(aref chr)
 	}
 	else LAi_tmpl_goto_Restart(chr); 
 }
+
+
 //Персонаж закончил проигрывать анимацию
 void LAi_tmpl_goto_EndAction(aref chr)
 {
 	LAi_tmpl_goto_Restart(chr);
 }
+
+
 //Персонажа просят освободить место
 void LAi_tmpl_goto_FreePos(aref chr, aref who)
 {
 }
+
+
 //Перезапустить задачу
 void LAi_tmpl_goto_Restart(aref chr)
 {
@@ -286,6 +323,7 @@ void LAi_tmpl_goto_Restart(aref chr)
 		if(LAi_IsInitedAI) SetCharacterTask_Stay(chr);
 	}
 }
+
 bool LAi_tmpl_goto_Teleport(aref chr)
 {
 	if(stf(chr.chr_ai.tmpl.timeout) >= 0)
@@ -296,6 +334,7 @@ bool LAi_tmpl_goto_Teleport(aref chr)
 	}
 	return false;
 }
+
 //Завершить goto
 void LAi_tmpl_goto_Complite(aref chr)
 {

@@ -4,10 +4,13 @@ void ProcessDialogEvent()
 {
 	ref NPChar;
 	aref Link, NextDiag;
+
 	DeleteAttribute(&Dialog,"Links");
+
 	makeref(NPChar,CharacterRef);
 	makearef(Link, Dialog.Links);
 	makearef(NextDiag, NPChar.Dialog);
+	
 	// вызов диалога по городам -->
     NPChar.FileDialog2 = "DIALOGS\" + LanguageGetLanguage() + "\Citizen\" + NPChar.City + "_Citizen.c";
     if (LoadSegment(NPChar.FileDialog2))
@@ -16,7 +19,9 @@ void ProcessDialogEvent()
 		UnloadSegment(NPChar.FileDialog2);
 	}
     // вызов диалога по городам <--
+	
 	ProcessCommonDialogRumors(NPChar, Link, NextDiag);
+	
 	switch(Dialog.CurrentNode)
 	{
 		case "First time":
@@ -25,6 +30,7 @@ void ProcessDialogEvent()
 			link.l1.go = "exit";
 			link.l2 = RandPhraseSimple("I've got a question for you.", "I need information.");
 			link.l2.go = "quests";//(перессылка в файл города)
+			
 			if (npchar.quest.meeting == "0")
 			{
 				if (sti(Pchar.Ship.Type) != SHIP_NOTUSED && CheckAttribute(npchar, "quest.passenger") && !CheckAttribute(pchar, "GenQuest.Marginpassenger"))//захват пассажира
@@ -49,6 +55,7 @@ void ProcessDialogEvent()
 			}
 			NextDiag.TempNode = "First time";
 		break;
+
 //----------------------------------------захват пассажиров для выкупа------------------------------------------
 			case "passenger":
 				DeleteAttribute(npchar, "talker");
@@ -56,6 +63,7 @@ void ProcessDialogEvent()
 				link.l1 = "First, prove that your information is worth paying at least a single silver peso.";
 				link.l1.go = "passenger_1";
 			break;
+		
 			case "passenger_1":
 				dialog.text = "It is, cap, it is. It costs much more than I ask. You give me gold and I'll tell you when and on which ship one high flying person will sail. You will be able to ransom this one for a very good price... I'll even tell you the name of the buyer. Deal?";
 				link.l1 = "No way! I don't ransom people. Get lost!";
@@ -63,6 +71,7 @@ void ProcessDialogEvent()
 				link.l2 = "And how can I know that you are telling the truth?";
 				link.l2.go = "passenger_2";
 			break;
+		
 			case "passenger_2":
 				pchar.GenQuest.Marginpassenger.Dublon = 70+drand(5)*10;
 				dialog.text = "I won't cheat on you, salty sailor. I live in this town and I don't need troubles. For just "+sti(pchar.GenQuest.Marginpassenger.Dublon)+" doubloons I'll give a complete information. You will make much more.";
@@ -76,16 +85,19 @@ void ProcessDialogEvent()
 				link.l3 = "Are you kidding me? Pay a lot of gold for I don't even know what? Get lost...";
 				link.l3.go = "exit_quest";
 			break;
+		
 			case "passenger_3":
 				dialog.text = "Don't you? Fine, cap. I can wait for a few days more and this information can too. Find me when you'll get your gold. It won't be difficult to find me... today, ha-ha-ha!";
 				link.l1 = "Don't show me your teeth like that. Fine, I'll bring you the gold... if I don't change my mind. ";
 				link.l1.go = "passenger_wait";
 			break;
+			
 			case "passenger_wait":
 			DialogExit();
 				SetFunctionTimerCondition("Marginpassenger_Over", 0, 0, 2, false);
 				npchar.dialog.currentnode = "passenger_repeat";
 			break;
+
 			case "passenger_repeat":
 				dialog.text = "Did you bring my gold?";
 				if (GetCharacterItem(pchar, "gold_dublon") >= sti(pchar.GenQuest.Marginpassenger.Dublon))
@@ -97,6 +109,7 @@ void ProcessDialogEvent()
 				link.l2.go = "exit";
 				Nextdiag.Tempnode = "passenger_repeat";
 			break;
+			
 			case "passenger_4"://установка параметров
 				pchar.quest.Marginpassenger_Over.over = "yes"; //снять возможный таймер
 				RemoveItems(pchar, "gold_dublon", sti(pchar.GenQuest.Marginpassenger.Dublon));
@@ -114,6 +127,7 @@ void ProcessDialogEvent()
 				link.l1 = "Yes. I am going to get back on my ship and write it in the log.";
 				link.l1.go = "passenger_5";
 			break;
+		
 			case "passenger_5":
 				dialog.text = "Exactly! Right choice. Fine, cap, good luck in this easy task. Oh yes, I've almost forgotten: "+GetStrSmallRegister(XI_ConvertString(GetBaseShipParamFromType(sti(pchar.GenQuest.Marginpassenger.ShipType), "Name")))+" will sail not from the port but from one of bays nearby. So watch it. Good luck and thanks for the gold!";
 				link.l1 = "You're welcome. I hope that you're not going to waste all of it tonight in the tavern.";
@@ -133,27 +147,32 @@ void ProcessDialogEvent()
 				pchar.GenQuest.Marginpassenger = "begin";
 				SetFunctionTimerCondition("Marginpassenger_InWorld", 0, 0, sti(pchar.GenQuest.Marginpassenger.Days), false);
 			break;
+			
 		//замечание по обнаженному оружию от персонажей типа citizen
 		case "CitizenNotBlade":
 			dialog.text = NPCharSexPhrase(NPChar, "Listen buddy, calm down and sheathe your weapon.", "Listen buddy, calm down and sheathe your weapon.");
 			link.l1 = LinkRandPhrase("Fine.", "Okay.", "As you wish.");
 			link.l1.go = "exit";
 		break;
+		
 		case "question":
 			dialog.text = LinkRandPhrase("Don't beat around the bush, cap. Speak what you want!","Oh, fine. What do you want?","Questions? Fine, sailor, I am listening.");
 			link.l1 = LinkRandPhrase("Can you tell me the last gossip of this town?","Has anything interesting happened here recently?","What's going on in the archipelago?");
 			link.l1.go = "rumours_marginal";
 		break;
+		
 		case "exit_quest":
 			DialogExit();
 			LAi_CharacterDisableDialog(npchar);
 		break;
+
 		case "Exit":
 			NextDiag.CurrentNode = NextDiag.TempNode;
 			DialogExit();
 		break;
 	}
 }
+
 void SelectMarginpassengerParameter()
 {
 	if (drand(1) == 0)

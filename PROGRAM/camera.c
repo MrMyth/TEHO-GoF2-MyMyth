@@ -1,10 +1,13 @@
 object Scene;
 object FreeCamera;
+
 #define LOCATION_CAMERA "LocationCamera"
 #define FREE_CAMERA "FreeCamera"
 #define SHIP_CAMERA "SeaShipCamera"
 #define DECK_CAMERA "SeaDeckCamera"
+
 string CurrentShipCamera = SHIP_CAMERA;
+
 void UpdateCamera()
 {
 	aref sceneRef;
@@ -13,9 +16,11 @@ void UpdateCamera()
 		LayerAddObject(EXECUTE, &Scene, 0);
 		LayerAddObject(SEA_EXECUTE, &Scene, 0);
 	}
+
 	if (IsEntity(&FreeCamera) && Scene.Camera != FREE_CAMERA) {
 		DeleteClass(&FreeCamera);
 	}
+
 	switch(Scene.camera) {
 		case SHIP_CAMERA:
 			SendMessage(&Scene, "si", "SetActiveCamera", &SeaShipCamera);
@@ -37,6 +42,7 @@ void UpdateCamera()
 		break;
 	}
 }
+
 void SetActiveCamera(string camera)
 {
 	Scene.camera = camera;

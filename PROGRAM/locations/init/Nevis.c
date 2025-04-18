@@ -1,15 +1,20 @@
+
 int LocationInitNevis(int n)
 {
+	
 	//////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 	// ГОРОД
 	//////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 	locations[n].id = "Charles_town";
 	locations[n].id.label = "Street";
 	locations[n].worldmap = "Nevis";
+
 	locations[n].townsack = "Charles";
 	locations[n].fastreload = "Charles";
  	locations[n].islandId = "Nevis";
+
 	locations[n].filespath.models = "locations\Town_Nevis\Town\";
+
 	locations[n].image = "loading\Town.tga";
 	locations[n].citizens = true;
 	locations[n].soldiers = true;
@@ -29,6 +34,7 @@ int LocationInitNevis(int n)
 	locations[n].models.always.grassPatch = "Nevis_grass";
 	locations[n].models.always.seabed = "Nevis_sb";
 	locations[n].models.always.plan.level = 9;
+
 	//WindMill Fan
 	locations[n].models.always.MillFan = "MillFan";
 	Locations[n].models.always.MillFan.locator.group = "WindMill";
@@ -36,10 +42,12 @@ int LocationInitNevis(int n)
 	Locations[n].models.always.MillFan.rotate.x = 0.0;
 	Locations[n].models.always.MillFan.rotate.y = 0.0;
 	Locations[n].models.always.MillFan.rotate.z = 0.3;
+
 	//Day
 	locations[n].models.day.fonar = "Nevis_fd";
 	locations[n].models.day.charactersPatch = "Nevis_patch_day";
 	locations[n].models.day.rinok = "Nevis_rinok";
+
 	//Night
 	locations[n].models.night.fonar = "Nevis_fn";
 	locations[n].models.night.charactersPatch = "Nevis_patch_night";
@@ -47,69 +55,81 @@ int LocationInitNevis(int n)
 	locations[n].environment.weather = "true";
 	locations[n].environment.sea = "true";
 	//Reload map
+
 	locations[n].reload.l1.name = "reload1_back";
 	locations[n].reload.l1.go = "Nevis";
 	locations[n].reload.l1.emerge = "reload_1";
 	locations[n].reload.l1.autoreload = "0";
 	locations[n].reload.l1.label = "Sea";
 	locations[n].locators_radius.reload.reload1_back = 1.8;
+
     locations[n].reload.l3.name = "reload3_back";
 	locations[n].reload.l3.go = "Charles_townhall";
 	locations[n].reload.l3.emerge = "reload1";
 	locations[n].reload.l3.autoreload = "0";
 	locations[n].reload.l3.label = "Residence";
 	locations[n].reload.l3.close_for_night = 1;
+
 	locations[n].reload.l4.name = "reload4_back";
 	locations[n].reload.l4.go = "Charles_tavern";
 	locations[n].reload.l4.emerge = "reload1";
 	locations[n].reload.l4.autoreload = "0";
 	locations[n].reload.l4.label = "Tavern";
+
 	locations[n].reload.l5.name = "reload5_back";
 	locations[n].reload.l5.go = "Charles_shipyard";
 	locations[n].reload.l5.emerge = "reload1";
 	locations[n].reload.l5.autoreload = "0";
 	locations[n].reload.l5.label = "Shipyard";
 	locations[n].reload.l5.close_for_night = 1;
+
 	locations[n].reload.l6.name = "reload6_back";
 	locations[n].reload.l6.go = "Charles_store";
 	locations[n].reload.l6.emerge = "reload1";
 	locations[n].reload.l6.autoreload = "0";
 	locations[n].reload.l6.label = "Shipyard";
 	locations[n].reload.l6.close_for_night = 1;
+
 	locations[n].reload.l7.name = "reload7_back";
 	locations[n].reload.l7.go = "Charles_church";
 	locations[n].reload.l7.emerge = "reload1";
 	locations[n].reload.l7.autoreload = "0";
 	locations[n].reload.l7.label = "Church";
 	//locations[n].reload.l7.close_for_night = 1;
+
 	locations[n].reload.l8.name = "reload8_back";
 	locations[n].reload.l8.go = "Charles_bank";
 	locations[n].reload.l8.emerge = "reload1";
 	locations[n].reload.l8.autoreload = "0";
 	locations[n].reload.l8.label = "Usurer House";
 	locations[n].reload.l8.close_for_night = 1;
+
 	locations[n].reload.l9.name = "reload9_back";
 	locations[n].reload.l9.go = "Charles_brothel";
 	locations[n].reload.l9.emerge = "reload1";
 	locations[n].reload.l9.autoreload = "0";
 	locations[n].reload.l9.label = "Brothel";
+
 	locations[n].reload.l10.name = "reload10_back";
 	locations[n].reload.l10.go = "Charles_PortOffice";
 	locations[n].reload.l10.emerge = "reload1";
 	locations[n].reload.l10.autoreload = "0";
 	locations[n].reload.l10.label = "PortOffice";
 	locations[n].reload.l10.close_for_night = 1;
+
 	locations[n].reload.gate.name = "gate_back";
 	locations[n].reload.gate.go = "Charles_ExitTown";
 	locations[n].reload.gate.emerge = "reload1";
 	locations[n].reload.gate.autoreload = "0";
 	locations[n].reload.gate.label = "ExitTown";
 	locations[n].locators_radius.reload.gate_back = 2.0;
+	
 	locations[n].reload.jail.name = "reload_jail";
 	locations[n].reload.jail.go = "Charles_prison";
 	locations[n].reload.jail.emerge = "reload1";
 	locations[n].reload.jail.autoreload = "0";
 	locations[n].reload.jail.label = "Prison";
+
     // --> Квестовые локации, резерв девять номеров.
 	locations[n].reload.l11.name = "housePirate";
 	locations[n].reload.l11.go = "Charles_PirateHouse";
@@ -117,63 +137,75 @@ int LocationInitNevis(int n)
 	locations[n].reload.l11.autoreload = "0";
 	locations[n].reload.l11.label = "PirateHouse";
 	locations[n].reload.l11.disable = true;
+	
 	locations[n].reload.l12.name = "houseH1";
 	locations[n].reload.l12.go = "Charles_houseH1";
 	locations[n].reload.l12.emerge = "reload1";
 	locations[n].reload.l12.autoreload = "0";
 	locations[n].reload.l12.label = "House";
+
     // --> Комоны, загрушки. Номера с начинаются с 20.
 	locations[n].reload.l20.name = "houseS3";
 	locations[n].reload.l20.go = "CommonDoubleflourHouse_1";
 	locations[n].reload.l20.emerge = "reload1";
 	locations[n].reload.l20.autoreload = "0";
 	locations[n].reload.l20.label = "House";
+
 	locations[n].reload.l21.name = "houseH2";
 	locations[n].reload.l21.go = "CommonRoom_MH4";
 	locations[n].reload.l21.emerge = "reload1";
 	locations[n].reload.l21.autoreload = "0";
 	locations[n].reload.l21.label = "House";
+
 	locations[n].reload.l22.name = "houseSp1";
 	locations[n].reload.l22.go = "CommonDoubleflourHouse_2";
 	locations[n].reload.l22.emerge = "reload1";
 	locations[n].reload.l22.autoreload = "0";
 	locations[n].reload.l22.label = "House";
+
 	locations[n].reload.l23.name = "houseSp2";
 	locations[n].reload.l23.go = "CommonDoubleflourHouse_1";
 	locations[n].reload.l23.emerge = "reload1";
 	locations[n].reload.l23.autoreload = "0";
 	locations[n].reload.l23.label = "House";
+
 	locations[n].reload.l24.name = "houseS1";
 	locations[n].reload.l24.go = "CommonStoneHouse";
 	locations[n].reload.l24.emerge = "reload1";
 	locations[n].reload.l24.autoreload = "0";
 	locations[n].reload.l24.label = "House";
+
 	locations[n].reload.l25.name = "houseS2";
 	locations[n].reload.l25.go = "CommonPirateHouse";
 	locations[n].reload.l25.emerge = "reload1";
 	locations[n].reload.l25.autoreload = "0";
 	locations[n].reload.l25.label = "House";
+
 	locations[n].reload.l26.name = "houseSp5";
 	locations[n].reload.l26.go = "CommonCobHouse";
 	locations[n].reload.l26.emerge = "reload1";
 	locations[n].reload.l26.autoreload = "0";
 	locations[n].reload.l26.label = "House";
+
 	locations[n].reload.l27.name = "houseSp4";
 	locations[n].reload.l27.go = "CommonFlamHouse";
 	locations[n].reload.l27.emerge = "reload1";
 	locations[n].reload.l27.autoreload = "0";
 	locations[n].reload.l27.label = "House";
+
 	locations[n].reload.l28.name = "houseSp3";
 	locations[n].reload.l28.go = "CommonDoubleflourHouse_2";
 	locations[n].reload.l28.emerge = "reload1";
 	locations[n].reload.l28.autoreload = "0";
 	locations[n].reload.l28.label = "House";
+
 	/*locations[n].reload.l29.name = "houseH1";
 	locations[n].reload.l29.go = "CommonRoom_MH7";
 	locations[n].reload.l29.emerge = "reload1";
 	locations[n].reload.l29.autoreload = "0";
 	locations[n].reload.l29.label = "House";*/
 	n = n + 1;
+
 	//////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 	// ТАВЕРНА
 	//////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
@@ -212,6 +244,7 @@ int LocationInitNevis(int n)
 	locations[n].reload.l1.emerge = "reload4";
 	locations[n].reload.l1.autoreload = "0";
 	locations[n].reload.l1.label = "Street";
+
 	locations[n].reload.l2.name = "reload2_back";
 	locations[n].reload.l2.go = "Charles_tavern_upstairs";
 	locations[n].reload.l2.emerge = "reload1";
@@ -220,6 +253,7 @@ int LocationInitNevis(int n)
 	locations[n].reload.l2.disable = 1; // закроем, но связку сделаем для квестовых нужд.
 	LAi_LocationFightDisable(&locations[n], true);
 	n = n + 1;
+
 	//////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 	// КОМНАТА В ТАВЕРНЕ
 	//////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
@@ -242,6 +276,7 @@ int LocationInitNevis(int n)
 	locations[n].models.always.window = "tavern_room_window";
 	locations[n].models.always.window.tech = "LocationWindows";
 	locations[n].models.always.window.level = 65539;
+
 	locations[n].models.always.back = "..\inside_back";
 	locations[n].models.always.back.level = 65529;
 	//Day
@@ -259,6 +294,7 @@ int LocationInitNevis(int n)
 	locations[n].reload.l1.label = "Tavern";
 	locations[n].locators_radius.reload.reload1 = 0.8;
 	n = n + 1;
+
  	//////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 	// МАГАЗИН
 	//////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
@@ -305,6 +341,7 @@ int LocationInitNevis(int n)
 	locations[n].reload.l2.label = "Room";
 	LAi_LocationFightDisable(&locations[n], true);
 	n = n + 1;
+
  	//////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 	// РОСТОВЩИК
 	//////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
@@ -326,6 +363,7 @@ int LocationInitNevis(int n)
 	locations[n].models.always.window = "bank02_windows";
 	locations[n].models.always.window.tech = "LocationWindows";
 	locations[n].models.always.window.level = 50;
+
 	locations[n].models.always.back = "..\inside_back";
 	//Day
 	locations[n].models.day.charactersPatch = "Bank02_patch";
@@ -340,6 +378,7 @@ int LocationInitNevis(int n)
 	locations[n].reload.l1.emerge = "reload8";
 	locations[n].reload.l1.autoreload = "0";
 	locations[n].reload.l1.label = "Street";
+
 	locations[n].reload.l2.name = "reload2";
 	locations[n].reload.l2.go = "CommonResidence_1";
 	locations[n].reload.l2.emerge = "reload1";
@@ -347,6 +386,7 @@ int LocationInitNevis(int n)
 	locations[n].reload.l2.label = "Room";
 	LAi_LocationFightDisable(&locations[n], true);
 	n = n + 1;
+
  	//////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 	// ВЕРФЬ
 	//////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
@@ -384,6 +424,7 @@ int LocationInitNevis(int n)
 	locations[n].reload.l1.emerge = "reload5";
 	locations[n].reload.l1.autoreload = "0";
 	locations[n].reload.l1.label = "Street";
+
 	locations[n].reload.l2.name = "reload2";
 	locations[n].reload.l2.go = "Charles_Packhouse";
 	locations[n].reload.l2.emerge = "reload1";
@@ -391,6 +432,7 @@ int LocationInitNevis(int n)
 	locations[n].reload.l2.label = "Room";
 	locations[n].locators_radius.item.item1 = 1.0;
 	n = n + 1;
+
 	//////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 	// СКЛАД НА ВЕРФИ
 	//////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////	
@@ -410,6 +452,7 @@ int LocationInitNevis(int n)
 	locations[n].models.always.locators = "sklad03_locators";
 	locations[n].models.always.modelSklad = "sklad03";
 	locations[n].models.always.modelSklad.level = 65538;
+	
 	locations[n].models.always.back = "..\inside_back";
 	locations[n].models.always.back.level = 65529;
 	//Day
@@ -429,6 +472,7 @@ int LocationInitNevis(int n)
 	locations[n].reload.l1.autoreload = "0";
 	locations[n].reload.l1.label = "shipyard";
 	n = n + 1;
+	
  	//////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 	// РЕЗИДЕНЦИЯ
 	//////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
@@ -466,22 +510,26 @@ int LocationInitNevis(int n)
 	//Reload map
 	locations[n].locators_radius.reload.dialog_event = 0.2;
 	locations[n].locators_radius.camdetector.dialog_event = 2.2;
+
 	locations[n].reload.l1.name = "reload1_back";
 	locations[n].reload.l1.go = "Charles_town";
 	locations[n].reload.l1.emerge = "reload3";
 	locations[n].reload.l1.autoreload = "0";
     locations[n].reload.l1.label = "Street";
+
 	locations[n].reload.l2.name = "reload2";
 	locations[n].reload.l2.go = "CommonResidence_4";
 	locations[n].reload.l2.emerge = "reload1";
 	locations[n].reload.l2.autoreload = "0";
 	locations[n].reload.l2.label = "Room";
+
 	locations[n].reload.l3.name = "reload3"; //кабинет направо от входа
 	locations[n].reload.l3.go = "Charles_Roomtownhall";
 	locations[n].reload.l3.emerge = "reload1";
 	locations[n].reload.l3.autoreload = "0";
 	locations[n].reload.l3.label = "Room";
 	n = n + 1;
+	
 ///////////////////////////////////////////////////////////////////////////////////////////////////////////
 //				приемная генерал-губернатора Франции - де Пуанси
 ///////////////////////////////////////////////////////////////////////////////////////////////////////////
@@ -519,12 +567,14 @@ int LocationInitNevis(int n)
 	//Reload map
 	locations[n].locators_radius.reload.dialog_event = 0.2;
 	locations[n].locators_radius.camdetector.dialog_event = 2.2;
+
 	locations[n].reload.l1.name = "reload1";
 	locations[n].reload.l1.go = "Charles_townhall";
 	locations[n].reload.l1.emerge = "reload3";
 	locations[n].reload.l1.autoreload = "0";
 	locations[n].reload.l1.label = "Room";
 	n = n + 1;
+
 	//////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 	// БОРДЕЛЬ
 	//////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
@@ -547,6 +597,7 @@ int LocationInitNevis(int n)
 	locations[n].models.always.window = "brothel_window";
 	locations[n].models.always.window.tech = "LocationWindows";
 	locations[n].models.always.window.level = 50;
+
 	locations[n].models.always.back = "..\inside_back";
 	//Day
 	locations[n].models.day.charactersPatch = "Brothel_patch";
@@ -561,12 +612,14 @@ int LocationInitNevis(int n)
 	locations[n].reload.l1.emerge = "reload9";
 	locations[n].reload.l1.autoreload = "0";
 	locations[n].reload.l1.label = "Street";
+
 	locations[n].reload.l2.name = "reload2_back";
 	locations[n].reload.l2.go = "Charles_Brothel_room";
 	locations[n].reload.l2.emerge = "reload1";
 	locations[n].reload.l2.autoreload = "0";
 	locations[n].reload.l2.label = "Brothel Room";
 	locations[n].reload.l2.disable = 1;  //закроем, но связка пусть будет для квестов.
+
 	locations[n].reload.l3.name = "reload3";
 	locations[n].reload.l3.go = "Charles_SecBrRoom";
 	locations[n].reload.l3.emerge = "reload1";
@@ -574,6 +627,7 @@ int LocationInitNevis(int n)
 	locations[n].reload.l3.label = "Brothel";
 	LAi_LocationFightDisable(&locations[n], true);
 	n = n + 1;
+
 	//////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 	// Комнаты в борделе
 	//////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
@@ -595,6 +649,7 @@ int LocationInitNevis(int n)
 	locations[n].models.always.window = "Brothel_room_window";
 	locations[n].models.always.window.tech = "LocationWindows";
 	locations[n].models.always.window.level = 50;
+
 	locations[n].models.always.back = "..\inside_back";
 	//Day
 	locations[n].models.day.charactersPatch = "Brothel_room_patch";
@@ -612,6 +667,7 @@ int LocationInitNevis(int n)
 	LAi_LocationFightDisable(&locations[n], true);
 	locations[n].locators_radius.item.item1 = 1;
 	n = n + 1;
+
 	//////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 	locations[n].id = "Charles_SecBrRoom"; // вторая комната борделя
 	locations[n].id.label = "Room";
@@ -632,6 +688,7 @@ int LocationInitNevis(int n)
 	locations[n].models.always.window = "BigHouse03_windows";
 	locations[n].models.always.window.tech = "LocationWindows";
 	locations[n].models.always.window.level = 65539;
+
 	locations[n].models.always.back = "..\inside_back";
 	locations[n].models.always.back.level = 65529;
 	//Day
@@ -651,6 +708,7 @@ int LocationInitNevis(int n)
 	locations[n].reload.l1.label = "Brothel";
 	LAi_LocationFightDisable(&locations[n], true);
 	n = n + 1;
+
 	//////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 	// ЦЕРКОВЬ
 	//////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
@@ -690,6 +748,7 @@ int LocationInitNevis(int n)
 	locations[n].reload.l1.label = "Street";
 	LAi_LocationFightDisable(&locations[n], true);
 	n = n + 1;
+
  	//////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 	// ПОРТОВЫЙ ОФИС
 	//////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
@@ -709,9 +768,11 @@ int LocationInitNevis(int n)
 	locations[n].models.always.housePortOffice = "PortOffice";
 	locations[n].models.always.housePortOffice.level = 65538;
 	locations[n].models.always.locators = "PortOffice_locators";
+
 	Locations[n].models.always.PortOffice = "PortOffice_windows";
 	Locations[n].models.always.PortOffice.tech = "LocationWindows";
 	locations[n].models.always.PortOffice.level = 65539;
+
 	locations[n].models.always.back = "..\inside_back";
 	locations[n].models.always.back.level = 65529;
 	//Day
@@ -729,6 +790,7 @@ int LocationInitNevis(int n)
 	locations[n].reload.l1.label = "Street";
 	LAi_LocationFightDisable(&locations[n], true);
 	n = n + 1;
+
  	//////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 	// ПИРАТСКИЙ ДОМ
 	//////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
@@ -766,6 +828,7 @@ int LocationInitNevis(int n)
 	locations[n].reload.l1.emerge = "housePirate";
 	locations[n].reload.l1.autoreload = "0";
 	locations[n].reload.l1.label = "Street";
+
 	locations[n].reload.l2.name = "reload2";
 	locations[n].reload.l2.go = "CommonPirateResidence";
 	locations[n].reload.l2.emerge = "reload1";
@@ -773,9 +836,11 @@ int LocationInitNevis(int n)
 	locations[n].reload.l2.label = "Room";
 	LAi_LocationFightDisable(&locations[n], true);
 	n = n + 1;
+	
 	///////////////////////////////////////////////////////////////////////////////////////////////////
 	////// берлога Давида Факмана - Валета
 	///////////////////////////////////////////////////////////////////////////////////////////////////
+	
 	locations[n].id = "Charles_houseH1";
 	locations[n].id.label = "House";
 	locations[n].filespath.models = "locations\inside\mediumhouse07";
@@ -792,12 +857,14 @@ int LocationInitNevis(int n)
 	locations[n].models.always.house.level = 65538;
 	locations[n].models.day.locators = "mediumhouse07_locators";
 	locations[n].models.night.locators = "mediumhouse07_Nlocators";
+
 	Locations[n].models.always.mediumhouse07windows = "mediumhouse07_windows";
 	Locations[n].models.always.mediumhouse07windows.tech = "LocationWindows";
 	locations[n].models.always.mediumhouse07windows.level = 65539;
 	locations[n].models.always.tul = "mediumhouse07_tul";
 	Locations[n].models.always.tul.tech = "LocationWaterFall";
 	locations[n].models.always.tul.level = 180;
+
 	locations[n].models.always.back = "..\inside_back";
 	locations[n].models.always.back.level = 65529;
 	//Day
@@ -816,7 +883,9 @@ int LocationInitNevis(int n)
 	locations[n].reload.l1.label = "Street";
 	LAi_LocationFightDisable(&locations[n], true);
 	locations[n].box1.QuestClosed = true;
+	
 	n = n + 1;
+	
 	////////////////////// prison ////////////////////////////
 	Locations[n].id = "Charles_prison";
 	locations[n].id.label = "Prison";
@@ -849,9 +918,12 @@ int LocationInitNevis(int n)
 	Locations[n].reload.l1.go = "Charles_town";
 	Locations[n].reload.l1.emerge = "reload_jail";
 	Locations[n].reload.l1.autoreload = "0";
+	
 	locations[n].locators_radius.box.box1 = 0.8;
 	locations[n].box1.QuestClosed = true;
 	n = n + 1;
+
+
  	//////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 	// Выход из Невиса
 	//////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
@@ -893,12 +965,14 @@ int LocationInitNevis(int n)
 	locations[n].reload.l1.autoreload = "1";
 	locations[n].reload.l1.label = "Charles";
 	locations[n].locators_radius.reload.reload1_back = 2.0;
+
 	locations[n].reload.l2.name = "reload2_back";
 	locations[n].reload.l2.go = "Charles_Jungle_02";
 	locations[n].reload.l2.emerge = "reload2";
 	locations[n].reload.l2.autoreload = "1";
 	locations[n].reload.l2.label = "Jungle";
 	locations[n].locators_radius.reload.reload2_back = 2.0;
+
 	locations[n].reload.l3.name = "reload3_back";
 	locations[n].reload.l3.go = "Charles_Graveyard";
 	locations[n].reload.l3.emerge = "reload1";
@@ -906,6 +980,7 @@ int LocationInitNevis(int n)
 	locations[n].reload.l3.label = "Jungle";
 	locations[n].locators_radius.reload.reload3_back = 2.0;
 	n = n + 1;
+
 	//////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 	// городское кладбище
 	//////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
@@ -949,28 +1024,33 @@ int LocationInitNevis(int n)
 	locations[n].reload.l1.autoreload = "1";
 	locations[n].reload.l1.label = "Jungle";
 	locations[n].locators_radius.reload.reload1_back = 2.0;
+
 	locations[n].reload.l2.name = "reload2_back";
 	locations[n].reload.l2.go = "Charles_Jungle_05";
 	locations[n].reload.l2.emerge = "reload1";
 	locations[n].reload.l2.autoreload = "1";
 	locations[n].reload.l2.label = "Jungle";
 	locations[n].locators_radius.reload.reload2_back = 2.0;
+
 	locations[n].reload.l3.name = "reload3";
 	locations[n].reload.l3.go = "Charles_KeepersHouse";
 	locations[n].reload.l3.emerge = "reload1";
 	locations[n].reload.l3.autoreload = "0";
 	locations[n].reload.l3.label = "House";
+	
 	locations[n].reload.l4.name = "reload4";
 	locations[n].reload.l4.go = "Charles_CryptBig1";
 	locations[n].reload.l4.emerge = "reload1";
 	locations[n].reload.l4.autoreload = "0";
 	locations[n].reload.l4.label = "Сhapel";
+	
 	locations[n].reload.l5.name = "reload5";
 	locations[n].reload.l5.go = "Common_Crypt";
 	locations[n].reload.l5.emerge = "reload1";
 	locations[n].reload.l5.autoreload = "0";
 	locations[n].reload.l5.label = "Crypt";
 	n = n + 1;
+	
 	////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////// домик смотрителя
 	/////////////////////////////////////////////////////////////////////////////////////////////
 	locations[n].id = "Charles_KeepersHouse";
@@ -990,6 +1070,7 @@ int LocationInitNevis(int n)
 	Locations[n].models.always.windows = "SmallHouse_inside_windows";
 	Locations[n].models.always.windows.tech = "LocationWindows";
 	locations[n].models.always.windows.level = 65539;
+
 	locations[n].models.always.back = "..\inside_back2";
 	//Day
 	locations[n].models.day.charactersPatch = "SmallHouse_inside_patch";
@@ -1041,12 +1122,14 @@ int LocationInitNevis(int n)
 	locations[n].reload.l1.emerge = "reload4";
 	locations[n].reload.l1.autoreload = "0";
 	locations[n].reload.l1.label = "Graveyard";
+	
 	locations[n].reload.l2.name = "reload2";
 	locations[n].reload.l2.go = "Charles_CryptBig2";
 	locations[n].reload.l2.emerge = "reload1";
 	locations[n].reload.l2.autoreload = "0";
 	locations[n].reload.l2.label = "Crypt";
 	n = n + 1;
+	
 	////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////// крипта большая - 2
 	/////////////////////////////////////////////////////////////////////////////////////////////
 	locations[n].id = "Charles_CryptBig2";
@@ -1121,12 +1204,14 @@ int LocationInitNevis(int n)
 	locations[n].reload.l1.autoreload = "1";
 	locations[n].reload.l1.label = "Mayak5";
 	locations[n].locators_radius.reload.reload1_back = 2.0;
+
 	locations[n].reload.l2.name = "reload2_back";
 	locations[n].reload.l2.go = "Charles_fort";
 	locations[n].reload.l2.emerge = "reload1";
 	locations[n].reload.l2.autoreload = "1";
 	locations[n].reload.l2.label = "Charles Fort";
 	locations[n].locators_radius.reload.reload2_back = 2.0;
+
 	locations[n].reload.l3.name = "reload1_back";
 	locations[n].reload.l3.go = "Charles_Graveyard";
 	locations[n].reload.l3.emerge = "reload2";
@@ -1134,6 +1219,7 @@ int LocationInitNevis(int n)
 	locations[n].reload.l3.label = "Jungle";
 	locations[n].locators_radius.reload.reload3_back = 2.0;
 	n = n + 1;
+
 	//////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 	// Маяк Невиса
 	//////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
@@ -1151,13 +1237,17 @@ int LocationInitNevis(int n)
 	locations[n].models.always.lighthouse.sea_reflection = 1;
 	Locations[n].models.always.lighthouseSeabed = "lighthouse_sb";
 	Locations[n].models.always.locators = "lighthouse_locators";
+	
 	Locations[n].models.always.dooropen = "lighthouse_dooropen";
 	Locations[n].models.always.dooropen.tech = "DLightModel";	
+	
 	Locations[n].models.always.windows = "lighthouse_windows";
 	Locations[n].models.always.windows.tech = "LocationWindows";
 	Locations[n].models.always.windows.level = 66530;
+		
 	Locations[n].models.always.grassPatch = "lighthouse_grass";
 	Locations[n].models.always.grassPatch.texture = "grass\grassshore.tga.tx";
+	
 	Locations[n].models.always.l1 = "plan1";
 	Locations[n].models.always.l1.level = 9;
 	Locations[n].models.always.l1.tech = "LocationModelBlend";
@@ -1169,9 +1259,11 @@ int LocationInitNevis(int n)
 	locations[n].models.day.fonar = "lighthouse_fd";
 	locations[n].models.day.charactersPatch = "lighthouse_patch";
 	Locations[n].models.day.jumpPatch = "lighthouse_jamp";
+	
 	locations[n].models.day.glassinday = "lighthouse_glassinday";
 	Locations[n].models.day.glassinday.tech = "LocationWindows";
 	locations[n].models.day.glassinday.level = 66531;
+	
 	locations[n].models.day.glassonday = "lighthouse_glassonday";
 	Locations[n].models.day.glassonday.tech = "LocationWindows";
 	locations[n].models.day.glassonday.level = 66532;	
@@ -1179,18 +1271,22 @@ int LocationInitNevis(int n)
 	locations[n].models.night.volumeLight= "lighthouse_volumeLight";
 	locations[n].models.night.volumeLight.tech = "LighthouseLight";
 	locations[n].models.night.volumeLight.level = 66529;	
+	
 	locations[n].models.night.fonar = "lighthouse_fn";
 	locations[n].models.night.winnight = "lighthouse_winnight";
 	locations[n].models.night.winnight.tech = "LighthouseLight";
 	locations[n].models.night.winnight.level = 66529;
 	locations[n].models.night.charactersPatch = "lighthouse_patch";	
 	Locations[n].models.night.jumpPatch = "lighthouse_jamp";
+	
 	locations[n].models.night.glassinnight = "lighthouse_glassinnight";
 	Locations[n].models.night.glassinnight.tech = "LocationWindows";
 	locations[n].models.night.glassinnight.level = 66531;
+	
 	locations[n].models.night.glassonnight = "lighthouse_glassonnight";
 	Locations[n].models.night.glassonnight.tech = "LocationWindows";
 	locations[n].models.night.glassonnight.level = 66532;
+	
 	locations[n].models.night.fonaronnight = "lighthouse_fonaronnight";		
 	//Environment
 	locations[n].environment.weather = "true";
@@ -1202,20 +1298,24 @@ int LocationInitNevis(int n)
 	locations[n].reload.l1.autoreload = "1";
 	locations[n].reload.l1.label = "Jungle";
 	locations[n].locators_radius.reload.reload1_back = 3.0;
+
 	locations[n].reload.l2.name = "boat";
 	locations[n].reload.l2.go = "Nevis";
 	locations[n].reload.l2.emerge = "reload_4";
 	locations[n].reload.l2.label = "Sea";
 	locations[n].locators_radius.reload.boat = 12.0;
+	
 	locations[n].reload.l3.name = "reload2";
 	locations[n].reload.l3.go = "Mayak5_Lighthouseroom";
 	locations[n].reload.l3.emerge = "reload1";
 	locations[n].reload.l3.label = "room";
 	locations[n].locators_radius.reload.reload2 = 1.0;
 	n = n + 1;
+	
 	////////////////////////////////////////////////////////////////////////////////
 	//////////комната на маяке
 	////////////////////////////////////////////////////////////////////////////////
+	
 	locations[n].id = "Mayak5_Lighthouseroom";
 	locations[n].id.label = "House";
 	locations[n].image = "loading\inside\mediumhouse10.tga";
@@ -1231,9 +1331,11 @@ int LocationInitNevis(int n)
 	locations[n].models.always.house.level = 65538;
 	locations[n].models.day.locators = "mediumhouse09_locators";
 	locations[n].models.night.locators = "mediumhouse09_Nlocators";
+
 	Locations[n].models.always.mediumhouse09windows = "mediumhouse09_windows";
 	Locations[n].models.always.mediumhouse09windows.tech = "LocationWindows";
 	locations[n].models.always.mediumhouse09windows.level = 65539;
+
 	locations[n].models.always.back = "..\inside_back";
 	locations[n].models.always.back.level = 65529;
 	//Day
@@ -1251,6 +1353,7 @@ int LocationInitNevis(int n)
 	locations[n].reload.l1.autoreload = "0";
 	locations[n].reload.l1.label = "Mayak5";
 	n = n + 1;
+
 	//////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 	// Джунгли
 	//////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
@@ -1290,12 +1393,14 @@ int LocationInitNevis(int n)
 	locations[n].reload.l1.autoreload = "1";
 	locations[n].reload.l1.label = "Shore43";
 	locations[n].locators_radius.reload.reload1_back = 2;
+
 	locations[n].reload.l2.name = "reload2_back";
 	locations[n].reload.l2.go = "Charles_ExitTown";
 	locations[n].reload.l2.emerge = "reload2";
 	locations[n].reload.l2.autoreload = "1";
 	locations[n].reload.l2.label = "Jungle";
 	locations[n].locators_radius.reload.reload2_back = 2;
+
 	locations[n].reload.l3.name = "reload3_back";
 	locations[n].reload.l3.go = "Charles_Jungle_03";
 	locations[n].reload.l3.emerge = "reload3";
@@ -1303,6 +1408,7 @@ int LocationInitNevis(int n)
 	locations[n].reload.l3.label = "Jungle";
 	locations[n].locators_radius.reload.reload3_back = 2;
 	n = n + 1;
+	
 	//////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 	// пляж Бат
 	//////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
@@ -1320,8 +1426,10 @@ int LocationInitNevis(int n)
 	locations[n].models.always.shore05.sea_reflection = 1;
 	Locations[n].models.always.shore05seabed = "shore05_sb";
 	Locations[n].models.always.locators = "shore05_locators"; 
+		
 	Locations[n].models.always.grassPatch = "shore05_grass";
 	Locations[n].models.always.grassPatch.texture = "grass\grassshore.tga.tx";
+	
 	Locations[n].models.always.l1 = "plan1";
 	Locations[n].models.always.l1.level = 9;
 	Locations[n].models.always.l1.tech = "LocationModelBlend";
@@ -1345,6 +1453,7 @@ int LocationInitNevis(int n)
 	locations[n].reload.l1.autoreload = "1";
 	locations[n].reload.l1.label = "Jungle";
 	locations[n].locators_radius.reload.reload1_back = 2;
+
 	locations[n].reload.l2.name = "boat";
 	locations[n].reload.l2.go = "Nevis";
 	locations[n].reload.l2.emerge = "reload_2";
@@ -1352,6 +1461,7 @@ int LocationInitNevis(int n)
 	locations[n].reload.l2.label = "Sea";
     locations[n].locators_radius.reload.boat = 9.0;
 	n = n + 1;
+
 	//////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 	// Джунгли
 	//////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
@@ -1391,12 +1501,14 @@ int LocationInitNevis(int n)
 	locations[n].reload.l1.autoreload = "1";
 	locations[n].reload.l1.label = "Jungle";
 	locations[n].locators_radius.reload.reload1_back = 2;
+
 	locations[n].reload.l2.name = "reload2_back";
 	locations[n].reload.l2.go = "Charles_Jungle_04";
 	locations[n].reload.l2.emerge = "reload2";
 	locations[n].reload.l2.autoreload = "1";
 	locations[n].reload.l2.label = "Jungle";
     locations[n].locators_radius.reload.reload2_back = 2;
+
 	locations[n].reload.l3.name = "reload3_back";
 	locations[n].reload.l3.go = "Charles_Jungle_02";
 	locations[n].reload.l3.emerge = "reload3";
@@ -1404,6 +1516,7 @@ int LocationInitNevis(int n)
 	locations[n].reload.l3.label = "Jungle";
 	locations[n].locators_radius.reload.reload3_back = 2;
 	n = n + 1;
+
 	//////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 	// Вход в грот
 	//////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
@@ -1446,6 +1559,7 @@ int LocationInitNevis(int n)
 	locations[n].reload.l3.autoreload = "0";
 	locations[n].reload.l3.label = "Grot";
 	locations[n].locators_radius.reload.reload1_back = 1.3;
+
 	locations[n].reload.l2.name = "reload2_back";
 	locations[n].reload.l2.go = "Charles_Jungle_03";
 	locations[n].reload.l2.emerge = "reload1";
@@ -1453,6 +1567,7 @@ int LocationInitNevis(int n)
 	locations[n].reload.l2.label = "Jungle";
 	locations[n].locators_radius.reload.reload2_back = 2.0;
 	n = n + 1;
+
 	//////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 	// Грот
 	//////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
@@ -1471,6 +1586,7 @@ int LocationInitNevis(int n)
 	Locations[n].models.always.grotto2alpha.tech = "LocationWindows";	
 	locations[n].models.always.grotto2alpha.level = 65532;	
 	locations[n].models.always.locators = "grotto2_locators";
+
 	locations[n].locators_radius.item.duhi1 = 0.0;
 /*	
 	Locations[n].models.always.rays = "grotto2_rays";
@@ -1495,6 +1611,7 @@ int LocationInitNevis(int n)
 	locations[n].reload.l1.label = "Cave entrance";
 	locations[n].locators_radius.reload.reload1_back = 2;
 	n = n + 1;
+	
 	//////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 	// Джунгли
 	//////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
@@ -1534,6 +1651,7 @@ int LocationInitNevis(int n)
 	locations[n].reload.l1.autoreload = "1";
 	locations[n].reload.l1.label = "Shore42";
 	locations[n].locators_radius.reload.reload1_back = 2.0;
+
 	locations[n].reload.l2.name = "reload2_back";
 	locations[n].reload.l2.go = "Charles_jungle_03";
 	locations[n].reload.l2.emerge = "reload2";
@@ -1541,6 +1659,7 @@ int LocationInitNevis(int n)
 	locations[n].reload.l2.label = "Jungle";
 	locations[n].locators_radius.reload.reload2_back = 2.0;
 	n = n + 1;
+
 	//////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 	// бухта Ньюкасл
 	//////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
@@ -1583,6 +1702,7 @@ int LocationInitNevis(int n)
 	locations[n].reload.l1.autoreload = "1";
 	locations[n].reload.l1.label = "Jungle";
 	locations[n].locators_radius.reload.reload1_back = 2;
+
 	locations[n].reload.l2.name = "boat";
 	locations[n].reload.l2.go = "Nevis";
 	locations[n].reload.l2.emerge = "reload_3";
@@ -1590,5 +1710,6 @@ int LocationInitNevis(int n)
 	locations[n].reload.l2.label = "Sea";
     locations[n].locators_radius.reload.boat = 9.0;
 	n = n + 1;
+	
 	return n;
 }

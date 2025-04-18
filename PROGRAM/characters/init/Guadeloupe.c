@@ -1,9 +1,12 @@
+
 int CreateGuadeloupeCharacters(int n)
 {
 	ref ch;
+	
 	///////////////////////////////////////////////////////////////////////////////
 	// ОСНОВНЫЕ ПЕРСОНАЖИ
 	///////////////////////////////////////////////////////////////////////////////
+	
 	makeref(ch,Characters[n]);			//Губернатор
 	ch.id		= "BasTer_Mayor";
 	ch.model	= "huber_5";
@@ -31,6 +34,7 @@ int CreateGuadeloupeCharacters(int n)
 	LAi_group_MoveCharacter(ch, "FRANCE_CITIZENS");
 	LAi_SetImmortal(ch, true);
 	n = n + 1;
+
 	makeref(ch,Characters[n]);			//Священик
 	ch.id		= "BasTer_Priest";
 	ch.model	= "priest_1";
@@ -48,6 +52,7 @@ int CreateGuadeloupeCharacters(int n)
 	LAi_group_MoveCharacter(ch, "FRANCE_CITIZENS");
 	LAi_SetImmortal(ch, true);
 	n = n + 1;
+
 	makeref(ch,Characters[n]);		// ОФициантка
 	ch.id		= "BasTer_waitress";
 	ch.model	= "women_12";
@@ -64,6 +69,7 @@ int CreateGuadeloupeCharacters(int n)
 	LAi_group_MoveCharacter(ch, "FRANCE_CITIZENS");
 	LAi_SetImmortal(ch, true);
 	n = n + 1;
+
 	makeref(ch,Characters[n]);			//Трактирщик
 	ch.id		= "BasTer_tavernkeeper";
 	ch.model	= "barmen_7";
@@ -81,6 +87,8 @@ int CreateGuadeloupeCharacters(int n)
 	LAi_group_MoveCharacter(ch, "FRANCE_CITIZENS");
 	LAi_SetImmortal(ch, true);
 	n = n + 1;
+
+
 	makeref(ch,Characters[n]);			//Торговец
 	ch.id		= "BasTer_trader";
 	ch.model	= "trader_7";
@@ -98,6 +106,7 @@ int CreateGuadeloupeCharacters(int n)
 	LAi_SetImmortal(ch, true);
 	ch.item_date = "";
 	n = n + 1;
+
 	makeref(ch,Characters[n]);			//Корабел
 	ch.id		= "BasTer_shipyarder";
 	ch.model	= "shipowner_7";
@@ -122,6 +131,7 @@ int CreateGuadeloupeCharacters(int n)
 	LAi_group_MoveCharacter(ch, "FRANCE_CITIZENS");
 	LAi_SetImmortal(ch, true);
 	n = n + 1;
+
 	makeref(ch,Characters[n]);			//Банкир
 	ch.id		= "BasTer_usurer";
 	ch.model	= "banker_7";
@@ -141,6 +151,7 @@ int CreateGuadeloupeCharacters(int n)
 	LAi_group_MoveCharacter(ch, "FRANCE_CITIZENS");
 	LAi_SetImmortal(ch, true);
 	n = n + 1;
+
 	makeref(ch,Characters[n]);			//Начальник порта
 	ch.id		= "BasTer_PortMan";
 	ch.model	= "citiz_4";
@@ -157,6 +168,7 @@ int CreateGuadeloupeCharacters(int n)
 	LAi_SetImmortal(ch, true);
 	ch.item_date = "";
 	n = n + 1;
+
     makeref(ch,Characters[n]);
 	ch.name 	= "Smuggler";
 	ch.lastname = "";
@@ -173,6 +185,7 @@ int CreateGuadeloupeCharacters(int n)
 	LAi_SetHP(ch, 80.0, 80.0);
 	ch.greeting = "smuggler";
 	n = n + 1;
+	
 	makeref(ch,Characters[n]);			//Смотритель маяка
 	ch.id		= "BasTer_Lightman";
 	ch.model	= "keeper_7";
@@ -193,5 +206,6 @@ int CreateGuadeloupeCharacters(int n)
 	LAi_group_MoveCharacter(ch, "FRANCE_CITIZENS");
 	LAi_SetImmortal(ch, true);
 	n = n + 1;
+	
 	return n;
 }

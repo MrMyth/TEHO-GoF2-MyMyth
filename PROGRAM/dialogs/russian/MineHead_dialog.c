@@ -5,10 +5,13 @@ void ProcessDialogEvent()
 	aref Link, NextDiag;
 	int i, iTemp;
 	string sTemp;
+
 	DeleteAttribute(&Dialog,"Links");
+
 	makeref(NPChar,CharacterRef);
 	makearef(Link, Dialog.Links);
 	makearef(NextDiag, NPChar.Dialog);
+	
 	switch(Dialog.CurrentNode)
 	{
 		location = &Locations[FindLocation(pchar.location)];
@@ -47,12 +50,14 @@ void ProcessDialogEvent()
 			link.l1.go = "exit";
 			NextDiag.TempNode = "First time";
 		break;
+		
 		case "info":
 			dialog.text = "Los-Teques  mine extracts gold for the Spanish Crown. Everything we extract belongs to Spain. We also find here not only gold but also silver nuggets and valuable precious stones. We don't sell gold here, everything we extract is delivered to the Old World under a reinforced convoy\nBut we have two exceptions for golden and silver nuggets. First, you can buy some amount of them in our local store from a quartermaster. Sometimes salary doesn't get here in time, so we have to keep some savings of coins here for such cases, that is why local trading is allowed\nSecond, we constantly experience a need of manpower, so we exchange nuggets for slaves. Therefore, talk to me if you have something to offer, we will do business\nI believe that rules of conduct of the mine are obvious: don't steal, don't distract convicts and don't bother soldiers otherwise you won't like the consequences.";
 			link.l1 = "Okay, thank you!";			
 			link.l1.go = "exit";
 			location.quest.info = "true";
 		break;
+		
 		// генератор купли-продажи рабов
 		case "slaves_0":
 			location.quest.slaves.qty = 200; // стартовая потребность
@@ -60,6 +65,7 @@ void ProcessDialogEvent()
 			link.l1 = "I have "+FindRussianQtyString(GetSquadronGoods(pchar, GOOD_SLAVES))+".";
 			link.l1.go = "slaves_1";
 		break;
+		
 		case "slaves":
 			location.quest.slaves.qty = sti(location.quest.slaves.qty)+GetNpcQuestPastDayParam(location, "slave_date"); // каждый день дает +1 потребности
 			if (sti(location.quest.slaves.qty) > 350) location.quest.slaves.qty = 350; // максимум потребности
@@ -76,6 +82,7 @@ void ProcessDialogEvent()
 				link.l1.go = "slaves_1";
 			}
 		break;
+		
 		case "slaves_1":
 			dialog.text = "For every slave, I am willing to pay you either one gold ingot or two silver ingots. What do you choose?";
 			link.l1 = "Gold ingots.";
@@ -85,6 +92,7 @@ void ProcessDialogEvent()
 			link.l3 = "I am sorry, senor, but I've just changed my mind. Some other time.";
 			link.l3.go = "slaves_exit";
 		break;
+		
 		case "slaves_g":
 			location.quest.slaves.type = "gold";
 			dialog.text = "Fine. How many slaves are you going to sell me?";
@@ -92,6 +100,7 @@ void ProcessDialogEvent()
 			link.l1.edit = 6;
 			link.l1.go = "slaves_trade";
 		break;
+		
 		case "slaves_s":
 			location.quest.slaves.type = "silver";
 			dialog.text = "Fine. How many slaves are you going to sell me?";
@@ -99,6 +108,7 @@ void ProcessDialogEvent()
 			link.l1.edit = 6;
 			link.l1.go = "slaves_trade";
 		break;
+		
 		case "slaves_trade":
 			iTotalTemp = sti(dialogEditStrings[6]);
 			if (iTotalTemp < 1)
@@ -128,12 +138,14 @@ void ProcessDialogEvent()
 			link.l1 = "Don't worry, senor. Your slaves will be delivered to you in time. I will issue all relevant orders immediately.";
 			link.l1.go = "slaves_calk";
 		break;
+		
 		case "slaves_max":
 			iTotalTemp = sti(location.quest.slaves.qty);
 			dialog.text = "Excellent. Please order to bring them to the town gates. I'll send my men after them.";
 			link.l1 = "Don't worry, senor. Your slaves will be delivered to you in time. I will issue all relevant orders immediately.";
 			link.l1.go = "slaves_calk";
 		break;
+		
 		case "slaves_calk":
 			DialogExit();
 			Log_Info("Exchange of slaves for ingots has been completed");
@@ -147,16 +159,19 @@ void ProcessDialogEvent()
 			SaveCurrentNpcQuestDateParam(location, "slave_date");
 			location.quest.slaves.qty = sti(location.quest.slaves.qty)-iTotalTemp;
 		break;
+		
 		case "slaves_exit":
 			DialogExit();
 			DeleteAttribute(location, "slave_date");
 			SaveCurrentNpcQuestDateParam(location, "slave_date");
 		break;
+		
 		case "":
 			dialog.text = "";
 			link.l1 = "";
 			link.l1.go = "";
 		break;
+		
 		case "fight":
 			DialogExit();
 			NextDiag.CurrentNode = NextDiag.TempNode;
@@ -167,6 +182,7 @@ void ProcessDialogEvent()
 			    LAi_group_Attack(&Characters[i], Pchar);
 			}
 		break;
+
 		case "Exit":
 			NextDiag.CurrentNode = NextDiag.TempNode;
 			DialogExit();

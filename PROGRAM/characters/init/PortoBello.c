@@ -1,9 +1,12 @@
+
 int CreatePortoBelloCharacters(int n)
 {
 	ref ch;
+	
 	///////////////////////////////////////////////////////////////////////////////
 	// ОСНОВНЫЕ ПЕРСОНАЖИ
 	///////////////////////////////////////////////////////////////////////////////
+
 	makeref(ch,Characters[n]);			//Губернатор
 	ch.id		= "PortoBello_Mayor";
 	ch.model	= "huber_20";
@@ -31,6 +34,7 @@ int CreatePortoBelloCharacters(int n)
 	LAi_group_MoveCharacter(ch, "SPAIN_CITIZENS");
 	LAi_SetImmortal(ch, true);
 	n = n + 1;
+
 	makeref(ch,Characters[n]);			//Священик
 	ch.id		= "PortoBello_Priest";
 	ch.model	= "priest_2";
@@ -48,6 +52,7 @@ int CreatePortoBelloCharacters(int n)
 	LAi_group_MoveCharacter(ch, "SPAIN_CITIZENS");
 	LAi_SetImmortal(ch, true);
 	n = n + 1;
+
 	makeref(ch,Characters[n]);		// ОФициантка
 	ch.id		= "PortoBello_waitress";
 	ch.model	= "women_14";
@@ -63,6 +68,7 @@ int CreatePortoBelloCharacters(int n)
 	LAi_group_MoveCharacter(ch, "SPAIN_CITIZENS");
 	LAi_SetImmortal(ch, true);
 	n = n + 1;
+
 	makeref(ch,Characters[n]);			//Трактирщик
 	ch.id		= "PortoBello_tavernkeeper";
 	ch.model	= "barmen_1";
@@ -81,6 +87,7 @@ int CreatePortoBelloCharacters(int n)
 	LAi_group_MoveCharacter(ch, "SPAIN_CITIZENS");
 	LAi_SetImmortal(ch, true);
 	n = n + 1;
+
 	makeref(ch,Characters[n]);			//Торговец
 	ch.id		= "PortoBello_trader";
 	ch.model	= "trader_1";
@@ -98,6 +105,7 @@ int CreatePortoBelloCharacters(int n)
 	LAi_SetImmortal(ch, true);
 	ch.item_date = "";
 	n = n + 1;
+
 	makeref(ch,Characters[n]);			//Корабел
 	ch.id		= "PortoBello_shipyarder";
 	ch.model	= "shipowner_1";
@@ -122,6 +130,7 @@ int CreatePortoBelloCharacters(int n)
 	LAi_group_MoveCharacter(ch, "SPAIN_CITIZENS");
 	LAi_SetImmortal(ch, true);
 	n = n + 1;
+
 	makeref(ch,Characters[n]);			//Банкир
 	ch.id		= "PortoBello_usurer";
 	ch.model	= "banker_1_1";
@@ -143,6 +152,7 @@ int CreatePortoBelloCharacters(int n)
 	LAi_group_MoveCharacter(ch, "SPAIN_CITIZENS");
 	LAi_SetImmortal(ch, true);
 	n = n + 1;
+
 	makeref(ch,Characters[n]);			//Начальник порта
 	ch.id		= "PortoBello_PortMan";
 	ch.model	= "citiz_5";
@@ -159,6 +169,7 @@ int CreatePortoBelloCharacters(int n)
 	LAi_SetImmortal(ch, true);
 	ch.item_date = "";
 	n = n + 1;
+
     makeref(ch,Characters[n]);
 	ch.name 	= "Smuggler";
 	ch.lastname = "";
@@ -175,6 +186,7 @@ int CreatePortoBelloCharacters(int n)
 	LAi_SetHP(ch, 80.0, 80.0);
 	ch.greeting = "smuggler";
 	n = n + 1;
+	
 	makeref(ch,Characters[n]);			//Заведующий  складом на верфи
 	ch.id		= "PortoBello_SkladMan";
 	ch.model	= "citiz_"+(rand(9)+1);
@@ -192,5 +204,6 @@ int CreatePortoBelloCharacters(int n)
 	LAi_SetImmortal(ch, true);
 	ch.Storage 	  = true;
 	n = n + 1; 
+	
 	return n;
 }

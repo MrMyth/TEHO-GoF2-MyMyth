@@ -1,9 +1,12 @@
 // Quiet-Sun, ChezJfrey, Mirsaneli
+
 #include "Weather\Init\WhrFogRainCheck.c"
 #include "Weather\Init\WhrGenerateValues.c"
 // #include "scripts\lagoon_mod.c"
+
 #define GENERATIONDEBUG 0
 #define RANDOMDEBUG 1
+
 // wRain levels
 #define WRAINOVERCAST 30
 #define WRAINRAIN 50
@@ -12,20 +15,26 @@
 // Night and lagoon color properties
 #define NIGHTCOLORBLEND 6.0
 #define SHORECOLORDISTANCE 20.0
+
 // Evolution of fog on the generator
 #define MINIMUMFOG 2
 #define FOG2TRANSPARENCY 150.0
+
 #define WIND2WAVESPEED 0.22
 #define WIND2WAVELENGTH 5.5
 #define WIND2AMPLITUDE 0.45
+
 #define RAIN2AMPLITUDE 2.0
 #define RAIN2WIND 1.0
+
 #define WIND2WAVELENGTH2 2.5
 #define WIND2AMPLITUDE2 0.25
 #define WIND2FOAMV 1.0
+
 #define AMPLITUDERANDOM 0.25
 #define SCALERANDOM 0.4
 #define FOAMRANDOM 0.020
+
 void Whr_ResetOvrd(){
 	OWeatherAngle = -50.0;
 	OWABallast = -50.0;
@@ -37,14 +46,17 @@ void Whr_ResetOvrd(){
 	OWBallast = -50;
 	gWeatherOvrd = false;
 }
+
 void Whr_Generator(int iHour){
 // ====================================================================
 // JL - Less Random Weather Generator -- hopefully
 // ====================================================================
+
     bool morningFog = false; //Have no idea what this was supposed to be, doesn't exist in mine
 	//Traceandlog("WhrInit.c : Whr_Generator() called -- gWeatherInit: " +gWeatherInit); //JL - Figuring out this weather system
 	bool bWhrTornado = false;
 	bool bWhrStorm = false;
+
 	if(gWeatherInit == 1){
 		goldRain = rand(100);
 		goldFog = rand(20);
@@ -58,16 +70,20 @@ void Whr_Generator(int iHour){
 		windABallast = 0;
 		Trace(" !gWeatherInit Whr_Generator() - Initialized ");
 	}
+
 	//Logit("BugTracker - goldFog: " + goldFog + " goldRain: " + goldRain + " oldWind: " + oldWind + " gWeatherInit: " + gWeatherInit);
 	curTime = iHour; //MakeInt(GetHour()); //Causing problems
 	//#20220311-01
 	//bWeatherIsStorm = false; // screwface
 	//bWeatherIsRain = false; // screwface
+
 	rWind = rand(MAX_WINDCHANGE);
 	rFog = rand(MAX_FOGCHANGE);
 	rRain = rand(MAX_RAINCHANGE);
 	rWindA = frand(MAX_ANGLECHANGE);
+
 	Whr_GenerateValues(FREE_FOG);
+
 	if(gWeatherOvrd){
 		if(oWeatherAngle != -50.0){fWindA = OWeatherAngle;	}
 		if(OWABallast != -50.0){windABallast = OWABallast; }
@@ -79,6 +95,7 @@ void Whr_Generator(int iHour){
 		if(OWBallast != -50){windBallast = OWBallast;}
 		Whr_ResetOvrd();
 	}
+
 	if (CheckAttribute(&WeatherParams,"Storm")) { bWhrStorm = sti(WeatherParams.Storm); }
 	if (CheckAttribute(&WeatherParams,"Tornado")) { bWhrTornado = sti(WeatherParams.Tornado); }
 	//#20220311-01
@@ -86,6 +103,7 @@ void Whr_Generator(int iHour){
 	//WeatherParams.Tornado = false;
 	bool bStormAlreadyStarted = bWeatherIsStorm;
     if (bWeatherIsStorm) bWhrStorm = true;
+
 	if(bWhrStorm && !bWeatherIsStorm){
 		wRain = 95;
 		winds = 25;
@@ -105,10 +123,12 @@ void Whr_Generator(int iHour){
 	}
 	btornado = bWhrTornado; //screwface
 	bstorm = bWhrStorm; //screwface
+
 	goldRain = wRain;
 	goldFog = fog;
 	oldWind = winds;
 	fWeatherAngleOld = fWindA;
+
 	if(windABallast >=  MAX_ABALLAST || windABallast <= -MAX_ABALLAST ){ windABallast = 0;}
 	if(rainBallast  >=  MAX_RBALLAST )                                 { rainBallast = -MAX_RBALLAST;}
 	if(rainBallast  <= -MAX_RBALLAST )                                 { rainBallast =  MAX_RBALLAST;}
@@ -116,21 +136,26 @@ void Whr_Generator(int iHour){
 	if(windBallast  <= -MAX_WBALLAST )                                 { windBallast =  MAX_WBALLAST;}
 	if(fogBallast   >=  MAX_FBALLAST )                                 { fogBallast  = -MAX_FBALLAST;}
 	if(fogBallast   <= -MAX_FBALLAST )                                 { fogBallast  =  MAX_FBALLAST;}
+
 	if(wRain >= 85 && winds <= 10){ windBallast = 15;}
 	if(winds <= 25 && wRain >= 90){ rainBallast = -15;}
 	if(fog > 0 && curTime >= 7 && curTime <= 20 && wRain <= 75){fogBallast = -30;}
 	if(fogBallast < 0 && curTime > 20 || curTime < 7){fogBallast = 0;}
 	if(fogBallast < 0 && curTime >= 7 && curTime <=20 && wRain > 75){fogBallast = 0;}
+
 	minwind = winds - rand(2);
 	maxwind = winds + rand(2);
 	if(minwind < 5){minwind = 5;}	// LDH up from 0 - 12Feb09
 	if(maxwind > 30){maxwind = 30;}
 	if(minwind > maxwind){ minwind = maxwind; } // JL - Temporary catch all for weird wind bug
+
 	// Whr_InitGValues(); //Setup generic values based on ToD
 	Whr_FogRainCheck();	 //Set wRain and fog values
+
 	// NK & Mith-->
 	// LDH fixes - 16Mar09
 	string direction1, direction2, direction3;
+
 	fSeaA = PIm2 - fWindA;
 	if (fSeaA >= (3.0 * PId2))
 	{
@@ -145,18 +170,23 @@ void Whr_Generator(int iHour){
 	WeathersNH.Wind.Speed.Max = maxwind;
 	float seaWindSpeed = Whr_GetFloat(&WeathersNH,"Wind.Speed");
 	WeathersNH.Wind.seaWindSpeed = seaWindSpeed;
+
 	direction1 = fts(fSeaB, 4);
 	direction2 = fts((fSeaB + (PId2 / 2.0)), 4);
 	direction3 = fts((fSeaB - (PId2 / 2.0)), 4);
+
 	float myWind = maxwind;
 	if (maxwind > 25.0 && !bWhrStorm && !bWhrTornado)
 		myWind = 25.0;
+
 	float windStrength1 = myWind / 26.0;
 	float windStrength2 = myWind / 30.0;
 	float windStrength3 = myWind / 28.0;
+
 	string seaStrength1 = f2s(windStrength1, 4);
 	string seaStrength2 = f2s(windStrength2, 4);
 	string seaStrength3 = f2s(windStrength3, 4);
+
 	string waveSpeed = "-78.0";
 	if(REALISTIC_WAVES == 1)
 	{
@@ -171,6 +201,7 @@ void Whr_Generator(int iHour){
 		// same number would make the waves go in a single direction, without changing shape or breaking.
 		// Setting all numbers for "generators" to an equal value would create perfect harmonic waves.
 		// If you are not satisfied with the waves in this mod, please modify the values that right now say "20", "0.01" and "10"
+
 		//WeathersNH.Sea.Harmonics.h1 = direction1 + ",20.0," + seaStrength1 + ",80.87," + waveSpeed;
 		//WeathersNH.Sea.Harmonics.h2 = direction2 + ",0.01," + seaStrength2 + ",82.28," + waveSpeed;
 		//WeathersNH.Sea.Harmonics.h3 = direction3 + ",10.0," + seaStrength3 + ",82.28," + waveSpeed;
@@ -242,45 +273,59 @@ void Whr_Generator(int iHour){
 	//	float wave1 = 5  + windStrength2 * 3;
 	//	float wave2 = 10 + windStrength1 * 3;
 	//	float wave3 = 10 + windStrength3 * 3;
+
 	//	string waveLength1 = f2s(wave1, 4);
 	//	string waveLength2 = f2s(wave2, 4);
 	//	string waveLength3 = f2s(wave3, 4);
+
 	//	WeathersNH.Sea.Harmonics.h1 = direction1 + "," + waveLength1 + "," + seaStrength1 + ",0," + waveSpeed;
 	//	WeathersNH.Sea.Harmonics.h2 = direction2 + "," + waveLength2 + "," + seaStrength2 + ",0," + waveSpeed;
 	//	WeathersNH.Sea.Harmonics.h3 = direction3 + "," + waveLength3 + "," + seaStrength3 + ",0," + waveSpeed;
 	//}
+
 	// Whr_DebugInfo();
+
+
 	float effectiveRain = (wRain-75)*RAIN2WIND;
 	if (effectiveRain < 0) effectiveRain = 0;
+
 	// Wave amplitude
 	float Amp1rand = 2.0*(frnd()-0.5)*AMPLITUDERANDOM + 1.0;
 	float Amp1 = (0.25 + WIND2AMPLITUDE*(seaWindSpeed*Amp1rand + RAIN2AMPLITUDE*effectiveRain));
 	WeathersNH.Sea2.Amp1 = Amp1;
 	WeathersNH.Sea2.AnimSpeed1 = 3.0;
+
 	// Wave Length
 	float Scale1rand = 2.0*(frnd()-0.5)*SCALERANDOM + 1.0;
 	float scale1 = WIND2WAVELENGTH/(seaWindSpeed + effectiveRain);
 	if (scale1 > 1.0) {scale1 = 1.0;}
 	scale1 = scale1*Scale1rand;
 	WeathersNH.Sea2.Scale1 = scale1;
+
 	string waveSpeedX = f2s(-WIND2WAVESPEED*(winds + effectiveRain)*sin(fWindA), 2);
 	string waveSpeedZ = f2s(-WIND2WAVESPEED*(winds + effectiveRain)*cos(fWindA), 2);
 	WeathersNH.Sea2.MoveSpeed1 = waveSpeedX + ", 0.0, " + waveSpeedZ;
+
 	// Amplitude 2
 	float Amp2rand = 1.0*(frnd()-0.5)*AMPLITUDERANDOM + 1.0;
 	float Amp2 = 0.5 + WIND2AMPLITUDE*WIND2AMPLITUDE2*(seaWindSpeed + effectiveRain);
 	WeathersNH.Sea2.Amp2 = Amp2*Amp2rand;
 	WeathersNH.Sea2.AnimSpeed2 = 3.0;
+
 	// Wavelength 2
 	float Scale2rand = 2.0*(frnd()-0.5)*SCALERANDOM + 1.0;
 	WeathersNH.Sea2.Scale2 = WIND2WAVELENGTH*WIND2WAVELENGTH2/(seaWindSpeed + effectiveRain)*Scale2rand;
+
+
 	// float randomDir = frnd()*PI;
 	// trace("random dir: " + randomDir);
 	string waveSpeed2X = f2s(-WIND2WAVESPEED*WIND2WAVELENGTH2*(seaWindSpeed + effectiveRain)*sin(fWindA), 2);
 	string waveSpeed2Z = f2s(-WIND2WAVESPEED*WIND2WAVELENGTH2*(seaWindSpeed + effectiveRain)*cos(fWindA), 2);
 	WeathersNH.Sea2.MoveSpeed2 = waveSpeed2X + ", 0.0, " + waveSpeed2Z;
+
 	// Foam properties
 	WeathersNH.Sea2.FoamEnable = true;
+	
 	// Storm foam generation
 	if (bWeatherIsStorm) {
     float foamstorm = 4.0 * (frnd() - 1.5) * FOAMRANDOM;
@@ -305,12 +350,17 @@ void Whr_Generator(int iHour){
     WeathersNH.Sea2.FoamUV = 0.5;
     WeathersNH.Sea2.FoamTexDisturb = 0.7;
 	}
+
 	// Sea properties
 	WeathersNH.Sea2.Attenuation = 0.2;
+
 	float fblend = 0;
 	float fblend2 = 0;
+
 	float transparency  = 0.5;
+
 	// Evening
+
 	if (curTime>=18 || curTime<=22)
 	{
 		fblend = 0.3;
@@ -330,23 +380,32 @@ void Whr_Generator(int iHour){
 		fblend = 1;
 		transparency = 0;
 	}
+
 	// Apply fog and rain to transparency
 	effectiveRain = (wRain-WRAINRAIN)/(100 - WRAINRAIN);
 	if (effectiveRain < 0) effectiveRain = 0;
+
 	SetNHFogValues();
+
 	float fog2trans = (Whr_GetFloat(&WeathersNH, "Fog.SeaDensity")-MINIMUMFOG*FOGFACTOR)*FOG2TRANSPARENCY + effectiveRain;
 	transparency = transparency - fog2trans;
 	trace("Fog to transparency: " + fog2trans);
+
 	if (transparency < 0) transparency = 0.0;
 	if (fog2trans > 1) fog2trans = 1.0;
+
 	// Create blending constant for water color and fog color
 	fblend2 = 0.40 - fog2trans;
+
 	// Assume that the water is shore water
 	int WaterColor = waterColor_Get(true);
+
 	// Darken and make opaque it for evening and night
 	int darkWater = argb(0,28,28,28);
 	int grayWater = argb(0,100,100,100);
+
 	WaterColor = Whr_BlendColor( fog2trans*0.8, WaterColor, grayWater);
+
 	// Correct it, if it open sea
 	pchar = GetMainCharacter();
 	float closestdist = 0.0;
@@ -357,8 +416,11 @@ void Whr_Generator(int iHour){
 	// }else{
 	// 	if (RANDOMDEBUG) trace("weather Char location: " + pchar.location);
 	// }
+
 	int darkgrayWater = argb(0,20,20,20);
+
 	if (CheckAttribute(pchar, "location")){
+
 		if (pchar.location == WDM_NONE_ISLAND || closestdist > SHORECOLORDISTANCE)
 		{
 			WaterColor = waterColor_Get(false);
@@ -371,18 +433,28 @@ void Whr_Generator(int iHour){
 			if (fog2trans > 1) fog2trans = 1.0;
 			fblend2 = fblend2 - 0.05;
 		}
+
 	}else{
 		WaterColor = waterColor_Get(false);
 		WaterColor = Whr_BlendColor( fog2trans*0.8, WaterColor, darkgrayWater);
 	}
+
 	WaterColor = Whr_BlendColor( fblend, WaterColor, darkWater);
+
+
+
+
 	// Blend fog between day and night
 	int lightfog = argb(0,160,160,180);
 	int darkfog = argb(0,0,0,0);
+
+
 	int fogcolor = Whr_BlendColor(fblend, lightfog, darkfog);
+
 	// Tint it with the water color
 	if (fblend2<0.0) fblend2 = 0.0;
 	fogcolor = Whr_BlendColor(fblend2, fogcolor, WaterColor);
+
 	int dawnduskfogcolor;
 	int dawnDuskSky;
 	// Dawn or dusk fogs and sun color
@@ -398,6 +470,7 @@ void Whr_Generator(int iHour){
 	WeathersNH.Fog.Color = fogcolor;
 	WeathersNH.SpecialSeaFog.Color = fogcolor;
 }
+
 string f2s(float fl,int nDigAfterPoint)
 {
 	float fmul = pow(10.0,nDigAfterPoint);
@@ -413,6 +486,7 @@ string f2s(float fl,int nDigAfterPoint)
 	if (strRight(retval,1) == ".")    retval = strLeft(retval, strLen(retval)-1);
 	return retval;
 }
+
 int waterColor_Get(bool isShore)
 {
     int waterColor = argb(0,50,70,90);
@@ -423,8 +497,10 @@ int waterColor_Get(bool isShore)
         if (isShore)
             waterColor = argb(0,5,138,181);
     }
+
 	return waterColor;
 }
+
 void SetNHFogValues()
 {
     if( iCurWeatherNum > -1) {
@@ -436,13 +512,16 @@ void SetNHFogValues()
         WeathersNH.SpecialSeaFog.Color = argb(0,135,168,205);
     }
 }
+
 //--------------------------------------------------------------------------------
 // Dawn/dusk randomizers (Quiet-Sun)
+
 void dawndusk_fog(ref dawnDuskFogColor, ref dawnDuskskyColor)
 {
 	// Random number for the case, if you add more skies be sure to match the number of cases
 	int fogNumber = rand(1);
 	//if (RANDOMDEBUG) Trace("dawndusk_fog random number: " + fogNumber);
+
 	switch(fogNumber)
     {
     case 0:
@@ -455,14 +534,19 @@ void dawndusk_fog(ref dawnDuskFogColor, ref dawnDuskskyColor)
 		dawnDuskskyColor = argb(0,216,216,255);
         break;
 	}
+
 }
+
 //--------------------------------------------------------------------------------
 // Color randomizers (Quiet-Sun)
+
 int waterColor_shore()
 {
+
 	// Random number for the case, if you add more colors be sure to match the number of cases
 	int colorNumber = rand(6);
 	if (RANDOMDEBUG) Trace("waterColor_shore random number: " + colorNumber);
+
 	int waterColor;
 	switch(colorNumber)
     {
@@ -488,13 +572,18 @@ int waterColor_shore()
         waterColor = argb(0,94,123,151);
         break;
 	}
+
 	return waterColor;
 }
+
+
 int waterColor_openSea()
 {
+
 	// Random number for the case, if you add more colors be sure to match the number of cases
 	int colorNumber = rand(11);
 	if (RANDOMDEBUG) Trace("waterColor_openSea random number: " + colorNumber);
+
 	int waterColor;
 	switch(colorNumber)
     {
@@ -535,5 +624,6 @@ int waterColor_openSea()
         waterColor = argb(0,7,84,103);
         break;
 	}
+
 	return waterColor;
 }

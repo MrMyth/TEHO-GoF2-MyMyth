@@ -1,3 +1,4 @@
+
 bool TestIntValue(int nValue, int nCompareValue, string sOperation)
 {
 	switch(sOperation)
@@ -26,6 +27,7 @@ bool TestIntValue(int nValue, int nCompareValue, string sOperation)
 	trace("ERROR: invalid operation(" + sOperation + ")");
 	return false;
 }
+
 bool ProcessCondition(aref condition, int n)
 {
 	bool bTmp;
@@ -38,6 +40,7 @@ bool ProcessCondition(aref condition, int n)
 	string locGroup;
 	string sLocation;
 	float fx,fy,fz;
+
 	sConditionName = GetAttributeValue(condition);
 	// boal -->
 	if(CheckAttribute(condition,"character"))
@@ -59,6 +62,7 @@ bool ProcessCondition(aref condition, int n)
 		refCharacter = GetMainCharacter();
 	}
 	// boal <--
+
 	switch(sConditionName)
 	{
 		case "Ready_Fight":
@@ -84,9 +88,11 @@ bool ProcessCondition(aref condition, int n)
 		case "MapEnter":
     		return IsEntity(&worldMap);
     	break;
+
     	case "ExitFromLocation":
     		return refCharacter.location != condition.location;
     	break;
+
         case "location":
     		if(refCharacter.location==condition.location) 
 			{
@@ -95,9 +101,11 @@ bool ProcessCondition(aref condition, int n)
 			}
     		return false;
     	break;
+		
 	case "item_equip":
 		return IsEquipCharacterByItem(refCharacter,condition.item_equip);
 	break;
+
         case "Timer":
     		if( GetDataYear() < sti(condition.date.year) ) return false;
     		if( GetDataYear() > sti(condition.date.year) ) return true;
@@ -111,30 +119,36 @@ bool ProcessCondition(aref condition, int n)
 			}
     		return true;
     	break;
+
 		//Jason --> прерывания на время суток - ночь и день
 		case "Night":
     		return Whr_IsNight();
     	break;
+		
 		case "Day":
     		return Whr_IsDay();
     	break;
+		
 		//Jason --> прерывание на промежуток времени
 		case "Hour":
 			if (stf(environment.time) >= stf(condition.start.hour) && stf(environment.time) < stf(condition.finish.hour)) return true;
     		return false;
     	break;
+		
 		//Jason --> прерывание на заданный час
 		case "HardHour":
 			if (stf(environment.time) >= stf(condition.hour)) return true;
     		return false;
     	break;
 		//<-- прерывания от времени суток и конкретного времени
+
 		//Jason --> прерывание на нацию (поднятие флага) ГГ
 		case "Nation":
 			if (sti(pchar.nation) == sti(condition.nation)) return true;
     		return false;
     	break;
 		//<-- прерывание на нацию
+
     	case "locator":
     		if(refCharacter.location == condition.location)
     		{
@@ -161,9 +175,11 @@ bool ProcessCondition(aref condition, int n)
     		}
     		return false;
     	break;
+
     	case "NPC_Death":
     		return CharacterIsDead(refCharacter);
     	break;
+
 		//navy --> универсальное прерывание на тип локации.
 		case "Location_Type":
 			if (IsEntity(loadedLocation))
@@ -173,6 +189,7 @@ bool ProcessCondition(aref condition, int n)
 			return false;
 		break;
 		//navy <--
+
 		case "Nation_City":
 			if (IsEntity(loadedLocation))
 			{
@@ -190,6 +207,7 @@ bool ProcessCondition(aref condition, int n)
 			}
 			return false;
 		break;
+		
         // boal  260804 -->  TO_DO
         /*
         case "location_port": // любая портовая локация
@@ -199,6 +217,7 @@ bool ProcessCondition(aref condition, int n)
     		}
     		return false;
     	break;
+
     	case "location_seashore": // любая бухта
             if (IsEntity(loadedLocation))
             {
@@ -206,6 +225,7 @@ bool ProcessCondition(aref condition, int n)
     		}
     		return false;
     	break;
+
     	case "Location_Coast": // любая бухта или порт
             if (IsEntity(loadedLocation) && CheckAttribute(loadedLocation, "type"))
             {
@@ -215,30 +235,37 @@ bool ProcessCondition(aref condition, int n)
     	break;
     	*/
         // boal <--
+
         case "Goods":
     		return TestIntValue(GetCargoGoods(refCharacter,sti(condition.goods)),sti(condition.quantity),condition.operation);
     	break;
+
 		//Jason: вертаем методы К3; прерывание на ранг
 		case "Rank":
 			return TestIntValue(sti(refCharacter.rank),sti(condition.value),condition.operation);
 		break;
+
 		//Jason --> прерывание с учетом аларма
 		case "Alarm":
 			return TestIntValue(LAi_grp_playeralarm, sti(condition.value), condition.operation);
     	break;
+		
 		// Addon-2016 Jason, французские миниквесты прерывание на количество денег
 		case "Money":
 			return TestIntValue(sti(pchar.money), sti(condition.value), condition.operation);
     	break;
+
     	case "item":  // to_do  пока в квесте воровства  есть, но не используется
 			// Warship Для новой системы предметов это неприемлемо
 			// Ugeen -- > для новой системы предметов переписал функцию CheckCharacterItem(), теперь будет приемлимо
     		return CheckCharacterItem(refCharacter,condition.item);
     	break;
+
         case "Character_Capture":
     		if( CheckAttribute(refCharacter,"Killer.status") && sti(refCharacter.Killer.status)==KILL_BY_ABORDAGE ) return true;
     		return false;
     	break;
+
         //a&m --> 03/02
         case "Character_sink":
     		if( CheckAttribute(refCharacter,"Killer.status") && sti(refCharacter.Killer.status) != KILL_BY_ABORDAGE ) return true;
@@ -254,6 +281,7 @@ bool ProcessCondition(aref condition, int n)
 			return Group_isDead(sTmpString);
 		break;
 	// boal <--
+	
 		case "ComeToIsland":
 			if(CheckAttribute(refCharacter,"ComeToIsland") && refCharacter.ComeToIsland=="1")
 			{
@@ -262,6 +290,7 @@ bool ProcessCondition(aref condition, int n)
 			}
 			return false;
 		break;
+
 		case "EnterToSea":
 			if(bSeaActive == true)
 			{
@@ -269,6 +298,7 @@ bool ProcessCondition(aref condition, int n)
 			}
 			return false;
 		break;
+
 		case "ExitFromSea":
 			if (bSeaActive == false)
 			{
@@ -276,6 +306,7 @@ bool ProcessCondition(aref condition, int n)
 			}
 			return false;
 		break;
+
 		case "nation_location":
 			iNation = sti(condition.nation);
 			sLocation = refCharacter.location;
@@ -294,6 +325,7 @@ bool ProcessCondition(aref condition, int n)
 			}
 			return false;
 		break;
+
 		case "Fort_capture":
 			if( CheckAttribute(refCharacter,"FortCapture") && refCharacter.FortCapture=="1" )
 			{
@@ -302,6 +334,7 @@ bool ProcessCondition(aref condition, int n)
 			}
 			return false;
 		break;
+
 		case "Ship_capture":
 			if(CheckAttribute(refCharacter,"ShipCapture") && refCharacter.ShipCapture=="1")
 			{
@@ -310,6 +343,7 @@ bool ProcessCondition(aref condition, int n)
 			}
 			return false;
 		break;
+		
 		case "Coordinates":
 			if(IsEntity(&worldMap)) // если на глобальной карте
 			{
@@ -344,8 +378,10 @@ bool ProcessCondition(aref condition, int n)
 	trace("n = " + n + " ERROR: unidentified condition type()" + condition + " : " + sConditionName);
 	return false;
 }
+
 bool bQuestCheckProcess = false;
 bool bQuestCheckProcessFreeze = false;// boal 230804 fix замораживать проверку квестов
+
 void QuestsCheck()
 {
 	if(bQuestCheckProcess || bQuestCheckProcessFreeze || dialogRun) return;//boal
@@ -359,14 +395,21 @@ void QuestsCheck()
 	int  n,m;
 	string sQuestName;
 	bool bQuestCompleted;
+	
+	
 	makearef(quests,pchar.quest);
+		
 	nQuestsNum = GetAttributesNum(quests);
+	
 //	trace("nQuestsNum : " + nQuestsNum);
 	for(n = 0; n < nQuestsNum; n++)
 	{
         if (bQuestCheckProcessFreeze || dialogRun) continue;  // boal 230804 fix замораживать проверку квестов
+        
         quest = GetAttributeN(quests,n);
+
 		sQuestName = GetAttributeName(quest);
+
 		if(CheckAttribute(quest,"win_condition"))
 		{
 			if(quest.win_condition == "no")
@@ -403,6 +446,7 @@ void QuestsCheck()
 				nQuestsNum = GetAttributesNum(quests);
 			}
 		}
+		
 		if(CheckAttribute(quest,"fail_condition"))
 		{
 			makearef(conditions,quest.fail_condition);
@@ -434,6 +478,7 @@ void QuestsCheck()
 	}
 	bQuestCheckProcess = false;
 }
+
 void OnQuestComplete(aref quest, string sQuestname)
 {
 	if(!CheckAttribute(quest,"over") && CheckAttribute(quest,"win_condition"))
@@ -447,6 +492,7 @@ void OnQuestComplete(aref quest, string sQuestname)
 		TraceQuestFiles(quest.win_condition, sQuestName);
 	}
 }
+
 void OnQuestFailed(aref quest, string sQuestName)
 {
 	if(CheckAttribute(quest,"fail_condition"))
@@ -457,6 +503,7 @@ void OnQuestFailed(aref quest, string sQuestName)
 		TraceQuestFiles(quest.fail_condition, sQuestName);
 	}
 }
+
 void QC_DoUnloadLocation()
 {
 	DeleteAttribute(GetMainCharacter(),"GroupDeath");
@@ -465,6 +512,7 @@ void QC_DoUnloadLocation()
 		DeleteAttribute(GetCharacter(n),"Quests.LocatorCheck");
 	}
 }
+
 void SetPossibleAction(ref chref, aref condition, bool setting)
 {
 	if(setting)
@@ -486,6 +534,7 @@ void SetPossibleAction(ref chref, aref condition, bool setting)
 		DeleteAttribute(chref,"Quests.quest_act");
 	}
 }
+
 // Warship, 02.06.11. Установка прерывание на определенное время (час).
 void SetFunctionHourCondition(string _quest, int _targetHour)
 {

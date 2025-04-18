@@ -2,28 +2,40 @@
 /// Ugeen --> переделка для ККС 23.08.10
 #define DEFAULT_NAME "Player"
 #define DEFAULT_PASS ""
+
 bool isOkExit = false;
 int idLngFile = -1;
 string sCharacterName;
+
 bool g_bToolTipStarted = false;
 int heroQty = 0;
 string totalInfo;
 string CurTable, CurRow, CurCol = 0;
 int iSelected, iSelectedCol;
 ref	nulChr;
+
 void InitInterface(string iniName)
 {
 	nulChr = &NullCharacter;
+
 	GameInterface.title = "titleCharacterSelect";
 	GameInterface.faces.current = 1;
+	
 	SendMessage(&GameInterface,"ls",MSG_INTERFACE_INIT,iniName);
+
 	SetMainCharacterIndex(1);
+
 	sCharacterName = pchar.id;
+	
 	SendMessage(&GameInterface,"lsll",MSG_INTERFACE_MSG_TO_NODE,"BLAZE", 5, 1);
+
 	GameInterface.PROFILE_NAME.str = DEFAULT_NAME;
 	GameInterface.PROFILE_PASS.str = DEFAULT_PASS;
+	
     LoadStartGameParam(); // boal
+    
 	startHeroType = 1; // fix
+    
 	SetEventHandler("exitCancel", "exitCancel", 0);
 	SetEventHandler("exitOk", "exitOk", 0);
 	SetEventHandler("confirmChangeProfileName", "confirmChangeProfileName", 0);
@@ -32,25 +44,34 @@ void InitInterface(string iniName)
 	SetEventHandler("OnTableClick", "OnTableClick", 0);
 	SetEventHandler("TableSelectChange", "CS_TableSelectChange", 0);
 	SetEventHandler("noteOk","procNoteOk",0);
+
 	SetEventHandler("frame","IProcessFrame",0);
 	SetEventHandler("ievnt_command","ProcessCommandExecute",0);
+	
 	setNewMainCharacter(&NullCharacter, startHeroType);
 	SetCharacterSPECIAL(NullCharacter.HeroParam.HeroType, &NullCharacter);
 	SetSPECIALMiniTableCharSelect("TABLE_SMALLSKILL", &NullCharacter);
 	SetSetupInfoText();
+	
 	SelectNation();
+
 	if (!CheckAttribute(&GameInterface, "SavePath"))
 		GameInterface.SavePath = "SAVE";
+		
 	EI_CreateFrame("CHARACTER_BIG_PICTURE_BORDER", 15,67,215,290);
     EI_CreateHLine("CHARACTER_BIG_PICTURE_BORDER", 18,91,212,1, 4);
+	
 	EI_CreateFrame("SETUP_BIG_PICTURE_BORDER",230,305,785,585); 
     EI_CreateHLine("SETUP_BIG_PICTURE_BORDER",233,535,782,1, 4);
+    
     heroQty  = MaxHeroQty;
+	
 	if(heroQty == 1)
 	{
 		SetNodeUsing("LEFTCHANGE_CHARACTER",  false);
 		SetNodeUsing("RIGHTCHANGE_CHARACTER", false);
 	}
+	
     if (!CheckAttribute(&NullCharacter, "HeroParam.HeroType") || !CheckAttribute(&NullCharacter, "HeroParam.nation"))
     {   // иначе уже загружен и выбран ГГ, смотрим настройки и идем обратно
 		SetVariable(true);
@@ -61,8 +82,10 @@ void InitInterface(string iniName)
 	}
 	TmpI_ShowLevelComplexity();
 	SetByDefault();
+	
 	SendMessage(&GameInterface,"lsl",MSG_INTERFACE_MSG_TO_NODE,"TABLE_SMALLSKILL", 0 );
 }
+
 void SetByDefault()
 {
 	if (iArcadeSails == 1)// 1 0
@@ -89,6 +112,7 @@ void SetByDefault()
     {
         CheckButton_SetState("CHECK_HARDCORE", 1, false);
     }
+	
 	if (bSeaBattleSave)// 1 0
     {
     	CheckButton_SetState("CHECK_SEABATTLESAVE", 1, true);
@@ -97,6 +121,7 @@ void SetByDefault()
     {
         CheckButton_SetState("CHECK_SEABATTLESAVE", 1, false);
     }	
+	
 	if (bRains)// 1 0
     {
     	CheckButton_SetState("CHECK_RAINS", 1, true);
@@ -105,6 +130,7 @@ void SetByDefault()
     {
         CheckButton_SetState("CHECK_RAINS", 1, false);
     }		
+	
 	if (bPartitionSet)// 1 0
     {
     	CheckButton_SetState("CHECK_PARTITION", 1, true);
@@ -114,6 +140,7 @@ void SetByDefault()
         CheckButton_SetState("CHECK_PARTITION", 1, false);
     }
 }
+
 void IProcessFrame()
 {
 	if(GetCurrentNode() == "PROFILE_NAME")
@@ -122,11 +149,13 @@ void IProcessFrame()
 		{
 			confirmChangeProfileName();
 		}
+
 		if(characters[GetCharacterIndex(sCharacterName)].profile.name!= GameInterface.PROFILE_NAME.str)
 		{
 			confirmChangeProfileName();
 		}
 	}
+
 	if(SendMessage(&GameInterface,"lsll",MSG_INTERFACE_MSG_TO_NODE, "CHECK_ARCADESAIL", 3, 1))
 	{
 		iArcadeSails = 1;
@@ -153,6 +182,7 @@ void IProcessFrame()
 	{
 		bHardcoreGame = false;
 	}
+	
 	if(SendMessage(&GameInterface,"lsll",MSG_INTERFACE_MSG_TO_NODE, "CHECK_SEABATTLESAVE", 3, 1))
 	{
 		bSeaBattleSave = true;
@@ -161,6 +191,7 @@ void IProcessFrame()
 	{
 		bSeaBattleSave = false;
 	}		
+	
 	if(SendMessage(&GameInterface,"lsll",MSG_INTERFACE_MSG_TO_NODE, "CHECK_RAINS", 3, 1))
 	{
 		bRains = true;
@@ -169,6 +200,7 @@ void IProcessFrame()
 	{
 		bRains = false;
 	}		
+	
 	if(SendMessage(&GameInterface,"lsll",MSG_INTERFACE_MSG_TO_NODE, "CHECK_PARTITION", 3, 1))	
 	{
 		bPartitionSet = true;
@@ -178,6 +210,7 @@ void IProcessFrame()
 		bPartitionSet = false;
 	}
 }
+
 void exitCancel()
 {
 	if( CheckAttribute(&InterfaceStates,"showGameMenuOnExit") && sti(InterfaceStates.showGameMenuOnExit) == true)
@@ -189,6 +222,7 @@ void exitCancel()
 	IDoExit(RC_INTERFACE_CHARACTER_SELECT_EXIT, true);
 	ReturnToMainMenu();
 }
+
 void exitOk()
 {
 	if( !IsCorrectProfileName() )
@@ -196,25 +230,32 @@ void exitOk()
 		ShowNoteText(true);
 		return;
 	}
+
 	confirmChangeProfileName();
+
 	if (!ProfileExists())
 	{
 		CreateProfileFolders();
+
         isOkExit = true;
 		IDoExit(RC_INTERFACE_CHARACTER_SELECT_EXIT, true);
 	} 
 	else 
 	{
+
 		ShowConfirmWindow(true);
 	}
 }
+
 bool IsCorrectProfileName()
 {
 	int n,nLen;
 	string str,sCurProfileName;
+
 	sCurProfileName = GameInterface.PROFILE_NAME.str;
 	nLen = strlen(sCurProfileName);
 	if( nLen==0 ) {return false;}
+
 	for( n=0; n<nLen; n++ )
 	{
 		str = GetSymbol(&sCurProfileName,n);
@@ -225,28 +266,36 @@ bool IsCorrectProfileName()
 	}
 	return true;
 }
+
 void ShowNoteText(bool bShow)
 {
 	if( bShow ) {
 		XI_WindowDisable("MAIN_WINDOW", true);
+
 		XI_WindowDisable("NOTE_WINDOW", false);
 		XI_WindowShow("NOTE_WINDOW", true);
+
 		SetCurrentNode("NOTE_WINDOW_OK");
 	} else {
 		XI_WindowDisable("MAIN_WINDOW", false);
+
 		XI_WindowDisable("NOTE_WINDOW", true);
 		XI_WindowShow("NOTE_WINDOW", false);
+
 		SetCurrentNode("PROFILE_NAME");
 	}
 }
+
 void procNoteOk()
 {
 	ShowNoteText(false);
 }
+
 void ProcessCommandExecute()
 {
 	string comName = GetEventData();
 	string nodName = GetEventData();
+
 	switch(nodName)
 	{
         case "LEFTCHANGE_COMPLEX":
@@ -259,6 +308,7 @@ void ProcessCommandExecute()
 				TmpI_ShowLevelComplexity();
 			}
 		break;
+
 		case "RIGHTCHANGE_COMPLEX":
 			if(comName=="click")
 			{
@@ -269,28 +319,38 @@ void ProcessCommandExecute()
 	            TmpI_ShowLevelComplexity();
 			}
 		break;
+		
 		case "CONFIRM_WINDOW_MB_YES":
+
 			if (comName == "click" || comName == "activate")
 			{
 				isOkExit = true;
 				SaveStartGameParam(); // boal
 				IDoExit(RC_INTERFACE_CHARACTER_SELECT_EXIT, true);
 			}
+
 			if (comName == "deactivate")
 			{
 				ShowConfirmWindow(false);
 			}
+
 			break;
+
 		case "CONFIRM_WINDOW_MB_NO":
+
 			if (comName == "click" || comName == "activate")
 			{
 				ShowConfirmWindow(false);
 			}
+
 			if (comName == "deactivate")
 			{
+
 				ShowConfirmWindow(false);
 			}
+
 			break;
+			
 		////////////////////////////////
 		case "OK_BUTTON":
     		if(comName=="leftstep")
@@ -312,30 +372,36 @@ void ProcessCommandExecute()
                 ProcessCommandExecuteRight();
     		}
     	break;
+    	
 		case "LEFTCHANGE_CHARACTER":
     		if(comName=="click")
     		{
     		    ProcessCommandExecuteLeft();
     		}
     	break;
+
     	case "RIGHTCHANGE_CHARACTER":
     		if(comName=="click")
     		{
     		    ProcessCommandExecuteRight();
     		}
     	break;
+
 		case "LEFTCHANGE_SETUP":
     		if(comName=="click")
     		{
 				ProcessCommandExecuteTypeLeft();
     		}
     	break;
+
     	case "RIGHTCHANGE_SETUP":
     		if(comName=="click")
     		{
 				ProcessCommandExecuteTypeRight();
     		}
     	break;
+		
+		
     	case "FACEPICT":
     		if(comName=="click")
     		{
@@ -343,18 +409,22 @@ void ProcessCommandExecute()
 				SetInfoText();
     		}
     	break;
+		
 		case "TABLE_SMALLSKILL":
 			if(comName=="click")
 			{
 			}
 		break;	
 	}
+
 }
+
 void ShowConfirmWindow(bool show)
 {
 	if (show)
 	{
 		SetCurrentNode("CONFIRM_WINDOW_MB_NO");
+
 		XI_WindowDisable("MAIN_WINDOW", true);
 		XI_WindowDisable("CONFIRM_WINDOW", false);
 		XI_WindowShow("CONFIRM_WINDOW", true);
@@ -368,6 +438,7 @@ void ShowConfirmWindow(bool show)
 		SetCurrentNode("OK_BUTTON");
 	}
 }
+
 //----------------------------------------------------------------------------------------------------
 //
 //----------------------------------------------------------------------------------------------------
@@ -375,7 +446,9 @@ void CreateProfileFolders()
 {
 	String folder = GameInterface.SavePath + "\";
 	folder+= pchar.profile.name;
+
 	if (XI_CheckFolder(folder)) return;
+
 	if(!XI_CreateFolder(folder)) 
 		trace("Could not create profile folder");
 }
@@ -383,17 +456,22 @@ void CreateProfileFolders()
 void DeleteProfile()
 {
 	String folder;
+
 	folder = GameInterface.SavePath + "\"+ pchar.profile.name;
+
 	int nSaveNum= 0;
 	string saveName;
 	int nSaveSize;
+
 	String path = GameInterface.SavePath;
 	GameInterface.SavePath = folder;
+
     while( SendMessage(&GameInterface,"llee",MSG_INTERFACE_SAVE_FILE_FIND,nSaveNum,&saveName,&nSaveSize)!=0 )
     {
 		nSaveNum++;
 		SendMessage(&GameInterface,"ls",MSG_INTERFACE_DELETE_SAVE_FILE,saveName);
     }
+
 	GameInterface.SavePath = path;
 	XI_DeleteFolder(folder);
 }
@@ -401,12 +479,15 @@ void DeleteProfile()
 bool ProfileExists()
 {
 	String folder = GameInterface.SavePath + "\";
+
 	folder+= pchar.profile.name;
+
 	return (XI_CheckFolder(folder)); 
 }
 //----------------------------------------------------------------------------------------------------
 //
 //----------------------------------------------------------------------------------------------------
+
 void SelectNation()
 {
 	int iNation = sti(nulChr.nation);
@@ -416,6 +497,7 @@ void SelectNation()
 	totalInfo = GetRPGText(Nations[iNation].Name + "_descr");
 	SetInfoText();
 }
+
 void IDoExit(int exitCode, bool bCode)
 {
 	DelEventHandler("exitCancel", "exitCancel");
@@ -427,6 +509,7 @@ void IDoExit(int exitCode, bool bCode)
 	DelEventHandler("OnTableClick", "OnTableClick");
 	DelEventHandler("TableSelectChange", "CS_TableSelectChange");
 	DelEventHandler("ievnt_command","ProcessCommandExecute");
+
 	if(isOkExit == false)
 	{
 		EndCancelInterface(bCode);
@@ -438,54 +521,66 @@ void IDoExit(int exitCode, bool bCode)
 		EndCancelInterface(bCode);
 	}
 }
+
 void confirmChangeProfileName()
 {	
 	PlayerProfile.name = GameInterface.PROFILE_NAME.str;
 	pchar.profile.name = GameInterface.PROFILE_NAME.str;
 }
+
 void confirmChangeProfilePass()
 {	
 	PlayerProfile.password = GameInterface.PROFILE_PASS.str;
 	pchar.profile.pass = GameInterface.PROFILE_PASS.str;
 	SetCurrentNode("OK_BUTTON");
 }
+
 void ShowInfo()
 {
 	g_bToolTipStarted = true;
 	string sHeader = "TEST";
 	string sNode = GetCurrentNode();
 	string sNation;
+
 	string sText1, sText2, sText3, sPicture, sGroup, sGroupPicture;
 	sPicture = "none";
 	sGroup = "none";
 	sGroupPicture = "none";
+
 	switch(sNode)
 	{
+	
 		case "TABLE_SMALLSKILL":
 		    sHeader = XI_ConvertString("Characteristics");
 			sText1  = GetRPGText(GameInterface.(CurTable).(CurRow).(CurCol).UserData.ID);7
 		break;
+	
 		case "NATIONS_PICTURE":
 			sNation = GetNationNameByType(sti(nulChr.nation));
 			sHeader = XI_ConvertString(sNation);
 			sText1 = GetRPGText(sNation + "_descr");
 		break;
+
 		case "COMPLEX_TYPE":
 			sHeader = XI_ConvertString("m_Complexity");
 			sText1 = GetRPGText("LevelComplexity_desc");
 		break;
+				
 		case "CHECK_ARCADESAIL":
 			sHeader = XI_ConvertString("Sailing Mode");
 			sText1 = GetRPGText("ArcadeSailMode_desc");
 		break;
+		
 		case "CHECK_PISTOL":
 			sHeader = XI_ConvertString("New Fight Mode");
 			sText1 = GetRPGText("RechargePistolOnLine_desc");
 		break;
+		
 		case "CHECK_HARDCORE":
 			sHeader = XI_ConvertString("HardcoreGame");
 			sText1 = GetRPGText("HardcoreGame_desc");
 		break;
+		
 		case "CHECK_PARTITION":
 			sHeader = XI_ConvertString("Partition Set");
 			sText1 = GetRPGText("Partition_hint");
@@ -501,6 +596,7 @@ void ShowInfo()
 	}
 	CreateTooltip("#" + sHeader, sText1, argb(255,255,255,255), sText2, argb(255,255,192,192), sText3, argb(255,255,255,255), "", argb(255,255,255,255), sPicture, sGroup, sGroupPicture, 64, 64);
 }
+
 void HideInfo()
 {
 	if( g_bToolTipStarted ) 
@@ -510,6 +606,7 @@ void HideInfo()
 		SetCurrentNode("OK_BUTTON");
 	}
 }
+
 void ProcessCommandExecuteLeft()
 {
     if (startHeroType > 1)
@@ -522,6 +619,7 @@ void ProcessCommandExecuteLeft()
     }
     SetVariable(true);
 }
+
 void ProcessCommandExecuteRight()
 {
     if (startHeroType < heroQty)
@@ -534,35 +632,42 @@ void ProcessCommandExecuteRight()
     }
     SetVariable(true);
 }
+
 void SetVariable(bool _init)
 {
 	if (startHeroType < 1) startHeroType = 1; // fix
 	setNewMainCharacter(&NullCharacter, startHeroType);
 	SetFormatedText("HERO_NAME", GetFullName(&NullCharacter));
     SetFormatedText("HERO_TYPE", XI_ConvertString(nulChr.HeroParam.HeroType));
+
 	SetNewPicture("FACEPICT", "interfaces\portraits\256\face_" + CCS_GetNewMainCharacterFace(&NullCharacter) + ".tga");
 	SelectNation();
 	totalInfo = nulChr.info;
     SetInfoText();
+	
 	SetFormatedText("SETUP_FRAME_CAPTION", XI_ConvertString(NullCharacter.HeroParam.HeroType)); 
 	SetCharacterSPECIAL(NullCharacter.HeroParam.HeroType, &NullCharacter);
 	SetSPECIALMiniTableCharSelect("TABLE_SMALLSKILL", &NullCharacter);
 	SetSetupInfoText();
 }
+
 void SetInfoText()
 {
     SetFormatedText("INFO_TEXT", totalInfo);
     SetVAligmentFormatedText("INFO_TEXT");
 }
+
 void SetSetupInfoText()
 {
     SetFormatedText("SETUP_TEXT", SetSetupInfo(NullCharacter.HeroParam.HeroType));
     SetVAligmentFormatedText("SETUP_TEXT");
 }
+
 void TmpI_ShowLevelComplexity()
 {
     SetFormatedText("COMPLEX_TYPE", GetLevelComplexity(MOD_SKILL_ENEMY_RATE));
 }
+
 void ProcessCommandExecuteTypeLeft()
 {
     NullCharacter.HeroParam.HeroType = GetCharacterType(NullCharacter.HeroParam.HeroType, -1);
@@ -571,6 +676,7 @@ void ProcessCommandExecuteTypeLeft()
 	SetSPECIALMiniTableCharSelect("TABLE_SMALLSKILL", &NullCharacter);
 	SetSetupInfoText();
 }
+
 void ProcessCommandExecuteTypeRight()
 {
     NullCharacter.HeroParam.HeroType = GetCharacterType(NullCharacter.HeroParam.HeroType, 1);
@@ -579,6 +685,7 @@ void ProcessCommandExecuteTypeRight()
 	SetSPECIALMiniTableCharSelect("TABLE_SMALLSKILL", &NullCharacter);
 	SetSetupInfoText();	
 }
+
 string GetCharacterType(string type, int direction)
 {
     switch (type)
@@ -593,6 +700,7 @@ string GetCharacterType(string type, int direction)
     	        type = "HeroType_4";
     	    }
 	    break;
+
 	    case "HeroType_2":
             if (direction > 0)
             {
@@ -603,6 +711,7 @@ string GetCharacterType(string type, int direction)
     	        type = "HeroType_1";
     	    }
 	    break;
+
 	    case "HeroType_3":
             if (direction > 0)
             {
@@ -613,6 +722,7 @@ string GetCharacterType(string type, int direction)
     	        type = "HeroType_2";
     	    }
 	    break;
+		
 		case "HeroType_4":
             if (direction > 0)
             {
@@ -624,8 +734,10 @@ string GetCharacterType(string type, int direction)
     	    }
 	    break;		
 	}
+
 	return type;
 }
+
 string SetSetupInfo(string type)
 {
 	string setupInfo;
@@ -650,6 +762,7 @@ string SetSetupInfo(string type)
 	}
 	return setupInfo;
 }
+
 void SetCharacterSPECIAL(string type, ref ch)
 {
 	switch (type)
@@ -676,11 +789,13 @@ void SetCharacterSPECIAL(string type, ref ch)
 		break;
 	}
 }
+		
 void SetSPECIALMiniTableCharSelect(string _tabName, ref _chr)
 {
     int     i;
 	string  row, skillName, col;
     int     diff, skillVal;
+    
     GameInterface.(_tabName).select = 0;
 	GameInterface.(_tabName).hr.td1.str = "";
 	row = "tr1";
@@ -707,15 +822,18 @@ void SetSPECIALMiniTableCharSelect(string _tabName, ref _chr)
 		GameInterface.(_tabName).(row).(col).str = skillVal;		
      	GameInterface.(_tabName).(row).(col).color = argb(255,255,255,255);		
 	}
+	
 	// прорисовка
 	Table_UpdateWindow(_tabName);
 	SetEventHandler("frame", "RefreshTableByFrameEvent", 0);
 }
+
 void RefreshTableByFrameEvent()
 {
 	DelEventHandler("frame", "RefreshTableByFrameEvent");
 	SendMessage(&GameInterface,"lsl",MSG_INTERFACE_MSG_TO_NODE,"TABLE_SMALLSKILL", 0 );
 }
+
 int GetCharacterSPECIALCharSelect(ref _refCharacter, string skillName)
 {
 	if (!CheckAttribute(_refCharacter,"SPECIAL."+skillName) )
@@ -723,10 +841,13 @@ int GetCharacterSPECIALCharSelect(ref _refCharacter, string skillName)
         return 3;
     }
 	int skillN = sti(_refCharacter.SPECIAL.(skillName));
+	
 	if (skillN <= 1) skillN = 1;
 	if( skillN > SPECIAL_MAX ) skillN = SPECIAL_MAX;
+
 	return skillN;
 }
+
 void OnTableClick()
 {
 	string sControl = GetEventData();
@@ -737,6 +858,7 @@ void OnTableClick()
 	CurCol   =  "td" + (iSelectedCol);
 	Table_UpdateWindow(sControl);
 }
+
 void CS_TableSelectChange()
 {
 	String sControl = GetEventData();

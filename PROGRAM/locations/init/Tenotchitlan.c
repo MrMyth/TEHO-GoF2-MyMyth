@@ -1,8 +1,10 @@
+
 int LocationInitTenotchitlan(int n)
 {
 	//////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 	// Теночтитлан
 	//////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+
 	//////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 	// Джунгли  ----------- ход к пирамиде и жемчужным промыслам из бухты Аматике (shore9)
 	//////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
@@ -43,6 +45,7 @@ int LocationInitTenotchitlan(int n)
 	locations[n].reload.l1.autoreload = "1";
 	locations[n].reload.l1.label = "Jungle";
 	locations[n].locators_radius.reload.reload1_back = 2.5;
+
 	locations[n].reload.l2.name = "reload2_back";
 	locations[n].reload.l2.go = "Tenotchitlan_Jungle_02";
 	locations[n].reload.l2.emerge = "reload1";
@@ -91,12 +94,14 @@ int LocationInitTenotchitlan(int n)
 	locations[n].reload.l1.autoreload = "1";
 	locations[n].reload.l1.label = "Jungle";
 	locations[n].locators_radius.reload.reload1_back = 2.0;
+
 	locations[n].reload.l2.name = "reload2_back";
 	locations[n].reload.l2.go = "Tenotchitlan_Jungle_03";       // на Shore9
 	locations[n].reload.l2.emerge = "reload2";
 	locations[n].reload.l2.autoreload = "1";
 	locations[n].reload.l2.label = "Jungle";
 	locations[n].locators_radius.reload.reload2_back = 2.0;
+
 	locations[n].reload.l3.name = "reload3_back";
 	locations[n].reload.l3.go = "Temple";
 	locations[n].reload.l3.emerge = "reload1";
@@ -121,8 +126,10 @@ int LocationInitTenotchitlan(int n)
 	locations[n].models.always.pyramid1.sea_reflection = 1;
 	Locations[n].models.always.pyramid1seabed = "pyramid1_sb";
 	Locations[n].models.always.locators = "pyramid1_locators";
+	
 	Locations[n].models.always.grassPatch = "pyramid1_grass";
 	Locations[n].models.always.grassPatch.texture = "grass\grassshore.tga.tx";
+			
 	Locations[n].models.always.l1 = "plan1";
 	Locations[n].models.always.l1.level = 99948;
 	Locations[n].models.always.l1.tech = "LocationModelBlend";
@@ -141,6 +148,7 @@ int LocationInitTenotchitlan(int n)
     Locations[n].models.always.Waterfall1.uvslide.v1 = 0.0;
 	Locations[n].models.always.Waterfall1.tech = "LocationWaterFall";
 	Locations[n].models.always.Waterfall1.level = 99950;
+	
 	Locations[n].models.always.Waterfall2 = "waterfall2";
 	Locations[n].models.always.Waterfall2.uvslide.v0 = 0.3;
     Locations[n].models.always.Waterfall2.uvslide.v1 = 0.0;
@@ -159,6 +167,7 @@ int LocationInitTenotchitlan(int n)
 	Locations[n].reload.l1.emerge = "reload3";
 	Locations[n].reload.l1.autoreload = "1";
 	Locations[n].locators_radius.reload.reload1_back = 3;
+
 	Locations[n].reload.l2.name = "reload2";
 	Locations[n].reload.l2.go = "Temple_Inside";
 	Locations[n].reload.l2.emerge = "reload1";
@@ -200,6 +209,7 @@ int LocationInitTenotchitlan(int n)
 	Locations[n].reload.l1.autoreload = "0";
 	Locations[n].locators_radius.item.item1 = 1.1;
 	n = n + 1;
+
  	//////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 	// Джунгли
 	//////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
@@ -240,12 +250,14 @@ int LocationInitTenotchitlan(int n)
 	locations[n].reload.l1.autoreload = "1";
 	locations[n].reload.l1.label = "Jungle";
 	locations[n].locators_radius.reload.reload1_back = 2;
+
 	locations[n].reload.l2.name = "reload2_back";
 	locations[n].reload.l2.go = "Tenotchitlan_Jungle_02";
 	locations[n].reload.l2.emerge = "reload2";
 	locations[n].reload.l2.autoreload = "1";
 	locations[n].reload.l2.label = "Jungle";
 	locations[n].locators_radius.reload.reload2_back = 2;
+
 	locations[n].reload.l3.name = "reload3_back";
 	locations[n].reload.l3.go = "Tenotchitlan_CaveEntrance";
 	locations[n].reload.l3.emerge = "reload2";
@@ -253,6 +265,7 @@ int LocationInitTenotchitlan(int n)
 	locations[n].reload.l3.label = "Jungle";
 	locations[n].locators_radius.reload.reload3_back = 2;
 	n = n + 1;
+
 	//////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 	// Вход в пещеру
 	//////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
@@ -296,6 +309,7 @@ int LocationInitTenotchitlan(int n)
 	locations[n].reload.l3.autoreload = "0";
 	locations[n].reload.l3.label = "Cave";
 	locations[n].locators_radius.reload.reload1_back = 1.3;
+
 	locations[n].reload.l2.name = "reload2_back";
 	locations[n].reload.l2.go = "Tenotchitlan_Jungle_03";
 	locations[n].reload.l2.emerge = "reload3";
@@ -303,6 +317,7 @@ int LocationInitTenotchitlan(int n)
 	locations[n].reload.l2.label = "Jungle";
 	locations[n].locators_radius.reload.reload2_back = 2.0;
 	n = n + 1;
+
 	//////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 	// Пещера
 	//////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
@@ -320,6 +335,7 @@ int LocationInitTenotchitlan(int n)
 	locations[n].models.always.cavernMedium1.sea_reflection = 1;
 	locations[n].models.always.lamps = "cavernMedium1_lamps";	
 	locations[n].models.always.locators = "cavernMedium1_locators";	
+
 	locations[n].locators_radius.item.duhi1 = 0.0;
 /*	
 	Locations[n].models.always.rays = "cavernMedium1_rays";
@@ -345,6 +361,7 @@ int LocationInitTenotchitlan(int n)
 	locations[n].reload.l1.go = "Tenotchitlan_CaveEntrance";
 	locations[n].reload.l1.emerge = "reload1";
 	n = n + 1;
+
 	//////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 	// Джунгли
 	//////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
@@ -385,6 +402,7 @@ int LocationInitTenotchitlan(int n)
 	locations[n].reload.l1.autoreload = "1";
 	locations[n].reload.l1.label = "Jungle";
 	locations[n].locators_radius.reload.reload1_back = 2.5;
+
 	locations[n].reload.l2.name = "reload2_back";
 	locations[n].reload.l2.go = "Tenotchitlan_Jungle_06";
 	locations[n].reload.l2.emerge = "reload2";
@@ -392,6 +410,7 @@ int LocationInitTenotchitlan(int n)
 	locations[n].reload.l2.label = "Jungle";
 	locations[n].locators_radius.reload.reload2_back = 2.0;
 	n = n + 1;
+
 	//////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 	// Джунгли
 	//////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
@@ -433,6 +452,7 @@ int LocationInitTenotchitlan(int n)
 	locations[n].reload.l1.autoreload = "1";
 	locations[n].reload.l1.label = "Shore9";
 	locations[n].locators_radius.reload.reload1_back = 2.0;
+
 	locations[n].reload.l2.name = "reload2_back";
 	locations[n].reload.l2.go = "Tenotchitlan_Jungle_05";
 	locations[n].reload.l2.emerge = "reload2";
@@ -440,6 +460,7 @@ int LocationInitTenotchitlan(int n)
 	locations[n].reload.l2.label = "Jungle";
 	locations[n].locators_radius.reload.reload2_back = 2.0;
 	n = n + 1;
+	
 	//////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 	// Тайясаль
 	//////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
@@ -483,6 +504,7 @@ int LocationInitTenotchitlan(int n)
 	locations[n].reload.l99.emerge = "reload3";
 	locations[n].reload.l99.autoreload = "1";
 	locations[n].locators_radius.reload.reload1_back = 2.0;
+	
 	// храмы богов майя
 	//---------- храм Тохила ----------
 	locations[n].reload.l1.name = "reloadTemple1";
@@ -500,6 +522,7 @@ int LocationInitTenotchitlan(int n)
 	locations[n].reload.l5.name = "reloadTemple5";
 	locations[n].reload.l5.go = "Temple_1";
 	locations[n].reload.l5.emerge = "reload5";
+	
 	//---------- храм Кавиля ----------
 	locations[n].reload.l6.name = "reloadTemple6";
 	locations[n].reload.l6.go = "Temple_2";
@@ -516,6 +539,7 @@ int LocationInitTenotchitlan(int n)
 	locations[n].reload.l10.name = "reloadTemple10";
 	locations[n].reload.l10.go = "Temple_2";
 	locations[n].reload.l10.emerge = "reload5";
+	
 	//---------- храм Чака ----------
 	locations[n].reload.l11.name = "reloadTemple11";
 	locations[n].reload.l11.go = "Temple_3";
@@ -532,6 +556,7 @@ int LocationInitTenotchitlan(int n)
 	locations[n].reload.l15.name = "reloadTemple15";
 	locations[n].reload.l15.go = "Temple_3";
 	locations[n].reload.l15.emerge = "reload5";
+	
 	//---------- храм Кинич-Ахау ----------
 	locations[n].reload.l16.name = "reloadTemple16";
 	locations[n].reload.l16.go = "Temple_4";
@@ -548,6 +573,7 @@ int LocationInitTenotchitlan(int n)
 	locations[n].reload.l20.name = "reloadTemple20";
 	locations[n].reload.l20.go = "Temple_4";
 	locations[n].reload.l20.emerge = "reload5";
+	
 	//---------- храм Ицамны ----------
 	locations[n].reload.l21.name = "reloadTemple21";
 	locations[n].reload.l21.go = "Temple_5";
@@ -564,6 +590,7 @@ int LocationInitTenotchitlan(int n)
 	locations[n].reload.l25.name = "reloadTemple25";
 	locations[n].reload.l25.go = "Temple_5";
 	locations[n].reload.l25.emerge = "reload5";
+	
 	//---------- храм Эк-Чуах ----------
 	locations[n].reload.l26.name = "reloadTemple26";
 	locations[n].reload.l26.go = "Temple_6";
@@ -580,11 +607,13 @@ int LocationInitTenotchitlan(int n)
 	locations[n].reload.l30.name = "reloadTemple30";
 	locations[n].reload.l30.go = "Temple_6";
 	locations[n].reload.l30.emerge = "reload5";
+	
 	//---------- круглый храм Кукулькана ----------
 	locations[n].reload.l31.name = "reloadTemple31";
 	locations[n].reload.l31.go = "Temple_round";
 	locations[n].reload.l31.emerge = "reload1";
 	locations[n].reload.l31.disable = true;
+
 	//---------- храм большой ----------
 	// верхний вход
 	locations[n].reload.l32.name = "reloadTemple32";
@@ -619,6 +648,7 @@ int LocationInitTenotchitlan(int n)
 	locations[n].reload.l40.name = "reloadTemple40";
 	locations[n].reload.l40.go = "Temple_great";
 	locations[n].reload.l40.emerge = "reload7";
+	
 	//---------- сокровищница ----------
 	locations[n].reload.l41.name = "reloadTemple35";
 	locations[n].reload.l41.go = "Temple_Treasure";
@@ -632,6 +662,7 @@ int LocationInitTenotchitlan(int n)
 	locations[n].reload.l43.go = "Temple_Treasure";
 	locations[n].reload.l43.emerge = "reload1";
 	locations[n].reload.l43.disable = true;
+	
 	//---------- подводные лабиринты ----------
 	locations[n].reload.l44.name = "reloadU1_back";
 	locations[n].reload.l44.go = "Temple_Underwater_right";
@@ -644,7 +675,9 @@ int LocationInitTenotchitlan(int n)
 	locations[n].reload.l45.autoreload = "1";
 	locations[n].locators_radius.reload.reloadU2_back = 3.0;
 	locations[n].locators_radius.teleport.fire1 = 4.1;
+	
 	locations[n].DisableOfficers = "1";
+	
 	n = n + 1;
 	//////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 	// Храмы богов
@@ -686,8 +719,10 @@ int LocationInitTenotchitlan(int n)
 	locations[n].reload.l5.name = "reload5";
 	locations[n].reload.l5.go = "Tenochtitlan";
 	locations[n].reload.l5.emerge = "reloadTemple5";
+	
 	locations[n].DisableOfficers = "1";
 	n = n + 1;
+	
 	//----------------- Храм Тохила ------------------------
 	locations[n].id = "Temple_2";
 	locations[n].id.label = "Temple_2";
@@ -725,8 +760,10 @@ int LocationInitTenotchitlan(int n)
 	locations[n].reload.l5.name = "reload5";
 	locations[n].reload.l5.go = "Tenochtitlan";
 	locations[n].reload.l5.emerge = "reloadTemple10";
+	
 	locations[n].DisableOfficers = "1";
 	n = n + 1;
+	
 	//----------------- Храм Чака ------------------------
 	locations[n].id = "Temple_3";
 	locations[n].id.label = "Temple_3";
@@ -764,8 +801,10 @@ int LocationInitTenotchitlan(int n)
 	locations[n].reload.l5.name = "reload5";
 	locations[n].reload.l5.go = "Tenochtitlan";
 	locations[n].reload.l5.emerge = "reloadTemple15";
+	
 	locations[n].DisableOfficers = "1";
 	n = n + 1;
+	
 	//----------------- Храм Кинич-Ахау ------------------------
 	locations[n].id = "Temple_4";
 	locations[n].id.label = "Temple_4";
@@ -803,8 +842,10 @@ int LocationInitTenotchitlan(int n)
 	locations[n].reload.l5.name = "reload5";
 	locations[n].reload.l5.go = "Tenochtitlan";
 	locations[n].reload.l5.emerge = "reloadTemple20";
+	
 	locations[n].DisableOfficers = "1";
 	n = n + 1;
+	
 	//----------------- Храм Ицамны ------------------------
 	locations[n].id = "Temple_5";
 	locations[n].id.label = "Temple_5";
@@ -842,8 +883,10 @@ int LocationInitTenotchitlan(int n)
 	locations[n].reload.l5.name = "reload5";
 	locations[n].reload.l5.go = "Tenochtitlan";
 	locations[n].reload.l5.emerge = "reloadTemple25";
+	
 	locations[n].DisableOfficers = "1";
 	n = n + 1;
+	
 	//----------------- Храм Эк-Чуах ------------------------
 	locations[n].id = "Temple_6";
 	locations[n].id.label = "Temple_6";
@@ -881,6 +924,7 @@ int LocationInitTenotchitlan(int n)
 	locations[n].reload.l5.name = "reload5";
 	locations[n].reload.l5.go = "Tenochtitlan";
 	locations[n].reload.l5.emerge = "reloadTemple30";
+	
 	locations[n].DisableOfficers = "1";
 	n = n + 1;
 	//////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
@@ -921,6 +965,7 @@ int LocationInitTenotchitlan(int n)
 	locations[n].reload.l3.name = "reload3";
 	locations[n].reload.l3.go = "Tenochtitlan";
 	locations[n].reload.l3.emerge = "reloadTemple34";
+
 	locations[n].reload.l4.name = "reload4";
 	locations[n].reload.l4.go = "Tenochtitlan";
 	locations[n].reload.l4.emerge = "reloadTemple41";
@@ -930,6 +975,7 @@ int LocationInitTenotchitlan(int n)
 	locations[n].reload.l6.name = "reload6";
 	locations[n].reload.l6.go = "Tenochtitlan";
 	locations[n].reload.l6.emerge = "reloadTemple43";
+
 	locations[n].reload.l7.name = "reload11";
 	locations[n].reload.l7.go = "Tenochtitlan";
 	locations[n].reload.l7.emerge = "reloadTemple38"; // 090912
@@ -939,6 +985,7 @@ int LocationInitTenotchitlan(int n)
 	locations[n].reload.l9.name = "reload7";
 	locations[n].reload.l9.go = "Tenochtitlan";
 	locations[n].reload.l9.emerge = "reloadTemple40";
+
 	locations[n].reload.l10.name = "reload9";
 	locations[n].reload.l10.go = "Temple_Underwater_right";
 	locations[n].reload.l10.emerge = "reload2";
@@ -947,6 +994,7 @@ int LocationInitTenotchitlan(int n)
 	locations[n].reload.l11.go = "Temple_Underwater_left";
 	locations[n].reload.l11.emerge = "reload2";
 	locations[n].reload.l11.autoreload = "1";
+
 	locations[n].locators_radius.reload.reload9 = 1.2;
 	locations[n].locators_radius.reload.reload10 = 1.2;
 	locations[n].locators_radius.item.defend1 = 5.2;
@@ -957,6 +1005,7 @@ int LocationInitTenotchitlan(int n)
 	locations[n].locators_radius.quest.detector2 = 6.0;
 	locations[n].locators_radius.quest.detector3 = 2.0;
 	locations[n].locators_radius.item.item1 = 0.9;
+	
 	//каменные сундуки
 	locations[n].private1.key = "stonekey";
 	locations[n].private1.items.talisman1 = 1;
@@ -969,10 +1018,13 @@ int LocationInitTenotchitlan(int n)
 	locations[n].private1.items.cannabis4 = 20;
 	locations[n].private1.items.cannabis7 = 5;
 	locations[n].private1.items.jewelry22 = 100; // всякое уже не очень нужное барахло
+	
 	locations[n].private2.key = "stonekey";
 	locations[n].private2.items.Tablet_1 = 1; // скрижаль Ицамны
+
 	locations[n].private3.key = "stonekey";
 	locations[n].private3.items.Tablet_3 = 1; // скрижаль Чака
+	
 	locations[n].DisableOfficers = "1";
 	n = n + 1;
 	//////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
@@ -1005,8 +1057,10 @@ int LocationInitTenotchitlan(int n)
 	locations[n].reload.l1.name = "reload1";
 	locations[n].reload.l1.go = "Tenochtitlan";
 	locations[n].reload.l1.emerge = "reloadTemple31";
+	
 	locations[n].locators_radius.item.dolly = 2.0;
 	locations[n].locators_radius.item.item1 = 1.1;
+	
 	locations[n].DisableOfficers = "1";
 	n = n + 1;
 	//////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
@@ -1042,74 +1096,96 @@ int LocationInitTenotchitlan(int n)
 	locations[n].reload.l1.name = "reload1";
 	locations[n].reload.l1.go = "Tenochtitlan";
 	locations[n].reload.l1.emerge = "reloadTemple36";
+	
 	// лари, сундуки
 	locations[n].private1.key = "stonekey";
 	locations[n].private1.items.icollection = 10;
 	locations[n].private1.items.jewelry14 = 500;
 	locations[n].private1.items.jewelry15 = 400;
+	
 	locations[n].private2.key = "stonekey";
 	locations[n].private2.items.icollection = 10;
 	locations[n].private2.items.jewelry2 = 1000;
 	locations[n].private2.items.jewelry10 = 100;
+	
 	locations[n].private3.key = "stonekey";
 	locations[n].private3.items.icollection = 10;
 	locations[n].private3.items.jewelry16 = 300;
 	locations[n].private3.items.jewelry17 = 600;
+	
 	locations[n].private4.key = "stonekey";
 	locations[n].private4.items.icollection = 10;
 	locations[n].private4.items.jewelry18 = 450;
 	locations[n].private4.items.jewelry20 = 700;
+	
 	locations[n].private5.key = "stonekey";
 	locations[n].private5.items.icollection = 10;
 	locations[n].private5.items.jewelry3 = 1000;
+	
 	locations[n].private6.key = "stonekey";
 	locations[n].private6.items.icollection = 10;
 	locations[n].private6.items.jewelry4 = 1000;
+	
 	locations[n].private7.key = "stonekey";
 	locations[n].private7.items.icollection = 10;
 	locations[n].private7.items.jewelry14 = 500;
+	
 	locations[n].private8.key = "stonekey";
 	locations[n].private8.items.icollection = 10;
 	locations[n].private8.items.jewelry1 = 1000;
 	locations[n].private8.items.jewelry7 = 100;
+	
 	locations[n].private9.key = "stonekey";
 	locations[n].private9.items.icollection = 10;
 	locations[n].private9.items.jewelry21 = 250;
 	locations[n].private9.items.jewelry23 = 750;
+	
 	locations[n].private10.key = "stonekey";
 	locations[n].private10.items.icollection = 100;
+	
 	locations[n].private11.key = "stonekey";
 	locations[n].private11.items.icollection = 100;
+	
 	locations[n].private12.key = "stonekey";
 	locations[n].private12.items.icollection = 100;
+	
 	locations[n].private13.key = "stonekey";
 	locations[n].private13.items.icollection = 10;
 	locations[n].private13.items.jewelry22 = 2000;
+	
 	locations[n].private14.key = "stonekey";
 	locations[n].private14.items.icollection = 10;
 	locations[n].private14.items.jewelry8 = 1000;
+	
 	locations[n].private15.key = "stonekey";
 	locations[n].private15.items.icollection = 10;
 	locations[n].private15.items.jewelry9 = 500;
 	locations[n].private15.items.jewelry19 = 300;
+	
 	locations[n].private16.key = "stonekey";
 	locations[n].private16.items.potion2 = 1000;
 	locations[n].private16.items.potion3 = 1000;
 	locations[n].private16.items.potion4 = 1000;
 	locations[n].private16.items.potion7 = 10;
 	locations[n].private16.items.berserker_potion = 20;
+	
 	locations[n].private17.key = "stonekey";
 	locations[n].private17.items.icollection = 100;
+	
 	locations[n].private18.key = "stonekey";
 	locations[n].private18.items.jewelry5 = 2000;
+	
 	locations[n].private19.key = "stonekey";
 	locations[n].private19.items.jewelry6 = 4000;
+	
 	locations[n].private20.key = "stonekey";
 	locations[n].private20.items.icollection = 200;
 	locations[n].private20.items.jewelry5 = 5000;
 	locations[n].private20.items.jewelry6 = 10000;
+	
 	locations[n].private21.key = "stonekey";
 	locations[n].private21.items.mushket3 = 1;
+	
 	locations[n].DisableOfficers = "1";
 	n = n + 1;
 	//////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
@@ -1145,6 +1221,7 @@ int LocationInitTenotchitlan(int n)
 	locations[n].reload.l1.go = "Tenochtitlan";
 	locations[n].reload.l1.emerge = "reloadU2";
 	locations[n].reload.l1.autoreload = "1";
+
 	locations[n].reload.l2.name = "reload2_back";
 	locations[n].reload.l2.go = "Temple_great";
 	locations[n].reload.l2.emerge = "reload10";
@@ -1152,6 +1229,7 @@ int LocationInitTenotchitlan(int n)
 	locations[n].locators_radius.reload.reload1_back = 0.4;
 	locations[n].locators_radius.reload.reload2_back = 0.4;
 	LAi_LocationFightDisable(&locations[n], true);
+	
 	locations[n].DisableOfficers = "1";
 	n = n + 1;
 	//////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
@@ -1187,6 +1265,7 @@ int LocationInitTenotchitlan(int n)
 	locations[n].reload.l1.go = "Tenochtitlan";
 	locations[n].reload.l1.emerge = "reloadU1";
 	locations[n].reload.l1.autoreload = "1";
+
 	locations[n].reload.l2.name = "reload2_back";
 	locations[n].reload.l2.go = "Temple_great";
 	locations[n].reload.l2.emerge = "reload9";
@@ -1194,6 +1273,7 @@ int LocationInitTenotchitlan(int n)
 	locations[n].locators_radius.reload.reload1_back = 0.4;
 	locations[n].locators_radius.reload.reload2_back = 0.4;
 	LAi_LocationFightDisable(&locations[n], true);
+	
 	locations[n].DisableOfficers = "1";
 	n = n + 1;
 	//////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
@@ -1239,6 +1319,7 @@ int LocationInitTenotchitlan(int n)
 	locations[n].reload.l1.autoreload = "1";
 	locations[n].reload.l1.label = "Jungle";
 	locations[n].locators_radius.reload.reload2_back = 2.0;
+
 	locations[n].reload.l2.name = "reload3_back"; 
 	locations[n].reload.l2.go = "Mine";
 	locations[n].reload.l2.emerge = "reload6";
@@ -1289,12 +1370,14 @@ int LocationInitTenotchitlan(int n)
 	locations[n].reload.l1.autoreload = "1";
 	locations[n].reload.l1.label = "Jungle";
 	locations[n].locators_radius.reload.reload1_back = 2.0;
+
 	locations[n].reload.l2.name = "reload2_back";
 	locations[n].reload.l2.go = "Mine_04"; 
 	locations[n].reload.l2.emerge = "reload1";
 	locations[n].reload.l2.autoreload = "1";
 	locations[n].reload.l2.label = "Jungle";
 	locations[n].locators_radius.reload.reload2_back = 2.0;
+
 	locations[n].reload.l3.name = "reload3_back";
 	locations[n].reload.l3.go = "Mine_exit";
 	locations[n].reload.l3.emerge = "reload2"; 
@@ -1337,18 +1420,21 @@ int LocationInitTenotchitlan(int n)
 	locations[n].environment.weather = "true";
 	locations[n].environment.sea = "false";
 	//Reload map
+	
 	locations[n].reload.l1.name = "reload1_back";
 	locations[n].reload.l1.go = "Tenotchitlan_Jungle_06"; 
 	locations[n].reload.l1.emerge = "reload1"; 
 	locations[n].reload.l1.autoreload = "1";
 	locations[n].reload.l1.label = "Jungle";
 	locations[n].locators_radius.reload.reload1_back = 2.0;
+
 	locations[n].reload.l2.name = "reload2_back";
 	locations[n].reload.l2.go = "Mine_02"; 
 	locations[n].reload.l2.emerge = "reload1";
 	locations[n].reload.l2.autoreload = "1";
 	locations[n].reload.l2.label = "Jungle";
 	locations[n].locators_radius.reload.reload2_back = 2.0;
+
 	locations[n].reload.l3.name = "reload3_back";
 	locations[n].reload.l3.go = "Mine_04"; 
 	locations[n].reload.l3.emerge = "reload2";
@@ -1383,6 +1469,7 @@ int LocationInitTenotchitlan(int n)
 	Locations[n].models.always.l3 = "plan3";
 	Locations[n].models.always.l3.level = 7;
 	Locations[n].models.always.l3.tech = "LocationModelBlend";
+
 	locations[n].models.always.l4 = "well_big";
 	Locations[n].models.always.l4.locator.group = "reload";
 	Locations[n].models.always.l4.locator.name ="reloadW_back";	
@@ -1401,12 +1488,14 @@ int LocationInitTenotchitlan(int n)
 	locations[n].reload.l1.autoreload = "1";
 	locations[n].reload.l1.label = "jungle";
 	locations[n].locators_radius.reload.reload1_back = 2;
+
 	locations[n].reload.l2.name = "reload2_back";
 	locations[n].reload.l2.go = "Mine_03"; 
 	locations[n].reload.l2.emerge = "reload3";
 	locations[n].reload.l2.autoreload = "1";
 	locations[n].reload.l2.label = "jungle";
 	locations[n].locators_radius.reload.reload2_back = 2;
+
 	locations[n].reload.l3.name = "reload3_back";
 	locations[n].reload.l3.go = "Mine_01"; 
 	locations[n].reload.l3.emerge = "reload2";
@@ -1483,6 +1572,7 @@ int LocationInitTenotchitlan(int n)
 	locations[n].reload.l1.label = "jungle";
 	locations[n].locators_radius.reload.reload1_back = 2;
 	Locations[n].reload.l1.disable = true; // закрыто до поры
+
 	locations[n].reload.l2.name = "reload2_back";
 	locations[n].reload.l2.go = "Mine_02"; 
 	locations[n].reload.l2.emerge = "reload3";
@@ -1510,6 +1600,7 @@ int LocationInitTenotchitlan(int n)
 	Locations[n].models.always.l3 = "plan3";
 	Locations[n].models.always.l3.level = 7;
 	Locations[n].models.always.l3.tech = "LocationModelBlend";
+	
     locations[n].models.always.locators = "canyon_locators";
     locations[n].models.always.grassPatch = "canyon_grass";
 	Locations[n].models.always.grassPatch.texture = "grass\grassshore.tga.tx";
@@ -1529,26 +1620,31 @@ int LocationInitTenotchitlan(int n)
     locations[n].reload.l1.autoreload = "0";
     locations[n].reload.l1.label = "jungle";
     locations[n].locators_radius.reload.reload1 = 2.0;
+	
 	locations[n].reload.l2.name = "reload2";
 	locations[n].reload.l2.go = "CommonRoom_MH4";
     locations[n].reload.l2.emerge = "reload1";  
     locations[n].reload.l2.autoreload = "0";
     locations[n].reload.l2.label = "House";
+	
 	locations[n].reload.l3.name = "reload3";
 	locations[n].reload.l3.go = "CommonRoom_MH7";
     locations[n].reload.l3.emerge = "reload1";  
     locations[n].reload.l3.autoreload = "0";
     locations[n].reload.l3.label = "House";
+	
 	locations[n].reload.l4.name = "reload4";
 	locations[n].reload.l4.go = "Mine_mines";
     locations[n].reload.l4.emerge = "reload1";  
     locations[n].reload.l4.autoreload = "0";
     locations[n].reload.l4.label = "mines";
+	
 	locations[n].reload.l5.name = "reload5";
 	locations[n].reload.l5.go = "Mine_residence";
     locations[n].reload.l5.emerge = "reload1";  
     locations[n].reload.l5.autoreload = "0";
     locations[n].reload.l5.label = "House";
+	
 	locations[n].reload.l6.name = "reload6";
 	locations[n].reload.l6.go = "Mine_01";
     locations[n].reload.l6.emerge = "reload3_back";  
@@ -1556,7 +1652,9 @@ int LocationInitTenotchitlan(int n)
     locations[n].reload.l6.label = "jungle";
     locations[n].locators_radius.reload.reload6 = 2.0;
 	locations[n].locators_radius.rld.warrior = 5.0;
+	
 	n = n + 1;
+	
 	////////////////////////////////////////////////////////////////////////////////////////////////////
 	// шахта
 	///////////////////////////////////////////////////////////////////////////////////////////////////
@@ -1595,6 +1693,7 @@ int LocationInitTenotchitlan(int n)
 	Locations[n].reload.l1.autoreload = "1";
 	locations[n].reload.l1.label = "mines";
 	n = n + 1;
+
 	/////////////////// Резиденция ////////////////////////////////////////////////////////////////////////////////////////////
 	locations[n].id = "Mine_residence";
 	locations[n].id.label = "House";
@@ -1615,6 +1714,7 @@ int LocationInitTenotchitlan(int n)
 	locations[n].models.always.window.tech = "LocationWindows";
 	locations[n].models.always.window.level = 65539;
 	locations[n].models.always.locators = "SmallResidence_locators";
+
 	locations[n].models.always.back = "..\inside_back";
 	locations[n].models.always.back.level = 65529;
 	//Day
@@ -1632,5 +1732,6 @@ int LocationInitTenotchitlan(int n)
 	locations[n].reload.l1.label = "";
 	locations[n].locators_radius.item.item1 = 1.0;
 	n = n + 1;
+	
 	return n;
 }

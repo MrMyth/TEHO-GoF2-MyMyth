@@ -1,6 +1,7 @@
 // диалог по городам
 void ProcessCommonDialogEvent(ref NPChar, aref Link, aref NextDiag)
 {
+
 	switch (Dialog.CurrentNode)
 	{
 		case "quests":
@@ -23,6 +24,7 @@ void ProcessCommonDialogEvent(ref NPChar, aref Link, aref NextDiag)
                 link.l1.go = "guardoftruth";
 			}
 		break;
+		
 		//Jason --> Португалец
 		case "Portugal_cloves":
 			dialog.text = "Noble clothes? Sure, I've got a set lying here: pants, a jerkin, a silk shirt, and boots. It costs 20 000 pesos. The clothes is very high quality, it's comfortable, and it has a remarkable look to it, so I won't take any less for it.";
@@ -34,11 +36,13 @@ void ProcessCommonDialogEvent(ref NPChar, aref Link, aref NextDiag)
 			link.l2 = "Hm... I don't have that much money at the moment.";
 			link.l2.go = "Portugal_cloves_nomoney";
 		break;
+		
 		case "Portugal_cloves_nomoney":
 			dialog.text = "Then come back when you have the money.";
 			link.l1 = "All right. I'll be back!";
 			link.l1.go = "exit";
 		break;
+		
 		case "Portugal_cloves_1":
 			AddMoneyToCharacter(pchar, -20000);
 			GiveItem2Character(pchar, "suit_1");
@@ -57,11 +61,13 @@ void ProcessCommonDialogEvent(ref NPChar, aref Link, aref NextDiag)
 			link.l1 = "The captain of that ship is Gaius Marchais, my old acquaintance. So I'm trying to find him. Would you be able to tell me what he did after that? Maybe you provided him some additional freight or he mentioned where he was gonna head to?";
 			link.l1.go = "guardoftruth_1";
 		break;
+		
 		case "guardoftruth_1":
 			dialog.text = "Nothing of that. I didn't offer him any freight; he didn't even ask for it. He didn't share his plans for the future with me. I don't even remember all the details, do you know how many people have come in and out of here since that time? He basically unloaded and sailed off and that's all I can say about him.";
 			link.l1 = "All right. Well, thanks anyway. All the best!";
 			link.l1.go = "guardoftruth_2";
 		break;
+		
 		case "guardoftruth_2":
 			DialogExit();
 			AddQuestRecord("Guardoftruth", "11");
@@ -70,3 +76,4 @@ void ProcessCommonDialogEvent(ref NPChar, aref Link, aref NextDiag)
 	}
 	UnloadSegment(NPChar.FileDialog2);
 }
+

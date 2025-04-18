@@ -10,12 +10,15 @@ It doesn't make sense! To sink ships which could be simply looted!
 ... have to catch another victim - some idiot who bought 'Valkyrie' from that half-dead Fleetwood. The guy is sailing to Blueweld now and his ship is filled with slaves...
 ... this hunt is going to be my last one, I had enough of acting a monster, it's time to take leave because my last conversation with the master was quite unpleasant. He is still demanding me to recall where I had sunk that British flute. It was like ages ago, the only thing I remember is that the latitude was 12 degrees 48'. He is even trying to scare me by that yellow-skin bastard. No, I've got enough of these 'ghost' games. It's time to do something serious and away from here...
 ... I suppose I should change my 'Mirage' to 'Valkyrie'. She is coming in my hands anyway. I don't give a damn about master's wish to deliver her to Esmeralda bay. This landlubber already owns 'Meifeng', fuck him, he won't get 'Valkyrie'!
+
+
 #QUEST	Fleetwood_Journal
 Richard Fleetwood's journal
 #TEXT	1
 ... poor Abi is begging me to find that island where I found her and her father. Damn, I wish I could remember where it all happened. Longitude 64 degrees 41' - it's all I remember. I saw 'Flying Dutchman' there and tried to chase her. I failed but I've found that island with Abi and her father instead. It seems that the old man thinks that I was the guy who sank their ship. I hope that sweet Abi doesn't think the same way.
 ... we almost got a proof of Rodenburg's connection to 'Flying Dutchman'. Good old Charlie said that she has changed her base location to Castle Bruce bay at Dominica. My hopes are that we will soon see an end of the story before the cannibals tear them apart. This is going to be quite a sensation!
 ... would be helpful to expose our rat in Bridgetown. I wish it is not a governor, but who else is so informed about planned trade routes and patrols?
+
 #QUEST	Merdok_Archive
 The last pages of Johan van Merden's archive
 #TEXT	1
@@ -26,26 +29,31 @@ The last pages of Johan van Merden's archive
 ... that 'Flying Dutchman' idea is a nice example of how Rodenburg does business. It seriously sabotaged English merchants' activity...
 ... Joachim Merriman has fulfilled his part of the bargain and paid well for the nephrite skull. Half of a million, it's quite a big sum...
 ... after that Merriman asked all to leave him, he wanted to prepare some kind of a trap for those, who will come here to find us. Tonzag decided to go and see the trap. An hour later, the Portuguese came back alone, he darkly joked that Tonzag shouldn't have come after him but still he helped a lot...
+
 #QUEST	LetterToAbi
 Richard Fleetwood's letter to Abigail
 #TEXT	1
 "Dear Abi! As I promised, I am taking you to me in St.John's. The messenger is my best friend, his name is Charlie. You can trust him. He will take you to Antigua, don't hesitate to follow him. I know about your misfortunes, I promise that I will compensate your father's money in the nearest occasion and nothing will stand between us. Looking forward to see you.
 Richard."
+
 #QUEST	LetterToFleetwood
 Letter to Richard Fleetwood with terms of ransom for Abigail
 #TEXT	1
 I have your Abigail and you will never find her. She became my... passenger after I had boarded your fellow's ship. The price is 200 000 pesos. You have plenty of coins according to your letter. Let's meet on Turks island at the Northern bay. Come alone on your brig. Don't even dare to harm or follow my messenger, I will be watching. In case my messenger won't leave your home in 30 minutes or will be followed, I will send you a box with a finger and an ear of your beloved. And if he won't carry any response or won't leave your place, then I will cut off Abi's head and send it to you. I hope that you'll be reasonable, Englishman, Abi's life is in your hands. 200 000 pesos is the price and if I don't get it, you will receive your girl in pieces.
 Evil man.
+
 #QUEST	FleetwoodAnswer
 Response from Richard Fleetwood
 #TEXT	1
 I agree with your terms, Evil man. See you on Turks, I will bring money you want. Don't harm Abigail or I will spend what is rest of my life to revenge you.
 Richard Fleetwood
+
 #QUEST	LetterToLucas
 Letter to Lucas Rodenburg from Richard Fleetwood
 #TEXT	1
 You are done, Rodenburg. I have arrested that chemist John Murdock for being a Dutch agent and I also have confiscated some pretty interesting archive. The man didn't last long... and now I have a cipher key. I've got a solid proof of your connection to 'Flying Dutchman' business or, to put it right, to your fellow Jacob van Berg who has been hunting for English ships. There are a lot of sweet facts in that archive, I'll tell you. I can promise you a multi national scandal, your own bosses will turn away from you when they'll know what you've done. Though I've been thinking... perhaps, you should prepare ten millions for the archive?...
 Richard Fleetwood
+
 #QUEST	LetterFromGaston
 Letter from Callow Gaston
 #TEXT	1
@@ -60,6 +68,7 @@ Find a chemist in St.John's. His name is John Murdock. He was the right hand of 
 Find the chemist before Lucas. His actual name is van Merden and he will likely be hiding in the dungeons of St.John's. Tell him that you've come from me. He will assist you in your justice. He has got a thing to lure Lucas from Curacao. And you are doing such kind of things well.
 Good luck to you, stranger! Remember Hercule Tonzag.
 This name was only known by me and van Merden. Now you know it too.
+
 #QUEST	LetterFromFleetwood
 Farewells from Richard Fleetwood
 #TEXT	1
@@ -71,6 +80,7 @@ Hire Charlie as your gunner. He will serve you until you won't spoil your honor 
 I wish you luck and victory!
 P.S. My healer told me that undead can protect treasure if they were cursed by some local spell and a part of the body was put inside the chest. That is the reason why Gaston's head was found inside a chest on the island.
 That monster you've met is called Chavinavi. According to the local tales, they are Yum Cimil' minions. The God of Death. The man who had summoned it is a very powerful sorcerer. That is another reason why I am taking Abi away. I am scared. And not for myself. Now I have got a right reason to scare. Abi is pregnant.
+
 #QUEST	LetterToMerdok
 Letter to Johan van Merden from Lucas Rodenburg
 #TEXT	1
@@ -80,6 +90,7 @@ I will be waiting you in our old place. Longway will deliver the message. I know
 I don't need your life. I only don't want any surprises from my past. You can keep Jew's gold and money received from the Portuguese for Indian skull for yoursef.
 Know, van Merden, I am waiting for you, but my patience has its limits. And when it will reach them - the League will deal with you.
 Your old friend and commander, Lucas.
+
 #QUEST	LSC_Alvorado
 Caribbean Chronicles - Cursed place
 #TEXT	1
@@ -106,6 +117,7 @@ Despite of our skin color Narwals don't trust us. Perhaps, they are heretics, Po
 Young local man, born in Dublin, a true Catholic, offered us to escape from the Island. It seems that this young brave man has figured out that our ship is in one piece. Tomorrow we will steal Rivados' boat. May the Holy Virgin help us!
 21.07.1620
 Success! But once again, we are in the hands of storm. Our hull is damaged and we have only one day to find a safe place or our fate is going to be unenviable otherwise. Men are in panic except our small Irish. No doubt, great future awaits him if we survive this mess...
+
 #QUEST	Legend_CapBucher
 Caribbean chronicles - the legend of Captain Butcher
 #TEXT	1
@@ -119,6 +131,7 @@ He didn't stand a chance. His men were killed on the shore. Though, Jackman and 
 Believe it or not, they say that fish men once landed on that island. Next morning they were found dead. Their wound were awful and it looked like a flame sword work. People avoid to visit the island at night since then. Even pirates. 
 Butcher was executed at Antigua. Hanged like any common pirate. That was the end of his story. The end might be different if he wouldn't had rejected his red talisman.
 The Mask didn't live long since then. He was found dead next day. His throat was cut by a shark tooth. They say that it was Shark Dodson who killed him. They also say that he loved his friend's sister. He had been always carrying a shark tooth on his neck. But he won't tell you anything about it. It was a long time ago...
+
 #QUEST	Mask
 Caribbean Chronicles - The Masked Man
 #TEXT	1
@@ -132,12 +145,14 @@ After battle Lawrence and pirate captain had a fight because of Jessica. Pirate 
 United pirate crew voted for Lawrence and he became a new captain. Barque was left to sink and same was done with half dead sailors. Leadbeater was among them, despite of terrible wound across his face, he was able to survive and see Lawrence hugging the girl. The girl he dreamed about.
 Thanks to Jacob Jackman, Lawrence got his nickname - Butcher. Soon, this name became known in every tavern from Cuba to Barbados.
 Leadbeater's fate didn't let him to die. He was picked up by some vessel. His face was completely destroyed, he had to always wear a mask and a wig. Finding Butcher became his obsession and the only meaning of life...
+
 #QUEST	RegataLetter
 Invitation to regatta
 #TEXT	1
 Dear captain! You are invited to participate in the regatta. If you are interested, you should immediately arrive at Port Royal, to me, the governor-general of Jamaica. Be aware that the only ship type allowed to participate is 'lugger', so you should prepare you vessel. Don't forget to not take any other ships of your squadron. Squadrons are not allowed in regatta. We guarantee a free access to Port Royal for you.
 Fee is 50 000 pesos, it will be your part in the prize money.
 Governor-general of English colonies, count Edward Doiley.
+
 #QUEST	RegataRules
 Rules and terms of regatta
 #TEXT	1
@@ -153,6 +168,7 @@ It is forbidden to:
 1. Sailing in squadrons.
 2. Changing your original lugger.
 You must keep the prescribed route.
+
 #QUEST	Sharlie_Father
 A letter from Henri de Monper
 #TEXT	1
@@ -164,15 +180,19 @@ I am afraid that he might have got into trouble. My letters to our countryman th
 I beg you to leave your painting and wenches for a while, sail to Martinique, and deal with this uncertainty. It is killing me. I am a former naval officer and I would rather know the worst than live with uncertainty.
 Unfortunately I can't give you any money for this trip. Our estate is in decline and a poor crop has finally ruined me. Michel promised to fix everything after his return, but...
 Please, my boy, forget old wounds and do what I ask, perhaps it is the last thing I ask you. You are the only one who can do it for me.
+
 Your father, Henri de Monper
 Gascony, 6th April, 1654
+
 #QUEST	Sharlie_Father_1
 A letter from Henri de Monper
 #TEXT	1
 Dear Charles, my beloved son, it's been a long time since you had sailed away for the quest to find your brother and it's been even longer while since I had seen you last. I am happy beyond measure that you took my advice and chose a path worthy of a man and a noble. During our last meeting years ago I dared not to imagine that you would become an officer of the Navy and would then go even beyond - to the hights of general-governcy of French New World! I am proud of you, son!
 But what happened to Michel? I am being kept in the total dark about his fate for years! Not long ago, our estate had been visited by our fellow countryman - chevalier la Breniet, but all I managed to find out is that Michel has been accused of something very serious. I hope that you will tell me all about it when you are back to France.
 Charles, our family estate is doing a bit better now, yet your help would help greatly. Nevertheless, I will not put any pressure on you here as I used to do. Just remember that the man is determined only by his actions and deeds. Let the God Allmighty be with you.
+
 Your father, Henri de Monper
+
 #QUEST	Sharlie_Shevallie
 Letter from chevalier de La Brignais
 #TEXT	1
@@ -181,8 +201,10 @@ This information was received from my trusted men. I didn’t want to hurt your 
 This letter will be brought to you by my servant and he will burn it as soon as you read it. I risk my career and my life, but I can't stand aside when my friend is in trouble. He once saved my life on the walls of Barcelona.
 Perhaps, you will manage to save your brother and set things right, I don't believe in his guilt. I am bound by my oath to the Order, so I cannot provide more help. It is all in your hands now.
 I rely on your wisdom and nobility.
+
 Chevalier de La Brignais
 Malta, 15th June, 1654
+
 #QUEST	Sharlie_Lover
 Note from Lulu
 #TEXT	1
@@ -192,7 +214,9 @@ And you'd better disappear in the provinces for a while. It's a great occasion t
 Save yourself, darling, and remember that I will be waiting for you. I hope that these trinkets will smooth a bit the sadness of our parting.
 P.S. 
 Be careful and don't forget your little Lulu. They say that the girls in Gascony get really passionate under the Southern sun... Oh, look at me, I am jealous already!
+
 Paris, 24th 1654
+
 #QUEST	Chad_Mary_letter
 Letter to Mary Casper from Chad Kapper
 #TEXT	1
@@ -203,12 +227,14 @@ Letter to Mary Casper from Chad Kapper
 ... I advice you to accept that you will belong to me and only to me, I will treat any of your boyfriends the same way I did with Alan. I don't need any big and pure love from you, silly, I need you and I will get what I want. Don't think me being a monster, no, when Steven is dead and I will become the admiral, I swear, you will get whatever you want...
 ... think about it. If you don't show yourself on 'Tartarus' before eleven p.m., then you won't see the dawn. I have loyal men among Narwhals and they will cut your guts in a second right in your cabin. Don't even hope that those smart locks or your pretty face will save you from a saber. Understand this, Mary: either you stay with me and own this Island or you will feed crabs with your beauties...
 Chad.
+
 #QUEST	Letter_Facio
 Giuseppe's explanations
 #TEXT	1
 ... that letter to Dodson was written under a great pressure from his boatswain and mad girl Mary. They had strong arguments - the gun in my face. I couldn't resist this couple even if I would be younger. I had to obey and become a part of their dirty plan...
 ... Chad and Mary got a small group of accomplices who want Shark dead. When Dodson get inside my cabin, they will attack him and he won't stand a chance. Good Lord, be merciful to his soul!
 ... I don't want to participate in this madness. I don't care who will win this fight. Kapper is a dangerous snake and he luckily won't leave any witness alive. And even if admiral lives, then, I suppose, he won't show mercy to poor Giuseppe. That is why I am going to leave this letter here, hoping that admiral men will find it. I am out of this game, I will hide in the place where neither Kapper nor his bitch will be able to find me. I will stay there for a while until this mess is over...
+
 #QUEST	Letter_valet
 Letter to David Fackman also known as Knive
 #TEXT	1
@@ -220,6 +246,7 @@ Barbazon will be on our side as soon as Tyrex is done. Making Black Pastor loyal
 Boss wants to give Isla Tesoro to British and make coins. Not this time, fuck him. Hangman is dead but my men are close to get the girl. Be careful about Charles de Maure. He works for Swanson and he has become a great pain in my butt. It looks like that he has the girl. I don't know his plans yet.
 We are close, soon the Brethren will be ours. Remember, brother, you are the only man I trust. So be careful and don't risk too much.
 Jacob.
+
 #QUEST	Letter_jess
 Jessica Rose' notes
 #TEXT	1
@@ -228,7 +255,9 @@ Jessica Rose' notes
 ... I see the 'Neptune' masts! She is damaged but it works for me. Soon I will see this little whore who has taken everything from me.
 **********
 ... I am calm! I am absolutely calm! Vengeance!
+
 12th April 1636, 78 degrees. 33' West
+
 #QUEST	Letter_beatriss
 Beatrice Sharp's letter to her brother Blaze
 #TEXT	1
@@ -237,6 +266,7 @@ I love Lawrence Beltrop and I have chosen him myself. My beloved one was forced 
 One thing can speed up our return. Blaze, you are an uncle now! We have a daughter, Helen. Perhaps, she might restore our family. Trust me, Lawrence didn't know a thing about his father's betrayal. He shouldn't answer for his father's actions. Even more, he always admired our father and he always knew that there were his friends at the Caribean. Don't ruin our friendship, listen to your heart. Lawrence is the father of my daughter, so he is your relative now.
 P.S. Little Helen is not with me now. We have left her in Belize with her wet-nurse Gladys Chandler. She seems like a kind woman. If I... well, let's not. I will send you the letter as soon as I can.
 Your beloved sister, Beatrice.
+
 #QUEST	Letter_Mishelle
 Letter from Michel de Monper
 #TEXT	1
@@ -245,6 +275,7 @@ I can imagine your emotions after reading this letter. But for me there is nothi
 I don't need my name anymore. De Monper. Nor do I need my past and Maltese Order. I have paid my debts to the country by helping you to defend Saint Pierre. New Era is coming, there will be no room for such little things.
 Don’t try to search for me. I know, you will, but I want you to realize: it is worthless and dangerous. Return to France, to your father. From where I see it, you have got enough coin and your naval talents will serve you well. Don't hesitate, Caribs are going to be changed once and for all. And you ain't going to like it.
 Farewell.
+
 #QUEST	Letter_Vincento
 Letter from padre Vincento 
 #TEXT	1
@@ -253,12 +284,14 @@ I am perfectly aware of you and your actions. And I appreciate your offer, even 
 Nevertheless, before I receive you in my place, you will have to prove purity and sincerity of your actions. Listen now, my son.
 They should have delivered three beautiful and expensive items to our Santiago parish right from Spain. A golden ostensory, a ring cross with lazurite and a golden censer. I am trying to make it the best parish across all the New World. Galleon 'Santa Margarita' which was carrying those items was boarded not far from Espanola shores by some French privateer. He captured the galleon, stole our holy items and even killed a lay brother who made an attempt to protect them. It can't go unpunished. Find the cursed criminal, capture him and bring alive to the hands of Holy Inquisition. You should also find and return all stolen items. Report to the lighthouse master, avoid talking to Spanish soldiers. If you do what I ask then I will tell you details concerning the matter you are interested in.
 His Reverence, Inquisitor, padre Vincento.
+
 #QUEST	Letter_Vincento_next
 Second letter from padre Vincento 
 #TEXT	1
 May the God bless you, my son!
 Well done for delivering this heretic to us. The poor soul has already repented his sins and ready to expiate. He told us where our items are. I am gladly telling you this information. Censer and ostensory were sold to the banker of Willemstad. Cross was gifted to Basse-Terre's parish in order to wash away own sins. Good luck and may the God watch over you!
 His Reverence, Inquisitor, padre Vincento.
+
 #QUEST	Letter_Vincento_last
 Third letter from padre Vincento 
 #TEXT	1
@@ -267,11 +300,13 @@ Alonso de Maldonado disobeyed my orders and my will. He should had joined you bu
 Yet I hope that you will see the truth and you'll understand that I was always on your side. We share the same goal. It is great and good - to save our world and prevent the evil from winning this battle. Now you have a powerful weapon against Indian demon - his artifact. You, and only you can lead army of Christ.
 I ask you to meet me, Charles de Maure. To guarantee my kind intensions, I offer you to meet me at neutral territories, on Curacao. There is a cemetery not far from Willemstad. Find me there. I will be waiting you for two weeks. I hope that you will make the right decision. I assure you that I will not harm you, I only want to help you. Remember, my son, fates of all good Christians are in you hands.
 His Reverence, Inquisitor, padre Vincento.
+
 #QUEST	Letter_Dichoso
 Letter from Miguel Dichoso to Arturo Lopez
 #TEXT	1
 Arturo, prepare yourself for the upcoming meeting. Charles is a serious man. Place your men smartly in order to prevent him from escaping. Take your best soldiers and don't forget about marksmen. Don't leave him any single chance. Round the cemetery in case somehow he will be able to leave the crypt. The only thing I ask - let him die with honor as a soldier. May his death be quick and painless. Go and see me when you are done. I will give you your reward and further instructions.
 Miguel Dichoso.
+
 #QUEST	ArchyBook
 Archibald Calhoun's diary - selected fragments
 #TEXT	1
@@ -290,6 +325,7 @@ Archibald Calhoun's diary - selected fragments
 ... it is impossible... this is Willy Patterson! My old friend and a countryman, Scottish Willy! Old Colhaun can't hold his tears, after two years he is hearing his own language!...
 ... I will serve under Willy's command. If it wasn't him - I would have stayed there forever. I had enough of my adventures, Indian amulets, questionable treasures and Jesus Order. I am starting a new life. I left my compass inside my hut. May it stay there, worthless and dangerous item...
 ... I am leaving Crab island. Its green hill almost disappeared at the horizon. I will remember its location forever - 16 degrees North, 71 degrees West. I doubt that my foot will step on it again...
+
 #QUEST	SQCapBook
 Journal of 'Santa Quiteria', the last pages
 #TEXT	1
@@ -311,6 +347,7 @@ Journal of 'Santa Quiteria', the last pages
 ... undead own the shore. They walk, make terrible noises and deliver awful smell of decaying flesh. We have locked ourselves inside the ship's cargo hold. Now we are listening to steps of that giant monster and rumbling of walking dead...
 ... quartermaster has gone completely insane. He used Tayasal things to make some sort of pagan altar. He is going hysterical, calling Indian gods, demons... I don't get it. Sailor are sitting in corners, listening to his mad screaming...
 ... heavy sword hits are destroying the door. Butcher is coming here. No barricade can stop him. I understand that we will die soon, this thing is unstoppable. I am writing this while hearing madman calling his pagan demons and cries of sailors, they realize that they are doomed. I am ready to die. If you are reading this - get away from this terrible place! Treasures of Tayasal... Dichoso... Dichoso... CURSE YOU!..
+
 #QUEST	RingCapBook
 Notes from 'Santa Lucia' journal
 #TEXT	1
@@ -335,6 +372,7 @@ Notes from 'Santa Lucia' journal
 ... poor Vavaya is dead. She died in calm, with a smile on her face. There was no fear in her eyes, only love and grief. I prayed for her and now I am ready to join her - there is no reason left for me to live without her... Another bullet wounded my leg. I barely move...
 ... the gunpowder is almost gone. I have got only four charges in a pair of two barrel pistols. I am behind my desk, getting ready to die with honor as a white man and as a captain. Storm is coming. It is going to be really strong...
 ... they are breaking the door. Soon it will be over and I will meet my Vavaya in a better world. I am thinking about her. Perhaps, she was right. All of this looks like a curse. 'Gods revenge'! Box with the gold... and who...
+ 
 #QUEST Recipe
 Recipes
 #TEXT Gold_dublon
@@ -343,51 +381,67 @@ Golden doubloons are usually kept in the trunk, with 150 pieces each.
 Charged timer: uncharged timer + hourglass
 #TEXT bussol
 Boussole: compass + astrolabe
+
 #TEXT cartridge	
 Paper cartridge
 ***************
 Remarkable innovation made by Swedish musketeer that regiments to speed the loading twice!
+
 You need one bullet and one portion of gunpowder for crafting.
 Take a piece of paper, make a paper tube and put some gunpowder and bullet inside of it.
 Craft the cartridges of suitable size.
 Check the cartridge before loading.
+
 Ingredients: Granular gunpowder, lead bullet
+
 #TEXT powder_pellet
 Petard
 *******
 A stun projectile which helps you to disorient your enemies without any damage to their property.
+
 Take a thin sheet of copper, the form of the barrel and bend the sheet in the form of the glass cup.
 Add ten portions of gunpowder, seal the copper and insert it in the barrel.
 Make a hole for the fuse.
+
 Ingredients: Copper jar, Granular gunpowder, Candle, Twine.
 Tools: Metalwork tool
+
 #TEXT grenade
 Grenade
 *******
 Spanish invention perfected by the British, capable of hitting major enemy forces at a distance.
+
 Prepare the sheet of copper and nearly twelve bullets.
 Bend the sheet in the form of the head to the size of the barrel of mortar, put some bullets inside one to one.
 Put ten portions of gunpowder on it and the rest of the bullets, seal the copper case.
 Make a hole in the bottom side of it and plug it with the wooden spool.
 In combat, on command, take out the spool, insert the fuse or wick, covered with saltpeter, a finger long or so, but not longer than the bolt and fix it with wax or the same spool.
+
 Ingredients: Copper jar, Granular gunpowder, Candle, Twine.
 Tools: Metalwork tool
+
 #TEXT harpoon
 Arrow
 ******
 A thin metal rod able to punch through the armor of any durability, and the person inside of it - too.
+
 Take thin metal rod, even a simple harpoon would fit well, and cut off a piece one and half of a finger long. 
+
 Ingredients: Harpoon
 Tools: Metalwork tool, Touchstone
+
 #TEXT shotgun_bullet
 Revolver bullets
 *****************
 Unusual for our times lead bullets in the form of a cylinder with a tapered end.
 Very accurate, well-balanced and deadly because of their shape.
+
 Melt some lead on the fire, make a bullet.
 Put it in the rag and cool. Avoid the contact with the water!
+
 Ingredients: Lead bullets
 Tools: Bullet mold, Melting pot, Icon-lamp
+
 #TEXT shotgun_cartridge
 Revolver cartridge
 *********************
@@ -399,29 +453,38 @@ Add some black gunpowder inside.
 Seal the free end and fold it.
 Cover the cartridge you made with a sheet of parchment or leather
 While loading pierce the paper bottom.
+
 Ingredients: revolver bullet, revolver gunpowder
 Tools: Sartorial set, Candle
+
 #TEXT GunCap_colt
 Capsules
 *******
 Disposable, put on the gun nipples one by one. Used for ignition the charge in the bolt of the revolver.
 Very efficient at any weather and in any gun position.
+
 You need the sheet of pure copper, melting pot, chisel and yews for the crafting.
 Make some pieces of round form of the sheet of copper.
 Melt the wax add some silver fulminate and put it all inside of the copper cylinder.
+
 Ingredients: Copper Bar, Candles, Silver fulminate.
 Tools: Melting Pot, Icon-lamp, Metalwork tool.
+
 #TEXT OxyHydSilver
 Silver fulminate.
 ****************
 The explosive used for the ignition of gunpowder in the cartridge.
+
 Take the clean empty flask and add some silver, dissolve it with some nitric acid. Cover the bottleneck for keeping the gas inside. 
 Take the clean empty flask and put some alcohol inside. Then add the silver solution you crafted before and heat up the flask. Add some more alcohol. The you'll see some shiny crystals on the bottom of the flask. Cool the flask in the water.
 After cooling the solution, remove the crystals from it. Rinse it with the water and dry.
 Store it carefully. Don't use too much ingredients at once for avoiding the explosion.
+
 Ingredients: Silver bar, Nitric acid, Alcohol
 Tools: Alchemy tools, Icon-lamp
+
 Requirements: Alchemy skill
+
 #TEXT GunEchin
 Charge of nails
 ************
@@ -429,97 +492,139 @@ Chopped up pieces of iron rod that can be used against enemies, but will be effi
 It's pretty light-weighted and flies aside of the target, so you needn't to aim well for the clear shot.
 Besides, it's rough and damages the barrel, so don't use it with exquisite and long barrels.
 Sometimes it uses instead of a buckshot, because of its ability to cause terrible wounds - not so deep, but demolished.
+
 For crafting one cartridge you need some chopped nails or other metal scrap and fix it together with some wax.
 It's better to pack it with some gunpowder in the paper cartridge.
+
 Ingredients: Nails, Candle, Granular gunpowder
 Tools: Metalwork tool, Melting Pot, Icon-lamp.
+
 #TEXT potion2
 Elixir
 *******
 Elixir was invented by ancient Inca relieves pain, removes the effect of the poison and heals the wounds quickly, known as "Stone Warrior".
+
 Chop the Ginger root, Sabadilla herb, ash of the devil's weed, add some saliva of drunkard and let it stand some time. Then heat it up and add healing potion.
+
 Ingredients: Healing Potion, Ginger root, devil's weed x3, Sabadilla, Empty vial, Old mug, Candle, amber
 Tools: Mortar and Pestle, Silver spoon, Alchemy chest
+
 Requirements: Alchemy skill
+
 #TEXT potion3
 Antidote
 ***********
 A decoction of rare ingredients, an antidote for  plenty of local poisons. Has disgusting taste and smell, but if  you want to stay alive - you would drink even something worse.
+
 Add much Verbena foliage in the half-filled bottle of water, some guarana seeds and allspice, ginger root and ipecac. Seal the bottle and heat it up on the fire.
 After the aqua will become cloudy, add big pearl.
 Strain the liquid after cooling.
+
 Ingredients: Verbena, Guarana, Ipecac, Allspice, Empty vial, Big pearl
 Tools: Copper jar, wooden spoon, Icon-lamp, Mortar and pestle, Alchemy chest
+
 Requirements: Alchemy skill
+
 #TEXT berserker_potion
 Ometochli Tincture 
 ******************
 Aztecs were against drunkenness. By their laws, every drunk man had to be executed.
 This liquid was ironically named after the Aztec god of strong beverages.
 Add some devil's weed, allspice and a pint of boiling rum in empty vial, seal it with the wax plug with emerald and cool it.
+
 Ingredients: Rum, Allspice, devil's weed x2, Candle, Emerald, Empty vial
 Tools: Mortar and Pestle, Alchemy chest
+
 Requirements: Alchemy skill
+
 #TEXT mangarosapower
 Tidal Wave
 ***********
 A unique potion made of rare weed Manga Rosa, by Amelia's recipe, increases your power, endurance and battle skills. The effect lasts 2 days.
+
 Add some Manga Rosa foliage, Ipecac and Ginger root in the Copper jar. Add a pint of rum and let it stand a few hours. Then add three small pearls and an amber and then heat it up on a low fire. Then cool the liquid, strain it and seal the bottle.
+
 Ingredients: Manga Rosa, Ipecac, Ginger root, Rum, Small pearl x3, Amber, Empty vial.
 Tools: Alchemy chest, Icon-lamp, Copper jar.
+
 Requirements: Alchemy skill
+
 #TEXT mangarosafast
 Squall
 *****
 A unique potion made of rare weed Mangarosa, by Amelia's recipe, increases your reaction and sharpness of your senses, increases your battle skills. The effect lasts 2 days.
+
 Add some Mangarosa foliage, Verbena and Guarana in the Silver jar. Add some wine, two big pearls, an amber and let it stand a few hours. Then strain the liquid and seal the bottle.
+
 Ingredients: Mangarosa, Verbena, Guarana x2, Good Wine, Big pearl x2, Amber, Empty vial.
 Tools: Alchemy chest, Silver spoon, Silver jar, Mortar and pestle
+
 Requirements: Alchemy skill
+
 #TEXT mangarosatotal
 Sea Hug
 **********
 A unique potion made of rare weed Mangarosa, by Amelia's recipe, increases your power, endurance, reaction and sharpness of your senses, your charisma and speechcraft, your luck and battle skills. The effect lasts 2 days.
+
 Add some Mangarosa foliage to the mug. Add healing potion and two big pearls, then three small ones, a piece of blue amber and heat it up on low fire. Then cool the liquid and place it in the clean bottle, then seal it.
+
 Ingredients: Mangarosa, Big pearl x2, Small pearl x3, Blue amber, empty vial
 Tools: Alchemy chest, wooden spoon, Mug, Mortar and pestle, Icon-lamp
+
 Requirements: Alchemy skill
+
 #TEXT totem_01
 'Booming Voice' talisman
 *************************
 Battle experience and faith can work miracles.
+
 Take a metal mug, put some silver into it.
 Heat it up, then cool and add some strong rum, put an amethyst in the centre. Put the blue amber on the cheek and cover the mug with your own shade. Then throw out the rum and spit out the stone.
 The best time for the ritual is the midnight.
 It's a very strong talisman.
+
 Ingredients: Bottle of rum, Old Mug, Silver nugget, Amethyst.
+
 Tools: Icon-lamp
+
 Requirements: Alchemy skill
+
 #TEXT totem_02
 'Ankle biter' talisman
 ********************
 It will make your crew obey and respect their captain.
 Sometimes good reprisal is the best way to show the rebels their possible future and make them fear.
+
 Untwist three lashes and choose the strongest stalk. 
 Dunk it with the liquid of the rat-poison, allspice and tobacco with blue amber. Insert the ruby in the stalk from the other side. 
+
 Ingredients: Lash x3, Gold nugget x3, Ruby, Blue amber, twine, Allspice, Tobacco, arsenic.
+
 Tools: sartorial set, Mortar and pestle
+
 Requirements: Alchemy skill
+
 #TEXT totem_03
 'Cupid's Balm' talisman
 ***************************
 An aphrodisiac that has a powerful emotional impact.
 Helps to overcome the depression, has antibacterial, antifungal, antiviral and anti-inflammatory properties.
 Indispensable for frequent sex with different partners.
+
 Put some Hercules-beetle powder, bat wing powder, Guarana seeds and small copper filings together. Heat it up, then cool. Then turn it to the powder using hyacinth and blue amber. Add some ginger root into the powder. Store in a cool dark place.
+
 Ingredients: Hercules beetle x5, Bat wing, Guarana x3, Ginger root, hyacinth, blue amber, Copper Bar
+
 Tools: Alchemy chest, Icon-lamp, Mortar and pestle.
+
 Requirements: Alchemy skill
+
 #TEXT totem_04
 Talisman of the Accomplice
 ******************
 A silver hoop encrusted with turquoise and rings of raw iron, provides the wearer's allegiance to the one who made the hex on it.
 An ancient talisman, but very efficient.
+
 Make a silver exquisite band.
 Take used shackles and chop some rings in the chain. Put undamaged rings in the ornament of the band.
 Then put the remains of the shackles into the piece of cloth and make a knot with the blue amber.
@@ -527,36 +632,52 @@ Act carefully and quick.
 Heat up the piece of turquoise and clench it in your fist.
 Fix the piece of turquoise in the centre of the band. Convince the person whom you need to obey to put the band on with his own hands.
 Whisper "So be it" before gifting the band.
+
 Gypsies and red-headed people can craft this talisman a bit better.
+
 Ingredients: Silver nugget x7, Shackles, Guarana x3,  Ginger root, Hyacinth, Blue amber, Copper Bar, Candle
+
 Tools: Metalwork tool
+
 Requirements: Alchemy skill
+
 #TEXT totem_05
 'Iron navel' talisman
 ***********************
 This belt helps you to carry your weapon with more comfort and protects you from stunning effect during the battle.
+
 Take the belts you like, put them together.
 Add some rings and holders.
 Made the buckle of the big piece of bone - the tortoise shell suits quite well.
 Fix the clasp to it, with a small blue amber and jade.
 Whisper standing in front of the mirror: "The stone is hard, the metal is hard, - so the spirit is".
+
 The talisman is efficient while you stand on your feet. Still try to avoid mighty blows.
+
 Ingredients: Leather belt x3, tortoise-shell comb, Iron bar, Jade and Blue amber
+
 Tools: Metalwork tool, Mirror
+
 Requirements: Alchemy skill
+
 #TEXT totem_06
 'Gonter' talisman
 *****************
 An all-purpose spell for your favorite shoes.
 Maybe it's only self-hypnosis...
 Anyway, it works.
+
 Take an old shoe, remove the insole.
 Put Hercules beetle inside the insole, put the package on the copper bar, put a blue amber into your fist and smash the package.
 Then ignite the leather with the sparks taken out of the chrysoprase. Put the cinder into the clean flask.
 Smash the flask with your heel when you need to walk some miles with a heavy load.
+
 Ingredients: Old shoe, Hercules beetle, Empty vial, Copper bar, chrysoprase, blue amber
+
 Tools: flint
+
 Requirements: Alchemy skill
+
 #TEXT totem_07
 'Minstrel' talisman
 *********************
@@ -566,9 +687,13 @@ Craft some silver strings using wax and wood branches. Surround yourself with bl
 Think about your hearers while melting the wax.
 Then heat up the silver and make round disk of it with a hammer. Make a thin spiral cut.
 Make some strings.
+
 Ingredients: Silver nugget x5, lapis lazuli, blue amber
+
 Tools: Metalwork tool, Icon-lamp.
+
 Requirements: Alchemy skill
+
 #TEXT totem_08
 'Lord of Fire' talisman
 **************************
@@ -579,9 +704,13 @@ Only the person who took away someone's life is able to perform the ritual.
 Take the tobacco pipe, a piece of the fire Opal and a piece of blue amber, then take tongs, stones and a big portion of devil's weed.
 Kindle the brazier and put a gold nugget in it, blow on the flames holding blue amber in your teeth. Fan the brazier with the devil's weed. Then put some of this weed on the brazier and spit the amber in it. Then add the arsenic and the fire Opal. When it cool, take the opal out of the cinder and put it inside of the pipe. Here is your talisman. 
 Be sure that the pipe looks to the skies while you wearing the amulet.
+
 Ingredients: Devil's weed x3, porcelain pipe, twine, Gold nugget, fire Opal, blue amber
+
 Tools: Metalwork tool
+
 Requirements: Alchemy skill
+
 #TEXT totem_09
 'Arguzin' talisman
 ******************
@@ -590,9 +719,13 @@ That's why boatswain is such an important member of each crew. He always has som
 Craft a platinum ball and put it into a Boatswain's pipe.
 Put the blue amber under the right heel and aquamarine - under the left one, hold the bugle close to your chest.
 Turn to the south and pray.
+
 Ingredients: Boatswain's pipe, platinum bar, aquamarine, blue amber
+
 Tools: Metalwork tool
+
 Requirements: Alchemy skill
+
 #TEXT totem_10
 'Widow maker' talisman
 **********************
@@ -603,9 +736,13 @@ The owners of golden pectoral cross and a piece of coral could successfully spre
 The gold remembers the taste of Spanish blood in this land.
 The ritual is simple. Cut the palm of your hand in the shape of the cross, put the pectoral cross on the wound, press it with a piece of blue amber and shut hand into a fist. Catch one drop of blood with the blade of the knife, "feed" the blade with it and then let the drop fall on the piece of coral.
 Now you have the artifact.
+
 Ingredients: clasp-knife, golden pectoral cross, coral, blue amber.
+
 You can replace blue amber with the diamond (for the warriors of spirit) or morion (for the easy riders).
+
 Requirements: Alchemy skill
+
 #TEXT totem_11
 'Vampire' talisman
 ****************
@@ -618,18 +755,26 @@ Take off the ring from the dagger and put on it an opal, a meteorite and a blue 
 If you end this cycle with the amber, you will drain the energy from your enemies.
 Sew the gems into the wing and drop it to your feet before the next fight.
 Remember that the rings are well known so don't neither cut hearts of fallen nor drink their blood. Don't alert the Holy Inquisition.
+
 Ingredients: charmed bone, bat wing, opal, meteorite and blue amber
+
 Tools: sartorial set
+
 Requirements: Alchemy skill
+
 #TEXT totem_12
 'The son of Jaguar' talisman
 *********************
 Aztecs, they love sacrifices to honor their gods. They loved to bouild arenas where their captives had been fighting till their end. They were fighting against the Eagle and the Jaguar, armed only with wooden spears. 
 The claw of Jaguar always considered to be the talisman of the hunt luck. It is a shame that the magics works only for the hunter.
 You need to boil this trophy in the silver jar with the pearl powder, verbena, blue amber and hyacinth and this thing will give you incredible accuracy. But this talisman works only in dark places.
+
 Components: x1 Jaguar's claw, x5 small pearls, x1 verbena, x1 jacinth and x1 blue ember
+
 Tools: Silver jug, mortar and pestle
+
 Requirements: Alchemy skill
+
 #TEXT totem_13
 'Joker' talisman
 *****************
@@ -638,10 +783,14 @@ The goal of this card is to act by the will of its owner.
 Paint the wheel on the table, divide it to the four pieces. Take four cards out of the pack of cards and put it on the four pieces of the wheel according to the card suit. Lay the Joker in the centre face down. Put a candle on it.
 Take a piece of iron, chrysoberyl, blue amber and big pearl in your hand.
 Then blow out the candle.
+
 Ingredients: pack of cards, Candle, big pearl, Iron bar, chrysoberyl, blue amber
 You can replace blue amber with the diamond (for the warriors of spirit) or morion (for the easy riders).
+
 Tools: pen and ink
+
 Requirements: Alchemy skill
+
 #QUEST	Rome
 Latin expressions
 #TEXT	1
@@ -719,6 +868,7 @@ Vae victis - woe to the conquered!
 Veni, vidi, vici - I came, I saw, I conquered
 Viribus unitis - united effort
 Vita sine libertate, nihil - life without freedom is nothing
+
 #QUEST	Wolfreek_Journal
 Wulfric Johannsen`s log — fragments
 #TEXT	1
@@ -767,28 +917,36 @@ November 26. Here we are. Will be resting here for a couple of weeks.
 January 11. Finally the trader has returned to Basse-Terre. Huge profits I got from this business, it was worth waiting him for more than a week. I should buy provisions and head to the gord.
 January 14. Three days with a favorable wind and here we are. Fast as birds.
 ==============================================================================================================================================================
+
 #QUEST	Ignasio_Journal
 Ignacio Marco`s log — fragments
 #TEXT	1
 ... Joker and me had agreed upon our signals — I should raise Spanish colors if the squadron will be heading to Puerto Rico through Santo Domingo. Jolly Roger for Isla Tesoro and Turks. French colors for Tortuga and Turks.
 ********************************************************************************
 ... the Spanish have changed their schedule — their exit point from the Caribbean will be between Isla Tesoro and Turks. I`ve even managed to calculate the possible range of coordinates of their whereabouts during @<sMonth> @<sDay> @<sYear>: 23`0 — 23`30 North and 64`25 — 64`55 West. I should think how to inform Joker about it to make it easier to hunt them down.
+
 #QUEST	GG_Letter_1
 The letter from Angerran de Chievous
 #TEXT	1
 Esteemed Charles de Maure,
 A certain dame well know to you was quite saddened by your recent actions. She agreed to keep my company for a time being, even though unwillingly. I assume her feelings towards you are not mutual, however if I am wrong then we can make business. Everything has a price and let's discuss it in a week in Basse-Terre of Guadeloupe. You've got ten days, not more, to make up your mind. Governor de Lyon is a good friend of mine and he agreed to arrange our meeting. 
+
 Best regards,
 Angerran de Chievous
+
 P.S. Even though the lass is pretty, she is not of my taste, but be aware that I will force myself overstep if it makes you feel miserable. Perhaps even tomorrow. If this issue between us is not resolved at all, I will toss her to my men, they are not so selective as we are.
+
 #QUEST	Letter_Portugal
 The letter from Bartolomeo the Portuguese
 #TEXT	1
 Senor de Maure, 
 I apologize for leaving you just like that. It was a great pleasure doing business with you, I must say that you are an exceptionally committed man. I assume brits will tell you about missing parts of the story. I will not apologize for using you since it worked just fine for all of us.
+
 It's really been a while since I last wrote elegant letters, but it is high time for real me to return. Shame we didn't share a cup or two of good rum. Perhaps some day when our nations will be closer? We have already made a first step to see that happen. Godspeed!
+
 Sincerely yours
 Senor Bartolomeo, Baron de la Cueva 
+
 #QUEST	Letter_France
 A letter from Henry de Monper
 #TEXT	1
@@ -799,43 +957,65 @@ I don’t know whether this letter will reach you, and whether all the previous 
  So, my son, we need to solve another, the most important thing. With this letter, which I am sending through my old friend Benoit, I am enclosing copies of documents confirming that you, Charles de Maure, are now Chevalier de Monper - my heir and continuer of our glorious family... I have to ask you one more time - you must return to the family estate. All papers are notarized, and your presence is not required to enter the inheritance and receive the title, but in order to go to God with a calm soul I need to know that my family will not disappear after me.
  I don’t know if you remember the La Brigne family, but Yvonne, their youngest daughter, has blossomed and is quite suitable for marriage. Her father and brother gave their prior consent, but we need to play the wedding according to all the rules. This is a worthy surname, and, as a dowry, Guillaume La Brigne is ready to offer a small vineyard just a couple of miles from our estate.
  You, Charles, should already have understood what duty and responsibility are, a person without this knowledge cannot stand on the bridge of a warship, and now you have the responsibility for the entire family de Monper. From now on, you are my last son and my heir. Come back to fulfill your filial duty and accept my parental blessing at the altar, so that your father can leave in peace.
+
  Full of expectations, your father. Henri de Monper.
  Gascony.
+
+ 
 #QUEST	Letter_Marquesa
 The letter from Julianne Botot
 #TEXT	1
 Charles, I have reasons for being angry with you, you remember, and I’m still not ready to sincerely rejoice at your happiness, so let’s skip the courtesies and get right to the point:
 Despite our differences, I do not wish you any harm, but there are people who wish. I understand that this is not news for you. But here's what you should know – there are people that want to harm you. How and when they strike I don’t know.
 But beware - if you are killed, it will not bring me happiness.
+
 D.B.
+
 #TEXT	2
 Charles, I have reasons for being angry with you, you remember, and I’m still not ready to sincerely rejoice at your happiness, so let’s skip the courtesies and get right to the point:
 Despite our differences, I do not wish you any harm, but there are people who wish. I understand that this is not news for you. But here's what you should know – there are people that want to harm you. How and when they strike I don’t know.
 But beware - if you are killed, it will not bring me happiness.
+
 D.B.
+
 P.S. I’ll clarify - if you are killed, maybe I’ll even drop a tear. But we better not check it.
+
 #TEXT	3
 Dear friend, can I call you like that? I’m not in the town right now and I won’t be able to congratulate you personally, but please, accept my best wishes.
 Yes, imagine! The courtesans afterall believe in love, and I want to think that you have found your own. I am grateful to you for bringing this faith in me, and it will warm me for many years. Be happy, you deserve it!
+
 Your good friend.
+
 P.S. And now to the point - you understand, I would not have bothered you without a reason. Beware of the good man. Not everyone around you sees a reason for joy in your wedding. Keep the gun handy and alert. I worry for you and wish you happiness again.
+
 #TEXT	4
 Dear friend, can I call you like that? I’m not in the town right now and I won’t be able to congratulate you personally, but please, accept my best wishes.
 I do not urge you to remember me - this is ridiculous, agree, but know - I will carry the memories of you in my heart until my last day. Be happy wherever you are!
+
 Your good friend.
+
 P.S. And now to the point - you understand, I would not have bothered you without a reason. Beware of the good man. Not everyone around you sees a reason for joy in your wedding. Keep the gun handy and alert. I worry for you and wish you happiness again.
+
 #TEXT	1-1
 Charles, I have reasons for being angry with you, you remember, and I’m still not ready to sincerely rejoice at your happiness, but I'll try. Be happy and stay safe.
+
 D.B.
+
 #TEXT	2-1
 Charles, I have reasons for being angry with you, you remember, and I’m still not ready to sincerely rejoice at your happiness, but I'll try. Be happy and stay safe.  I'll clarify - if you are killed, maybe I’ll even drop a tear. But we better not check it.
+
 D.B.
+
 P.S. I’ll clarify - if you are killed, maybe I’ll even drop a tear. But we better not check it.
+
 #TEXT	3-1
 Dear friend, can I call you like that? I’m not in the town right now and I won’t be able to congratulate you personally, but please, accept my best wishes.
 Yes, imagine! The courtesans afterall believe in love, and I want to think that you have found your own. I am grateful to you for bringing this faith in me, and it will warm me for many years. Be happy, you deserve it!
+
 Your good friend.
+
 #TEXT	4-1
 Dear friend, can I call you like that? I’m not in the town right now and I won’t be able to congratulate you personally, but please, accept my best wishes.
 I do not urge you to remember me - this is ridiculous, agree, but know - I will carry the memories of you in my heart until my last day. Be happy wherever you are!
+
 Your good friend.

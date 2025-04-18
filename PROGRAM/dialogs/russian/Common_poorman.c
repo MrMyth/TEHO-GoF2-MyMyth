@@ -3,11 +3,15 @@ void ProcessDialogEvent()
 {
 	ref NPChar, sld;
 	aref Link, NextDiag;
+
 	DeleteAttribute(&Dialog,"Links");
+
 	makeref(NPChar,CharacterRef);
 	makearef(Link, Dialog.Links);
 	makearef(NextDiag, NPChar.Dialog);
+
 	ProcessCommonDialogRumors(NPChar, Link, NextDiag);//homo 25/06/06
+
 	switch(Dialog.CurrentNode)
 	{
 		case "First time":
@@ -41,6 +45,7 @@ void ProcessDialogEvent()
 					"Living on alms is not easy...", 
 					"I'd give everything to break out of this poverty!",
 					"You again?..", "block", 1, npchar, Dialog.CurrentNode);
+
 				link.l1 = HeroStringReactionRepeat("I see. Well, no big deal.", 
 					"Of course. Well, you know, the greatest man in history was the poorest.",
 					"Then you should start to do something, but not sitting here a whole day.", 
@@ -158,31 +163,37 @@ void ProcessDialogEvent()
 				link.l1.go = "exit";
 			}
 		break;
+		
 		case "trial":
 			dialog.text = "A silly question, senor! Of course, I would! But... what will I have to do? Certainly you aren't gonna give me that money just for my beautiful smile.";
 			link.l1 = "Of course, not. Listen now. I am acting on behalf of the governor himself. His grace suspects that someone at the shipyard is deliberately sabotaging the launch of 'Alacantara', his galleon. And his suspicions just grew stronger after a French spy have been caught recently...";
 			link.l1.go = "trial_1";
 		break;
+		
 		case "trial_1":
 			dialog.text = "";
 			link.l1 = "His grace already heard the excuses of the shipwright, but he's not sure he was telling the truth. We need to find out, who is sabotaging the work and why. Go to the docks, take a look around and ask the workers, why the hell 'Alacantara' is still not ready to sail...";
 			link.l1.go = "trial_2";
 		break;
+		
 		case "trial_2":
 			dialog.text = "";
 			link.l1 = "No one will suspect you, you even might get hold of a pile of tobacco. As for me, no one will tell me anything. Everyone will know who I am working for. If you manage to learn anything worthy, you will receive three thousand pesos. Enough to abandon your 'job' for a month at least.";
 			link.l1.go = "trial_3";
 		break;
+		
 		case "trial_3":
 			dialog.text = "Three thousand pesos? But, esteemed senor...";
 			link.l1 = "Are you haggling with me or what? Oh, and if you find out, who's behind all this stalling, you'll get another two thousand. Deal?";
 			link.l1.go = "trial_4";
 		break;
+		
 		case "trial_4":
 			dialog.text = "Alright, senor. Shouldn't be too difficult - many of my old buddies are working at the docks these days. Hey, I was a sailor too long time ago. Like, ten years ago...";
 			link.l1 = "You will be able tell me your life story later. Meet me on the pier at night after eleven. Now go.";
 			link.l1.go = "trial_5";
 		break;
+		
 		case "trial_5":
 			chrDisableReloadToLocation = true;//закрыть локацию
 			DialogExit();
@@ -199,11 +210,13 @@ void ProcessDialogEvent()
 			SetTimerCondition("Trial_ReturnPoormanNorm", 0, 0, 1, false);
 			AddQuestRecord("Trial", "15");
 		break;
+		
 		case "trial_6":
 			dialog.text = "Good evening, senor...";
 			link.l1 = "So? Did you find out anything?";
 			link.l1.go = "trial_7";
 		break;
+		
 		case "trial_7":
 			dialog.text = "I did, senor, I did. Not sure how does it all agree with what you told me... Have you brought the money? Five thousand pesos.";
 			if (sti(pchar.money) >= 5000)
@@ -217,11 +230,13 @@ void ProcessDialogEvent()
 				link.l1.go = "trial_fail";
 			}
 		break;
+		
 		case "trial_fail":
 			dialog.text = "You're trying to cheat on me, senor! If you're not going to pay - go and ask someone else around yourself. And don't even think of reaching for your sword or I'll call the guards!";
 			link.l1 = "...";
 			link.l1.go = "trial_fail_1";
 		break;
+		
 		case "trial_fail_1":
 			chrDisableReloadToLocation = true;//закрыть локацию
 			DialogExit();
@@ -232,22 +247,26 @@ void ProcessDialogEvent()
 			sld = characterFromId("Florian");
 			sld.DeckDialogNode = "florian_failspy_5";
 		break;
+		
 		case "trial_8":
 			AddMoneyToCharacter(pchar, -5000);
 			dialog.text = "So how it goes. 'Alcantara' has been ready to sail since long time, but it didnt't get loaded intentionally, and by order of the governor himself. Well, so I was told. And carpenters are now doing all kinds of different minor work, which does not affect vessel departure\nEveryone is waiting for the arrival of some bark from Cartagena. Thing is 'Alcantara' has, in her captain's opinion, an insufficient stock of gunpowder. So ship has been staying here and waiting for whole days when 'Puebla' will bring gunpowder\nBut everyone thinks that all this waiting is just a wasting of time, so if 'Puebla' doesn't arrive in three days, 'Alcantara' will hit the road without the gunpowder...";
 			link.l1 = "Is that so? And who told you that? Name?";
 			link.l1.go = "trial_9";
 		break;
+		
 		case "trial_9":
 			dialog.text = "One of the sailors from 'Alacantara' - Felipe Dabinho... But that's actually no secret at all, and His Grace governor himself had ordered...";
 			link.l1 = "I see. That's what I expected. French spies are in town, but these idiots are blabbing like tradegirls, unbelievable! Any first comer can find out whatever he wants about the plans of His Grace. Oh, that Felipe Dabinho is in serious trouble now! And the boatswain of 'Alacantara' too! It's only his fault that his crew doesn't know a thing about discipline!";
 			link.l1.go = "trial_10";
 		break;
+		
 		case "trial_10":
 			dialog.text = "Oh... So, you knew it from the start? But why... It's not my fault! You told me to do that!";
 			link.l1 = "It wasn't your fault, you shouldn't worry about it, no one's gonna punish you. Now we know that the crew of 'Alacantara' can blab out any information to an enemy - even what's supposed to be kept in a secret. Alright, you can go now. Thanks for your help. Go spend your money.";
 			link.l1.go = "trial_11";
 		break;
+		
 		case "trial_11":
 			chrDisableReloadToLocation = true;//закрыть локацию
 			DialogExit();
@@ -258,12 +277,14 @@ void ProcessDialogEvent()
 			sld = characterFromId("Florian");
 			sld.DeckDialogNode = "florian_12";
 		break;
+		
 		// --> калеуче
 		case "Caleuche":
 			dialog.text = "Pardon me, good sir... I won it in a game of dices against some stranger, I thought that it was charmed healing amulet, but I was wrong... It doesn't cure illnesses, and market traders aren't interested in it. And here you are - the sailor, captain, a learned man, check and you may find it useful\nYes, and for you this couple of thousand is a little sum, but for me it's a piece of bread and a sip of rum for a month. Look, mister...";
 			link.l1 = "Okay, show...";
 			link.l1.go = "Caleuche_1";
 		break;
+		
 		case "Caleuche_1":
 			Log_Info("You got a strange amulet");
 			PlaySound("interface\important_item.wav");
@@ -271,12 +292,14 @@ void ProcessDialogEvent()
 			link.l1 = "So-so... Interesting thing, I agree. I'm sure, it was stolen from the Indian settlements. Okay, I'll take it. Here's your money";
 			link.l1.go = "Caleuche_2";
 		break;
+		
 		case "Caleuche_2":
 			AddMoneyToCharacter(pchar, -2000);
 			dialog.text = "Thank you, sir! I hope, this thing will bring you luck! May Lord protect you!";
 			link.l1 = "Good luck, buddy. Don't spend all the money at once in the tavern.";
 			link.l1.go = "Caleuche_3";
 		break;
+		
 		case "Caleuche_3":
 			DialogExit();
 			GiveItem2Character(pchar, "kaleuche_amulet1"); 

@@ -4,10 +4,14 @@ void ProcessDialogEvent()
 	aref Link, NextDiag;
 	int i, iTemp;
 	string sTemp;
+	
 	DeleteAttribute(&Dialog,"Links");
+	
 	makeref(NPChar,CharacterRef);
 	makearef(Link, Dialog.Links);
 	makearef(NextDiag, NPChar.Dialog);
+	
+	
 	switch(Dialog.CurrentNode)
 	{
 		case "First time":
@@ -41,16 +45,19 @@ void ProcessDialogEvent()
 				}
 			}
 		break;
+		
 		case "exit_distress":
 			DialogExit();
 			NextDiag.CurrentNode = "Trader_distress";
 		break;
+		
 		case "Trader_distress":
 			dialog.text = "Captain, we've had a talk already, right? You 'don't help profiteers', so what do you want from me now?";
 			link.l1 = "Yes, you are right. Fine, just sit on you fat arse and drink your rum. I have to go.";
 			link.l1.go = "exit";
 			NextDiag.TempNode = "Trader_distress";
 		break;
+		
 		case "Escort_choice"://первые развилки - выбираем между городом, бухтой и необитайкой
 			pchar.GenQuest.Escort.Trader.StartCity = GetCurrentTown();//стартовый город
 			pchar.GenQuest.Escort.Trader.ShipType = TraderShipType();//тип корабля торговца
@@ -103,22 +110,26 @@ void ProcessDialogEvent()
 				break;
 			}
 		break;
+		
 		case "Escort_exit":
 			DialogExit();
 			DeleteAttribute(pchar, "GenQuest.Escort.Trader");
 		break;
+		
 		case "Trader_wait":
 			dialog.text = "Are you ready to sail, captain? I am waiting for your orders.";
 			link.l1 = "Yes, we are going to set sail now. See you at the port.";
 			link.l1.go = "exit";
 			NextDiag.TempNode = "Trader_wait";
 		break;
+		
 		case "EscortType":
 			dialog.text = "Splendid! I am glad that we had a deal. I hope that our trip will be safe.";
 			link.l1 = "So do I. It is time to set sail!";
 			link.l1.go = "EscortType_go";
 			NextDiag.CurrentNode = "Trader_wait";
 		break;
+		
 		case "EscortType_go":
 			//общие параметры
 			DialogExit();
@@ -179,6 +190,7 @@ void ProcessDialogEvent()
 			pchar.quest.EscortTrader_fail.win_condition.l1.character = pchar.GenQuest.Escort.Trader.id;
 			pchar.quest.EscortTrader_fail.function = "EscortTrader_failed";
 		break;
+		
 		case "EscortTrader_complete"://сдаем квест
 			sld = characterFromId(pchar.GenQuest.Escort.Trader.id);
 			if (sti(sld.ship.HP) < makeint(sti(pchar.GenQuest.Escort.Trader.ShipMaxHP)/4))//если корпуса осталось меньше 1/4 - первая проверка
@@ -207,6 +219,7 @@ void ProcessDialogEvent()
 			link.l1 = "You are welcome... I just did my job.";
 			link.l1.go = "EscortTrader_complete_3";
 		break;
+		
 		case "EscortTrader_complete_1":
 			dialog.text = "Don't try to scare me! Your battle skills make your threats pathetic. Farewell!";
 			link.l1 = "Get lost, profiteer...";
@@ -215,6 +228,7 @@ void ProcessDialogEvent()
 			AddComplexSeaExpToScill(20, 20, 20, 0, 20, 0, 0);
 			AddCharacterExpToSkill(pchar, "Fortune", 20);//везение
 		break;
+		
 		case "EscortTrader_complete_2":
 			dialog.text = "Yes, a very wise observation... Here, take your "+FindRussianMoneyString(sti(pchar.GenQuest.Escort.Trader.Money))+" and farewell.";
 			link.l1 = "See you, " + npchar.name + ".";
@@ -225,6 +239,7 @@ void ProcessDialogEvent()
 			AddComplexSeaExpToScill(50, 50, 50, 0, 50, 0, 50);
 			AddCharacterExpToSkill(pchar, "Fortune", 40);//везение
 		break;
+		
 		case "EscortTrader_complete_3":
 			dialog.text = "You did great! Well I have to go now. Goodbye, captain!";
 			link.l1 = "Good luck, " + npchar.name + "!";
@@ -237,6 +252,7 @@ void ProcessDialogEvent()
 			AddCharacterExpToSkill(pchar, "Fortune", 80);//везение
 			AddCharacterExpToSkill(pchar, "Sneak", 50);//скрытность
 		break;
+		
 		case "EscortTrader_complete_4":
 			pchar.GenQuest.Escort.Trader.Enemyname = GenerateRandomName_Generator(sti(npchar.nation), "man");
 			GetEnemyTraderGoods();
@@ -245,11 +261,13 @@ void ProcessDialogEvent()
 			link.l1 = "Homo homini lupus est?";
 			link.l1.go = "EscortTrader_complete_5";
 		break;
+		
 		case "EscortTrader_complete_5":
 			dialog.text = "What?";
 			link.l1 = "You are 'giving away' you colleague in such an easy and honest manner... But I don't care about your conscience and thanks for your information. Good luck, sir!";
 			link.l1.go = "EscortTrader_complete_6";
 		break;
+		
 		case "EscortTrader_complete_6":
 			DialogExit();
 			chrDisableReloadToLocation = false;
@@ -277,6 +295,7 @@ void ProcessDialogEvent()
 			AddCharacterExpToSkill(pchar, "Fortune", 80);//везение
 			AddCharacterExpToSkill(pchar, "Sneak", 50);//скрытность
 		break;
+		
 		case "complete_exit":
 			DialogExit();
 			CloseQuestHeader("TraderEscort");
@@ -291,6 +310,7 @@ void ProcessDialogEvent()
 			RemoveCharacterCompanion(Pchar, npchar);
 			DeleteAttribute(pchar, "GenQuest.Escort.Trader");
 		break;
+		
 		case "Race_prepare":
 			NextDiag.TempNode = "Race_begin";
 			NextDiag.CurrentNode = NextDiag.TempNode;
@@ -298,31 +318,37 @@ void ProcessDialogEvent()
 			pchar.questTemp.friend_in_tavern = npchar.id;
 			AddDialogExitQuest("alc");
 		break;
+		
 		case "exit_sit":
 			NextDiag.CurrentNode = "First time";
 			DialogExit();
 			AddDialogExitQuest("exit_sit");
 		break;
+		
 		case "Race_begin"://гонки на гидропланах
 			dialog.text = "Eh, let's drink some old good rum, captain! How are you doing, how is your trade?";
 			link.l1 = "I am not really a merchant. But I am doing just fine.";
 			link.l1.go = "Race_begin_1";
 		break;
+		
 		case "Race_begin_1":
 			dialog.text = "And that's the most important! Considering that unsafe situation in the open sea.";
 			link.l1 = "Yes, you are right. Especially for you, merchants, there are a lot of hunters for your cargo. And you are rarely able neither to flee nor to fight back. Your vessels are slow and your cannons are small, since you put your profits first. Sailing in convoys with four or five ships together, that is what saves you.";
 			link.l1.go = "Race_begin_2";
 		break;
+		
 		case "Race_begin_2":
 			dialog.text = "Well, not all of us are like that, friend. I always sail alone, I don't need any ballast. I perfectly know the Caribbean sea and might I say, I am really good in navigating, sailing and commanding my men. I am able to outrun any pirate.";
 			link.l1 = "Really? I can hardly believe that. With a full stored cargo? On the trade vessel? So do you mean that you can escape from a pirate brigantine or a lugger?";
 			link.l1.go = "Race_begin_3";
 		break;
+		
 		case "Race_begin_3":
 			dialog.text = "It looks like you, pal, are doubting that my ship is able to sail fast? Fine. I offer you a bet.";
 			link.l1 = "What kind of a bet?";
 			link.l1.go = "Race_begin_4";
 		break;
+		
 		case "Race_begin_4"://тут устанавливаем все параметры
 			if (!CheckAttribute(pchar, "GenQuest.Racing")) pchar.GenQuest.Racing.Count = 0;
 			pchar.GenQuest.Racing.Go.Nation = npchar.nation;
@@ -338,6 +364,7 @@ void ProcessDialogEvent()
 			link.l2 = "I am too busy to start a race because of some silly boasting.";
 			link.l2.go = "Race_exit";
 		break;
+		
 		case "Race_exit":
 			dialog.text = "Hm... Are you afraid to loose? Whatever. But don't be so quick to judge other people, there are a lot of experienced sailors among merchants... much more experienced than you are.";
 			link.l1 = "Fine, fine, don't sermonize me, philosopher. Farewell...";
@@ -345,6 +372,7 @@ void ProcessDialogEvent()
 			DeleteAttribute(pchar, "GenQuest.Racing.Go");
 			NextDiag.TempNode = "First time";
 		break;
+		
 		case "Race_begin_5":
 			dialog.text = "It is your choice, captain.";
 			iTemp = 1;
@@ -356,6 +384,7 @@ void ProcessDialogEvent()
 					iTemp++;
 			}
 		break;
+		
 		case "Racing_rate5"://50 000
 			if (drand(9) > 6)
 			{
@@ -373,6 +402,7 @@ void ProcessDialogEvent()
 			link.l2.go = "Race_begin_5";
 			}
 		break;
+		
 		case "Racing_rate4"://40 000
 			if (drand(9) > 4)
 			{
@@ -390,6 +420,7 @@ void ProcessDialogEvent()
 			link.l2.go = "Race_begin_5";
 			}
 		break;
+		
 		case "Racing_rate3"://30 000
 			if (drand(9) > 2)
 			{
@@ -407,6 +438,7 @@ void ProcessDialogEvent()
 			link.l2.go = "Race_begin_5";
 			}
 		break;
+		
 		case "Racing_rate2"://20 000
 			if (drand(9) > 0)
 			{
@@ -424,12 +456,14 @@ void ProcessDialogEvent()
 			link.l2.go = "Race_begin_5";
 			}
 		break;
+		
 		case "Racing_rate1"://10 000
 			dialog.text = "Fine. I agree. Your coins please. Here is my bet.";
 			link.l1 = "Just let me get my purse...";
 			link.l1.go = "Racing_rate";
 			pchar.GenQuest.Racing.Go.Money = 10000;
 		break;
+		
 		case "Racing_rate":
 			dialog.text = "So?";
 			if (sti(pchar.money) >= sti(pchar.GenQuest.Racing.Go.Money))
@@ -443,6 +477,7 @@ void ProcessDialogEvent()
 			link.l1.go = "Racing_rate_nomoney";
 			}
 		break;
+		
 		case "Racing_rate_nomoney":
 			if (sti(pchar.GenQuest.Racing.Go.Money) == 10000 || sti(pchar.Money) < 10000)
 			{
@@ -461,6 +496,7 @@ void ProcessDialogEvent()
 			link.l2.go = "Racing_exit";
 			}
 		break;
+		
 		case "Racing_exit":
 			dialog.text = "Changed your mind, huh? Aren't you just scared? Fine, hell with you. But don't be so quick to judge other people, there are a lot of experienced sailors among merchants... much more experienced than you are.";
 			link.l1 = "Fine, fine, don't sermonize me, philosopher. Farewell...";
@@ -468,17 +504,20 @@ void ProcessDialogEvent()
 			DeleteAttribute(pchar, "GenQuest.Racing.Go");
 			NextDiag.TempNode = "First time";
 		break;
+		
 		case "Racing_Go":
 			AddMoneyToCharacter(pchar, -sti(pchar.GenQuest.Racing.Go.Money));
 			dialog.text = "We have got a bet then! Let's call a bartender to witness if you don't mind... and let's give our stakes to him. Winner will return and take the whole sum. Cheating is impossible since gossips spread over the archipelago very fast so he will know who is the winner.";
 			link.l1 = "I agree. That seems right.";
 			link.l1.go = "Racing_Go_1";
 		break;
+		
 		case "Racing_Go_1":
 			dialog.text = "Well, I suppose it time for us to get on our ships and set sail, the time is ticking. I don't know about you, but I am going to set sail right now. Oh, and my ship is a flute and her name is "+pchar.GenQuest.Racing.Go.ShipName+". I suppose that you will easily recognize her at the port of arrival.";
 			link.l1 = "Don't jump of joy that soon. See you in the tavern of "+XI_ConvertString("Colony"+pchar.GenQuest.Racing.Go.City+"Gen")+"!";
 			link.l1.go = "Racing_Go_2";
 		break;
+		
 		case "Racing_Go_2":
 			DialogExit();
 			npchar.lifeday = 0;
@@ -510,6 +549,7 @@ void ProcessDialogEvent()
 			AddQuestUserData("Racing", "sDay", FindRussianDaysString(pchar.GenQuest.Racing.Go.DaysQty));
 			AddQuestUserData("Racing", "sMoney", FindRussianMoneyString(sti(pchar.GenQuest.Racing.Go.Money)));
 		break;
+		
 		case "Racing_Finished":
 			if (CheckAttribute(pchar, "GenQuest.Racing.Go.MCWin"))
 			{
@@ -528,6 +568,7 @@ void ProcessDialogEvent()
 			//LocatorReloadEnterDisable(pchar.GenQuest.Racing.Go.City + "_town", "reload2_back", false);
 			//LocatorReloadEnterDisable(pchar.GenQuest.Racing.Go.City + "_town", "gate_back", false);
 		break;
+		
 		case "Racing_Finished_1":
 			dialog.text = "Well, you are the winner. Now, you have to return to "+XI_ConvertString("Colony"+pchar.GenQuest.Racing.Go.StartCity)+" and take your money from the bartender. You have surely deserved it!";
 			link.l1 = "On my way already. It was a pleasure. Goodbye!";
@@ -552,6 +593,7 @@ void ProcessDialogEvent()
 			ChangeCharacterComplexReputation(pchar,"authority", 3);
 			ChangeOfficersLoyality("good_all", 3);
 		break;
+		
 		case "Racing_Finished_2":
 			dialog.text = "There is no secret in that just skill and experience. And I have to go to "+XI_ConvertString("Colony"+pchar.GenQuest.Racing.Go.StartCity)+" in order to collect my prize.";
 			link.l1 = "You have earned it. Goodbye!";
@@ -565,6 +607,7 @@ void ProcessDialogEvent()
 			AddQuestRecord("Racing", "5");
 			CloseQuestHeader("Racing");
 		break;
+		
 		case "Racing_end":
 			DialogExit();
 			NextDiag.currentNode = "Racing_end_repeat";
@@ -573,18 +616,21 @@ void ProcessDialogEvent()
 			sld = characterFromId("RaceTraderSkiper");
 			sld.lifeday = 0;
 		break;
+		
 		case "Racing_end_repeat":
 			dialog.text = "Is there is anything else you want to talk about?";
 			link.l1 = "No, it is nothing.";
 			link.l1.go = "exit";
 			NextDiag.TempNode = "Racing_end_repeat";
 		break;
+		
 		case "Exit":
 			NextDiag.CurrentNode = NextDiag.TempNode;
 			DialogExit();
 		break;
 	}
 }
+
 float ShipFactorMC()//коэффициент от класса корабля ГГ
 {
 	float f;
@@ -601,6 +647,7 @@ float ShipFactorMC()//коэффициент от класса корабля Г
 	}
 	return f;
 }
+
 int TraderShipType()//корабль торговца
 {
 	int iShipType;
@@ -612,6 +659,7 @@ int TraderShipType()//корабль торговца
 	if (iRank >= 25) iShipType = SHIP_CARAVEL + rand(makeint(SHIP_NAVIO - SHIP_CARAVEL)); 
 	return iShipType;
 }
+
 void GetEnemyTraderGoods()//выберем товар
 {
 switch (rand(7))
@@ -650,11 +698,14 @@ switch (rand(7))
 			break;
 	}
 }
+
 bool CheckFreeSitFront(ref _npchar)
 {
  	ref rCharacter;
 	int n;
+
 	if (!CheckAttribute(_npchar, "Default.ToLocator")) return false;
+	
 	for (n=0; n<MAX_CHARACTERS; n++)
 	{
 		makeref(rCharacter, Characters[n]);

@@ -1,13 +1,19 @@
 /*
 Тип: стоячий, всегда стоит, отвечает на диалоги, никогда не боится. А еще он молится у стойки, базарит с подходящими 
 прихожанами, ходит по локаторам группы "barmen" и боится врагов. Тока надо было доделать.
+
 	Используемые шаблоны:
 		stay
 		dialog
 		goto
 		ani
 */
+
+
+
 #define LAI_TYPE_PRIEST		"priest"
+
+
 //Инициализация
 void LAi_type_priest_Init(aref chr)
 {
@@ -25,6 +31,7 @@ void LAi_type_priest_Init(aref chr)
 	LAi_SetDefaultStayAnimation(chr);
 	SendMessage(&chr, "lsl", MSG_CHARACTER_EX_MSG, "SetFightWOWeapon", false);
 }
+
 //Процессирование типа персонажа
 void LAi_type_priest_CharacterUpdate(aref chr, float dltTime)
 {
@@ -123,16 +130,19 @@ void LAi_type_priest_CharacterUpdate(aref chr, float dltTime)
 		}
 	}
 }
+
 //Загрузка персонажа в локацию
 bool LAi_type_priest_CharacterLogin(aref chr)
 {
 	return true;
 }
+
 //Выгрузка персонажа из локацию
 bool LAi_type_priest_CharacterLogoff(aref chr)
 {
 	return true;
 }
+
 //Завершение работы темплейта
 void LAi_type_priest_TemplateComplite(aref chr, string tmpl)
 {
@@ -147,10 +157,12 @@ void LAi_type_priest_TemplateComplite(aref chr, string tmpl)
 		break;
 	}
 }
+
 //Сообщить о желании завести диалог
 void LAi_type_priest_NeedDialog(aref chr, aref by)
 {
 }
+
 //Запрос на диалог, если возвратить true то в этот момент можно начать диалог
 bool LAi_type_priest_CanDialog(aref chr, aref by)
 {
@@ -160,6 +172,7 @@ bool LAi_type_priest_CanDialog(aref chr, aref by)
 	if(chr.chr_ai.tmpl == LAI_TMPL_ANI) return true;
 	return false;
 }
+
 //Начать диалог
 void LAi_type_priest_StartDialog(aref chr, aref by)
 {
@@ -168,20 +181,28 @@ void LAi_type_priest_StartDialog(aref chr, aref by)
 	CharacterTurnByChr(chr, by);
 	LAi_tmpl_SetActivatedDialog(chr, by);
 }
+
 //Закончить диалог
 void LAi_type_priest_EndDialog(aref chr, aref by)
 {
 	LAi_tmpl_stay_InitTemplate(chr);
 	LAi_CharacterRestoreAy(chr);
 }
+
+
 //Персонаж выстрелил
 void LAi_type_priest_Fire(aref attack, aref enemy, float kDist, bool isFindedEnemy)
 {
+
 }
+
+
 //Персонаж атакован
 void LAi_type_priest_Attacked(aref chr, aref by)
 {
+	
 }
+
 //Проиграть анимацию зазывания покупанелей
 void LAi_type_priest_Ask(aref chr)
 {
@@ -203,11 +224,13 @@ void LAi_type_priest_Ask(aref chr)
 	//Выбираем проигрываемый звук
 	LAi_CharacterPlaySound(chr, "priest");
 }
+
 //Ориентироваться по текущему локатору
 void LAi_type_priest_RestoreAngle(aref chr)
 {
 	CharacterTurnByLoc(chr, "barmen", chr.chr_ai.type.locator);
 }
+
 //Найти врага
 int LAi_type_priest_FindEnemy(aref chr, int num)
 {
@@ -221,6 +244,7 @@ int LAi_type_priest_FindEnemy(aref chr, int num)
 	}
 	return -1;
 }
+
 //Отправить священника в другой локатор
 void LAi_type_priest_SetGoto(aref chr)
 {
@@ -234,6 +258,7 @@ void LAi_type_priest_SetGoto(aref chr)
 	LAi_tmpl_goto_SetLocator(chr, "barmen", chr.chr_ai.type.locator, 600.0);
 	chr.chr_ai.type.state = "goto";
 }
+
 //Установить задание после прихода в локатор
 void LAi_type_priest_SetAfterGoto(aref chr)
 {

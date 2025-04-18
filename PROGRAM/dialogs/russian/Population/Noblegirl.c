@@ -4,10 +4,13 @@ void ProcessDialogEvent()
 {
 	ref NPChar;
 	aref Link, NextDiag;
+
 	DeleteAttribute(&Dialog,"Links");
+
 	makeref(NPChar,CharacterRef);
 	makearef(Link, Dialog.Links);
 	makearef(NextDiag, NPChar.Dialog);
+	
 	// вызов диалога по городам -->
     NPChar.FileDialog2 = "DIALOGS\" + LanguageGetLanguage() + "\Citizen\" + NPChar.City + "_Citizen.c";
     if (LoadSegment(NPChar.FileDialog2))
@@ -16,7 +19,9 @@ void ProcessDialogEvent()
 		UnloadSegment(NPChar.FileDialog2);
 	}
     // вызов диалога по городам <--
+	
 	ProcessCommonDialogRumors(NPChar, Link, NextDiag);
+	
 	switch(Dialog.CurrentNode)
 	{
 		case "First time":
@@ -63,6 +68,7 @@ void ProcessDialogEvent()
 			}
 			NextDiag.TempNode = "First time";
 		break;
+
 		//сюда вставляем любые проверки и направления на квесты
 		case "question":
 			dialog.text = LinkRandPhrase("Alright, let's listen.","Oh, fine. What do you want?","Questions? Fine, sailor, I am listening.");
@@ -70,12 +76,14 @@ void ProcessDialogEvent()
 			link.l1.go = "rumours_noblegirl";
 			NextDiag.TempNode = "First time";
 		break;
+
 		//замечание по обнаженному оружию от персонажей типа citizen
 		case "CitizenNotBlade":
 			dialog.text = NPCharSexPhrase(NPChar, "Are you insane?! You scared me! Sheathe your weapon or I will tell the commendant to hang you in the fort!", "Are you insane?! You scared me! Sheathe your weapon or I will tell the commendant to hang you in the fort!");
 			link.l1 = LinkRandPhrase("Fine.", "As you wish.", "Okay.");
 			link.l1.go = "exit";
 		break;
+
 		case "Exit":
 			NextDiag.CurrentNode = NextDiag.TempNode;
 			DialogExit();

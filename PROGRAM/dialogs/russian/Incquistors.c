@@ -1,11 +1,14 @@
+
 void ProcessDialogEvent()
 {
 	ref NPChar;
 	aref Link, NextDiag;
 	DeleteAttribute(&Dialog,"Links");
+
 	makeref(NPChar,CharacterRef);
 	makearef(Link, Dialog.Links);
 	makearef(NextDiag, NPChar.Dialog);
+	
 	switch(Dialog.CurrentNode)
 	{
 		case "First time":
@@ -55,14 +58,17 @@ void ProcessDialogEvent()
 				}
 			}
 		break;
+
 		case "Exit":
 			NextDiag.CurrentNode = NextDiag.TempNode;
 			DialogExit();
 		break;
+
 		case "NoMoreTalkExit":
 			LAi_CharacterDisableDialog(npchar);
 			DialogExit();
 		break;
+
 		case "fight":
 			DialogExit();
 			NextDiag.CurrentNode = NextDiag.TempNode;

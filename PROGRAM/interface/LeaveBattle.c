@@ -1,42 +1,57 @@
 // покинуть поле боя
 string totalInfo = "";
+
 void InitInterface(string iniName)
 {
 	StartAboveForm(true);
+	
     SendMessage(&GameInterface,"ls",MSG_INTERFACE_INIT,iniName);
+
     SetFormatedText("MAP_CAPTION", XI_ConvertString("titleLeaveBattle"));
+
 	SetFormatedText("INFO_TEXT_QUESTION", XI_ConvertString("MapWhatYouWantToDo"));
+
 	CalculateInfoData();
+
 	SetFormatedText("INFO_TEXT",totalInfo);
+
 	SetEventHandler("InterfaceBreak","ProcessBreakExit",0); // Выход на море
 	SetEventHandler("exitCancel","ProcessCancelExit",0); // Выход на море по крестику или Esc
 	SetEventHandler("ievnt_command","ProcCommand",0); // выход на карту только тут (по НЕТ)
 	SetEventHandler("evntDoPostExit","DoPostExit",0); // выход из интерфейса
+	
 	EI_CreateFrame("INFO_BORDERS", 250,152,550,342);
 	PlaySound("interface\_EvShip1.wav");
 }
+
 void ProcessBreakExit()
 {
 	IDoExit( RC_INTERFACE_ANY_EXIT );
 }
+
 void ProcessCancelExit()
 {
 	IDoExit( RC_INTERFACE_ANY_EXIT );
 }
+
 void IDoExit(int exitCode)
 {
 	DelEventHandler("InterfaceBreak","ProcessBreakExit");
 	DelEventHandler("exitCancel","ProcessCancelExit");
 	DelEventHandler("ievnt_command","ProcCommand");
 	DelEventHandler("evntDoPostExit","DoPostExit");
+
     EndAboveForm(true);
+	
 	interfaceResultCommand = exitCode;
 	EndCancelInterface(true);
 }
+
 void ProcCommand()
 {
 	string comName = GetEventData();
 	string nodName = GetEventData();
+	
 	switch(nodName)
 	{
 	case "B_OK":
@@ -51,6 +66,7 @@ void ProcCommand()
 			if(GetSelectable("B_CANCEL"))	{SetCurrentNode("B_CANCEL");}
 		}
 	break;
+
 	case "B_CANCEL":
 		if(comName=="activate" || comName=="click")
 		{
@@ -64,18 +80,22 @@ void ProcCommand()
 	break;
 	}
 }
+
 void DoPostExit()
 {
 	int exitCode = GetEventData();
 	IDoExit(exitCode);
 }
+
 void CalculateInfoData()
 {
 	aref    rootItems;
 	string  sEnd;
 	int     cn, i;
 	ref     chr;
+	
 	makearef(rootItems, pchar.CheckEnemyCompanionDistance);  // допущение, что один есть точно иначе форму не вызвать
+	
 	if (GetAttributesNum(rootItems) > 1)
 	{
 		totalInfo = "Our ships ";
@@ -103,11 +123,13 @@ void CalculateInfoData()
 	}
 	totalInfo += sEnd;  
 }
+
 void KillCompanions()
 {
 	aref    rootItems;
 	int     cn, i;
 	ref     chr;
+	
 	makearef(rootItems, pchar.CheckEnemyCompanionDistance);  // допущение, что один есть точно иначе форму не вызвать
 	for (i = 0; i < GetAttributesNum(rootItems); i++)
 	{

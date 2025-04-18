@@ -1,3 +1,4 @@
+
 int LocationInitMartinique(int n)
 {	
 	//////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
@@ -29,19 +30,23 @@ int LocationInitMartinique(int n)
 	locations[n].models.always.seabed = "Martinique_sb";
 	locations[n].models.always.locators = "Martinique_locators";
 	locations[n].models.always.grassPatch = "Martinique_grass";
+	
 	locations[n].models.always.plan = "plan1";
 	locations[n].models.always.plan.level = 9;
+
 	//Fontain
 	locations[n].models.always.Waterfall1 = "fontain1";
 	locations[n].models.always.Waterfall1.uvslide.v0 = 0.5;
     locations[n].models.always.Waterfall1.uvslide.v1 = 0.0;
 	locations[n].models.always.Waterfall1.tech = "LocationWaterFall";
 	locations[n].models.always.Waterfall1.level = 50;
+	
 	locations[n].models.always.Waterfall2 = "fontain2";
 	locations[n].models.always.Waterfall2.uvslide.v0 = 0.2;
     locations[n].models.always.Waterfall2.uvslide.v1 = 0.0;
 	locations[n].models.always.Waterfall2.tech = "LocationWaterFall";
 	locations[n].models.always.Waterfall2.level = 49;
+
 	//WindMill Fan
 	locations[n].models.always.MillFan = "MillFan";
 	Locations[n].models.always.MillFan.locator.group = "WindMill";
@@ -49,6 +54,7 @@ int LocationInitMartinique(int n)
 	Locations[n].models.always.MillFan.rotate.x = 0.0;
 	Locations[n].models.always.MillFan.rotate.y = 0.0;
 	Locations[n].models.always.MillFan.rotate.z = 0.2;
+
 	//Day
 	locations[n].models.day.fonar = "Martinique_fd";
 	locations[n].models.day.charactersPatch = "Martinique_patch_day";
@@ -60,6 +66,7 @@ int LocationInitMartinique(int n)
 	locations[n].environment.weather = "true";
 	locations[n].environment.sea = "true";
 	//Reload map
+	
     // --> Типовые городские локации, четкая фиксация на 10 номеров.
 	locations[n].reload.l1.name = "reload1_back";
 	locations[n].reload.l1.go = "Martinique";
@@ -67,136 +74,161 @@ int LocationInitMartinique(int n)
 	locations[n].reload.l1.autoreload = "0";
 	locations[n].reload.l1.label = "Sea";
 	locations[n].locators_radius.reload.reload2_back = 1.8;
+
 	locations[n].reload.l2.name = "reload2_back";
 	locations[n].reload.l2.go = "Martinique";
 	locations[n].reload.l2.emerge = "reload_1";
 	locations[n].reload.l2.autoreload = "0";
 	locations[n].reload.l2.label = "Sea";
 	locations[n].locators_radius.reload.reload2_back = 1.8;
+
 	locations[n].reload.l3.name = "reload3_back";
 	locations[n].reload.l3.go = "FortFrance_townhall";
 	locations[n].reload.l3.emerge = "reload1";
 	locations[n].reload.l3.autoreload = "0";
 	locations[n].reload.l3.label = "Residence";
 	locations[n].reload.l3.close_for_night = 1;
+
 	locations[n].reload.l4.name = "reload4_back";
 	locations[n].reload.l4.go = "FortFrance_tavern";
 	locations[n].reload.l4.emerge = "reload1";
 	locations[n].reload.l4.autoreload = "0";
 	locations[n].reload.l4.label = "Tavern";
+
 	locations[n].reload.l5.name = "reload5_back";
 	locations[n].reload.l5.go = "FortFrance_shipyard";
 	locations[n].reload.l5.emerge = "reload1";
 	locations[n].reload.l5.autoreload = "0";
 	locations[n].reload.l5.label = "Shipyard";
 	locations[n].reload.l5.close_for_night = 1;
+
 	locations[n].reload.l6.name = "reload6_back";
 	locations[n].reload.l6.go = "FortFrance_store";
 	locations[n].reload.l6.emerge = "reload1";
 	locations[n].reload.l6.autoreload = "0";
 	locations[n].reload.l6.label = "Store";
 	locations[n].reload.l6.close_for_night = 1;
+
 	locations[n].reload.l7.name = "reload7_back";
 	locations[n].reload.l7.go = "FortFrance_church";
 	locations[n].reload.l7.emerge = "reload1";
 	locations[n].reload.l7.autoreload = "0";
 	locations[n].reload.l7.label = "Church";
 	//locations[n].reload.l7.close_for_night = 1;
+
 	locations[n].reload.l8.name = "reload8_back";
 	locations[n].reload.l8.go = "FortFrance_bank";
 	locations[n].reload.l8.emerge = "reload1";
 	locations[n].reload.l8.autoreload = "0";
 	locations[n].reload.l8.label = "Usurer House";
 	locations[n].reload.l8.close_for_night = 1;
+
 	locations[n].reload.l9.name = "reload9_back";
 	locations[n].reload.l9.go = "FortFrance_brothel";
 	locations[n].reload.l9.emerge = "reload1";
 	locations[n].reload.l9.autoreload = "0";
 	locations[n].reload.l9.label = "Brothel";
+
  	locations[n].reload.l91.name = "reload91";
 	locations[n].reload.l91.go = "FortFrance_SecBrRoom";
 	locations[n].reload.l91.emerge = "reload2";
 	locations[n].reload.l91.autoreload = "0";
 	locations[n].reload.l91.label = "Brothel";
+
 	locations[n].reload.l10.name = "reload10_back";
 	locations[n].reload.l10.go = "FortFrance_PortOffice";
 	locations[n].reload.l10.emerge = "reload1";
 	locations[n].reload.l10.autoreload = "0";
 	locations[n].reload.l10.label = "PortOffice";
 	locations[n].reload.l10.close_for_night = 1;
+
 	locations[n].reload.gate.name = "gate_back";
 	locations[n].reload.gate.go = "FortFrance_ExitTown";
 	locations[n].reload.gate.emerge = "reload3";
 	locations[n].reload.gate.autoreload = "0";
 	locations[n].reload.gate.label = "ExitTown";
+	
 	locations[n].reload.jail.name = "reload_jail";
 	locations[n].reload.jail.go = "FortFrance_prison";
 	locations[n].reload.jail.emerge = "reload1";
 	locations[n].reload.jail.autoreload = "0";
 	locations[n].reload.jail.label = "Prison";
+	
     // --> Квестовые локации.
 	locations[n].reload.l11.name = "basement1";
 	locations[n].reload.l11.go = "FortFrance_Dungeon";
 	locations[n].reload.l11.emerge = "reload2";
 	locations[n].reload.l11.autoreload = "0";
 	locations[n].reload.l11.label = "Dungeon";
+
 	locations[n].reload.l12.name = "reloadPr1";
 	locations[n].reload.l12.go = "FortFrance_Dungeon";
 	locations[n].reload.l12.emerge = "reload1";
 	locations[n].reload.l12.autoreload = "0";
 	locations[n].reload.l12.label = "Dungeon";
+
     // --> Комоны, загрушки. Номера с начинаются с 20.
 	locations[n].reload.l20.name = "houseF4";
 	locations[n].reload.l20.go = "CommonRoom_MH";
 	locations[n].reload.l20.emerge = "reload1";
 	locations[n].reload.l20.autoreload = "0";
 	locations[n].reload.l20.label = "House";
+
 	locations[n].reload.l21.name = "houseF3";
 	locations[n].reload.l21.go = "CommonRoom_MH2";
 	locations[n].reload.l21.emerge = "reload1";
 	locations[n].reload.l21.autoreload = "0";
 	locations[n].reload.l21.label = "House";
+
 	locations[n].reload.l22.name = "houseS1";
 	locations[n].reload.l22.go = "CommonCobHouse";
 	locations[n].reload.l22.emerge = "reload1";
 	locations[n].reload.l22.autoreload = "0";
 	locations[n].reload.l22.label = "House";
+
 	locations[n].reload.l23.name = "houseF1";
 	locations[n].reload.l23.go = "CommonRoom_MH5";
 	locations[n].reload.l23.emerge = "reload1";
 	locations[n].reload.l23.autoreload = "0";
 	locations[n].reload.l23.label = "House";
+
 	locations[n].reload.l24.name = "houseS2";
 	locations[n].reload.l24.go = "CommonFlamHouse";
 	locations[n].reload.l24.emerge = "reload1";
 	locations[n].reload.l24.autoreload = "0";
 	locations[n].reload.l24.label = "House";
+
 	locations[n].reload.l25.name = "houseH2";
 	locations[n].reload.l25.go = "CommonRoom_MH7";
 	locations[n].reload.l25.emerge = "reload1";
 	locations[n].reload.l25.autoreload = "0";
 	locations[n].reload.l25.label = "House";
+
 	locations[n].reload.l26.name = "houseSp1";
 	locations[n].reload.l26.go = "CommonResidence_BackHall";
 	locations[n].reload.l26.emerge = "reload1";
 	locations[n].reload.l26.autoreload = "0";
 	locations[n].reload.l26.label = "House";
+
 	locations[n].reload.l27.name = "houseF2";
 	locations[n].reload.l27.go = "CommonRoom_MH9";
 	locations[n].reload.l27.emerge = "reload1";
 	locations[n].reload.l27.autoreload = "0";
 	locations[n].reload.l27.label = "House";
+	
 	locations[n].reload.l28.name = "houseH1";
 	locations[n].reload.l28.go = "CommonHut";
 	locations[n].reload.l28.emerge = "reload1";
 	locations[n].reload.l28.autoreload = "0";
 	locations[n].reload.l28.label = "House";
+
 	/*locations[n].reload.l29.name = "houseH11";
 	locations[n].reload.l29.go = "CommonHut";
 	locations[n].reload.l29.emerge = "reload2";
 	locations[n].reload.l29.autoreload = "0";
 	locations[n].reload.l29.label = "House";*/
 	n = n + 1;
+
   	//////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 	// ТАВЕРНА
 	//////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
@@ -235,6 +267,7 @@ int LocationInitMartinique(int n)
 	locations[n].reload.l1.emerge = "reload4";
 	locations[n].reload.l1.autoreload = "0";
     locations[n].reload.l1.label = "Street";
+
 	locations[n].reload.l2.name = "reload2_back";
 	locations[n].reload.l2.go = "FortFrance_tavern_upstairs";
 	locations[n].reload.l2.emerge = "reload1";
@@ -243,6 +276,7 @@ int LocationInitMartinique(int n)
 	locations[n].reload.l2.disable = 1; // закроем, но связку сделаем для квестовых нужд.
 	LAi_LocationFightDisable(&locations[n], true);
 	n = n + 1;
+
 	//////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 	// КОМНАТА В ТАВЕРНЕ
 	//////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
@@ -265,6 +299,7 @@ int LocationInitMartinique(int n)
 	locations[n].models.always.window = "tavern_room_window";
 	locations[n].models.always.window.tech = "LocationWindows";
 	locations[n].models.always.window.level = 65539;
+
 	locations[n].models.always.back = "..\inside_back";
 	locations[n].models.always.back.level = 65529;
 	//Day
@@ -282,6 +317,7 @@ int LocationInitMartinique(int n)
 	locations[n].reload.l1.label = "Tavern";
 	locations[n].locators_radius.reload.reload1 = 0.8;
 	n = n + 1;
+
  	//////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 	// МАГАЗИН
 	//////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
@@ -327,6 +363,7 @@ int LocationInitMartinique(int n)
 	locations[n].reload.l2.label = "Room";
 	LAi_LocationFightDisable(&locations[n], true);
 	n = n + 1;
+
  	//////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 	// РОСТОВЩИК
 	//////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
@@ -364,6 +401,7 @@ int LocationInitMartinique(int n)
 	locations[n].reload.l1.emerge = "reload8";
 	locations[n].reload.l1.autoreload = "0";
     locations[n].reload.l1.label = "Street";
+
 	locations[n].reload.l2.name = "reload2";
 	locations[n].reload.l2.go = "CommonResidence_5";
 	locations[n].reload.l2.emerge = "reload1";
@@ -371,6 +409,7 @@ int LocationInitMartinique(int n)
 	locations[n].reload.l2.label = "Room";
 	LAi_LocationFightDisable(&locations[n], true);
 	n = n + 1;
+
 	//////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 	// БОРДЕЛЬ
 	//////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
@@ -393,6 +432,7 @@ int LocationInitMartinique(int n)
 	locations[n].models.always.window = "brothel_window";
 	locations[n].models.always.window.tech = "LocationWindows";
 	locations[n].models.always.window.level = 50;
+
 	locations[n].models.always.back = "..\inside_back";
 	//Day
 	locations[n].models.day.charactersPatch = "Brothel_patch";
@@ -407,12 +447,14 @@ int LocationInitMartinique(int n)
 	locations[n].reload.l1.emerge = "reload9";
 	locations[n].reload.l1.autoreload = "0";
     locations[n].reload.l1.label = "Street";
+
 	locations[n].reload.l2.name = "reload2_back";
 	locations[n].reload.l2.go = "FortFrance_Brothel_room";
 	locations[n].reload.l2.emerge = "reload1";
 	locations[n].reload.l2.autoreload = "0";
 	locations[n].reload.l2.label = "Brothel Room";
 	locations[n].reload.l2.disable = 1;  //закроем, но связка пусть будет для квестов.
+
 	locations[n].reload.l3.name = "reload3";
 	locations[n].reload.l3.go = "FortFrance_SecBrRoom";
 	locations[n].reload.l3.emerge = "reload1";
@@ -420,6 +462,7 @@ int LocationInitMartinique(int n)
 	locations[n].reload.l3.label = "Brothel";
 	LAi_LocationFightDisable(&locations[n], true);
 	n = n + 1;
+
 	//////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 	// Комнаты в борделе
 	//////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
@@ -441,6 +484,7 @@ int LocationInitMartinique(int n)
 	locations[n].models.always.window = "Brothel_room_window";
 	locations[n].models.always.window.tech = "LocationWindows";
 	locations[n].models.always.window.level = 50;
+
 	locations[n].models.always.back = "..\inside_back";
 	//Day
 	locations[n].models.day.charactersPatch = "Brothel_room_patch";
@@ -458,6 +502,7 @@ int LocationInitMartinique(int n)
 	LAi_LocationFightDisable(&locations[n], true);
 	locations[n].locators_radius.item.item1 = 1;
 	n = n + 1;
+
 	//////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 	locations[n].id = "FortFrance_SecBrRoom"; // вторая комната борделя
 	locations[n].id.label = "Room";
@@ -477,6 +522,7 @@ int LocationInitMartinique(int n)
 	locations[n].models.always.window = "BigHouse03_windows";
 	locations[n].models.always.window.tech = "LocationWindows";
 	locations[n].models.always.window.level = 65539;
+
 	locations[n].models.always.back = "..\inside_back";
 	locations[n].models.always.back.level = 65529;
 	//Day
@@ -494,6 +540,7 @@ int LocationInitMartinique(int n)
 	locations[n].reload.l1.emerge = "reload3";
 	locations[n].reload.l1.autoreload = "0";
 	locations[n].reload.l1.label = "Brothel";
+
 	locations[n].reload.l2.name = "reload2";
 	locations[n].reload.l2.go = "FortFrance_town";
 	locations[n].reload.l2.emerge = "reload91";
@@ -501,6 +548,7 @@ int LocationInitMartinique(int n)
 	locations[n].reload.l2.label = "Street";
 	LAi_LocationFightDisable(&locations[n], true);
 	n = n + 1;
+
  	//////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 	// ВЕРФЬ
 	//////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
@@ -538,6 +586,7 @@ int LocationInitMartinique(int n)
 	locations[n].reload.l1.emerge = "reload5";
 	locations[n].reload.l1.autoreload = "0";
     locations[n].reload.l1.label = "Street";
+
 	locations[n].reload.l2.name = "reload2";
 	locations[n].reload.l2.go = "CommonPackhouse_2";
 	locations[n].reload.l2.emerge = "reload1";
@@ -545,6 +594,7 @@ int LocationInitMartinique(int n)
 	locations[n].reload.l2.label = "Room";
 	locations[n].locators_radius.item.item1 = 1.0;
 	n = n + 1;
+
  	//////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 	// РЕЗИДЕНЦИЯ
 	//////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
@@ -582,16 +632,19 @@ int LocationInitMartinique(int n)
 	//Reload map
 	locations[n].locators_radius.reload.dialog_event = 0.2;
 	locations[n].locators_radius.camdetector.dialog_event = 2.2;
+
 	locations[n].reload.l1.name = "reload1_back";
 	locations[n].reload.l1.go = "FortFrance_town";
 	locations[n].reload.l1.emerge = "reload3";
 	locations[n].reload.l1.autoreload = "0";
     locations[n].reload.l1.label = "Street";
+
 	locations[n].reload.l2.name = "reload2";
 	locations[n].reload.l2.go = "CommonResidence_4";
 	locations[n].reload.l2.emerge = "reload1";
 	locations[n].reload.l2.autoreload = "0";
 	locations[n].reload.l2.label = "Room";
+
 	locations[n].reload.l3.name = "reload3";
 	locations[n].reload.l3.go = "CommonResidence_2";
 	locations[n].reload.l3.emerge = "reload1";
@@ -637,6 +690,7 @@ int LocationInitMartinique(int n)
     locations[n].reload.l1.label = "Street";
 	LAi_LocationFightDisable(&locations[n], true);
 	n = n + 1;
+
  	//////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 	// ПОРТОВЫЙ ОФИС
 	//////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
@@ -656,9 +710,11 @@ int LocationInitMartinique(int n)
 	locations[n].models.always.housePortOffice = "PortOffice";
 	locations[n].models.always.housePortOffice.level = 65538;
 	locations[n].models.always.locators = "PortOffice_locators";
+
 	Locations[n].models.always.PortOffice = "PortOffice_windows";
 	Locations[n].models.always.PortOffice.tech = "LocationWindows";
 	locations[n].models.always.PortOffice.level = 65539;
+
 	locations[n].models.always.back = "..\inside_back";
 	locations[n].models.always.back.level = 65529;
 	//Day
@@ -694,6 +750,7 @@ int LocationInitMartinique(int n)
 	locations[n].models.always.Maltains = "Malta_Base";
 	locations[n].models.always.InquisitionMaltainsFonars = "Malta_fonars";
 	locations[n].models.always.locators = "Malta_locators";
+	
 	//Day
 	locations[n].models.day.charactersPatch = "Malta_patch";
 	//Night
@@ -710,12 +767,14 @@ int LocationInitMartinique(int n)
 	locations[n].reload.l1.emerge = "reloadPr1";
 	locations[n].reload.l1.autoreload = "0";
     locations[n].reload.l1.label = "Street";
+	
 	locations[n].reload.l2.name = "reload2";
 	locations[n].reload.l2.go = "FortFrance_town";
 	locations[n].reload.l2.emerge = "basement1";
 	locations[n].reload.l2.autoreload = "0";
     locations[n].reload.l2.label = "Street";
 	n = n + 1;
+	
 	////////////////////// prison ////////////////////////////
 	Locations[n].id = "FortFrance_prison";
 	locations[n].id.label = "Prison";
@@ -748,9 +807,11 @@ int LocationInitMartinique(int n)
 	Locations[n].reload.l1.go = "FortFrance_town";
 	Locations[n].reload.l1.emerge = "reload_jail";
 	Locations[n].reload.l1.autoreload = "0";
+	
 	locations[n].locators_radius.box.box1 = 0.8;
 	locations[n].box1.QuestClosed = true;
 	n = n + 1;
+
  	//////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 	// Выход в джунгли из Форт де Франс
 	//////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
@@ -767,9 +828,12 @@ int LocationInitMartinique(int n)
 	locations[n].filespath.models = "locations\Outside\Jungles\TownExitY";
 	Locations[n].models.always.townExit = "townExitY";
 	Locations[n].models.always.townWalls = "townExitY_stone";
+	
 	Locations[n].models.always.locators = "townExitY_locators";
+		
 	Locations[n].models.always.grassPatch = "townExitY_grass";
 	Locations[n].models.always.grassPatch.texture = "grass\grassshore.tga.tx";
+	
 	Locations[n].models.always.l1 = "plan1";
 	Locations[n].models.always.l1.level = 9;
 	Locations[n].models.always.l1.tech = "LocationModelBlend";
@@ -794,12 +858,14 @@ int LocationInitMartinique(int n)
 	locations[n].reload.l1.emerge = "gate_back";
 	locations[n].reload.l1.autoreload = "0";
 	locations[n].reload.l1.label = "FortFrance";
+
 	locations[n].reload.l2.name = "reload1_back";
 	locations[n].reload.l2.go = "Martinique_jungle_01";
 	locations[n].reload.l2.emerge = "reload2";
 	locations[n].reload.l2.autoreload = "1";
 	locations[n].reload.l2.label = "Jungle";
 	locations[n].locators_radius.reload.reload1_back = 2;
+
 	locations[n].reload.l3.name = "reload2_back";
 	locations[n].reload.l3.go = "FortFrance_fort";
 	locations[n].reload.l3.emerge = "reload1";
@@ -807,6 +873,7 @@ int LocationInitMartinique(int n)
 	locations[n].reload.l3.label = "FortFrance Fort";
 	locations[n].locators_radius.reload.reload1_back = 2;
 	n = n + 1;
+	
  	//////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 	// Джунгли
 	//////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
@@ -846,12 +913,14 @@ int LocationInitMartinique(int n)
 	locations[n].reload.l1.autoreload = "1";
 	locations[n].reload.l1.label = "Jungle";
 	locations[n].locators_radius.reload.reload1_back = 2;
+
 	locations[n].reload.l2.name = "reload2_back";
 	locations[n].reload.l2.go = "FortFrance_ExitTown";
 	locations[n].reload.l2.emerge = "reload1";
 	locations[n].reload.l2.autoreload = "1";
 	locations[n].reload.l2.label = "ExitTown";
 	locations[n].locators_radius.reload.reload2_back = 2;
+
 	locations[n].reload.l3.name = "reload3_back";
 	locations[n].reload.l3.go = "Martinique_jungle_04";
 	locations[n].reload.l3.emerge = "reload3";
@@ -859,6 +928,7 @@ int LocationInitMartinique(int n)
 	locations[n].reload.l3.label = "Jungle";
 	locations[n].locators_radius.reload.reload3_back = 2;
 	n = n + 1;
+	
 	//////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 	// Пляж Ламантен
 	//////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
@@ -876,8 +946,10 @@ int LocationInitMartinique(int n)
 	locations[n].models.always.shore10.sea_reflection = 1;
 	Locations[n].models.always.shore10seabed = "shore10_sb";
 	Locations[n].models.always.locators = "shore10_locators";
+		
 	Locations[n].models.always.grassPatch = "shore10_grass";
 	Locations[n].models.always.grassPatch.texture = "grass\grassshore.tga.tx";
+	
 	Locations[n].models.always.l1 = "plan1";
 	Locations[n].models.always.l1.level = 9;
 	Locations[n].models.always.l1.tech = "LocationModelBlend";
@@ -901,6 +973,7 @@ int LocationInitMartinique(int n)
 	locations[n].reload.l1.autoreload = "1";
 	locations[n].reload.l1.label = "Jungle";
 	locations[n].locators_radius.reload.reload1_back = 2;
+
 	locations[n].reload.l2.name = "boat";
 	locations[n].reload.l2.go = "Martinique";
 	locations[n].reload.l2.emerge = "reload_2";
@@ -908,6 +981,7 @@ int LocationInitMartinique(int n)
 	locations[n].reload.l2.label = "Sea";
     locations[n].locators_radius.reload.boat = 9.0;
 	n = n + 1;
+	
 	//////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 	// Джунгли
 	//////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
@@ -947,12 +1021,14 @@ int LocationInitMartinique(int n)
 	locations[n].reload.l1.autoreload = "1";
 	locations[n].reload.l1.label = "Shore38";
 	locations[n].locators_radius.reload.reload1_back = 2.0;
+
 	locations[n].reload.l2.name = "reload2_back";
 	locations[n].reload.l2.go = "Martinique_CaveEntrance";
 	locations[n].reload.l2.emerge = "reload2";
 	locations[n].reload.l2.autoreload = "1";
 	locations[n].reload.l2.label = "Jungle";
 	locations[n].locators_radius.reload.reload2_back = 2.0;
+
 	locations[n].reload.l3.name = "reload3_back";
 	locations[n].reload.l3.go = "Martinique_jungle_01";
 	locations[n].reload.l3.emerge = "reload3";
@@ -960,6 +1036,7 @@ int LocationInitMartinique(int n)
 	locations[n].reload.l3.label = "Jungle";
 	locations[n].locators_radius.reload.reload3_back = 2.0;
 	n = n + 1;
+
 	//////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 	// Вход в грот
 	//////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
@@ -999,6 +1076,7 @@ int LocationInitMartinique(int n)
 	locations[n].reload.l1.autoreload = "0";
 	locations[n].reload.l1.label = "Grot";
 	locations[n].locators_radius.reload.reload1_back = 1.3;
+
 	locations[n].reload.l2.name = "reload2_back";
 	locations[n].reload.l2.go = "Martinique_Jungle_04";
 	locations[n].reload.l2.emerge = "reload2";
@@ -1006,6 +1084,7 @@ int LocationInitMartinique(int n)
 	locations[n].reload.l2.label = "Jungle";
 	locations[n].locators_radius.reload.reload2_back = 2.0;
 	n = n + 1;
+	
 	//////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 	// Грот
 	//////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
@@ -1024,6 +1103,7 @@ int LocationInitMartinique(int n)
 	Locations[n].models.always.grotto2alpha.tech = "LocationWindows";	
 	locations[n].models.always.grotto2alpha.level = 65532;	
 	locations[n].models.always.locators = "grotto2_locators";	
+
 	//locations[n].locators_radius.item.duhi1 = 0.0;
 /*	
 	Locations[n].models.always.rays = "grotto2_rays";
@@ -1048,6 +1128,7 @@ int LocationInitMartinique(int n)
 	locations[n].reload.l1.label = "Cave entrance";
 	locations[n].locators_radius.reload.reload1_back = 2;
 	n = n + 1;
+	
 	//////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 	// Джунгли
 	//////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
@@ -1087,12 +1168,14 @@ int LocationInitMartinique(int n)
 	locations[n].reload.l1.autoreload = "1";
 	locations[n].reload.l1.label = "Jungle";
 	locations[n].locators_radius.reload.reload1_back = 2.0;
+
 	locations[n].reload.l2.name = "reload2_back";
 	locations[n].reload.l2.go = "Martinique_jungle_03";
 	locations[n].reload.l2.emerge = "reload1";
 	locations[n].reload.l2.autoreload = "1";
 	locations[n].reload.l2.label = "Jungle";
 	locations[n].locators_radius.reload.reload2_back = 2.0;
+
 	locations[n].reload.l3.name = "reload3_back";
 	locations[n].reload.l3.go = "LeFransua_ExitTown";
 	locations[n].reload.l3.emerge = "reload1";
@@ -1100,6 +1183,7 @@ int LocationInitMartinique(int n)
 	locations[n].reload.l3.label = "Jungle";
 	locations[n].locators_radius.reload.reload3_back = 2.0;
 	n = n + 1;
+
 	//////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 	// Джунгли
 	//////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
@@ -1139,6 +1223,7 @@ int LocationInitMartinique(int n)
 	locations[n].reload.l1.autoreload = "1";
 	locations[n].reload.l1.label = "Jungle";
 	locations[n].locators_radius.reload.reload1_back = 2.0;
+
 	locations[n].reload.l2.name = "reload2_back";
 	locations[n].reload.l2.go = "Shore39";
 	locations[n].reload.l2.emerge = "reload1";
@@ -1146,6 +1231,7 @@ int LocationInitMartinique(int n)
 	locations[n].reload.l2.label = "Shore39";
 	locations[n].locators_radius.reload.reload2_back = 2.0;
 	n = n + 1;
+
 	//////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 	// Бухта Ле Марен
 	//////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
@@ -1163,8 +1249,10 @@ int LocationInitMartinique(int n)
 	locations[n].models.always.shore06.sea_reflection = 1;
 	Locations[n].models.always.shore06seabed = "shore06_sb";
 	Locations[n].models.always.locators = "shore06_locators";
+		
 	Locations[n].models.always.grassPatch = "shore06_grass";
 	Locations[n].models.always.grassPatch.texture = "grass\grassshore.tga.tx";
+	
 	Locations[n].models.always.l1 = "plan1";
 	Locations[n].models.always.l1.level = 9;
 	Locations[n].models.always.l1.tech = "LocationModelBlend";
@@ -1188,6 +1276,7 @@ int LocationInitMartinique(int n)
 	locations[n].reload.l1.autoreload = "1";
 	locations[n].reload.l1.label = "Jungle";
 	locations[n].locators_radius.reload.reload1_back = 2;
+
 	locations[n].reload.l2.name = "boat";
 	locations[n].reload.l2.go = "Martinique";
 	locations[n].reload.l2.emerge = "reload_4";
@@ -1195,6 +1284,7 @@ int LocationInitMartinique(int n)
 	locations[n].reload.l2.label = "Sea";
     locations[n].locators_radius.reload.boat = 9.0;
 	n = n + 1;
+	
 	//////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 	// Порт Ле Франсуа
 	//////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
@@ -1215,8 +1305,10 @@ int LocationInitMartinique(int n)
 	locations[n].models.always.shore07.sea_reflection = 1;
 	Locations[n].models.always.shore07seabed = "shore07_sb";
 	Locations[n].models.always.locators = "shore07_locators";
+		
 	Locations[n].models.always.grassPatch = "shore07_grass";
 	Locations[n].models.always.grassPatch.texture = "grass\grassshore.tga.tx";
+	
 	Locations[n].models.always.l1 = "plan1";
 	Locations[n].models.always.l1.level = 9;
 	Locations[n].models.always.l1.tech = "LocationModelBlend";
@@ -1240,6 +1332,7 @@ int LocationInitMartinique(int n)
 	locations[n].reload.l1.autoreload = "1";
 	locations[n].reload.l1.label = "Jungle";
 	locations[n].locators_radius.reload.reload1_back = 2;
+
 	locations[n].reload.l2.name = "boat";
 	locations[n].reload.l2.go = "Martinique";
 	locations[n].reload.l2.emerge = "reload_3";
@@ -1247,6 +1340,7 @@ int LocationInitMartinique(int n)
 	locations[n].reload.l2.label = "Sea";
     locations[n].locators_radius.reload.boat = 9.0;
 	n = n + 1;
+
 	//////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 	// Выход из города Ле Франсуа
 	//////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
@@ -1291,12 +1385,14 @@ int LocationInitMartinique(int n)
 	locations[n].reload.l1.autoreload = "1";
 	locations[n].reload.l1.label = "Jungle";
 	locations[n].locators_radius.reload.reload2_back = 2.0;
+
 	locations[n].reload.l2.name = "reload2_back";
 	locations[n].reload.l2.go = "LeFransua_port";
 	locations[n].reload.l2.emerge = "reload1";
 	locations[n].reload.l2.autoreload = "1";
 	locations[n].reload.l2.label = "LeFransua Port";
 	locations[n].locators_radius.reload.reload1_back = 2.0;
+
     Locations[n].reload.l3.name = "reload3";
 	Locations[n].reload.l3.go = "LeFransua_town";
 	Locations[n].reload.l3.emerge = "reload1";
@@ -1304,6 +1400,7 @@ int LocationInitMartinique(int n)
 	Locations[n].reload.l3.label = "Street";
 	locations[n].locators_radius.reload.reload3 = 1.8;
 	n = n + 1;
+
 	//////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 	// Ле Франсуа
 	//////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
@@ -1345,46 +1442,55 @@ int LocationInitMartinique(int n)
 	locations[n].environment.weather = "true";
 	locations[n].environment.sea = "false";
 	//Reload map
+
 	Locations[n].reload.l1.name = "reload1"; 
 	Locations[n].reload.l1.go = "LeFransua_ExitTown";
 	Locations[n].reload.l1.emerge = "reload3";
 	Locations[n].reload.l1.autoreload = "0";
 	Locations[n].reload.l1.label = "ExitTown";
 	locations[n].locators_radius.reload.reload1 = 1.8;
+
 	locations[n].reload.l2.name = "reload2";
 	locations[n].reload.l2.go = "CommonHut";
 	locations[n].reload.l2.emerge = "reload1";
 	locations[n].reload.l2.autoreload = "0";
 	locations[n].reload.l2.label = "House";
+	
 	locations[n].reload.l4.name = "reload4";
 	locations[n].reload.l4.go = "CommonRoom_MH";
 	locations[n].reload.l4.emerge = "reload1";
 	locations[n].reload.l4.autoreload = "0";
 	locations[n].reload.l4.label = "House";
+
 	Locations[n].reload.l5.name = "reload5";
 	Locations[n].reload.l5.go = "LeFransua_tavern";
 	Locations[n].reload.l5.emerge = "reload1";
 	Locations[n].reload.l5.autoreload = "0";
 	Locations[n].reload.l5.label = "Tavern";
+
 	Locations[n].reload.l6.name = "reload6";
 	Locations[n].reload.l6.go = "LeFransua_townhall";
 	Locations[n].reload.l6.emerge = "reload1";
 	Locations[n].reload.l6.autoreload = "0";
 	Locations[n].reload.l6.label = "Townhall";
 	Locations[n].reload.l6.close_for_night = 1;
+
 	locations[n].reload.l7.name = "reload7";
 	locations[n].reload.l7.go = "CommonRoom_MH2";
 	locations[n].reload.l7.emerge = "reload1";
 	locations[n].reload.l7.autoreload = "0";
 	locations[n].reload.l7.label = "House";
+
 	Locations[n].reload.l8.name = "reload8";
 	Locations[n].reload.l8.go = "LeFransua_store";
 	Locations[n].reload.l8.emerge = "reload1";
 	Locations[n].reload.l8.autoreload = "0";
 	Locations[n].reload.l8.label = "Store";
 	Locations[n].reload.l8.close_for_night = 1;
+	
 	locations[n].locators_radius.quest.detector1 = 2.0;
     n = n + 1;
+
 	//////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 	// Таверна Ле Франсуа
 	//////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
@@ -1421,6 +1527,7 @@ int LocationInitMartinique(int n)
 	locations[n].reload.l1.emerge = "reload5";
 	locations[n].reload.l1.autoreload = "0";
     locations[n].reload.l1.label = "Street";
+
 	locations[n].reload.l2.name = "reload2_back";
 	locations[n].reload.l2.go = "LeFransua_tavern_upstairs";
 	locations[n].reload.l2.emerge = "reload1";
@@ -1429,6 +1536,7 @@ int LocationInitMartinique(int n)
 	locations[n].reload.l2.disable = 1; // закроем, но связку сделаем для квестовых нужд.	
 	LAi_LocationFightDisable(&locations[n], true);
 	n = n + 1;
+
 	//////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 	// Комната в таверне наверху, Ле Франсуа
 	//////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
@@ -1451,6 +1559,7 @@ int LocationInitMartinique(int n)
 	locations[n].models.always.window = "tavern_room_window";
 	locations[n].models.always.window.tech = "LocationWindows";
 	locations[n].models.always.window.level = 65539;
+
 	locations[n].models.always.back = "..\inside_back";
 	locations[n].models.always.back.level = 65529;
 	//Day
@@ -1468,6 +1577,7 @@ int LocationInitMartinique(int n)
 	locations[n].reload.l1.label = "Tavern";
 	locations[n].locators_radius.reload.reload1 = 0.8;
 	n = n + 1;
+
 	//////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 	// Магазин Ле Франсуа
 	//////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
@@ -1489,6 +1599,7 @@ int LocationInitMartinique(int n)
 	locations[n].models.always.window = "StoreSmall_window";
 	locations[n].models.always.window.tech = "LocationWindows";
 	locations[n].models.always.window.level = 50;
+
 	locations[n].models.always.back = "..\inside_back";
 	//Day
 	locations[n].models.day.charactersPatch = "StoreSmall_patch";
@@ -1503,6 +1614,7 @@ int LocationInitMartinique(int n)
 	locations[n].reload.l1.emerge = "reload8"; 
 	locations[n].reload.l1.autoreload = "0";
     locations[n].reload.l1.label = "Street";
+
     ////////////////////////==> комната в магазине
 	locations[n].reload.l2.name = "reload2";
 	locations[n].reload.l2.go = "CommonRoom_MH10";
@@ -1511,6 +1623,7 @@ int LocationInitMartinique(int n)
 	locations[n].reload.l2.label = "Room";
 	LAi_LocationFightDisable(&locations[n], true);
 	n = n + 1;
+
 	//////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 	// Резиденция Ле Франсуа
 	//////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
@@ -1533,6 +1646,7 @@ int LocationInitMartinique(int n)
 	locations[n].models.always.window = "SmallResidence_windows";
 	locations[n].models.always.window.tech = "LocationWindows";
 	locations[n].models.always.window.level = 65539;
+
 	locations[n].models.always.back = "..\inside_back";
 	locations[n].models.always.back.level = 65529;
 	//Day
@@ -1549,5 +1663,6 @@ int LocationInitMartinique(int n)
 	locations[n].reload.l1.autoreload = "0";
 	locations[n].reload.l1.label = "Street";
 	n = n + 1;
+	
 	return n;
 }

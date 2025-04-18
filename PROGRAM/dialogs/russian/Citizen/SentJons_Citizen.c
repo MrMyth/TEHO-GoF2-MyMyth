@@ -14,6 +14,7 @@ void ProcessCommonDialogEvent(ref NPChar, aref Link, aref NextDiag)
 				link.l1.go = "terrapin";
 			}
 		break;
+		
 		case "terrapin":
 			if (sti(pchar.questTemp.Terrapin.SJ_count) == 5 || rand(9) == 1) // 10% или числом
 			{
@@ -29,23 +30,27 @@ void ProcessCommonDialogEvent(ref NPChar, aref Link, aref NextDiag)
 			}
 			npchar.quest.terrapin = "true";
 		break;
+		
 		case "terrapin_no":
 			dialog.text = RandPhraseSimple(LinkRandPhrase("Hm. Can't help you with that.","I don't know him.","Well, if that Molly Johns which I know has got a rare beauty than our colonel Fox is a priest."), LinkRandPhrase("I know a few Mollies Johns. One of them really has brother but she is not who you are looking for. Only a man who has been living with apes would call her beautiful.","I am sorry, but all Johnses I know don't have sisters.","I am sorry, I can't help you. Ask someone else."));
 			link.l1 = "Sorry for troubling you...";
 			link.l1.go = "exit";
 			pchar.questTemp.Terrapin.SJ_count = sti(pchar.questTemp.Terrapin.SJ_count)+1;
 		break;
+		
 		case "terrapin_yes":
 			dialog.text = "Yes, but she'd better be a man. This strapper won't likely find herself a groom because of her ugly mug.";
 			link.l1 = "Thanks for your help!";
 			link.l1.go = "terrapin_yes_1";
 		break;
+		
 		case "terrapin_yes_1":
 			DialogExit();
 			AddQuestRecord("Terrapin", "2");
 			pchar.questTemp.Terrapin.Benjamin = true;
 			DeleteAttribute(pchar, "questTemp.Terrapin.SJ_count");
 		break;
+		
 		case "info":
         // заменить на описание неких НПС, по квестам
 			dialog.text = "Do you think I work for the secret service of "+NationNameGenitive(sti(NPChar.nation))+"?";
@@ -54,9 +59,11 @@ void ProcessCommonDialogEvent(ref NPChar, aref Link, aref NextDiag)
 			link.l2 = "Another question then";
 			link.l2.go = "new question";
 		break;
+		
 		case "town":
         // заменить на описание как пройти, по квестам
 			dialog.text = "Am I the information bureau for you? Don't know. Don't know a thing.";
+
             link.l1 = "You're such a muddle-headed! Bye.";
 			link.l1.go = "exit";
 			link.l2 = "Another question then";
@@ -65,3 +72,4 @@ void ProcessCommonDialogEvent(ref NPChar, aref Link, aref NextDiag)
 	}
 	UnloadSegment(NPChar.FileDialog2);  // если где-то выход внутри switch  по return не забыть сделать анлод
 }
+

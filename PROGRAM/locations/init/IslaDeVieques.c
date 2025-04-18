@@ -1,3 +1,4 @@
+
 int LocationInitIslaDeVieques(int n)
 {
 	//////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
@@ -22,6 +23,7 @@ int LocationInitIslaDeVieques(int n)
 	locations[n].models.always.shore13.sea_reflection = 1;
 	Locations[n].models.always.shore13seabed = "shore13_seabed";
 	Locations[n].models.always.locators = "shore13_locators";
+	
 	Locations[n].models.always.l1 = "plan1";
 	Locations[n].models.always.l1.level = 9;
 	Locations[n].models.always.l1.tech = "LocationModelBlend";
@@ -31,6 +33,7 @@ int LocationInitIslaDeVieques(int n)
 	Locations[n].models.always.l3 = "plan3";
 	Locations[n].models.always.l3.level = 7;
 	Locations[n].models.always.l3.tech = "LocationModelBlend";	
+	
 	Locations[n].models.always.grassPatch = "shore13_grass";
 	Locations[n].models.always.grassPatch.texture = "grass\grassshore.tga.tx";
 	//Day
@@ -47,13 +50,16 @@ int LocationInitIslaDeVieques(int n)
 	locations[n].reload.l1.autoreload = "1";
 	locations[n].reload.l1.label = "Jungle";
 	locations[n].locators_radius.reload.reload1_back = 8.0;
+
 	locations[n].reload.l2.name = "boat";
 	locations[n].reload.l2.go = "IslaDeVieques";
 	locations[n].reload.l2.emerge = "reload_2";
 	locations[n].reload.l2.autoreload = "0";
 	locations[n].reload.l2.label = "Sea";
     locations[n].locators_radius.reload.boat = 9.0;
+	
 	n = n + 1;
+
 	//////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 	// Джунгли
 	//////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
@@ -94,12 +100,14 @@ int LocationInitIslaDeVieques(int n)
 	locations[n].reload.l1.autoreload = "1";
 	locations[n].reload.l1.label = "Jungle";
 	locations[n].locators_radius.reload.reload1_back = 2;
+
 	locations[n].reload.l2.name = "reload2_back";
 	locations[n].reload.l2.go = "Shore74";
 	locations[n].reload.l2.emerge = "reload1";
 	locations[n].reload.l2.autoreload = "1";
 	locations[n].reload.l2.label = "Shore74";
     locations[n].locators_radius.reload.reload2_back = 2;
+
 	locations[n].reload.l3.name = "reload3_back";
 	locations[n].reload.l3.go = "IslaDeVieques_HouseEntrance";
 	locations[n].reload.l3.emerge = "reload1";
@@ -107,6 +115,7 @@ int LocationInitIslaDeVieques(int n)
 	locations[n].reload.l3.label = "Jungle";
 	locations[n].locators_radius.reload.reload3_back = 2;
 	n = n + 1;
+
 	//////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 	// Вход в грот
 	//////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
@@ -147,6 +156,7 @@ int LocationInitIslaDeVieques(int n)
 	locations[n].reload.l1.autoreload = "0";
 	locations[n].reload.l1.label = "Grot";
 	locations[n].locators_radius.reload.reload1_back = 1.3;
+
 	locations[n].reload.l2.name = "reload2_back";
 	locations[n].reload.l2.go = "IslaDeVieques_Jungle_01";
 	locations[n].reload.l2.emerge = "reload1";
@@ -154,6 +164,7 @@ int LocationInitIslaDeVieques(int n)
 	locations[n].reload.l2.label = "Jungle";
 	locations[n].locators_radius.reload.reload2_back = 2.0;
 	n = n + 1;
+
 	//////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 	// Грот
 	//////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
@@ -189,6 +200,7 @@ int LocationInitIslaDeVieques(int n)
 	locations[n].reload.l1.label = "Cave entrance";
 	locations[n].locators_radius.reload.reload1_back = 2;
 	n = n + 1;
+
 	//////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 	// Вход в дом Арчи
 	//////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
@@ -217,6 +229,7 @@ int LocationInitIslaDeVieques(int n)
     Locations[n].models.always.l3.level = 7;
     Locations[n].models.always.l4.tech = "LocationModelBlend";
 	Locations[n].models.always.locators = "rhouse_l";
+	
 	Locations[n].models.always.grassPatch = "rhouse_g";
 	Locations[n].models.always.grassPatch.texture = "grass\grassshore.tga.tx";
     //Day
@@ -233,6 +246,7 @@ int LocationInitIslaDeVieques(int n)
 	locations[n].reload.l1.autoreload = "0";
 	locations[n].reload.l1.label = "House";
 	locations[n].locators_radius.reload.reload2 = 1.3;
+
 	locations[n].reload.l2.name = "reload1_back";
 	locations[n].reload.l2.go = "IslaDeVieques_Jungle_01";
 	locations[n].reload.l2.emerge = "reload3";
@@ -240,6 +254,7 @@ int LocationInitIslaDeVieques(int n)
 	locations[n].reload.l2.label = "Jungle";
 	locations[n].locators_radius.reload.reload1_back = 2.0;
 	n = n + 1;
+
 	//////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 	// Дом Арчи
 	//////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
@@ -259,6 +274,7 @@ int LocationInitIslaDeVieques(int n)
 	Locations[n].models.always.windows = "SmallHouse_inside_windows";
 	Locations[n].models.always.windows.tech = "LocationWindows";
 	locations[n].models.always.windows.level = 65539;
+
 	locations[n].models.always.back = "..\inside_back2";
 	//Day
 	locations[n].models.day.charactersPatch = "SmallHouse_inside_patch";
@@ -276,5 +292,6 @@ int LocationInitIslaDeVieques(int n)
 	locations[n].reload.l1.autoreload = "0";
 	locations[n].reload.l1.label = "jungle";
 	n = n + 1;
+
 	return n;
 }

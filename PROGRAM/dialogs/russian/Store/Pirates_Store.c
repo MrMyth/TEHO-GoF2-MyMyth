@@ -55,6 +55,7 @@ void ProcessCommonDialogEvent(ref NPChar, aref Link, aref NextDiag)
 			link.l1.go = "exit";
 			AddQuestRecord("Xebeca_BlueBird", "2");
 		break;
+
 		case "BlueBird_3":
 			dialog.text = NPCStringReactionRepeat("Get lost, idiot...", 
 				"You're tiring me...", 
@@ -72,10 +73,12 @@ void ProcessCommonDialogEvent(ref NPChar, aref Link, aref NextDiag)
 			link.l1 = "All right. Thanks for the info!";
 			link.l1.go = "tieyasal_1";
 		break;
+		
 		case "tieyasal_1":
 			DialogExit();
 			npchar.quest.tieyasal = "true";
 		break;
+		
 		// Addon 2016-1 Jason пиратскаЯ линейка
 		case "mtraxx":
 			pchar.quest.Mtraxx_PasqualeLate.over = "yes";
@@ -83,12 +86,14 @@ void ProcessCommonDialogEvent(ref NPChar, aref Link, aref NextDiag)
 			link.l1 = "I am all ears.";
 			link.l1.go = "mtraxx_1";
 		break;
+		
 		case "mtraxx_1":
 			string sTemp = GetStrSmallRegister(XI_ConvertString(GetBaseShipParamFromType(sti(pchar.questTemp.Mtraxx.Crdn.Ship), "Name")));
             dialog.text = "At this moment a "+sTemp+", the Dutch vessel named 'Rosbohom', is arriving to our waters along with one guard ship. She is loaded with black wood and sailing from Willemstad to meet another guard ship to ensure a safety voyage to Europe. I don't know what route she takes, via Sint Maarten or via Espanyol, but I know the coordinates of their rendezvous point\nYour mission is to find the Dutch there, board the trader and get her cargo to me. I will pay as soon as the cargo is delivered.";
 			link.l1 = "Got it. Time and location?";
 			link.l1.go = "mtraxx_2";
 		break;
+		
 		case "mtraxx_2":
 			int i = sti(pchar.questTemp.Mtraxx.Crdn.minN2)-10;
 			int n = sti(pchar.questTemp.Mtraxx.Crdn.minW2)-10;
@@ -96,11 +101,13 @@ void ProcessCommonDialogEvent(ref NPChar, aref Link, aref NextDiag)
 			link.l1 = "Noted... I got it. No wasting time then!";
 			link.l1.go = "mtraxx_3";
 		break;
+		
 		case "mtraxx_3":
             dialog.text = "Godspeed captain. I'll be waiting for you and the cargo.";
 			link.l1 = "...";
 			link.l1.go = "mtraxx_4";
 		break;
+		
 		case "mtraxx_4":
            DialogExit();
 		   pchar.questTemp.Mtraxx = "pasq_convoy";
@@ -115,6 +122,7 @@ void ProcessCommonDialogEvent(ref NPChar, aref Link, aref NextDiag)
 		   SetFunctionTimerCondition("Mtraxx_PasqualeTimeConvoy", 0, 0, 6, false);
 		   SetFunctionTimerCondition("Mtraxx_PasqualeConvoyOver", 0, 0, 7, false);
 		break;
+		
 		case "mtraxx_5":
 			iTotalTemp = GetSquadronGoods(pchar, GOOD_EBONY);
 			if (iTotalTemp < 1)
@@ -142,6 +150,7 @@ void ProcessCommonDialogEvent(ref NPChar, aref Link, aref NextDiag)
 			link.l1 = "150 pesos? I guess that black wood costs much more.";
 			link.l1.go = "mtraxx_10";
 		break;
+		
 		case "mtraxx_6":
            DialogExit();
 		   pchar.questTemp.Mtraxx = "pasq_angry";
@@ -150,11 +159,13 @@ void ProcessCommonDialogEvent(ref NPChar, aref Link, aref NextDiag)
 		   CloseQuestHeader("Roger_4");
 		   QuestSetCurrentNode("Terrax", "mtraxx_34");
 		break;
+		
 		case "mtraxx_7":
             dialog.text = "Rats? Well-well... But okay. 100 pesos for a piece and you are free to go.";
 			link.l1 = "100 pesos only? This is a robbery!";
 			link.l1.go = "mtraxx_8";
 		break;
+		
 		case "mtraxx_8":
 			AddMoneyToCharacter(pchar, iTotalTemp*100);
 			RemoveCharacterGoods(pchar, GOOD_EBONY, iTotalTemp);
@@ -162,6 +173,7 @@ void ProcessCommonDialogEvent(ref NPChar, aref Link, aref NextDiag)
 			link.l1 = "Fuck you then!";
 			link.l1.go = "mtraxx_9";
 		break;
+		
 		case "mtraxx_9":
            DialogExit();
 		   pchar.questTemp.Mtraxx = "pasq_fail";
@@ -169,11 +181,13 @@ void ProcessCommonDialogEvent(ref NPChar, aref Link, aref NextDiag)
 		   CloseQuestHeader("Roger_4");
 		   QuestSetCurrentNode("Terrax", "mtraxx_34");
 		break;
+		
 		case "mtraxx_10":
             dialog.text = "And you are right, captain, but first, try to sell stolen goods and I'll see how much other merchants will pay you for them. The price offered to you is very high. Second, it was my lead, you would never find that caravan on your own, plus there were other valuables and goods on it and I am not claiming them. Third, I will give you best credits in the eyes of Marcus Tyrex and this costs a lot, trust me. And finally, fourth, a poor merchant must make a living somehow.";
 			link.l1 = "Whoa! I must retreat in the face of such arguments "+npchar.name+". Let's do counting.";
 			link.l1.go = "mtraxx_11";
 		break;
+		
 		case "mtraxx_11":
 			AddMoneyToCharacter(pchar, iTotalTemp*150);
 			RemoveCharacterGoods(pchar, GOOD_EBONY, iTotalTemp);
@@ -181,6 +195,7 @@ void ProcessCommonDialogEvent(ref NPChar, aref Link, aref NextDiag)
 			link.l1 = "And you in the trade...";
 			link.l1.go = "mtraxx_12";
 		break;
+		
 		case "mtraxx_12":
            DialogExit();
 		   pchar.questTemp.Mtraxx = "pasq_complete";

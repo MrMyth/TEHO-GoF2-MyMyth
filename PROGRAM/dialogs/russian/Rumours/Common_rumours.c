@@ -1,5 +1,7 @@
 // Слухи - диалог по типажам
+
 #define MAX_RUMOURS_ABOUT_OWNERS 7
+
 void ProcessCommonDialogRumors(ref NPChar, aref Link, aref NextDiag);
 {
     string strum;
@@ -9,6 +11,7 @@ void ProcessCommonDialogRumors(ref NPChar, aref Link, aref NextDiag);
 /////////////////////////////////////////////////---слухи мещанок---////////////////////////////////////////////
 		case "rumours_towngirl":	
 		NextDiag.CurrentNode = "rumours";
+
 		if (!CheckAttribute(NPChar, "quest.repeat.rumours_citizen") || NPChar.quest.repeat.rumours_citizen != 2 )
         srum = SelectRumourEx("towngirl", NPChar);
         else srum = NO_RUMOUR_TEXT[rand(SIMPLE_RUMOUR_NUM - 1)]; // fix
@@ -45,9 +48,11 @@ void ProcessCommonDialogRumors(ref NPChar, aref Link, aref NextDiag);
 		link.l2 = RandPhraseSimple("Thanks, I should go.","Farewell.");
 		link.l2.go = "exit";
 	break;
+
 /////////////////////////////////////////////////---слухи мещан---////////////////////////////////////////////
 	case "rumours_townman":	
 		NextDiag.CurrentNode = "rumours";
+
 		if (!CheckAttribute(NPChar, "quest.repeat.rumours_citizen") || NPChar.quest.repeat.rumours_citizen != 2 )
         srum = SelectRumourEx("townman", NPChar);
         else srum = NO_RUMOUR_TEXT[rand(SIMPLE_RUMOUR_NUM - 1)]; // fix
@@ -83,9 +88,11 @@ void ProcessCommonDialogRumors(ref NPChar, aref Link, aref NextDiag);
 		link.l2 = RandPhraseSimple("Thanks, I should go.","Farewell.");
 		link.l2.go = "exit";
 	break;
+	
 	///////////////////////////////////---слухи темных личностей---////////////////////////////////////////////
 	case "rumours_marginal":	
 		NextDiag.CurrentNode = "rumours";
+
 		if (!CheckAttribute(NPChar, "quest.repeat.rumours_citizen") || NPChar.quest.repeat.rumours_citizen != 2 )
         srum = SelectRumourEx("townman", NPChar);
         else srum = NO_RUMOUR_TEXT[rand(SIMPLE_RUMOUR_NUM - 1)]; // fix
@@ -121,6 +128,7 @@ void ProcessCommonDialogRumors(ref NPChar, aref Link, aref NextDiag);
 		link.l2 = RandPhraseSimple("Thanks, I should go.","Farewell.");
 		link.l2.go = "exit";
 	break;
+	
 /////////////////////////////////////////////////---слухи дворян---////////////////////////////////////////////
 	case "rumours_nobleman":	
         srum = SelectRumourEx("nobleman", NPChar);
@@ -156,6 +164,7 @@ void ProcessCommonDialogRumors(ref NPChar, aref Link, aref NextDiag);
 		link.l2 = RandPhraseSimple("Thanks, I should go.","Farewell.");
 		link.l2.go = "exit";
 	break;
+	
 /////////////////////////////////////////////////---слухи дворянок---////////////////////////////////////////////
 	case "rumours_noblegirl":	
         srum = SelectRumourEx("noblegirl", NPChar);
@@ -191,9 +200,11 @@ void ProcessCommonDialogRumors(ref NPChar, aref Link, aref NextDiag);
 		link.l2 = RandPhraseSimple("Thanks, I should go.","Farewell.");
 		link.l2.go = "exit";
 	break;
+	
 	///////////////////////////////////////////---слухи матросов---////////////////////////////////////////////
 	case "rumours_sailor":	
 		NextDiag.CurrentNode = "rumours";
+
 		if (!CheckAttribute(NPChar, "quest.repeat.rumours_citizen") || NPChar.quest.repeat.rumours_citizen != 2) srum = SelectRumourEx("sailor", NPChar);
         else srum = NO_RUMOUR_TEXT[rand(SIMPLE_RUMOUR_NUM - 1)]; // fix
         if (RumourHasInformation(srum))
@@ -237,6 +248,7 @@ void ProcessCommonDialogRumors(ref NPChar, aref Link, aref NextDiag);
 		link.l2 = RandPhraseSimple("Thanks, I should go.",
                                  "Eh, helluva rum. Fine, I should go, have fun here.");
 		link.l2.go = "exit_sit";
+
 		//-->работорговец
 		if (pchar.questTemp.Slavetrader == "FindRatJamaica_H" && npchar.location == "FortOrange_tavern")
         {
@@ -251,6 +263,7 @@ void ProcessCommonDialogRumors(ref NPChar, aref Link, aref NextDiag);
             link.l1.go = "EscapeSlave_Villemstad_H1";
         }
 		//<--работорговец
+				
 		//Голландский Гамбит, против всех
 		if (CheckAttribute(pchar, "questTemp.HWIC.Self") && pchar.questTemp.HWIC.Self == "LetterToLucasSent" && npchar.location == "Villemstad_tavern")
         {
@@ -259,6 +272,7 @@ void ProcessCommonDialogRumors(ref NPChar, aref Link, aref NextDiag);
             link.l1.go = "Lucas_Tavern";
         }
 		//Голландский Гамбит
+		
 		//--> поиск дезертира
 		if (CheckAttribute(pchar, "GenQuest.FindFugitive") && sti(NPChar.nation) == PIRATE && !CheckAttribute(npchar, "quest.fugitive"))
         {
@@ -267,6 +281,7 @@ void ProcessCommonDialogRumors(ref NPChar, aref Link, aref NextDiag);
             link.l1.go = "FindFugitiveHb";
         }
 		//<-- поиск дезертира
+		
 		// карибские нравы
 		if (CheckAttribute(pchar, "questTemp.Trial") && pchar.questTemp.Trial == "spy" && npchar.location == "Portobello_tavern")
 		{
@@ -307,6 +322,7 @@ pcharrepphrase(RandSwear() +" One more topic and I'll leave.","You are correct, 
 			NextDiag.TempNode = "quests";
             NPChar.talk_date =  lastspeakdate();
 		break;
+		
 		 case "rumours_landcaptain":
 			Dialog.Text = SelectRumourEx("landcaptain", NPChar);
 			Link.l1 = RandPhraseSimple(RandSwear() + "Interesting! There is one more thing I want to ask...",
@@ -320,11 +336,13 @@ pcharrepphrase(RandSwear() +" One more topic and I'll leave.","You are correct, 
 		break;
 //////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 		case "rumours_tavern":  // homo 03/08/06
+
                  Dialog.Text = NPCStringReactionRepeat(LinkRandPhrase("Information costs money. 1000 pesos and I will tell you everything I know.",
                 "Something's wrong with my memory, 1000 coins might help me remember something.",
                 "I am eager to share with information. But it will cost you 1000 pesos. No bargaining."),
                 "Nothing more to add here. Now, excuse me, I should go.",
                 "", "", "block", 1, npchar, Dialog.CurrentNode);
+             
     			link.l1 = HeroStringReactionRepeat(RandPhraseSimple(RandSwear() + "I am not paying for a worthless chit chat.",
                                          "I'll think about better ways to spend these money."), "Let's change the subject.", "Let's change the subject.", "Let's change the subject.", npchar, Dialog.CurrentNode);
                 link.l1.go = HeroStringReactionRepeat("rumours_tavern_no", "first time", "first time", "first time", npchar, Dialog.CurrentNode);//"rumours_tavern_no";
@@ -340,7 +358,9 @@ pcharrepphrase(RandSwear() +" One more topic and I'll leave.","You are correct, 
                     link.l2 =  HeroStringReactionRepeat("I don't have such sum.", "", "", "", npchar, Dialog.CurrentNode);
     				link.l2.go = HeroStringReactionRepeat("rumours_tavern_no", "exit", "exit", "exit", npchar, Dialog.CurrentNode);
     			}
+
 		break;
+		
 		case "rumours_tavern_yes":
 			if (CheckAttribute(pchar, "questTemp.Saga.BarbTemptation"))
 			{
@@ -394,10 +414,12 @@ pcharrepphrase(RandSwear() +" One more topic and I'll leave.","You are correct, 
 				break;
 			}
             string RumText = SelectRumourEx("tavern", NPChar); //fix
+			
 		    if(!RumourHasInformation(RumText))
             {
                 Dialog.Text = NO_RUMOUR_TEXT[rand(SIMPLE_RUMOUR_NUM - 1)]; //fix
                 link.l1 = RandPhraseSimple("Worthless crap. I am not gonna pay you for this even a single peso! Bye.", "Your information costs nothing, so you'll get nothing.");
+
 			    link.l1.go = "Exit";
 			    NextDiag.CurrentNode = NextDiag.TempNode;
             }
@@ -410,6 +432,7 @@ pcharrepphrase(RandSwear() +" One more topic and I'll leave.","You are correct, 
     			NextDiag.CurrentNode = NextDiag.TempNode;    
             }
 		break;
+
 		case "rumours_tavern_no":
 			Dialog.Text = "Get me right, I need to feed my family.";
             link.l1 = "Let's change the subject.";
@@ -464,6 +487,7 @@ pcharrepphrase(RandSwear() +" One more topic and I'll leave.","You are correct, 
 			}
 			NPChar.talk_date = lastspeakdate();
 		break;
+
 //////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
         case "rumours_LSC":
 			if (CheckNPCQuestDate(NPChar, "quest.repeat.rumours"))
@@ -482,18 +506,21 @@ pcharrepphrase(RandSwear() +" One more topic and I'll leave.","You are correct, 
 				Link.l1.go = "exit";			
 			}
 		break;
+		
 //Jason -------------слухи смотрителей маяков, идентичны таверне, но бесплатны, по 1 шт за день--------------------
 		case "rumours_lighthouse": 
 			Dialog.Text = NPCStringReactionRepeat(RandPhraseSimple("Eh, captain! It's always nice chatting with you. Being on my own here is quite dull sometimes...", "I live alone, visitors are a rare occasion. So I am always in a mood to talk."), "Like talking, captain? Well, I might have something else to tell...", "Take a bottle of rum next time you visit me. Talks are better with drinks...", "Alas, I told you everything I knew. I have nothing to add.", "block", 1, npchar, Dialog.CurrentNode);
     		link.l1 = HeroStringReactionRepeat(RandPhraseSimple("Then share your information. I like talking with people, you know...", "Tell me! Like they say who owns the information - he owns the world?"), "Like what?", "By all means! Got anything else to share?", "Fine, we had a nice chat anyway." , npchar, Dialog.CurrentNode);
     		link.l1.go = HeroStringReactionRepeat("rumours_lighthouse_yes", "rumours_lighthouse_void", "rumours_lighthouse_void", "exit", npchar, Dialog.CurrentNode);
 		break;
+		
 		case "rumours_lighthouse_yes":
             RumText = SelectRumourEx("tavern", NPChar);
 		    if(!RumourHasInformation(RumText))
             {
                 Dialog.Text = NO_RUMOUR_TEXT[rand(SIMPLE_RUMOUR_NUM - 1)];
                 link.l1 = RandPhraseSimple("Thank you! Anything else?", "Very interesting! Anything else?");
+
 			    link.l1.go = "rumours_lighthouse";
 				link.l2 = RandPhraseSimple("Gratitude! It was quite entertaining...", "Thank you for telling me!");
 			    link.l2.go = "exit";
@@ -509,9 +536,11 @@ pcharrepphrase(RandSwear() +" One more topic and I'll leave.","You are correct, 
     			NextDiag.CurrentNode = NextDiag.TempNode;    
             }
 		break;
+		
 		case "rumours_lighthouse_void":
                 Dialog.Text = NO_RUMOUR_TEXT[rand(SIMPLE_RUMOUR_NUM - 1)];
                 link.l1 = RandPhraseSimple("Thank you! Anything else?", "Very interesting! Anything else?");
+
 			    link.l1.go = "rumours_lighthouse";
 				link.l2 = RandPhraseSimple("Gratitude! It was quite entertaining...", "Thank you for telling me!");
 			    link.l2.go = "exit";
@@ -527,6 +556,7 @@ pcharrepphrase(RandSwear() +" One more topic and I'll leave.","You are correct, 
 	        	link.l1.go = "Postcureer_LevelUp_complete_fail";
 				break;
 			}
+			
 			if (sti(pchar.questTemp.WPU.Postcureer.AgentChance) == 4)//раскрыли обман
 			{
 				dialog.text = "Hm. Excuse me, but the package was opened before! It's crystal for me. The seal has been re-stamped...";
@@ -534,6 +564,7 @@ pcharrepphrase(RandSwear() +" One more topic and I'll leave.","You are correct, 
 	        	link.l1.go = "Postcureer_LevelUp_complete_Agentfail";
 				break;
 			}
+			
 			if (pchar.questTemp.WPU.Postcureer == "late")//опоздали
 			{
 				int iTime = makeint(GetQuestPastDayParam("questTemp.Postcureer.Late"))+1;
@@ -548,6 +579,7 @@ pcharrepphrase(RandSwear() +" One more topic and I'll leave.","You are correct, 
 				AddQuestUserData("Postcureer", "sMoney", FindRussianMoneyString(sti(pchar.questTemp.WPU.Postcureer.Money)));
 				break;
 			}
+			
 			if (pchar.questTemp.WPU.Postcureer == "lost")//опоздали совсем
 			{
 				dialog.text = "So it's you! I've been waiting for you quite a while, even took steps to retrieve the package. Give me it. I don't need it now really, thanks to your timing, but I'd like to keep it to myself\nAs you understand, I can't pay you anything, yet I will make sure your good name is restored.";
@@ -561,6 +593,7 @@ pcharrepphrase(RandSwear() +" One more topic and I'll leave.","You are correct, 
 			pchar.quest.PostcureerTime_Over.over = "yes";//снять таймер
 			AddQuestRecord("Postcureer", "10");
 		break;
+		
 		case "Postcureer_LevelUp_complete":
 			RemoveItems(PChar, pchar.questTemp.WPU.Current.Item, 1);
 			AddMoneyToCharacter(pchar, sti(pchar.questTemp.WPU.Postcureer.Money));
@@ -578,6 +611,7 @@ pcharrepphrase(RandSwear() +" One more topic and I'll leave.","You are correct, 
 			Group_DeleteGroup("Fraht_Attack");
 			DialogExit();
 		break;
+		
 		case "Postcureer_LevelUp_complete_bad":
 			RemoveItems(PChar, pchar.questTemp.WPU.Current.Item, 1);
 			AddQuestRecord("Postcureer", "9");
@@ -590,6 +624,7 @@ pcharrepphrase(RandSwear() +" One more topic and I'll leave.","You are correct, 
 			pchar.questTemp.WPU.Postcureer = "complete";
 			DialogExit();
 		break;
+		
 		case "Postcureer_LevelUp_complete_fail":
 			dialog.text = "Eh, I knew it would end this way... I should have hired a military courier vessel, not a civilian captain... Whatever, " + GetAddress_Form(NPChar) + ", you are not a soldier, so there is nothing to blame you for. Goodbye.";
 			link.l1 = "Bye, " + GetAddress_FormToNPC(NPChar) + ".";
@@ -605,11 +640,13 @@ pcharrepphrase(RandSwear() +" One more topic and I'll leave.","You are correct, 
 			DeleteAttribute(pchar, "questTemp.WPU.Postcureer.LevelUp");
 			pchar.questTemp.WPU.Postcureer = "complete";
 		break;
+		
 		case "Postcureer_LevelUp_complete_Agentfail":
 			dialog.text = "Sir, I know the harbor master of " +XI_ConvertString("Colony"+pchar.questTemp.WPU.Postcureer.StartCity+"Gen")+ " personally, he is an honest man. Plus, there was no point for him to open the package. " + GetAddress_Form(NPChar) + ", you are a fraud! I am not gonna pay you a single copper. Get lost!";
 			link.l1 = "Hm...";
 			link.l1.go = "Postcureer_LevelUp_complete_Agentfail_1";
 		break;
+		
 		case "Postcureer_LevelUp_complete_Agentfail_1":
 			if (pchar.questTemp.WPU.Postcureer == "begin") pchar.quest.PostcureerTime_Over.over = "yes";//снять таймер
 			if (pchar.questTemp.WPU.Postcureer == "late") pchar.quest.PostcureerTime_FullOver.over = "yes";//снять второй таймер
@@ -625,13 +662,16 @@ pcharrepphrase(RandSwear() +" One more topic and I'll leave.","You are correct, 
 			pchar.questTemp.WPU.Postcureer = "complete";
 			DialogExit();
 		break;
+		
 // <--почтовый генератор 2 уровня
+
 //Jason --> ---------------------------------генератор Неудачливый вор--------------------------------------------
 		case "Device_Common":
 			dialog.text = "Looked like crap. A homeless or a tramp. Can't tell where exactly he went, I didn't care to follow him.";
 			link.l1 = "Better than nothing. Thank you! I should go.";
 			link.l1.go = "Device_Common_1";
 		break;
+		
 		case "Device_Common_1":
 			string sNation = pchar.GenQuest.Device.Shipyarder.Nation;
 			sld = GetCharacter(NPC_GenerateCharacter("Device_poorman", "panhandler_"+(rand(5)+1), "man", "man", sti(pchar.rank)+5, sNation, 20, true, "quest"));
@@ -675,6 +715,7 @@ pcharrepphrase(RandSwear() +" One more topic and I'll leave.","You are correct, 
 			AddQuestRecord("Device", "9");
 		break;
 		//<-- генератор Неудачливый вор
+		
 		// Addon-2016 Jason ФМК-Сент-Кристофер
 		case "FMQN_r":
 			Dialog.Text =  "Not long ago an English vessel was captured within waters of Saint-Martin, she was carrying a few high-ranked officers. There was decided to send them to Willemstad but at this moment they are held here in our comfortable dungeons. They say that one of captured soldiers has told our commandant about intentions of the English to sent here a raiding party to rescue the officers. That's why our good old commandant is ready and armed. Why wouldn't he be, if the prisoners are gone, he will be disranked to a soldier!";
@@ -687,6 +728,7 @@ pcharrepphrase(RandSwear() +" One more topic and I'll leave.","You are correct, 
 			if (Whr_IsDay()) AddDialogExitQuest("FMQN_GetRumoursDay");
 			else AddDialogExitQuest("FMQN_GetRumoursNight");
 		break;
+
 //////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 /////////		Квесты мэра, проникновение во враждебный город
 //////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
@@ -708,6 +750,7 @@ pcharrepphrase(RandSwear() +" One more topic and I'll leave.","You are correct, 
 			AddQuestUserData("MayorsQuestsList", "sWho", GetWorkTypeOfMan(&characters[GetCharacterIndex(pchar.GenQuest.Intelligence.SpyId)], "Gen"));
 			AddQuestUserData("MayorsQuestsList", "SpyName", GetFullName(&characters[GetCharacterIndex(pchar.GenQuest.Intelligence.SpyId)]));			
 		break;
+
 //////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 /////////		Грабеж среди бела дня, попытка залезть в сундуки
 //////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
@@ -725,6 +768,7 @@ pcharrepphrase(RandSwear() +" One more topic and I'll leave.","You are correct, 
 		break;
 	}
 }
+
 string sRumourAboutOwners_CityRumour(string sCity, string sOwnerType) // Здесь идет распределение по городам
 {
 	string sRetRumour = "Oh, seems like you've found a bug. Contact Jason and tell him about it, look for a 'Blackmark'.";
@@ -735,99 +779,124 @@ string sRumourAboutOwners_CityRumour(string sCity, string sOwnerType) // Зде�
 			sRetRumour = sRumourAboutOwners_Init(sOwnerType, 0);
 			PChar.QuestTemp.RumoursAboutOwners.(sOwnerType) = 0;
 		break;
+		
 		case "PortRoyal":
 			sRetRumour = sRumourAboutOwners_Init(sOwnerType, 1);
 			PChar.QuestTemp.RumoursAboutOwners.(sOwnerType) = 1;
 		break;
+		
 		case "FortOrange":
 			sRetRumour = sRumourAboutOwners_Init(sOwnerType, 2);
 			PChar.QuestTemp.RumoursAboutOwners.(sOwnerType) = 2;
 		break;
+		
 		case "Beliz":
 			sRetRumour = sRumourAboutOwners_Init(sOwnerType, 3);
 			PChar.QuestTemp.RumoursAboutOwners.(sOwnerType) = 3;
 		break;
+		
 		case "PortoBello":
 			sRetRumour = sRumourAboutOwners_Init(sOwnerType, 4);
 			PChar.QuestTemp.RumoursAboutOwners.(sOwnerType) = 4;
 		break;
+		
 		case "Cartahena":
 			sRetRumour = sRumourAboutOwners_Init(sOwnerType, 5);
 			PChar.QuestTemp.RumoursAboutOwners.(sOwnerType) = 5;
 		break;
+		
 		case "Maracaibo":
 			sRetRumour = sRumourAboutOwners_Init(sOwnerType, 6);
 			PChar.QuestTemp.RumoursAboutOwners.(sOwnerType) = 6;
 		break;
+		
 		case "Caracas":
 			sRetRumour = sRumourAboutOwners_Init(sOwnerType, 0);
 			PChar.QuestTemp.RumoursAboutOwners.(sOwnerType) = 7;
 		break;
+		
 		case "Cumana":
 			sRetRumour = sRumourAboutOwners_Init(sOwnerType, 1);
 			PChar.QuestTemp.RumoursAboutOwners.(sOwnerType) = 8;
 		break;
+		
 		case "SantaCatalina":
 			sRetRumour = sRumourAboutOwners_Init(sOwnerType, 2);
 			PChar.QuestTemp.RumoursAboutOwners.(sOwnerType) = 9;
 		break;
+		
 		case "SanJuan":
 			sRetRumour = sRumourAboutOwners_Init(sOwnerType, 3);
 			PChar.QuestTemp.RumoursAboutOwners.(sOwnerType) = 10;
 		break;
+		
 		case "Marigo":
 			sRetRumour = sRumourAboutOwners_Init(sOwnerType, 4);
 			PChar.QuestTemp.RumoursAboutOwners.(sOwnerType) = 11;
 		break;
+		
 		case "Charles":
 			sRetRumour = sRumourAboutOwners_Init(sOwnerType, 5);
 			PChar.QuestTemp.RumoursAboutOwners.(sOwnerType) = 12;
 		break;
+		
 		case "SentJons":
 			sRetRumour = sRumourAboutOwners_Init(sOwnerType, 6);
 			PChar.QuestTemp.RumoursAboutOwners.(sOwnerType) = 13;
 		break;
+		
 		case "FortFrance":
 			sRetRumour = sRumourAboutOwners_Init(sOwnerType, 0);
 			PChar.QuestTemp.RumoursAboutOwners.(sOwnerType) = 14;
 		break;
+		
 		case "BasTer":
 			sRetRumour = sRumourAboutOwners_Init(sOwnerType, 1);
 			PChar.QuestTemp.RumoursAboutOwners.(sOwnerType) = 15;
 		break;
+		
 		case "Bridgetown":
 			sRetRumour = sRumourAboutOwners_Init(sOwnerType, 2);
 			PChar.QuestTemp.RumoursAboutOwners.(sOwnerType) = 16;
 		break;
+		
 		case "PortSpein":
 			sRetRumour = sRumourAboutOwners_Init(sOwnerType, 3);
 			PChar.QuestTemp.RumoursAboutOwners.(sOwnerType) = 17;
 		break;
+		
 		case "Havana":
 			sRetRumour = sRumourAboutOwners_Init(sOwnerType, 4);
 			PChar.QuestTemp.RumoursAboutOwners.(sOwnerType) = 18;
 		break;
+		
 		case "Villemstad":
 			sRetRumour = sRumourAboutOwners_Init(sOwnerType, 5);
 			PChar.QuestTemp.RumoursAboutOwners.(sOwnerType) = 19;
 		break;
+		
 		case "Santiago":
 			sRetRumour = sRumourAboutOwners_Init(sOwnerType, 6);
 			PChar.QuestTemp.RumoursAboutOwners.(sOwnerType) = 20;
 		break;
+		
 		case "PortPax":
 			sRetRumour = sRumourAboutOwners_Init(sOwnerType, 0);
 			PChar.QuestTemp.RumoursAboutOwners.(sOwnerType) = 21;
 		break;
+		
 		case "SantoDomingo":
 			sRetRumour = sRumourAboutOwners_Init(sOwnerType, 1);
 			PChar.QuestTemp.RumoursAboutOwners.(sOwnerType) = 22;
 		break;
 	}
+	
 	return sRetRumour;
 }
+
 string sRumourAboutOwners_Init(string sOwnerType, int iRumourNum) // База слухов жителей. Можно менять без новой игры
 {
+	
 	string STR_MAYOR[MAX_RUMOURS_ABOUT_OWNERS]; // Губернаторы
 	STR_MAYOR[0] = "Oh, sir governor is an excellent man. He manages our colony with a great skill, never had a single conflict since the day of foundation\nHis only flaw is... he is… well... he is quite thrifty. It might be just another virtue though.";
 	STR_MAYOR[1] = "Oh, sir governor is an excellent man. He manages our colony with a great skill, never had a single conflict since the day of foundation\nHis only flaw is... he is… well... he is quite thrifty. It might be just another virtue though.";
@@ -836,6 +905,7 @@ string sRumourAboutOwners_Init(string sOwnerType, int iRumourNum) // База с
 	STR_MAYOR[4] = "Our governor is still relatively young. They say he is a good-for-nothing younger son of a Spanish count, sent far away from the yard to stop shaming his family. He has been appointed here quite recently, and didn't have time to create anything memorable.";
 	STR_MAYOR[5] = "Hmm ... He's recently become our governor. He is quite young and therefore very initiative. With him our colony is flourishing";
 	STR_MAYOR[6] = "Well... Nothing... I can't say anything bad about him...";
+	
 	string STR_TAVERNKEEPER[MAX_RUMOURS_ABOUT_OWNERS]; // Тавернщики
 	STR_TAVERNKEEPER[0] = "Hm, I wouldn't trust my property to this rogue. Don't misunderstand me, but it seems to me that this is the most unreliable person in our town\nI heard he's working with pirates and smugglers whom often can be seen in his tavern.";
 	STR_TAVERNKEEPER[1] = "What can we say about him! Cowardly, also not the smartest person I know. Besides, he is greedy for money, which is why he constantly gets into various troubles! But he is always up to date with all the news.";
@@ -844,6 +914,7 @@ string sRumourAboutOwners_Init(string sOwnerType, int iRumourNum) // База с
 	STR_TAVERNKEEPER[4] = "I don't know what to tell you. A man. Keeps a tavern. Knows everything about the town and its citizens.";
 	STR_TAVERNKEEPER[5] = "They say that one can rely on it. On the other hand, I heard that he doesn't like unnecessary risk and always careful in doing his business. Yes, and dark affairs is not his type of business.";
 	STR_TAVERNKEEPER[6] = "He's got the tavern from his father. His father kept a tavern not far from here, on the island of Highrock on another archipelago. Then his father moved here, built a new tavern here, and now his son runs it..";
+	
 	string STR_SHIPYARDER[MAX_RUMOURS_ABOUT_OWNERS]; // Верфисты
 	STR_SHIPYARDER[0] = "Builds ships. I dunno. He's a quiet and peaceful. I guess, he's a good man.";
 	STR_SHIPYARDER[1] = "Builds ships. I dunno. He's a quiet and peaceful. I guess, he's a good man.";
@@ -852,6 +923,7 @@ string sRumourAboutOwners_Init(string sOwnerType, int iRumourNum) // База с
 	STR_SHIPYARDER[4] = "This old man has to retire already and give the road for some fresh blood. He constantly dreams of past times, and grumbles when someone orders something from him besides caravels or galleons.";
 	STR_SHIPYARDER[5] = "Great lad. Always willing to help. I have to say, he builds fine ships for such a shithole like this place.";
 	STR_SHIPYARDER[6] = "He was a prisoner, exiled from Europe to our colony until it turned out that he had a talent for shipbuilding. After two magnificent brigs had been built under his leadership at the shipyard of our colony, he was forgiven for his transgressions, and now he is a full member of our society.";
+	
 	string STR_TRADER[MAX_RUMOURS_ABOUT_OWNERS]; // Магазинщики
 	STR_TRADER[0] = "I can't say anything bad about him. A decent citizen, often visits our chapel. People seem to like him. Never heard of anyone being angry at him.";
 	STR_TRADER[1] = "He is the main supplier of our governor, and this gives him a good income. But he conducts his affairs honestly. Well, at least he hasn't been noticed in anything shaming for him.";
@@ -860,15 +932,18 @@ string sRumourAboutOwners_Init(string sOwnerType, int iRumourNum) // База с
 	STR_TRADER[4] = "He is not a good man, monsieur. I heard that he was Piere Thiers's right hand, previous trader, but he ruined his business it and then bought the store. I don't know how about the quality of the goods that he sells, but as a person he is very unpleasant to me.";
 	STR_TRADER[5] = "Oh! He is an ugly person, I wouldn't advise you to have any business with him\nHe keeps a half of the inhabitants of our city in debt! And the goods those are sold in his store are always of poor quality.";
 	STR_TRADER[6] = "Nobody really knows anything about him. He has recently moved here, and immediately opened his business. Trades honestly, wasn't caught at smuggling.";
+	
 	string sTempMayor = STR_MAYOR[iRumourNum];
 	string sTempTavernkeper = STR_TAVERNKEEPER[iRumourNum];
 	string sTempShipyarder = STR_SHIPYARDER[iRumourNum];
 	string sTempTrader = STR_TRADER[iRumourNum];
+	
 	if(sOwnerType == "Mayor") return sTempMayor;
 	if(sOwnerType == "TavernKeeper") return sTempTavernkeper;
 	if(sOwnerType == "ShipYarder") return sTempShipyarder;
 	if(sOwnerType == "Trader") return sTempTrader;
 }
+
 string GetDeviceLocation(ref npchar)
 {
     aref	arCommon, arRld, arRld2;

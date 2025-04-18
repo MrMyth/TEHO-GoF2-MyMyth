@@ -1,6 +1,8 @@
+
 int CreateTrinidadCharacters(int n)
 {
 	ref ch;
+	
 	///////////////////////////////////////////////////////////////////////////////
 	// ОСНОВНЫЕ ПЕРСОНАЖИ
 	///////////////////////////////////////////////////////////////////////////////
@@ -31,6 +33,7 @@ int CreateTrinidadCharacters(int n)
 	LAi_group_MoveCharacter(ch, "SPAIN_CITIZENS");
 	LAi_SetImmortal(ch, true);
 	n = n + 1;
+
 	makeref(ch,Characters[n]);			//Священик
 	ch.id		= "PortSpein_Priest";
 	ch.model	= "priest_3";
@@ -48,6 +51,7 @@ int CreateTrinidadCharacters(int n)
 	LAi_group_MoveCharacter(ch, "SPAIN_CITIZENS");
 	LAi_SetImmortal(ch, true);
 	n = n + 1;
+
 	makeref(ch,Characters[n]);		// ОФициантка
 	ch.id		= "PortSpein_waitress";
 	ch.model	= "women_15";
@@ -64,6 +68,7 @@ int CreateTrinidadCharacters(int n)
 	LAi_group_MoveCharacter(ch, "SPAIN_CITIZENS");
 	LAi_SetImmortal(ch, true);
 	n = n + 1;
+
 	makeref(ch,Characters[n]);			//Трактирщик
 	ch.id		= "PortSpein_tavernkeeper";
 	ch.model	= "barmen_2";
@@ -81,6 +86,8 @@ int CreateTrinidadCharacters(int n)
 	LAi_group_MoveCharacter(ch, "SPAIN_CITIZENS");
 	LAi_SetImmortal(ch, true);
 	n = n + 1;
+
+
 	makeref(ch,Characters[n]);			//Торговец
 	ch.id		= "PortSpein_trader";
 	ch.model	= "trader_2";
@@ -98,6 +105,7 @@ int CreateTrinidadCharacters(int n)
 	LAi_SetImmortal(ch, true);
 	ch.item_date = "";
 	n = n + 1;
+
 	makeref(ch,Characters[n]);			//Корабел
 	ch.id		= "PortSpein_shipyarder";
 	ch.model	= "shipowner_2";
@@ -122,6 +130,7 @@ int CreateTrinidadCharacters(int n)
 	LAi_group_MoveCharacter(ch, "SPAIN_CITIZENS");
 	LAi_SetImmortal(ch, true);
 	n = n + 1;
+
 	makeref(ch,Characters[n]);			//Банкир
 	ch.id		= "PortSpein_usurer";
 	ch.model	= "banker_2";
@@ -141,6 +150,7 @@ int CreateTrinidadCharacters(int n)
 	LAi_group_MoveCharacter(ch, "SPAIN_CITIZENS");
 	LAi_SetImmortal(ch, true);
 	n = n + 1;
+
 	makeref(ch,Characters[n]);			//Начальник порта
 	ch.id		= "PortSpein_PortMan";
 	ch.model	= "usurer_5";
@@ -157,6 +167,7 @@ int CreateTrinidadCharacters(int n)
 	LAi_SetImmortal(ch, true);
 	ch.item_date = "";
 	n = n + 1;
+
     makeref(ch,Characters[n]);
 	ch.name 	= "Smuggler";
 	ch.lastname = "";
@@ -173,6 +184,7 @@ int CreateTrinidadCharacters(int n)
 	LAi_SetHP(ch, 80.0, 80.0);
 	ch.greeting = "smuggler";
 	n = n + 1;
+	
 	makeref(ch,Characters[n]);			//Смотритель маяка
 	ch.id		= "PortSpein_Lightman";
 	ch.model	= "keeper_5";
@@ -192,5 +204,6 @@ int CreateTrinidadCharacters(int n)
 	LAi_group_MoveCharacter(ch, "SPAIN_CITIZENS");
 	LAi_SetImmortal(ch, true);
 	n = n + 1;
+	
 	return n;
 }

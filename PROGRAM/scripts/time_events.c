@@ -1,17 +1,22 @@
 void RechargeColonyPopulationUp()
 {
 	int iRechargeTime = rand(5)+5;
+	
 	Log_TestInfo("RechargeColonyPopulationUp: iRechargeTime = " + iRechargeTime);
+
 	if(CheckAttribute(pchar, "colonypopulationlock"))
 	{
 		ColonyPopulationUp();
 	}
+	
 	int iQuest = rand(1000000);
+	
 	while(iQuest == sti(pchar.time_events_counter))
 	{
 		iQuest = rand(1000000);
 	}
 	pchar.time_events_counter = iQuest;
+	
 	string sQuest = "recharge_colonypopulation_quest" + iQuest;
 	pchar.quest.(sQuest).win_condition.l1 = "timer";
 	pchar.quest.(sQuest).win_condition.l1.date.day = GetAddingDataDay(0, 0, iRechargeTime);
@@ -20,21 +25,30 @@ void RechargeColonyPopulationUp()
 	pchar.quest.(sQuest).win_condition.l1.date.hour = rand(23);
 	pchar.quest.(sQuest).win_condition = "recharge_colonypopulation_quest";
 }
+
 void RechargeColonyUpgrades()
 {
+	
+	
 	int iRechargeTime = rand(10)+rand(10);
+
 	if(CheckAttribute(pchar, "colonyupgradelock"))
 	{
 		CheckColonyUpgrades();
 	}
+
 	iRechargeTime = iRechargeTime + iEvolutionState*10;
+	
 	int iQuest = rand(1000000);
+	
 	while(iQuest == sti(pchar.time_events_counter))
 	{
 		iQuest = rand(1000000);
 	}
 	pchar.time_events_counter = iQuest;
+
 	string sQuest = "recharge_colony_upgrade_quest" + iQuest;
+
 	pchar.quest.(sQuest).win_condition.l1 = "timer";
 	pchar.quest.(sQuest).win_condition.l1.date.day = GetAddingDataDay(0, 0, iRechargeTime);
 	pchar.quest.(sQuest).win_condition.l1.date.month = GetAddingDataMonth(0, 0, iRechargeTime);
@@ -42,6 +56,8 @@ void RechargeColonyUpgrades()
 	pchar.quest.(sQuest).win_condition.l1.date.hour = rand(23);
 	pchar.quest.(sQuest).win_condition = "recharge_colony_upgrade";
 }
+
+
 void ActivateTimeEvents()
 {
 	RechargeColonyUpgrades();
@@ -49,6 +65,7 @@ void ActivateTimeEvents()
 	//RechargeColonyOccupation();
 	//RechargeColonyColonistsUp();
 }
+
 //////////////////////// boal SLiB ////////////////////////////////
 void SalaryNextDayUpdate()
 {
@@ -58,6 +75,7 @@ void SalaryNextDayUpdate()
 		int nPaymentQ = 0;
 		int i, cn;
 		ref chref;
+		
 		for (i=0; i<COMPANION_MAX; i++)
 		{
 			cn = GetCompanionIndex(pchar, i);
@@ -70,6 +88,7 @@ void SalaryNextDayUpdate()
 				}
 			}
 		}
+		
 		// проверка на наличие кому платить <--
 		NullCharacter.SalayPayMonth = GetDataMonth(); // boal
 		if (nPaymentQ > 0)
@@ -83,8 +102,10 @@ void SalaryNextDayUpdate()
 				nPaymentQ += makeint(pchar.Partition.MonthPart); // доля за месяц
 				DeleteAttribute(pchar,"Partition.MonthPart")
 			}
+			
 			pchar.CrewPayment = nPaymentQ;
 			LaunchMoneyGraphCollect();
+			
 			if (!dialogRun && !bQuestCheckProcessFreeze && !bAbordageStarted) // можно показать
 			{
 				LaunchSalaryScreen("");
@@ -98,22 +119,29 @@ void SalaryNextDayUpdate()
 		}
 	}
 }
+
 #event_handler("EvSituationsUpdate","WorldSituationsUpdate");
 void WorldSituationsUpdate()
 {
 	int 	iStep = GetEventData();
 	float 	dayRandom;
+
 	//Log_TestInfo("WorldSituationUpdate: iStep: " + iStep);
+
 	switch(iStep)
 	{
 		case 0:		
 			DailyEatCrewUpdate();
+		
             DeleteAttribute(pchar, "SkipEshipIndex");// boal
 			Log_QuestInfo("WorldSituationsUpdate DailyEatCrewUpdate");
+			
 			dayRandom = Random();
 			PChar.DayRandom = dayRandom;
 			Log_TestInfo("dayRandom == " + dayRandom);
+
 			CheckCharactersUpdateItems();
+						
 			if (CheckAttribute(pchar, "questTemp.LSC")) 
 			{ //Jason: еженедельное обновление паролей кланов LSC и ежедневное вытирание
 				if (GetDataDay() == 7 || GetDataDay() == 14 || GetDataDay() == 21 || GetDataDay() == 28)
@@ -135,9 +163,11 @@ void WorldSituationsUpdate()
 			// трем эскадру у Тортуги
 			Tortuga_DeleteShipGuard();						
 		break;
+		
 		case 1:			
 			SalaryNextDayUpdate();  // зряплата
 			Log_QuestInfo("WorldSituationsUpdate SalaryNextDayUpdate");
+
 			if (rand(2) == 0) Norman_ChangeFesivalFace(); // выходки Нормана
 			if (GetDataDay() == 5 && CheckAttribute(pchar, "questTemp.OilTrade")) DoQuestFunctionDelay("Oil_SetSergioToMayak", 1.0); // генератор смол
 			if (GetDataDay() == 1 && !CheckAttribute(pchar, "questTemp.Sharlie.Lock") && !CheckAttribute(pchar, "questTemp.Mtraxx.Corrida.IslandLock")) // Addon 2016-1 Jason пиратская линейка
@@ -149,13 +179,16 @@ void WorldSituationsUpdate()
 			}
 			// калеуче - без НИ
 			if (CheckAttribute(pchar, "questTemp.Caleuche") && pchar.questTemp.Caleuche == "Start") DoQuestFunctionDelay("Caleuche_StartGo", 1.0);
+			
 			AchievmentsDayUpdateStart();			
 		break;
+		
 		case 2:				
 			// Jason: ежедневная переустановка сторожевиков Тортуги
 			Tortuga_SetShipGuard();
 			ProcessHullDecrease();	// учет безвозвратной убыли корпуса
 			ProcessDayRepair();
+			
 			// Addon 2016-1 Jason пиратская линейка
 			if (CheckAttribute(pchar, "questTemp.Mtraxx.CharleePrince"))
 			{
@@ -169,14 +202,17 @@ void WorldSituationsUpdate()
 				}
 			}
 		break;
+		
 		case 3:				
 			Group_FreeAllDead();
+
 			// Jason НСО
 			if (CheckAttribute(pchar, "questTemp.Patria.Governor") && GetDataDay() == 15)
 			{
 				AddMoneyToCharacter(pchar, 100000);
 				log_info("You have received your share of profit from Poincy");
 			}
+			
 			// Jason Дороже золота
 			if(GetDLCenabled(DLC_APPID_5))
 			{	
@@ -201,18 +237,23 @@ void WorldSituationsUpdate()
 				log_info("Jean David prepared your share in Le Francois");
 			}
 		break;
+		
 		case 4:		
 			QuestActions(); //eddy				
 		break;
+		
 		case 5:
 			wdmEmptyAllOldEncounter();// homo чистка энкоутеров				
 		break;
+		
 		case 6:
 			UpdateCrewExp();  // изменение опыта команды	
 		break;
+		
 		case 7:
 			UpdateCrewInColonies(); // пересчет наемников в городах	
 		break;
+		
 		case 8:
 			if(IsEntity(&worldMap))
 			{
@@ -220,31 +261,40 @@ void WorldSituationsUpdate()
 				wdmEmptyAllDeadQuestEncounter();
 			}				
 		break;
+		
 		case 9:		
 			UpdateReputation();
 		break;
+		
 		case 10:
 			GenerateRumour(); //homo 05/07/06			
 		break;		
+		
 		case 11:
 			UpdateColonyProfit();
 		break;
 	}
+
 	iStep++;
 	InterfaceStates.WorldSituationUpdateStep = iStep;
+
 	if(iStep <= iWorldSituationUpdateStepHooks)
 	{
 		PostEvent("EvSituationsUpdate", 1000, "l", iStep);
 	}
 }
+
+
 //////////////////////////////// начало игры - туториал ////////////////////////////////
 void Tut_StartGame(string sQuest)
 {
+
 	DeleteWeatherEnvironment();
 	CreateSea(EXECUTE, REALIZE);
 	Whr_UpdateWeather();
 	//SetEventHandler("frame", "LoadNextWeather_frame", 1); // Hacky solution, but I'm out of ideas for now (rare starting deck weather bug)
 //	Statistic_AddValue(PChar, "Cheats.F9", 1);
+
     InterfaceStates.Buttons.Save.enable = false;
 	StartQuestMovie(true, true, true);
     SetCharacterTask_None(GetMainCharacter());
@@ -255,11 +305,13 @@ void Tut_StartGame(string sQuest)
 	InterfaceStates.Buttons.Save.enable = false;
 	DoQuestFunctionDelay("Tut_locCamera_1", 0.1);
 }
+
 void Tut_locCamera_1(string _tmp)
 {
     locCameraToPos(-5, 2.5, 5.6, false);
     DoQuestFunctionDelay("Tut_locCamera_2", 10.0);
 }
+
 void Tut_locCamera_2(string _tmp)
 {
     locCameraFollow();
@@ -270,15 +322,18 @@ void Tut_Continue()
     LAi_LocationFightDisable(loadedLocation, false);
     LAi_SetFightMode(Pchar, false);
     LAi_LockFightMode(pchar, true);
+    
 	sld = GetCharacter(NPC_GenerateCharacter("Sailor_1", "citiz_31", "man", "man", 1, PIRATE, 0, false, "soldier"));
     sld.name 	= "Sandro";
     sld.lastname 	= "Torn";
     sld.Dialog.CurrentNode = "First time";
     sld.dialog.filename = "Quest\StartGame_dialog.c";
     sld.greeting = "Teacher_pirat";
+
     SetSPECIAL(sld, 9,8,10,3,6,10,4);
     InitStartParam(sld);
     SetEnergyToCharacter(sld);
+
     LAi_SetCheckMinHP(sld, 1, true, "Tut_StartGame_CheckMinHP_1");
     GiveItem2Character(sld, "blade_11");
 	EquipCharacterByItem(sld, "blade_11");
@@ -286,18 +341,22 @@ void Tut_Continue()
     ChangeCharacterAddressGroup(sld, "Ship_deck_Low", "reload", "reload1");
     LAi_SetActorType(sld);
 	LAi_ActorDialog(sld, pchar, "", 5.0, 0);
+
 	// генерим второго матроса, но пока не ставим
 	sld = GetCharacter(NPC_GenerateCharacter("Sailor_2", "citiz_36", "man", "man", 1, PIRATE, 0, false, "soldier"));
     //sld.name 	= "Джим";
     //sld.lastname 	= "Хопкинс";
+
     SetSPECIAL(sld, 8,10,9,3,6,10,4);
     InitStartParam(sld);
     SetEnergyToCharacter(sld);
+
     LAi_SetCheckMinHP(sld, 1, true, "Tut_StartGame_CheckMinHP_2");
     GiveItem2Character(sld, "blade_12");
 	EquipCharacterByItem(sld, "blade_12");
 	GiveItem2Character(sld, "pistol1");
 	EquipCharacterByItem(sld, "pistol1");
+		
 	AddItems(sld, "bullet", 30);
 	AddItems(sld, "gunpowder", 30);
 	LAi_SetCharacterUseBullet(sld, "bullet");	
@@ -306,32 +365,41 @@ void Tut_Continue()
 	//раскидаем квестовых нпс по локациям
 	//SetQuestsCharacters();	
 }
+
 void Tut_RestoreState()
 {
 	ref sld;
+	
 	pchar.Health.Damg = 0.0; // здоровье бережем
 	pchar.Health.weekDamg = 0.0;
+
 	LAi_SetCurHPMax(pchar);
 	LAi_SetCheckMinHP(pchar, 1, true, "Tut_StartGame_CheckMinHP_Hero");
 	LAi_SetImmortal(pchar, false);
+	
 	sld = characterFromID("Sailor_1");
 	LAi_SetCurHPMax(sld);
 	LAi_SetCheckMinHP(sld, 1, true, "Tut_StartGame_CheckMinHP_1");
 	LAi_SetImmortal(sld, false);
+	
 	sld = characterFromID("Sailor_2");
 	LAi_SetCurHPMax(sld);
 	LAi_SetCheckMinHP(sld, 1, true, "Tut_StartGame_CheckMinHP_2");
 	LAi_SetImmortal(sld, false);
+	
 	DeleteAttribute(pchar, "HeroParam.Teach_beat");
 }
+
 void Tut_TeachBattle()
 {
 	ref sld;
+	
 	LAi_SetPlayerType(pchar);
 	LAi_SetFightMode(Pchar, true);
 	sld = characterFromID("Sailor_1");
 	LAi_SetWarriorType(sld);
     LAi_group_MoveCharacter(sld, "TmpEnemy");
+	
 	if (sti(pchar.HeroParam.Teach_battle) == 2)
 	{
         sld = characterFromID("Sailor_2");
@@ -346,9 +414,11 @@ void Tut_TeachBattle()
     LAi_group_FightGroupsEx("TmpEnemy", LAI_GROUP_PLAYER, true, Pchar, -1, false, false);
     LAi_group_SetRelation("TmpEnemy", LAI_GROUP_PLAYER, LAI_GROUP_ENEMY);
 }
+
 void Tut_StartDialog()
 {
 	ref sld = characterFromID("Sailor_1");
+	
 	if (CheckAttribute(pchar, "HeroParam.Teach_beat"))
 	{ // признак, что выиграл
 		if (sti(pchar.HeroParam.Teach_beat) == 3)

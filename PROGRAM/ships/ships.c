@@ -1,8 +1,12 @@
 #include "ships\ships.h"
+
 extern void InitShips();
 extern void InitSailsColors();
 extern void InitRandomShipsNames();
+
 string	sRndShpSpName[22], sRndShpEnName[21], sRndShpFrName[14], sRndShpPiName[9], sRndShpHoName[10];
+
+
 void ShipsInit()
 {
 	if (LoadSegment("ships\ships_init.c"))
@@ -10,6 +14,7 @@ void ShipsInit()
 		InitShips();
 		UnloadSegment("ships\ships_init.c");
 	}
+
 	// init sails color
 	if (LoadSegment("ships\sails_init.c"))
 	{
@@ -17,6 +22,7 @@ void ShipsInit()
 		UnloadSegment("ships\sails_init.c");
 	}
 }
+
 void SetRandomNameToShip(ref rCharacter)
 {
 	ref rMassiveOfNames;
@@ -28,6 +34,7 @@ void SetRandomNameToShip(ref rCharacter)
 	{
 		rCharacter.nation = PIRATE;
 	}
+
 	switch (sti(rCharacter.nation))
 	{
 		case ENGLAND:	makeref(rMassiveOfNames, sRndShpEnName); break;
@@ -39,6 +46,7 @@ void SetRandomNameToShip(ref rCharacter)
 	int iMassiveOfNamesSize = GetArraySize(rMassiveOfNames);
 	rCharacter.Ship.Name = GetRandSubString(rMassiveOfNames[rand(iMassiveOfNamesSize-2)]);
 }
+
 string generateRandomNameToShip(int iNation)
 {
 	ref rMassiveOfNames;
@@ -52,8 +60,10 @@ string generateRandomNameToShip(int iNation)
 	}
 	int iMassiveOfNamesSize = GetArraySize(rMassiveOfNames);
 	string sName = GetRandSubString(rMassiveOfNames[rand(iMassiveOfNamesSize-2)]);
+	
 	return sName;
 }
+
 string GetShipLocationID(ref chref)
 {
 	if(!CheckAttribute(chref,"ship.type")) 
@@ -65,6 +75,7 @@ string GetShipLocationID(ref chref)
 	{
 		return "";
 	}
+
 	int iShipType = sti(RealShips[st].basetype);
 	if(ShipsTypes[iShipType].name == "Fort")
 	{
@@ -96,6 +107,7 @@ string GetShipLocationID(ref chref)
 		}
 	}
     return "BOARDING_SMALL_DECK";
+
 	/*if(!CheckAttribute(&RealShips[st],"AbordageLocation"))
 	{
 		trace("WARNING!!! Ship ("+st+") " + ShipsTypes[st].name + " hav`t attribute AbordageLocation");
@@ -106,6 +118,7 @@ string GetShipLocationID(ref chref)
 // boal
 string GetShipCabinID(ref chref)
 {
+
 	if(!CheckAttribute(chref,"ship.type"))
 	{
 		return "";
@@ -115,6 +128,7 @@ string GetShipCabinID(ref chref)
 	{
 		return "";
 	}
+
 	int iShipType = sti(RealShips[st].basetype);
 	if(ShipsTypes[iShipType].name == "Fort")
 	{

@@ -16,6 +16,7 @@ void ProcessCommonDialogEvent(ref NPChar, aref Link, aref NextDiag)
 				link.l1.go = "caleuche";
 			}
 		break;
+		
 		// калеуче
 		case "caleuche":
 			dialog.text = "Nah. Haven't seen such a client.";
@@ -26,3 +27,4 @@ void ProcessCommonDialogEvent(ref NPChar, aref Link, aref NextDiag)
 	}
 	UnloadSegment(NPChar.FileDialog2);  // если где-то выход внутри switch  по return не забыть сделать анлод
 }
+

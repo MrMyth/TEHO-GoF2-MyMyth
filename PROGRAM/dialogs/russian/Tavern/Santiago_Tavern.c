@@ -16,12 +16,14 @@ void ProcessCommonDialogEvent(ref NPChar, aref Link, aref NextDiag)
 				link.l1.go = "LH_tavern";
 			}
 		break;
+		
 		// Jason Долго и счастливо
 		case "LH_tavern":
 			dialog.text = "No senor, that story was settled a long time ago without any clerics. You see, you live completely under a palm tree, since you haven't heard that Pope Innocent X with Cardinal Mazarin finally agreed. Europe with its wars is one thing, but all Christians should fight together against pagan darkness at the end of the world\nAnd yes, frog-eaters came to us. But they just didn’t agree on anything - our honored guests sits in a governor's mansion, under the guard, drink coffee and warming a seat. Almost a month already! The people gossiped, had a long talk and got used to it - look, the French abbot serves a prayer service in the evenings in the church. Almost like a sight ahah!";
 			link.l1 = "Interesting! I should look at that Frenchman, atleast it is more funny than staring at a mug.";
 			link.l1.go = "LH_tavern_1";
 		break;
+		
 		case "LH_tavern_1":
 			DialogExit();
 			LongHappy_SantiagoBenua();
@@ -29,3 +31,4 @@ void ProcessCommonDialogEvent(ref NPChar, aref Link, aref NextDiag)
 	}
 	UnloadSegment(NPChar.FileDialog2);  // если где-то выход внутри switch  по return не забыть сделать анлод
 }
+

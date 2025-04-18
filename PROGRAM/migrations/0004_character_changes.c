@@ -9,9 +9,11 @@ void ApplyMigration(ref migrationState) {
 		}
 		trace("Освободили " + (firstFreeCharacter + 1));
 	}
+	
 	// правка бага инита предметов в бете
 	ref sld = ItemsFromID("pistol2");
 	sld.type.t1.bullet = "grapeshot";
+	
 	bool found = false;
 	for (i = 0; i < ITEMS_QUANTITY; i++) {
 		sld = &items[i];

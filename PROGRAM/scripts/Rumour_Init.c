@@ -4,14 +4,18 @@
 #include "scripts\Rumour_generate.c"
 #include "scripts\Rumour_Data.h"
 #include "scripts\GoldFleet.c"
+
 object	Rumour[MAX_RUMOURS]; // стек слухов
 object RumourParams;         // дерево переменных для шаблонных слухов
+
 int id_counter;
+
 void SetRumourDefaults()// заполняем стек начальными - простыми слухами
 {
 	int i;
 	ref CurrentRumour;
 	id_counter = 0;
+
 	for(i = 0; i < MAX_RUMOURS; i++)
 	{
 		makeref(CurrentRumour, Rumour[i]);
@@ -27,6 +31,7 @@ void SetRumourDefaults()// заполняем стек начальными - п
 		id_counter++; // счетчик слухов
 	}	
 }
+
 void RumourInit();
 {
 	//Log_SetStringToLog("Слухи!");

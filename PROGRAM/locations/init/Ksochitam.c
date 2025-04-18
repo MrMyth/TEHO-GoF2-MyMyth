@@ -1,8 +1,10 @@
+
 int LocationInitKsochitam(int n)
 {
 	//////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 	// Остров Ксочитэм
 	//////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+
 	//////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 	// Бухта65
 	//////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
@@ -24,12 +26,15 @@ int LocationInitKsochitam(int n)
 	locations[n].models.always.shore12.sea_reflection = 1;
 	Locations[n].models.always.shore12seabed = "rockshore_sb";
 	Locations[n].models.always.locators = "rockshore_locators";
+		
 	Locations[n].models.always.grassPatch = "rockshore_grass";
 	Locations[n].models.always.grassPatch.texture = "grass\grassshore.tga.tx";
+
 	//Day
 	locations[n].models.day.charactersPatch = "rockshore_patch_day";
 	//Night
 	locations[n].models.night.charactersPatch = "rockshore_patch_day";		
+	
 	Locations[n].models.day.jumpPatch = "rockshore_jump_patch";
 	Locations[n].models.night.jumpPatch = "rockshore_jump_patch"; 	
 	//Environment
@@ -46,6 +51,7 @@ int LocationInitKsochitam(int n)
 	locations[n].reload.l1.autoreload = "1";
 	locations[n].reload.l1.label = "Jungle";
 	locations[n].locators_radius.reload.reload2_back = 1;
+
 	locations[n].reload.l2.name = "reload1_back";
 	locations[n].reload.l2.go = "Ksochitam";
 	locations[n].reload.l2.emerge = "reload_2";
@@ -100,12 +106,14 @@ int LocationInitKsochitam(int n)
 	locations[n].reload.l1.autoreload = "1";
 	locations[n].reload.l1.label = "Shore65";
 	locations[n].locators_radius.reload.reload1_back = 2;
+
 	locations[n].reload.l2.name = "reload2_back";
 	locations[n].reload.l2.go = "Ksochitam_Jungle_02";
 	locations[n].reload.l2.emerge = "reload1";
 	locations[n].reload.l2.autoreload = "1";
 	locations[n].reload.l2.label = "Jungle";
     locations[n].locators_radius.reload.reload2_back = 2;
+
 	locations[n].reload.l3.name = "reload3_back";
 	locations[n].reload.l3.go = "Ksochitam_Jungle_03";
 	locations[n].reload.l3.emerge = "reload1";
@@ -113,6 +121,7 @@ int LocationInitKsochitam(int n)
 	locations[n].reload.l3.label = "Jungle";
 	locations[n].locators_radius.reload.reload3_back = 2;
 	n = n + 1;
+	
 	//////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 	// Джунгли - к сокровищам
 	//////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
@@ -158,12 +167,14 @@ int LocationInitKsochitam(int n)
 	locations[n].reload.l1.autoreload = "1";
 	locations[n].reload.l1.label = "Jungle";
 	locations[n].locators_radius.reload.reload1_back = 2;
+	
 	locations[n].reload.l2.name = "reload2_back";
 	locations[n].reload.l2.go = "Shore_ship4";
 	locations[n].reload.l2.emerge = "reload1";
 	locations[n].reload.l2.autoreload = "1";
 	locations[n].reload.l2.label = "Shore_ship4";
 	locations[n].locators_radius.reload.reload2_back = 2;
+
 	locations[n].reload.l3.name = "reload3_back";
 	locations[n].reload.l3.go = "Ksochitam_GrotEntrance";
 	locations[n].reload.l3.emerge = "reload2";
@@ -221,9 +232,12 @@ int LocationInitKsochitam(int n)
 	locations[n].reload.l1.autoreload = "1";
 	locations[n].reload.l1.label = "Jungle";
 	locations[n].locators_radius.reload.reload2_back = 3;
+	
 	locations[n].private1.items.jewelry5 = 250;
 	locations[n].private1.items.talisman4 = 1;
+	
 	locations[n].private2.items.chest = 5;
+	
 	locations[n].private3.items.jewelry2 = 200;
 	locations[n].private3.items.jewelry3 = 200;
 	locations[n].private3.items.jewelry4 = 150;
@@ -281,6 +295,7 @@ int LocationInitKsochitam(int n)
 	locations[n].reload.l1.autoreload = "0";
 	locations[n].reload.l1.label = "Grot";
 	locations[n].locators_radius.reload.reload1_back = 1.3;
+
 	locations[n].reload.l2.name = "reload2_back";
 	locations[n].reload.l2.go = "Ksochitam_Jungle_02";
 	locations[n].reload.l2.emerge = "reload3";
@@ -304,18 +319,22 @@ int LocationInitKsochitam(int n)
 	//Always
 	locations[n].filespath.models = "locations\inside\cavernLow3";
 	locations[n].models.always.cavernLow2 = "cavernLow3";
+	
 	locations[n].models.always.cavernLow1Crystals = "crystals";
 	locations[n].models.always.cavernLow1Crystals.tech = "EnvironmentShader";
+	
 	locations[n].models.always.Waterfall = "water";
 	locations[n].models.always.Waterfall.uvslide.v0 = 0.0;
 	locations[n].models.always.Waterfall.uvslide.v1 = 0.0;
 	locations[n].models.always.Waterfall.tech = "LocationWaterFall";
 	locations[n].models.always.Waterfall.level = 51;
+
 	locations[n].models.always.Cfall = "cfall";
 	locations[n].models.always.Cfall.uvslide.v0 = 0.3;
     locations[n].models.always.Cfall.uvslide.v1 = 0.0;
 	locations[n].models.always.Cfall.tech = "LocationWaterFall";
 	locations[n].models.always.Cfall.level = 50;
+	
 	locations[n].models.always.locators = "cavernLow3_locators";
 	//Day
 	locations[n].models.day.charactersPatch = "cavernLow3_patch";
@@ -328,6 +347,7 @@ int LocationInitKsochitam(int n)
 	Locations[n].QuestlockWeather = "23 Hour";
 	locations[n].environment.sea = "true";
 	locations[n].environment.weather.rain = false;
+	
 	Locations[n].lockWeather = "Inside";
 	//Reload map
 	locations[n].reload.l1.name = "reload1_back";
@@ -335,6 +355,7 @@ int LocationInitKsochitam(int n)
 	locations[n].reload.l1.emerge = "reload1";
 	locations[n].reload.l1.autoreload = "0";
 	locations[n].reload.l1.label = "Jungle";
+
 	locations[n].reload.l2.name = "reload2_back";
 	locations[n].reload.l2.go = "Ksochitam_WaterCave";
 	locations[n].reload.l2.emerge = "reload2";
@@ -370,6 +391,7 @@ int LocationInitKsochitam(int n)
 	Locations[n].QuestlockWeather = "23 Hour";
 	locations[n].environment.sea = "false";
 	locations[n].environment.weather.rain = false;
+	
 	locations[n].underwater = true;
 	Locations[n].QuestlockWeather = "Underwater";
 	Locations[n].lockWeather = "Inside";
@@ -379,11 +401,13 @@ int LocationInitKsochitam(int n)
 	locations[n].reload.l1.emerge = "reload2";
 	locations[n].reload.l1.autoreload = "0";
 	locations[n].reload.l1.label = "Cave";
+
 	locations[n].reload.l2.name = "reload2";
 	locations[n].reload.l2.go = "Ksochitam_Grot";
 	locations[n].reload.l2.emerge = "reload2";
 	locations[n].reload.l2.autoreload = "0";
 	locations[n].reload.l2.label = "Jungle";
+	
 	locations[n].DisableOfficers = "1";
 	LAi_LocationFightDisable(&locations[n], true);
 	n = n + 1;
@@ -426,12 +450,14 @@ int LocationInitKsochitam(int n)
 	locations[n].reload.l1.autoreload = "0";
 	locations[n].reload.l1.label = "Shore66";
 	locations[n].locators_radius.reload.reload1_back = 1;
+
 	locations[n].reload.l2.name = "reload2_back";
 	locations[n].reload.l2.go = "Ksochitam_WaterCave";
 	locations[n].reload.l2.emerge = "reload1";
 	locations[n].reload.l2.autoreload = "0";
 	locations[n].reload.l2.label = "FloodedCave";
 	locations[n].locators_radius.reload.reload2_back = 1.5;
+	
 	locations[n].DisableOfficers = "1";
 	n = n + 1;
 	//////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
@@ -455,23 +481,28 @@ int LocationInitKsochitam(int n)
 	locations[n].models.always.shore11.sea_reflection = 1;
 	Locations[n].models.always.shore11seabed = "sandshore_sb";
 	Locations[n].models.always.locators = "sandshore_Qlocators";
+	
 	Locations[n].models.always.shore11_quest = "sandshore_quest2";
 	Locations[n].models.always.shore11_quest_seabed = "sandshorequest_sb";
 	locations[n].models.always.shore11_quest.sea_reflection = 1;
 	Locations[n].models.always.shore11_sqiut = "sandshore_squit";
 	locations[n].models.always.shore11_sqiut.sea_reflection = 1;
 	Locations[n].models.always.thing = "sandshore_thing";
+	
 	Locations[n].models.always.grassPatch = "sandshore_grass";
 	Locations[n].models.always.grassPatch.texture = "grass\grassshore.tga.tx";
+	
 	Locations[n].models.always.l1 = "plan1";
 	Locations[n].models.always.l1.level = 9;
 	Locations[n].models.always.l1.tech = "LocationModelBlend";
 	locations[n].models.always.l1.sea_reflection = 1;
+	
 	Locations[n].models.always.Waterfall1 = "WaterFall1";
 	Locations[n].models.always.Waterfall1.uvslide.v0 = 0.2;
     Locations[n].models.always.Waterfall1.uvslide.v1 = 0.0;
 	Locations[n].models.always.Waterfall1.tech = "LocationWaterFall";
 	Locations[n].models.always.Waterfall1.level = 50;
+	
 	Locations[n].models.always.Waterfall2 = "WaterFall2";
 	Locations[n].models.always.Waterfall2.uvslide.v0 = 0.3;
     Locations[n].models.always.Waterfall2.uvslide.v1 = 0.0;
@@ -484,6 +515,7 @@ int LocationInitKsochitam(int n)
 	// Jump patch
 	Locations[n].models.day.jumpPatch = "sandshore_jump_patch";
 	Locations[n].models.night.jumpPatch = "sandshore_jump_patch";
+	
 	Locations[n].animals = "true";
 	//Environment
 	locations[n].environment.weather = "true";
@@ -498,34 +530,48 @@ int LocationInitKsochitam(int n)
 	locations[n].reload.l1.autoreload = "0";
 	locations[n].reload.l1.label = "Cave";
 	locations[n].locators_radius.reload.reload2_back = 2;
+	
 	locations[n].reload.l2.name = "reload1";
 	locations[n].reload.l2.go = "SantaQuiteriaInside";
 	locations[n].reload.l2.emerge = "reload2";
 	locations[n].reload.l2.autoreload = "0";
 	locations[n].reload.l2.label = "SantaQuiteriaInside";
+	
 	locations[n].reload.l3.name = "reload3";
 	locations[n].reload.l3.go = "SantaQuiteriaInside";
 	locations[n].reload.l3.emerge = "reload1";
 	locations[n].reload.l3.autoreload = "0";
 	locations[n].reload.l3.label = "SantaQuiteriaInside";
+	
 	locations[n].reload.l4.name = "boat";
 	locations[n].reload.l4.go = "Ksochitam";
 	locations[n].reload.l4.emerge = "reload_1";
 	locations[n].reload.l4.autoreload = "0";
 	locations[n].reload.l4.label = "Sea";
     locations[n].locators_radius.reload.boat = 6.0;
+	
 	locations[n].DisableOfficers = "1";
+	
 	locations[n].private1.items.mask_false = 1;
 	locations[n].private1.key = "key_archy";
 	locations[n].private1.key.delItem = true;
+	
 	locations[n].private2.items.icollection = 8;
+	
 	locations[n].private3.items.icollection = 10;
+	
 	locations[n].private4.items.icollection = 14;
+	
 	locations[n].private5.items.icollection = 8;
+	
 	locations[n].private6.items.icollection = 12;
+	
 	locations[n].private7.items.icollection = 13;
+	
 	locations[n].private8.items.icollection = 8;
+	
 	locations[n].private9.items.icollection = 15;
+	
 	n = n + 1;
 	//////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 	// Фрегат Санта-Квитерия - внутри корабля
@@ -563,27 +609,36 @@ int LocationInitKsochitam(int n)
 	locations[n].reload.l1.emerge = "reload3";
 	locations[n].reload.l1.autoreload = "0";
 	locations[n].reload.l1.label = "shore66";
+
 	locations[n].reload.l2.name = "reload2";
 	locations[n].reload.l2.go = "shore66";
 	locations[n].reload.l2.emerge = "reload1";
 	locations[n].reload.l2.autoreload = "0";
 	locations[n].reload.l2.label = "shore66";
+	
 	locations[n].locators_radius.item.item1 = 1.2;
+
 	//ключи для сундуков и предметы внутри
 	locations[n].private1.money = 10000;
 	locations[n].private1.items.potion5 = 5;
 	locations[n].private1.items.icollecton = 2;
+
 	locations[n].private2.money = 5000;
 	locations[n].private2.items.gold_dublon = 300;
 	locations[n].private2.items.icollecton = 5;
+	
 	locations[n].private3.items.icollecton = 6;
 	locations[n].private3.items.potion7 = 1;
+	
 	locations[n].private4.items.icollecton = 4;
 	locations[n].private4.items.berserker_potion = 1;
+	
 	locations[n].private5.items.icollecton = 3;
 	locations[n].private5.items.potion7 = 1;
+	
 	locations[n].private6.items.icollecton = 5;
 	locations[n].private6.items.berserker_potion = 1;
+	
 	n = n + 1;
 	//////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 	// Джунгли - к маске
@@ -630,12 +685,14 @@ int LocationInitKsochitam(int n)
 	locations[n].reload.l1.autoreload = "1";
 	locations[n].reload.l1.label = "Jungle";
 	locations[n].locators_radius.reload.reload1_back = 2;
+	
 	locations[n].reload.l2.name = "reload2_back";
 	locations[n].reload.l2.go = "Ksochitam_CaveEntrance";
 	locations[n].reload.l2.emerge = "reload2";
 	locations[n].reload.l2.autoreload = "1";
 	locations[n].reload.l2.label = "CaveEntrance";
 	locations[n].locators_radius.reload.reload2_back = 2;
+
 	n = n + 1;
 	//////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 	// Вход в пещеру - к маске Кукулькана
@@ -682,6 +739,7 @@ int LocationInitKsochitam(int n)
 	locations[n].reload.l1.autoreload = "0";
 	locations[n].reload.l1.label = "Cave";
 	locations[n].locators_radius.reload.reload1_back = 1.3;
+
 	locations[n].reload.l2.name = "reload2_back";
 	locations[n].reload.l2.go = "Ksochitam_Jungle_03";
 	locations[n].reload.l2.emerge = "reload2";
@@ -726,20 +784,24 @@ int LocationInitKsochitam(int n)
 	locations[n].reload.l1.emerge = "reload1";
 	locations[n].reload.l1.autoreload = "0";
 	locations[n].reload.l1.label = "Jungle";
+
 	locations[n].reload.l2.name = "reload2";
 	locations[n].reload.l2.go = "Ksochitam_FloodedCaveLock";
 	locations[n].reload.l2.emerge = "reload2";
 	locations[n].reload.l2.autoreload = "0";
 	locations[n].reload.l2.label = "FloodedCave";
 	locations[n].locators_radius.reload.reload2 = 1.0;
+	
 	locations[n].reload.l3.name = "reload3_back";
 	locations[n].reload.l3.go = "Ksochitam_FloodedCave";
 	locations[n].reload.l3.emerge = "reload1";
 	locations[n].reload.l3.autoreload = "0";
 	locations[n].reload.l3.label = "FloodedCave";
 	locations[n].locators_radius.reload.reload3_back = 0.2;
+	
 	locations[n].locators_radius.randitem.randitem1 = 2.0;
 	n = n + 1;
+	
 	//////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 	// Затопленная пещера - тупиковая
 	//////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
@@ -755,14 +817,17 @@ int LocationInitKsochitam(int n)
 	//Always
 	locations[n].filespath.models = "locations\inside\cavernLow2";
 	locations[n].models.always.cavernLow2 = "cavernLow2";
+	
 	locations[n].models.always.cavernLow1Crystals = "cavernLow2_crystals";
 	locations[n].models.always.cavernLow1Crystals.tech = "EnvironmentShader";
 	locations[n].models.always.cavernLow1Crystals.reflection = 0.25;
+	
 	locations[n].models.always.Waterfall = "water";
 	locations[n].models.always.Waterfall.uvslide.v0 = 0.0;
 	locations[n].models.always.Waterfall.uvslide.v1 = 0.0;
 	locations[n].models.always.Waterfall.tech = "LocationWaterFall";
 	locations[n].models.always.Waterfall.level = 51;
+
 	locations[n].models.always.Cfall = "cfall";
 	locations[n].models.always.Cfall.uvslide.v0 = 0.3;
     locations[n].models.always.Cfall.uvslide.v1 = 0.0;
@@ -788,6 +853,7 @@ int LocationInitKsochitam(int n)
 	locations[n].reload.l1.emerge = "reload2";
 	locations[n].reload.l1.autoreload = "0";
 	locations[n].reload.l1.label = "Cave";
+	
 	locations[n].DisableOfficers = "1";
 	LAi_LocationFightDisable(&locations[n], true);
 	n = n + 1;
@@ -806,14 +872,17 @@ int LocationInitKsochitam(int n)
 	//Always
 	locations[n].filespath.models = "locations\inside\cavernLow2";
 	locations[n].models.always.cavernLow2 = "cavernLow2";
+	
 	locations[n].models.always.cavernLow1Crystals = "cavernLow2_crystals";
 	locations[n].models.always.cavernLow1Crystals.tech = "EnvironmentShader";
 	locations[n].models.always.cavernLow1Crystals.reflection = 0.25;
+	
 	locations[n].models.always.Waterfall = "water";
 	locations[n].models.always.Waterfall.uvslide.v0 = 0.0;
 	locations[n].models.always.Waterfall.uvslide.v1 = 0.0;
 	locations[n].models.always.Waterfall.tech = "LocationWaterFall";
 	locations[n].models.always.Waterfall.level = 51;
+
 	locations[n].models.always.Cfall = "cfall";
 	locations[n].models.always.Cfall.uvslide.v0 = 0.3;
     locations[n].models.always.Cfall.uvslide.v1 = 0.0;
@@ -839,12 +908,14 @@ int LocationInitKsochitam(int n)
 	locations[n].reload.l1.emerge = "reload3";
 	locations[n].reload.l1.autoreload = "0";
 	locations[n].reload.l1.label = "Cave";
+
 	locations[n].reload.l2.name = "reload2_back";
 	locations[n].reload.l2.go = "Ksochitam_DumpGrot";
 	locations[n].reload.l2.emerge = "reload2";
 	locations[n].reload.l2.autoreload = "0";
 	locations[n].reload.l2.label = "Grot";
 	locations[n].locators_radius.reload.reload2_back = 0.2;
+	
 	locations[n].DisableOfficers = "1";
 	LAi_LocationFightDisable(&locations[n], true);
 	n = n + 1;
@@ -888,17 +959,20 @@ int LocationInitKsochitam(int n)
 	locations[n].reload.l1.emerge = "reload1";
 	locations[n].reload.l1.autoreload = "0";
 	locations[n].reload.l1.label = "Shore_mask";
+
 	locations[n].reload.l2.name = "reload2_back";
 	locations[n].reload.l2.go = "Ksochitam_FloodedCave";
 	locations[n].reload.l2.emerge = "reload2";
 	locations[n].reload.l2.autoreload = "0";
 	locations[n].reload.l2.label = "FloodedCave";
 	locations[n].locators_radius.reload.reload2_back = 1.2;
+	
 	locations[n].reload.l3.name = "reload3_back";
 	locations[n].reload.l3.go = "Ksochitam_DeadlockGrot";
 	locations[n].reload.l3.emerge = "reload1";
 	locations[n].reload.l3.autoreload = "0";
 	locations[n].reload.l3.label = "grot";
+	
 	locations[n].DisableOfficers = "1";
 	n = n + 1;
 	//////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
@@ -921,13 +995,16 @@ int LocationInitKsochitam(int n)
 	locations[n].models.always.seabed = "Grotto1_sb";
 	locations[n].models.always.grassPatch = "Grotto1_grass";
 	locations[n].models.always.locators = "Grotto1_locators";
+	
 	locations[n].models.always.Cfall = "Cfall";
 	locations[n].models.always.Water = "Water";
+	
 	Locations[n].models.always.Waterfall1 = "Waterfall1";
 	Locations[n].models.always.Waterfall1.uvslide.v0 = 0.7;
 	Locations[n].models.always.Waterfall1.uvslide.v1 = 0.0;
 	Locations[n].models.always.Waterfall1.tech = "LocationWaterFall";
 	Locations[n].models.always.Waterfall1.level = 50;
+
 	Locations[n].models.always.Waterfall2 = "Waterfall2";
 	Locations[n].models.always.Waterfall2.uvslide.v0 = 0.3;
 	Locations[n].models.always.Waterfall2.uvslide.v1 = 0.0;
@@ -943,12 +1020,15 @@ int LocationInitKsochitam(int n)
 	locations[n].alwaysStorm = true; //живем в штормах
 	locations[n].storm = true;
 	locations[n].tornado = true;
+
 	locations[n].reload.l1.name = "reload1";
 	locations[n].reload.l1.go = "Ksochitam_DumpGrot";
 	locations[n].reload.l1.emerge = "reload1";
 	locations[n].reload.l1.autoreload = "0";
 	locations[n].reload.l1.label = "Grot";
+	
 	locations[n].DisableOfficers = "1";
+	
 	string sloc;
 	int i;
 	for (i=1; i<=95; i++)
@@ -996,7 +1076,9 @@ int LocationInitKsochitam(int n)
 	locations[n].reload.l1.autoreload = "1";
 	locations[n].reload.l1.label = "grot";
 	locations[n].locators_radius.reload.reload1_back = 1.5;
+	
 	locations[n].DisableOfficers = "1";
 	n = n + 1;
+		
 	return n;
 }

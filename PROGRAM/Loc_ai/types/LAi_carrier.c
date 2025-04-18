@@ -1,4 +1,8 @@
+
+
 #define LAI_TYPE_CARRY	"carrier"
+
+
 //Инициализация
 void LAi_type_carrier_Init(aref chr)
 {
@@ -35,6 +39,7 @@ void LAi_type_carrier_Init(aref chr)
 	chr.chr_ai.tmpl.baseLocator = "";  //откуда идем
 	SendMessage(&chr, "lsl", MSG_CHARACTER_EX_MSG, "SetFightWOWeapon", false);
 }
+
 //Процессирование типа персонажа
 void LAi_type_carrier_CharacterUpdate(aref chr, float dltTime)
 {	
@@ -88,6 +93,7 @@ void LAi_type_carrier_CharacterUpdate(aref chr, float dltTime)
 			{
 				if(CheckAttribute(chr, "chr_ai.tmpl.baseLocator")) // Warship fix. Могло не быть
 					ChangeCharacterAddressGroup(chr, chr.location, "reload", chr.chr_ai.tmpl.baseLocator);
+					
 				LAi_tmpl_goto_InitTemplate(chr);
 				LAi_type_carrier_GoTo(chr);
 			}
@@ -134,45 +140,62 @@ void LAi_type_carrier_CharacterUpdate(aref chr, float dltTime)
 		}
 	}
 }
+
 //Загрузка персонажа в локацию
 bool LAi_type_carrier_CharacterLogin(aref chr)
 {
 	return true;
 }
+
 //Выгрузка персонажа из локацию
 bool LAi_type_carrier_CharacterLogoff(aref chr)
 {
 	return true;
 }
+
 //Завершение работы темплейта
 void LAi_type_carrier_TemplateComplite(aref chr, string tmpl)
 {
+
 }
+
 //Сообщить о желании завести диалог
 void LAi_type_carrier_NeedDialog(aref chr, aref by)
 {
 }
+
 //Запрос на диалог, если возвратить true то в этот момент можно начать диалог
 bool LAi_type_carrier_CanDialog(aref chr, aref by)
 {
 	return false;
 }
+
 //Начать диалог
 void LAi_type_carrier_StartDialog(aref chr, aref by)
 {
+
 }
+
 //Закончить диалог
 void LAi_type_carrier_EndDialog(aref chr, aref by)
 {
+
 }
+
 //Персонаж выстрелил
 void LAi_type_carrier_Fire(aref attack, aref enemy, float kDist, bool isFindedEnemy)
 {
+
 }
+
+
 //Персонаж атакован
 void LAi_type_carrier_Attacked(aref chr, aref by)
 {
+
 }
+
+
 int LAi_type_carrier_FindNearEnemy(aref chr)
 {
 	if(LAi_grp_alarmactive == true)
@@ -192,6 +215,7 @@ int LAi_type_carrier_FindNearEnemy(aref chr)
 	}
 	return -1;
 }
+
 void LAi_type_carrier_GoTo(aref chr)
 {
 	if (!LAi_grp_alarmactive)
@@ -211,6 +235,7 @@ void LAi_type_carrier_GoTo(aref chr)
 		chr.location.locator = "gate";
 	}
 }
+
 string LAi_type_carrier_SetPath(aref chr)
 {
 	//определим маршрут

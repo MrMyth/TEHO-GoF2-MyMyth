@@ -1,3 +1,4 @@
+
 int LocationInitSantaQuiteria(int n)
 {
 	//////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
@@ -18,8 +19,10 @@ int LocationInitSantaQuiteria(int n)
 	locations[n].models.always.shore03.sea_reflection = 1;
 	Locations[n].models.always.shore03seabed = "shore03_sb";
 	Locations[n].models.always.locators = "shore03_locators";
+		
 	Locations[n].models.always.grassPatch = "shore03_grass";
 	Locations[n].models.always.grassPatch.texture = "grass\grassshore.tga.tx";
+	
 	Locations[n].models.always.l1 = "plan1";
 	Locations[n].models.always.l1.level = 9;
 	Locations[n].models.always.l1.tech = "LocationModelBlend";
@@ -43,13 +46,16 @@ int LocationInitSantaQuiteria(int n)
 	locations[n].reload.l1.autoreload = "1";
 	locations[n].reload.l1.label = "Jungle";
 	locations[n].locators_radius.reload.reload1_back = 2;
+
 	locations[n].reload.l2.name = "boat";
 	locations[n].reload.l2.go = "SantaQuiteria";
 	locations[n].reload.l2.emerge = "reload_2";
 	locations[n].reload.l2.autoreload = "0";
 	locations[n].reload.l2.label = "Sea";
     locations[n].locators_radius.reload.boat = 9.0;
+	
 	n = n + 1;
+
 	//////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 	// Джунгли
 	//////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
@@ -91,13 +97,16 @@ int LocationInitSantaQuiteria(int n)
 	locations[n].reload.l1.autoreload = "1";
 	locations[n].reload.l1.label = "Shore71";
 	locations[n].locators_radius.reload.reload1_back = 2;
+
 	locations[n].reload.l2.name = "reload2_back";
 	locations[n].reload.l2.go = "SantaQuiteria_jungle_01";
 	locations[n].reload.l2.emerge = "reload1";
 	locations[n].reload.l2.autoreload = "1";
 	locations[n].reload.l2.label = "Jungle";
 	locations[n].locators_radius.reload.reload2_back = 2.0;
+		
 	n = n + 1;
+	
 	//////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 	// Вход в пещеру
 	//////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
@@ -138,6 +147,7 @@ int LocationInitSantaQuiteria(int n)
 	locations[n].reload.l1.autoreload = "0";
 	locations[n].reload.l1.label = "Cave";
 	locations[n].locators_radius.reload.reload1_back = 1.3;
+
 	locations[n].reload.l2.name = "reload2_back";
 	locations[n].reload.l2.go = "SantaQuiteria_jungle_01";
 	locations[n].reload.l2.emerge = "reload3";
@@ -145,6 +155,7 @@ int LocationInitSantaQuiteria(int n)
 	locations[n].reload.l2.label = "Jungle";
 	locations[n].locators_radius.reload.reload2_back = 2.0;
 	n = n + 1;
+
 	//////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 	// Пещера
 	//////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
@@ -161,6 +172,7 @@ int LocationInitSantaQuiteria(int n)
 	locations[n].models.always.cavernMedium2 = "cavernMedium2";
 	locations[n].models.always.lamps = "cavernMedium2_lamps";	
 	locations[n].models.always.locators = "cavernMedium2_locators";	
+
 	locations[n].locators_radius.item.duhi1 = 0.0;
 /*	
 	Locations[n].models.always.rays = "cavernMedium2_rays";
@@ -184,12 +196,14 @@ int LocationInitSantaQuiteria(int n)
 	locations[n].reload.l1.go = "SantaQuiteria_CaveEntrance";
 	locations[n].reload.l1.emerge = "reload1";
 	locations[n].locators_radius.reload.reload1 = 2.0;
+
 	locations[n].reload.l2.name = "reload2";
 	locations[n].reload.l2.go = "SantaQuiteria_Jungle_02";
 	locations[n].reload.l2.emerge = "reloadW";
 	locations[n].locators_radius.reload.reload2 = 2.0;
 	locations[n].locators_radius.item.CheckReload1 = 3.5;
 	n = n + 1;
+
 	//////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 	// Джунгли
 	//////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
@@ -230,12 +244,14 @@ int LocationInitSantaQuiteria(int n)
 	locations[n].reload.l1.autoreload = "1";
 	locations[n].reload.l1.label = "Jungle";
 	locations[n].locators_radius.reload.reload1_back = 2.0;
+
 	locations[n].reload.l2.name = "reload2_back";
 	locations[n].reload.l2.go = "SantaQuiteria_jungle_02";
 	locations[n].reload.l2.emerge = "reload3";
 	locations[n].reload.l2.autoreload = "1";
 	locations[n].reload.l2.label = "Jungle";
 	locations[n].locators_radius.reload.reload2_back = 2.0;
+
 	locations[n].reload.l3.name = "reload3_back";
 	locations[n].reload.l3.go = "SantaQuiteria_CaveEntrance";
 	locations[n].reload.l3.emerge = "reload2";
@@ -243,6 +259,7 @@ int LocationInitSantaQuiteria(int n)
 	locations[n].reload.l3.label = "Jungle";
 	locations[n].locators_radius.reload.reload3_back = 2.0;
 	n = n + 1;
+
 	//////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 	// Джунгли
 	//////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
@@ -269,6 +286,7 @@ int LocationInitSantaQuiteria(int n)
 	Locations[n].models.always.l3 = "plan3";
 	Locations[n].models.always.l3.level = 7;
 	Locations[n].models.always.l3.tech = "LocationModelBlend";
+
 	locations[n].models.always.well_small = "well_big";
 	Locations[n].models.always.well_small.locator.group = "reload";
 	Locations[n].models.always.well_small.locator.name ="reloadW_back";	
@@ -287,18 +305,21 @@ int LocationInitSantaQuiteria(int n)
 	locations[n].reload.l1.autoreload = "1";
 	locations[n].reload.l1.label = "Shore72";
 	locations[n].locators_radius.reload.reload1_back = 2;
+
 	locations[n].reload.l2.name = "reload2_back";
 	locations[n].reload.l2.go = "Shore70";
 	locations[n].reload.l2.emerge = "reload1";
 	locations[n].reload.l2.autoreload = "1";
 	locations[n].reload.l2.label = "Shore70";
 	locations[n].locators_radius.reload.reload2_back = 2;
+
 	locations[n].reload.l3.name = "reload3_back";
 	locations[n].reload.l3.go = "SantaQuiteria_jungle_01";
 	locations[n].reload.l3.emerge = "reload2";
 	locations[n].reload.l3.autoreload = "1";
 	locations[n].reload.l3.label = "Jungle";
 	locations[n].locators_radius.reload.reload3_back = 2;
+
 	locations[n].reload.l4.name = "reloadW_back";
 	locations[n].reload.l4.go = "SantaQuiteria_Cave";
 	locations[n].reload.l4.emerge = "reload2";
@@ -306,6 +327,7 @@ int LocationInitSantaQuiteria(int n)
 	locations[n].reload.l4.label = "Jungle";
 	locations[n].locators_radius.reload.reloadW_back = 2.3;
 	n = n + 1;
+
 	//////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 	// Бухта 72
 	//////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
@@ -324,8 +346,10 @@ int LocationInitSantaQuiteria(int n)
 	locations[n].models.always.shore07.sea_reflection = 1;
 	Locations[n].models.always.shore07seabed = "shore07_sb";
 	Locations[n].models.always.locators = "shore07_locators";
+		
 	Locations[n].models.always.grassPatch = "shore07_grass";
 	Locations[n].models.always.grassPatch.texture = "grass\grassshore.tga.tx";
+	
 	Locations[n].models.always.l1 = "plan1";
 	Locations[n].models.always.l1.level = 9;
 	Locations[n].models.always.l1.tech = "LocationModelBlend";
@@ -349,6 +373,7 @@ int LocationInitSantaQuiteria(int n)
 	locations[n].reload.l1.autoreload = "1";
 	locations[n].reload.l1.label = "Jungle";
 	locations[n].locators_radius.reload.reload1_back = 2;
+
 	locations[n].reload.l2.name = "boat";
 	locations[n].reload.l2.go = "SantaQuiteria";
 	locations[n].reload.l2.emerge = "reload_2";
@@ -356,6 +381,7 @@ int LocationInitSantaQuiteria(int n)
 	locations[n].reload.l2.label = "Sea";
     locations[n].locators_radius.reload.boat = 9.0;
 	n = n + 1;
+
 	//////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 	// Бухта70
 	//////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
@@ -399,6 +425,7 @@ int LocationInitSantaQuiteria(int n)
 	locations[n].reload.l1.autoreload = "1";
 	locations[n].reload.l1.label = "Jungle";
 	locations[n].locators_radius.reload.reload1_back = 2;
+
 	locations[n].reload.l2.name = "boat";
 	locations[n].reload.l2.go = "SantaQuiteria";
 	locations[n].reload.l2.emerge = "reload_3";
@@ -406,5 +433,6 @@ int LocationInitSantaQuiteria(int n)
 	locations[n].reload.l2.label = "Sea";
     locations[n].locators_radius.reload.boat = 9.0;
 	n = n + 1;
+
 	return n;
 }

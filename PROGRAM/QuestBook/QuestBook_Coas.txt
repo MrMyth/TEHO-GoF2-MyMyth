@@ -14,6 +14,7 @@ The governor has doled me the sum of 2500 piasters, such that I might purchase m
 As Mr. Dan was not at home, I had to find the medicine on my own. Now I must hurry back to the estate...
 #TEXT  7
 Everything is all right; I helped the governor's wife. Since it is already late, and the gates to that accursed Bishop's plantation are long closed, I was allowed to stay in the city and allocated a bedroom in the tavern. Oh, how good it is, even for one night, to feel like a man again, not a slave...
+
 #QUEST CapBloodLine_q2
 Whacker's Offer
 #TEXT  1
@@ -33,6 +34,8 @@ Time to go back to the tavern and speak to Whacker. Not that there's anything le
 Doctor Whacker was only able to supply 18 000 piasters. I still need around 7000 more to purchase a sloop.
 #TEXT  8
 I collected the necessary sum, and sent Nettall for the sloop. Now I can only wait...
+
+
 #QUEST WeaponsForEscape
 Arms of Freedom
 #TEXT  1
@@ -69,6 +72,7 @@ The ring itself looks absolutely ordinary - golden, without any facets - yet is 
 How did the smuggler know of the ring? And why does he need it? But then, is it any of my business? I should just return to the tavern and ask for my reward.
 #TEXT  16
 The smuggler got his ring, and I got my money and armaments. That certainly was an interesting trinket, but I simply have no time to study it. Whatever it was, I've done my part and gotten what I need. Time to be on!
+
 #QUEST HugtorpTrouble
 Hagthorpe's Quandary
 #TEXT  1
@@ -80,6 +84,7 @@ Still, I should investigate this business that Whacker has for me. Mustn't waste
 I challenged Winterwood for a duel, and slew him. I think that Stuart won't be needing the thousand piasters that he had on his person. I must return to Hagthorpe.
 #TEXT  4
 Having learned of the death of Winterwood, Hagthorpe has agreed to join me.
+
 #QUEST DiekeQuest
 Junior Officer Nicolas Dyke
 #TEXT  1
@@ -90,6 +95,7 @@ The buyer is a certain Weston; I must quickly learn who and where he is.
 Recently a Jamaican merchant arrived in the city with some cargo. He's an old friend of the Bishop's. It may stand to conjecture that he is that Weston. I'll need to find his house, then see where I might go from there.
 #TEXT  4
 It seems that Charlie Weston was going to get Dyke on the cheap side. He's got 6000 piasters and a few gemstones ready for Bishop. Perhaps I should keep all this stuff for myself; I'm sure I'll find a use for it. It's not like Bishop needs any of it, anyway...
+
 #QUEST OglQuest
 The One-Eyed Gunner
 #TEXT  1
@@ -98,12 +104,14 @@ The only artillery gunner available to me took out a loan of five thousand piast
 I have repaid Ogle's debt. I should go let him know. 
 #TEXT  3
 Ogle is in.
+
 #QUEST FishermanQuest
 The Fish Place
 #TEXT  1
 Fisherman Hells has given me some work: I need to learn the spot where Arnold Summerlite, a rival fisherman, has been catching all his fish. For this, Hells promised me 2000 piasters.
 #TEXT  2
 I uncovered Summerlite's secret fishing spot. Now I only need inform Hells, and claim my money.
+
 #QUEST UsurerQuest
 The Anonymous Debtor
 #TEXT  1
@@ -114,6 +122,7 @@ I had to slip the innkeeper five hundred for the information on this Guinness fe
 I played the role well... Mom always said I should have been an actor. Why was it I joined the service, again? Anyway, the terrified impostor - his real name is Alex Winner - has given me all his savings. That's 55,000 piasters, a piece of which belongs to the moneylender... Perhaps.
 #TEXT  4
 Overwhelmed by my righteousness, Raphael/Alex returned me the loan money. Now I should return the money to the moneylender and receive my share. Or... should I? 
+
 #QUEST PirateQuest
 The Fallen Pirate
 #TEXT  1
@@ -126,6 +135,7 @@ Having learned the passenger's name, the shipbuilder told me the story of this p
 John Mayner, the captain of the Sailing Briton, has agreed to deliver Jacques Swallow to Tortuga for three thousand piasters. Now I need only find the pirate and tell him about it, then claim my reward.
 #TEXT  5
 I received my money from Swallow, though he obviously was in little hurry to part with it. What an odd bird...
+
 #QUEST EscapeFormBarbados
 Escape from Barbados
 #TEXT  1
@@ -218,6 +228,7 @@ Well, whaddaya know! That petty prankster Salvatore has accused me of murdering 
 I'll need to tell Atila all about this when I get the chance. After all, it did start with him...
 #TEXT  31_NONE
 //////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+
 #QUEST	Story_Sharp
 Sharp's Legacy
 #TEXT	1_man
@@ -268,6 +279,7 @@ The free captains have arrived at Isla del Tesoro for the meeting. I should retu
 Against all odds, I've been able to convince the captains to join my cause. Although if it wasn't for Beatrice's perfectly timed arrival and fiery speech, they'd have probably just laughed at me. But now that we have a whole fleet of privateers harassing the nations, and the traders and bankers on our side, we have a chance of taking over the colonies.
 #TEXT	10_woman
 Against all odds, I've been able to convince the captains to join my cause. Although truth be told, if it wasn't for Blaze's perfectly timed arrival and fiery speech, they'd have probably just laughed at me. But now that we have a whole fleet of privateers harassing the nations, and the traders and bankers on our side, we have a chance of taking over the colonies.
+
 #QUEST Xebeca_BlueBird
 Hunting the "Blue Bird"
 #TEXT  1
@@ -308,6 +320,7 @@ In the waters of @<sIsland>, I sink a local merchant flute. This is fine; it's w
 #TEXT  14
 <<<<<<< HEAD
 It's done. I received not fifty, but two-hundred thousand for that business with the xebec. Doesn't that just warm a pirate's heart?
+
 #QUEST BerglarsGang
 Brigands and Assassins
 #TEXT  1

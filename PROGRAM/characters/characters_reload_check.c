@@ -1,3 +1,5 @@
+
+
 //Disable reload locator
 bool chrEnableReloadLocator(string locationID, string reloadLocatorName, bool isEnable)
 {
@@ -43,6 +45,8 @@ bool chrEnableReloadLocator(string locationID, string reloadLocatorName, bool is
 	}
 	return false;
 }
+
+
 //locatorName
 bool chrCheckReload(ref loc, string reloadLocatorName)
 {
@@ -70,6 +74,7 @@ bool chrCheckReload(ref loc, string reloadLocatorName)
 	}
 	return false;
 }
+
 //locatorName
 bool chrCheckReloadLink(ref loc, string reloadLocatorName)
 {
@@ -108,6 +113,8 @@ bool chrCheckReloadLink(ref loc, string reloadLocatorName)
 	}
 	return 0;
 }
+
+
 //locatorName
 bool chrCheckAutoReload(ref loc, string reloadLocatorName)
 {
@@ -126,3 +133,16 @@ bool chrCheckAutoReload(ref loc, string reloadLocatorName)
 	}
 	return false;
 }
+
+
+
+
+
+
+
+
+
+
+
+
+

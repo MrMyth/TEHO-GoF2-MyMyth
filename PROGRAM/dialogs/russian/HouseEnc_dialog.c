@@ -1,31 +1,40 @@
+
 void ProcessDialogEvent()
 {
 	ref NPChar;
 	aref Link, NextDiag, arRld, arDis;
 	int i, Qty;
 	ref rColony;
+	
 	int iTest;
+	
 	bool  ok; // лесник . спецпеременная.
+
 	DeleteAttribute(&Dialog,"Links");
+
 	makeref(NPChar,CharacterRef);
 	makearef(Link, Dialog.Links);
 	makearef(NextDiag, NPChar.Dialog);
+	
 	iTest = FindColony(NPChar.City);
 	if (iTest != -1)
 	{
 		rColony = GetColonyByIndex(iTest);
 	}
+	
 	switch(Dialog.CurrentNode)
 	{
 		case "Exit":
 			NextDiag.CurrentNode = NextDiag.TempNode;
 			DialogExit();
 		break;
+
 		case "exit_setOwner":
 			LAi_SetOwnerTypeNoGroup(npchar);
 			NextDiag.CurrentNode = NextDiag.TempNode;
 			DialogExit();
 		break;
+
 		case "fight":
 			NextDiag.CurrentNode = NextDiag.TempNode;
 			DialogExit();
@@ -34,6 +43,7 @@ void ProcessDialogEvent()
 			if (rand(3) != 1) SetNationRelation2MainCharacter(sti(npchar.nation), RELATION_ENEMY);
 			AddDialogExitQuest("MainHeroFightModeOn");
 		break;
+
 		case "exit_GoOut":
 			makearef(arRld, Locations[reload_cur_location_index].reload);
     		Qty = GetAttributesNum(arRld);
@@ -53,6 +63,7 @@ void ProcessDialogEvent()
 			NextDiag.CurrentNode = NextDiag.TempNode;
 			DialogExit();
 		break;
+
 		case "exit_close":
 			makearef(arRld, Locations[reload_cur_location_index].reload);
     		Qty = GetAttributesNum(arRld);
@@ -69,6 +80,7 @@ void ProcessDialogEvent()
 			NextDiag.CurrentNode = NextDiag.TempNode;
 			DialogExit();
 		break;
+
 		//--------------------------------- мужик ---------------------------------
 		case "HouseMan":
 			NextDiag.TempNode = "HouseMan";
@@ -124,6 +136,7 @@ void ProcessDialogEvent()
 				}
 			}
 		break;
+
 		case "HouseMan_1":
 			dialog.text = "Oh, allow me to introduce myself - " + GetFullName(npchar) + ". We're very happy to have you our guest. In this town, the laws of hospitability are honored.";
 			link.l1 = GetFullName(pchar) + ", if you please...";
@@ -189,6 +202,7 @@ void ProcessDialogEvent()
 				}
 			}
 		break;
+
 		case "HouseWoman_1":
 			dialog.text = "We are always happy to have guests. Just don't stay here for too long,"+ GetSexPhrase(", since I am a married woman..."," since I have a lot to do...") +"";
 			link.l1 = "Oh, yeah, sure...";
@@ -232,6 +246,7 @@ void ProcessDialogEvent()
 				"Yeah, that sounds like a problem.", npchar, Dialog.CurrentNode);
 			link.l1.go = DialogGoNodeRepeat("exit", "exit", "exit", "exit", npchar, Dialog.CurrentNode);				
 		break;
+		
 		case "SkladMan1":
 			NextDiag.TempNode = "SkladMan1";
 			if (LAi_grp_playeralarm > 0)
@@ -291,6 +306,7 @@ void ProcessDialogEvent()
 			// <-- ugeen
 			}		
 		break;
+		
 		//--------------------------------- Аренда склада ---------------------------------
 		case "storage_rent":
 			NPChar.Storage.Speak = true;
@@ -298,6 +314,7 @@ void ProcessDialogEvent()
 			link.l1 = "A warehouse, you say? Yeah, tempting, indeed... Is it large enough? And how much will you charge for the rent?";
 			link.l1.go = "storage_rent1";
 		break;
+		
 		case "storage_rent1":
 			NPChar.MoneyForStorage = GetStoragePriceExt(NPChar, pchar); 
 			dialog.text = "It's quite spacious even for a port warehouse - it can hold 50000 centners of cargo. For " + FindRussianMoneyString(sti(NPChar.MoneyForStorage)) + "  per month I can provide safekeeping of your goods. "+
@@ -307,6 +324,7 @@ void ProcessDialogEvent()
 			link.l2 = "That's too much. And I bet it's flooded and infested with rats.";
 			link.l2.go = "storage_rent3";		
 		break;
+		
 		case "storage_rent2":
 			dialog.text = "Sure, sure. But... I'll need a month's payment in advance. ";
 			if(sti(pchar.money) >= sti(NPChar.MoneyForStorage))
@@ -320,11 +338,13 @@ void ProcessDialogEvent()
 				link.l1.go = "exit";
 			}	
 		break;
+		
 		case "storage_rent3":
 			dialog.text = "As you wish. If you change your mind - let me know. And keep in mind, that such a nice warehouse is unlikely to stay vacant for long...";
 			link.l1 = "No problem. I'll let you know if I need it.";
 			link.l1.go = "exit";
 		break;
+		
 		case "storage_0":
 			NPChar.MoneyForStorage = GetNpcQuestPastMonthParam(NPChar, "Storage.Date") * sti(NPChar.Storage.MoneyForStorage); 
 			if(sti(NPChar.MoneyForStorage) > 0) 
@@ -361,6 +381,7 @@ void ProcessDialogEvent()
 			link.l2 = "No, I've changed my mind.";
 			link.l2.go = "exit"; 						
 		break;
+		
 		case "storage_01":
 			dialog.text = "No, "+ GetSexPhrase("mister","ma'am") +", still vacant and waiting for you. I knew that you would not turn down my offer in the end.";
 			link.l1 = "Very good. I'll rent it.";
@@ -368,6 +389,7 @@ void ProcessDialogEvent()
 			link.l2 = "No, it just came to mind...";
 			link.l2.go = "exit";
 		break;
+		
 		case "storage_1":
 			NPChar.MoneyForStorage = GetStoragePriceExt(NPChar, pchar); 
 			dialog.text = "As you should remember, I need a month's payment up front.";
@@ -382,6 +404,7 @@ void ProcessDialogEvent()
 				link.l1.go = "exit";
 			}
 		break;
+		
 		case "storage_11":
 			AddMoneyToCharacter(pchar, -makeint(NPChar.MoneyForStorage)); 
 			NPChar.Storage.MoneyForStorage = NPChar.MoneyForStorage;
@@ -391,11 +414,13 @@ void ProcessDialogEvent()
 			DialogExit();
 			LaunchStorage(sti(rColony.StoreNum));			
 		break;
+				
 		case "storage_2":			
 			NextDiag.CurrentNode = NextDiag.TempNode;
 			DialogExit();
 			LaunchStorage(sti(rColony.StoreNum));			
 		break;
+		
 		case "storage_3":			
 			AddMoneyToCharacter(pchar, -sti(NPChar.MoneyForStorage)); 
 			NPChar.MoneyForStorage = GetStoragePriceExt(NPChar, pchar);
@@ -405,6 +430,7 @@ void ProcessDialogEvent()
 			DialogExit();
 			LaunchStorage(sti(rColony.StoreNum));			
 		break;		
+
 		case "storage_04":
 			dialog.text = "Leaving already? What a pity - that's really an excellent place on great terms. I assure you that you won't get a deal like this one nowhere in the Caribbean.";
 			link.l1 = "I said, I am vacating it. Or do you propose me to pay for storing an air? You may look for another holder.";
@@ -412,6 +438,7 @@ void ProcessDialogEvent()
 			link.l2 = "Nowhere in the Caribbean, you say? Alright, I'll bag it for awhile, then. But the rent cost, I must say, is a bit too high.";
 			link.l2.go = "exit";
 		break;
+		
 		case "storage_4":
 			NPChar.MoneyForStorage = GetNpcQuestPastMonthParam(NPChar,"Storage.Date") * sti(NPChar.Storage.MoneyForStorage); 
 			if(sti(NPChar.MoneyForStorage) > 0) 			
@@ -441,6 +468,7 @@ void ProcessDialogEvent()
                 }				
 			}
 		break;
+		
 		case "storage_5":
 			SetStorageGoodsToShip(&stores[sti(rColony.StoreNum)]);
 			AddMoneyToCharacter(pchar, -sti(NPChar.MoneyForStorage)); 
@@ -448,13 +476,16 @@ void ProcessDialogEvent()
 			DeleteAttribute(NPChar,"Storage.Activate");
 			DialogExit();
 		break;
+		
 		case "storage_6":
 			SetStorageGoodsToShip(&stores[sti(rColony.StoreNum)]);
 			DeleteAttribute(NPChar,"Storage.Activate");
 			NPChar.Storage.NoActivate = true;
 			DialogExit();
 		break;		
+
 		//--------------------------------- Аренда склада ---------------------------------
+		
 		case "ShipyardsMap_1":
 			dialog.text = "Heh! Alright, let's talk.";
 			link.l1 = "I need to get to the shipyard at night, when there's no one around.";
@@ -520,5 +551,6 @@ void ProcessDialogEvent()
 			//ставим таймер на возврат close_for_night
 			SetTimerFunction("ShipyardsMap_returnCFN", 0, 0, 2);
 		break;
+
 	}
 }

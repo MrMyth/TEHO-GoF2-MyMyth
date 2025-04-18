@@ -19,22 +19,26 @@ void ProcessCommonDialogEvent(ref NPChar, aref Link, aref NextDiag)
 				}
 			}
 		break;
+		
 		// Addon 2016-1 Jason пиратскаЯ линейка
 		case "mtraxx":
             dialog.text = "Could you be more clear, young man? What exactly brought you here? If you want to improve your ship - let's get to business.";
 			link.l1 = "Not entirely. The type of services you perform require goods which are not freely available in the store. I would like to offer you the type of materials you might require.";
 			link.l1.go = "mtraxx_1";
 		break;
+		
 		case "mtraxx_1":
             dialog.text = "Well-well... Ugh... Are you aware that only the authorities on this colony are allowed to deal with such strategic goods? You are free to provide your own silk for me to work on improving your ship, however, selling it is strictly forbidden. As is buying it from me - such activities will be fined rather heavily.";
 			link.l1 = "Well, this isn't a store, nor is it a customs office...";
 			link.l1.go = "mtraxx_2";
 		break;
+		
 		case "mtraxx_2":
             dialog.text = "I acquire all of the silk sailcloth directly from my clients, or purchase limited quantities with a special permission of the governor. If you don't have any further questions then please, let me get back to my job.";
 			link.l1 = "Hm... Very well. Have a good day, master.";
 			link.l1.go = "mtraxx_3";
 		break;
+		
 		case "mtraxx_3":
             DialogExit();
 			AddQuestRecord("Roger_2", "5");
@@ -43,3 +47,4 @@ void ProcessCommonDialogEvent(ref NPChar, aref Link, aref NextDiag)
 	}
 	UnloadSegment(NPChar.FileDialog2);  // если где-то выход внутри switch  по return не забыть сделать анлод
 }
+

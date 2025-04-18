@@ -6,10 +6,13 @@ void ProcessDialogEvent()
 	int Shit, i;
 	ref refStore;
 	ref sld;
+	
 	DeleteAttribute(&Dialog,"Links");
+
 	makeref(NPChar,CharacterRef);
 	makearef(Link, Dialog.Links);
 	makearef(Diag, NPChar.Dialog);
+	
 	switch(Dialog.CurrentNode)
 	{
         case "exit":
@@ -17,12 +20,14 @@ void ProcessDialogEvent()
 			NPChar.quest.meeting = NPC_Meeting;
 			DialogExit();
 		break;
+
         case "First time":
 			Diag.TempNode = "first time";
 			if(CheckAttribute(PChar, "quest.Contraband.active"))
 			{
 				int iTmp = false;
 				int iChIdx;
+
 				// поиск мин.  те старшего класса
 				for (i=0; i<COMPANION_MAX; i++)
 				{
@@ -33,6 +38,7 @@ void ProcessDialogEvent()
             			if (GetCharacterShipClass(sld) < ((MOD_SKILL_ENEMY_RATE/5.0) + 1.5)) iTmp = true;
 					}
 				}
+				
 				if (iTmp)
 				{
 					dialog.text = NPCStringReactionRepeat("Weren't you told not to come here on such noticeable ship! Why didn't you bring a pair of man-of-wars? Get lost and come on a smaller ship.", 
@@ -46,6 +52,7 @@ void ProcessDialogEvent()
 						link.l1.go = DialogGoNodeRepeat("exit", "", "", "", npchar, Dialog.CurrentNode);	
 					break;
 				}
+			
 				Dialog.snd = "voice\SMSH\SMSH001";
 				dialog.Text = RandPhraseSimple("Hey, what are doing here, "+ GetSexPhrase("pal","girl") +"?",
                                           RandSwear() + "What's your business here?!");
@@ -130,6 +137,7 @@ void ProcessDialogEvent()
 						//поплыл, иначе RemoveTravelSmugglers грохнет всю ветку
 						PChar.GenQuest.contraTravel.ship = true;
 						PChar.quest.Munity = "";  // признак выхода с палубы
+						
 						SetLaunchFrameFormParam(".. " + sti(Pchar.GenQuest.contraTravel.destination.days) + " days passed." + NewStr() + "Smuggler's ship deck.",
 						                        "Reload_To_Location", 0.1, 5.0);
                         bQuestCheckProcessFreeze = true;
@@ -162,6 +170,7 @@ void ProcessDialogEvent()
 				}
 			}
 		break;
+
 		case "No_Ship":
 			Dialog.snd = "voice\SMSH\SMSH003";
 			dialog.Text = "Are you carrying it on your backbone? Where is your ship?";
@@ -170,12 +179,14 @@ void ProcessDialogEvent()
 			Link.l2 = "The deal is over!";
 			Link.l2.go = "Cancellation";
 		break;
+
 		case "No_ship_1":
 			Dialog.snd = "voice\SMSH\SMSH004";
 			dialog.Text = "We are honest men and we won't cheat on you. Bring your ship here, just don't make patrols follow you.";
 			Link.l1 = "Fine. Wait me here.";
 			Link.l1.go = "Exit";
 		break;
+
 		case "Cancellation":
             if (sti(Pchar.quest.Contraband.Counter) == 0)
             {
@@ -190,6 +201,7 @@ void ProcessDialogEvent()
     			Link.l1.go = "Finish_exit";
 			}
 		break;
+
 		case "Cancellation_1":
 			if( makeint(Pchar.rank) <= 3 || GetSummonSkillFromNameToOld(Pchar, SKILL_FENCING) <= 5 || GetSummonSkillFromNameToOld(Pchar, SKILL_LEADERSHIP) <= 5 )
 			{
@@ -219,6 +231,7 @@ void ProcessDialogEvent()
 				Link.l1.go = "Exit_cancel";			
 			}	
 		break;
+
 		case "GenQuestKillContraband_1":
 			//счетчик подстав по "метро"...
 			if(CheckAttribute(PChar, "GenQuest.contraTravel.active") && sti(PChar.GenQuest.contraTravel.active) == true)
@@ -230,6 +243,7 @@ void ProcessDialogEvent()
 			Link.l1 = "Then you are all dead. I've got a clear order - to eliminate all of you if you will resist.";
 			Link.l1.go = "Exit_fight";
 		break;
+		
 		case "Exit_Cancel":
             DeleteAttribute(Pchar, "quest.Contraband");
             CloseQuestHeader("Gen_Contraband");
@@ -240,21 +254,26 @@ void ProcessDialogEvent()
 			NPChar.quest.meeting = NPC_Meeting;
 			DialogExit();
 		break;
+		
 		case "Exit_fight":
             DeleteAttribute(Pchar, "quest.Contraband.active");
 			DeleteAttribute(Pchar, "quest.Contraband.counter");			
+
 			AddSimpleRumourCity("Heard the last news? The local smugglers were round up by patrol not long ago. And you know what? Captain who had a deal with them escaped!" +
 				"He had dashing lads in his crew and the whole patrol was killed. And our local smugglers just vanished. There wad nothing found on the shore. No goods, no stash and smugglers. See, how they do their business here!", Pchar.quest.contraband.City, 3, 5, "");	
+
 			CloseQuestHeader("Gen_Contraband");
 			Pchar.quest.Rand_Smuggling.over = "yes";
 			LAi_group_FightGroups(LAI_GROUP_PLAYER, pchar.GenQuest.Smugglers_Group, true);
 			RemoveSmugglersFromShore();
 			RemoveAllContraGoods(CharacterFromId(pchar.GenQuest.Contraband.SmugglerId));
 			LAi_SetFightMode(Pchar, true);
+
 			Diag.CurrentNode = Diag.TempNode;
 			NPChar.quest.meeting = NPC_Meeting;
 			DialogExit();
 		break;
+
 		case "Finish_exit":
             // таможня на суше
             if(GetSummonSkillFromName(pchar, "Sneak") < Rand(120))
@@ -272,13 +291,17 @@ void ProcessDialogEvent()
 			ChangeContrabandRelation(pchar, 15);
             OfficersReaction("bad");
             ChangeCharacterComplexReputation(pchar,"nobility", -1);
+            
             CloseQuestHeader("Gen_Contraband");
+            
 			DeleteAttribute(Pchar, "quest.Contraband.active");
 			DeleteAttribute(Pchar, "quest.Contraband.counter");
+	
 			Pchar.quest.Rand_Smuggling.over = "yes";
 			RemoveSmugglersFromShore();
 			RemoveAllContraGoods(CharacterFromId(pchar.GenQuest.Contraband.SmugglerId));
 		break;
+
 		case "Exchange":
 			// сама торговля -->
             if(FindContrabandGoods(Pchar) == -1 && sti(Pchar.quest.Contraband.Counter) == 0)
@@ -306,6 +329,7 @@ void ProcessDialogEvent()
         			}
         			// при убегании от патруля на карту - корабли трем
         			SetTimerCondition("Rand_ContrabandInterruptionAtSeaEnded", 0, 0, 2, false);// если в порту сидим, спим, то 2 день
+        			
                     Pchar.quest.Rand_ContrabandAtSeaEnded.win_condition.l1 = "MapEnter";
         			Pchar.quest.Rand_ContrabandAtSeaEnded.win_condition = "Rand_ContrabandAtSeaEnded";
     			}
@@ -320,10 +344,12 @@ void ProcessDialogEvent()
 				}				
             }
 		break;
+		
 		case "Exchange1":
 			NPChar.quest.meeting = NPC_Meeting;
 			Diag.CurrentNode = Diag.TempNode;		 
 			DialogExit();
+			
 			LaunchContrabandTrade(CharacterFromId(pchar.GenQuest.Contraband.SmugglerId),  sti(pchar.FindContrabandGoods.StoreIdx));	
 		break;				
 	}

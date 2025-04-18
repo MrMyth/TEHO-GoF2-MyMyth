@@ -2,48 +2,63 @@
 #define CONFIRMMODE_SAVE_DELETE		2
 #define CONFIRMMODE_SAVE_OVERWRITE	3
 #define CONFIRMMODE_LOAD_GAME		4
+
 #define SAVEIMAGE_UPDATE_TIME	50
+
 bool bThisSave;
 bool bIsGameProcessNow;
 aref scrshot;
 object emptyscrshot;
+
 int g_nLablesFileID = -1;
 int g_nInterfaceFileID = -1;
 string currentProfile;
+
 int g_nCurrentSaveIndex = 0;
 int g_nFirstSaveIndex = -1;
 int g_nSaveQuantity = 0;
+
 object g_oSaveList[10];
 object g_oSaveContainer;
+
 int g_nConfirmMode;
 string g_sConfirmReturnWindow;
 bool isMainMenuChecker = false;
+
 void InitInterface_BB(string iniName, bool isSave, bool isMainMenu)
 {
 	if( CheckAttribute(&PlayerProfile,"name") ) {
 		PlayerProfile.old_name = PlayerProfile.name;
 	}
+
 	isMainMenuChecker = isMainMenu;
 	bThisSave = isSave;
 	bIsGameProcessNow = true;
 	if(bThisSave) GameInterface.title = "titleSave";
 	else GameInterface.title = "titleLoad";
+
 	g_nLablesFileID = LanguageOpenFile("LocLables.txt");
 	g_nInterfaceFileID = LanguageOpenFile("interface_strings.txt");
+
 	SendMessage(&GameInterface,"ls",MSG_INTERFACE_INIT,iniName);
+
 	if( bThisSave ) {
 		SetSelectable("BTN_PROFILE",false);
 		SendMessage( &GameInterface,"lsls",MSG_INTERFACE_MSG_TO_NODE,"BTN_SAVELOAD", 0, "Save" );
 	}
+
 	// by default first save is selected
 	SendMessage( &GameInterface, "lsll", MSG_INTERFACE_MSG_TO_NODE, "SAVEIMG1", 5, true );
 	SendMessage( &GameInterface, "lslll", MSG_INTERFACE_MSG_TO_NODE, "SAVENOTES", 3, 1, argb(255,255,255,255) );
 	SendMessage( &GameInterface, "lslll", MSG_INTERFACE_MSG_TO_NODE, "SAVENOTES", 3, 2, argb(255,255,255,255) );
 	SendMessage( &GameInterface, "lslll", MSG_INTERFACE_MSG_TO_NODE, "SAVENOTES", 3, 3, argb(255,255,255,255) );
+
 	//FillProfileList();
+	
 	FillProfileList();
 	FindScrshotClass();
 	InitSaveObjList();
+
 	SetEventHandler("exitCancel","ProcessCancelExit",0);
 	SetEventHandler("eventBtnAction","procBtnAction",0);
 	SetEventHandler("eventSelecterActivate","procSelecterActivate",0);
@@ -57,7 +72,10 @@ void InitInterface_BB(string iniName, bool isSave, bool isMainMenu)
 	SetEventHandler("SaveLoad","SaveLoad",0);
 	SetEventHandler("eventSaveCustom","ProcessCustomSaveAction",0);
 	SetEventHandler("ScrollTopChange","ProcScrollChange",0);
+
+
 	PostEvent( "evLoadOneSaveInfo",1 );
+
 	if(isSave == false && isMainMenu == true && sti(PlayerProfile.profilesQuantity) > 1)
 	{
 		ProcChooseProfileFromList();
@@ -67,9 +85,12 @@ void InitInterface_BB(string iniName, bool isSave, bool isMainMenu)
 	{
 		SetCurrentProfile( GetCurrentProfile() );
 	}
+
+
 	//SetCurrentNode("PROFILE_WINDOW_BTN_CHOOSE");
 	//SetSelectable("PROFILE_WINDOW_BTN_CHOOSE", false);
 }
+
 void SetCurrentProfile( string sProfileName )
 {
 	currentProfile = sProfileName;
@@ -98,6 +119,7 @@ void SetCurrentProfile( string sProfileName )
 	if( bThisSave ) {
 		setInitSelection( g_nSaveQuantity );
 	} else {
+		
 		setInitSelection( 0 );
 	}
 	SetClickable("SAVESCROLL",g_nSaveQuantity>10);
@@ -106,6 +128,7 @@ void SetCurrentProfile( string sProfileName )
 	// read option from profile
 	LoadGameOptions();
 }
+
 void setInitSelection(int _sel)
 {
     if(_sel < 0 || _sel > g_nSaveQuantity) {
@@ -117,6 +140,7 @@ void setInitSelection(int _sel)
     int nLine = 0;
     if(nLineQ != 0)
         nLine = makeint( makefloat(nLineQ) * (makefloat(_sel / 5) / makefloat(nLineQ) ));
+
     int imgIdx = _sel + 1;
     if(nLine > nLinesPer) {
         FillSaveList(nLine * 5);
@@ -128,6 +152,7 @@ void setInitSelection(int _sel)
     string sName = "SAVEIMG" + imgIdx;
     PostEvent("eventSaveClick", nTimeout, "ls", 0, sName);
 }
+
 void ProcessCancelExit()
 {
 	DelEventHandler("ScrollPosChange","ScrollPosChange");
@@ -143,9 +168,12 @@ void ProcessCancelExit()
 	DelEventHandler("SaveLoad","SaveLoad");
 	DelEventHandler("eventSaveCustom","ProcessCustomSaveAction");
 	DelEventHandler("ScrollTopChange","ProcScrollChange");
+
+
 	if( CheckAttribute(&PlayerProfile,"old_name") ) {
 		PlayerProfile.name = PlayerProfile.old_name;
 	}
+
 	if( CheckAttribute(&InterfaceStates,"showGameMenuOnExit") && sti(InterfaceStates.showGameMenuOnExit) == true)
 	{	
 		// Warship Fix свечения
@@ -153,21 +181,27 @@ void ProcessCancelExit()
 		{
 			SetGlowParams(1.0, sti(InterfaceStates.GlowEffect), 2));
 		}
+		
 		IDoExit(RC_INTERFACE_LAUNCH_GAMEMENU);
 		return;
 	}
+
 	IDoExit(RC_INTERFACE_SAVELOAD_EXIT);
+
 	if( !CheckAttribute(&InterfaceStates,"InstantExit") || sti(InterfaceStates.InstantExit)==false )
 	{
 		ReturnToMainMenu();
 	}
 }
+
 void IDoExit(int exitCode)
 {
 	DeleteAttribute(&PlayerProfile,"old_name");
+
 	GameInterface.SavePath = "SAVE";
 	LanguageCloseFile(g_nLablesFileID);
 	LanguageCloseFile(g_nInterfaceFileID);
+
     interfaceResultCommand = exitCode;
 	if( CheckAttribute(&InterfaceStates,"InstantExit") && sti(InterfaceStates.InstantExit)==true ) {
 		EndCancelInterface(false);
@@ -175,51 +209,64 @@ void IDoExit(int exitCode)
 		EndCancelInterface(true);
 	}
 }
+
 void FindScrshotClass()
 {
 	string layerName;
 	if(bSeaActive && !bAbordageStarted) layerName = SEA_REALIZE;
 	else layerName = "realize"; // TODO: Investigate whether this works. Shouldn't it be just REALIZE?
+
 	if( !GetEntity(&scrshot, "scrshoter") ) {
 		makearef(scrshot,emptyscrshot);
 	}
 }
+
 string GetCurrentProfile()
 {
 	if( CheckAttribute(&PlayerProfile, "name") && PlayerProfile.name!="" ) {
 		return PlayerProfile.name;
 	}
 	trace("error (save_load.c) : PlayerProfile.name attribute not found.");
+
 	object FolderList;
 	XI_FindFoldersWithoutNetsave("SAVE"+ "\*", &FolderList);
+
 	int num = GetAttributesNum(&FolderList);
 	if( num > 0 )
 		return GetAttributeValue( GetAttributeN(&FolderList, num - 1) );
 	return "";
 }
+
 void FillProfileList()
 {
 	PlayerProfile.profilesQuantity = 0;
+
 	object FolderList;
 	XI_FindFoldersWithoutNetsave("SAVE\*", &FolderList);
+
 	int num = GetAttributesNum(&FolderList);
 	string folderName;
+
 	int i = 0;
 	string attr;
 	for(i=0; i<num; i++) {
 		attr = "profile_" + i;
 		PlayerProfile.(attr) = GetAttributeValue( GetAttributeN(&FolderList,i) );
 	}
+
 	PlayerProfile.profilesQuantity = num;
 }
+
 void procSelecterActivate()
 {
 	SaveLoadCurrentIntoSlot();
 }
+
 void procBtnAction()
 {
 	int iComIndex = GetEventData();
 	string sNodName = GetEventData();
+
 	if( iComIndex == ACTION_RIGHTSTEP ) {
 		if( sNodName == "BTN_PROFILE" ) {
 			if( GetSelectable("BTN_SAVELOAD") ) {
@@ -240,6 +287,7 @@ void procBtnAction()
 		}
 		return;
 	}
+
 	if( iComIndex == ACTION_LEFTSTEP ) {
 		if( sNodName == "BTN_EXIT" ) {
 			if( GetSelectable("BTN_DELETE") ) {
@@ -260,6 +308,7 @@ void procBtnAction()
 		}
 		return;
 	}
+
 	if( iComIndex == ACTION_ACTIVATE || iComIndex == ACTION_MOUSECLICK ) {
 		if( sNodName == "BTN_PROFILE" ) {
 			ProcChooseProfileFromList();
@@ -272,6 +321,7 @@ void procBtnAction()
 		}
 	}
 }
+
 void SaveLoadCurrentIntoSlot()
 {
 	if( bThisSave ) {
@@ -293,6 +343,7 @@ void SaveLoadCurrentIntoSlot()
 		}
 	}
 }
+
 void ProcChooseProfileFromList()
 {
 	// disable all windows
@@ -304,6 +355,7 @@ void ProcChooseProfileFromList()
 	FillProfileListIntoTable();
 	SetCurrentNode( "PROFILE_WINDOW_LIST" );
 }
+
 void FillProfileListIntoTable()
 {
 	// Fill Profile List
@@ -327,6 +379,7 @@ void FillProfileListIntoTable()
 	GameInterface.profile_window_list.select = nSel;
 	SendMessage( &GameInterface, "lsl", MSG_INTERFACE_MSG_TO_NODE, "PROFILE_WINDOW_LIST", 0 );
 }
+
 void ProcExitProfile()
 {
 	// disable all windows
@@ -336,14 +389,17 @@ void ProcExitProfile()
 	// set current node to button for start profile choosing
 	SetCurrentNode( "BTN_PROFILE" );
 }
+
 void ProcChooseProfile()
 {
 	string attr = "profile_" + (sti(GameInterface.profile_window_list.select)-1);
 	if( CheckAttribute(&PlayerProfile,attr) ) {
 		SetCurrentProfile( PlayerProfile.(attr) );
 	}
+
 	ProcExitProfile();
 }
+
 void ProcDeleteProfile()
 {
 	int nProfileIdx = sti(GameInterface.profile_window_list.select) - 1;
@@ -351,6 +407,7 @@ void ProcDeleteProfile()
 	string attr = "profile_" + nProfileIdx;
 	string sThisProfile = PlayerProfile.(attr);
 	DeleteProfile( PlayerProfile.(attr) );
+
 	// shifting profile list
 	int nProfilesQ = sti(PlayerProfile.profilesQuantity);
 	nProfilesQ--;
@@ -364,19 +421,23 @@ void ProcDeleteProfile()
 	DeleteAttribute( &PlayerProfile, "profile_"+nProfilesQ );
 	PlayerProfile.profilesQuantity = nProfilesQ;
 	FillProfileListIntoTable();
+
 	if( sThisProfile == currentProfile )
 	{
 		SetCurrentProfile("");
 	}
 }
+
 void DeleteProfile(string profileName)
 {
 	string oldpath = "";
+	
 	// Warship 08.07.09 fix - ошибка движка об отсутствии атрибута
 	if(CheckAttribute(GameInterface, "SavePath"))
 	{
 		oldpath = GameInterface.SavePath;
 	}
+	
 	GameInterface.SavePath = "SAVE\"+profileName;
 	// deleting all files from profile folder
 	int nSaveNum= 0;
@@ -390,11 +451,14 @@ void DeleteProfile(string profileName)
 	XI_DeleteFolder( GameInterface.SavePath );
 	GameInterface.SavePath = oldpath;
 }
+
 void procSelecterMove()
 {
 	int iComIndex = GetEventData();
+
 	int nLeft,nTop,nRight,nBottom;
 	bool bMakeMove = false;
+
 	switch( iComIndex )
 	{
 	case ACTION_RIGHTSTEP:
@@ -410,10 +474,12 @@ void procSelecterMove()
 		bMakeMove = GetMoveToOtherSave( g_nCurrentSaveIndex+5, &nLeft,&nTop,&nRight,&nBottom );
 	break;
 	}
+
 	if( bMakeMove ) {
 		SendMessage( &GameInterface, "lslllll", MSG_INTERFACE_MSG_TO_NODE,"SAVE_SELECTER",0, nLeft,nTop,nRight,nBottom );
 	}
 }
+
 void SetSelecting(int nSlot,bool bSelect)
 {
 	string sNodeName;
@@ -429,13 +495,16 @@ void SetSelecting(int nSlot,bool bSelect)
 	SendMessage( &GameInterface, "lslll", MSG_INTERFACE_MSG_TO_NODE, "SAVENOTES", 3, nSlot*3+2, nColor );
 	SendMessage( &GameInterface, "lslll", MSG_INTERFACE_MSG_TO_NODE, "SAVENOTES", 3, nSlot*3+3, nColor );
 }
+
 void ProcScrollChange()
 {
 	int changeNum = GetEventData();
 	trace("changeNum = " + changeNum);
 	if(changeNum == 0) return;
+	
 	bool bMakeMove = false;
 	int nLeft,nTop,nRight,nBottom;
+	
 	if(changeNum>0) 
 	{
 		bMakeMove = GetMoveToOtherSave( g_nCurrentSaveIndex+5, &nLeft,&nTop,&nRight,&nBottom );
@@ -444,20 +513,26 @@ void ProcScrollChange()
 	{
 		bMakeMove = GetMoveToOtherSave( g_nCurrentSaveIndex-5, &nLeft,&nTop,&nRight,&nBottom );
 	}
+
 	if( bMakeMove ) 
 	{
 		SendMessage( &GameInterface, "lslllll", MSG_INTERFACE_MSG_TO_NODE,"SAVE_SELECTER",0, nLeft,nTop,nRight,nBottom );
 	}
 }
+
+
 bool GetMoveToOtherSave( int nNewSaveIndex, ref rLeft, ref rTop, ref rRight, ref rBottom )
 {
 	if( nNewSaveIndex < 0 ) return false;
 	//if( nNewSaveIndex > 9 ) return false;
 	if( g_nCurrentSaveIndex == nNewSaveIndex ) return false;
+
 	int nMaxQ = (g_nSaveQuantity + 4)/ 5 * 5 + 5;
 	if( nNewSaveIndex > nMaxQ ) return false;
+
 	int nOldIdx = g_nCurrentSaveIndex - g_nFirstSaveIndex;
 	int nNewIdx = nNewSaveIndex - g_nFirstSaveIndex;
+
 	if( nNewIdx < 0 ) {
 		if( g_nFirstSaveIndex > 0 ) {
 			FillSaveList(g_nFirstSaveIndex - 5);
@@ -468,6 +543,7 @@ bool GetMoveToOtherSave( int nNewSaveIndex, ref rLeft, ref rTop, ref rRight, ref
 		FillSaveList(g_nFirstSaveIndex + 5);
 		nNewIdx = nNewSaveIndex - g_nFirstSaveIndex;
 	}
+
 	string sNodName = "SAVEIMG"+(nNewIdx+1);
 	if( nNewIdx>0 && GetSelectable(sNodName)==false ) {
 		nNewIdx = g_nCurrentSaveIndex - g_nFirstSaveIndex;
@@ -477,13 +553,16 @@ bool GetMoveToOtherSave( int nNewSaveIndex, ref rLeft, ref rTop, ref rRight, ref
 			return false; // нельзя перейти на новый элемент (на первый всегда можно)
 		}
 	}
+
 	// старое немигает новое подмигивает & старый текст серый новый выделенный - светлый
 	if( g_nCurrentSaveIndex>=0 && nOldIdx>=0 && nOldIdx<10 ) {
 		SetSelecting(nOldIdx,false);
 	}
 	SetSelecting(nNewIdx,true);
+
 	g_nCurrentSaveIndex = nNewSaveIndex;
 	ReloadSaveInfo();
+	
 	if(g_nSaveQuantity > 5)
 	{	
 		int nLineQ = g_nSaveQuantity / 5;
@@ -491,6 +570,7 @@ bool GetMoveToOtherSave( int nNewSaveIndex, ref rLeft, ref rTop, ref rRight, ref
 		//trace(" nLineQ " + nLineQ + " g_nCurrentSaveIndex " + g_nCurrentSaveIndex);
 		SendMessage(&GameInterface,"lsf",MSG_INTERFACE_SET_SCROLLER,"SAVESCROLL",makefloat(nLineCur)/makefloat(nLineQ));
 	}
+
 	int nLeft = 0;
 	int nTop = 0;
 	int nRight = 0;
@@ -516,21 +596,25 @@ bool GetMoveToOtherSave( int nNewSaveIndex, ref rLeft, ref rTop, ref rRight, ref
 	rBottom = nBottom;
 	return true;
 }
+
 void procSaveClick()
 {
 	int iComIdx = GetEventData();
 	string sNodName = GetEventData();
+
 	if( sNodName == "SAVEIMG1" ) { SelectSaveImage( g_nFirstSaveIndex + 0 ); return; }
 	if( sNodName == "SAVEIMG2" ) { SelectSaveImage( g_nFirstSaveIndex + 1 ); return; }
 	if( sNodName == "SAVEIMG3" ) { SelectSaveImage( g_nFirstSaveIndex + 2 ); return; }
 	if( sNodName == "SAVEIMG4" ) { SelectSaveImage( g_nFirstSaveIndex + 3 ); return; }
 	if( sNodName == "SAVEIMG5" ) { SelectSaveImage( g_nFirstSaveIndex + 4 ); return; }
+
 	if( sNodName == "SAVEIMG6" ) { SelectSaveImage( g_nFirstSaveIndex + 5 ); return; }
 	if( sNodName == "SAVEIMG7" ) { SelectSaveImage( g_nFirstSaveIndex + 6 ); return; }
 	if( sNodName == "SAVEIMG8" ) { SelectSaveImage( g_nFirstSaveIndex + 7 ); return; }
 	if( sNodName == "SAVEIMG9" ) { SelectSaveImage( g_nFirstSaveIndex + 8 ); return; }
 	if( sNodName == "SAVEIMG10" ) { SelectSaveImage( g_nFirstSaveIndex + 9 ); return; }
 }
+
 void SelectSaveImage( int nSaveIndex )
 {
 	int nLeft,nTop,nRight,nBottom;
@@ -540,14 +624,17 @@ void SelectSaveImage( int nSaveIndex )
 	}
 	SetCurrentNode( "SAVE_SELECTER" );
 }
+
 void FillSaveList(int nFirstSaveIndex)
 {
 	if( nFirstSaveIndex<0 ) nFirstSaveIndex = 0;
 	nFirstSaveIndex = nFirstSaveIndex / 5;
 	nFirstSaveIndex = nFirstSaveIndex * 5;
+
 	bool bNoRebuildSaveList = (g_nFirstSaveIndex>=0);
 	int nDelta = nFirstSaveIndex - g_nFirstSaveIndex;
 	g_nFirstSaveIndex = nFirstSaveIndex;
+
 	if( bNoRebuildSaveList && (nDelta==5) ) {
 		// перенос нижней линии записей вверх
 		MoveSaveLine(1,0);
@@ -569,6 +656,7 @@ void FillSaveList(int nFirstSaveIndex)
 	FillSaveLine(1,nFirstSaveIndex+5);
 	ReloadSaveInfo();
 }
+
 void FillSaveLine(int nLine, int nBegIndex)
 {
 	int nBeg = nLine * 5;
@@ -585,6 +673,7 @@ void FillSaveLine(int nLine, int nBegIndex)
 		}
 	}
 }
+
 void FillEmptySaveSlot(int nSlot)
 {
 	ClearSaveInfoByIndex( nSlot );
@@ -593,6 +682,7 @@ void FillEmptySaveSlot(int nSlot)
 	g_oSaveList[nSlot].loaded = 1;
 	ShowDataForSave(nSlot,"empty",0,"");
 }
+
 void ShowDataForSave(int nSlot, string picname, int picpointer, string strdata)
 {
 	string nodname = "SAVEIMG" + (nSlot+1);
@@ -608,11 +698,13 @@ void ShowDataForSave(int nSlot, string picname, int picpointer, string strdata)
 			SendMessage( &GameInterface, "lslls", MSG_INTERFACE_MSG_TO_NODE, nodname, 2, 0,"interfaces\SaveIcons\SaveCorrupted.tga" );
 		}
 	}
+	
 	if( picpointer ) {
 		SendMessage( &GameInterface, "lsll", MSG_INTERFACE_MSG_TO_NODE, nodname, 7, picpointer );
 		bClickable = true;
 	}
 	SetSelectable( nodname, bClickable );
+
 	string fileSystemTime = "";
 	string fileSystemDate = "";
 	string sSystemTimeString = XI_ConvertString("No Time");
@@ -622,6 +714,7 @@ void ShowDataForSave(int nSlot, string picname, int picpointer, string strdata)
 		sSystemTimeString = GetSystemTimeString( fileSystemTime, fileSystemDate );
 	}
 	SendMessage( &GameInterface,"lslls",MSG_INTERFACE_MSG_TO_NODE, "SAVENOTES", 1, nSlot*3+3, "#"+sSystemTimeString );
+
 	if( strdata != "" )
 	{
 		string facestr, locName, timeStr, language, playtime;
@@ -642,14 +735,17 @@ void ShowDataForSave(int nSlot, string picname, int picpointer, string strdata)
 		g_oSaveList[nSlot].faceinfo = "";
 		g_oSaveList[nSlot].playtime = "";
 	}
+
 	if( (g_nCurrentSaveIndex-g_nFirstSaveIndex) == nSlot ) {
 		ReloadSaveInfo();
 	}
 }
+
 string GetSystemTimeString( string systemTime, string systemDate )
 {
 	return systemTime + " " + systemDate;
 }
+
 void MoveSaveLine(int nSrcLine, int nDstLine)
 {
 	int nSrc = nSrcLine * 5;
@@ -659,6 +755,7 @@ void MoveSaveLine(int nSrcLine, int nDstLine)
 		MoveSaveInfo(nSrc+i,nDst+i);
 	}
 }
+
 void InitSaveObjList()
 {
 	int i;
@@ -667,6 +764,7 @@ void InitSaveObjList()
 		g_oSaveList[i].saveidx = -1;
 	}
 }
+
 int FindSaveInfoIndex(int iSaveIdx)
 {
 	int i;
@@ -678,17 +776,20 @@ int FindSaveInfoIndex(int iSaveIdx)
 	}
 	return -1;
 }
+
 void ClearSaveInfoByIndex(int i)
 {
 	if( g_oSaveList[i].saveidx == -1 ) {return;}
 	DeleteAttribute( &g_oSaveList[i], "" );
 	g_oSaveList[i].saveidx = -1;
 }
+
 void MoveSaveInfo(int nSrc, int nDst)
 {
 	CopyAttributes( &g_oSaveList[nDst], &g_oSaveList[nSrc] );
 	DeleteAttribute( &g_oSaveList[nSrc], "" );
 	g_oSaveList[nSrc].saveidx = -1;
+
 	// copy info from src control to dst control
 	string sDstImgNod = "SAVEIMG"+(nDst+1);
 	string sSrcImgNod = "SAVEIMG"+(nSrc+1);
@@ -700,6 +801,7 @@ void MoveSaveInfo(int nSrc, int nDst)
 	// set src control to empty
 	ShowDataForSave( nSrc, "empty", 0, "" );
 }
+
 void LoadInfo(int nInfoIdx, int nSaveIdx, string sSaveName)
 {
 	ClearSaveInfoByIndex( nInfoIdx );
@@ -708,6 +810,7 @@ void LoadInfo(int nInfoIdx, int nSaveIdx, string sSaveName)
 	g_oSaveList[nInfoIdx].loaded = 0;
 	ShowDataForSave(nInfoIdx,"loading",0,"");
 }
+
 void procLoadOneSaveInfo()
 {
 	int i;
@@ -740,10 +843,12 @@ void procLoadOneSaveInfo()
 	}
 	PostEvent( "evLoadOneSaveInfo",SAVEIMAGE_UPDATE_TIME );
 }
+
 void procProfileBtnAction()
 {
 	int iComIndex = GetEventData();
 	string sNodName = GetEventData();
+
 	if( iComIndex == ACTION_ACTIVATE || iComIndex == ACTION_MOUSECLICK ) {
 		if( sNodName == "PROFILE_WINDOW_BTN_EXIT" ) {
 			if(isMainMenuChecker == true && g_nSaveQuantity == 0)
@@ -765,6 +870,7 @@ void procProfileBtnAction()
 		return;
 	}
 }
+
 bool ParseSaveData(string fullSaveData, ref facestr, ref locationStr, ref timeStr, ref languageID, ref playtime)
 {
 	string lastStr;
@@ -775,6 +881,7 @@ bool ParseSaveData(string fullSaveData, ref facestr, ref locationStr, ref timeSt
 	GetNextSubStr(lastStr, languageID, &lastStr, "@");
 	return true;
 }
+
 bool GetNextSubStr(string inStr, ref outStr, ref lastStr, string separator)
 {
 	if(inStr=="")
@@ -803,11 +910,13 @@ bool GetNextSubStr(string inStr, ref outStr, ref lastStr, string separator)
 	else lastStr = "";
 	return true;
 }
+
 void ProcessDeleteSaveFile()
 {
 	string curSave = GetCurSaveName();
 	if( curSave=="" ) { return; }
 	SendMessage(&GameInterface,"ls",MSG_INTERFACE_DELETE_SAVE_FILE,curSave);
+
 	int n, nDst, nSrc;
 	string attrDst,attrSrc;
 	aref arSrc,arDst;
@@ -825,6 +934,7 @@ void ProcessDeleteSaveFile()
 		} else {
 			DeleteAttribute( &g_oSaveContainer, attrDst );
 		}
+
 		nDst = n - g_nFirstSaveIndex;
 		nSrc = nDst + 1;
 		if( nDst<10 ) {
@@ -850,18 +960,23 @@ void ProcessDeleteSaveFile()
 			SelectSaveImage( g_nCurrentSaveIndex - 1 );
 		}
 	}
+
 	ReloadSaveInfo();
 }
+
 void ProcessLoad()
 {
 	string sCurSave = GetCurSaveName();
 	PlayerProfile.name = currentProfile;
+
 	IDoExit(RC_INTERFACE_SAVELOAD_EXIT);
 	ResetSound();
+
 	SetEventHandler("evntLoad","LoadGame",1);
 	PostEvent( "evntLoad", 0, "s", "SAVE\"+PlayerProfile.name+"\"+sCurSave );
 	Event("evntPreLoad");
 }
+
 void DeleteCurrent()
 {
 	string curSave = GetCurSaveName();
@@ -869,10 +984,12 @@ void DeleteCurrent()
 		SendMessage(&GameInterface,"ls",MSG_INTERFACE_DELETE_SAVE_FILE,curSave);
 	}
 }
+
 void ProcessSave()
 {
 	LaunchCustomSaveGame();
 }
+
 void LaunchCustomSaveGame()
 {
 	string curLocName = GetCurLocationName();
@@ -886,12 +1003,15 @@ void LaunchCustomSaveGame()
 		saveName = GetClampedSaveName(curLocName,idx+1);
 		idx++;
 	}
+
 	XI_WindowDisable("MAIN_WINDOW", true);
 	XI_WindowDisable("CUSTOM_SAVE_WINDOW", false);
 	XI_WindowShow("CUSTOM_SAVE_WINDOW", true);    
+
 	GameInterface.CUSTOM_SAVE_NAME.str = saveName;
 	SetFormatedText("CUSTOM_SAVE_MSG", "Enter the name of the saved game :");
 }
+
 void ExitSaveCustomGame()
 {
 	XI_WindowShow( "CUSTOM_SAVE_WINDOW", false );
@@ -899,12 +1019,15 @@ void ExitSaveCustomGame()
 	// set current node to button for start profile choosing
 	SetCurrentNode( "BTN_PROFILE" );
 }
+
 void ProcessCustomSaveAction()
 {
 	int iComIndex = GetEventData();
 	string sNodName = GetEventData();
+
 	if( iComIndex == ACTION_ACTIVATE || iComIndex == ACTION_MOUSECLICK ) {
 		if( sNodName == "CUSTOM_SAVE_BTN_OK" ) {
+           
             DeleteCurrent(); // сначала грохнем старый сейв воизбежание...
 			string saveName = GameInterface.CUSTOM_SAVE_NAME.str;
 			string sSaveDescriber = GetSaveDataString(saveName);
@@ -923,11 +1046,13 @@ void ProcessCustomSaveAction()
 		}		
 	}
 }
+
 string GetClampedSaveName(string sInName, int nNumber)
 {
 	if(nNumber>0) {return sInName + " " + nNumber;}
 	else {return sInName;}
 }
+
 string GetCurSaveName()
 {
 	if( g_nCurrentSaveIndex<0 || g_nCurrentSaveIndex>=g_nSaveQuantity ) return "";
@@ -937,6 +1062,7 @@ string GetCurSaveName()
 	}
 	return "";
 }
+
 void DoConfirm( int nConfirmMode )
 {
 	g_sConfirmReturnWindow = "MAIN_WINDOW";
@@ -948,6 +1074,7 @@ void DoConfirm( int nConfirmMode )
 	XI_WindowDisable( "CONFIRM_WINDOW", false );
 	XI_WindowShow( "CONFIRM_WINDOW", true );
 	SetCurrentNode( "CONFIRM_YES" );
+
 	g_nConfirmMode = nConfirmMode;
 	switch( nConfirmMode )
 	{
@@ -966,10 +1093,12 @@ void DoConfirm( int nConfirmMode )
 	}
 	SendMessage( &GameInterface, "lsl", MSG_INTERFACE_MSG_TO_NODE, "CONFIRM_TEXT", 5 ); // центрируем по вертикали
 }
+
 void procConfirm()
 {
 	int iComIndex = GetEventData();
 	string sNodName = GetEventData();
+
 	if( iComIndex==ACTION_ACTIVATE || iComIndex==ACTION_MOUSECLICK ) {
 		if( sNodName=="CONFIRM_YES" ) {
 			UndoConfirm(true);
@@ -981,6 +1110,7 @@ void procConfirm()
 		UndoConfirm(false);
 	}
 }
+
 void UndoConfirm(bool bPositiveChoose)
 {
 	// disable confirm
@@ -988,6 +1118,7 @@ void UndoConfirm(bool bPositiveChoose)
 	XI_WindowShow( "CONFIRM_WINDOW", false );
 	// enable window where confirm was started
 	XI_WindowDisable( g_sConfirmReturnWindow, false );
+
 	int nTmp = g_nConfirmMode;
 	if( bPositiveChoose ) {
 		switch( nTmp )
@@ -1010,6 +1141,7 @@ void UndoConfirm(bool bPositiveChoose)
 	case CONFIRMMODE_LOAD_GAME: SetCurrentNode("BTN_SAVELOAD"); break;
 	}
 }
+
 void ShowCharacterFace(int iPlace, string sFace)
 {
 	string nodname = "OFFICER" + (iPlace+1);
@@ -1027,6 +1159,7 @@ void ShowCharacterFace(int iPlace, string sFace)
 	}
 	SendMessage( &GameInterface, "lslss", MSG_INTERFACE_MSG_TO_NODE, nodname, 6, facegroup, "face" );
 }
+
 void ShowFaceInfo( string facestr )
 {
 	string sstr = facestr;
@@ -1041,6 +1174,7 @@ void ShowFaceInfo( string facestr )
 		}
 	}
 }
+
 void ReloadSaveInfo()
 {
 	int nSlot = g_nCurrentSaveIndex - g_nFirstSaveIndex;
@@ -1060,6 +1194,7 @@ void ReloadSaveInfo()
 	}
 	ShowFaceInfo( info );
 	SendMessage( &GameInterface,"lslls",MSG_INTERFACE_MSG_TO_NODE, "SAVEINFO", 1, 2, playtime );
+
 	if( info == "" ) {
 		SetSelectable( "BTN_SAVELOAD", bThisSave );
 		SetSelectable( "BTN_DELETE", false );
@@ -1068,6 +1203,7 @@ void ReloadSaveInfo()
 		SetSelectable( "BTN_DELETE", true );
 	}
 }
+
 void ScrollPosChange()
 {
 	float fPos = GetEventData();
@@ -1088,23 +1224,28 @@ void ScrollPosChange()
 		//SendMessage(&GameInterface,"lsf",MSG_INTERFACE_SET_SCROLLER,"SAVESCROLL",fPos);
 	}
 }
+
 void LoadProfile()
 {
 	ProcChooseProfile();
 }
+
 void SaveLoad()
 {
 	int iComIdx = GetEventData();
 	string sNodName = GetEventData();
+
 	if( sNodName == "SAVEIMG1" ) { SelectSaveImage( g_nFirstSaveIndex + 0 ) }
 	if( sNodName == "SAVEIMG2" ) { SelectSaveImage( g_nFirstSaveIndex + 1 ) }
 	if( sNodName == "SAVEIMG3" ) { SelectSaveImage( g_nFirstSaveIndex + 2 ) }
 	if( sNodName == "SAVEIMG4" ) { SelectSaveImage( g_nFirstSaveIndex + 3 ) }
 	if( sNodName == "SAVEIMG5" ) { SelectSaveImage( g_nFirstSaveIndex + 4 ) }
+
 	if( sNodName == "SAVEIMG6" ) { SelectSaveImage( g_nFirstSaveIndex + 5 ) }
 	if( sNodName == "SAVEIMG7" ) { SelectSaveImage( g_nFirstSaveIndex + 6 ) }
 	if( sNodName == "SAVEIMG8" ) { SelectSaveImage( g_nFirstSaveIndex + 7 ) }
 	if( sNodName == "SAVEIMG9" ) { SelectSaveImage( g_nFirstSaveIndex + 8 ) }
 	if( sNodName == "SAVEIMG10" ) { SelectSaveImage( g_nFirstSaveIndex + 9 ) }
+
 	SaveLoadCurrentIntoSlot();
 }

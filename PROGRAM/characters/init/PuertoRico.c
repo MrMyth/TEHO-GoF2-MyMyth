@@ -1,9 +1,12 @@
+
 int CreatePuertoRicoCharacters(int n)
 {
 	ref ch;
+	
 	///////////////////////////////////////////////////////////////////////////////
 	// ОСНОВНЫЕ ПЕРСОНАЖИ
 	///////////////////////////////////////////////////////////////////////////////
+
 	makeref(ch,Characters[n]);			//Губернатор
 	ch.id = "SanJuan_Mayor";
 	ch.model	= "huber_17";
@@ -31,6 +34,7 @@ int CreatePuertoRicoCharacters(int n)
 	LAi_group_MoveCharacter(ch, "SPAIN_CITIZENS");
 	LAi_SetImmortal(ch, true);
 	n = n + 1;
+
 	makeref(ch,Characters[n]);			//Священик
 	ch.id = "SanJuan_Priest";
 	ch.model	= "priest_4";
@@ -48,6 +52,7 @@ int CreatePuertoRicoCharacters(int n)
 	LAi_group_MoveCharacter(ch, "SPAIN_CITIZENS");
 	LAi_SetImmortal(ch, true);
 	n = n + 1;
+
 	makeref(ch,Characters[n]);		// ОФициантка
 	ch.id = "SanJuan_waitress";
 	ch.model	= "women_15";
@@ -64,6 +69,7 @@ int CreatePuertoRicoCharacters(int n)
 	LAi_group_MoveCharacter(ch, "SPAIN_CITIZENS");
 	LAi_SetImmortal(ch, true);
 	n = n + 1;
+
 	makeref(ch,Characters[n]);			//Трактирщик
 	ch.id = "SanJuan_tavernkeeper";
 	ch.model	= "barmen_4";
@@ -81,6 +87,8 @@ int CreatePuertoRicoCharacters(int n)
 	LAi_group_MoveCharacter(ch, "SPAIN_CITIZENS");
 	LAi_SetImmortal(ch, true);
 	n = n + 1;
+
+
 	makeref(ch,Characters[n]);			//Торговец
 	ch.id = "SanJuan_trader";
 	ch.model	= "trader_4";
@@ -98,6 +106,7 @@ int CreatePuertoRicoCharacters(int n)
 	LAi_SetImmortal(ch, true);
 	ch.item_date = "";
 	n = n + 1;
+
 	makeref(ch,Characters[n]);			//Корабел
 	ch.id = "SanJuan_shipyarder";
 	ch.model	= "shipowner_4";
@@ -122,6 +131,7 @@ int CreatePuertoRicoCharacters(int n)
 	LAi_group_MoveCharacter(ch, "SPAIN_CITIZENS");
 	LAi_SetImmortal(ch, true);
 	n = n + 1;
+
 	makeref(ch,Characters[n]);			//Банкир
 	ch.id		= "SanJuan_usurer";
 	ch.model	= "banker_4";
@@ -141,6 +151,7 @@ int CreatePuertoRicoCharacters(int n)
 	LAi_group_MoveCharacter(ch, "SPAIN_CITIZENS");
 	LAi_SetImmortal(ch, true);
 	n = n + 1;
+
 	makeref(ch,Characters[n]);			//Начальник порта
 	ch.id		= "SanJuan_PortMan";
 	ch.model	= "citiz_3";
@@ -157,6 +168,7 @@ int CreatePuertoRicoCharacters(int n)
 	LAi_SetImmortal(ch, true);
 	ch.item_date = "";
 	n = n + 1;
+
     makeref(ch,Characters[n]);
 	ch.name 	= "Smuggler";
 	ch.lastname = "";
@@ -173,5 +185,6 @@ int CreatePuertoRicoCharacters(int n)
 	LAi_SetHP(ch, 80.0, 80.0);
 	ch.greeting = "smuggler";
 	n = n + 1;
+	
 	return n;
 }

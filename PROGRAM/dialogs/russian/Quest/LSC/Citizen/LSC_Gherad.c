@@ -4,11 +4,15 @@ void ProcessDialogEvent()
 {
 	ref NPChar, sld;
 	aref Link, NextDiag;
+
 	DeleteAttribute(&Dialog,"Links");
+
 	makeref(NPChar,CharacterRef);
 	makearef(Link, Dialog.Links);
 	makearef(NextDiag, NPChar.Dialog);
+	
 	ProcessCommonDialogRumors(NPChar, Link, NextDiag);
+	
 	switch(Dialog.CurrentNode)
 	{
 		case "First time":
@@ -38,21 +42,25 @@ void ProcessDialogEvent()
 			}
 			NextDiag.TempNode = "First time";
 		break;
+		
 		case "meeting": // первая встреча
 			dialog.text = "Sure, you don't, but it is easy to fix, right? I am Gerard Smeets, sailor, a seaman from Rotterdam. And you look like a quartermaster not less...";
 			link.l1 = "Something like that. My name is "+GetFullName(pchar)+". Nice to meet you.";
 			link.l1.go = "meeting_1";
 		break;
+		
 		case "meeting_1":
 			dialog.text = "You look more like a ship owner or a paymaster... You are a well educated man no doubt. Glad to meet you. How did you get here?";
 			link.l1 = "I have decided to explore an unknown area. Buccaneers from Cuba told me that there was something in this area and I decided to check it out...";
 			link.l1.go = "meeting_2";
 		break;
+		
 		case "meeting_2":
 			dialog.text = "Are you the only survivor? Where did your ship sink? Near the ring?";
 			link.l1 = "I am the only one. And my Tartane is at the bottom of the sea, it didn't even get to the ring.";
 			link.l1.go = "meeting_3";
 		break;
+		
 		case "meeting_3":
 			dialog.text = "I see. Well, you stuck here for a while. Visit Sancho to get some rum, it's a good deed...";
 			link.l1 = "I will. See you!";
@@ -63,6 +71,7 @@ void ProcessDialogEvent()
 			link.l3.go = "int_quests"; //информационный блок
 			NextDiag.TempNode = "First time";
 		break;
+		
 //--------------------------------------- блок вопросов и ответов ---------------------------------------------
 		case "int_quests":
 			dialog.text = "Sure, friend. I am listening.";
@@ -89,24 +98,28 @@ void ProcessDialogEvent()
 			link.l10 = "No questions. Pardon...";
 			link.l10.go = "exit";
 		break;
+		
 		case "ansewer_1":
 			dialog.text = "I got here with that puffed up cock named Abbot. I was serving on his ship. You know what? People like him should never lay a foot on the ship's deck because they bring bad luck. The devil must have made him sail with us.\nWe only had to sail from Jamaica to Belize, easy as pie. But the ill fate chased us: our boatswain fell overboard, a navigator made a mistake, bloody Spanish and a storm in the end. And here we are.";
 			link.l1 = "Interesting...";
 			link.l1.go = "int_quests";
 			npchar.quest.answer_1 = "true";
 		break;
+		
 		case "ansewer_2":
 			dialog.text = "I wish I knew, pal. I used to but I don't now. Life is fine here, plenty of rum and wine, good food, not a lot, but anyway better than that shit I ate on ships\nGood guys live on the Island too. There are people either to drink with or to talk with. I like it here. So I am not even sure... No, I suppose not, I don't want to leave. I used to be angry and hungry, look at my belly now, ha-ha!";
 			link.l1 = "Great! I am glad for you.";
 			link.l1.go = "int_quests";
 			npchar.quest.answer_2 = "true";
 		break;
+		
 		case "ansewer_3":
 			dialog.text = "No, they don't. Just don't argue with them and don't visit their territories without permission. They really don't like it. Narwhals are good lads, most of them were born here and they haven't seen other life. Many of them are very skilled, Jurgen Schmidt for example. He is a god of blacksmithing!";
 			link.l1 = "I see...";
 			link.l1.go = "int_quests";
 			npchar.quest.answer_3 = "true";
 		break;
+		
 		case "ansewer_4":
 			dialog.text = "Easy as pie. Shoal and reefs. The outer ring is made of ships right from the top to the bottom. Ships get caught by a storm, hit the reefs or the outer ring itself. That's how the Island grows. Though I have no idea why the inner ships stay above the water.";
 			link.l1 = "I see...";
@@ -114,6 +127,7 @@ void ProcessDialogEvent()
 			npchar.quest.answer_4 = "true";
 		break;
 // <-- блок вопросов и ответов
+		
 //----------------------------------------- специальные реакции -----------------------------------------------
 		//обнаружение ГГ в сундуках
 		case "Man_FackYou":
@@ -121,12 +135,14 @@ void ProcessDialogEvent()
 			link.l1 = "Damn it!";
 			link.l1.go = "fight";
 		break;
+		
 		case "Woman_FackYou":
 			dialog.text = "What?! Decided to check my chests? You won't get away with it!";
 			link.l1 = "Foolish girl!";
 			link.l1.go = "exit_setOwner";
 			LAi_group_Attack(NPChar, Pchar);
 		break;
+		
 		case "fight":
 			NextDiag.CurrentNode = NextDiag.TempNode;
 			DialogExit();
@@ -134,11 +150,13 @@ void ProcessDialogEvent()
 			LAi_group_Attack(NPChar, Pchar);
 			AddDialogExitQuest("MainHeroFightModeOn");
 		break;
+		
 		case "exit_setOwner":
 			LAi_SetOwnerTypeNoGroup(npchar);
 			NextDiag.CurrentNode = NextDiag.TempNode;
 			DialogExit();
 		break;
+		
 		//замечание по обнаженному оружию
 		case "LSCNotBlade":
 			dialog.text = LinkRandPhrase("Listen, you'd better take your weapon away. It makes me nervous.", "You know, running with blade is not tolerated here. Take it away.", "Listen, don't play a medieval knight running with a sword around. Take it away, it doesn't suit you...");
@@ -146,6 +164,7 @@ void ProcessDialogEvent()
 			link.l1.go = "exit";
 			NextDiag.TempNode = "First Time";
 		break;	
+		
 		case "CitizenNotBlade":
 			if (loadedLocation.type == "town")
 			{
@@ -161,6 +180,7 @@ void ProcessDialogEvent()
 			NextDiag.TempNode = "First Time";
 		break;
 // <-- специальные реакции
+		
 		case "Exit":
 			NextDiag.CurrentNode = NextDiag.TempNode;
 			DialogExit();

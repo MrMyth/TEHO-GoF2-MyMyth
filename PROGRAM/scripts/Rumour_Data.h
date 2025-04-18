@@ -1,5 +1,6 @@
 #define SIMPLE_RUMOUR_NUM	95
 #define CITIZEN_RUMOUR_NUM	10
+
 string DEFAULT_TEXT[19] = {
 "They say that the Golden Fleet sails from Porto Belo twice a year. Several dozens of traders protected by warships.  Always the same route: from Porto Belo to Havana, once it reaches Cuba, it sails north to the Old World. Obviously, holds of the fleet are filled with treasures beyond measure.",
 "Nothing special to tell. Life is going on peacefully and quiet. Surprisingly quiet, I'll tell you.",
@@ -119,6 +120,7 @@ string NO_RUMOUR_TEXT[SIMPLE_RUMOUR_NUM] = {
 "I don't recall anything of interest. Even tavern brawls are rare here.",
 "I doubt that I can tell you anything special, it's been a while since I heard any news.",
 };
+
 // Слухи капитанов
 string CAPTAIN_RUMOUR_TEXT[CITIZEN_RUMOUR_NUM] = {
 "Beware of almost sunken vessels. Some captains may set their own powder supplies on fire, just to deliver you and your allies a very last blow from the hell. It is not the most common way of saying goodbye, but be careful anyway.",
@@ -132,6 +134,7 @@ string CAPTAIN_RUMOUR_TEXT[CITIZEN_RUMOUR_NUM] = {
 "Beware of almost sunken vessels. Some captains may set their own powder supplies on fire, just to deliver you and your allies a very last blow from the hell. It is not the most common way of saying goodbye, but be careful anyway.",
 "Do not underestimate cannon balls, captain! They may seem ordinary and boring, but they have the biggest range and can deal a decent damage to almost anything. And they are cheap. Which is always good. Not everyone can afford to buy bombs and chain shots all the time.",
 };
+
 // Слухи мещан мужские
 string CITIZEN_MAN_RUMOUR_TEXT[CITIZEN_RUMOUR_NUM] = {
 "Trading can be a way to make a fortune, yet I suggest you hire a purser, business is tricky here, at the colonies. Without a fine purser, they will eat you and your coins. So perhaps you should consider working for a governor or something. Not that risky and very honorable.",
@@ -145,6 +148,7 @@ string CITIZEN_MAN_RUMOUR_TEXT[CITIZEN_RUMOUR_NUM] = {
 "Trading can be a way to make a fortune, yet I suggest you hire a purser, business is tricky here, at the colonies. Without a fine purser, they will eat you and your coins. So perhaps you should consider working for a governor or something. Not that risky and very honorable.",
 "Go to a tavern if you are looking for something particular. I have nothing for you to tell.",
 };
+
 // Слухи мещан женские
 string CITIZEN_WOMAN_RUMOUR_TEXT[CITIZEN_RUMOUR_NUM] = {
 "If you can't hire enough people in taverns, just search at the streets. Sometimes sailors just wandering around the city, looking for the right captain.",
@@ -158,6 +162,7 @@ string CITIZEN_WOMAN_RUMOUR_TEXT[CITIZEN_RUMOUR_NUM] = {
 "If you can't hire enough people in taverns, just search at the streets. Sometimes sailors just wandering around the city, looking for the right captain.",
 "This place is barbaric! Mostly. Local men are brutes without an honor. Please, do not ignore women who are in a need of help. We have so few protectors here. Show some dignity!",
 };
+
 // Слухи дворян
 string NOBLE_MAN_RUMOUR_TEXT[CITIZEN_RUMOUR_NUM] = {
 "Master you rapier, sir. It will save your life and protect your honor. But, to be completely honest, local lowlifes deserve not a rapier but an axe.",
@@ -171,6 +176,7 @@ string NOBLE_MAN_RUMOUR_TEXT[CITIZEN_RUMOUR_NUM] = {
 "Master you rapier, sir. It will save your life and protect your honor. But, to be completely honest, local lowlifes deserve not a rapier but an axe.",
 "Always keep enough gun powder and bullets at your disposal. You do not want to run out of ammo in a middle of a fight. Keeping an extra gun would be nice too. Those things often explodes...",
 };
+
 // Слухи дворянок
 string NOBLE_WOMAN_RUMOUR_TEXT[CITIZEN_RUMOUR_NUM] = {
 "You look like a man of honor. A noble man. If you were different type, I would send you to a tavern to ask people there.",
@@ -184,6 +190,7 @@ string NOBLE_WOMAN_RUMOUR_TEXT[CITIZEN_RUMOUR_NUM] = {
 "You look like a man of honor. A noble man. If you were different type, I would send you to a tavern to ask people there.",
 "Did you know, captain, that there are all kinds of magical items around this area? The Church might not approve it, but everyone use talismans and amulets.",
 };
+
 // Слухи матросов
 string SAILOR_RUMOUR_TEXT[CITIZEN_RUMOUR_NUM] = {
 "Hard to find a decent captain these days. Most of them want us to be their soldiers or slaves. Or both. Screw them. Hope you're different.",
@@ -197,6 +204,7 @@ string SAILOR_RUMOUR_TEXT[CITIZEN_RUMOUR_NUM] = {
 "Hard to find a decent captain these days. Most of them want us to be their soldiers or slaves. Or both. Screw them. Hope you're different.",
 "Nothing interesting. Thing will be interesting when our supplies are run off.",
 };
+
 // Если новостей нет в LSC
 string NO_RUMOUR_LSC_TEXT[5] = {
 "It's rather dull here. What news are interested to hear?",

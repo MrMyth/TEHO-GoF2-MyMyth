@@ -15,12 +15,14 @@ void ProcessCommonDialogEvent(ref NPChar, aref Link, aref NextDiag)
 				link.l2.go = "Romantic_1";
 			}
 		break;
+
         case "Romantic_1":
 			dialog.text = "Se√±ora Olevares? Quite often, my son, she's a fine parishioner... Why do you ask?";
 			link.l1 = "Just curious, Padre. Thanks, I'll see ya.";
 			link.l1.go = "exit";
 			DeleteAttribute(Pchar, "RomanticQuest.PriestAsk");
 		break;
+
         case "Romantic_2":
 			dialog.text = GetFullName(pchar) + ", do you take Isabella de Valdez to be your lawfully wedded wife, and swear to love, honor and cherish her in sickness and in health, for as long as you both shall live?";
 			link.l1 = "I do, Padre.";

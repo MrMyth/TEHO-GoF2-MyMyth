@@ -5,7 +5,9 @@ void ProcessDialogEvent()
 {
 	ref NPChar;
 	aref Link, Diag;
+
 	DeleteAttribute(&Dialog,"Links");
+
 	makeref(NPChar,CharacterRef);
 	makearef(Link, Dialog.Links);
 	makearef(Diag, NPChar.Dialog);
@@ -14,12 +16,15 @@ void ProcessDialogEvent()
     makearef(aData, NullCharacter.Siege);
     string sCap, sGroup;
     string fort;
+
     if (CheckAttribute(aData, "nation"))
     {
 	    sCap = NationShortName(sti(aData.nation))+"SiegeCap_";
 	    sGroup = "Sea_"+sCap+"1";
+	    
 	   // string myships  = GetCompanionQuantity(PChar);
        // string escships = Group_GetCharactersNum(sGroup);
+        
         switch(sti(aData.conation))
         {
             case 0:  fort = "English fort"; break;
@@ -31,9 +36,12 @@ void ProcessDialogEvent()
         int ifortPower = sti(colonies[FindColony(aData.colony)].FortValue);
         int fortDamage = CheckFortInjuri();
         int SquadronDamage = CheckSquadronInjuri();
+        
     }
+
     int iMoney;
 	ref sld;
+    
     if (CheckNPCQuestDate(npchar, "Card_date"))
 	{
 		SetNPCQuestDate(npchar, "Card_date");
@@ -54,6 +62,7 @@ void ProcessDialogEvent()
 			DialogExit();
 			Diag.CurrentNode = Diag.TempNode;
 		break;
+		
 		case "First time":
 			if (!bDisableMapEnter)
 			{
@@ -88,6 +97,7 @@ void ProcessDialogEvent()
 					break;
 				}
 				//<-- эскорт 2 уровень
+				
 				if(CheckAttribute(NPChar, "surrendered"))
 				{
 					Pchar.GenQuest.MoneyForCaptureShip = makeint(Group_GetLiveCharactersNum( GetGroupIDFromCharacter(NPChar)))*(7 - sti(RealShips[sti(NPChar.Ship.Type)].Class))*(1+rand(10))*500);
@@ -100,6 +110,7 @@ void ProcessDialogEvent()
 					link.l2.go = "surrender2";
 					break;
 				}
+				
 				//Голландский Гамбит, против всех
 				if (CheckAttribute(PChar, "questTemp.HWIC.Self") && pchar.questTemp.HWIC.Self == "MeetingStivesant" && NPChar.id == "Stivesant")
 				{
@@ -138,6 +149,7 @@ void ProcessDialogEvent()
             }
 			Diag.TempNode = "first time";
  		break;
+
         case "quests":
             if (!CheckAttribute(NPChar, "MainCaptanId")  || NPChar.MainCaptanId == pchar.GenQuest.CaptainId)
             {
@@ -187,6 +199,7 @@ void ProcessDialogEvent()
 			link.l2 = "Sorry, but I've changed my mind"+ GetSexPhrase("","") +".";
 			link.l2.go = "exit";
 		break;
+		
 		case "Trade_2":
 			FillShipStore(NPChar);
 	    	pchar.shiptrade.character = NPChar.id;
@@ -195,6 +208,7 @@ void ProcessDialogEvent()
 		    DeleteAttribute(pchar, "PriceList.StoreManIdx"); // не вести лог по кораблям
 		    LaunchStore(SHIP_STORE);
 		break;
+		
         case "Play_Game":
 			dialog.text = "What are you suggesting?";
 			link.l1 = "Wanna play a game of cards for some serious money?";
@@ -222,6 +236,7 @@ void ProcessDialogEvent()
     			link.l2.go = "Cards_Rule";
 			}
 		break;
+
 		case "Cards_Rule":
    			dialog.text = CARDS_RULE;
 			link.l1 = "Well, let's begin, then!";
@@ -229,6 +244,7 @@ void ProcessDialogEvent()
 			link.l3 = "No, it's not for me...";
 			link.l3.go = "exit";
 		break;
+
 		case "Cards_begin":
 			Dialog.text = "Let's agree on the bet, first.";
 			link.l1 = "Let's play for 100 pesos.";
@@ -238,6 +254,7 @@ void ProcessDialogEvent()
 			link.l3 = "I guess I should go.";
 			link.l3.go = "exit";
 		break;
+
 		case "Cards_Node_100":
 		    if (sti(pchar.Money) < 300)
 		    {
@@ -260,6 +277,7 @@ void ProcessDialogEvent()
             pchar.GenQuest.Cards.iRate     = 100;
             pchar.GenQuest.Cards.SitType   = false;
 		break;
+
 		case "Cards_Node_500":
 		    if (sti(pchar.Money) < 1500)
 		    {
@@ -282,6 +300,7 @@ void ProcessDialogEvent()
             pchar.GenQuest.Cards.iRate     = 500;
             pchar.GenQuest.Cards.SitType   = false;
 		break;
+
 		case "Cards_begin_go":
             Diag.CurrentNode = Diag.TempNode;
 			DialogExit();
@@ -315,6 +334,7 @@ void ProcessDialogEvent()
 				}
 			}
 		break;
+
 		case "Dice_Rule":
    			dialog.text = DICE_RULE;
 			link.l1 = "Well, let's begin, then!";
@@ -322,6 +342,7 @@ void ProcessDialogEvent()
 			link.l3 = "No, it's not for me...";
 			link.l3.go = "exit";
 		break;
+
 		case "Dice_begin":
 			Dialog.text = "Let's agree on the bet, first.";
 			link.l1 = "Let's play for 50 pesos.";
@@ -331,6 +352,7 @@ void ProcessDialogEvent()
 			link.l3 = "I guess I should go.";
 			link.l3.go = "exit";
 		break;
+
 		case "Dice_Node_100":
             if (!CheckDiceGameSmallRate())
 		    {
@@ -339,6 +361,7 @@ void ProcessDialogEvent()
 			    link.l1.go = "exit";
 			    break;
 		    }
+
 			if (sti(pchar.Money) < 300)
 		    {
                 dialog.text = "Are you joking or what? You have no money!";
@@ -360,6 +383,7 @@ void ProcessDialogEvent()
             pchar.GenQuest.Dice.iRate     = 50;
             pchar.GenQuest.Dice.SitType   = false;
 		break;
+
 		case "Dice_Node_500":
             if (!CheckDiceGameSmallRate())
 		    {
@@ -377,6 +401,7 @@ void ProcessDialogEvent()
 			    link.l2.go = "exit";
 			    break;
 		    }
+
 			if (sti(pchar.Money) < 1500)
 		    {
                 dialog.text = "Are you joking or what? You don't have 1500 pesos!";
@@ -398,6 +423,7 @@ void ProcessDialogEvent()
             pchar.GenQuest.Dice.iRate     = 200;
             pchar.GenQuest.Dice.SitType   = false;
 		break;
+
 		case "Dice_begin_go":
             SetNPCQuestDate(npchar, "Dice_date_begin");
 			Diag.CurrentNode = Diag.TempNode;
@@ -420,6 +446,7 @@ void ProcessDialogEvent()
 	            {
                     sld = &Characters[iMoney];
                     pchar.PriceList.ShipStoreIdx = iMoney;
+                    
 					Dialog.Text = "I am coming from the city of" + GetCityName(sld.City) + ".";
 					Link.l1 = "What are the prices of goods at the local store?";
 					Link.l1.go = "price_2";
@@ -434,6 +461,7 @@ void ProcessDialogEvent()
 				Link.l1.go = "exit";
             }
 		break;
+		
 		case "price_2":
             sld = &Characters[sti(pchar.PriceList.ShipStoreIdx)];
 			SetPriceListByStoreMan(&Colonies[FindColony(sld.City)]);
@@ -442,6 +470,7 @@ void ProcessDialogEvent()
 			Link.l1.go = "exit";
 			PlaySound("interface\important_item.wav");
 		break;
+		
         case "Talk_board":
             if ((Group_GetCharactersNum(NPChar.EncGroupName) - Group_GetDeadCharactersNum(NPChar.EncGroupName)) > GetCompanionQuantity(PChar) && rand(11) > GetCharacterSkillToOld(PChar, SKILL_FORTUNE))
             {
@@ -473,6 +502,7 @@ void ProcessDialogEvent()
 			sld = characterFromId(pchar.GenQuest.CaptainId);
             sld.talk_date_Go_away =  lastspeakdate(); // boal злопамятность :)
         break;
+		
 		case "surrender1" :
 			Diag.TempNode = "surrender_goaway";
             Dialog.Text = "Here you go - and now get lost!";
@@ -486,17 +516,20 @@ void ProcessDialogEvent()
 			AddCharacterExpToSkill(pchar, "Leadership", 20);
 			ChangeCharacterHunterScore(pchar, NationShortName(sti(NPChar.nation)) + "hunter", 7 + rand(10));
 		break;
+		
 		case "surrender_goaway":
 			Dialog.Text = "What else do you want from me?";
 			Link.l1 = "Nothing.";
 			Link.l1.go = "exit";
 			Diag.TempNode = "surrender_goaway";
 		break;
+		
 		case "surrender2":			
 			dialog.text = "Seems, I have no other choice rather than submitting to you.";
 			link.l1 = "Move on, now!";
 			link.l1.go = "surrender3";				
 		break;
+						
 		case "surrender3":
 			Diag.TempNode = "surrender_goaway";
 			sld = characterFromId(pchar.GenQuest.CaptainId);
@@ -504,6 +537,7 @@ void ProcessDialogEvent()
 			DialogExit(); 
 			LaunchTransferMain(pchar, sld, "Transfer");
 		break;
+				
         case "rumours":
 			Dialog.Text = SelectRumour(); // to_do
 			Link.l1 = RandPhraseSimple(RandSwear() + "This is very interesting. Another question?",
@@ -514,18 +548,21 @@ void ProcessDialogEvent()
 			Link.l2.go = "exit";
 			Diag.TempNode = "quests";
 		break;
+		
 		case "Go_away":
 			Dialog.Text = "Get out of my ship!";
 			Link.l1 = "I am already leaving.";
 			Link.l1.go = "exit";
 			Diag.TempNode = "Go_away";
 		break;
+		
 		case "Go_away_Good":
 			Dialog.Text = "Our conversation is over. I'm not gonna tell you anything new "+GetAddress_Form(NPChar)+".";
 			Link.l1 = "All right. See you at the sea!";
 			Link.l1.go = "exit";
 			Diag.TempNode = "Go_away_Good";
 		break;
+
         case "Capture":
             Diag.TempNode = "Go_away";
             Dialog.Text = "Here you go - and now get out!";
@@ -536,6 +573,7 @@ void ProcessDialogEvent()
 			AddCharacterExpToSkill(pchar, "Leadership", 20);
 			ChangeCharacterHunterScore(pchar, NationShortName(sti(NPChar.nation)) + "hunter", 7 + rand(10));
         break;
+
         case "Boarding":
             if (CheckAttribute(NPChar, "MainCaptanId"))
             {
@@ -546,6 +584,7 @@ void ProcessDialogEvent()
             DialogExit();
             Diag.CurrentNode = Diag.TempNode;
         break;
+        
         case "QuestAboardCabinDialog":  // тестовый диалог, в игре не работает, для метода SetQuestAboardCabinDialog
 			Diag.TempNode = "QuestAboardCabinDialog";
             Dialog.Text = "Hold on, you may kill me this way. What do you want from me?";
@@ -556,6 +595,7 @@ void ProcessDialogEvent()
 			Link.l3 = "Отдай нам карту, Билли (c)";  // предмет, далее не ясно или  QuestAboardCabinDialog_1 или QuestAboardCabinDialog_2
 			Link.l3.go = "QuestAboardCabinDialog_3";  // можно закодить покидание корабля, но экипаж уже вырезан и тп...
         break;
+        
         case "QuestAboardCabinDialog_1":
 			Dialog.Text = "Well, we'll see, bastard!";
 			Link.l1 = "And what do I have to see?";
@@ -564,12 +604,14 @@ void ProcessDialogEvent()
 			LAi_SetCurHPMax(NPChar);
 			AddDialogExitQuestFunction("QuestAboardCabinDialogExitWithBattle"); // тут ругань обратно
 		break;
+		
 		case "QuestAboardCabinDialog_2":
 			Dialog.Text = "Fine, you won!";
 			Link.l1 = "Smart decision!";
 			Link.l1.go = "exit";
 			AddDialogExitQuestFunction("QuestAboardCabinDialogSurrender");
 		break;
+		
 		case "QuestAboardCabinDialog_3":
 			Dialog.Text = "Hope you choke on it!";
 			Link.l1 = "Very good, get into shackles and shut your mouth, prisoner.";
@@ -584,6 +626,7 @@ void ProcessDialogEvent()
 			TakeNItems(NPChar, "Chest", -1);
 			TakeNItems(pchar, "Chest", 1);
 		break;
+		
 		case "QuestAboardCabinDialog_3_1":
 			Dialog.Text = ""+ GetSexPhrase("Came here","Came here") +", made a mess"+ GetSexPhrase("","") +",and took everything"+ GetSexPhrase("","") +", now you wanna make me a slave? Never!";
 			Link.l1 = "Then prepare to die.";
@@ -595,24 +638,30 @@ void ProcessDialogEvent()
 			Link.l1 = "I see.";
 			Link.l1.go = "exit";
 		break;
+		
 		//homo Наводка на купца
 		case "MerchantTrap_Abordage":
+
 			Dialog.Text = "In the name of "+NationKingsName(NPChar)+" surrender, "+ GetSexPhrase("filthy pirate","foul wench!") +"! Then your life will be spared until a fair tribunal, where you will be judged for all "+NationNameSK(sti(NPChar.nation))+"ships that you have plundered"+ GetSexPhrase("","") +".";
 			Link.l1 = "Screw you! You should surrender!";
 			Link.l1.go = "exit";
 			LAi_SetCurHPMax(NPChar);
 			AddDialogExitQuestFunction("QuestAboardCabinDialogExitWithBattleNoParam"); // тут ругань обратно
 		break;
+		
 		case "Siegehelp":		
             ref rchar = Group_GetGroupCommander(sGroup);
             if (NPChar.id == rchar.id)
             {
+    			
     			dialog.text = "I am listening, but please be quick, we have a battle with " + fort +
                           "right now, and I must rule the battle.";
                 link.l1 = "That is why I am here,  " + GetAddress_FormToNPC(NPChar) + ".";
                 link.l1.go = "attack_fort";
+
                 link.l2 = "In that case I won't take anymore of your time. Farewell, "+ GetAddress_FormToNPC(NPChar) + ".";
                 link.l2.go = "exit";
+    			
             }
             else
             {
@@ -620,9 +669,12 @@ void ProcessDialogEvent()
                               ", you can find him on " + XI_ConvertString(RealShips[sti(rchar.Ship.Type)].BaseName) + " ''" + rchar.Ship.Name + "''.";
                 link.l1 = "Thanks. I'll do as you say.";
                 link.l1.go = "exit";
+            
             }
             Diag.TempNode = "Siegehelp";
+            
 		break;
+		
 		case "attack_fort":
                 dialog.text = "And what do you mean?";
                 link.l1 = "I can assist you in a crushing the fort of the colony of " +GetConvertStr(aData.Colony+" Town", "LocLables.txt")+ " and capture the city, and a prey, resulting in the case of our success, we divide among us.";
@@ -631,13 +683,16 @@ void ProcessDialogEvent()
                 link.l2.go = "exit";
                 Diag.TempNode = "Siegehelp_0";
 		break;
+		
 		case "Siegehelp_0":
             Dialog.text = "You again? I though we had already discussed everything.";
             link.l1 = "You're right. I guess I've forgotten"+ GetSexPhrase("","") +".";
 			link.l1.go = "exit";
 			NPChar.DeckDialogNode = "Siegehelp_0";
             Diag.TempNode = "Siegehelp_0";
+
 		break;
+		
 		case "Siegehelp_1":
             SiegeResult("");
             if (sti(aData.win)==0)
@@ -659,7 +714,9 @@ void ProcessDialogEvent()
                 link.l2.go = "exit";
             }
 			Diag.TempNode = "Siegehelp_0";
+
 		break;
+		
 		case "attack_fort_03":
             if((sti(aData.iSquadronPower)*SquadronDamage - (ifortPower)*fortDamage) < 4000)
             {
@@ -697,6 +754,7 @@ void ProcessDialogEvent()
             }
             Diag.TempNode = "Siegehelp_0";
         break;
+        
         case "attack_fort_04":
             dialog.text = "As soon as the fort is captured, we will start to deploy landing parties on the shore, and then we will continue fighting in the town itself, where I hope to meet with you.";
             link.l1 = "So be it. See you soon, " + GetAddress_FormToNPC(NPChar) + "!";
@@ -704,6 +762,7 @@ void ProcessDialogEvent()
             Diag.TempNode = "Siegehelp_0";
             PChar.quest.Union_with_Escadra = "Yes";
         break;
+
         case "Middle_part":
             if((sti(aData.iSquadronPower)*SquadronDamage - (ifortPower)*fortDamage) <= -600)
             {
@@ -721,6 +780,7 @@ void ProcessDialogEvent()
             }
             Diag.TempNode = "Siegehelp_0";
         break;
+
         case "Small_part":
             dialog.text = "My ships are weary, and any fresh force is welcome in this situation. I accept your help and I agree on your terms.";
             link.l1 = "I am glad"+ GetSexPhrase("","") +", " + GetAddress_FormToNPC(NPChar) + ".. I will immediately order my men to begin the assault of the fort.";
@@ -728,6 +788,7 @@ void ProcessDialogEvent()
             aData.PartAttaksFort = 4;
             Diag.TempNode = "Siegehelp_0";
         break;
+		
 		case "Talk_Capture_City":
             AfterTownBattle();  // все, все свободны
             LAi_LoginInCaptureTown(NPChar, false);
@@ -741,6 +802,7 @@ void ProcessDialogEvent()
             link.l1 = "In that case, I will leave you, " + GetAddress_FormToNPC(NPChar) + ". Farewell!";
             link.l1.go = "exit";
             //AddDialogExitQuest("End_Siege_and_Attaks_City");
+
             Diag.TempNode = "no_return_02";
             AddMoneyToCharacter(PChar, ilt);
             ChangeCharacterNationReputation(pchar, sti(NPChar.nation), 20);
@@ -757,12 +819,14 @@ void ProcessDialogEvent()
             SiegeRumour("I've been told that you had helped our squadron in the assault of the "+NationNameSK(sti(aData.conation))+" colony - "+GetConvertStr(aData.Colony+" Town", "LocLables.txt")+"! We're so thankfull to you, "+ GetAddress_Form(NPChar)+".", "", sti(aData.nation), -1, 30, 3);
             //<-- слухи
 		break;
+
         case "no_return_02":
             dialog.text = "Ahoy, captain! Do you have business to me?";
             link.l1 = "No, " + GetAddress_FormToNPC(NPChar) + ". Goodbye!";
             link.l1.go = "exit";
             Diag.TempNode = "no_return_02";
 		break;
+		
 		case "GoldSquadron":
             ref rch = Group_GetGroupCommander("Sea_Head_of_Gold_Squadron");
             if (NPChar.id == rch.id)
@@ -770,6 +834,7 @@ void ProcessDialogEvent()
     			dialog.text = "I am listening to you, but please be quick about the goal of your visit, I don't have much time. I have an important and secret mission, and also I am ordered to sink all suspicious ships in the open sea, which could present any danger to our convoy.";                          
                 link.l1 = "In that case I won't take anymore of your time. Good luck, "+ GetAddress_FormToNPC(NPChar) + ".";
                 link.l1.go = "exit";
+
             }
             else
             {
@@ -777,25 +842,30 @@ void ProcessDialogEvent()
                               ", you can find him on " + XI_ConvertString(RealShips[sti(rch.Ship.Type)].BaseName) + " ''" + rch.Ship.Name + "''.";
                 link.l1 = "Thanks. I'll as you say.";
                 link.l1.go = "exit";
+
             }
             Diag.TempNode = "GoldSquadron";
 		break;
+		
 		case "WM_Captain":
 			dialog.text = "Nice to meet you, and my name is " + GetFullName(npchar) + ". So you have come to help us? In that case I am especially glad, since our current situation is critical indeed - we are alone at the shores of an uninhabited island, the ship is hardly seaworthy, the crew has suffered heavy losses...";
 			link.l1 = "Like I heard, you had a battle with pirates, and then there was that storm...";
 			link.l1.go = "WM_Captain_1";
 			pchar.quest.DesIsland_Over.over = "yes";//снять прерывание
 		break;
+		
 		case "WM_Captain_1":
 			dialog.text = "Correct. My ship was badly damaged in the battle - we even had to stand againts a boarding attack led by those pirate bastards. Later, a storm caught us… oh, I don't want even think about it. We were carried to this inhospitable shore. We had been praying a whole day to the Blessed Virgin to save us from the storm and to keep our anchor chains in one piece\nAnd here we are. We have been repairing our ship for a week, but see for yourself: only fifty men left and we also lack of wooden planks - and where are we supposed to get them from? Jungles? Obviously. Working hard every day and yet we only have the fifth part of total material needed\nSailing with such damage is as good as suicide. Now you see how we are doing here, captain...";
 			link.l1 = "Yeah... Your situation is unenviable. Let's think what we could undertake and how I can help you.";
 			link.l1.go = "WM_Captain_2";
 		break;
+		
 		case "WM_Captain_2":
 			dialog.text = "Eh, I wish we had enough planks and sailcloth - in such case we would repair our ship in a week\nCaptain, since you've come here on purpose, perhaps you could visit the nearest port and buy materials we need? This would solve our problem. Don't worry about coins, I will compensate all expenses.";
 			link.l1 = "Of course. What exactly do you need to deliver, and how much?";
 			link.l1.go = "WM_Captain_3";
 		break;
+		
 		case "WM_Captain_3":
 			pchar.questTemp.WPU.Escort.Planks = 300 + drand(5)*10;
 			pchar.questTemp.WPU.Escort.Sailcloth = 150 + drand(10)*10;
@@ -804,6 +874,7 @@ void ProcessDialogEvent()
 			link.l1 = "Okay. I will bring you all materials which you need. Wait for me - I'll return no later than in ten days.";
 			link.l1.go = "WM_Captain_4";
 		break;
+		
 		case "WM_Captain_4":
 			dialog.text = "Thanks a lot, captain! Now that's a weight off my mind. We will be waiting and praying for your successful return!";
 			link.l1 = "Don't you worry. Soon you will have everything you need for the repair.";
@@ -818,17 +889,20 @@ void ProcessDialogEvent()
 			SetFunctionTimerCondition("WM_Captain_Over", 0, 0, 11, false);
 			pchar.questTemp.WPU.Escort = "wait";
 		break;
+		
 		case "WM_Captain_again":
 			dialog.text = "We will be eagerly waiting for your return, captain!";
 			link.l1 = "Weigh anchors!";
 			link.l1.go = "exit";
 			Diag.TempNode = "WM_Captain_again";
 		break;
+		
 		case "WM_Captain_5":
 			dialog.text = "Excellent! Now we can start to repare the ship!";
 			link.l1 = "My men will give you a hand - this way it will be faster. Besides, I must accompany you to the colony of "+XI_ConvertString("Colony"+pchar.questTemp.WPU.Escort.StartCity)+", so the sooner we're done with the repairing, the better for me.";
 			link.l1.go = "WM_Captain_6";
 		break;
+		
 		case "WM_Captain_6":
 			pchar.questTemp.WPU.Current.TargetIslandID.Shore = SelectQuestShoreLocationFromSea(pchar.questTemp.WPU.Current.TargetIslandID);
 			dialog.text = "Really, I have no idea how to thank you properly, captain... Please order to unload the materials in a cove called " + XI_ConvertString(pchar.questTemp.WPU.Current.TargetIslandID.Shore) + " - there we have everything ready for repairing.";
@@ -841,17 +915,20 @@ void ProcessDialogEvent()
 			pchar.quest.DisasterShip_WMC.function = "RepairShip_Prepare";
 			Diag.TempNode = "WM_Captain_repeat";
 		break;
+		
 		case "WM_Captain_repeat":
 			dialog.text = "When will we begin the repairing, captain? I'll be waiting for you on the shore.";
 			link.l1 = "Yes, of course. I am leaving now.";
 			link.l1.go = "exit";
 			Diag.TempNode = "WM_Captain_repeat";
 		break;
+		
 		case "Repair_start":
 			dialog.text = "Well, everything seems ready for the repairing. I think we should be done in about five days.";
 			link.l1 = "Very good! I was going to explore this island anyway, so I will make good use of this time.";
 			link.l1.go = "Repair_start_1";
 		break;
+		
 		case "Repair_start_1":
 			DialogExit();
 			pchar.quest.WM_Captain_Over.over = "yes";//снять прерывание
@@ -864,11 +941,13 @@ void ProcessDialogEvent()
 			RemoveCharacterGoods(pchar, GOOD_COTTON, sti(pchar.questTemp.WPU.Escort.Linen));
 			DoQuestFunctionDelay("RepairShip_WithoutMasts", 5.0);
 		break;
+		
 		case "Repair_end":
 			dialog.text = "Well, that's it. We're done with the repairing, and the ship is ready to set sail. When do we depart, captain?";
 			link.l1 = "If you are ready, I see no point in hanging in there. Weigh anchors!";
 			link.l1.go = "Repair_end_1";
 		break;
+		
 		case "Repair_end_1":
 			DialogExit();
 			sld = characterFromId("WMCaptain");
@@ -883,6 +962,7 @@ void ProcessDialogEvent()
 			pchar.quest.DisasterShip_final.win_condition.l1.location = pchar.questTemp.WPU.Escort.StartCity +"_town";
 			pchar.quest.DisasterShip_final.function = "WMShip_final";
 		break;
+		
 		case "WMShip_final":
 			pchar.quest.Escort_fail.over = "yes";
 			pchar.quest.DisasterShipWM_Over.over = "yes";//снимаем оба прерывания
@@ -892,6 +972,7 @@ void ProcessDialogEvent()
 			link.l1 = "I was happy to help you.";
 			link.l1.go = "WMShip_final_1";
 		break;
+		
 		case "WMShip_final_1":
 			AddMoneyToCharacter(pchar, sti(pchar.questTemp.WPU.Escort.LevelUp_1Money));
 			TakeNItems(pchar, "obereg_"+(drand(10)+1), 1);
@@ -899,6 +980,7 @@ void ProcessDialogEvent()
 			link.l1 = "Have a nice day, " + npchar.name + "!";
 			link.l1.go = "WMShip_final_2";
 		break;
+		
 		case "WMShip_final_2":
 			chrDisableReloadToLocation = false;
 			bDisableFastReload = false;
@@ -913,16 +995,19 @@ void ProcessDialogEvent()
 			AddQuestUserData("Escort", "sStartCity", XI_ConvertString("Colony"+pchar.questTemp.WPU.Escort.StartCity+"Gen"));
 			AddQuestUserData("Escort", "sSName", pchar.questTemp.WPU.Escort.ShipName);
 		break;
+		
 		case "VSP_Captain":
 			dialog.text = "Is that so? And I was thinking that they had forgotten us. Yeah, my ship got the worst of all. We were left to struggle the elements of nature after the storm forced the pirates to stop an attack of our caravan. We were carried to this inhospitable shore\nSpent a few days repairing and resting. This pagans attacked us again, as soon as we were going to sail away\nAnd then the storm hit us again - we thought that the Lord finally decided to finish us, but you arrived. Thanks the Holy Mary! Thank you again, captain!";
 			link.l1 = "It's all over, " + GetAddress_FormToNPC(NPChar) + ". Now I must escort you to "+XI_ConvertString("Colony"+pchar.questTemp.WPU.Escort.StartCity+"Gen")+", in order to protect it from other possible troubles. Are you ready to go now? The storm has already begun to decline.";
 			link.l1.go = "VSP_Captain_1";
 		break;
+		
 		case "VSP_Captain_1":
 			dialog.text = "But of course! The sooner we leave this place, the calmer my men will be - they have already suffered too much. Let's set sail!";
 			link.l1 = "Just follow my ship - and calm down your crew, there is nothing to fear now.";
 			link.l1.go = "VSP_Captain_2";
 		break;
+		
 		case "VSP_Captain_2":
 			pchar.quest.DisasterShip_GetOut.over = "yes";
 			DialogExit();
@@ -947,12 +1032,14 @@ void ProcessDialogEvent()
 			Diag.currentnode = "VSP_Captain_again";
 			Delete_EscortStorm();//уберем шторм
 		break;
+		
 		case "VSP_Captain_again":
 			dialog.text = "Should we set sail, captain?";
 			link.l1 = "Sure. I will return to my ship now.";
 			link.l1.go = "exit";
 			Diag.TempNode = "VSP_Captain_again";
 		break;
+		
 		case "VSPShip_final":
 			pchar.quest.Escort_fail.over = "yes";
 			pchar.quest.DisasterShipWM_Over.over = "yes";//снимаем оба прерывания
@@ -962,6 +1049,7 @@ void ProcessDialogEvent()
 			link.l1 = "I was happy to help you!";
 			link.l1.go = "WMShip_final_1";
 		break;
+		
 		case "SShip_final":
 			pchar.questTemp.WPU.Escort.LevelUp_1Money = 5000+sti(pchar.rank)*100;
 			RemovePassenger(Pchar, npchar);//удаляем пассажира
@@ -969,47 +1057,56 @@ void ProcessDialogEvent()
 			link.l1 = "Of course, not. I will gladly keep it. I was happy to help you!";
 			link.l1.go = "WMShip_final_1";
 		break;
+		
 		//Голландский Гамбит
 		case "Stivesant_1":
 			dialog.text = "Okay. But, mynheer, would you explain what is happening here? How come that you are in command of 'Meifeng'! Did something happen to Longway?";
 			link.l1 = "I have all explanations you need - and some other important information as well.";
 			link.l1.go = "Stivesant_2";			
 		break;
+		
 		case "Stivesant_2":
 			dialog.text = "Then I am all ears.";
 			link.l1 = "There was a coup in Willemstad. Lucas Rodenburg took the place of the governor and has put Matthias Beck in prison on a ridiculous suspicion that he had connections with British intel.";
 			link.l1.go = "Stivesant_3";			
 		break;
+		
 		case "Stivesant_3":
 			dialog.text = "Hmm... Mynheer, the things you're telling me are truly surprising. I had received news from Willemstad not so long ago, and there was nothing like that in it.";
 			link.l1 = "Please hear me out, mynheer Stuyvesant. You must have gotten the news through Rodenburg, and he must be sure that you won't get to Curacao.";
 			link.l1.go = "Stivesant_4";			
 		break;
+		
 		case "Stivesant_4":
 			dialog.text = "Mister, I like what you're saying less and less. Just who are you?";
 			link.l1 = "I am just a captain and just a man not indifferent to the fate of Dutch colonists. Lucas Rodenburg ordered Longway to destroy your ship and kill you as well. And since 'Meifeng' would not cause you to become suspicious, he would have carried it out without any effort.";
 			link.l1.go = "Stivesant_5";			
 		break;
+		
 		case "Stivesant_5":
 			dialog.text = "So, you mean to say that Lucas...";
 			link.l1 = "Decided to remove you from power in the easiest way possible - by simply eliminating you. Save for you, there is no other person in the region capable of putting up any significant resistance to Rodenburg's influence on the Archipelago.";
 			link.l1.go = "Stivesant_6";			
 		break;
+		
 		case "Stivesant_6":
 			dialog.text = "I can't believe it!";
 			link.l1 = "I didn't fall for that crap with Beck connected to English intel and did undertake my own investigation. I found out that 'Meifeng', loaded with picked cutthroats, left for Philipsburg. I've run them down and gave them battle. Longway was captured, and he gave me all this information, including your whereabouts.";
 			link.l1.go = "Stivesant_7";			
 		break;
+		
 		case "Stivesant_7":
 			dialog.text = "Hm... That seems probable. No one, save for Rodenburg, knew or could know about me schedule and route! Goddammit! It's treason! Where is Longway?!";
 			link.l1 = "I have set him free in exchange for his voluntary confession. I must say, he was not too eager to carry out Rodenburg's order, but neither could he disregard it. He also said that he would not return to Rodenburg's service - this last dirty affair made his cup run over.";
 			link.l1.go = "Stivesant_8";			
 		break;
+		
 		case "Stivesant_8":
 			dialog.text = "All right... Captain " + GetFullName(pchar) + ", you will go to Willemstad with me. You will sail on 'Meifeng' ahead of my ship. If what you've said is true, Lucas must be arrested, and you will provide your assistance in this. But if you lied to me... You have only yourself to blame.";
 			link.l1 = "For me, there is no point in lying to you, mynheer. Let's hurry!";
 			link.l1.go = "Stivesant_9";			
 		break;
+		
 		case "Stivesant_9":
 			DialogExit();
 			Diag.CurrentNode = "Stivesant_10";
@@ -1032,32 +1129,38 @@ void ProcessDialogEvent()
 			pchar.quest.Terms_Over.win_condition.l1.date.year  = GetAddingDataYear(0, 0, 15);
 			pchar.quest.Terms_Over.function = "QuestShipsTerms_Over";
 		break;
+		
 		case "Stivesant_10":
 			dialog.text = "Captain, go to 'Meifeng'. It's time for us to set sail.";
 			link.l1 = "Yes, mynheer, of course.";
 			link.l1.go = "exit";
 			Diag.TempNode = "Stivesant_10";
 		break;
+		
 		case "Keller_1":
 			dialog.text = "Very interesting! Please, tell your story. I'll try to do my best to help.";
 			link.l1 = "Mynheer Keller, do you remember how you had met a flute on your way to Willemstad several months ago. There was a family of Jewish refugees on it. You have dined on the board of that ship and then continued on your journey.";
 			link.l1.go = "Keller_2";
 		break;
+		
 		case "Keller_2":
 			dialog.text = "Yes, I guess so... Yes, I remember it quite clear now. So, what's the deal?";
 			link.l1 = "The flute was sunk by pirates on that very day. Only two refugees managed to save themselves - Solomon and Abigail, his daughter. They found refuge on an island just in several miles from where the attack occured. I need to find that island. Could you please recall where you'd met that flute? This is very important.";
 			link.l1.go = "Keller_3";
 		break;
+		
 		case "Keller_3":
 			dialog.text = "And that's all you need? I know this island. It's very close by, between Trinidad and Curacao. A small desert uninhabited island. There are even no Indians there.";
 			link.l1 = "And do you know it's approximate coordinates?";
 			link.l1.go = "Keller_4";
 		break;
+		
 		case "Keller_4":
 			dialog.text = "I can tell you the exact coordinates. It's at 12  48'  North and 64  41'  West. Look for it there. The island is rather small, but you should be able to easily locate it.";
 			link.l1 = "Thank you, mynheer Keller! You've helped me a lot. Goodbye.";
 			link.l1.go = "Keller_5";
 		break;
+		
 		case "Keller_5":
 			DialogExit();
 			Diag.CurrentNode = "Keller_6";
@@ -1066,6 +1169,7 @@ void ProcessDialogEvent()
 			DeleteAttribute(pchar, "questTemp.HWICMC");
 			AddQuestRecord("Holl_Gambit", "3-66");
 		break;
+		
 		case "Keller_6":
 			dialog.text = "Did you want anything else, captain?";
 			link.l1 = "No, thanks. I was already returning to my ship.";
@@ -1074,6 +1178,7 @@ void ProcessDialogEvent()
 		break;
 	}
 }
+
 string GetNumShips(int ship)
 {
     string numships;
@@ -1089,6 +1194,7 @@ string GetNumShips(int ship)
     }
     return numships;
 }
+
 string GetPart(int part)
 {
     string numpart;
@@ -1099,15 +1205,18 @@ string GetPart(int part)
        case 2: numpart = "half of the loot"; break;
        case 3: numpart = "third of the loot"; break;
        case 4: numpart = "quarter of the loot";      break;
+
     }
     return numpart;
 }
+
 int findPriceStoreMan(ref NPChar)
 {
     ref ch;
 	int n;
     int storeArray[40];
     int howStore = 0;
+
 	for(n=0; n<MAX_CHARACTERS; n++)
 	{
 		makeref(ch,Characters[n]);
@@ -1117,6 +1226,7 @@ int findPriceStoreMan(ref NPChar)
             if (ch.location == "none") continue; // фикс для новых, невидимых до поры островов
             storeArray[howStore] = n;
             howStore++;
+            
             // homo 05/09/06
             if ( CheckAttribute(NPChar, "FromColony") && NPChar.FromColony == ch.City ) return n;
             //

@@ -2,6 +2,7 @@
 // boal ролики делать не умею, зато умею кодить на скриптах, титры на них ;)
 float fNewPos;
 #define MAX_LINE         147
+
 string STR_TEXT[MAX_LINE] = {
 "",
 "",
@@ -155,6 +156,7 @@ string STR_TEXT[MAX_LINE] = {
 "",
 "",
 };
+
 string STR_COLOR[MAX_LINE] = {
 "",
 "",
@@ -306,18 +308,25 @@ string STR_COLOR[MAX_LINE] = {
 "",
 "",
 };
+
+
 void InitInterface(string iniName)
 {
 	GameInterface.title = "";
+	
 	SendMessage(&GameInterface, "ls", MSG_INTERFACE_INIT,iniName);
+
 	SetEventHandler("InterfaceBreak", "ProcessCancelExit", 0);
 	SetEventHandler("exitCancel", "ProcessCancelExit", 0);
 	SetEventHandler("My_MoveText", "MoveText", 0);
+
 	SetFormatedText("INFO_TEXT", "");
 	int i, k;
+	
 	for(i = 0; i < MAX_LINE; i++)
 	{
 		SendMessage(&GameInterface, "lsle", MSG_INTERFACE_MSG_TO_NODE, "INFO_TEXT", 0, STR_TEXT[i] + "\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n");
+	
 		if(STR_COLOR[i] != "")
 		{
 			switch (STR_COLOR[i])
@@ -334,9 +343,11 @@ void InitInterface(string iniName)
 			}
 		}
 	}
+
 	PostEvent("My_MoveText", 800);
 	fNewPos = 0;
 }
+
 void ProcessCancelExit()
 {
 	if(CheckAttribute(&InterfaceStates, "showGameMenuOnExit") && sti(InterfaceStates.showGameMenuOnExit) == true)
@@ -344,20 +355,24 @@ void ProcessCancelExit()
 		IDoExit(RC_INTERFACE_LAUNCH_GAMEMENU);
 		return;
 	}
+
 	IDoExit(RC_INTERFACE_OPTIONSCREEN_EXIT);
 	if(!CheckAttribute(&InterfaceStates, "InstantExit") || sti(InterfaceStates.InstantExit) == false) ReturnToMainMenu();
 }
+
 void IDoExit(int exitCode)
 {
  	DelEventHandler("InterfaceBreak","ProcessCancelExit");
 	DelEventHandler("exitCancel","ProcessCancelExit");
 	DelEventHandler("My_MoveText","MoveText");
+    
 	interfaceResultCommand = exitCode;
 	if(CheckAttribute(&InterfaceStates,"InstantExit") && sti(InterfaceStates.InstantExit) == true)
 		EndCancelInterface(true);
 	else
 		EndCancelInterface(false);
 }
+
 void MoveText()
 {
 	if(fNewPos >= 1)

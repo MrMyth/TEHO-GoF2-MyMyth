@@ -1,9 +1,14 @@
+
+
 #define LAI_TMPL_DIALOG		"dialog"
+
 /*
 	Возможные состояния:
 		"wait"		ждёт начала диалога
 		"dialog"	разговаривает
 */
+
+
 bool LAi_tmpl_SetDialog(aref chr, aref by, float dlgTime)
 {
 	if(!LAi_tmpl_dialog_InitTemplate(chr)) return false;
@@ -15,6 +20,7 @@ bool LAi_tmpl_SetDialog(aref chr, aref by, float dlgTime)
 	LAi_tmpl_dialog_StartDialog(chr, by, dlgTime);
 	return true;
 }
+
 //Если мы пасивны, запускаем шаблон без времени завершения
 bool LAi_tmpl_SetActivatedDialog(aref chr, aref by)
 {
@@ -26,10 +32,12 @@ bool LAi_tmpl_SetActivatedDialog(aref chr, aref by)
 	LAi_tmpl_dialog_CharacterUpdate(chr, 0.0);
 	return true;
 }
+
 void LAi_tmpl_dialog_NoAni(aref chr)
 {
 	chr.chr_ai.tmpl.noani = "1";
 }
+
 //Остановить диалог между NPC
 bool LAi_tmpl_dialog_StopNPC(aref chr)
 {
@@ -51,6 +59,8 @@ bool LAi_tmpl_dialog_StopNPC(aref chr)
 	}
 	return true;
 }
+
+
 bool LAi_tmpl_dialog_InitTemplate(aref chr)
 {
 	SendMessage(&chr, "lsl", MSG_CHARACTER_EX_MSG, "LockFightMode", false);
@@ -95,12 +105,15 @@ bool LAi_tmpl_dialog_InitTemplate(aref chr)
 	chr.chr_ai.tmpl.phrasetime = rand(3);
 	return true;
 }
+
 //Возможно ли завенсти диалог
 bool LAi_tmpl_dialog_IsActive(aref chr)
 {	
 	if(chr.chr_ai.tmpl.state == "wait") return false;
 	return true;
 }
+
+
 //Процессирование шаблона персонажа
 void LAi_tmpl_dialog_CharacterUpdate(aref chr, float dltTime)
 {
@@ -149,6 +162,7 @@ void LAi_tmpl_dialog_CharacterUpdate(aref chr, float dltTime)
 	//если нищий и сидит - ничего не крутим
 	if (chr.chr_ai.type == LAI_TYPE_POOR && sti(chr.chr_ai.type.SitState)) return; 
 	if (chr.model.animation == "mushketer") return; 
+
 	if (chr.chr_ai.type == LAI_TYPE_HUBER) 
 	{
 		time = stf(chr.chr_ai.tmpl.phrasetime) - dltTime;
@@ -277,88 +291,113 @@ void LAi_tmpl_dialog_CharacterUpdate(aref chr, float dltTime)
 		}
 	}
 }
+
 //Персонаж выполнил команду  go to point
 void LAi_tmpl_dialog_EndGoToPoint(aref chr)
 {
 }
+
 //Персонаж провалил команду  go to point
 void LAi_tmpl_dialog_FailureGoToPoint(aref chr)
 {
 }
+
 //Персонаж выполнил команду  run to point
 void LAi_tmpl_dialog_EndRunToPoint(aref chr)
 {	
 }
+
 //Персонаж провалил команду  run to point
 void LAi_tmpl_dialog_FailureRunToPoint(aref chr)
 {	
 }
+
 //Персонаж не может добраться до точки назначения
 void LAi_tmpl_dialog_BusyPos(aref chr, float x, float y, float z)
 {
 }
+
 //Персонаж начал перемещение за другим
 void LAi_tmpl_dialog_FollowGo(aref chr)
 {
 }
+
 //Персонаж начал дошёл до другого персонажа
 void LAi_tmpl_dialog_FollowStay(aref chr)
 {	
 }
+
 //Персонаж провалил команду  dialog character
 void LAi_tmpl_dialog_FailureFollow(aref chr)
 {	
 }
+
+
 //Персонаж начал перемещение за другим
 void LAi_tmpl_dialog_FightGo(aref chr)
 {
 }
+
 //Персонаж начал дошёл до другого персонажа
 void LAi_tmpl_dialog_FightStay(aref chr)
 {
 }
+
 //Персонаж провалил команду  Fight
 void LAi_tmpl_dialog_FailureFight(aref chr)
 {
 }
+
 //Можно ли стрелять
 bool LAi_tmpl_dialog_IsFire(aref chr)
 {	
 	return false;
 }
+
 //Можно ли использовать оружие
 bool LAi_tmpl_dialog_IsFight(aref chr)
 {
 	return false;
 }
+
+
 //Персонаж выполнил команду  escape
 void LAi_tmpl_dialog_EndEscape(aref chr)
 {
 }
+
 //Персонаж скользит вдоль патча
 void LAi_tmpl_dialog_EscapeSlide(aref chr)
 {
 }
+
 //Персонаж провалил команду  escape
 void LAi_tmpl_dialog_FailureEscape(aref chr)
 {
 }
+
+
 //Персонаж толкается с другими персонажами
 void LAi_tmpl_dialog_ColThreshold(aref chr)
 {
 }
+
 //Персонаж закончил проигрывать анимацию
 void LAi_tmpl_dialog_EndAction(aref chr)
 {
 	CharacterPlayAction(chr, "");
 }
+
+
 //Персонажа просят освободить место
 void LAi_tmpl_dialog_FreePos(aref chr, aref who)
 {
 }
+
 //------------------------------------------------------------------------------------------
 //Внутреннии функции
 //------------------------------------------------------------------------------------------
+
 void LAi_tmpl_dialog_updatetemplate(aref chr)
 {
 	if(chr.chr_ai.tmpl.state == "dialog")
@@ -369,6 +408,7 @@ void LAi_tmpl_dialog_updatetemplate(aref chr)
 		SetCharacterTask_Stay(chr);
 	}
 }
+
 void LAi_tmpl_dialog_StartDialog(aref chr, aref by, float dlgTime)
 {
 	//Заполняем поля

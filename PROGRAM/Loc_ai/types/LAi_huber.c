@@ -1,10 +1,16 @@
 /*
 Тип: губернатор, отвечает на диалоги, никогда не боится
+
 	Используемые шаблоны:
 		stay
 		dialog
 */
+
+
+
 #define LAI_TYPE_HUBER		"huber"
+
+
 //Инициализация
 void LAi_type_huber_Init(aref chr)
 {
@@ -16,6 +22,7 @@ void LAi_type_huber_Init(aref chr)
 	LAi_SetHuberSitAnimation(chr);
 	SendMessage(&chr, "lsl", MSG_CHARACTER_EX_MSG, "SetFightWOWeapon", false);
 }
+
 //Процессирование типа персонажа
 void LAi_type_huber_CharacterUpdate(aref chr, float dltTime)
 {	
@@ -71,25 +78,30 @@ void LAi_type_huber_CharacterUpdate(aref chr, float dltTime)
 		}
 	}
 }
+
 //Загрузка персонажа в локацию
 bool LAi_type_huber_CharacterLogin(aref chr)
 {
 	return true;
 }
+
 //Выгрузка персонажа из локацию
 bool LAi_type_huber_CharacterLogoff(aref chr)
 {
 	return true;
 }
+
 //Завершение работы темплейта
 void LAi_type_huber_TemplateComplite(aref chr, string tmpl)
 {
 	LAi_tmpl_player_InitTemplate(chr);
 }
+
 //Сообщить о желании завести диалог
 void LAi_type_huber_NeedDialog(aref chr, aref by)
 {
 }
+
 //Запрос на диалог, если возвратить true то в этот момент можно начать диалог
 bool LAi_type_huber_CanDialog(aref chr, aref by)
 {
@@ -98,6 +110,7 @@ bool LAi_type_huber_CanDialog(aref chr, aref by)
 	//Согласимся на диалог
 	return true;
 }
+
 //Начать диалог
 void LAi_type_huber_StartDialog(aref chr, aref by)
 {
@@ -107,20 +120,26 @@ void LAi_type_huber_StartDialog(aref chr, aref by)
 	//LAi_tmpl_dialog_NoAni(chr);
 	chr.chr_ai.tmpl.firstAnim = 1;
 }
+
 //Закончить диалог
 void LAi_type_huber_EndDialog(aref chr, aref by)
 {
 	LAi_tmpl_stay_InitTemplate(chr);
 	LAi_SetHuberSitAnimation(chr);
 }
+
 //Персонаж выстрелил
 void LAi_type_huber_Fire(aref attack, aref enemy, float kDist, bool isFindedEnemy)
 {
 }
+
+
 //Персонаж атакован
 void LAi_type_huber_Attacked(aref chr, aref by)
 {
+	
 }
+
 //Найти врага
 int LAi_type_huber_FindEnemy(aref chr, int num)
 {
@@ -144,3 +163,4 @@ int LAi_type_huber_FindEnemy(aref chr, int num)
 	}
 	return -1;
 }
+

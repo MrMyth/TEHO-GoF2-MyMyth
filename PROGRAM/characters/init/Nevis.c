@@ -1,9 +1,12 @@
+
 int CreateNevisCharacters(int n)
 {
 	ref ch;
+	
 	///////////////////////////////////////////////////////////////////////////////
 	// ОСНОВНЫЕ ПЕРСОНАЖИ
 	///////////////////////////////////////////////////////////////////////////////
+
 	makeref(ch,Characters[n]);			//Губернатор
 	ch.id		= "Charles_Mayor";
 	ch.model	= "trader_11";
@@ -29,6 +32,7 @@ int CreateNevisCharacters(int n)
 	LAi_group_MoveCharacter(ch, "FRANCE_CITIZENS");
 	LAi_SetImmortal(ch, true);
 	n = n + 1;
+
 	makeref(ch,Characters[n]);			//Священик
 	ch.id		= "Charles_Priest";
 	ch.model	= "priest_2";
@@ -46,6 +50,7 @@ int CreateNevisCharacters(int n)
 	LAi_group_MoveCharacter(ch, "FRANCE_CITIZENS");
 	LAi_SetImmortal(ch, true);
 	n = n + 1;
+
 	makeref(ch,Characters[n]);		// ОФициантка
 	ch.id		= "Charles_waitress";
 	ch.model	= "women_13";
@@ -62,6 +67,7 @@ int CreateNevisCharacters(int n)
 	LAi_group_MoveCharacter(ch, "FRANCE_CITIZENS");
 	LAi_SetImmortal(ch, true);
 	n = n + 1;
+
 	makeref(ch,Characters[n]);			//Трактирщик
 	ch.id		= "Charles_tavernkeeper";
 	ch.model	= "barmen_8";
@@ -79,6 +85,8 @@ int CreateNevisCharacters(int n)
 	LAi_group_MoveCharacter(ch, "FRANCE_CITIZENS");
 	LAi_SetImmortal(ch, true);
 	n = n + 1;
+
+
 	makeref(ch,Characters[n]);			//Торговец
 	ch.id = "Charles_trader";
 	ch.model	= "trader_8";
@@ -96,6 +104,7 @@ int CreateNevisCharacters(int n)
 	LAi_SetImmortal(ch, true);
 	ch.item_date = "";
 	n = n + 1;
+
 	makeref(ch,Characters[n]);			//Корабел
 	ch.id		= "Charles_shipyarder";
 	ch.model	= "shipowner_8_1";
@@ -122,6 +131,7 @@ int CreateNevisCharacters(int n)
 	LAi_group_MoveCharacter(ch, "FRANCE_CITIZENS");
 	LAi_SetImmortal(ch, true);
 	n = n + 1;
+	
 	makeref(ch,Characters[n]);			//Банкир
 	ch.id		= "Charles_usurer";
 	ch.model	= "banker_8_1";
@@ -143,6 +153,7 @@ int CreateNevisCharacters(int n)
 	LAi_group_MoveCharacter(ch, "FRANCE_CITIZENS");
 	LAi_SetImmortal(ch, true);
 	n = n + 1;
+
 	makeref(ch,Characters[n]);			//Начальник порта
 	ch.id		= "Charles_PortMan";
 	ch.model	= "citiz_3";
@@ -159,6 +170,7 @@ int CreateNevisCharacters(int n)
 	LAi_SetImmortal(ch, true);
 	ch.item_date = "";
 	n = n + 1;
+
 	makeref(ch,Characters[n]);			//Хозяйка борделя
 	ch.id		= "Charles_Hostess";
 	ch.name		= "Merilin"
@@ -177,6 +189,7 @@ int CreateNevisCharacters(int n)
 	LAi_SetOwnerType(ch);
 	LAi_group_MoveCharacter(ch, "FRANCE_CITIZENS");
 	n = n + 1;
+
     makeref(ch,Characters[n]);
 	ch.name 	= "Smuggler";
 	ch.lastname = "";
@@ -193,6 +206,7 @@ int CreateNevisCharacters(int n)
 	LAi_SetHP(ch, 80.0, 80.0);
 	ch.greeting = "smuggler";
 	n = n + 1;
+	
 	makeref(ch,Characters[n]);			//Смотритель маяка
 	ch.id		= "Charles_Lightman";
 	ch.model	= "keeper_6";
@@ -212,6 +226,7 @@ int CreateNevisCharacters(int n)
 	LAi_group_MoveCharacter(ch, "FRANCE_CITIZENS");
 	LAi_SetImmortal(ch, true);
 	n = n + 1;
+	
 	makeref(ch,Characters[n]);			//Заведующий  складом на верфи
 	ch.id		= "Charles_SkladMan";
 	ch.model	= "citiz_"+(rand(9)+1);
@@ -230,6 +245,7 @@ int CreateNevisCharacters(int n)
 	LAi_SetImmortal(ch, true);
 	ch.Storage 	  = true;
 	n = n + 1; 
+	
 	makeref(ch,Characters[n]);			//Смотритель кладбища
 	ch.id		= "Charles_Cemeteryman";
 	ch.model	= "keeper_4";
@@ -249,5 +265,6 @@ int CreateNevisCharacters(int n)
 	LAi_group_MoveCharacter(ch, "FRANCE_CITIZENS");
 	LAi_SetImmortal(ch, true);
 	n = n + 1;
+	
 	return n;
 }

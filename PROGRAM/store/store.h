@@ -1,4 +1,5 @@
 #define STORE_QUANTITY			30
+
 #define Bridgetown_STORE		0
 #define SanJuan_STORE			1
 #define Santiago_STORE			2
@@ -28,7 +29,9 @@
 #define SantaCatalina_STORE     26
 #define Beliz_STORE          	27
 #define SanAndres_STORE         28
+
 #define SHIP_STORE 				29
+
 #define T_TYPE_NORMAL			0		// повседневные товары
 #define T_TYPE_AMMUNITION		1		// боеприпасы
 #define T_TYPE_CROWN			2		// коронные товары
@@ -38,6 +41,7 @@
 #define T_TYPE_CANNONS 			6		// орудия
 #define T_TYPE_CONTRABAND		7		// контрабанда
 #define T_TYPE_AGGRESSIVE		8		// товары агрессивного спроса
+
 #define T_TYPE_NORMAL_NAME		"normal"
 #define T_TYPE_AMMUNITION_NAME	"ammunition"
 #define T_TYPE_CROWN_NAME		"crown"
@@ -47,4 +51,5 @@
 #define T_TYPE_CANNONS_NAME 	"cannons"
 #define T_TYPE_CONTRABAND_NAME	"contraband"
 #define T_TYPE_AGGRESSIVE_NAME  "aggressive"
+
 object  stores[STORE_QUANTITY];

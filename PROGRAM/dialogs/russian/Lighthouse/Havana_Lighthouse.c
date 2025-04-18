@@ -15,6 +15,7 @@ void ProcessCommonDialogEvent(ref NPChar, aref Link, aref NextDiag)
 				link.l1.go = "merriman";
 			}
 		break;
+		
 		// калеуче
 		case "merriman":
 			dialog.text = "No, buddy, no one like that. I would have taken notice.";
@@ -25,3 +26,5 @@ void ProcessCommonDialogEvent(ref NPChar, aref Link, aref NextDiag)
 	}
 	UnloadSegment(NPChar.FileDialog2); 
 }
+
+

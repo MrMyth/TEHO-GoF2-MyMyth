@@ -1,11 +1,14 @@
 #define FOGFACTOR 0.5
 #define FOGHEIGHTFACTOR 0.5
+
 void Whr_FogRainCheck(){
 //JL -------------------------------------------------------------
+
 //  LDH more fog in mornings - 26Feb09
 	int tempFog = fog;
 	int theHour = GetHour();
 	if (theHour >= 6 && theHour < 10) fog += 15-theHour;	// +8, 7, 6, 5, don't use random number here
+
 //JRH -->
 	ref PChar = GetMainCharacter();
 	if(CheckAttribute(Pchar,"quest.JRH_rain"))
@@ -18,65 +21,81 @@ void Whr_FogRainCheck(){
 				//Log_SetStringToLog("JRH_rain = Clear");
 				WhrDeleteRainEnvironment();			//JRH added june 2019
 			break;
+
 			case "Cloudy":
 				wRain = 60;
 				//Log_SetStringToLog("JRH_rain = Cloudy");
 			break;
+
 			case "Overcast":
 				wRain = 70;
 				//Log_SetStringToLog("JRH_rain = Overcast");
 			break;
+
 			case "Rainy":
 				wRain = 80;
 				//Log_SetStringToLog("JRH_rain = Rainy");
 			break;
+
 			case  "Heavy Rain":
 				wRain = 90;
 				//Log_SetStringToLog("JRH_rain = Heavy Rain");
 			break;
+
 			case  "Stormy":
 				wRain = 97;
 			break;
+
 			case "Heavy Storm":
 				wRain = 100;
 				Winds = 30;	// twisters start at minwind >= 28
 			break;
+
 			case  "Foggy":
 				Fog = 15;		// produces fog density of 0.00375
 				//Log_SetStringToLog("JRH_rain = Foggy");
 			break;
+
 			case  "Heavy Fog":
 				Fog = 25;		// produces fog density of 0.00625
 			break;
+
 			case  "Black Pearl Fight":
 				wRain = 90;
 				Fog = 15;
 			//	OWind = 25;
 			break;
+
 			case  "IslaDeMuerte":
 				Fog = 80;		// produces fog density of 0.02
 				//Log_SetStringToLog("JRH_rain = IslaDeMuerte");
 			break;
+
 			case  "Mine Fog 1":
 				wRain = 0;
 				Fog = 200;
 				WeathersNH.Sea.Water.Color = argb(0,0,0,0);
 			break;
+
 			case  "Mine Fog 2":
 				wRain = 0;
 				Fog = 650;
 				WeathersNH.Sea.Water.Color = argb(0,0,0,0);
 			break;
+
 			case  "Super Fog":
 				Fog = 999;
 			break;
+
 			//Default
 			//Log_SetStringToLog("JRH_rain = Default");
 		}
 	}
 //<-- JRH
+
 //  LDH more fog during rain - 26Feb09
 	if (wRain > 75 && fog < 10) fog += (wRain-75)/2;
+
 	if ( fog >= 5 ){
 		WeathersNH.Fog.Enable = true;
 		WeathersNH.Fog.Height = (fog-4)*500.0*FOGHEIGHTFACTOR;				// LDH - 25Feb09
@@ -98,13 +117,16 @@ void Whr_FogRainCheck(){
 		WeathersNH.Fog.Density = 0.001*FOGFACTOR;
 		WeathersNH.Fog.SeaDensity = 0.001*FOGFACTOR;
 		WeathersNH.Fog.IslandDensity = 0.001*FOGFACTOR;
+
 		WeathersNH.SpecialSeaFog.Enable = true;
 		WeathersNH.SpecialSeaFog.Height = 1500.0*FOGHEIGHTFACTOR;
 		WeathersNH.SpecialSeaFog.Start = 0.0;
 		WeathersNH.SpecialSeaFog.Density = 0.001*FOGFACTOR;
 		WeathersNH.SpecialSeaFog.SeaDensity = 0.001*FOGFACTOR;
 	}
+
 	fog = tempFog;		// LDH 26Feb09
+
 	//#20220311-01
 	//WeathersNH.Rain = false;
 	//WeathersNH.Storm = false;
@@ -112,6 +134,7 @@ void Whr_FogRainCheck(){
 	//WeathersNH.StormSky = false;
 	//bWeatherIsStorm = false;
 	//WeathersNH.StormSky = false;
+
 	WeathersNH.Rain.DropsNearNum = 500;
 	WeathersNH.Rain.DropsFarNum = 500;
 	WeathersNH.Rain.DropsNearRadius = 25.0;
@@ -121,6 +144,7 @@ void Whr_FogRainCheck(){
 	WeathersNH.Rain.DropsTexture = "weather\rain_drops.tga.tx";
 	WeathersNH.Rain.DropsColor = argb(63,255,255,255);
 	WeathersNH.Lightning.Enable = false;
+
 	if (wRain > 75)
 	{
 	    if (bWeatherIsStorm)
@@ -156,7 +180,9 @@ void Whr_FogRainCheck(){
 		WeathersNH.Rain.WindSpeedJitter = (0.5);
 		WeathersNH.Rain.MaxBlend = 75;
 		WeathersNH.Rain.TimeBlend = 2000;
+
 		if(theHour >= 5 && theHour < 23) {WeathersNH.Rainbow.Enable = false;}		//UZVER
+
         //#20220311-01
 	    if (!bWeatherIsStorm)
             WeathersNH.Storm = false;
@@ -238,6 +264,7 @@ void Whr_FogRainCheck(){
 	{
 	    //#20220311-01
 	    if (bWeatherIsRain || bWeatherIsStorm) return;
+
 	    WeathersNH.Rain = false;
         WeathersNH.Storm = false;
         WeathersNH.Tornado = false;
@@ -245,6 +272,7 @@ void Whr_FogRainCheck(){
         bWeatherIsStorm = false;
         WeathersNH.StormSky = false;
         WeathersNH.Lightning.Enable = false;
+
 		WeathersNH.Rain.NumDrops = 0;
 		WeathersNH.Rain.Color = argb(0,73,73,73);
 		WeathersNH.Rain.DropLength = 2.12;
@@ -255,6 +283,7 @@ void Whr_FogRainCheck(){
 		WeathersNH.Rain.WindSpeedJitter = 0.5;
 		WeathersNH.Rain.MaxBlend = 49;
 		WeathersNH.Rain.TimeBlend = 2000;
+
 		WeathersNH.Rainbow.Enable = false;
 		WeathersNH.Rainbow.Texture = "weather\rainbow\rainbow.tga.tx";
 	}

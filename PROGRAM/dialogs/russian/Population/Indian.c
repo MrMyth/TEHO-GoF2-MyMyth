@@ -3,10 +3,13 @@ void ProcessDialogEvent()
 {
 	ref NPChar;
 	aref Link, NextDiag;
+
 	DeleteAttribute(&Dialog,"Links");
+
 	makeref(NPChar,CharacterRef);
 	makearef(Link, Dialog.Links);
 	makearef(NextDiag, NPChar.Dialog);
+	
 	switch(Dialog.CurrentNode)
 	{
 		case "First time":
@@ -19,6 +22,7 @@ void ProcessDialogEvent()
                 "Very poetic.", 
 				"I am glad to see you too.", npchar, Dialog.CurrentNode);
 			link.l1.go = "exit";
+			
 			if (npchar.quest.meeting == "0")
 			{
 				dialog.text = "Good day to you, white brother. You want to talk with Indian man?";
@@ -28,12 +32,14 @@ void ProcessDialogEvent()
 			}
 			NextDiag.TempNode = "First time";
 		break;
+
 		//замечание по обнаженному оружию от персонажей типа citizen
 		case "CitizenNotBlade":
 			dialog.text = NPCharSexPhrase(NPChar, "Don't tempt your fate, paleface! Sword away!", "Don't tempt your fate, paleface! Sword away!");
 			link.l1 = LinkRandPhrase("Fine.", "As you wish.", "As you say.");
 			link.l1.go = "exit";
 		break;
+
 		case "Exit":
 			NextDiag.CurrentNode = NextDiag.TempNode;
 			DialogExit();

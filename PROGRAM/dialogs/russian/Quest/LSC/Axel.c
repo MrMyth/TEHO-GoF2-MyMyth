@@ -4,11 +4,15 @@ void ProcessDialogEvent()
 {
 	ref NPChar, sld;
 	aref Link, NextDiag;
+
 	DeleteAttribute(&Dialog,"Links");
+
 	makeref(NPChar,CharacterRef);
 	makearef(Link, Dialog.Links);
 	makearef(NextDiag, NPChar.Dialog);
+	
 	ProcessCommonDialogRumors(NPChar, Link, NextDiag);
+	
 	switch(Dialog.CurrentNode)
 	{
 		case "First time":
@@ -69,6 +73,7 @@ void ProcessDialogEvent()
 			}
 			NextDiag.TempNode = "First time";
 		break;
+		
 		case "meeting":
 			dialog.text = "All kinds of stuff. Mixtures, blades, firearms, ammo, cuirasses, gems and minerals. Enchanted amulets and talismans. Garbage and everyday items. People bring to me everything they find on dead ships, things they don't need themselves\nSo feel free to do the same. I must warn you, though. I do not offer provision and ship wares.";
 			link.l1 = "Fine, Axel. Let's see your goods.";
@@ -77,6 +82,7 @@ void ProcessDialogEvent()
 			link.l2.go = "exit";
 			NextDiag.TempNode = "First time";
 		break;
+		
 		case "Trade_items":
 			DialogExit();
 			if (!CheckAttribute(npchar, "trade_date") || GetNpcQuestPastDayParam(npchar, "trade_date") >= 5)
@@ -86,22 +92,26 @@ void ProcessDialogEvent()
 			}
 			LaunchItemsTrade(npchar, 0);
 		break;
+		
 		// наводка на Адольфа
 		case "adolf":
 			dialog.text = "This must some kind of a joke. You are already the third to ask. I don't have such weapon. But several months ago Adolf Barbier tried to sell me his hunting scoped stutzen. A wonderful weapon, I tell you. Exactly what you are looking for\nBut Barbier asked a hell of price for it, it seems that it is made of pure gold and shoots with diamonds. So, I had to reject his offer.";
 			link.l1 = "Interesting! And where can I find Barbier?";
 			link.l1.go = "adolf_1";
 		break;
+		
 		case "adolf_1":
 			dialog.text = "I have no idea. He's probably wandering around somewhere. He often visits Sancho's tavern, he likes to have a drink every evening.";
 			link.l1 = "Thanks! I think, I will easily find him there. Tell me, Axel, has anyone else asked you about the rifle? You've mentioned the other two and who are they? Competitors?";
 			link.l1.go = "adolf_2";
 		break;
+		
 		case "adolf_2":
 			dialog.text = "Mary Casper and some Marcello also known as Cyclops. I have no idea, why would the girl need a rifle, but our Red Mary is a well-known madcap. A year ago, she started to buy tons of gun powder in order to make mines, she wanted to stun crabs. Thank the Lord, they forbidden her to do so\nAnd Marcello wanted to buy a rifle for bird hunting, the man got tired of salted beef. I sent them both to Adolf, don't know if they bought the rifle from him\nAlso, this sly dog Giuseppe Fazio was asking about Adolf recently. Perhaps, he wants to buy this stutzen too.";
 			link.l1 = "Heh, I've got a lot of competitors. Fine, I'll go to find that Adolf - perhaps, he hasn't sold the gun yet.";
 			link.l1.go = "adolf_3";
 		break;
+		
 		case "adolf_3":
 			DialogExit();
 			pchar.questTemp.Saga.SharkHunt = "search_mush_2"; //флаг на таверну
@@ -109,6 +119,7 @@ void ProcessDialogEvent()
 			sld = characterFromId("LSC_Adolf");
 			sld.lifeday = 0; // убираем настоящего Адольфа
 		break;
+		
 		// бусинка для Белого Мальчика - просто инфа
 		case "ole_pearl":
 			dialog.text = "Everybody knows that, mister! He asks everyone for these beads, that is how he calls big pearls. Give him one, and you will become his best friend.";
@@ -116,40 +127,48 @@ void ProcessDialogEvent()
 			link.l1.go = "exit";
 			DeleteAttribute(npchar, "quest.ole_pearl");
 		break;
+		
 		// виски для Акулы
 		case "whiskey":
 			dialog.text = "Yes, pal, he did. But I will disappoint you in case you want to buy a barrel of Bushmills too. I had only one barrel and Chad has bought it. I can offer you Scottish Whiskey - it's as good as Irish, and, actually, I like its taste much better.";
 			link.l1 = "Perhaps, later. Has Chad bought anything else from you?";
 			link.l1.go = "whiskey_1";
 		break;
+		
 		case "whiskey_1":
 			dialog.text = "No. He was interested in arsenic, he said that there are too many rats at the Tartarus and he wants to exterminate them. I don't need arsenic since I've hired that idiot Olle to clean the shop, all rats have just gone to the tavern of poor Sancho. I don't know why rats hate Olle so much...";
 			link.l1 = "Perhaps, he had some cats in his family...";
 			link.l1.go = "whiskey_2";
 		break;
+		
 		case "whiskey_2":
 			dialog.text = "Ha-ha! Perhaps... Sancho is the man who has arsenic - that's for sure.";
 			link.l1 = "I see. Thanks for the information, then!";
 			link.l1.go = "whiskey_3";
 		break;
+		
 		case "whiskey_3":
 			DialogExit();
 			AddQuestRecord("SharkHunt", "36");
 			pchar.questTemp.Saga.SharkHunt = "barmen_whiskey"; // флаг на таверну - поиск мышьяка
 		break;
+		
 		case "":
 			dialog.text = "";
 			link.l1 = "";
 			link.l1.go = "";
 		break;
+		
 		case "":
 			dialog.text = "";
 			link.l1 = "";
 			link.l1.go = "";
 		break;
+		
 		case "Exit":
 			NextDiag.CurrentNode = NextDiag.TempNode;
 			DialogExit();
 		break;
+		
 	}
 }

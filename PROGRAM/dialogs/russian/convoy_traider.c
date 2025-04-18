@@ -4,17 +4,21 @@ void ProcessDialogEvent()
 	ref NPChar, d;
 	aref Link, Diag;
 	string NPC_Meeting;
+
 	DeleteAttribute(&Dialog,"Links");
+
 	makeref(NPChar,CharacterRef);
 	makearef(Link, Dialog.Links);
 	makeref(d, Dialog);
 	makearef(Diag, NPChar.Dialog);
+
 	switch(Dialog.CurrentNode)
 	{
 		case "exit":
 			Diag.CurrentNode = Diag.TempNode;
 			DialogExit();
 		break;
+		
 		case "prepare_convoy_quest":
 			if (isBadReputation(pchar, 40)) 
 			{
@@ -29,11 +33,13 @@ void ProcessDialogEvent()
 				link.l1.go = "prepare_convoy_quest_2";
 			}
 		break;
+		
 		case "prepare_convoy_quest_2":
 			dialog.text = "Exactly. Moreover, I believe you're just the right person for my escorting. What would you say?";
 			link.l1 = "Well, make me an offer, and perhaps, you'll get a deal.";
 			link.l1.go = "prepare_convoy_quest_3";
 		break;
+		
 		case "prepare_convoy_quest_3":
 			LookShipConvoy();
 			GenerateConvoyQuest(npchar);
@@ -44,6 +50,7 @@ void ProcessDialogEvent()
 			link.l2 = "I don't think it's an interesting proposition.";
 			link.l2.go = "convoy_refused";
 		break;
+		
 		case "convoy_refused":
 			chrDisableReloadToLocation = false;
 			npchar.LifeDay = 0;
@@ -51,6 +58,7 @@ void ProcessDialogEvent()
 			DialogExit();
 			AddDialogExitQuest("convoy_refused");
 		break;
+		
 		case "convoy_agreeded":
 			chrDisableReloadToLocation = false;
 		    pchar.convoy_quest = pchar.quest.destination;
@@ -58,6 +66,7 @@ void ProcessDialogEvent()
 			DialogExit();
 			AddDialogExitQuest("convoy_agreeded");
 		break;
+		
 		case "complete_convoy_quest":
 			dialog.text = "Oh! Thank you. Under your protection I felt myself safety like never before. Here's your well-deserved reward.";
 			Link.l1 = "You're welcome.";
@@ -73,12 +82,15 @@ void ProcessDialogEvent()
 		break;
 	}
 } 
+
 // boal 03.05.04 квест сопроводить торговца -->
 void GenerateConvoyQuest(ref npchar)
 {
 	int iTradeMoney, iNation;
+
 	DeleteAttribute(NPChar, "Ship");
     SetShipToFantom(NPChar, "trade", true);
+
 	iNation = GetRelation2BaseNation(sti(npchar.nation)); //если привезти нужно во вражеский город
 	int daysQty = GetMaxDaysFromIsland2Island(GetArealByCityName(pchar.ConvoyQuest.City), GetArealByCityName(pchar.quest.destination));
 	if (sti(daysQty) > 14) daysQty = 14;
@@ -86,15 +98,21 @@ void GenerateConvoyQuest(ref npchar)
 	iTradeMoney = (sti(daysQty)*600*sti(pchar.GenQuest.Convoy.Shipmod)+rand(100))*sti(daysQty)/sti(pchar.ConvoyQuest.iDay);
 	if (iNation == RELATION_ENEMY && sti(npchar.nation != PIRATE)) iTradeMoney = makeint(iTradeMoney * 1.4); //то размер награды увеличивается
 	pchar.ConvoyQuest.convoymoney = iTradeMoney;			
+
+
 	//Log_Info(FindRussianDaysString(sti(daysQty)));
 	//Log_Info(pchar.quest.destination);
 	//Log_Info(pchar.ConvoyQuest.City);
+
 	SetTimerCondition("generate_convoy_quest_timer", 0, 0, sti(pchar.ConvoyQuest.iDay), false);
+
 	pchar.quest.generate_convoy_quest_progress = "begin";
+
 	pchar.quest.generate_convoy_quest_failed.win_condition.l1 = "NPC_Death";
 	pchar.quest.generate_convoy_quest_failed.win_condition.l1.character = "QuestTrader";
 	pchar.quest.generate_convoy_quest_failed.win_condition = "generate_convoy_quest_failed";
 }
+
 void LookShipConvoy()
 {
 	switch(makeint(6-sti(RealShips[sti(Pchar.Ship.Type)].Class)))

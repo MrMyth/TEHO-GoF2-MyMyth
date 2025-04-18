@@ -1,13 +1,17 @@
 #include "camera.c" // not completely sure if needed.
+
 bool bSeePeoplesOnDeck = false; // Warship 08.06.09 видеть матросов на палубе при виде от первого лица или нет
+
 // ugeen 13.09.20
 #define DEFAULT_CAM_PERSP 				1.285
 #define DEFAULT_CAM_PERSP_DEN 			1.25
+
 object	SeaCameras;
 aref	Crosshair;
 object	SeaShipCamera,SeaFreeCamera,SeaDeckCamera;
 ref		SeaShipCharacterForCamera;
 bool	bCanSwitchCameras = true;
+
 void DeleteSeaCamerasEnvironment()
 {
 	DeleteClass(&SeaCameras);
@@ -17,12 +21,15 @@ void DeleteSeaCamerasEnvironment()
 	DelEventHandler("SeaCameras_Switch", "SeaCameras_Switch");
 	DelEventHandler(TELESCOPE_ACTIVE, "SeaCameras_TelescopeActive");
 }
+
 void SetPerspectiveSettings()
 {
     float fCamPersp = CalcSeaPerspective();
+
     SeaFreeCamera.Perspective = fCamPersp;
 	SeaShipCamera.Perspective = fCamPersp;
 }
+
 float CalcSeaPerspective()
 {
     float fCamPerspAdj = 0.0;
@@ -32,19 +39,25 @@ float CalcSeaPerspective()
 	fCamPerspAdj = fSCP / DEFAULT_CAM_PERSP_DEN;
     return (DEFAULT_CAM_PERSP + fCamPerspAdj);
 }
+
 void CreateSeaCamerasEnvironment()
 {
 	bCanSwitchCameras = true;
+
 	CreateEntity(&SeaCameras, "SEA_CAMERAS");
 	CreateEntity(&SeaFreeCamera, "FREE_CAMERA");
 	CreateEntity(&SeaShipCamera, "SHIP_CAMERA");
 	CreateEntity(&SeaDeckCamera, "DECK_CAMERA");
+
 	//LayerAddObject("system_messages", &SeaCameras, 1);
 	LayerAddObject(SEA_EXECUTE, &SeaShipCamera, iShipPriorityExecute + 5);
 	LayerAddObject(SEA_EXECUTE, &SeaFreeCamera, 1);
 	LayerAddObject(SEA_EXECUTE, &SeaDeckCamera, iShipPriorityExecute + 5);
+	
 	SetPerspectiveSettings();
+
 	//SeaFreeCamera.Perspective = 1.285;
+
 	// Ship camera paramerets
 	//SeaShipCamera.Perspective = 1.285;
 	SeaShipCamera.SensivityDistance = 30.0;
@@ -61,6 +74,7 @@ void CreateSeaCamerasEnvironment()
 	SeaShipCamera.MaxHeightOnShip = 5.0;
 	SeaShipCamera.InvertMouseX = 1.0;
 	SeaShipCamera.InvertMouseY = -1.0;
+
 	// Deck camera paramerets
 	SeaDeckCamera.Perspective = 1.285;
 	SeaDeckCamera.SensivityDistance = 0.01;
@@ -76,11 +90,15 @@ void CreateSeaCamerasEnvironment()
 	SeaDeckCamera.MinAngleX = -1.3;
 	SeaDeckCamera.RockingX = 0.5;
 	SeaDeckCamera.RockingZ = 0.5;
+
 	makearef(Crosshair,SeaCameras.Crosshair);
+
 	if (!bSeaLoad){
 		Scene.Camera = SHIP_CAMERA;
 		Crosshair.OutsideCamera = true;
 	}
+	
+
 	Crosshair.Texture = "crosshair\crosshair.tga.tx";
 	Crosshair.Size = 0.05;
 	Crosshair.Technique = "Crosshair";
@@ -90,14 +108,18 @@ void CreateSeaCamerasEnvironment()
 	Crosshair.Colors.Enemy = argb(0, 255, 0, 0);
 	Crosshair.Colors.Friend = argb(0, 0, 255, 0);
 	Crosshair.Colors.Neutral = argb(0, 128, 128, 128);
+
 	SendMessage(&AISea, "la", AI_MESSAGE_SET_CAMERAS_ATTRIBUTE, &SeaCameras);
+
 	SetEventHandler("SeaCameras_Switch", "SeaCameras_Switch", 1);
 	SetEventHandler(TELESCOPE_ACTIVE, "SeaCameras_TelescopeActive", 0);
+
 	// add cameras to list
 	SendMessage(&SeaCameras, "li", AI_CAMERAS_ADD_CAMERA, &SeaShipCamera);
 	SendMessage(&SeaCameras, "li", AI_CAMERAS_ADD_CAMERA, &SeaFreeCamera);
 	SendMessage(&SeaCameras, "li", AI_CAMERAS_ADD_CAMERA, &SeaDeckCamera);
 }
+
 void SeaCameras_TelescopeActive()
 {
 	int iTelescopeActive = GetEventData();
@@ -112,10 +134,13 @@ void SeaCameras_TelescopeActive()
 		Crosshair.OutsideCamera = SeaCameras_isCameraOutside(); //|| CrosshairHidden();    // LDH 17Jan17
 	}
 }
+
 void SeaCameras_Switch()
 {
 	if (!bCanSwitchCameras) return;
+
 	int bSwitch = false;
+	
 	// Коммент - выбираем состояние, ИЗ КОТОРОГО ПЕРЕКЛЮЧАЕМСЯ
 	// Sailors.IsOnDeck = 1; - Флаг, находимя ли мы на палубе
 	// если Sailors.IsOnDeck == 1, значит, мы на палубе, и матросов бегающих мы не увидем
@@ -153,6 +178,7 @@ void SeaCameras_Switch()
 	}
 	if (bSwitch) SeaCameras_UpdateCamera();
 }
+
 void SeaCameras_UpdateCamera()
 {
 	switch (SeaCameras.Camera)
@@ -168,6 +194,7 @@ void SeaCameras_UpdateCamera()
 		break;
 	}
 }
+
 void SeaCameras_SetDieCamera()
 {
 	bool bOldCanSwitchCameras;
@@ -181,6 +208,7 @@ void SeaCameras_SetDieCamera()
 		SendMessage(&objISpyGlass, "ll", MSG_TELESCOPE_REQUEST,0); // выключить телескоп
 	}
 }
+
 bool SeaCameras_isCameraOutside()
 {
 	if (SeaCameras.Camera == "SeaShipCamera") return true;
@@ -188,6 +216,7 @@ bool SeaCameras_isCameraOutside()
 	if (SeaCameras.Camera == "SeaDeckCamera") return false;
 	return false;
 }
+
 void SeaCameras_SetShipForSeaCamera(object Character)
 {
 	makeref(SeaShipCharacterForCamera, Character);
@@ -195,10 +224,12 @@ void SeaCameras_SetShipForSeaCamera(object Character)
 	SendMessage(&SeaDeckCamera, "sa", "SetCharacter", SeaShipCharacterForCamera);
 	UpdateCamera();
 }
+
 // LDH 17Jan17 hide crosshair -->
 void ToggleCrosshair()
 {
     if (GetCurControlGroup() != "Sailing1Pers") return;
+
     if ( ! CheckAttribute(Crosshair, "hidden")) Crosshair.hidden = 1;   // hide crosshair by default
     switch (makeint(Crosshair.hidden))
     {
@@ -206,12 +237,14 @@ void ToggleCrosshair()
             Crosshair.hidden = 1;           // hide the crosshair
             Crosshair.OutsideCamera = true;
         break;
+
         case 1:
             Crosshair.hidden = 0;           // show the crosshair
             Crosshair.OutsideCamera = false;
         break;
     }
 }
+
 bool CrosshairHidden()
 {
     if ( ! CheckAttribute(Crosshair, "hidden")) Crosshair.hidden = 1;   // hide crosshair by default

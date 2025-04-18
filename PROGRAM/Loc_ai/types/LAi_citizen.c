@@ -1,4 +1,8 @@
+
+
 #define LAI_TYPE_CITIZEN	"citizen"
+
+
 //Инициализация
 void LAi_type_citizen_Init(aref chr)
 {
@@ -23,6 +27,7 @@ void LAi_type_citizen_Init(aref chr)
 	LAi_SetDefaultStayAnimation(chr);
 	SendMessage(&chr, "lsl", MSG_CHARACTER_EX_MSG, "SetFightWOWeapon", false);
 }
+
 //Процессирование типа персонажа
 void LAi_type_citizen_CharacterUpdate(aref chr, float dltTime)
 {	
@@ -199,24 +204,30 @@ void LAi_type_citizen_CharacterUpdate(aref chr, float dltTime)
 		}
 	}
 }
+
 //Загрузка персонажа в локацию
 bool LAi_type_citizen_CharacterLogin(aref chr)
 {
 	return true;
 }
+
 //Выгрузка персонажа из локацию
 bool LAi_type_citizen_CharacterLogoff(aref chr)
 {
 	return true;
 }
+
 //Завершение работы темплейта
 void LAi_type_citizen_TemplateComplite(aref chr, string tmpl)
 {
+
 }
+
 //Сообщить о желании завести диалог
 void LAi_type_citizen_NeedDialog(aref chr, aref by)
 {
 }
+
 //Запрос на диалог, если возвратить true то в этот момент можно начать диалог
 bool LAi_type_citizen_CanDialog(aref chr, aref by)
 {
@@ -245,6 +256,7 @@ bool LAi_type_citizen_CanDialog(aref chr, aref by)
 	}
 	return false;
 }
+
 //Начать диалог
 void LAi_type_citizen_StartDialog(aref chr, aref by)
 {
@@ -253,6 +265,7 @@ void LAi_type_citizen_StartDialog(aref chr, aref by)
 	CharacterTurnByChr(chr, by);
 	LAi_tmpl_SetActivatedDialog(chr, by);
 }
+
 //Закончить диалог
 void LAi_type_citizen_EndDialog(aref chr, aref by)
 {
@@ -260,10 +273,14 @@ void LAi_type_citizen_EndDialog(aref chr, aref by)
 	LAi_tmpl_walk_InitTemplate(chr);
 	chr.chr_ai.type.notalk = 10.0 + rand(20);
 }
+
 //Персонаж выстрелил
 void LAi_type_citizen_Fire(aref attack, aref enemy, float kDist, bool isFindedEnemy)
 {
+
 }
+
+
 //Персонаж атакован
 void LAi_type_citizen_Attacked(aref chr, aref by)
 {
@@ -273,6 +290,8 @@ void LAi_type_citizen_Attacked(aref chr, aref by)
 		LAi_type_citizen_CharacterUpdate(chr, 0.0);
 	}
 }
+
+
 int LAi_type_citizen_FindNearEnemy(aref chr)
 {
 	if(LAi_grp_alarmactive == true)

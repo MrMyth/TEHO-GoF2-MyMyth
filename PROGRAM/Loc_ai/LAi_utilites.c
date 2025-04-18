@@ -1,5 +1,6 @@
 string arrayNPCModel[64];
 int    arrayNPCModelHow; // для рандомизации моделей в одной локации
+
 void CreateTraders(aref loc)
 {
 	if(CheckAttribute(loc, "QuestCapture")) return; // если идет квестовый бой
@@ -12,11 +13,13 @@ void CreateTraders(aref loc)
 		aref st;
 		int iChar, iSex;
 		string slai_group, sType, sTraderType;
+
 		for(int n = 0; n < MAX_CHARACTERS; n++)
 		{
 			makeref(chr, Characters[n]);
 			if (CheckAttribute(chr, "CityType") && CheckAttribute(chr, "Merchant.type") && chr.location == loc.id) return; 
 		}				
+
 		if(CheckAttribute(loc, "fastreload"))
 		{
 			iColony = FindColony(loc.fastreload);
@@ -25,11 +28,14 @@ void CreateTraders(aref loc)
 		{
 			return;
 		}
+	
 		iNation = GetCityNation(loc.fastreload);
+	
 		if(iNation == -1)
 		{
 			return;
 		}
+				
 		slai_group = GetNationNameByType(iNation)  + "_citizens"; 
 		if (checkAttribute(loc, "locators.merchant"))
 		{
@@ -75,15 +81,20 @@ void CreateTraders(aref loc)
 						sTraderType = "armourer";	
 					break;
 				}
+			
 				iChar = NPC_GeneratePhantomCharacter(sType, iNation, iSex, 180);
+
 				chr = &characters[iChar];
 				SetNPCModelUniq(chr, sType, iSex);
+				
 				chr.City = Colonies[iColony].id;
 				chr.CityType = "citizen";
 				chr.Merchant = true; // Флаг "торговец"
 				chr.Merchant.type = sTraderType; 
 				chr.money = TRADER_MIN_MONEY + rand(TRADER_NORM);
+				
 				LAi_SetLoginTime(chr, 7.0, 20.0);
+
 				ChangeCharacterAddressGroup(chr, loc.id, "merchant", "merchant"+(i+1));
 				LAi_SetMerchantType(chr);
 				chr.dialog.filename = "Common_ItemTrader.c";
@@ -102,19 +113,24 @@ void CreateTraders(aref loc)
 		} 
 	}	
 }
+
 // создаем горожан в локацию + солдаты, фантомы-многодневки (живут 48ч) переработка boal 13.05.06
 void CreateCitizens(aref loc)
 {
 	bool generateAffairOfHonor = true;
+	
 	if (loc.type != "town" && loc.type != "church" && loc.type != "residence") return; //городской генератор не должен отрабатывать везде
 	if(LAi_IsCapturedLocation) // fix нефиг грузить, когда город трупов или боевка
 	{
 		return;
 	}
 	if(CheckAttribute(loc, "QuestCapture")) return; // если идет квестовый бой
+	
 	int iColony = -1;
 	int iNation = -1;
+
 	if (isLocationHasCitizens(loc.id)) return; // boal  если есть еще с того раза, но не нужно
+	
 	if(CheckAttribute(loc, "fastreload"))
 	{
 		iColony = FindColony(loc.fastreload);
@@ -123,11 +139,14 @@ void CreateCitizens(aref loc)
 	{
 		return;
 	}
+	
 	iNation = GetCityNation(loc.fastreload);
+	
 	if(iNation == -1)
 	{
 		return;
 	}
+
 	int iCitizensQuantity, iModel;
 	int iSailorQty, iCapQty, iCitizQty, iNobleQty, iGipsyQty, iContraQty, iIndianQty, iMonkQty, iConvQty;
 	ref chr;
@@ -136,6 +155,7 @@ void CreateCitizens(aref loc)
 	bool bOk;
 	string slai_group, locatorName, sType;
     slai_group = GetNationNameByType(iNation)  + "_citizens"; 
+
 	// нищие -->
 	if (loc.type == "town")
 	{
@@ -158,9 +178,11 @@ void CreateCitizens(aref loc)
 				ChangeCharacterAddressGroup(&characters[iPoorIdx], loc.id, "goto", locatorName);
 			else
 				PlaceCharacter(&characters[iPoorIdx], "patrol", "random_free");
+
 		}
 	}
 	// нищие <--
+
     // горожане --> Jason: тотально переделал генерацию горожан - разнесено по типам
 	iSailorQty = rand(2)+2;
 	iContraQty = rand(1)+1;
@@ -349,6 +371,7 @@ void CreateCitizens(aref loc)
 						if(!CheckAttribute(PChar, "QuestTemp.AffairOfHonor.FinishCount")) PChar.QuestTemp.AffairOfHonor.FinishCount = 0;
 						//pchar.questTemp.AffairOfHonor.LighthouseId = Island_GetLighthouseId(loc.islandId);
 						pchar.questTemp.AffairOfHonor.LighthouseId = Colony_GetLighthouseId(loc.fastreload);
+						
 						if(loc.type == "town" && chr.City != "PortRoyal" && chr.City != "FortOrange" && PChar.QuestTemp.AffairOfHonor.LighthouseId != "" && AffairOfHonor_GetCurQuest() == "")
 						{
 							if(sti(PChar.QuestTemp.AffairOfHonor.FinishCount) < 8 && GetCharacterIndex("AffairOfHonor_QuestMan") == -1)
@@ -540,6 +563,7 @@ void CreateCitizens(aref loc)
 		}
 	}
 	// горожане <--    
+	
 	// солдаты -->
 	if (checkAttribute(loc, "soldiers") && CheckAttribute(loc, "locators.soldiers"))
 	{
@@ -567,6 +591,7 @@ void CreateCitizens(aref loc)
 			LAi_SetReincarnationRankStep(chr, MOD_SKILL_ENEMY_RATE+2); //задаем шаг на увеличение ранга фантомам на реинкарнацию
             SetFantomParamFromRank(chr, sti(pchar.rank)+MOD_SKILL_ENEMY_RATE, true); // бравые орлы
 			LAi_SetLoginTime(chr, 6.0, 23.0); //а ночью будет беготня от патруля :)
+
 			//locatorName = PlaceCharacter(chr, "soldiers", "random_free"); // бага наложения была из-за правки рандома
 			solderLoc = GetAttributeN(st, i);
 			locatorName = GetAttributeName(solderLoc);
@@ -579,9 +604,12 @@ void CreateCitizens(aref loc)
 			}
 			else chr.greeting = "soldier";
 			// <-- eddy. проверяем, должен ли солдат быть протектором
+			
 			chr.dialog.filename = "Common_Soldier.c";
 			chr.dialog.currentnode = "first time";
+			
 			LAi_SetGuardianType(chr);
+
             if (sti(Colonies[iColony].HeroOwn) == true)
 			{
 				LAi_group_MoveCharacter(chr, LAI_GROUP_PLAYER_OWN);
@@ -624,9 +652,12 @@ void CreateCitizens(aref loc)
 			LAi_CharacterReincarnation(chr, true, true);
 			LAi_SetReincarnationRankStep(chr, MOD_SKILL_ENEMY_RATE+2); //задаем шаг на увеличение ранга фантомам на реинкарнацию
 			LAi_SetLoginTime(chr, 0.0, 24.0);
+			
 			chr.dialog.filename = "Common_Soldier.c";
 			chr.dialog.currentnode = "first time";
+
 			LAi_SetPatrolType(chr);
+			
             if (sti(Colonies[iColony].HeroOwn) == true)
 			{
 				LAi_group_MoveCharacter(chr, LAI_GROUP_PLAYER_OWN);
@@ -661,10 +692,14 @@ void CreateCitizens(aref loc)
 			LAi_SetReincarnationRankStep(chr, MOD_SKILL_ENEMY_RATE+2); //задаем шаг на увеличение ранга фантомам на реинкарнацию
             SetFantomParamFromRank(chr, sti(pchar.rank)+MOD_SKILL_ENEMY_RATE, true); // бравые орлы
 			LAi_SetLoginTime(chr, 0.0, 24.0); //а ночью будет беготня от патруля :)
+
 			PlaceCharacter(chr, "patrol", "random_free");
+
 			chr.dialog.filename = "Common_Soldier.c";
 			chr.dialog.currentnode = "first time";				
+
 			LAi_SetPatrolType(chr);
+			
             if (sti(Colonies[iColony].HeroOwn) == true)
 			{
 				LAi_group_MoveCharacter(chr, LAI_GROUP_PLAYER_OWN);
@@ -736,6 +771,7 @@ void CreateCitizens(aref loc)
 	}
 	// грузчики <--
 }
+
 void CreateIslatesoroEng(aref loc)//Jason, Исла Тесоро при провале Саги
 {
 	if (loc.id == "Pirates_town" && CheckAttribute(loc, "EngBase"))
@@ -797,31 +833,40 @@ void CreateIslatesoroEng(aref loc)//Jason, Исла Тесоро при пров
 		}
 	}
 }
+
 // плодим завсегдатеев в таверну, тоже фантомы-многоджневки (24ч) переработка boal 13.05.06
 void CreateHabitues(aref loc)
 {
 	int iColony = -1;
 	int iNation = -1;
+	
 	bool generateAffairOfHonor = true;
+	
 	if (!checkAttribute(loc, "habitues")) return;
 	if(LAi_IsCapturedLocation) return;
 	if (CheckAttribute(pchar, "questTemp.Mtraxx.InTavern") && loc.id == "LaVega_tavern") return; // Addon 2016-1 Jason Пиратская линейка
 	if (CheckAttribute(pchar, "questTemp.LongHappy.InTavern") && loc.id == "Pirates_tavern") return; // Jason Долго и счастливо
+	
 	OfficersReactionResult(); // уход офов в местах, где есть пьянь и др офы - пока это таверна
+
 	if (!isLocationHasCitizens(loc.id))  // boal  если есть еще с того раза, но не нужно
 	{
 		if (CheckAttribute(loc, "fastreload"))
 		{
 			iColony = FindColony(loc.fastreload);
+
 			if(iColony == -1)
 			{
 				return;
 			}
+
 			iNation = GetCityNation(loc.fastreload);
+
 			if (iNation == -1)
 			{
 				return;
 			}
+
 			string sColony = loc.fastreload;
 			int iCitizensQuantity, iModel;
 			ref chr;
@@ -829,7 +874,9 @@ void CreateHabitues(aref loc)
 			int iChar;
 			int i, n, k;
 			string sTemp;
+
 			slai_group = GetNationNameByType(iNation)  + "_citizens";
+
             arrayNPCModelHow = 0;
 			if (pchar.location == "Minentown_tavern")
 			{
@@ -871,6 +918,7 @@ void CreateHabitues(aref loc)
 					chr.CityType = "citizen";
 					sTemp = PlaceCharacter(chr, "sit", "random_free"); // может не быть вовсе, если все места заняты
                     ReSitCharacterOnFree(chr, loc.id, sTemp);
+
 					LAi_SetLoginTime(chr, 0.0 + rand(6), 24.0 - rand(10));
 					LAi_SetSitType(chr);
 					if (sti(Colonies[iColony].HeroOwn) == true)
@@ -951,6 +999,7 @@ void CreateHabitues(aref loc)
 					chr.dialog.currentnode = "first time";
 					if (chr.quest.last_theme == 0) chr.greeting = "habitue"; // пьянтос
 					else chr.greeting = "player"; // игрок
+					
 					// Warship, 30.05.11. "Дело чести" -->
 					bool bAh = (drand(11) == 5) && (!CheckAttribute(pchar, "questTemp.Sharlie.Lock")) && (!CheckAttribute(pchar, "GenQuest.Escort.Trader"))
 					if(bAh || bBettaTestMode)
@@ -958,6 +1007,7 @@ void CreateHabitues(aref loc)
 						if(generateAffairOfHonor && IsDay())
 						{
 							pchar.questTemp.AffairOfHonor.LighthouseId = Colony_GetLighthouseId(loc.fastreload);
+							
 							if(chr.City != "PortRoyal" && chr.City != "FortOrange" && PChar.QuestTemp.AffairOfHonor.LighthouseId != "" && AffairOfHonor_GetCurQuest() == "")
 							{
 								if(!CheckAttribute(PChar, "QuestTemp.AffairOfHonor.CoatHonor") && GetCharacterIndex("AffairOfHonor_QuestMan") == -1)
@@ -1008,6 +1058,7 @@ void CreateHabitues(aref loc)
 					SetOfficerParam(chr, rand(4));
 					sTemp = PlaceCharacter(chr, "sit", "random_free");
 					ReSitCharacterOnFree(chr, loc.id, sTemp);
+
 					LAi_SetSitType(chr);
 					// без группы
 					chr.dialog.filename = "Enc_Officer_dialog.c";
@@ -1033,11 +1084,13 @@ void CreateHabitues(aref loc)
 				chr.CityType = "citizen";
 				sTemp = PlaceCharacter(chr, "sit", "random_free"); // может не быть вовсе, если все места заняты
 				ReSitCharacterOnFree(chr, loc.id, sTemp);
+
 				LAi_SetSitType(chr);
 				LAi_group_MoveCharacter(chr, slai_group);
 				chr.dialog.filename = "Enc_Treasure_dialog.c";
 				chr.dialog.currentnode = "first time";
 				chr.greeting = "map_trader";
+				
 		        if (GetCharacterItem(pchar, "map_full") == 0) // нет карты - генерим, если купит
 		        {
 		            aref item;
@@ -1067,6 +1120,7 @@ void CreateHabitues(aref loc)
 					chr.CityType = "citizen";
 					sTemp = PlaceCharacter(chr, "sit", "random_free"); // может не быть вовсе, если все места заняты
                     ReSitCharacterOnFree(chr, loc.id, sTemp);
+
 					LAi_SetLoginTime(chr, 0.0 + rand(6), 24.0 - rand(10));
 					LAi_SetSitType(chr);
 					if (sti(Colonies[iColony].HeroOwn) == true)
@@ -1088,10 +1142,12 @@ void CreateHabitues(aref loc)
 	//PGG_TavernCheckIsPGGHere(); //Jason: вызов ПГГ закомментил
 	if (CheckAttribute(pchar, "GenQuest.Ole")) LSC_CheckOlePearl(); // Оле клянчит очередную жемчужину
 }
+
 void CreateMaltains(aref loc)//Jason, заполнение базы мальтийцев в Сен-Пьере
 {	
 	if (GetCityNation("FortFrance") != FRANCE) return; 
 	if(CheckAttribute(loc, "QuestCapture")) return; // если идет квестовый бой
+	
 	if (CheckAttribute(loc, "Maltains"))
 	{
 		ref sld;
@@ -1186,9 +1242,11 @@ void CreateMaltains(aref loc)//Jason, заполнение базы мальти
 		}
 	}
 }
+
 void CreateHWICOffice(aref loc)//Jason, заполнение офиса ГВИК
 {	
 	if (GetCityNation("Villemstad") != HOLLAND) return; 
+	
 	if (CheckAttribute(loc, "HWIC"))
 	{
 		ref sld;
@@ -1244,6 +1302,7 @@ void CreateHWICOffice(aref loc)//Jason, заполнение офиса ГВИК
 		sld.money = TRADER_MIN_MONEY;
 	}
 }
+
 // устанавливаем клановых охранников в LSC - фантомы-однодневки
 void CreateLSCGuardClan(aref loc)
 {	
@@ -1254,6 +1313,7 @@ void CreateLSCGuardClan(aref loc)
 		int i;
 		int iRank = sti(pchar.rank)+MOD_SKILL_ENEMY_RATE+15;
 		int iScl = 30 + 3*sti(pchar.rank);
+		
 		int imush = 17; // общее число мушкетеров
 		int isold = 15; // общее число солдат
 		int iprot = 10; // общее число протекторов
@@ -1450,6 +1510,7 @@ void CreateLSCGuardClan(aref loc)
 		}
 	}
 }
+
 void CreateLSCInsideClan(aref loc) // создаем кланы внутри их кораблей
 {
 	if (CheckAttribute(loc, "lsc_inside"))
@@ -1459,6 +1520,7 @@ void CreateLSCInsideClan(aref loc) // создаем кланы внутри и�
 		int i;
 		int iRank = sti(pchar.rank)+MOD_SKILL_ENEMY_RATE+15;
 		int iScl = 30 + 3*sti(pchar.rank);
+		
 		if (CheckNPCQuestDate(loc, "LSCInside_date"))
 		{
 			SetNPCQuestDate(loc, "LSCInside_date");
@@ -1489,6 +1551,7 @@ void CreateLSCInsideClan(aref loc) // создаем кланы внутри и�
 						sld.LSC_clan = true;
 					}
 				break;
+				
 				case "rivados": // ривадос
 					for (i=1; i<=8; i++)
 					{
@@ -1512,6 +1575,7 @@ void CreateLSCInsideClan(aref loc) // создаем кланы внутри и�
 						sld.LSC_clan = true;
 					}
 				break;
+				
 				case "shark": // пираты Акулы
 					for (i=1; i<=10; i++)
 					{
@@ -1539,6 +1603,7 @@ void CreateLSCInsideClan(aref loc) // создаем кланы внутри и�
 		}
 	}
 }
+
 // остров Ксочитэм - скелеты
 void CreateKsochitamSkeletons(aref loc) //Jason
 {	
@@ -1572,6 +1637,7 @@ void CreateKsochitamSkeletons(aref loc) //Jason
 		}
 	}
 }
+
 // Калеуче - храм на Хаэль Роа - нежить
 void CreateKhaelRoaSkeletons(aref loc) //Jason
 {	
@@ -1589,10 +1655,12 @@ void CreateKhaelRoaSkeletons(aref loc) //Jason
 			if (MOD_SKILL_ENEMY_RATE > 2) sPistol = "pistol5";
 			if (MOD_SKILL_ENEMY_RATE > 4) sPistol = "pistol6";
 			if (MOD_SKILL_ENEMY_RATE > 8) sPistol = "pistol4";
+			
 			int iRank = 17+MOD_SKILL_ENEMY_RATE*2;
 			int iHp = 300+MOD_SKILL_ENEMY_RATE*70;
 			int iHpt = 200+MOD_SKILL_ENEMY_RATE*30;
 			float fMft = 1.0+MOD_SKILL_ENEMY_RATE/20;
+			
 			if (!CheckAttribute(loc, "KhaelRoa_date") || GetNpcQuestPastDayParam(loc, "KhaelRoa_date") >= 1)
 			{
 				SaveCurrentNpcQuestDateParam(loc, "KhaelRoa_date");
@@ -1627,10 +1695,12 @@ void CreateKhaelRoaSkeletons(aref loc) //Jason
 		}
 	}
 }
+
 // заполнение инквизиции. eddy
 void CreateIncquisitio(aref loc)
 {	
 	if (GetCityNation("Santiago") != SPAIN) return; 
+	
 	if (CheckAttribute(loc, "Incquisitio"))
 	{
 		ref sld;
@@ -1726,6 +1796,7 @@ void CreateMayak(aref loc)
 		if (!CheckAttribute(loc, "Mayak_date") || GetNpcQuestPastDayParam(loc, "Mayak_date") > 2)
 		{
 			SaveCurrentNpcQuestDateParam(loc, "Mayak_date");
+
 			if(CheckAttribute(loc, "from_colony")) 
 			{
 				int iColony = FindColony(loc.from_colony);
@@ -1735,8 +1806,10 @@ void CreateMayak(aref loc)
 				iColony = FindColony(GetCityNameByIsland(GiveArealByLocation(loc)));
 			}
 			if(iColony == -1) return;
+
 			int iNation = GetCityNation(GetCityNameByIsland(GiveArealByLocation(loc)));
 			if(iNation == -1) return;
+
 			int iCitizensQuantity, iModel;
 			ref chr;
 			aref st, solderLoc;
@@ -1818,6 +1891,7 @@ void CreateMayak(aref loc)
 		}
 	}
 }
+
 void CreateBrothels(aref loc)
 {
 	if (CheckAttribute(loc, "brothel"))
@@ -1887,6 +1961,7 @@ void CreateBrothels(aref loc)
 		}
 	}
 }
+
 void CreatePearlVillage(aref loc) // Jason: деревни мискито
 {
 	if (CheckAttribute(loc, "pearlVillage"))
@@ -1911,6 +1986,7 @@ void CreatePearlVillage(aref loc) // Jason: деревни мискито
 			model[8] = "Miskito_3";
 			model[9] = "Miskito_4";
 			i = 0;
+			
 			while(i < num)
 			{
 				iMassive = rand(9);
@@ -1979,6 +2055,7 @@ void CreatePearlVillage(aref loc) // Jason: деревни мискито
 		}
 	}
 }
+
 void CreateIndianVillage(aref loc) // Jason: деревня карибов
 {
 	if (CheckAttribute(loc, "indianVillage"))
@@ -1991,6 +2068,7 @@ void CreateIndianVillage(aref loc) // Jason: деревня карибов
 			int num = rand(2)+6; //кол-во 
 			ref chr;
 			string model[10];
+				
 			model[0] = "canib_1";
 			model[1] = "canib_2";
 			model[2] = "canib_3";
@@ -2002,6 +2080,7 @@ void CreateIndianVillage(aref loc) // Jason: деревня карибов
 			model[8] = "canib_3";
 			model[9] = "canib_4";
 			i = 0;
+			
 			while(i < num)
 			{
 				iMassive = rand(9);
@@ -2064,6 +2143,7 @@ void CreateIndianVillage(aref loc) // Jason: деревня карибов
 		}
 	}
 }
+
 void CreateMinentownMine(aref loc) // Jason: шахта на руднике
 {
 	if (loc.id == "Minentown_mine")
@@ -2126,6 +2206,7 @@ void CreateMinentownMine(aref loc) // Jason: шахта на руднике
 		LAi_group_MoveCharacter(chr, "SPAIN_CITIZENS");
 	}
 }
+
 void CreateMineBandits(aref loc) // Jason: бандиты у рудника у Блювельда
 {
 	ref chr;
@@ -2201,6 +2282,7 @@ void CreateMineBandits(aref loc) // Jason: бандиты у рудника у �
 		}
 	}
 }
+
 void CreateInsideHouseEncounters(aref loc)
 {	
 	if (CheckAttribute(loc, "MustSetReloadBack") && loc.id.label == "house" && CheckAttribute(loc,"fastreload") && !IsLocationCaptured(loc.fastreload+"_town"))
@@ -2439,6 +2521,7 @@ void CreateInsideHouseEncounters(aref loc)
 				rCity.(sTemp).man.name = chr.name;
 				rCity.(sTemp).man.lastname = chr.lastname;
 				//<-- запомним параметры нпс в структуре колонии
+				
 				// --> калеуче
 				if(CheckAttribute(PChar, "questTemp.Caleuche.Bandos") && pchar.questTemp.Caleuche.Bandos == "seek" && chr.city == "Beliz")
 				{
@@ -2461,6 +2544,7 @@ void CreateInsideHouseEncounters(aref loc)
 					return;
 				}
 				// <-- калеуче
+				
 				if(CheckAttribute(PChar, "QuestTemp.AffairOfHonor.CoatHonor.NeedGenerateDuelMan"))
 				{
 					chr.id = "AffairOfHonor_CoatHonor_Man";
@@ -2508,9 +2592,11 @@ void CreateInsideHouseEncounters(aref loc)
 					ChangeCharacterAddressGroup(&characters[iEnc], loc.id, "barmen", "stay");
 				}
 			}
+			
 		}
 	}
 }
+
 //энкаунтеры в резиденциях
 void CreateInsideResidenceEncounters(aref loc)
 {	
@@ -2600,6 +2686,7 @@ void CreateResidenceNpc(aref loc)
 	LAi_SetOwnerType(chr);
 	LAi_group_MoveCharacter(chr, slai_group);
 }
+
 bool CreateQuestResidenceNPC(aref loc)
 {
 	bool bOk;
@@ -2620,6 +2707,7 @@ bool CreateQuestResidenceNPC(aref loc)
 	}
 	return false;
 }
+
 //энкаунтеры на склад верфи и магазине
 void CreateSkladInsideEncounters(aref loc)
 {
@@ -2645,6 +2733,7 @@ void CreateSkladInsideEncounters(aref loc)
 		LAi_group_MoveCharacter(chr, slai_group);
 	}
 }
+
 //тюрьма
 void CreateJail(aref loc)
 {
@@ -2734,6 +2823,7 @@ void CreateJail(aref loc)
 		}
 	}
 }
+
 //форты
 void CreateFortsNPC(aref loc)
 {	
@@ -2838,6 +2928,7 @@ void CreateFortsNPC(aref loc)
 				LAi_SetReincarnationRankStep(chr, MOD_SKILL_ENEMY_RATE+2); //задаем шаг на увеличение ранга фантомам на реинкарнацию
 				LAi_SetLoginTime(chr, 0.0, 24.0);
 				LAi_SetPatrolType(chr);
+
 				if (sti(Colonies[iColony].HeroOwn) == true)
 				{
 					LAi_group_MoveCharacter(chr, LAI_GROUP_PLAYER_OWN);
@@ -2856,6 +2947,7 @@ void CreateFortsNPC(aref loc)
 		// патруль <--
 	}
 }
+
 void CreateAmmo(aref loc) // Jason, оружейная
 {
 	if (loc.type == "ammo")
@@ -2877,9 +2969,12 @@ void CreateAmmo(aref loc) // Jason, оружейная
 			//	sld = GetCharacter(NPC_GenerateCharacter(loc.parent_colony+"AmmoOff", "off_"+NationShortName(iNation)+"_"+(rand(1)+1), "man", "man", iRank, iNation, 2, true, "governor"));
 			//}
 			//sld = Characters[GetCharacterIndex(loc.parent_colony + " Fort Commander")];
+
 			string commandant_id = loc.parent_colony+"AmmoOff";
+
 			sld = GetCharacter(NPC_GenerateCharacter(commandant_id, "Skel1", "man", "man", iRank, iNation, 2, true, "governor")); // If the commandant remains a skeleton after the copying, something went wrong.
 			CopyCharacter(GetCharacterIndex(sld.id), GetCharacterIndex(loc.parent_colony + " Fort Commander"));
+
 			FantomMakeCoolFighter(sld, iRank+5, 70, 70, "blade_13", "pistol3", "grapeshot", 100);
 			sld.City = loc.parent_colony;
 			sld.CityType = "soldier";
@@ -2915,6 +3010,7 @@ void CreateAmmo(aref loc) // Jason, оружейная
 		}
 	}
 }
+
 int GetCityNation(string _sColony) // boal метод вернет нацию по ид города
 {
     int iColony = FindColony(_sColony)
@@ -2924,6 +3020,7 @@ int GetCityNation(string _sColony) // boal метод вернет нацию п
 	}
 	return sti(Colonies[iColony].nation);
 }
+
 /// boal
 // проверка локации на сгенеренного в ней фантома многожневку, если есть, то новый не плодим
 bool isLocationHasCitizens(string _locId)
@@ -2931,6 +3028,7 @@ bool isLocationHasCitizens(string _locId)
     ref rCharacter; //ищем
 	int n, Qty;
 	bool bOk = false;
+
 	for(n=0; n<MAX_CHARACTERS; n++)
 	{
 		makeref(rCharacter,Characters[n]);
@@ -2946,15 +3044,18 @@ bool isLocationHasCitizens(string _locId)
     }
 	return bOk;
 }
+
 void ReSitCharacterOnFree(ref chr, string _locId, string sTemp)
 {
 	int n, k;
+	
 	n = 0;
 	while (!CheckFreeLocator(_locId, sTemp, sti(chr.index)) && n < 10)
 	{
 	    sTemp = PlaceCharacter(chr, "sit", "random_free");
 	    n++;
 	}
+	
 	n = 0;
 	while (findsubstr(sTemp, "sit_front" , 0) != -1 && n < 20)
 	{    // чтоб не занимали место напротив
@@ -2968,11 +3069,13 @@ void ReSitCharacterOnFree(ref chr, string _locId, string sTemp)
 	    n++;
 	}
 }
+
 bool CheckNPCModelUniq(ref chr)
 {
 	int   i, n;
 	bool  bOk;
 	string sModel = chr.model;
+	
     bOk = true;
 	for (i=0; i<arrayNPCModelHow; i++)
 	{
@@ -2984,9 +3087,11 @@ bool CheckNPCModelUniq(ref chr)
 	}
 	return bOk;
 }
+
 void SetNPCModelUniq(ref chr, string sType, int iSex)
 {
 	int i;
+	
 	i = 0;
 	while (!CheckNPCModelUniq(chr) && i < 10)
 	{
@@ -2996,3 +3101,4 @@ void SetNPCModelUniq(ref chr, string sType, int iSex)
 	arrayNPCModel[arrayNPCModelHow] = chr.model;
 	arrayNPCModelHow++;
 }
+

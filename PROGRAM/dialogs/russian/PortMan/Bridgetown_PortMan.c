@@ -48,6 +48,7 @@ void ProcessCommonDialogEvent(ref NPChar, aref Link, aref NextDiag)
 				}
 			}
 		break;
+
 		//Голландский гамбит
 		case "PortofficeDone":
 			dialog.text = "Unfortunately, there is no passengers to Blueweld nor to Port-Royal. Come back tomorrow or the day after tomorrow.";
@@ -65,6 +66,7 @@ void ProcessCommonDialogEvent(ref NPChar, aref Link, aref NextDiag)
 				pchar.quest.VanBergAttack_Check.function = "VanBergAttackCheck";
 			}
 		break;
+
 		//регата
 		case "Regata_check":
 		iTest = FindColony(npchar.city); 
@@ -99,6 +101,7 @@ void ProcessCommonDialogEvent(ref NPChar, aref Link, aref NextDiag)
 			link.l1.go = "exit";
 		}
 		break;
+		
 		case "Regata_info":
 			int n=1;
 			string sTemp, sName, sShip;
@@ -188,17 +191,20 @@ void ProcessCommonDialogEvent(ref NPChar, aref Link, aref NextDiag)
 			pchar.quest.Regata_Siege.function = "RegataSiegeOfficer";//на квест по вывозу жителей
 		break;
 		//регата
+		
 		// Страж Истины
 		case "guardoftruth":
 			dialog.text = "Yes, this galleon was here, got relieved of his goods and has left our port later. Information about its destination... hm... none, there is nothing. I am sorry but there is nothing I can do.";
 			link.l1 = "I see. Too bad... I will continue looking for it.";
 			link.l1.go = "guardoftruth_1";
 		break;
+		
 		case "guardoftruth_1":
 			DialogExit();
 			AddQuestRecord("Guardoftruth", "13");
 			pchar.questTemp.Guardoftruth = "barbados1";
 		break;
+		
 		// калеуче
 		case "caleuche":
 			dialog.text = "Sir, I need the exact name of the ship. We have tons of Jacks and Jacksons going through our port. So, what's the name?";
@@ -208,18 +214,21 @@ void ProcessCommonDialogEvent(ref NPChar, aref Link, aref NextDiag)
 			link.l2 = "Trouble is that I don't know the name of his old tub. It's strange, some bird woman, born...";
 			link.l2.go = "caleuche_1";
 		break;
+		
 		case "caleuche_1":
 			dialog.text = "Mister, go tell your stories and riddles at the tavern, we have a serious establishment here. Either you tell me the name of that xebec, or stop disturbing me from my work.";
 			link.l1 = "Alright, I'll try to find out.";
 			link.l1.go = "exit";
 			npchar.questTemp.caleuche = "true";
 		break;
+		
 		case "caleuche_2":
 			dialog.text = "So? Do you have the name of the ship? I am listening.";
 			link.l1 = "";
 			Link.l1.edit = 2;
 			link.l1.go = "caleuche_name";
 		break;
+		
 		case "caleuche_name":
 			if (GetStrSmallRegister(dialogEditStrings[2]) == "harpy")
 			{
@@ -234,6 +243,7 @@ void ProcessCommonDialogEvent(ref NPChar, aref Link, aref NextDiag)
 				link.l1.go = "exit";
 			}
 		break;
+		
 		case "caleuche_3":
 			DialogExit();
 			AddQuestRecord("Caleuche", "18");
@@ -243,3 +253,5 @@ void ProcessCommonDialogEvent(ref NPChar, aref Link, aref NextDiag)
 	}
 	UnloadSegment(NPChar.FileDialog2);  // если где-то выход внутри switch  по return не забыть сделать анлод
 }
+
+

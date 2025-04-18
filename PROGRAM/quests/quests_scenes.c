@@ -2,12 +2,16 @@
 		Типы исполняемых команд и их параметры:
 	- "sass","gotopoint", <референс на персонажа>, <имя группы локаторов>, <имя локатора>
 **===================================================================*/
+
 #define SCENES_TIMEOUT		90.0
 #define SCENES_DIALOGTIME	15.0
+
 #event_handler("QuestSceneCommand","procQuestSceneCommand");
 #event_handler("startAfterWaitScene","startAfterWaitScene");
 #event_handler("qprocTaskEnd","qprocTaskEnd");
+
 object objQuestScene;
+
 void procQuestSceneCommand()
 {
 	string	command_name	= GetEventData();
@@ -213,19 +217,25 @@ void procQuestSceneCommand()
 	}
 	trace("SCENE WARNING! unknown task setting : <"+command_name+">");
 }
+
 void qprocTaskEnd()
 {
 	aref arch = GetEventData();
+
 	aref taskRef;
 	if( !GetFirstTask(arch,&taskRef) ) return;
 	if( !CheckAttribute(taskRef,"Executing") || taskRef.Executing!="1" ) return;
+
 	string locTask = GetAttributeValue(taskRef);
+
 	if( locTask == "loopAction" )
 	{
 		PerformLoopAnimation(GetCharacter(sti(arch.index)),taskRef.action);
 		return;
 	}
+
 	if( CheckAttribute(taskRef,"QuestCheck") ) ExecuteQuestCheck(taskRef.QuestCheck);
+
 	if( CheckAttribute(taskRef,"StopTask") && sti(taskRef.StopTask)==true )
 	{
 		PopBegSceneTask(arch);
@@ -236,11 +246,13 @@ void qprocTaskEnd()
 		StartSceneExecute(arch);
 	}
 }
+
 void qprocEndReload()
 {
 	DelEventHandler(EVENT_LOCATION_LOAD,"qprocEndReload");
 	Event("qprocTaskEnd","a",pchar);
 }
+
 string PopSceneTask(aref character)
 {
 	aref taskRef;
@@ -249,6 +261,7 @@ string PopSceneTask(aref character)
 	DeleteAttribute(character,"SceneTask."+GetAttributeName(taskRef));
 	return taskName;
 }
+
 string PopBegSceneTask(aref character)
 {
 	aref taskRef;
@@ -257,6 +270,7 @@ string PopBegSceneTask(aref character)
 	DeleteAttribute(character,"SceneTask."+GetAttributeName(taskRef));
 	return taskName;
 }
+
 aref PushSceneTask(aref character,string TaskName)
 {
 	aref staref; makearef(staref,character.SceneTask);
@@ -265,6 +279,7 @@ aref PushSceneTask(aref character,string TaskName)
 	makearef(staref,character.SceneTask.(attrName));
 	return staref;
 }
+
 bool GetLastTask(aref character, ref taskRef)
 {
 	aref staref; makearef(staref,character.SceneTask);
@@ -273,6 +288,7 @@ bool GetLastTask(aref character, ref taskRef)
 	taskRef = GetAttributeN(staref,qn-1);
 	return true;
 }
+
 bool GetFirstTask(aref character, ref taskRef)
 {
 	aref staref; makearef(staref,character.SceneTask);
@@ -281,62 +297,76 @@ bool GetFirstTask(aref character, ref taskRef)
 	taskRef = GetAttributeN(staref,0);
 	return true;
 }
+
 void StartSceneExecute(aref character)
 {
 	aref scnref;
 	if( !GetFirstTask(character,&scnref) )	return;
+
 	if( CheckAttribute(scnref,"Executing") && scnref.Executing=="1" )
 	{
 		PopBegSceneTask(character);
 		if( !GetFirstTask(character,&scnref) )	return;
 	}
+
 	int i;
 	scnref.Executing = "1";
+
 	// Персонаж становиться актером
 	LAi_SetActorType(character);
+
 	switch(GetAttributeValue(scnref))
 	{
 	case "Goto point":
 		LAi_ActorGoToLocator(ARefChrToRef(character), scnref.group, scnref.locator, QuestNameForChr(character), SCENES_TIMEOUT );
 		return;
 	break;
+
 	case "Stay":
 		LAi_ActorStay(ARefChrToRef(character));
 		PostEvent("qprocTaskEnd",1,"a",character); // !!!
 		return;
 	break;
+
 	case "Runto point":
 		LAi_ActorRunToLocator(ARefChrToRef(character), scnref.group, scnref.locator, QuestNameForChr(character), SCENES_TIMEOUT );
 		return;
 	break;
+
 	case "Follow character":
 		LAi_ActorFollow(ARefChrToRef(character), CharacterFromID(scnref.charID), QuestNameForChr(character), SCENES_TIMEOUT);
 		return;
 	break;
+
 	case "Fight":
 		LAi_ActorAttack(ARefChrToRef(character), CharacterFromID(scnref.charID), QuestNameForChr(character) );
 		return;
 	break;
+
 	case "Escape":
 		trace("WARNING!!!  Escape не реализована!");
 		PostEvent("qprocTaskEnd",1,"a",character); // !!!
 		return;
 	break;
+
 	case "Dead":
 		trace("WARNING!!!  Dead не реализована!");
 		PostEvent("qprocTaskEnd",1,"a",character); // !!!
 		return;
 	break;
+
 	case "TurnByCharacter":
 		LAi_ActorTurnToCharacter(ARefChrToRef(character), CharacterFromID(scnref.charID));
 		PostEvent("qprocTaskEnd",1,"a",character); // !!!
 		return;
 	break;
+
 	case "TurnByLocator":
 		LAi_ActorTurnByLocator(ARefChrToRef(character), scnref.group, scnref.locator);
 		PostEvent("qprocTaskEnd",1,"a",character); // !!!
 		return;
 	break;
+
 	case "Dialog":
 		i =  GetCharacterIndex(scnref.charID);
 		if(i<0)
@@ -351,59 +381,71 @@ void StartSceneExecute(aref character)
 		}
 		return;
 	break;
+
 	case "EndQuestMovie":
 		EndQuestMovie();
 		PostEvent("qprocTaskEnd",1,"a",character); // !!!
 		return;
 	break;
+
 	case "action":
 		LAi_ActorAnimation(ARefChrToRef(character), scnref.action, QuestNameForChr(character), SCENES_TIMEOUT);
 		return;
 	break;
+
 	case "loopAction":
 		PerformLoopAnimation(ARefChrToRef(character),scnref.action);
 		return;
 	break;
+
 	case "BladeToHand":
 		trace("WARNING!!! BladeToHand функция не реализована!!!"); // !!!
 		PostEvent("qprocTaskEnd",1,"a",character); // !!!
 		return;
 	break;
+
 	case "Teleport":
 		ChangeCharacterAddressGroup(ARefChrToRef(character), scnref.location,scnref.group,scnref.locator);
 		PostEvent("qprocTaskEnd",1,"a",character);
 		return;
 	break;
+
 	case "ReloadToLocation":
 		DoReloadCharacterToLocation ( scnref.location, scnref.group, scnref.locator );
 		SetEventHandler(EVENT_LOCATION_LOAD,"qprocEndReload",0);
 		return;
 	break;
+
 	case "TimeWait":
 		LAi_QuestDelay(QuestNameForChr(character), stf(scnref.time)*0.001);
 		return;
 	break;
+
 	case "TimeFade":
 		//WaitNightPause(false);
 		AddTimeToCurrent(0,sti(scnref.time));
 		PostEvent("qprocTaskEnd",1,"a",character); // !!!
 		return;
 	break;
+
 	case "AttackGroup":
 		trace( "WARNING!!! AttackGroup не реализована" ); // !!!
 		PostEvent("qprocTaskEnd",1,"a",character); // !!!
 		return;
 	break;
+
 	case "PlayMusic":
 		PlayMusic(scnref.name);
 		PostEvent("qprocTaskEnd",1,"a",character); // !!!
 		return;
 	break;
+
 	case "PlaySound":
 		PlayMusic(scnref.name);
 		PostEvent("qprocTaskEnd",1,"a",character); // !!!
 		return;
 	break;
+
 	case "StartTaskForOtherChar":
 		StartSceneExecute ( CharacterFromID(scnref.charID) );
 		Event( "qprocTaskEnd", "a", character );
@@ -413,16 +455,19 @@ void StartSceneExecute(aref character)
 	trace("SCENE WARNING! unknown task starting : <"+GetAttributeValue(scnref)+">   TASK WILL DELETED!");
 	Event( "qprocTaskEnd", "a", character );
 }
+
 void startAfterWaitScene()
 {
 	aref ar1 = GetEventData();
 	StartSceneExecute(ar1);
 }
+
 void ExecuteQuestCheck(string questCheckName)
 {
 	CompleteQuestName(questCheckName, "");
 	QuestsCheck();
 }
+
 bool PerformLoopAnimation(ref chr,string action)
 {
 	switch(action)
@@ -433,6 +478,7 @@ bool PerformLoopAnimation(ref chr,string action)
 	}
 	return LAi_ActorAnimation(chr, action, QuestNameForChr(chr), SCENES_TIMEOUT);
 }
+
 string GetStayAniName()
 {
 	float fl = frnd();
@@ -447,6 +493,7 @@ string GetStayAniName()
 	if(fl<=0.3) return "idle_1";
 	return "idle_2";
 }
+
 string GetSitAniName()
 {
 	switch(rand(4))
@@ -458,22 +505,28 @@ string GetSitAniName()
 		case 4:		return "Sit_WaveHand";		break;
 	}
 }
+
 void ClearOldScenes(ref chref)
 {
 	DeleteAttribute(chref,"SceneTask");
 }
+
 string QuestNameForChr(aref chref)
 {
 	string questName;
 	aref arQuestList;
 	int q;
+
 	makearef(arQuestList,objQuestScene.list);
 	q = GetAttributesNum(arQuestList);
+
 	if(q<=0)	{questName = "_ScenesQuest_0";}
 	else	{questName = "_ScenesQuest_" + q;}
+
 	objQuestScene.list.(questName).chrIdx = chref.index;
 	return questName;
 }
+
 ref ARefChrToRef(aref charef)
 {
 	return &Characters[sti(charef.index)];

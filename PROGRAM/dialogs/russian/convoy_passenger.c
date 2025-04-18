@@ -4,17 +4,21 @@ void ProcessDialogEvent()
 	ref NPChar, d;
 	aref Link, Diag, arAll;
 	string NPC_Meeting, sTemp, sTitle, sTavern;
+
 	DeleteAttribute(&Dialog,"Links");
+
 	makeref(NPChar,CharacterRef);
 	makearef(Link, Dialog.Links);
 	makeref(d, Dialog);
 	makearef(Diag, NPChar.Dialog);
+
 	switch(Dialog.CurrentNode)
 	{
 		case "exit":
 			Diag.CurrentNode = Diag.TempNode;
 			DialogExit();
 		break;
+		
 		case "prepare_convoy_quest":
 			if (isBadReputation(pchar, 40)) 
 			{
@@ -29,6 +33,7 @@ void ProcessDialogEvent()
 				link.l1.go = "prepare_convoy_quest_3";
 			}
 		break;
+		
 		case "prepare_convoy_quest_3":
 			LookShipPassenger();
 			GenerateConvoyPassengerQuest(npchar);
@@ -39,6 +44,7 @@ void ProcessDialogEvent()
 			link.l2 = "I don't think it's an interesting proposition.";
 			link.l2.go = "convoy_refused";
 		break;
+		
 		case "convoy_refused":
 			chrDisableReloadToLocation = false;
 			sTemp = npchar.id + "_TimeOver";
@@ -51,6 +57,7 @@ void ProcessDialogEvent()
 			Diag.CurrentNode = Diag.TempNode;
 			DialogExit();
 		break;
+		
 		case "convoy_agreeded":
 			sTitle = npchar.index + "convoy_passenger";
 			AddQuestRecordEx(sTitle, "Gen_convoy_passenger", "1");
@@ -78,11 +85,13 @@ void ProcessDialogEvent()
 			Diag.CurrentNode = "convoy_DeskTalk";
 			DialogExit();
 		break;
+		
 		case "complete_convoy_quest":
 			dialog.text = "Thank you. You have fulfilled your obligations. I am at my destination point, here's your reward. Here you go.";
 			Link.l1 = "Thank you.";
 			link.l1.go = "complete_convoy_quest_1";
 		break;
+
 		case "complete_convoy_quest_1":
 			//слухи
 			AddSimpleRumour(LinkRandPhrase("One person by the name of " + GetFullName(npchar) + " says that captain " + GetMainCharacterNameDat() + " can be trusted, since "+ GetSexPhrase("he","she") +" had easily delivered him to " + XI_ConvertString("Colony" + npchar.GenQuest.GetPassenger_Destination + "Gen") + ".", 
@@ -109,6 +118,7 @@ void ProcessDialogEvent()
 			Diag.CurrentNode = Diag.TempNode;
 			DialogExit();
 		break;
+		
 		case "convoy_DeskTalk":
 			dialog.text = NPCStringReactionRepeat(LinkRandPhrase(RandSwear() + "Captain, time has run out. When, damn it, will I finally get to " + XI_ConvertString("Colony" + npchar.GenQuest.GetPassenger_Destination + "Acc") + "?", 
 						  RandSwear() + "Captain, just how much longer are you going to wander God knows where?! When will we get to " + XI_ConvertString("Colony" + npchar.GenQuest.GetPassenger_Destination + "Gen") + "?" , 
@@ -131,16 +141,19 @@ void ProcessDialogEvent()
 			link.l2.go = "convoy_Prison_1";
 			pchar.quest.Munity = "Deads"; //дверцы откроем
 		break;
+		
 		case "convoy_DeskTalk_1":
 			dialog.text = LinkRandPhrase("Alright, but I will cut down your payment for the delay.", "Alright, I'll try to believe you... But keep in mind that I am going to cut down your fee!", "Well, there is nowhere for me to go, anyway, but keep in mind that I am going to cut your payment down....");
 			Link.l1 = LinkRandPhrase("Alright.", "Fine, then...", "Alright, as you say.");
 			link.l1.go = "convoy_DeskTalk_2";
 		break;
+
 		case "convoy_DeskTalk_2":
 			dialog.text = RandPhraseSimple("I would like to believe that this time you are going to fulfill your obligations.", "I do hope that this is our last conversation on this unpleasant topic.");
 			Link.l1 = "Of course.";
 			link.l1.go = "convoy_DeskTalk_exit";
 		break;
+
 		case "convoy_DeskTalk_exit":
 			DeleteAttribute(pchar, "GenQuest.ConvoyPassenger." + npchar.id); //извлекаем из структуры недовольных
 			sTemp = npchar.id + "_TimeOver";
@@ -156,6 +169,7 @@ void ProcessDialogEvent()
 			Diag.CurrentNode = "convoy_DeskTalk";
 			DialogExit();
 		break;
+
 		case "convoy_Prison_1":
 			dialog.text = RandSwear() + "What hold? I don't understand!";
 			if (GetPrisonerQty() < PRISONER_MAX)
@@ -166,11 +180,13 @@ void ProcessDialogEvent()
 			Link.l2 = "Just a joke... In seven days we will arrive at your town.";
 			link.l2.go = "convoy_DeskTalk_1";
 		break;
+		
 		case "convoy_Prison_2":
 			dialog.text = RandSwear() + "You will pay for this, "+ GetSexPhrase("scum","stinker") +"!";
 			Link.l1 = "Everybody says that - but in the end they all pay to me!";
 			link.l1.go = "convoy_Prison_3";
 		break;
+		
 		case "convoy_Prison_3":
 			AddSimpleRumour(LinkRandPhrase("It became known that a captain named " + GetFullName(pchar) + " obliged to deliver a passenger by the name of " + GetFullName(npchar) + ", but didn't stay true to "+ GetSexPhrase("his","her") +" word. Besides, "+ GetSexPhrase("he","she") +" imprisoned a poor guy. That's what happens when you trust strange people...", 
 				"What's wrong with this world?! Captain " + GetFullName(pchar) + " imprisoned a poor guy by the name of " + GetFullName(npchar) + ", despite him being a passenger on his ship...", 
@@ -198,10 +214,12 @@ void ProcessDialogEvent()
 		break;
 	}
 } 
+
 void GenerateConvoyPassengerQuest(ref npchar)
 {
 	int iTradeMoney, iNation, irank;
 	string sTemp, sR;
+
 	iNation = GetRelation2BaseNation(sti(npchar.nation)); //если привезти нужно во вражеский город
 	npchar.GenQuest.GetPassenger_Destination = sGlobalTemp;
 	int daysQty = GetMaxDaysFromIsland2Island(GetArealByCityName(pchar.GenQuest.GetPassenger_City), GetArealByCityName(sGlobalTemp));
@@ -210,19 +228,24 @@ void GenerateConvoyPassengerQuest(ref npchar)
 	iTradeMoney = (sti(daysQty)*500*sti(pchar.GenQuest.GetPassenger.Shipmod)+rand(100))*sti(daysQty)/sti(npchar.GenQuest.GetPassenger_Time);
 	if (iNation == RELATION_ENEMY && sti(npchar.nation != PIRATE)) iTradeMoney = makeint(iTradeMoney * 1.3); //то размер награды увеличивается
 	npchar.GenQuest.GetPassenger_Money = iTradeMoney;
+
 	//Log_Info(FindRussianDaysString(sti(daysQty)));
 	//Log_Info(npchar.GenQuest.GetPassenger_Destination);
 	//Log_Info(pchar.GenQuest.GetPassenger_City);
+	
+
 	sTemp = npchar.id + "_TimeOver";
 	SetTimerCondition(sTemp, 0, 0, sti(npchar.GenQuest.GetPassenger_Time), false);
 	pchar.quest.(sTemp).win_condition              = "AllPassangersTimeOver";
 	pchar.quest.(sTemp).Idx						   = npchar.index; 
+
 	sTemp = npchar.id + "_dead";
 	pchar.quest.(sTemp).win_condition.l1           = "NPC_Death";
 	pchar.quest.(sTemp).win_condition.l1.character = npchar.id;
 	pchar.quest.(sTemp).win_condition              = "AllPassangersDead";
 	pchar.quest.(sTemp).Idx						   = npchar.index; 	
 }
+
 void LookShipPassenger()
 {
 	switch(makeint(6-sti(RealShips[sti(Pchar.Ship.Type)].Class)))

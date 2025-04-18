@@ -1,11 +1,16 @@
 /*
 Тип: Бедняг
+
 	Используемые шаблоны:
 		stay
 		dialog
 		ani
 */
+
+
 #define LAI_TYPE_POOR		"poor"
+
+
 //Инициализация
 void LAi_type_poor_Init(aref chr)
 {
@@ -30,12 +35,14 @@ void LAi_type_poor_Init(aref chr)
 	}
 	SendMessage(&chr, "lsl", MSG_CHARACTER_EX_MSG, "SetFightWOWeapon", false);
 }
+
 //Процессирование типа персонажа
 void LAi_type_poor_CharacterUpdate(aref chr, float dltTime)
 {
 	ref by;
 	int idx, num;
 	string sLoc;
+
 	if (chr.chr_ai.tmpl == LAI_TMPL_DIALOG) return; //режем диалог
 	if (chr.chr_ai.tmpl == LAI_TMPL_ANI)
 	{
@@ -231,24 +238,29 @@ void LAi_type_poor_CharacterUpdate(aref chr, float dltTime)
 	}
 	// <-- стоячий нищий
 }
+
 //Загрузка персонажа в локацию
 bool LAi_type_poor_CharacterLogin(aref chr)
 {
 	return true;
 }
+
 //Выгрузка персонажа из локацию
 bool LAi_type_poor_CharacterLogoff(aref chr)
 {
 	return true;
 }
+
 //Завершение работы темплейта
 void LAi_type_poor_TemplateComplite(aref chr, string tmpl)
 {
 }
+
 //Сообщить о желании завести диалог
 void LAi_type_poor_NeedDialog(aref chr, aref by)
 {
 }
+
 //Запрос на диалог, если возвратить true то в этот момент можно начать диалог
 bool LAi_type_poor_CanDialog(aref chr, aref by)
 {
@@ -257,6 +269,7 @@ bool LAi_type_poor_CanDialog(aref chr, aref by)
 	//Согласимся на диалог
 	return true;
 }
+
 //Начать диалог
 void LAi_type_poor_StartDialog(aref chr, aref by)
 {
@@ -268,19 +281,25 @@ void LAi_type_poor_StartDialog(aref chr, aref by)
 	}
 	LAi_tmpl_SetActivatedDialog(chr, by);
 }
+
 //Закончить диалог
 void LAi_type_poor_EndDialog(aref chr, aref by)
 {
 	LAi_tmpl_stay_InitTemplate(chr);
 }
+
 //Персонаж выстрелил
 void LAi_type_poor_Fire(aref attack, aref enemy, float kDist, bool isFindedEnemy)
 {
 }
+
+
 //Персонаж атакован
 void LAi_type_poor_Attacked(aref chr, aref by)
 {
+	
 }
+
 int LAi_type_poor_FindNearEnemy(aref chr)
 {
 	int i, idx;
@@ -308,6 +327,7 @@ int LAi_type_poor_FindNearEnemy(aref chr)
 	}
 	return -1;
 }
+
 void LAi_SetSitPoorAnimation(aref chr)
 {
 	//Установим анимацию сидячему нищему
@@ -321,6 +341,7 @@ void LAi_SetSitPoorAnimation(aref chr)
 	chr.actions.HitNoFight = "Ground_HitNoFight";
 	EndChangeCharacterActions(chr);
 }
+
 void LAi_SetPoorAfraidGroundDead(ref chr)
 {
 	BeginChangeCharacterActions(chr);

@@ -1,10 +1,14 @@
 /*
 Тип: лежачий, всегда лежит, отвечает на диалоги, никогда не боится
+
 	Используемые шаблоны:
 		stay
 		dialog
 */
+
+
 #define LAI_TYPE_LAY		"lay"
+
 //Инициализация
 void LAi_type_lay_Init(aref chr)
 {
@@ -16,6 +20,7 @@ void LAi_type_lay_Init(aref chr)
 	LAi_SetDefaultLayAnimation(chr);
 	SendMessage(&chr, "lsl", MSG_CHARACTER_EX_MSG, "SetFightWOWeapon", false);
 }
+
 //Процессирование типа персонажа
 void LAi_type_lay_CharacterUpdate(aref chr, float dltTime)
 {
@@ -32,25 +37,30 @@ void LAi_type_lay_CharacterUpdate(aref chr, float dltTime)
 		}
 	}
 }
+
 //Загрузка персонажа в локацию
 bool LAi_type_lay_CharacterLogin(aref chr)
 {
 	return true;
 }
+
 //Выгрузка персонажа из локацию
 bool LAi_type_lay_CharacterLogoff(aref chr)
 {
 	return true;
 }
+
 //Завершение работы темплейта
 void LAi_type_lay_TemplateComplite(aref chr, string tmpl)
 {
 	LAi_tmpl_player_InitTemplate(chr);
 }
+
 //Сообщить о желании завести диалог
 void LAi_type_lay_NeedDialog(aref chr, aref by)
 {
 }
+
 //Запрос на диалог, если возвратить true то в этот момент можно начать диалог
 bool LAi_type_lay_CanDialog(aref chr, aref by)
 {
@@ -59,6 +69,7 @@ bool LAi_type_lay_CanDialog(aref chr, aref by)
 	//Согласимся на диалог
 	return true;
 }
+
 //Начать диалог
 void LAi_type_lay_StartDialog(aref chr, aref by)
 {
@@ -68,25 +79,32 @@ void LAi_type_lay_StartDialog(aref chr, aref by)
 	LAi_tmpl_dialog_NoAni(chr);
 	chr.InDialog = true;
 }
+
 //Закончить диалог
 void LAi_type_lay_EndDialog(aref chr, aref by)
 {
 	LAi_tmpl_stay_InitTemplate(chr);
 	if(CheckAttribute(chr,"InDialog")) DeleteAttribute(chr,"InDialog");
 }
+
 //Персонаж атаковал другого персонажа
 void LAi_type_lay_Attack(aref attack, aref enemy, float attackDmg, float hitDmg)
 {
 }
+
 //Персонаж атоковал заблокировавшегося персонажа
 void LAi_type_lay_Block(aref attack, aref enemy, float attackDmg, float hitDmg)
 {
 }
+
 //Персонаж выстрелил
 void LAi_type_lay_Fire(aref attack, aref enemy, float kDist, bool isFindedEnemy)
 {
 }
+
+
 //Персонаж атакован
 void LAi_type_lay_Attacked(aref chr, aref by)
 {
+	
 }

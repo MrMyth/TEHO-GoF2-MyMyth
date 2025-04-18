@@ -16,16 +16,19 @@ void ProcessCommonDialogEvent(ref NPChar, aref Link, aref NextDiag)
                 link.l1.go = "trial";
             }
 		break;
+		
 		case "trial":
 			dialog.text = "";
 			link.l1 = "";
 			link.l1.go = "";
 		break;
+		
 		case "":
 			dialog.text = "";
 			link.l1 = "";
 			link.l1.go = "";
 		break;
+		
 		case "":
 			dialog.text = "";
 			link.l1 = "";
@@ -34,3 +37,4 @@ void ProcessCommonDialogEvent(ref NPChar, aref Link, aref NextDiag)
 	}
 	UnloadSegment(NPChar.FileDialog2);  // если где-то выход внутри switch  по return не забыть сделать анлод
 }
+

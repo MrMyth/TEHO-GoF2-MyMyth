@@ -3,10 +3,13 @@ void ProcessDialogEvent()
 {
 	ref NPChar;
 	aref Link, NextDiag;	
+
 	DeleteAttribute(&Dialog,"Links");
+
 	makeref(NPChar,CharacterRef);
 	makearef(Link, Dialog.Links);
 	makearef(NextDiag, NPChar.Dialog);
+
     // вызов диалога по городам -->
     NPChar.FileDialog2 = "DIALOGS\" + LanguageGetLanguage() + "\Cemetery\" + NPChar.City + "_cemetery.c";
     if (LoadSegment(NPChar.FileDialog2))
@@ -15,9 +18,11 @@ void ProcessDialogEvent()
 		UnloadSegment(NPChar.FileDialog2);
 	}
     // вызов диалога по городам <--
+	
     int iTemp;
 	string sTemp;
 	bool ok;
+    
 	switch(Dialog.CurrentNode)
 	{
 		case "First time":
@@ -45,11 +50,13 @@ void ProcessDialogEvent()
 			}
 			NextDiag.TempNode = "First time";
 		break;
+		
 		case "meeting":
 			dialog.text = "And why should I be afraid, captain? To afraid living people is necessary, the dead don't bite. Eh! Once I had a quite different life, and now I'm a watchman of this cemetery. I look after graves. And also trade some odd bits sometimes...";
 			link.l1 = "And what do you trade in, please, tell me?";
 			link.l1.go = "trade_info";
 		break;
+		
 		case "talk":
 			dialog.text = "What brought you to me this time?";
 			link.l1 = "Show me what you have for sale today.";
@@ -60,16 +67,19 @@ void ProcessDialogEvent()
 			link.l3.go = "exit";
 			NextDiag.TempNode = "First time";
 		break;
+		
 		case "trade_info":
 			dialog.text = "I have a lot of free time, therefore I like walking in the jungle and collect useful plants and fancy stones. Then I sell them in the town. They don't cost a lot, but however it's better, than nothing. And I get most various things from my friends......";
 			link.l1 = "Friends? You mean, you resell what others bring to you?";
 			link.l1.go = "trade_info_1";
 		break;
+		
 		case "trade_info_1":
 			dialog.text = "O-ho-ho... No, they all give me free of charge. Who can be friends of a cemetery watchman, if not deadmen?";
 			link.l1 = "Wha... Do you rob dead bodies?";
 			link.l1.go = "trade_info_2";
 		break;
+		
 		case "trade_info_2":
 			dialog.text = "I don't rob, just take off things they don't need already. Different poeple are buried here. Many unknown and not from our lands. The commandant brings from the town a dead body and says 'This is for you "+npchar.name+", send him in the last way'. Homeless, hanged pirates, bandits killed by guardians, all are buried here, and old "+npchar.name+" buries their bodies on a Christian custom.";
 			link.l1 = "I see. Well, money is money, show me what you have.";
@@ -77,6 +87,7 @@ void ProcessDialogEvent()
 			link.l2 = "Got it. I have to go. I was glad to meet you.";
 			link.l2.go = "exit";
 		break;
+		
 		case "trade":
 			DialogExit();
 			if (!CheckAttribute(npchar, "trade_date") || GetNpcQuestPastDayParam(npchar, "trade_date") >= 10)
@@ -87,6 +98,7 @@ void ProcessDialogEvent()
 			LaunchItemsTrade(npchar, 0);
 			NextDiag.TempNode = "First time";
 		break;
+		
 		case "fight":
 			DialogExit();
 			NextDiag.CurrentNode = NextDiag.TempNode;
@@ -94,15 +106,18 @@ void ProcessDialogEvent()
 			if (rand(3) != 1) SetNationRelation2MainCharacter(sti(npchar.nation), RELATION_ENEMY);
 			AddDialogExitQuest("MainHeroFightModeOn");
 		break;
+		
 		case "Exit":
 			NextDiag.CurrentNode = NextDiag.TempNode;
 			DialogExit();
 		break;
+		
 		case "exit_setOwner":
 			LAi_SetOwnerTypeNoGroup(npchar);
 			NextDiag.CurrentNode = NextDiag.TempNode;
 			DialogExit();
 		break;
+		
 		case "Man_FackYou"://реакция на попытку залезть в сундук
 			dialog.text = LinkRandPhrase("And you, "+GetFullName(pchar)+", are a thief, guard!!!", "What the Hell! I looked away for a moment and you're already trying to steal what belongs to me! Hold a thief!!!", "Guard! Rob!!! Catch a thief!!!");
 			link.l1 = "Oh shit!!!";

@@ -1,6 +1,9 @@
 #define MAX_SHIP_GROUPS  350
+
 object	AIGroups[MAX_SHIP_GROUPS];
+
 #event_handler(GROUP_CHECKTASKEVENT, "Group_CheckTask");
+
 void SeaAIGroupsInit()
 {
 	for (int i=0;i<MAX_SHIP_GROUPS;i++)
@@ -8,6 +11,7 @@ void SeaAIGroupsInit()
 		DeleteAttribute(&AIGroups[i],"");
 	}
 }
+
 // delete group by index
 void Group_DeleteGroupIndex(int iGroupIndex)
 {
@@ -28,8 +32,10 @@ void Group_DeleteGroupIndex(int iGroupIndex)
 		}
 	}
 	// boal super fix 03/02/2005 <--
+
 	DeleteAttribute(&AIGroups[iGroupIndex], "");
 }
+
 // delete group by ID
 void Group_DeleteGroup(string sGroupID)
 {
@@ -41,33 +47,39 @@ void Group_DeleteGroup(string sGroupID)
 	}
 	Group_DeleteGroupIndex(iGroupIndex);
 }
+
 // if you call Group_DeleteUnusedGroup() all group marked this will be deleted
 void Group_DeleteAtEnd(string sGroupID)
 {
 	ref rGroup = Group_GetGroupByID(sGroupID);
 	rGroup.DelAtEnd = true;
 }
+
 // return group type
 string Group_GetTypeR(ref rGroup) 
 {
 	if (!CheckAttribute(rGroup, "Type")) return "trade"; 
 	return rGroup.Type; 
 }
+
 string Group_GetType(string sGroupID)
 {
 	ref rGroup = Group_GetGroupByID(sGroupID);
 	return Group_GetTypeR(rGroup);
 }
+
 // set group type: "war" | "trade" | "pirate"
 void Group_SetType(string sGroupID, string sGroupType)
 {
 	ref rGroup = Group_FindOrCreateGroup(sGroupID);
 	rGroup.Type = sGroupType;
+
 	if (isEntity(&AISea))
 	{
 		SendMessage(&AISea, "lss", AI_MESSAGE_GROUP_SET_TYPE, sGroupID, sGroupType);
 	}
 }
+
 // create a new AI group for ships, return -1 if can't create
 int Group_CreateGroup(string sGroupID)
 {
@@ -108,6 +120,7 @@ void Group_FreeAllDead()
 		}
 	}
 }
+
 ref Group_GetGroupByID(string sGroupID)
 {
 	int	iGroupIndex = Group_FindGroup(sGroupID);
@@ -115,6 +128,7 @@ ref Group_GetGroupByID(string sGroupID)
 	// if (iGroupIndex < 0)
 	return Group_GetGroupByIndex(iGroupIndex);
 }
+
 ref	Group_GetGroupByIndex(int iGroupIndex)
 {
     if (iGroupIndex < 0) // fix
@@ -124,6 +138,7 @@ ref	Group_GetGroupByIndex(int iGroupIndex)
     }
     return &AIGroups[iGroupIndex];
 }
+
 // find AI group for ships
 int	Group_FindGroup(string sGroupID)
 {
@@ -136,6 +151,7 @@ int	Group_FindGroup(string sGroupID)
 //	if (bQuestLogShow) Log_Info("Error: Group_FindGroup нет группы "+sGroupID);
 	return -1;
 }
+
 ref	Group_FindOrCreateGroup(string sGroupID)
 {
 	//trace("sGroupID = " + sGroupID);
@@ -157,32 +173,40 @@ ref	Group_FindOrCreateGroup(string sGroupID)
 			return &AIGroups[0];
 		}
 	}
+
 	return &AIGroups[iGroupIndex];
 }
+
 // set group address to none
 void Group_SetAddressNone(string sGroupID)
 {
 	ref rGroup = Group_FindOrCreateGroup(sGroupID);
+
 	rGroup.Location = "none";
 }
+
 // set location near other group
 void Group_SetPursuitGroup(string sGroupID, string sPursuitGroupID)
 {
 	ref rGroup = Group_FindOrCreateGroup(sGroupID);
 	rGroup.Location.neargroup = sPursuitGroupID;
+
 	if (isEntity(&AISea))
 	{
 		SendMessage(&AISea, "lss", AI_MESSAGE_GROUP_SET_LOCATION_OTHER_GROUP, sGroupID, sPursuitGroupID);
 	}
 }
+
 // set new address for group
 void Group_SetAddress(string sGroupID, string sLocationID, string sLocationGroup, string sLocationLocator)
 {
 	ref rGroup = Group_FindOrCreateGroup(sGroupID);
+
 	rGroup.Location = sLocationID;
 	rGroup.Location.group = sLocationGroup;
 	rGroup.Location.locator = sLocationLocator;
 }
+
 void Group_DeleteUnusedGroup()
 {
 	for (int i=0;i<MAX_SHIP_GROUPS;i++)	
@@ -194,9 +218,11 @@ void Group_DeleteUnusedGroup()
 		}
 	}
 }
+
 // ======================================================================================================
 // =										CHARACTER MANAGER											=
 // ======================================================================================================
+
 // Get main character for group
 ref Group_GetGroupCommanderR(ref rGroup) 
 { 
@@ -207,15 +233,18 @@ ref Group_GetGroupCommanderR(ref rGroup)
 	}
 	return &NullCharacter;
 }
+
 int Group_GetGroupCommanderIndexR(ref rGroup) 
 { 
 	return GetCharacterIndex(rGroup.MainCharacter); 
 }
+
 int Group_GetGroupCommanderIndex(string sGroupID)
 {
 	ref rGroup = Group_FindOrCreateGroup(sGroupID);
 	return Group_GetGroupCommanderIndexR(rGroup);
 }
+
 ref Group_GetGroupCommander(string sGroupID)
 {
 	ref rGroup = Group_FindOrCreateGroup(sGroupID);
@@ -226,17 +255,21 @@ ref Group_GetGroupCommander(string sGroupID)
 	}
 	return Group_GetGroupCommanderR(rGroup);
 }
+
 // Set group commander
 void Group_SetGroupCommander(string sGroupID, string sCharacterID)
 {
 	ref rGroup = Group_FindOrCreateGroup(sGroupID);
+
 	rGroup.MainCharacter = sCharacterID;
+
 	if (bSeaActive)
 	{
 		ref rCharacter = GetCharacter(GetCharacterIndex(sCharacterID));
 		SendMessage(&AISea, "lsa", AI_MESSAGE_GROUP_SET_COMMANDER, sGroupID, rCharacter);
 	}
 }
+
 // ugeen 
 string GetGroupIDFromCharacter(ref chr)
 {
@@ -257,6 +290,7 @@ string GetGroupIDFromCharacter(ref chr)
 	return "";
 }
 // <-- ugeen
+
 // delete character from others group, add character to new group
 void Group_ChangeCharacter(string sGroupID, string sCharacterID)
 {
@@ -268,17 +302,21 @@ void Group_ChangeCharacter(string sGroupID, string sCharacterID)
 			Group_DelCharacter(rOldGroup.id, sCharacterID);
 		}
 	}
+
 	Group_AddCharacter(sGroupID, sCharacterID);
 }
+
 // add new character to group
 void Group_AddCharacter(string sGroupID, string sCharacterID)
 {
 	ref rGroup = Group_FindOrCreateGroup(sGroupID);
+	
 	// add new character to list
 	int iCharacterIndex = GetCharacterIndex(sCharacterID);
 	string sTemp = "id_" + iCharacterIndex;
 	rGroup.Quest.(sTemp) = sCharacterID;
 	rGroup.Quest.(sTemp).index = iCharacterIndex;
+
 	// DANGER 
 	Characters[iCharacterIndex].SeaAI.Group.Name = sGroupID;
 }
@@ -288,6 +326,7 @@ int Group_GetLiveCharactersNum(string sGroupID)
 	ref rGroup = Group_FindOrCreateGroup(sGroupID);
 	return (Group_GetCharactersNumR(rGroup) - Group_GetDeadCharactersNumR(rGroup));
 }
+
 int Group_GetDeadCharactersNum(string sGroupID) { ref rGroup = Group_FindOrCreateGroup(sGroupID); return Group_GetDeadCharactersNumR(rGroup); }
 int Group_GetDeadCharactersNumR(ref rGroup)
 {
@@ -301,6 +340,7 @@ int Group_GetDeadCharactersNumR(ref rGroup)
 	}
 	return iDeads;
 }
+
 int Group_GetCharactersNum(string sGroupID) { ref rGroup = Group_FindOrCreateGroup(sGroupID); return Group_GetCharactersNumR(rGroup); }
 int Group_GetCharactersNumR(ref rGroup)
 {
@@ -309,6 +349,7 @@ int Group_GetCharactersNumR(ref rGroup)
 	makearef(arQuest,rGroup.Quest);
 	return GetAttributesNum(arQuest);
 }
+
 int Group_GetCharacterIndexR(ref rGroup, int iIndex)
 {
 	aref arQuest, arAttr; 
@@ -319,19 +360,24 @@ int Group_GetCharacterIndexR(ref rGroup, int iIndex)
 	arAttr = GetAttributeN(arQuest, iIndex);
 	return sti(arAttr.index);
 }
+
 // delete character from group
 void Group_DelCharacter(string sGroupID, string sCharacterID)
 {
 	ref rGroup = Group_FindOrCreateGroup(sGroupID);
+
 	string sTemp = "Quest.id_" + GetCharacterIndex(sCharacterID);
+
 	if (CheckAttribute(rGroup, sTemp))
 	{
 		DeleteAttribute(rGroup, sTemp);
 	}
 }
+
 // ======================================================================================================
 // =											GROUP UTILS												=
 // ======================================================================================================
+
 bool Group_isDeadR(ref rGroup)
 {
 	int i = 0;
@@ -346,25 +392,31 @@ bool Group_isDeadR(ref rGroup)
 	if (iNumDeadCharacters == i) { return true; }
 	return false;
 }
+
 bool Group_isDead(string sGroupID)
 {
 	int	iGroupIndex = Group_FindGroup(sGroupID);
 	if (iGroupIndex < 0) { return true; } // fc! вот тут был БАГ!!! нет групы - она мертва - а возвращали false..
+
 	ref rGroup = Group_GetGroupByIndex(iGroupIndex);
 	return Group_isDeadR(rGroup);
 }
+
 // set start position
 void Group_SetXZ_AY(string sGroupID, float x, float z, float ay)
 {
 	ref rGroup = Group_FindOrCreateGroup(sGroupID);
+	
 	rGroup.Pos.x = x;
 	rGroup.Pos.z = z;
 	rGroup.Pos.ay = ay;
+
 	if (bSeaActive)
 	{
 		SendMessage(&AISea, "lsffff", AI_MESSAGE_GROUP_SET_XYZ_AY, sGroupID, x, 0.0, z, ay);
 	}
 }
+
 float Group_GetAttackHPDistance_R(ref rGroup, float fDistance)
 {
 	float fHP = 0.0;
@@ -374,11 +426,13 @@ float Group_GetAttackHPDistance_R(ref rGroup, float fDistance)
 	}
 	return fHP;
 }
+
 float Group_GetAttackHP(string sGroupID) { ref rG = Group_FindOrCreateGroup(sGroupID); return Group_GetAttackHP_R(rG); }
 float Group_GetAttackHP_R(ref rGroup)
 {
 	return Group_GetAttackHPDistance_R(rGroup, -1.0);
 }
+
 float Group_GetPowerHP(string sGroupID) { ref rG = Group_FindOrCreateGroup(sGroupID); return Group_GetPowerHP_R(rG); }
 float Group_GetPowerHP_R(ref rGroup)
 {
@@ -399,27 +453,32 @@ float Group_GetPowerHP_R(ref rGroup)
 	}	
 	return fHP;
 }
+
 // ======================================================================================================
 // =											TASK SECTION											=
 // ======================================================================================================
+
 bool Group_isTaskLockR(ref rGroup) { return sti(rGroup.Task.Lock); }
 bool Group_isTaskLock(string sGroupID)
 {
 	ref rGroup = Group_FindOrCreateGroup(sGroupID);
 	return Group_isTaskLockR(rGroup);
 }
+
 // lock task, group can't change task before end current
 void Group_LockTask(string sGroupID)
 {
 	ref rGroup = Group_FindOrCreateGroup(sGroupID);
 	rGroup.Task.Lock = true;
 }
+
 // unlock task, group can change tasks 
 void Group_UnlockTask(string sGroupID)
 {
 	ref rGroup = Group_FindOrCreateGroup(sGroupID);
 	rGroup.Task.Lock = false;
 }
+
 // Task: Defend
 void Group_SetTaskDefend(string sGroupID, string sDefendedGroupID)
 {
@@ -427,19 +486,23 @@ void Group_SetTaskDefend(string sGroupID, string sDefendedGroupID)
 	rGroup.Task = AITASK_DEFEND;
 	rGroup.Task.Target = sDefendedGroupID;
 }
+
 // Task: Runaway
 void Group_SetTaskRunaway(string sGroupID, string sGroupAwayFrom)
 {
 	ref rGroup = Group_FindOrCreateGroup(sGroupID);
+
 	rGroup.Task = AITASK_RUNAWAY;
 	rGroup.Task.Target = "";
 	if (bSeaActive)	{ AIRunaway_GroupRunaway(sGroupID, sGroupAwayFrom); }
 }
+
 // Task: Attack
 void Group_SetTaskAttack(string sGroupID, string sAttackedGroup) { Group_SetTaskAttackEx(sGroupID, sAttackedGroup, true); }
 void Group_SetTaskAttackEx(string sGroupID, string sAttackedGroup, bool bTaskBoth)
 {
 	ref rGroup = Group_FindOrCreateGroup(sGroupID);
+
 	rGroup.Task = AITASK_ATTACK;
 	rGroup.Task.Target = sAttackedGroup;
 	// fix --> //navy тогда уж так ;)
@@ -456,14 +519,17 @@ void Group_SetTaskAttackEx(string sGroupID, string sAttackedGroup, bool bTaskBot
 void Group_SetTaskAttackInMap(string sGroupID, string sAttackedGroup)
 {
 	ref rGroup = Group_FindOrCreateGroup(sGroupID);
+
 	rGroup.Task = AITASK_ATTACK;
 	rGroup.Task.Target = sAttackedGroup;
 	// fix -->
 	rGroup = Group_FindOrCreateGroup(sAttackedGroup);
+
 	rGroup.Task = AITASK_ATTACK;
 	rGroup.Task.Target = sGroupID;
 	// fix <--
 }
+
 // Task: Move
 void Group_SetTaskMove(string sGroupID, float x, float z)
 {
@@ -473,6 +539,7 @@ void Group_SetTaskMove(string sGroupID, float x, float z)
 	rGroup.Task.Target.Pos.x = x;
 	rGroup.Task.Target.Pos.y = 0.0;
 	rGroup.Task.Target.Pos.z = z;
+
 	int iIndex = 0;
 	while (true)
 	{
@@ -482,13 +549,16 @@ void Group_SetTaskMove(string sGroupID, float x, float z)
 		Ship_SetTaskMove(SECONDARY_TASK,iCharacterIndex,x,z);
 	}
 }
+
 // Task: Reset to none
 void Group_SetTaskNone(string sGroupID)
 {
 	ref rGroup = Group_FindOrCreateGroup(sGroupID);
+
 	rGroup.Task = AITASK_NONE;
 	rGroup.Task.Target = "";
 	rGroup.Task.Lock = false;
+	
 	// boal fix!! 03/02/2005
 	int iIndex;
 	int iCharacterIndex;
@@ -501,11 +571,14 @@ void Group_SetTaskNone(string sGroupID)
 		Ship_SetTaskNone(SECONDARY_TASK, iCharacterIndex);
 	}
 }
+
 void Group_SetEnemyToCharacter(string sGroupID, int iEnemyToCharacter)
 {
 	int iGroupIndex = Group_FindGroup(sGroupID);
 	if (iGroupIndex < 0) { return; }
+
 	ref rGroup = Group_GetGroupByIndex(iGroupIndex);
+
 	int i = 0;
 	int iNumDeadCharacters = 0;
 	while (true)
@@ -516,11 +589,14 @@ void Group_SetEnemyToCharacter(string sGroupID, int iEnemyToCharacter)
 		i++;
 	}
 }
+
 void Group_SetNeutralToCharacter(string sGroupID, int iEnemyToCharacter)
 {
 	int iGroupIndex = Group_FindGroup(sGroupID);
 	if (iGroupIndex < 0) { return; }
+
 	ref rGroup = Group_GetGroupByIndex(iGroupIndex);
+
 	int i = 0;
 	int iNumDeadCharacters = 0;
 	while (true)
@@ -531,6 +607,8 @@ void Group_SetNeutralToCharacter(string sGroupID, int iEnemyToCharacter)
 		i++;
 	}
 }
+
+
 void Group_CheckTask()
 {
 	string sGroupID = GetEventData();

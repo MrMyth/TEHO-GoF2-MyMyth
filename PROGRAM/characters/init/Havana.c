@@ -1,9 +1,12 @@
+
 int CreateHavanaCharacters(int n)
 {
 	ref ch;
+	
 	///////////////////////////////////////////////////////////////////////////////
 	// ОСНОВНЫЕ ПЕРСОНАЖИ
 	///////////////////////////////////////////////////////////////////////////////
+
 	makeref(ch,Characters[n]);			//Губернатор
 	ch.id		= "Havana_Mayor";
 	ch.model	= "huber_14";
@@ -31,6 +34,7 @@ int CreateHavanaCharacters(int n)
 	LAi_group_MoveCharacter(ch, "SPAIN_CITIZENS");
 	LAi_SetImmortal(ch, true);
 	n = n + 1;
+
 	makeref(ch,Characters[n]);			//Священик
 	ch.id		= "Havana_Priest";
 	ch.model	= "priest_1";
@@ -48,6 +52,7 @@ int CreateHavanaCharacters(int n)
 	LAi_group_MoveCharacter(ch, "SPAIN_CITIZENS");
 	LAi_SetImmortal(ch, true);
 	n = n + 1;
+
 	makeref(ch,Characters[n]);		// ОФициантка
 	ch.id		= "Havana_waitress";
 	ch.model	= "women_13";
@@ -64,6 +69,7 @@ int CreateHavanaCharacters(int n)
 	LAi_group_MoveCharacter(ch, "SPAIN_CITIZENS");
 	LAi_SetImmortal(ch, true);
 	n = n + 1;
+
 	makeref(ch,Characters[n]);			//Трактирщик
 	ch.id		= "Havana_tavernkeeper";
 	ch.model	= "barmen_1";
@@ -81,6 +87,8 @@ int CreateHavanaCharacters(int n)
 	LAi_group_MoveCharacter(ch, "SPAIN_CITIZENS");
 	LAi_SetImmortal(ch, true);
 	n = n + 1;
+
+
 	makeref(ch,Characters[n]);			//Торговец
 	ch.id		= "Havana_trader";
 	ch.model	= "trader_1";
@@ -98,6 +106,7 @@ int CreateHavanaCharacters(int n)
 	LAi_SetImmortal(ch, true);
 	ch.item_date = "";
 	n = n + 1;
+
 	makeref(ch,Characters[n]);			//Корабел
 	ch.id		= "Havana_shipyarder";
 	ch.model	= "shipowner_1_1";
@@ -124,6 +133,7 @@ int CreateHavanaCharacters(int n)
 	LAi_group_MoveCharacter(ch, "SPAIN_CITIZENS");
 	LAi_SetImmortal(ch, true);
 	n = n + 1;
+
 	makeref(ch,Characters[n]);			//Банкир
 	ch.id		= "Havana_usurer";
 	ch.model	= "banker_1_2";
@@ -145,6 +155,7 @@ int CreateHavanaCharacters(int n)
 	LAi_group_MoveCharacter(ch, "SPAIN_CITIZENS");
 	LAi_SetImmortal(ch, true);
 	n = n + 1;
+
 	makeref(ch,Characters[n]);			//Начальник порта
 	ch.id		= "Havana_PortMan";
 	ch.model	= "citiz_5";
@@ -161,6 +172,7 @@ int CreateHavanaCharacters(int n)
 	LAi_SetImmortal(ch, true);
 	ch.item_date = "";
 	n = n + 1;
+
     makeref(ch,Characters[n]);
 	ch.name 	= "Smuggler";
 	ch.lastname = "";
@@ -177,6 +189,7 @@ int CreateHavanaCharacters(int n)
 	LAi_SetHP(ch, 80.0, 80.0);
 	ch.greeting = "smuggler";
 	n = n + 1;
+	
 	makeref(ch,Characters[n]);			//Смотритель маяка
 	ch.id		= "Havana_Lightman";
 	ch.model	= "keeper_2";
@@ -196,6 +209,7 @@ int CreateHavanaCharacters(int n)
 	LAi_group_MoveCharacter(ch, "SPAIN_CITIZENS");
 	LAi_SetImmortal(ch, true);
 	n = n + 1;
+	
 	makeref(ch,Characters[n]);			//Заведующий  складом на верфи
 	ch.id		= "Havana_SkladMan";
 	ch.model	= "citiz_"+(rand(9)+1);
@@ -214,6 +228,7 @@ int CreateHavanaCharacters(int n)
 	LAi_SetImmortal(ch, true);
 	ch.Storage 	  = true;
 	n = n + 1; 
+	
 	makeref(ch,Characters[n]);			//Смотритель кладбища
 	ch.id		= "Havana_Cemeteryman";
 	ch.model	= "keeper_2";
@@ -233,5 +248,6 @@ int CreateHavanaCharacters(int n)
 	LAi_group_MoveCharacter(ch, "SPAIN_CITIZENS");
 	LAi_SetImmortal(ch, true);
 	n = n + 1;
+	
 	return n;
 }

@@ -1,13 +1,17 @@
+
 void ProcessDialogEvent()
 {
 	ref NPChar;
 	aref Link, NextDiag;
 	string sTemp;
 	bool bOk;
+
 	DeleteAttribute(&Dialog,"Links");
+
 	makeref(NPChar,CharacterRef);
 	makearef(Link, Dialog.Links);
 	makearef(NextDiag, NPChar.Dialog);
+	
 	switch(Dialog.CurrentNode)
 	{
 		case "First time":
@@ -16,10 +20,12 @@ void ProcessDialogEvent()
 			link.l1.go = "exit";
 			NextDiag.TempNode = "First time";
 		break;
+
 		case "Exit":
 			NextDiag.CurrentNode = NextDiag.TempNode;
 			DialogExit();
 		break;
+
 		// ==> пиплы в поселении
 		case "PearlMan":
 			NextDiag.TempNode = "PearlMan";
@@ -61,6 +67,7 @@ void ProcessDialogEvent()
 			link.l1 = RandPhraseSimple("No need to be rude...", "Watch your tongue!");
 			link.l1.go = "exit";
 		break;
+
 		// ==> индейцы в поселении
 		case "IndPearlMan":
 			NextDiag.TempNode = "IndPearlMan";
@@ -79,10 +86,13 @@ void ProcessDialogEvent()
 			link.l1 = "Oh, nothing in particular, just wanted to listen to what you would say.";
 			link.l1.go = "exit";
 		break;
+		
+				
 		case "CitizenNotBlade":
 			dialog.text = "Captain, what are you doing? Hide away your weapon, before you'll make a lot of trouble!";
 			link.l1 = LinkRandPhrase("Fine.", "Okay.", "Don't worry, I am already hiding it away...");
 			link.l1.go = "exit";
 		break;  
+
 	}
 }

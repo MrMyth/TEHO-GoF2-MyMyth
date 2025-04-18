@@ -95,6 +95,7 @@ The booty was divided according to the laws of the Brethren. Let's hope that it 
 To divide the booty? I'd better cut few throats and take it all.
 #TEXT dum
 /////////////////////////////////////////////////////////////////////////////////////////////////////////////
+
 #QUEST Rumour_GoldFleet
 Spanish Golden Fleet
 #TEXT 1
@@ -127,6 +128,7 @@ We fought well with Spanish - few of their ships will never reach Havana. The bo
 We fought well with Spanish - few of their ships will never reach Havana. The booty could be better but we had to retreat.
 #TEXT 15
 We fought well with Spanish - few of their ships will never reach Havana. The booty could be better but we had to retreat.
+
 #TEXT 15_none
 ///////////////////////////////////////////////////////////////////////////////////////////////////////////////
 #QUEST MerchantOnMap
@@ -143,6 +145,7 @@ I managed to capture "@<sShipName>" with @<sQuestGoodsIdx> in it.
 "@<sShipName>" was sunk with all of her cargo!
 #TEXT 6
 Well trained soldiers of @<snation> had been waiting for me inside "@<sShipName>". It was a trap!
+
 #TEXT  7_NONE
 ///////////////////////////////////////////////////////////////////////////////////////////////////////////////
 #QUEST	HeadHunter
@@ -165,6 +168,8 @@ I persuaded commandant of @<sCity> prison to let me go in piece. But the price o
 I was attacked by a punitive expedition of @<sNation>.
 #TEXT HeadHunter_NONE
 //////////////////////////////////////////////////////////////////////////////////////////////////////////
+
+
 #QUEST ShipTuning
 Upgrading the ship
 #TEXT t1
@@ -175,6 +180,7 @@ Upgrade was successful.
 I've changed my ship and the deal is off.
 #TEXT dum
 /////////////////////////////////////////////////////////
+
 #QUEST ShipRepair
 Restoring ship's hull
 #TEXT t1
@@ -184,6 +190,8 @@ Repair is done.
 #TEXT Lose
 I've changed my ship and the deal is off.
 #TEXT dum
+
+
 #QUEST	DELIVERY_TRADE_QUEST
 Goods delivering
 #TEXT	1
@@ -207,6 +215,7 @@ I don't have enough @<sGoodGen>. I need @<sHaveNotQty> more to finish the deal.
 I have to find more cargo or I won't be able to get any job like this again.
 #TEXT   8_NONE
 //////////////////////////////////////////////////////////////////////////////////////////////////////////
+
 #QUEST Gen_LoanFindCitizen
 Bankers. Finding debtors.
 #TEXT   1
@@ -222,6 +231,8 @@ Money was given to my employer.
 I told employer that I was unable to get the debt.
 #TEXT   6
 I refused to do the job due to some complications with a debtor.
+
+
 #QUEST Gen_LoanTakeChest
 Bankers. Gold delivering.
 #TEXT   1
@@ -238,6 +249,7 @@ I had to replace chests with coins from my very own pocket.
 I refused to do the job.
 #TEXT   5_NONE
 //////////////////////////////////////////////////////////////////////////////////////////////////////////
+
 #QUEST convoy_quest
 Escorting
 #TEXT   1
@@ -250,6 +262,8 @@ Merchant is dead. My mission is completely failed.
 I've done the job.
 #TEXT   5
 Merchant has left my squadron. Well, the fault is mine, I shouldn't try to attack him.
+
+
 #QUEST Gen_convoy_passenger
 Taking @<sName> to @<sCity>
 #TEXT   1
@@ -264,6 +278,8 @@ I've done the job.
 I can't make it in time. The passenger gave me one more week to do the job and lowered my promised reward, it is @<sMoney> now.
 #TEXT   6
 I have cheated on my passenger, he is my slave now.
+
+
 #QUEST MayorsQuestsList
 Assignments from governors
 #TEXT   1
@@ -317,6 +333,8 @@ I had a talk with the deserter, he persuaded me to leave him alone, it looks lik
 I didn't make it in time, @<MayorName> won't be happy about it.
 #TEXT   21
 I failed a mission of @<ColonyName> governor. I had found my target, yet I didn't manage to complete the task. @<MayorName> is so angry...
+
+
 #QUEST GivePrisonFree
 Prison business
 #TEXT   1
@@ -364,6 +382,7 @@ I didn't find any trade ships there. Damn scums cheated on me, I should've not t
 I have delivered the message to prisoner's pals. They offered me to buy some information for a lot of coins. I refused, their faces were not looking honest enough for me.
 #TEXT   17
 I have delivered the message and was robbed by the prisoner's fellows. Never again I will trust these scums...
+
 #QUEST  ShipyardsMap
 Industrial espionage 
 #TEXT   1
@@ -376,6 +395,8 @@ Damn it! The man refused to pay! I was unlucky to steal some junk.
 Owner of @<sCity> shipyard had shown an interest in the blueprint I brought. I was paid well.
 #TEXT   5
 The door of @<sCity>'s shipyard will be opened for the whole day. I should use this...
+
+
 #QUEST  SeekMayorsRing
 Sleuth in the brothel
 #TEXT   1
@@ -393,6 +414,7 @@ I didn't find the ring. Failure.
 I've found the ring. Now I should bring it back.
 #TEXT   7
 The ring was delivered.
+
 #QUEST  Church_NightGuard
 Night watch in @<sCity> church
 #TEXT   1
@@ -405,6 +427,8 @@ I've left the building during my night watch. Mission failed.
 Three nights passed, I have fulfilled Holy father's ask. I should report to him.
 #TEXT   5
 I see the thieves! I am afraid that the fight is unavoidable...
+
+
 #QUEST  PortmansBook_Delivery
 @<sCity> harbor master's mission. Chasing captain @<sCapName>
 #TEXT   1
@@ -418,6 +442,8 @@ I managed to find the man in @<sCity> inside the harbor master's office. Mission
 They say that captain @<sCapName> is sailing to @<sTargetCity>@<sAreal>.
 #TEXT   5
 Harbor master told me that captain @<sCapName> of @<sShipTypeName> '@<sShipName>' had gone to @<sTargetCity>@<sAreal>.
+
+
 #QUEST  Portmans_SeekShip
 @<sCity> harbor master's mission. Returning the stolen ship
 #TEXT   1
@@ -439,6 +465,7 @@ I had to refuse to do this mission.
 Damn it!!! I was unable to keep the ship undamaged, it has sunk! And what am I going to return to my employer?
 #TEXT   9
 I boarded the ship and yet it has sunk. This is a total failure. And what am I going to return to my employer?
+
 #QUEST  SCQ_NM_battle
 Searching for captains. Request from nobleman @<sName> from @<sCity>.
 #TEXT   1
@@ -451,6 +478,7 @@ They say that captain @<sCapName> is sailing from @<sCity> to @<sTargetCity>@<sA
  @<sCapName> was found and eliminated. My job is done, now I may return to my employer in @<sCity> and claim my money. I can find the man in the local church from 8 till 10 a.m.
 #TEXT   5
 I have found the captain I seek and visited his ship. @<sName> is looking alerted and he forced me out of his ship. My goal is perfectly clear - I must to sink his @<sShipTypeName>. 
+
 #QUEST  SCQ_NM_prisoner
 Searching for captains. Request from nobleman @<sName> from @<sCity>.
 #TEXT   1
@@ -465,6 +493,7 @@ The captain I seek is dead. Now I won't be able to find his officer.
 @<sName> is found and now he is sitting under arrest. Job is done, I may return to my employer in @<sCity> and claim my coins. I can find him in the local church from 8 till 10 a.m.
 #TEXT   6
 I have met the captain. He refused to give out his officer scum. Well, it's worse for him then. I have only one option now - I must board his ship.
+
 #QUEST  SCQ_NM_peace
 Searching for captains. Request from nobleman @<sName> from @<sCity>.
 #TEXT   1
@@ -477,6 +506,7 @@ They say that captain @<sCapName> is sailing from @<sCity> to @<sTargetCity>@<sA
 Captain @<sCapName> died. My mission is failed.
 #TEXT   5
 I was able to find the captain and tell him the nobleman's ask. My job is done, I may return to @<sCity> for my coins. My employer may be found in the local church from 6 p.m. till 8 p.m.
+
 #QUEST  SCQ_manSlave
 Ex slave's vengeance. Request from citizen @<sName> from @<sCity>.
 #TEXT   1
@@ -493,6 +523,8 @@ There is the captain I seek. I managed to have a talk with him. My question conc
 It is all clear now. I must to sink @<sShipTypeName>.
 #TEXT   10
 The ship is gone. I won't be able to revenge the man.
+
+
 #QUEST  SCQ_womanHasband
 Searching for husband
 #TEXT   1
@@ -509,6 +541,8 @@ I've found the captain I was looking for. Turned out that he is too busy and una
 Well, job is done. Now I may claim my coins.
 #TEXT   10
 The ship is gone. I won't be able to find the man.
+
+
 #QUEST  SCQ_manRapeWife
 Saving a wife of @<sCity> citizen.
 #TEXT   1
@@ -526,6 +560,8 @@ Captain @<sCapName> is found. Kidnapped woman is kept in his cabin. Now I must t
 I managed to save a woman named @<sName>. That's my client. Now I may return her back to her husband in @<sCity>.
 #TEXT   10
 The ship is gone. I won't be able to help that poor man to find his wife.
+
+
 #QUEST  SCQ_manFriend
 Finding a @<sCity> citizen's countryman
 #TEXT   1
@@ -541,6 +577,8 @@ They say that captain @<sCapName> is sailing from @<sCity> to @<sTargetCity>@<sA
 I managed to find the captain I needed and inform him that his fellow was looking for him. My job is done, time to return to @<sCity> and claim my coins.
 #TEXT   10
 The ship is gone. Now I won't be able to help my employer.
+
+
 #QUEST  SCQ_womanRevenge
 Rejected woman from @<sCity>
 #TEXT   1
@@ -558,6 +596,8 @@ Captain @<sCapName> is dead. I managed to do what my employer asked.
 Fury's mission is finished. Now I may return to @<sCity> and claim my coins.
 #TEXT   10
 The ship I seek is gone. Revenge is failed.
+
+
 #QUEST  SCQ_womanPirates
 Saving a husband from @<sCity>
 #TEXT   1
@@ -575,6 +615,7 @@ Captain @<sName> is found. Now I must to board his @<sShipTypeName>.
 I managed to release the prisoner. Job is done, time to return at @<sCity>.
 #TEXT   10
 The ship is gone. I won't be able to save the man.
+
 #QUEST Slavetrader
 Slave Trader
 #TEXT   1
@@ -693,6 +734,8 @@ I failed to gather 5 000 slaves in time. Now I must deal with bounty hunters...
 Slaves were delivered to my employer. I should visit him in a week to collect my money. I will receive over a million for the job! Now, that why I should do this job! I can't even imagine what next mission will bring. Yes, this business will make me rich!
 #TEXT	33
 Fucking bastard has screwed me! When I arrived for my coins, it turned out that my dear 'partner' had run away, took my million and his investor's money. It's the first time I was cheated that hard! Yet he will get what he deserves. They all do. World is small, we might meet each other again. And the rat will pay for everything!
+
+
 #QUEST PrisonGun
 Guns for a fort
 #TEXT   1
@@ -703,6 +746,7 @@ Cannons were delivered, payment were received though not in coins but in credit 
 What a pity! Commandant refused to buy cannons. And what am I supposed to do with this load of iron? I can only to sell to the shipyard for a few coins...
 #TEXT   4
 I have spent to much time finding cannons and @<sName> bought them from another seller. My fault...
+
 #QUEST Fraht
 Harbor master's freights
 #TEXT   1
@@ -725,6 +769,7 @@ These bureaucrats are damn too insolent! They wanted to rob me to my very cloth.
 Harbor master from @<sStartCity> has offered me to get and deliver @<sGoodQty> of @<sGoods> for their colony. He promised to pay @<sText> price. In total, I will get @<sMoney>.
 #TEXT   9
 I was too slow, a month has passed. No need to hurry now...
+
 #QUEST Postcureer
 Mail delivery
 #TEXT   1
@@ -761,6 +806,7 @@ I had a nice opportunity to make some coins - I let the man to copy those docume
 The agent tried to bribe me but failed. I am not Judas!
 #TEXT   17
 Well... My client noticed that the package was opened, looks like the agent was not that professional. I didn't get any coins for delivery and my reputation has suffered...
+
 #QUEST Escort
 Escorting trade ships
 #TEXT   1
@@ -859,6 +905,7 @@ The fight wasn't really lucky for us, all pirates were eliminated yet only one t
 The fight was really unlucky for us, all trade ships are gone. This is failure.
 #TEXT   47
 The enemy was too tough, I had to retreat. Such a shame on me.
+
 #QUEST Shadowtrader
 I Want Your Shop, Your Goods and Your Life
 #TEXT   1
@@ -883,6 +930,7 @@ I was lead to the lair where I met the competitor. Negotiating was ended by a fi
 I was lead to the lair where I met the competitor. Negotiating was ended by a fight. I have killed the man and two his fellows. I suppose that is the best solution, he won't be able to harm people again. Now I may return to the merchant and claim my reward.
 #TEXT   11
 I have received 15 000 pesos for dealing with the competitor. Nice...
+
 #QUEST Wine
 Bottleneck Commodity
 #TEXT   0
@@ -903,6 +951,7 @@ Surprise. @<sName> doesn't trade wine. Looks like that huckster has lied to me. 
 Damn bastard has cheated on me, refused to return money and called guards! Hell with it...
 #TEXT   8
 I bought enough wine. Now I may return to the soldier.
+
 #QUEST Contraoffer
 Doubtful Proposal
 #TEXT   1
@@ -921,6 +970,7 @@ Suddenly a patrol had arrived before I ended the bargain. How did they know? I h
 Suddenly a patrol had arrived before I ended the bargain. How did they know? I failed to bribe them, their commander is damn too honest. Or he was.
 #TEXT   8
 Suddenly a patrol had arrived before I ended the bargain. How did they know? I failed to bribe them, their commander is damn too honest. I had to go in prison. I am a captain after all so I think that they won't hold me here for too long.
+
 #QUEST Findship
 Searching for the ship
 #TEXT   1
@@ -951,6 +1001,7 @@ I have found the thief. He refused to part with the stolen item peacefully and c
 Locals told me that there was some tramp with the tool I seek. That is all I've got unfortunately. I doubt that the thief could run far away. I should search the town and its outskirts.
 #TEXT   10
 I was paid @<sMoney>. Not bad.
+
 #QUEST Sunplace
 Dirty business
 #TEXT   1
@@ -981,6 +1032,7 @@ Client was satisfied and paid me well.
 Really?! I have overdone my job and he is not happy! I don't trust in his words about 'heavy sins' - the man is definitely lacking conscience. Looks like he had his own plans. Hell with him, he paid me anyway.
 #TEXT   14
 I am just in time. Surprisingly, '@<sSName>' is not a @<sType>, it is a heavy galleon. It looks like the client was mistaken. But, perhaps, there is no any @<sGoods> in its cargo holds? Anyway, I have to fight.
+
 #QUEST TraderEscort
 Escorting
 #TEXT   1
@@ -1013,6 +1065,7 @@ We were attacked by pirates as soon as we reached the island. We were outnumbere
 The reckless bastard has risen the black flag as soon as we reached the island. I had to fight.
 #TEXT   15
 I have sunk the flute. Too bad, I won't get the cargo.
+
 #QUEST Racing
 Sea marathon
 #TEXT   1
@@ -1029,6 +1082,7 @@ I lost this time but there must be other merchants like him. And we will see the
 I have changed my mind - I won't take part in this absurd race. I'll let the man to have his prize and be happy about it.
 #TEXT   7
 I was too angry because of my fail, so I have attacked the merchant right in the port. Such an idiot I am. Blind fury so they say...
+
 #QUEST RedChieftain
 A Chief of Redskins
 #TEXT   1
@@ -1048,6 +1102,7 @@ Schooners were too tough for me. Of course! I had only one ship which is weaker 
 The fight was awful, all Indian tartans destroyed. There is no one to save now. I will land Kanauri in the nearest port, I failed him.
 #TEXT   8
 All enemies are dead. Indians paid me well and went to the jungles. I respect people like Kanauri, he is a true chief of his tribe.
+
 #QUEST FalseTrace
 False Trace
 #TEXT   1
@@ -1104,6 +1159,7 @@ I've found Adam's cache. His gang attacked me while I was heading back to my boa
 I was attacked as soon as I got aboard. Katerine's threat turned to be true. I engaged the enemy and destroyed it.
 #TEXT   27
 I was attacked as soon as I got aboard. Katerine's threat turned to be true. I preferred to stay away and retreated.
+
 #QUEST Portugal
 Long Way to Gallows
 #TEXT   1
@@ -1179,6 +1235,7 @@ I have freed Bartolomeo from the prison, I barely made it, yet Vazquez attacked 
 The Portuguese didn't survive the fight with bounty hunters...
 #TEXT   36
 The Portuguese didn't survive the fight with Franz Garcke's men...
+
 #QUEST Consumption
 A Price of Consumption
 #TEXT   1
@@ -1218,6 +1275,7 @@ Juan, the slave trader, paid me well for his life. Young and noble officer Sergi
 Juan has escaped from his deserved fate, I had to leave him in order to save slaves. Angelo will return to his sister and Consumption... perhaps, we shall meet again one day and I will be able to end what I've started...
 #TEXT   18
 End of the story. Consumption is dead and he will never continue his dirty hunt for people. Angelo will return to his sister just like a lot of other people will return back to their families today. I am not sure that senor commandant will be punished yet it is not my problem...
+
 #QUEST Citizpassenger
 Transporting @<sType> called @<sName> to @<sCity>.
 #TEXT   1
@@ -1226,6 +1284,7 @@ I have to transport a passenger named @<sName> to @<sCity> in @<sDays>. My rewar
 Passenger had enough of sailing with me and wait until I finally desire to  do my job. He had left me in the last port.
 #TEXT   3
 Job is done.
+
 #QUEST Monkletter
 Church mail
 #TEXT   1
@@ -1236,6 +1295,7 @@ Padre was upset because I was too late yet he accepted the papers.
 The message was delivered in time. I have received a blessing and a few golden doubloons.
 #TEXT   4
 Two weeks have passed and I have still a job to do. I should hurry...
+
 #QUEST Churchbooks
 Delivery of prayer books
 #TEXT   1
@@ -1248,6 +1308,7 @@ Despite of my timing, holy father thanked me for my work.
 Holy father presented me a sanctified amulet for my work.
 #TEXT   5
 Month has passed and I still got a job to do. I should hurry up...
+
 #QUEST Nobleslaves
 Slaves for a nobleman from @<sCity>
 #TEXT   1
@@ -1256,6 +1317,7 @@ Some nobleman from @<sCity> has ordered @<sQty> slaves from me. I agreed. I will
 Slaves were delivered, payment received.
 #TEXT   3
 I was too slow with the slave business and my client had already solved his problem without my help. I should find another buyer.
+
 #QUEST Noblelombard
 A family relic
 #TEXT   1
@@ -1272,6 +1334,7 @@ I failed to deal with the usurer. @<sName> is upset but there is nothing I can d
 @<sName> has cheated on me. He wasn't going to pay his debts and went to Europe. A word given by the nobleman…
 #TEXT   7
  @<sName> has put down a deposit just as he promised. Nice.
+
 #QUEST Marginpassenger
 Kidnapper
 #TEXT   1
@@ -1314,6 +1377,7 @@ I've sunk the barquentine with all it's cargo. Failure again...
 Barquentine '@<sShipName>' was boarded. Her cargo will easily compensate all my costs.
 #TEXT   20
 I've told commandant about @<sName>.  He promised to deal with it, praised me and... that's all. Oh, no, the governor will be told about my good deed. And, of course, no one gives a fuck about my lost doubloons...
+
 #QUEST MarchCap
 Hot Raid
 #TEXT   1
@@ -1340,6 +1404,7 @@ I decided to don't share the booty with my companion. It is all mine!
 Captain @<sName> has offered me to plunder a trading caravan loaded with @<sGoods>. It will be sailing from @<sCity1> to @<sCity2> in @<sDays>. I agreed, I believe that there will be enough loot for both of us, besides, fighting together is always easier.
 #TEXT   11
 Captain @<sName> has offered me to find and capture some pirate ship loaded with @<sGoods>. Pirate named @<sName1> is repairing his tub not far from @<sShore> at @<sIsland>. I agreed, I believe that there will be enough loot for both of us, besides, fighting together is always easier. We have got @<sDays> for our operation.
+
 #QUEST Bakaut
 Goods of strategic value
 #TEXT   1
@@ -1350,6 +1415,7 @@ Deal is finished - I have sold @<sQty> of ironwood for @<sDublon> doubloons. My 
 That was bad… I have brought not enough of ironwood and Michael refused to buy it. I must be more attentive next time if I don't want to loose such a great buyer.
 #TEXT   4
 I have failed Rosenkraft for the third time and he won't work with me again. What a shame...
+
 #QUEST Mangarosa
 Manga Rosa
 #TEXT   1
@@ -1360,24 +1426,28 @@ This plant is called Manga Rosa, trade girl told me that Indians and Gypsies wil
 Gypsies pay fifty doubloons for each Manga Rosa. I can't even imagine that a plant can cost so much. If I find more Manga Rosa I may sell it to Gypsies yet only one plant once.
 #TEXT   4
 Gypsies use Manga Rosa to make some addiction to the tobacco, my interlocutor has rejected to tell me the secret of this addiction but she told me about one sorceress called Amelia who knows secrets of the plant. She lives in a house somewhere southwest of Main.
+
 #QUEST Amulet_Mayak4_Lighthouseroom
 Guadeloupe lighthouse: amulets
 #TEXT   1
 A keeper of Guadeloupe lighthouse promised me to get @<sAml> in two months for 15 000 pesos.
 #TEXT   2
 The amulet was delivered. Now I can make another order.
+
 #QUEST Amulet_Mayak9_Lighthouseroom
 Santiago lighthouse: amulets
 #TEXT   1
 A keeper of Santiago lighthouse promised me to get @<sAml> in two months for 15 000 pesos.
 #TEXT   2
 The amulet was delivered. Now I can make another order.
+
 #QUEST Amulet_Mayak11_Lighthouseroom
 Cartagena lighthouse: amulets
 #TEXT   1
 A keeper of Cartagena lighthouse promised me to get @<sAml> in two months for 15 000 pesos.
 #TEXT   2
 The amulet was delivered. Now I can make another order.
+
 #QUEST Unique_Goods
 Goods of strategic value
 #TEXT   1
@@ -1388,6 +1458,7 @@ Fadey the Muscovite will sell me 50 coils of ropes every 20th day of month. 500 
 From now on I am authorized to buy 30 pieces of ship silk every first and fifteenth day of month from a new vice-director of Dutch West Indian Company. A price for a single batch is 600 doubloons.
 #TEXT   4
 Sergio Saldo offered me to buy 60 barrels of resin every fifth day of month. A price for a single batch is 600 doubloons.
+
 #QUEST FMQ_Guadeloupe
 Price of Discretion
 #TEXT   1
@@ -1448,6 +1519,7 @@ The bastard was scared shitless. I am sure that he won't ever try to harm me in 
 The term of two months, given me to find Bertrand Pinette has expired. Now I should take care of my reputation issues within French colonies... @<sAdd>@<sAdd1>
 #TEXT   29
 Pinette's letter has made a lasting impression on the banker. He will keep his quite, that's for sure. I should check Bertrand's stash now, it's too risky to let it stay there for too long.
+
 #QUEST FMQ_Martinique
 Resin Dog
 #TEXT   1
@@ -1494,6 +1566,7 @@ Felicien Gronier tried to threaten me, yet it didn't turn so well for him and hi
 The Topaz attacked me when I was leaving the bay. What made this small tartane to engage into her last fight - is a mystery to me.
 #TEXT   22
 I was delaying a landing on the shore for too long and Felicien Gronier's men are gone now. Pity, what a pity...
+
 #QUEST FMQ_Nevis
 Prison Break
 #TEXT   1
@@ -1556,6 +1629,7 @@ Finally I have delivered the Brits to Antigua. I should pay a visit to colonel F
 30 000 pesos, an arquebus and a decent blade. It's an adequate reward for my troubles, but this job is not something I'd do again.
 #TEXT   30
 I took my time delivering the Brits to Antigua and they left my ship on their own without saying farewells. Very English of them...
+
 #QUEST FMQ_Tortuga
 Just Like Home
 #TEXT   1
@@ -1606,6 +1680,7 @@ What a fuck up! Damn girl had robed me while we were having fun in a bed. No way
 Damn it! This fucking bitch had me screwed! It's just my fault. Nothing to do here. That was a really instructive experience.
 #TEXT   24
 It's done. I am alive, I got my share of coin and share of sex. What a lass! I am starting to like my new lifestyle. Something to tell about when I am back home.
+
 #QUEST FMQ_Portpax
 Grandee Albalate
 #TEXT   1
@@ -1636,6 +1711,7 @@ This is the end of the curious case of don Albalate. Young grandee made a decisi
 We were late to Portobello and Luis Ortiz had taken care of any evidences. Don Domingo is going to deal with his situation in court. I wish him luck. I am not empty-handed though - grandee Albalate gifted me with his rapier.
 #TEXT   14
 I didn't find the young don in marquee Albalate's house, but instead I was met by his retainer named Ugo. He got extremely nervous when he heard news about the attack on his master and ran straight to a commandant. I was literally turned out the place. Fine, I can live without their famous Spanish 'hospitality'.
+
 #QUEST FMQ_Lesson
 The Final Lesson
 #TEXT   1
@@ -1668,6 +1744,7 @@ It took too much time for me to sail to Martinique and Gregoire had left me with
 I didn't arrive to Lamentin Bay in time and the deal was concluded without me. Gregoire's vessel is gone and so is my share.
 #TEXT   15
 I can't say for sure that it was the toughest fight in my life. But I am alive, I have both the cash and the cargo. Another beach swimming in blood. I doubt that I would have made it without Prosper. All I know is that no one would come to help me just like that in France. Lesson learnt.
+
 #QUEST Roger_1
 Flying the Jolly Roger: The Amber Rush.
 #TEXT   1
@@ -1704,6 +1781,7 @@ I have managed to plunder several long boats but the total gain is too miserable
 A plunder turned to be fortunate, I've managed to gather @<sQty> pieces of blue amber, not to mention an ordinary amber. I should go see Tyrex to boast about this.
 #TEXT   17
 I need to find some Rosario Gusman, according to a governor, this caballero had already tried to help don Lope Montoro out. Let's not waste time then. Don Rosario does a visiting round of city guard's posts everyday from 16 to 20 pm.
+
 #QUEST Roger_2
 Flying the Jolly Roger: The Silk Road.
 #TEXT   1
@@ -1756,6 +1834,7 @@ Bald Geffrey was instructed - he is about to set sail to Jamaica with a first ba
 I reported to Marcus. I should see him in thirty days to receive my poor reward. And a new assignment.
 #TEXT   24
 I reported to Marcus. I should see him in twenty days to receive my reward. And a new assignment.
+
 #QUEST Roger_3
 Flying the Jolly Roger: Hot Sun of Maracaibo.
 #TEXT   1
@@ -1802,6 +1881,7 @@ The enemy has a serious force. I should eliminate his flagship, cause confusion 
 A fight well fought. Heading to La Vega to see Tyrex at once.
 #TEXT	21
 It's done, we've fled to the jungles. Now we should head to Guajira Bay before more Spanish will arrive.
+
 #QUEST Roger_4
 Flying the Jolly Roger: Pirate Trading for Dummies
 #TEXT	1
@@ -1842,6 +1922,7 @@ We parted our ways with Jean Picard at Gonaives Bay. He told me he is quitting a
 We wasted too much time in the jungles on a road to La Vega and didn't risk to do a robbery. Jean was very upset. I should see Marcus and report him about Ignacio Marco.
 #TEXT	19
 I have completely forgotten about Jean Picard's offer! Pity.
+
 #QUEST Roger_5
 Flying the Jolly Roger: Stones of Blood and Forest
 #TEXT	1
@@ -1886,6 +1967,7 @@ It took too much time for me to gather gifts for the red skinned couple. Leprech
 I was too slow so Leprechaun along with Jean decided they can do better without me. Probably for the best!
 #TEXT	21
 I was too slow so Leprechaun along with Jean decided they can do better without me. Probably for the best!
+
 #QUEST Roger_6
 Flying the Jolly Roger: Master of Trickery
 #TEXT	1
@@ -1912,6 +1994,7 @@ I had engaged into a tough battle against the Spanish heavy squadron and elimina
 I've managed to flee from the Spanish squadron. I should hurry and see Tyrex as soon as possible.
 #TEXT	12
 The El Casador, the flagship is eliminated. Now we can try to flee - all we need is 1000 yards distance from them.
+
 #QUEST Roger_7
 Flying the Jolly Roger: Jarl's Treasures
 #TEXT	1
@@ -1954,6 +2037,7 @@ This is it, I have found Wulfric's gord. Only three of his men survived and they
 I have found Red Wolf's treasures. Helluva money: 750 000 pesos and 900 doubloons. A third goes to Tyrex, the rest is mine by right. I will keep the secret of this island to myself. This is now my base, my gord. I can repair ships and store goods here. One day I might build and expand here.
 #TEXT	20
 I have my very own base from now on! It's coordinates are: 18 42' North, 72 9' West. Island is called Isla Mona. Rodgar Janssen will stay here overseeing the village and repairing my ships. Time to see Tyrex and report to him.
+
 #QUEST Roger_8
 Flying the Jolly Roger: Corrida
 #TEXT	1
@@ -2004,6 +2088,7 @@ Despite my fail, Tyrex wasn`t really mad at me. I should see Marcus in three wee
 I was too late — Tyrex has already gone to the raid. What a shame!
 #TEXT	24
 I failed to find the Torero in the high seas. Everything`s lost… I shout get back to Marcus.
+
 #QUEST Roger_9
 Flying the Jolly Roger: City of Blood Harvest
 #TEXT	1
@@ -2022,6 +2107,7 @@ The resistance has been terminated. Cartagena is ours! Marcus is heading to fort
 I made the Spanish to pay even more than Marcus wanted — the ransom of 350 000 pesos is acquired. Heading to the fort.
 #TEXT	8
 The gold of Cartagena has been loaded on our ships. My cut is @<sGold> pieces of gold and @<sMoney> pesos. It`s a rich prize and it`s an fair split... mostly. I didn`t really like that Marcus split the gold without me, plus he took a fucking half of it! I agree, the lead was his and he had the biggest ship… Never mind, I have a new order, I should head to Tortuga and put my coin to good waste there. Whores and rum, I will not disappoint you!
+
 #QUEST Roger_10
 Flying the Jolly Roger: Nemesis
 #TEXT	1

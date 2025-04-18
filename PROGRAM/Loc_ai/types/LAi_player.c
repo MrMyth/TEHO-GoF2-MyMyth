@@ -1,10 +1,16 @@
 /*
 Тип: игрок
+
 	Используемые шаблоны:
 		player
 		dialog
 */
+
+
+
 #define LAI_TYPE_PLAYER		"player"
+
+
 //Инициализация
 void LAi_type_player_Init(aref chr)
 {
@@ -30,6 +36,7 @@ void LAi_type_player_Init(aref chr)
 	//Время стояния с оружием
 	chr.chr_ai.type.weapontime = 0;
 }
+
 //Процессирование типа персонажа
 void LAi_type_player_CharacterUpdate(aref chr, float dltTime)
 {
@@ -100,25 +107,30 @@ void LAi_type_player_CharacterUpdate(aref chr, float dltTime)
 		chr.chr_ai.type.weapontime = "0";
 	}
 }
+
 //Загрузка персонажа в локацию
 bool LAi_type_player_CharacterLogin(aref chr)
 {
 	return true;
 }
+
 //Выгрузка персонажа из локацию
 bool LAi_type_player_CharacterLogoff(aref chr)
 {
 	return true;
 }
+
 //Завершение работы темплейта
 void LAi_type_player_TemplateComplite(aref chr, string tmpl)
 {
 	LAi_tmpl_player_InitTemplate(chr);
 }
+
 //Сообщить о желании завести диалог
 void LAi_type_player_NeedDialog(aref chr, aref by)
 {
 }
+
 //Запрос на диалог, если возвратить true то в этот момент можно начать диалог
 bool LAi_type_player_CanDialog(aref chr, aref by)
 {
@@ -129,6 +141,7 @@ bool LAi_type_player_CanDialog(aref chr, aref by)
 	//Согласимся на диалог
 	return true;
 }
+
 //Начать диалог
 void LAi_type_player_StartDialog(aref chr, aref by)
 {
@@ -137,6 +150,7 @@ void LAi_type_player_StartDialog(aref chr, aref by)
 	CharacterTurnByChr(chr, by);
 	LAi_tmpl_SetActivatedDialog(chr, by);
 }
+
 //Закончить диалог
 void LAi_type_player_EndDialog(aref chr, aref by)
 {
@@ -144,6 +158,8 @@ void LAi_type_player_EndDialog(aref chr, aref by)
 	LAi_CharacterRestoreAy(chr);
 	LAi_tmpl_player_InitTemplate(chr);
 }
+
+
 //Персонаж выстрелил и в кого-то попал
 void LAi_type_player_Fire(aref attack, aref enemy, float kDist, bool isFindedEnemy)
 {
@@ -153,6 +169,8 @@ void LAi_type_player_Fire(aref attack, aref enemy, float kDist, bool isFindedEne
 	if(iCurHP > 0 && !LAi_IsImmortal(enemy))
 		Log_Info("Health left - " + iCurHP + " of " + iMaxHP);
 }
+
+
 //Персонаж атакован
 void LAi_type_player_Attacked(aref chr, aref by)
 {

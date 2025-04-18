@@ -1,3 +1,4 @@
+
 int CreateStoryCharacters(int n)
 {
    /* ref ch;
@@ -24,6 +25,7 @@ int CreateStoryCharacters(int n)
 	ch.greeting = "Gr_Hovernor";
 	ch.notQuestLine = true; //флаг не давать задания по линейке
 	n = n + 1;
+
 	makeref(ch,Characters[n]);		// ГУБЕРНАТОР Испания
 	ch.name 	= "дон Энрике";
 	//ch.middlename = "";
@@ -47,6 +49,7 @@ int CreateStoryCharacters(int n)
 	ch.greeting = "Gr_Hovernor";
 	ch.notQuestLine = true; //флаг не давать задания по линейке
 	n = n + 1;
+
 	makeref(ch,Characters[n]);		// ГУБЕРНАТОР Франция
 	ch.name 	= "шевалье Филлип Лонвийе";
 	ch.lastname = "де Пуанси";
@@ -68,6 +71,7 @@ int CreateStoryCharacters(int n)
 	ch.greeting = "Gr_Hovernor";
 	ch.notQuestLine = true; //флаг не давать задания по линейке
 	n = n + 1;
+
 	makeref(ch,Characters[n]);		// ГУБЕРНАТОР Голландия
 	ch.name 	= "Матиас";
 	ch.lastname = "Бек";
@@ -90,6 +94,7 @@ int CreateStoryCharacters(int n)
 	ch.notMoveAble = true; //не переезжать
 	ch.notQuestLine = true; //флаг не давать задания по линейке
 	n = n + 1;
+
 //============== Генри Морган! Всем трепетать. =================
     makeref(ch,Characters[n]);
 	ch.name 	= "Генри";
@@ -144,6 +149,7 @@ int CreateStoryCharacters(int n)
 	LAi_SetHP(ch, 230.0, 230.0);
 	ch.greeting = "Gr_Morgan";
 	n = n + 1;
+
 //============== Секретать Моргана, можно расслабиться. =================
 	makeref(ch,Characters[n]);
 	ch.name 	= "Оливер";
@@ -169,5 +175,6 @@ int CreateStoryCharacters(int n)
 	LAi_group_MoveCharacter(ch, "ENGLAND_CITIZENS");
 	LAi_SetHP(ch, 100.0, 100.0);
 	n=n+1;*/
+   	
 	return n;
 }

@@ -1,14 +1,18 @@
+
 int LocationInitPanama(int n)
 {
+	
 	//////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 	// ГОРОД
 	//////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 	locations[n].id = "Panama_town";
 	locations[n].id.label = "Street";
 	locations[n].worldmap = "Panama";
+	
 	locations[n].townsack = "Panama";
 	locations[n].fastreload = "Panama";
  	locations[n].islandId = "Mein";
+	
 	locations[n].filespath.models = "locations\Town_Panama\Town\";
 	locations[n].image = "loading\Town.tga";
 	locations[n].citizens = true;
@@ -26,8 +30,10 @@ int LocationInitPanama(int n)
 	locations[n].models.always.locators = "Panama_locators";
 	locations[n].models.always.seabed = "Panama_sb";
 	locations[n].models.always.grassPatch = "Panama_grass";
+	
 	locations[n].models.always.plan = "plan1";
 	locations[n].models.always.plan.level = 9;
+
 	//WindMill Fan
 	locations[n].models.always.MillFan = "MillFan";
 	Locations[n].models.always.MillFan.locator.group = "WindMill";
@@ -35,6 +41,7 @@ int LocationInitPanama(int n)
 	Locations[n].models.always.MillFan.rotate.x = 0.0;
 	Locations[n].models.always.MillFan.rotate.y = 0.0;
 	Locations[n].models.always.MillFan.rotate.z = 0.2;	
+	
 	//Day
 	locations[n].models.day.fonar = "Panama_fd";
 	locations[n].models.day.charactersPatch = "Panama_patch_day";
@@ -46,6 +53,7 @@ int LocationInitPanama(int n)
 	locations[n].environment.weather = "true";
 	locations[n].environment.sea = "true";
 	//Reload map
+
     // --> Типовые городские локации, четкая фиксация на 10 номеров.
 	locations[n].reload.l0.name = "reload1";
 	locations[n].reload.l0.go = "Panama";
@@ -53,115 +61,137 @@ int LocationInitPanama(int n)
 	locations[n].reload.l0.autoreload = "0";
 	locations[n].reload.l0.label = "Sea";
 	locations[n].locators_radius.reload.reload1 = 0.2;
+
 	locations[n].reload.l1.name = "reload1_back";
 	locations[n].reload.l1.go = "Panama";
 	locations[n].reload.l1.emerge = "reload_1";
 	locations[n].reload.l1.autoreload = "0";
 	locations[n].reload.l1.label = "Sea";
 	locations[n].locators_radius.reload.reload1_back = 1.8;
+
 	locations[n].reload.l3.name = "reload3_back";
 	locations[n].reload.l3.go = "Panama_townhall";
 	locations[n].reload.l3.emerge = "reload1";
 	locations[n].reload.l3.autoreload = "0";
 	locations[n].reload.l3.label = "Residence";
 	locations[n].reload.l3.close_for_night = 1;
+
 	locations[n].reload.lR1.name = "reloadR1";
 	locations[n].reload.lR1.go = "Panama_TownhallRoom";
 	locations[n].reload.lR1.emerge = "reload2";
 	locations[n].reload.lR1.autoreload = "0";
 	locations[n].reload.lR1.label = "Residence";
 	locations[n].reload.lR1.close_for_night = 1;
+
 	locations[n].reload.l4.name = "reload4_back";
 	locations[n].reload.l4.go = "Panama_tavern";
 	locations[n].reload.l4.emerge = "reload1";
 	locations[n].reload.l4.autoreload = "0";
 	locations[n].reload.l4.label = "Tavern";
+
 	locations[n].reload.l6.name = "reload6_back";
 	locations[n].reload.l6.go = "Panama_store";
 	locations[n].reload.l6.emerge = "reload1";
 	locations[n].reload.l6.autoreload = "0";
 	locations[n].reload.l6.label = "Shipyard";
 	locations[n].reload.l6.close_for_night = 1;
+
 	locations[n].reload.l7.name = "reload7_back";
 	locations[n].reload.l7.go = "Panama_church";
 	locations[n].reload.l7.emerge = "reload1";
 	locations[n].reload.l7.autoreload = "0";
 	locations[n].reload.l7.label = "Church";
+
 	locations[n].reload.l8.name = "reload8_back";
 	locations[n].reload.l8.go = "Panama_bank";
 	locations[n].reload.l8.emerge = "reload1";
 	locations[n].reload.l8.autoreload = "0";
 	locations[n].reload.l8.label = "Usurer House";
 	locations[n].reload.l8.close_for_night = 1;
+
 	locations[n].reload.l9.name = "reload9_back";
 	locations[n].reload.l9.go = "Panama_brothel";
 	locations[n].reload.l9.emerge = "reload1";
 	locations[n].reload.l9.autoreload = "0";
 	locations[n].reload.l9.label = "Brothel";
+	
  	locations[n].reload.l91.name = "reload91";
 	locations[n].reload.l91.go = "Panama_SecBrRoom";
 	locations[n].reload.l91.emerge = "reload2";
 	locations[n].reload.l91.autoreload = "0";
 	locations[n].reload.l91.label = "Brothel";
+
 	locations[n].reload.l10.name = "reload10_back";
 	locations[n].reload.l10.go = "Panama_PortOffice";
 	locations[n].reload.l10.emerge = "reload1";
 	locations[n].reload.l10.autoreload = "0";
 	locations[n].reload.l10.label = "PortOffice";
 	locations[n].reload.l10.close_for_night = 1;
+
 	locations[n].reload.gate.name = "gate_back";
 	locations[n].reload.gate.go = "Panama_ExitTown";
 	locations[n].reload.gate.emerge = "reload4";
 	locations[n].reload.gate.autoreload = "0";
 	locations[n].reload.gate.label = "ExitTown";
+	
 	locations[n].reload.jail.name = "reload_jail";
 	locations[n].reload.jail.go = "Panama_prison";
 	locations[n].reload.jail.emerge = "reload1";
 	locations[n].reload.jail.autoreload = "0";
 	locations[n].reload.jail.label = "Prison";
+
     // --> Квестовые локации.
+
     // --> Комоны, загрушки. Номера с начинаются с 20.
 	locations[n].reload.l20.name = "houseS1";
 	locations[n].reload.l20.go = "CommonDoubleflourHouse_2";
 	locations[n].reload.l20.emerge = "reload1";
 	locations[n].reload.l20.autoreload = "0";
 	locations[n].reload.l20.label = "House";
+
 	locations[n].reload.l21.name = "houseF1";
 	locations[n].reload.l21.go = "CommonRoom_MH2";
 	locations[n].reload.l21.emerge = "reload1";
 	locations[n].reload.l21.autoreload = "0";
 	locations[n].reload.l21.label = "House";
+    
 	locations[n].reload.l22.name = "houseSp2";
 	locations[n].reload.l22.go = "CommonPirateHouse";
 	locations[n].reload.l22.emerge = "reload1";
 	locations[n].reload.l22.autoreload = "0";
 	locations[n].reload.l22.label = "House";
+    
 	locations[n].reload.l23.name = "houseH1";
 	locations[n].reload.l23.go = "CommonRoom_MH5";
 	locations[n].reload.l23.emerge = "reload1";
 	locations[n].reload.l23.autoreload = "0";
 	locations[n].reload.l23.label = "House";
+
 	locations[n].reload.l24.name = "houseS2";
 	locations[n].reload.l24.go = "CommonFlamHouse";
 	locations[n].reload.l24.emerge = "reload1";
 	locations[n].reload.l24.autoreload = "0";
 	locations[n].reload.l24.label = "House";
+
 	locations[n].reload.l25.name = "houseH2";
 	locations[n].reload.l25.go = "CommonRoom_MH4";
 	locations[n].reload.l25.emerge = "reload1";
 	locations[n].reload.l25.autoreload = "0";
 	locations[n].reload.l25.label = "House";
+
 	locations[n].reload.l26.name = "houseSp3";
 	locations[n].reload.l26.go = "CommonDoubleflourHouse_1";
 	locations[n].reload.l26.emerge = "reload1";
 	locations[n].reload.l26.autoreload = "0";
 	locations[n].reload.l26.label = "House";
+	
 	locations[n].reload.l27.name = "houseSp1";
 	locations[n].reload.l27.go = "CommonDoubleflourHouse_1";
 	locations[n].reload.l27.emerge = "reload1";
 	locations[n].reload.l27.autoreload = "0";
 	locations[n].reload.l27.label = "House";
 	n = n + 1;
+
 	//////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 	// ТАВЕРНА
 	//////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
@@ -200,6 +230,7 @@ int LocationInitPanama(int n)
 	locations[n].reload.l1.emerge = "reload4";
 	locations[n].reload.l1.autoreload = "0";
 	locations[n].reload.l1.label = "Street";
+
 	locations[n].reload.l2.name = "reload2_back";
 	locations[n].reload.l2.go = "Panama_tavern_upstairs";
 	locations[n].reload.l2.emerge = "reload1";
@@ -208,6 +239,7 @@ int LocationInitPanama(int n)
 	locations[n].reload.l2.disable = 1; // закроем, но связку сделаем для квестовых нужд.
 	LAi_LocationFightDisable(&locations[n], true);
 	n = n + 1;
+
 	//////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 	// КОМНАТА В ТАВЕРНЕ
 	//////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
@@ -230,6 +262,7 @@ int LocationInitPanama(int n)
 	locations[n].models.always.window = "tavern_room_window";
 	locations[n].models.always.window.tech = "LocationWindows";
 	locations[n].models.always.window.level = 65539;
+
 	locations[n].models.always.back = "..\inside_back";
 	locations[n].models.always.back.level = 65529;
 	//Day
@@ -247,6 +280,7 @@ int LocationInitPanama(int n)
 	locations[n].reload.l1.label = "Tavern";
 	locations[n].locators_radius.reload.reload1 = 0.8;
 	n = n + 1;
+
  	//////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 	// МАГАЗИН
 	//////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
@@ -268,6 +302,7 @@ int LocationInitPanama(int n)
 	locations[n].models.always.window = "store04_window";
 	locations[n].models.always.window.tech = "LocationWindows";
 	locations[n].models.always.window.level = 50;
+
 	locations[n].models.always.back = "..\inside_back";
 	//Day
 	locations[n].models.day.charactersPatch = "Store04_patch";
@@ -285,6 +320,7 @@ int LocationInitPanama(int n)
 	locations[n].locators_radius.camdetector.camera1 = 5;
 	LAi_LocationFightDisable(&locations[n], true);
 	n = n + 1;
+
  	//////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 	// РОСТОВЩИК
 	//////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
@@ -322,6 +358,7 @@ int LocationInitPanama(int n)
 	locations[n].reload.l1.emerge = "reload8";
 	locations[n].reload.l1.autoreload = "0";
 	locations[n].reload.l1.label = "Street";
+
 	locations[n].reload.l2.name = "reload2";
 	locations[n].reload.l2.go = "CommonResidence_5";
 	locations[n].reload.l2.emerge = "reload1";
@@ -329,6 +366,7 @@ int LocationInitPanama(int n)
 	locations[n].reload.l2.label = "Room";
 	LAi_LocationFightDisable(&locations[n], true);
 	n = n + 1;
+
  	//////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 	// ВЕРФЬ
 	//////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
@@ -366,6 +404,7 @@ int LocationInitPanama(int n)
 	locations[n].reload.l1.emerge = "reload5";
 	locations[n].reload.l1.autoreload = "0";
 	locations[n].reload.l1.label = "Street";
+
 	locations[n].reload.l2.name = "reload2";
 	locations[n].reload.l2.go = "CommonPackhouse_1";
 	locations[n].reload.l2.emerge = "reload1";
@@ -373,6 +412,7 @@ int LocationInitPanama(int n)
 	locations[n].reload.l2.label = "Room";
 	LAi_LocationFightDisable(&locations[n], true);
 	n = n + 1;*/
+
  	//////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 	// РЕЗИДЕНЦИЯ
 	//////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
@@ -413,12 +453,14 @@ int LocationInitPanama(int n)
 	locations[n].reload.l1.emerge = "reload3";
 	locations[n].reload.l1.autoreload = "0";
 	locations[n].reload.l1.label = "Street";
+
 	locations[n].reload.l2.name = "reload2";
 	locations[n].reload.l2.go = "Panama_TownhallRoom";
 	locations[n].reload.l2.emerge = "reload1";
 	locations[n].reload.l2.autoreload = "0";
 	locations[n].reload.l2.label = "TownhallRoom";
 	n = n + 1;
+
 	//////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 	locations[n].id = "Panama_TownhallRoom"; //кабинет
 	locations[n].id.label = "TownhallRoom";
@@ -440,6 +482,7 @@ int LocationInitPanama(int n)
 	locations[n].models.always.window = "BigHouse01_2Door_windows";
 	locations[n].models.always.window.tech = "LocationWindows";
 	locations[n].models.always.window.level = 65539;
+
 	locations[n].models.always.back = "..\inside_back";
 	locations[n].models.always.back.level = 65529;
 	//Day
@@ -455,11 +498,13 @@ int LocationInitPanama(int n)
 	locations[n].reload.l1.emerge = "reload2";
 	locations[n].reload.l1.autoreload = "0";
 	locations[n].reload.l1.label = "Townhall";
+
 	locations[n].reload.l2.name = "reload2";
 	locations[n].reload.l2.go = "Panama_town";
 	locations[n].reload.l2.emerge = "reloadR1";
 	locations[n].reload.l2.autoreload = "0";
 	locations[n].reload.l2.label = "Street";
+
 	//ключи для сундуков и предметы внутри
 	locations[n].private1.key = "keyPanama";
 	//locations[n].private1.key.delItem = true;
@@ -472,6 +517,7 @@ int LocationInitPanama(int n)
 	locations[n].private2.items.potionrum = 2;
 	locations[n].private2.items.potion4 = 3;
 	n = n + 1;
+
 	//////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 	// БОРДЕЛЬ
 	//////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
@@ -494,6 +540,7 @@ int LocationInitPanama(int n)
 	locations[n].models.always.window = "brothel_window";
 	locations[n].models.always.window.tech = "LocationWindows";
 	locations[n].models.always.window.level = 50;
+
 	locations[n].models.always.back = "..\inside_back";
 	//Day
 	locations[n].models.day.charactersPatch = "Brothel_patch";
@@ -508,12 +555,14 @@ int LocationInitPanama(int n)
 	locations[n].reload.l1.emerge = "reload9";
 	locations[n].reload.l1.autoreload = "0";
 	locations[n].reload.l1.label = "Street";
+
 	locations[n].reload.l2.name = "reload2_back";
 	locations[n].reload.l2.go = "Panama_Brothel_room";
 	locations[n].reload.l2.emerge = "reload1";
 	locations[n].reload.l2.autoreload = "0";
 	locations[n].reload.l2.label = "Brothel Room";
 	locations[n].reload.l2.disable = 1;  //закроем, но связка пусть будет для квестов.
+
 	locations[n].reload.l3.name = "reload3";
 	locations[n].reload.l3.go = "Panama_SecBrRoom";
 	locations[n].reload.l3.emerge = "reload1";
@@ -521,6 +570,7 @@ int LocationInitPanama(int n)
 	locations[n].reload.l3.label = "Brothel";
 	LAi_LocationFightDisable(&locations[n], true);
 	n = n + 1;
+
 	//////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 	// Комнаты в борделе
 	//////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
@@ -542,6 +592,7 @@ int LocationInitPanama(int n)
 	locations[n].models.always.window = "Brothel_room_window";
 	locations[n].models.always.window.tech = "LocationWindows";
 	locations[n].models.always.window.level = 50;
+
 	locations[n].models.always.back = "..\inside_back";
 	//Day
 	locations[n].models.day.charactersPatch = "Brothel_room_patch";
@@ -559,6 +610,7 @@ int LocationInitPanama(int n)
 	LAi_LocationFightDisable(&locations[n], true);
 	locations[n].locators_radius.item.item1 = 1;
 	n = n + 1;
+
 	//////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 	locations[n].id = "Panama_SecBrRoom"; // вторая комната борделя
 	locations[n].id.label = "Room";
@@ -579,6 +631,7 @@ int LocationInitPanama(int n)
 	locations[n].models.always.window = "BigHouse03_windows";
 	locations[n].models.always.window.tech = "LocationWindows";
 	locations[n].models.always.window.level = 65539;
+
 	locations[n].models.always.back = "..\inside_back";
 	locations[n].models.always.back.level = 65529;
 	//Day
@@ -596,6 +649,7 @@ int LocationInitPanama(int n)
 	locations[n].reload.l1.emerge = "reload3";
 	locations[n].reload.l1.autoreload = "0";
 	locations[n].reload.l1.label = "Brothel";
+
 	locations[n].reload.l2.name = "reload2";
 	locations[n].reload.l2.go = "Panama_town";
 	locations[n].reload.l2.emerge = "reload91";
@@ -603,6 +657,7 @@ int LocationInitPanama(int n)
 	locations[n].reload.l2.label = "Street";
 	LAi_LocationFightDisable(&locations[n], true);
 	n = n + 1;
+
 	//////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 	// ЦЕРКОВЬ
 	//////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
@@ -642,6 +697,7 @@ int LocationInitPanama(int n)
 	locations[n].reload.l1.label = "Street";
 	LAi_LocationFightDisable(&locations[n], true);
 	n = n + 1;
+
  	//////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 	// ПОРТОВЫЙ ОФИС
 	//////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
@@ -661,9 +717,11 @@ int LocationInitPanama(int n)
 	locations[n].models.always.housePortOffice = "PortOffice";
 	locations[n].models.always.housePortOffice.level = 65538;
 	locations[n].models.always.locators = "PortOffice_locators";
+
 	Locations[n].models.always.PortOffice = "PortOffice_windows";
 	Locations[n].models.always.PortOffice.tech = "LocationWindows";
 	locations[n].models.always.PortOffice.level = 65539;
+
 	locations[n].models.always.back = "..\inside_back";
 	locations[n].models.always.back.level = 65529;
 	//Day
@@ -681,6 +739,7 @@ int LocationInitPanama(int n)
 	locations[n].reload.l1.label = "Street";
 	LAi_LocationFightDisable(&locations[n], true);
 	n = n + 1;
+	
 	////////////////////// prison ////////////////////////////
 	Locations[n].id = "Panama_prison";
 	locations[n].id.label = "Prison";
@@ -713,9 +772,11 @@ int LocationInitPanama(int n)
 	Locations[n].reload.l1.go = "Panama_town";
 	Locations[n].reload.l1.emerge = "reload_jail";
 	Locations[n].reload.l1.autoreload = "0";
+	
 	locations[n].locators_radius.box.box1 = 0.8;
 	locations[n].box1.QuestClosed = true;
 	n = n + 1;
+
 	//////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 	// Выход из города
 	//////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
@@ -733,9 +794,12 @@ int LocationInitPanama(int n)
 	locations[n].filespath.models = "locations\Outside\Jungles\TownExitW";
 	Locations[n].models.always.townExit = "townExitW";
 	Locations[n].models.always.townWalls = "townExitW_stone";
+	
 	Locations[n].models.always.locators = "townExitW_locators";
+		
 	Locations[n].models.always.grassPatch = "townExitW_grass";
 	Locations[n].models.always.grassPatch.texture = "grass\grassshore.tga.tx";
+	
 	Locations[n].models.always.l1 = "plan1";
 	Locations[n].models.always.l1.level = 9;
 	Locations[n].models.always.l1.tech = "LocationModelBlend";
@@ -760,18 +824,21 @@ int LocationInitPanama(int n)
 	locations[n].reload.l1.emerge = "gate_back";
 	locations[n].reload.l1.autoreload = "0";
 	locations[n].reload.l1.label = "Panama";
+
 	locations[n].reload.l2.name = "reload1_back";
 	locations[n].reload.l2.go = "Panama_jungle_01";
 	locations[n].reload.l2.emerge = "reload1";
 	locations[n].reload.l2.autoreload = "1";
 	locations[n].reload.l2.label = "Jungle";
 	locations[n].locators_radius.reload.reload1_back = 2.0;
+
 	locations[n].reload.l3.name = "reload2_back";
 	locations[n].reload.l3.go = "Panama_jungle_03";
 	locations[n].reload.l3.emerge = "reload1";
 	locations[n].reload.l3.autoreload = "1";
 	locations[n].reload.l3.label = "Jungle";
 	locations[n].locators_radius.reload.reload2_back = 2.0;
+
 	locations[n].reload.l4.name = "reload3_back";
 	locations[n].reload.l4.go = "Panama_Fort";
 	locations[n].reload.l4.emerge = "reload1";
@@ -779,6 +846,7 @@ int LocationInitPanama(int n)
 	locations[n].reload.l4.label = "Panama Fort";
 	locations[n].locators_radius.reload.reload2_back = 2.0;
 	n = n + 1;
+
 	//////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 	// Джунгли
 	//////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
@@ -819,6 +887,7 @@ int LocationInitPanama(int n)
 	locations[n].reload.l1.autoreload = "1";
 	locations[n].reload.l1.label = "Jungle";
 	locations[n].locators_radius.reload.reload1_back = 2.0;
+
 	locations[n].reload.l2.name = "reload2_back";
 	locations[n].reload.l2.go = "Panama_jungle_02";
 	locations[n].reload.l2.emerge = "reload1";
@@ -826,6 +895,7 @@ int LocationInitPanama(int n)
 	locations[n].reload.l2.label = "Jungle";
 	locations[n].locators_radius.reload.reload2_back = 2.0;
 	n = n + 1;
+
 	//////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 	// Джунгли
 	//////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
@@ -866,12 +936,14 @@ int LocationInitPanama(int n)
 	locations[n].reload.l1.autoreload = "1";
 	locations[n].reload.l1.label = "Jungle";
 	locations[n].locators_radius.reload.reload1_back = 2.0;
+
 	locations[n].reload.l2.name = "reload2_back";
 	locations[n].reload.l2.go = "PortoBello_Jungle_01";       // на Пуэрто Бело
 	locations[n].reload.l2.emerge = "reload1";
 	locations[n].reload.l2.autoreload = "1";
 	locations[n].reload.l2.label = "Jungle";
 	locations[n].locators_radius.reload.reload2_back = 2.0;
+
 	locations[n].reload.l3.name = "reload3_back";
 	locations[n].reload.l3.go = "Panama_CaveEntrance";
 	locations[n].reload.l3.emerge = "reload2";
@@ -879,6 +951,7 @@ int LocationInitPanama(int n)
 	locations[n].reload.l3.label = "Jungle";
 	locations[n].locators_radius.reload.reload3_back = 2.0;
 	n = n + 1;
+
 	//////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 	// Вход в пещеру
 	//////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
@@ -919,6 +992,7 @@ int LocationInitPanama(int n)
 	locations[n].reload.l1.autoreload = "0";
 	locations[n].reload.l1.label = "Cave";
 	locations[n].locators_radius.reload.reload1_back = 1.3;
+
 	locations[n].reload.l2.name = "reload2_back";
 	locations[n].reload.l2.go = "Panama_jungle_02";
 	locations[n].reload.l2.emerge = "reload3";
@@ -926,6 +1000,7 @@ int LocationInitPanama(int n)
 	locations[n].reload.l2.label = "Jungle";
 	locations[n].locators_radius.reload.reload2_back = 2.0;
 	n = n + 1;
+
 	//////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 	// Пещера
 	//////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
@@ -942,6 +1017,7 @@ int LocationInitPanama(int n)
 	locations[n].filespath.models = "locations\inside\DungeonDuffer2";
 	locations[n].models.always.DungeonDuffer2 = "DungeonDuffer2";
 	locations[n].models.always.locators = "DungeonDuffer2_locators";
+
 	locations[n].locators_radius.item.duhi1 = 1.3;
 /*	
 	Locations[n].models.always.rays = "DungeonDuffer2_rays";
@@ -966,6 +1042,7 @@ int LocationInitPanama(int n)
 	locations[n].reload.l1.emerge = "reload1";
 	locations[n].locators_radius.item.berglar1 = 3.0;
 	n = n + 1;
+	
 	//////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 	// Джунгли
 	//////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
@@ -1006,6 +1083,7 @@ int LocationInitPanama(int n)
 	locations[n].reload.l1.autoreload = "1";
 	locations[n].reload.l1.label = "Jungle";
 	locations[n].locators_radius.reload.reload1_back = 2.0;
+
 	locations[n].reload.l2.name = "reload2_back";
 	locations[n].reload.l2.go = "Panama_jungle_04";
 	locations[n].reload.l2.emerge = "reload1";
@@ -1013,6 +1091,7 @@ int LocationInitPanama(int n)
 	locations[n].reload.l2.label = "Jungle";
 	locations[n].locators_radius.reload.reload2_back = 2.0;
 	n = n + 1;
+
 	//////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 	// Джунгли
 	//////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
@@ -1053,12 +1132,14 @@ int LocationInitPanama(int n)
 	locations[n].reload.l1.autoreload = "1";
 	locations[n].reload.l1.label = "Jungle";
 	locations[n].locators_radius.reload.reload1_back = 2;
+
 	locations[n].reload.l2.name = "reload2_back";
 	locations[n].reload.l2.go = "Shore63";
 	locations[n].reload.l2.emerge = "reload1";
 	locations[n].reload.l2.autoreload = "1";
 	locations[n].reload.l2.label = "Shore63";
     locations[n].locators_radius.reload.reload2_back = 2;
+
 	locations[n].reload.l3.name = "reload3_back";
 	locations[n].reload.l3.go = "Panama_jungle_05";   //на Shore48
 	locations[n].reload.l3.emerge = "reload2";
@@ -1066,6 +1147,7 @@ int LocationInitPanama(int n)
 	locations[n].reload.l3.label = "";
 	locations[n].locators_radius.reload.reload3_back = 2;
 	n = n + 1;
+	
 	//////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 	// залив Сан Мигель
 	//////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
@@ -1085,8 +1167,10 @@ int LocationInitPanama(int n)
 	locations[n].models.always.shore01.sea_reflection = 1;
 	Locations[n].models.always.shore01seabed = "shore01_sb";
 	Locations[n].models.always.locators = "shore01_locators";
+
 	Locations[n].models.always.grassPatch = "shore01_grass";
 	Locations[n].models.always.grassPatch.texture = "grass\grassshore.tga.tx";
+	
 	Locations[n].models.always.l1 = "plan1";
 	Locations[n].models.always.l1.level = 9;
 	Locations[n].models.always.l1.tech = "LocationModelBlend";
@@ -1110,6 +1194,7 @@ int LocationInitPanama(int n)
 	locations[n].reload.l1.autoreload = "1";
 	locations[n].reload.l1.label = "Jungle";
 	locations[n].locators_radius.reload.reload1_back = 2;
+
 	locations[n].reload.l2.name = "boat";
 	locations[n].reload.l2.go = "Panama";
 	locations[n].reload.l2.emerge = "reload_2";
@@ -1117,6 +1202,7 @@ int LocationInitPanama(int n)
 	locations[n].reload.l2.label = "Sea";
     locations[n].locators_radius.reload.boat = 9.0;
 	n = n + 1;
+
 	//////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 	// Джунгли
 	//////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
@@ -1157,6 +1243,7 @@ int LocationInitPanama(int n)
 	locations[n].reload.l1.autoreload = "1";
 	locations[n].reload.l1.label = "Shore48";
 	locations[n].locators_radius.reload.reload1_back = 2.0;
+
 	locations[n].reload.l2.name = "reload2_back";
 	locations[n].reload.l2.go = "Panama_jungle_04";
 	locations[n].reload.l2.emerge = "reload3_back";
@@ -1164,5 +1251,6 @@ int LocationInitPanama(int n)
 	locations[n].reload.l2.label = "Jungle";
 	locations[n].locators_radius.reload.reload2_back = 2.0;
 	n = n + 1;
+	
 	return n;
 }

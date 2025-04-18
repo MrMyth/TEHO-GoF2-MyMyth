@@ -14,6 +14,7 @@ void ProcessCommonDialogEvent(ref NPChar, aref Link, aref NextDiag)
                 link.l1.go = "Portobello_ratP_1";
             }
 		break;
+
 		case "Portobello_ratP_1":
 			dialog.text = "The important matter you say? Let's see. Well...  Francois Gontier, corvette '" + pchar.questTemp.Slavetrader.ShipName + "'... According to my notes, senor Gontier was heading to Jamaica.";
 			link.l1 = "Thank you! You've helped a lot!";
@@ -22,6 +23,10 @@ void ProcessCommonDialogEvent(ref NPChar, aref Link, aref NextDiag)
 			AddQuestRecord("Slavetrader", "21_3");
 			AddQuestUserData("Slavetrader", "sShip", pchar.questTemp.Slavetrader.ShipName);
 		break;
+		
+
 	}
 	UnloadSegment(NPChar.FileDialog2);  // если где-то выход внутри switch  по return не забыть сделать анлод
 }
+
+

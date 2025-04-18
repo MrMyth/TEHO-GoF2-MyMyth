@@ -1,30 +1,43 @@
+
+
 #include "characters\characters_reload_check.c"
+
+
 string lockedReloadLocator;
+
 string chrWaitReloadLocator;
 aref chrWaitReloadRef;
 aref chrWaitLocationRef;
 bool chrWaitReloadIsNoLink = false;
+
 void InitCharacterEvents()
 {
 	SetEventHandler("Location_CharacterEntryToLocator", "chrCharacterEntryToLocator", 0);
 	SetEventHandler("Location_CharacterInLocator", "chrCharacterInLocator", 0);
 	SetEventHandler("Location_CharacterExitFromLocator", "chrCharacterExitFromLocator", 0);
+
+
 	lockedReloadLocator = "";
 	chrWaitReloadLocator = "";
+	
 	chrWaitReloadIsNoLink = false;
 }
+
 bool AddCharacterLocatorGroup(aref chr, string group)
 {
 	bool res;
 	res = SendMessage(chr, "ls", MSG_CHARACTER_ADD_DETECTOR, group);
 	return res;
 }
+
 bool DelCharacterLocatorGroup(aref chr, string group)
 {
 	bool res;
 	res = SendMessage(chr, "ls", MSG_CHARACTER_DEL_DETECTOR, group);
 	return res;
 }
+
+
 void chrCharacterEntryToLocator()
 {
 	aref loc = GetEventData();	
@@ -36,6 +49,7 @@ void chrCharacterEntryToLocator()
 	float x, y, z;
 	ref mc = GetMainCharacter();
 	int result;
+
 	switch(group)
 	{
 	case "reload":
@@ -124,12 +138,14 @@ void chrCharacterEntryToLocator()
 		}
 		break;
 	}
+	
 	if( CheckAttribute(chr,"Quests.LocatorCheck." + group) )
 	{
 		chr.Quests.LocatorCheck.(group) = locator;
 		QuestsCheck();
 	}
 }
+
 bool chrCheckReloadLocatorSkip(aref loc,string locator)
 {
 	aref rl,at;
@@ -146,10 +162,12 @@ bool chrCheckReloadLocatorSkip(aref loc,string locator)
 	if( n<num ) return false;
 	return true;
 }
+
 bool chrCheckCamLocatorSkip(aref loc,string locator)
 {
 	aref rl,at;
 	int n,num;
+
 	makearef(rl, loc.locators.reload);
 	num = GetAttributesNum(rl);
 	for(n=0; n<num; n++)
@@ -158,6 +176,7 @@ bool chrCheckCamLocatorSkip(aref loc,string locator)
 		// есть такой локатор для перегрузки
 		if(GetAttributeName(at) == locator) { break; }
 	}
+
 	if( n<num )
 	{
 		makearef(rl, loc.reload);
@@ -171,8 +190,10 @@ bool chrCheckCamLocatorSkip(aref loc,string locator)
 		// такого локатора нет в реале - значит скипаем его
 		if( n==num ) {return true;}
 	}
+
 	return false;
 }
+
 void chrCharacterInLocator()
 {
 	if (bMainCharacterInFire)
@@ -190,6 +211,7 @@ void chrCharacterInLocator()
 	string locator = GetEventData();
 	float timeInLocator = GetEventData();
 }
+
 void chrCharacterExitFromLocator()
 {
 	aref loc = GetEventData();
@@ -197,6 +219,7 @@ void chrCharacterExitFromLocator()
 	string group = GetEventData();
 	string locator = GetEventData();
 	float timeInLocator = GetEventData();
+
 	switch(group)
 	{
 	case "reload":
@@ -231,11 +254,13 @@ void chrCharacterExitFromLocator()
 		}
 		break;
 	}
+
 	if( CheckAttribute(chr,"Quests.LocatorCheck." + group) )
 	{
 		chr.Quests.LocatorCheck.(group) = "";
 	}
 }
+
 void chrCharacterKeys()
 {
 	string controlName = GetEventData();
@@ -273,6 +298,7 @@ void chrCharacterKeys()
 	chrWaitReloadLocator = "";
 	chrWaitReloadIsNoLink = false;
 }
+
 bool chrIsNowEnableReload()
 {
     if (chrDisableReloadToLocation) return false; // boal
@@ -287,6 +313,8 @@ bool chrIsNowEnableReload()
 	if (LAi_IsFightMode(GetMainCharacter())) return false; // boal запрет выхода с саблей
 	return true;
 }
+
+
 #event_handler("EventStartQuestMovie","chrChangeReloadStateHndl");
 #event_handler("EndStartQuestMovie","chrChangeReloadStateHndl");
 #event_handler(EVENT_DIALOG_START,"chrChangeReloadStateHndl");
@@ -294,6 +322,8 @@ bool chrIsNowEnableReload()
 #event_handler("EnableReloadLocatorEvent","chrChangeReloadStateHndl");
 #event_handler("chrCheckChangeOpenStateEvent","chrCheckChangeOpenState");
 #event_handler("eGetWeaponID","funcGetWeaponID");
+
+
 string g_strRetParam;
 ref funcGetWeaponID()
 {
@@ -307,10 +337,12 @@ ref funcGetWeaponID()
 	}	
 	return &g_strRetParam;
 }
+
 void chrChangeReloadStateHndl()
 {
 	PostEvent("chrCheckChangeOpenStateEvent", 1);
 }
+
 void chrCheckChangeOpenState()
 {
 	if(chrWaitReloadLocator == "") return;
@@ -321,9 +353,11 @@ void chrCheckChangeOpenState()
 		Log_SetActiveAction("Reload");
 	}
 }
+
 bool chrIsEnableReload()
 {
 	if(DialogRun != 0) return false;
 	if(qmIsNoReload() != false) return false;
 	return true;
 }
+

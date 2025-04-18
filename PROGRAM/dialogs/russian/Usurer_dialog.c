@@ -7,21 +7,27 @@ void ProcessDialogEvent()
 	string NPC_Area, sTemp, sTitle, sDepositType1, sDepositType2;
 	int LoanSum, LoanInterest, LoanPeriod, LoanResult, iPastMonths, DepositSum, DepositInterest, DepositResult, iNum, iTemp, iTotalDublonQty;
 	int iRes, iPer, iDep;
+
 	DeleteAttribute(&Dialog,"Links");
+
 	makeref(NPChar,CharacterRef);
 	makearef(Link, Dialog.Links);
 	makearef(NextDiag, NPChar.Dialog);
+
 	string iDay, iMonth, s1;
 	iDay = environment.date.day;
 	iMonth = environment.date.month;
 	string lastspeak_date = iday + " " + iMonth;
+
 	NPC_Area = Npchar.City;
 	sDepositType1 = NPC_Area + "_Type1";
 	sDepositType2 = NPC_Area + "_Type2";
+ 
 	if(!CheckAttribute(npchar, "quest.item_date"))
 	{
 		npchar.quest.item_date = "";
 	} 
+ 
 	// вызов диалога по городам -->
     NPChar.FileDialog2 = "DIALOGS\" + LanguageGetLanguage() + "\Usurer\" + NPChar.City + "_Usurer.c";
     if (LoadSegment(NPChar.FileDialog2))
@@ -31,6 +37,7 @@ void ProcessDialogEvent()
 	}
     // вызов диалога по городам <--
 	ProcessCommonDialogRumors(NPChar, Link, NextDiag);//homo 16/06/06
+
 	if (!CheckAttribute(npchar, "quest.trade_date"))
     {
         npchar.quest.trade_date = "";
@@ -39,17 +46,20 @@ void ProcessDialogEvent()
     {
         npchar.quest.FindCitizenNoShip = 0;
     }
+
 	switch(Dialog.CurrentNode)
 	{
 		case "Exit":
 			NextDiag.CurrentNode = NextDiag.TempNode;
 			DialogExit();
 		break;
+		
 		case "fight":
 			DialogExit();
 			NextDiag.CurrentNode = NextDiag.TempNode;
 			LAi_group_Attack(NPChar, Pchar);
 		break;
+		
 		case "First time":
 			if (LAi_group_GetPlayerAlarm() > 0)
 			{
@@ -62,6 +72,8 @@ void ProcessDialogEvent()
 					break;
 				}
 				//<-- работорговец
+			
+			    
        			dialog.text = NPCharRepPhrase(pchar, 
 					LinkRandPhrase("The town is on alarm and they are searching for you everywhere! If I were you I would not stay here for long.", "All guards are looking for you. I am not an idiot and won't risk talking to you!", "Run, "+ GetSexPhrase("pal","girl") +", until soldiers will make a sieve from you..."), 
 					LinkRandPhrase("What do you want, vile creature?! Town guards are aware of your position and you won't run away, "+ GetSexPhrase("filthy pirate","") +"!", "Dirty murderer, get away from my place! Guards!", "I don't fear you, vile creature! Soon you'll be hanged in our for, you won't get away..."));
@@ -105,6 +117,7 @@ void ProcessDialogEvent()
 				break;
 			}			
 		//<-- Бремя гасконца
+			
 			//--> работорговец
 			if (pchar.questTemp.Slavetrader == "canTakeQuest" && pchar.questTemp.Slavetrader.UsurerId == npchar.id)
 			{
@@ -114,6 +127,7 @@ void ProcessDialogEvent()
 				npchar.quest.slave = "current";//чтобы камнем не долбил
 				break;
 			}	
+			
 			if (pchar.questTemp.Slavetrader == "TakeShoreCap_end" && pchar.questTemp.Slavetrader.UsurerId == npchar.id)
 			{
 				dialog.Text = "...";
@@ -143,6 +157,7 @@ void ProcessDialogEvent()
 				}
 				break;
 			}	
+			
 			if (pchar.questTemp.Slavetrader == "End_quest_bad" && pchar.questTemp.Slavetrader.UsurerId == npchar.id)
 			{
 				dialog.Text = "Hm.. Are you still alive? Strange. But it won't last long. Soldiers! Help! I've got a bandit here!";
@@ -151,6 +166,7 @@ void ProcessDialogEvent()
 				LAi_group_Attack(NPChar, Pchar);
 				break;
 			}
+			
 			if(pchar.questTemp.Slavetrader == "wait_6" && GetQuestPastDayParam("pchar.questTemp.Slavetrader_wait_6") > 6 && pchar.questTemp.Slavetrader.UsurerId == npchar.id)
 			{
 				dialog.Text = "Good day. My name is " + GetFullName(npchar) + ". How can be on service?";
@@ -167,6 +183,7 @@ void ProcessDialogEvent()
 				link.l1.go = "FMQG_x";
 				break;
 			}
+			
 			if(NPChar.quest.meeting == "0")
 			{
 				dialog.Text = LinkRandPhrase(LinkRandPhrase("Good day to you, "+GetAddress_Form(NPChar)+". How can I help you? Do I know you?","Come in, captain. My name is "+GetFullName(npchar)+" and I'm the local banker.","Nice to meet you, "+GetAddress_Form(NPChar)+"! I am a local banker and if you've got a money matter then I can help you."), LinkRandPhrase("Have we met before, captain? I am "+GetFullName(npchar)+", and I'm a local banker.","Come in, captain. My name is "+GetFullName(npchar)+" and I'm the local banker.","Greetings, "+GetAddress_Form(NPChar)+". I am "+GetFullName(npchar)+", the local banker."), LinkRandPhrase("Nice to meet you, "+GetAddress_Form(NPChar)+", I am "+GetFullName(npchar)+" just a modest banker the one in this wonderful town.","It is your call, captain! Want to borrow some coin from me or lend money on interest?","Sir captain! I'm so glad that you've visited my modest office!"));
@@ -182,6 +199,7 @@ void ProcessDialogEvent()
 				link.l1.go = "next";
 			}
 			break;
+			
 			case "next":
 			dialog.text = NPCStringReactionRepeat("How can I help you?", 
 				"What do you want this time?", 
@@ -232,6 +250,7 @@ void ProcessDialogEvent()
 				link.l10 = "I am interested to know who is the document's owner.";
 				link.l10.go = "ShipLetters_Usurer1";			
 			}
+			
 			//--> семейная реликвия // лесник переписал с нпчара на чара 
 			if (CheckAttribute(pchar, "GenQuest.Noblelombard") && npchar.city == pchar.GenQuest.Noblelombard.City && !CheckAttribute(pchar, "quest.noblelombard"))// вот тут 
 			{
@@ -244,6 +263,7 @@ void ProcessDialogEvent()
 				link.l11.go = "Noblelombard_5";			
 			}
 			//<-- семейная реликвия
+			
 			//-->работорговец
 			if (pchar.questTemp.Slavetrader == "Seek_slaves" && pchar.questTemp.Slavetrader.UsurerId == npchar.id) 
 			{
@@ -299,6 +319,7 @@ void ProcessDialogEvent()
 				link.l8.go = "Slaveshore";
 				break;
 			}			
+			
 			if(pchar.questTemp.Slavetrader == "goodbye" && pchar.questTemp.Slavetrader.UsurerId == npchar.id)
 			{
 				link.l8 = "Bad news," + npchar.name + ". I failed to get the brigantine.";
@@ -362,6 +383,7 @@ void ProcessDialogEvent()
 			//<--работорговец
 			NextDiag.TempNode = "First time";
 		break;
+
 		case "items_0":
 			dialog.text = "Want to buy some golden doubloons or chests for them? Trust me, it is a very valuable investment.";
 			link.l1 = "Yes, that's very interesting.";
@@ -371,6 +393,7 @@ void ProcessDialogEvent()
 			SetAlchemyRecipeKnown("Chest");
 			npchar.quest.meeting = "1"; 			
 		break;
+		
 		case "items_1":
 			dialog.text = "Do you want to trade for pesos or doubloons?";
 			link.l1 = "For pesos.";
@@ -378,6 +401,7 @@ void ProcessDialogEvent()
 			link.l2 = "For doubloons.";
 			link.l2.go = "items_dub";
 		break;
+		
 		case "items":
 			if (npchar.quest.item_date != lastspeak_date)
 			{
@@ -388,6 +412,7 @@ void ProcessDialogEvent()
 			DialogExit();
 			LaunchItemsTrade(NPChar, 0);
 		break;
+		
 		case "items_dub":
 			if (npchar.quest.item_date != lastspeak_date)
 			{
@@ -398,6 +423,7 @@ void ProcessDialogEvent()
 			DialogExit();
 			LaunchItemsTrade(NPChar, 1);
 		break;
+		
 		//<<<<----------генератор -"Shipping documents". ------		
 		case "ShipLetters_Usurer1":
 			pchar.questTemp.different.GiveShipLetters.speakUsurer = true;
@@ -407,6 +433,7 @@ void ProcessDialogEvent()
 			link.l2 = "As you wish. Farewell!";
 			link.l2.go = "exit";
 		break;
+		
 		case "ShipLetters_Usurer2":
 			AddMoneyToCharacter(pchar, -sti(pchar.questTemp.different.GiveShipLetters.price1));
 			pchar.questTemp.different.GiveShipLetters.speakUsurer_1 = true;
@@ -431,22 +458,26 @@ void ProcessDialogEvent()
 				link.l1.go = "ShipLetters_Usurer2_3";
 			}
 		break;
+		
 		case "ShipLetters_Usurer2_1":
 			dialog.text = "I promised you to take a look on those papers and nothing more. You can go.";
 			link.l1 = "Thanks... I guess.";
 			link.l1.go = "exit";
 		break;
+		
 		case "ShipLetters_Usurer2_2":
 			dialog.text = "It's your call. Our commandant has been showing quite an 'interest' to one person for a long time. Got any ideas already? And here we have bills of lading with no marks on them...";
 			link.l1 = "I see. My gratitude!";
 			link.l1.go = "exit";		
 		break;
+		
 		case "ShipLetters_Usurer2_3":
 			s1 = "Exactly. Our smugglers are bearing a grudge against this captain by the way.";
 			dialog.text = s1 + "And as I mentioned before, paper's owner is a man of principals and don't really like local crimes.";
 			link.l1 = "I see. My gratitude!";
 			link.l1.go = "exit";		
 		break;
+
 		case "EncGirl_4":
 			if(sti(pchar.GenQuest.EncGirl.LoverFatherAngry) == 0)
 			{
@@ -461,16 +492,19 @@ void ProcessDialogEvent()
 				link.l1.go = "EncGirl_6";			
 			}
 		break;
+		
 		case "EncGirl_5":
 			dialog.text = "I am really grateful for helping my kid and not leaving him in that troublefull situation. Please, allow me to thank you as I can. Accept this modest sum and a gift from me.";
 			link.l1 = "My thanks. It was my pleasure to help this young couple.";
 			link.l1.go = "EncGirl_5_1";
 		break;
+		
 		case "EncGirl_6":
 			dialog.text = "Thanks? For what? This blockhead was unemployed for the half of the year and he has found time to get himself a girl already! I ran my own business in his age. There is a marriageable governor's daughter and he brought this whore here, Lord, forgive me for saying it! And now he's looking for my blessing!";
 			link.l1 = "I take it that you don't believe in feelings?";
 			link.l1.go = "EncGirl_6_1";		
 		break;
+		
 		case "EncGirl_5_1":
 			AddMoneyToCharacter(pchar, sti(pchar.GenQuest.EncGirl.sum));
 			GiveItem2Character(pchar, pchar.GenQuest.EncGirl.item); 
@@ -480,11 +514,13 @@ void ProcessDialogEvent()
 			NextDiag.CurrentNode = NextDiag.TempNode;
 			DialogExit();
 		break;
+		
 		case "EncGirl_6_1":
 			dialog.text = "Feelings? What kind of feelings? You are an adult man and you are talking about these feelings too? Such a shame on you to be a pander for youth. Took away the girl from her parents and broke my son's life. You won't get any thanks from me. Farewell.";
 			link.l1 = "Bye...";
 			link.l1.go = "EncGirl_6_2";
 		break;
+		
 		case "EncGirl_6_2":
 			ChangeCharacterComplexReputation(pchar,"nobility", -1);
 			AddQuestRecord("JungleGirl", "19");
@@ -495,6 +531,7 @@ void ProcessDialogEvent()
 			NextDiag.CurrentNode = NextDiag.TempNode;
 			DialogExit();		
 		break;
+		
 ////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 /////////		Кредитный генератор Loan
 ////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
@@ -546,6 +583,7 @@ void ProcessDialogEvent()
 					Link.l8.go = "deposit_dub";				
 				}
 			}
+			
 			if(CheckAttribute(Pchar, "Quest.Deposits." + (sDepositType1)) && makeint(Pchar.Quest.Deposits.(sDepositType1)) == true)
 			{
 				iPastMonths = GetPastTime("Month", makeint(Pchar.Quest.Deposits.(sDepositType1).StartYear),makeint(Pchar.Quest.Deposits.(sDepositType1).StartMonth),makeint(Pchar.Quest.Deposits.(sDepositType1).StartDay), makefloat(Pchar.Quest.Deposits.(sDepositType1).StartTime), getDataYear(),getDataMonth(),GetDataDay(), GetTime());
@@ -560,6 +598,7 @@ void ProcessDialogEvent()
 				Link.l9 = LinkRandPhrase("I'm here to get my investment back in pesos.", "It's time to get back my silver you own.", "I need back my investment in pesos with all of interest.");
 				Link.l9.go = "Deposit_return";									
 			}
+			
 			if(CheckAttribute(Pchar, "Quest.Deposits." + (sDepositType2)) && makeint(Pchar.Quest.Deposits.(sDepositType2)) == true)
 			{
 				iPastMonths = GetPastTime("Month", makeint(Pchar.Quest.Deposits.(sDepositType2).StartYear),makeint(Pchar.Quest.Deposits.(sDepositType2).StartMonth),makeint(Pchar.Quest.Deposits.(sDepositType2).StartDay), makefloat(Pchar.Quest.Deposits.(sDepositType2).StartTime), getDataYear(),getDataMonth(),GetDataDay(), GetTime());
@@ -575,6 +614,7 @@ void ProcessDialogEvent()
 				Link.l10.go = "Deposit_return_dub";									
 			}
 /*			
+			
 */			
 			//выход
 			if (sTemp == "credit")
@@ -606,6 +646,7 @@ void ProcessDialogEvent()
 				break;
 			}
             dialog.text = "No, thanks, I'm fine.";
+
 			if (npchar.quest.trade_date != lastspeak_date || bBettaTestMode)
 			{
                 npchar.quest.trade_date = lastspeak_date;
@@ -618,6 +659,7 @@ void ProcessDialogEvent()
                 {
                     case 0 : // найти должника
                         if (CheckAttribute(pchar, "GenQuest.Loan.FindCitizen")) break;
+                        
                         if (sti(Pchar.Ship.Type) == SHIP_NOTUSED && sti(npchar.quest.FindCitizenNoShip) < 2)
                         {
                             iNum = findCitizenMan(Npchar, true);
@@ -648,8 +690,10 @@ void ProcessDialogEvent()
                 			link.l1.go = "LoanUsurer_GiveWork_1";
             			}
                     break;
+
                     case 1: // доставить сундуки
                         if (CheckAttribute(pchar, "GenQuest.LoanChest.TakeChest")) break;
+                        
                         iNum = findChestMan(Npchar);
                         if (iNum > 0)
                         {
@@ -701,6 +745,7 @@ void ProcessDialogEvent()
 			AddQuestUserData("Gen_LoanFindCitizen", "sMoney", FindRussianMoneyString(sti(pchar.GenQuest.Loan.FindCitizenMoney)));
 			AddQuestUserData("Gen_LoanFindCitizen", "sMyMoney", FindRussianMoneyString(sti(pchar.GenQuest.Loan.FindCitizenPercent)));
 		break;
+
 		case "FindCitizen_1": //проверка выполнения квеста
             dialog.text = "I am listening.";
             if (CheckAttribute(pchar, "GenQuest.Loan.FindCitizenDone"))
@@ -709,6 +754,7 @@ void ProcessDialogEvent()
                 link.l1.go = "finish_work";
                 link.l2.go = "finish_work_lie";
             }
+
             if (CheckAttribute(pchar, "GenQuest.Loan.FindCitizenFalied"))
             {
                 link.l1 = "I've found your debtor but I couldn't get money from him.";
@@ -716,7 +762,9 @@ void ProcessDialogEvent()
             }
             link.l3 = "I have decided to cancel your order of debt collecting, it is not for me.";
             link.l3.go = "finish_work_cancel";
+            
 		break; 
+
 		case "finish_work":
             if (sti(pchar.Money) >= sti(pchar.GenQuest.Loan.FindCitizenMoney))
             {
@@ -740,6 +788,7 @@ void ProcessDialogEvent()
     			link.l9.go = "exit";
     		}
 		break;
+		
 		case "finish_work_bad":
             dialog.text = "To bad! You are unable to do your job!";
 			link.l9 = "This man was really insolvent but you are right it wasn't my kind of job.";
@@ -751,6 +800,7 @@ void ProcessDialogEvent()
 			AddQuestUserData("Gen_LoanFindCitizen", "sSex", GetSexPhrase(" tried"," tried"));
             CloseQuestHeader("Gen_LoanFindCitizen");
 		break;
+		
 		case "finish_work_cancel":
             if (CheckAttribute(pchar, "GenQuest.Loan.FindCitizenDone") || CheckAttribute(pchar, "GenQuest.Loan.FindCitizenFalied"))
             {
@@ -766,6 +816,7 @@ void ProcessDialogEvent()
     			{
     			   link.l2.go = "finish_work_bad_2";
     			}
+    			
 			}
             else
             {
@@ -780,6 +831,7 @@ void ProcessDialogEvent()
                 CloseQuestHeader("Gen_LoanFindCitizen");
             }
 		break;
+		
 		case "finish_work_bad_2":
 			ChangeCharacterComplexReputation(pchar,"nobility", -3);
             dialog.text = "You've already shown me that you were a cheating type. Return me my money!";
@@ -791,11 +843,13 @@ void ProcessDialogEvent()
 				link.l2.go = "finish_work";
 			}
 		break;
+		
 		case "finish_work_lie":
             dialog.text = "Really?";
             link.l1 = "Sure!";
     		link.l1.go = "finish_work_cancel";
 		break;
+
 		case "finish_work_hanter":
             dialog.text = "Oh, you are serious, aren't you? And do you really think that I'll let it go just like that? I promise that you'll have troubles which will cost you much more than that money. Get away from here!";
             link.l1 = "Don't try to scare me. Have a nice day!";
@@ -806,6 +860,7 @@ void ProcessDialogEvent()
     		AddQuestRecord("Gen_LoanFindCitizen", "7");
             CloseQuestHeader("Gen_LoanFindCitizen");
 		break;
+
 		//============== boal доставка сундуков ===============
 		case "LoanUsurer_ChestWork_1": 
             pchar.GenQuest.LoanChest.TakeChest = true;
@@ -833,6 +888,7 @@ void ProcessDialogEvent()
 			AddQuestUserData("Gen_LoanTakeChest", "sMoney", FindRussianMoneyString(sti(pchar.GenQuest.LoanChest.Money)));
 			AddQuestUserData("Gen_LoanTakeChest", "sDay", FindRussianDaysString(sti(pchar.GenQuest.LoanChest.Time)));
 		break;
+
 		case "TakeChest_1":
             dialog.text = "I am listening.";
             link.l1 = "I have decided to cancel your order of credit delivering, it is not for me.";
@@ -840,6 +896,7 @@ void ProcessDialogEvent()
             link.l9 = "No, it's nothing.";
 			link.l9.go = "exit";
 		break;
+
 		case "TakeChestFinish_work_cancel":
             if (GetCharacterItem(pchar, "Chest") >= sti(pchar.GenQuest.LoanChest.Chest))
             {
@@ -899,6 +956,7 @@ void ProcessDialogEvent()
 			Link.l3 = "As big as possible.";
 			Link.l3.go = "Large";
 		break;
+
 		case "small":
 			Pchar.Quest.Loans.(NPC_Area).Sum = 500*makeint(Pchar.rank);
 			Dialog.snd = "voice\USDI\USDI017";
@@ -911,6 +969,7 @@ void ProcessDialogEvent()
 			Link.l3.go = "ExitDelLoan1";
 			Pchar.Quest.Loans.(NPC_Area).Interest = 22 - makeint((GetSummonSkillFromName(pchar, "Commerce")+GetSummonSkillFromName(pchar, "Leadership"))/10);
 		break;
+
 		case "Medium":
 			Pchar.Quest.Loans.(NPC_Area).Sum = 1500*makeint(Pchar.rank);
 			Dialog.snd = "voice\USDI\USDI018";
@@ -923,6 +982,7 @@ void ProcessDialogEvent()
 			Link.l3.go = "ExitDelLoan1";
 			Pchar.Quest.Loans.(NPC_Area).Interest = 27 - makeint((GetSummonSkillFromName(pchar, "Commerce")+GetSummonSkillFromName(pchar, "Leadership"))/10);
 		break;
+
 		case "Large":
 			Pchar.Quest.Loans.(NPC_Area).Sum = 4000*makeint(Pchar.rank);
 			Dialog.snd = "voice\USDI\USDI019";
@@ -935,6 +995,7 @@ void ProcessDialogEvent()
 			Link.l3.go = "ExitDelLoan1";
 			Pchar.Quest.Loans.(NPC_Area).Interest = 37 - makeint((GetSummonSkillFromName(pchar, "Commerce")+GetSummonSkillFromName(pchar, "Leadership"))/10);
 		break;
+
 		case "Interest":
 			//Pchar.Quest.Loans.(NPC_Area).Interest = 16 - makeint(Pchar.skill.commerce);
 			Dialog.snd = "voice\USDI\USDI020";
@@ -944,6 +1005,7 @@ void ProcessDialogEvent()
 			Link.l3 = "I suppose that it's better to don't run into debt for me. Farewell.";
 			Link.l3.go = "ExitDelLoan1";
 		break;
+
 		case "Period":
 			Pchar.Quest.Loans.(NPC_Area).Period = makeint(makeint(Pchar.reputation.nobility)/20) + 1;			
 			Dialog.snd = "voice\USDI\USDI021";
@@ -953,18 +1015,21 @@ void ProcessDialogEvent()
 			Link.l3 = "Excuse me, but it won't work for me. Farewell.";
 			Link.l3.go = "ExitDelLoan1";
 		break;
+
 		case "LoanGranted":
 			Dialog.snd = "voice\USDI\USDI022";
 			dialog.text = "I am sincerely glad. But let me warn you. I have been doing this for a long time and I know how to return my investments. So if you ever had any silly ideas, I suggest you leave them be\nNo offence, only warning.";
 			Link.l1 = "Hm.. Well. Farewell.";
 			Link.l1.go = "LoanGranted_exit";
 		break;
+
 		case "Loan_Remind":
 			Dialog.snd = "voice\USDI\USDI023";
 			dialog.text = "It's your choice, captain. My interest in growing and you don't have that much time.";
 			Link.l1 = "Don't worry. See you.";
 			Link.l1.go = "exit";
 		break;
+
 		case "loan_return":
 			addMoneyToCharacter(Pchar, -(makeint(Pchar.Quest.Loans.(NPC_Area).Result)));
 			// boal 27.01.2004 -->
@@ -995,12 +1060,14 @@ void ProcessDialogEvent()
 			Link.l4 = "Farewell, " + NPchar.name + ".";
 			Link.l4.go = "ExitDelLoan1";
 		break;
+
 		case "deposit":
 			dialog.text = LinkRandPhrase("I sea the wise man! What sum would you like to invest?", "Fine. Trust me, this sum will wait you here in safety and with all of interest.", "I see that you know what's really important in this life. How much would you like to invest?");
 			link.l1.edit = 3;
 			link.l1 = "";	
 			Link.l1.go = "result";
 		break;
+		
 		case "result":
 			Pchar.QuestTemp.Deposits.(sDepositType1).Interest = makeint((GetSummonSkillFromName(pchar, "Commerce")+GetSummonSkillFromName(pchar, "Leadership"))/10.0/4.0 + 0.66) + 1; 
 			Pchar.QuestTemp.Deposits.(sDepositType1).Sum = dialogEditStrings[3];
@@ -1027,6 +1094,7 @@ void ProcessDialogEvent()
 			Link.l3 = "Looks like it was a bad idea... Farewell.";
 			Link.l3.go = "Exit";
 		break;
+
 		case "Deposit_placed":
 			Dialog.snd = "voice\USDI\USDI033";
 			if ( !CheckAttribute(Pchar, "Quest.Deposits." + (sDepositType1)+".Result"))
@@ -1048,6 +1116,7 @@ void ProcessDialogEvent()
 				Link.l1.go = "Deposit_Exit";
 			}
 		break;
+		
 		case "Deposit_return":
 			Dialog.snd = "voice\USDI\USDI034";
 			dialog.text = "Considering promised interest and passed time, I owe you " + FindRussianMoneyString(sti(Pchar.Quest.Deposits.(sDepositType1).Result)) + "... Are you sure that you want to take the money?";
@@ -1058,6 +1127,7 @@ void ProcessDialogEvent()
 			Link.l3 = "You are right. I'll let it to stay with you for a while. Good day.";			
 			Link.l3.go = "Exit";		
 		break;		
+		
 		case "Deposit_exit":
 			NextDiag.CurrentNode = NextDiag.TempNode;
 			if(CheckAttribute(Pchar, "Quest.Deposits." + (sDepositType1)+ ".Rem"))
@@ -1067,6 +1137,7 @@ void ProcessDialogEvent()
 			Pchar.Quest.Deposits.(sDepositType1).Interest = sti(Pchar.QuestTemp.Deposits.(sDepositType1).Interest);
 			Pchar.Quest.Deposits.(sDepositType1).Sum      = sti(Pchar.QuestTemp.Deposits.(sDepositType1).Sum);
 			Pchar.Quest.Deposits.(sDepositType1).city 	  = NPC_Area;	
+
 			AddMoneyToCharacter(Pchar, -(makeint(Pchar.Quest.Deposits.(sDepositType1).Sum)));
 			// общий долг
 			Pchar.Quest.Deposits.(sDepositType1).Sum = sti(Pchar.Quest.Deposits.(sDepositType1).Result) + sti(Pchar.Quest.Deposits.(sDepositType1).Sum);
@@ -1077,6 +1148,7 @@ void ProcessDialogEvent()
 			Pchar.Quest.Deposits.(sDepositType1).StartTime 	= getTime();
 			DialogExit();
 		break;
+		
 		//--> Jason забор денег по частям
 		case "Deposit_return_part":
 			dialog.text = "And how much?";
@@ -1084,6 +1156,7 @@ void ProcessDialogEvent()
 			link.l1 = "";	
 			Link.l1.go = "result_part";
 		break;
+
 		case "result_part":
 			iTemp = sti(dialogEditStrings[4]);
 			if (iTemp <= 0)
@@ -1111,6 +1184,7 @@ void ProcessDialogEvent()
 			link.l1 = "Thanks!";	
 			Link.l1.go = "result_part_1";
 		break;
+		
 		case "result_part_1":
 			DialogExit();
 			iTemp = sti(dialogEditStrings[4]);
@@ -1139,6 +1213,7 @@ void ProcessDialogEvent()
 			Pchar.Quest.Deposits.(sDepositType1).StartYear 	= getDataYear();
 			Pchar.Quest.Deposits.(sDepositType1).StartTime 	= getTime();
 		break;
+		
 		case "Deposit_return_all":
 			DialogExit();
 			iTemp = sti(dialogEditStrings[4]);
@@ -1146,6 +1221,7 @@ void ProcessDialogEvent()
 			DeleteAttribute(Pchar, "quest.Deposits." + (sDepositType1));
 		break;
 		//<-- забор денег по частям		
+		
 		case "Deposit_return_1":
 			addMoneyToCharacter(Pchar, makeint(Pchar.Quest.Deposits.(sDepositType1).Result));
 			Dialog.snd = "voice\USDI\USDI035";
@@ -1154,6 +1230,7 @@ void ProcessDialogEvent()
 			Link.l1.go = "Exit";
 			DeleteAttribute(Pchar, "quest.Deposits." + (sDepositType1));
 		break;
+		
 		//  ugeen -> вклады в дублонах	
 		case "deposit_dub":
 			dialog.text = LinkRandPhrase("I see the wise man! What sum would you like to invest?", "Fine. Trust me, this sum will wait you here in safety and with all of your interest.", "I see that you know what's really important in this life. How much would like to invest?");
@@ -1161,6 +1238,7 @@ void ProcessDialogEvent()
 			link.l1 = "";	
 			Link.l1.go = "result_dub";
 		break;
+		
 		case "result_dub":		
 			iTotalDublonQty = GetCharacterItem(pchar,"gold_dublon") + CheckItemMyCabin("gold_dublon");		
 			Pchar.QuestTemp.Deposits.(sDepositType2).Interest = makeint((GetSummonSkillFromName(pchar, "Commerce")+GetSummonSkillFromName(pchar, "Leadership"))/20.0/4.0 + 0.66) + 1; 
@@ -1188,6 +1266,7 @@ void ProcessDialogEvent()
 			Link.l3 = "I suppose that it's better not to lose my gold. Farewell.";
 			Link.l3.go = "Exit";
 		break;
+		
 		case "Deposit_placed_dub":
 			Dialog.snd = "voice\USDI\USDI033";
 			if ( !CheckAttribute(Pchar, "Quest.Deposits." + (sDepositType2)+".Result"))
@@ -1209,6 +1288,7 @@ void ProcessDialogEvent()
 				Link.l1.go = "Deposit_Exit_dub";
 			}
 		break;
+		
 		case "Deposit_return_dub":
 			Dialog.snd = "voice\USDI\USDI034";
 			dialog.text = "Considering promised interest and passed time, I owe you " + FindRussianDublonString(sti(Pchar.Quest.Deposits.(sDepositType2).Result)) + "... Are you sure that you want to take the money";
@@ -1219,6 +1299,7 @@ void ProcessDialogEvent()
 			Link.l3 = "You are right. I'll let it to stay with you for a while. Good day.";			
 			Link.l3.go = "Exit";		
 		break;	
+
 		case "Deposit_exit_dub":
 			NextDiag.CurrentNode = NextDiag.TempNode;		
 			if(CheckAttribute(Pchar, "Quest.Deposits." + (sDepositType2)+ ".Rem"))
@@ -1228,6 +1309,7 @@ void ProcessDialogEvent()
 			Pchar.Quest.Deposits.(sDepositType2).Interest = sti(Pchar.QuestTemp.Deposits.(sDepositType2).Interest);
 			Pchar.Quest.Deposits.(sDepositType2).Sum      = sti(Pchar.QuestTemp.Deposits.(sDepositType2).Sum);
 			Pchar.Quest.Deposits.(sDepositType2).city 	  = NPC_Area;	
+			
 			iTemp = GetCharacterItem(pchar,"gold_dublon");
 			if(iTemp > sti(Pchar.Quest.Deposits.(sDepositType2).Sum))
 			{
@@ -1239,6 +1321,7 @@ void ProcessDialogEvent()
 				iTemp = sti(Pchar.Quest.Deposits.(sDepositType2).Sum) - iTemp;
 				GetItemMyCabin("gold_dublon", iTemp);
 			}
+						
 			// общий долг
 			Pchar.Quest.Deposits.(sDepositType2).Sum = sti(Pchar.Quest.Deposits.(sDepositType2).Result) + sti(Pchar.Quest.Deposits.(sDepositType2).Sum);
 			Pchar.Quest.Deposits.(sDepositType2) = true;
@@ -1248,6 +1331,7 @@ void ProcessDialogEvent()
 			Pchar.Quest.Deposits.(sDepositType2).StartTime 	= getTime();
 			DialogExit();
 		break;	
+		
 		//-->забор дублонов по частям
 		case "Deposit_return_dub_part":
 			dialog.text = "And how much?";
@@ -1255,6 +1339,7 @@ void ProcessDialogEvent()
 			link.l1 = "";	
 			Link.l1.go = "result_dub_part";
 		break;
+		
 		case "result_dub_part":
 			iTemp = sti(dialogEditStrings[4]);
 			if (iTemp <= 0)
@@ -1282,6 +1367,7 @@ void ProcessDialogEvent()
 			link.l1 = "Gratitude!";	
 			Link.l1.go = "result_dub_part_1";
 		break;
+		
 		case "result_dub_part_1":
 			DialogExit();
 			iTemp = sti(dialogEditStrings[4]);
@@ -1310,6 +1396,7 @@ void ProcessDialogEvent()
 			Pchar.Quest.Deposits.(sDepositType2).StartYear 	= getDataYear();
 			Pchar.Quest.Deposits.(sDepositType2).StartTime 	= getTime();
 		break;
+		
 		case "Deposit_return_dub_all":
 			DialogExit();
 			iTemp = sti(dialogEditStrings[4]);
@@ -1317,6 +1404,7 @@ void ProcessDialogEvent()
 			DeleteAttribute(Pchar, "quest.Deposits." + (sDepositType2));
 		break;
 		//<-- забор денег по частям		
+		
 		case "Deposit_return_dub_1":
 			TakeNItems(pchar,"gold_dublon", sti(Pchar.Quest.Deposits.(sDepositType2).Result));
 			Dialog.snd = "voice\USDI\USDI035";
@@ -1326,6 +1414,7 @@ void ProcessDialogEvent()
 			DeleteAttribute(Pchar, "quest.Deposits." + (sDepositType2));
 		break;
 		//  ugeen <- вклады в дублонах	
+		
 		case "DeadMotherfucker":
 			Dialog.TempNode = "DeadMotherFucker_1";
 			Dialog.snd = "voice\USDI\USDI035";
@@ -1335,6 +1424,7 @@ void ProcessDialogEvent()
 			Link.l2 = LinkRandPhrase("Let's see then! Know that you are not protected from being a corpse as well!", "A threat?! Let's see then what you're going to do...", "Money isn't the most important thing in our life. Don't grieve too much over it and kill people.");
 			Link.l2.go = "ExitDelLoan2";
 		break;
+
 		case "DeadMotherFucker_1":			
 			Dialog.snd = "voice\USDI\USDI035";
 			dialog.text = "Get out! I wish I would never see you again.";			
@@ -1355,6 +1445,7 @@ void ProcessDialogEvent()
     			Link.l2.go = "LoanRestore_2";
 			}
 		break;
+		
 		case "LoanRestore_2":
 			dialog.text = "Now you are talking! I can do business with you after all.";
 			Link.l1 = "Thanks. I won't let you down anymore.";
@@ -1366,32 +1457,39 @@ void ProcessDialogEvent()
 			ChangeCharacterHunterScore(PChar, NationShortName(sti(NPChar.nation)) + "hunter", -30);
 			ChangeCharacterComplexReputation(pchar,"nobility", 2);
 		break;
+
 		case "ExitDelLoan1":
 			NextDiag.CurrentNode = NextDiag.TempNode;
 			DialogExit();
 			DeleteAttribute(Pchar, "quest.Loans." + (NPC_Area));
 		break;
+
 		case "ExitDelLoan2":
 			NextDiag.CurrentNode = NextDiag.TempNode;
 			DialogExit();
 			DeleteAttribute(Pchar, "quest.Loans." + (NPC_Area));
 			DeleteAttribute(Pchar, "quest.Deposits." + (NPC_Area));
 		break;
+		
         case "LoanGranted_exit":
 			NextDiag.CurrentNode = NextDiag.TempNode;
+
 			AddMoneyToCharacter(Pchar, makeint(Pchar.Quest.Loans.(NPC_Area).Sum));
 			Pchar.Quest.Loans.(NPC_Area) = true;
 			Pchar.Quest.Loans.(NPC_Area).StartDay = getDataDay();
 			Pchar.Quest.Loans.(NPC_Area).StartMonth = getDataMonth();
 			Pchar.Quest.Loans.(NPC_Area).StartYear = getDataYear();
 			Pchar.Quest.Loans.(NPC_Area).StartTime = getTime();
+
 			sTemp = "Loans_" + NPC_Area;			
 			SetTimerCondition(sTemp, 0, makeint(Pchar.Quest.Loans.(NPC_Area).Period), 0, false);
 			pchar.quest.(sTemp).CityId = NPC_Area;
 			pchar.quest.(sTemp).win_condition = "LoansForAll";
+			
 			DialogExit();
 			npchar.quest.trade_date = lastspeak_date; // дыра с прокачкой была
 		break;
+        
 		//работорговец
 		int iSlaveMoney;
 		int amount;
@@ -1402,6 +1500,7 @@ void ProcessDialogEvent()
 			Link.l1 = "It will depend on what kind of 'deal' you are going to offer me.";
 			Link.l1.go = "GiveTaskSlave_1";
 		break;
+			
 		case "GiveTaskSlave_1":
 			dialog.Text = "Very well, listen then. Slavery is the most profitable business in the Caribbean now days. I am not a planter, but I have trustworthy clients\nSo, I need the following amount of slaves - " + pchar.questTemp.Slavetrader.iSlaveQuantity + " heads. I am ready to pay you 250 pesos per each. Trust me, that's a fine price. In total you will earn " + FindRussianMoneyString(sti(pchar.questTemp.Slavetrader.iSlaveMoney)) + " pesos.";
 			Link.l1 = "No, I am not a slave trader. Find yourself another assistant who doesn't care about his conscience.";
@@ -1409,6 +1508,7 @@ void ProcessDialogEvent()
 			Link.l2 = "A tempting offer. I'd like to do that. How soon you'll need the slaves?";
 			Link.l2.go = "GiveTaskSlave_2";
 		break;
+			
 		case "exit_slaves":
 			dialog.Text = "Meh, it seems that nobody is eager to move his butt and take a gold under his feet. I am disappointed. Farewell and don't even think to spread about our talk. I have a long reach...";
 			Link.l1 = "Your reach is 'dirty'... just like your tongue. Farewell.";
@@ -1416,6 +1516,7 @@ void ProcessDialogEvent()
 			pchar.questTemp.Slavetrader = "End_quest";
 			DeleteAttribute(npchar, "quest.slave");
 		break;
+			
 		case "GiveTaskSlave_2":
 			dialog.Text = "I won't limit your time but try to accomplish your mission as soon as possible. The demand for the 'black ivory' is huge. If you do your job well then I'll be giving you such kind of job very often in future.";
 			Link.l1 = "Sounds nice. Wait for the positive news.";
@@ -1428,6 +1529,7 @@ void ProcessDialogEvent()
 			AddQuestUserData("Slavetrader", "sSum", makeint(pchar.questTemp.Slavetrader.iSlaveMoney));
 			LAi_LocationDisableOfficersGen(&Locations[FindLocation(pchar.location)], true); // блокируем вход офицеров 2015
 		break;
+			
 		case "Checkslaves":
 			amount = GetSquadronGoods(Pchar, GOOD_SLAVES) - sti(pchar.questTemp.Slavetrader.iSlaveQuantity);
 			dialog.Text = "Have you succeeded in getting that shipment of 'black ivory'?";
@@ -1442,6 +1544,7 @@ void ProcessDialogEvent()
             	Link.l1.go = "Takeslaves";
 			}
 		break;
+		
 		case "Takeslaves":
 			amount = sti(pchar.questTemp.Slavetrader.iSlaveQuantity);
 			dialog.Text = "Splendid. My men will take them... Don't worry about customs and a commandant of the fort. I am running a huge operation here so don't expect any troubles and no one will accuse you in smuggling.";
@@ -1449,12 +1552,14 @@ void ProcessDialogEvent()
             Link.l1.go = "Takeslaves_1";
 			RemoveCharacterGoods(Pchar, GOOD_SLAVES, amount);
 		break;
+		
 		case "Takeslaves_1":
 			AddMoneyToCharacter(pchar, makeint(pchar.questTemp.Slavetrader.iSlaveMoney));
 			dialog.Text = "Here it is. I don't speak idly. Stay with me, captain, and soon you will own so much gold that you would need a galleon to move it!";
 			Link.l1 = "That would be great... What's next?";
             Link.l1.go = "Takeslaves_2";
 		break;
+		
 		case "Takeslaves_2":
 			dialog.Text = "Next? Come here again in three weeks. I am preparing a deal right now and it will be ready by this time.";
 			Link.l1 = "Deal. Farewell.";
@@ -1464,6 +1569,7 @@ void ProcessDialogEvent()
 			pchar.questTemp.Slavetrader = "wait";
 			SaveCurrentQuestDateParam("pchar.questTemp.Slavetrader_wait");//запомнить дату
 		break;
+		
 		case "Takeslaves_3":
 			if (4-sti(RealShips[sti(pchar.ship.type)].Class) < 0)//проверка класса корабля
 			{
@@ -1478,11 +1584,13 @@ void ProcessDialogEvent()
             	Link.l1.go = "Takeslaves_4";
 			}
 		break;
+		
 		case "Takeslaves_3_smallship":
 			pchar.questTemp.Slavetrader = "waitship";
 			NextDiag.CurrentNode = NextDiag.TempNode;
 			DialogExit();
 		break;
+		
 		case "Takeslaves_4":
 			Slavetrader_GetRandomShore();//выбор бухты
 			pchar.questTemp.Slavetrader.ShipName = GenerateRandomNameToShip(sti(NPChar.nation));
@@ -1491,6 +1599,7 @@ void ProcessDialogEvent()
 			link.l1 = "And how about the slaves? It would be such a waste to sink them!";
 			link.l1.go = "Takeslaves_5";
 		break;
+		
 		case "Takeslaves_5":
 			dialog.Text = "Why would you do that? There's no need in that. " + GetName( NAMETYPE_ORIG, pchar.questTemp.Slavetrader.UnknownPirateName, NAME_NOM) + " has a bad renown and no one will be upset about his disappearance. Board his galleon, kill the man, bring me the cargo and I will sell it. According to my sources there are about thousand and a half of slaves.";
 			Link.l1 = "Wow. That's quite the number. What about my payment?";
@@ -1498,6 +1607,7 @@ void ProcessDialogEvent()
 			Link.l2 = "No, sir, this intrigues are not for me. Why should I spoil my relations with smugglers?";
             Link.l2.go = "exit_slaves_1";
 		break;
+		
 		case "exit_slaves_1":
 			dialog.Text = "Well.. It looks like I was mistaken about you... Farewell and forget about our talk. And don't spread about what you've heard here. I own this town. And if you are planning to board the '" + pchar.questTemp.Slavetrader.ShipName + " for yourself... I will make sure that you would be hanged. Consider it.";
 			Link.l1 = "Don't worry, I won't report to the authorities and I don't need your galleon. Farewell.";
@@ -1507,6 +1617,7 @@ void ProcessDialogEvent()
 			CloseQuestHeader("Slavetrader");
 			pchar.questTemp.Slavetrader = "End_quest";//конец квеста
 		break;
+		
 		case "Takeslaves_6":
 			dialog.Text = "Considering that I've given you a location of the cargo and you don't need to sail in a search for: a prize the payment is a bit lower - 200 pesos for a head. And still that would be a great sum - three hundred thousand pesos in case of success.";
 			Link.l1 = "Deal. How much time do I have?";
@@ -1514,6 +1625,7 @@ void ProcessDialogEvent()
 			Link.l2 = "Ho-ho! You say that like those slaves would swim by themselves to my ship hoping to get inside my cargo as soon as possible! Do you really want my people to risk their heads for such a tiny sum? Increase my reward or I am out of the business.";
             Link.l2.go = "exit_slaves_1";
 		break;
+		
 		case "Takeslaves_7":
 			dialog.text = "You've got two weeks. Don't be late or he will transfer his cargo and all will be over.";
 			link.l1 = "Have to hurry then. Expect me with the good news.";
@@ -1529,16 +1641,19 @@ void ProcessDialogEvent()
 			SetFunctionTimerCondition("Slavetrader_SlaveShipsOver", 0, 0, 15, false);	//таймер
 			pchar.questTemp.Slavetrader = "wait1";	//это заглушка
 		break;
+		
 		case "Takeslaves_4_lose":
 			dialog.text = "Well, " + GetFullName(pchar) + ", what about our mission? Your cheerless face tells me that you've failed it.";
 			link.l1 = "Damn, you are right... I... well, you know... I was late. It seemed that he had already left the place, because I found no one there. Had to sail by the wind the whole way, damn it... ";
 			link.l1.go = "Takeslaves_5_lose";
 		break;
+		
 		case "Takeslaves_4_win":
 			dialog.text = "Well, " + GetFullName(pchar) + ", what's your catch for today? They told me that " + GetName( NAMETYPE_ORIG, pchar.questTemp.Slavetrader.UnknownPirateName, NAME_NOM) + " feeds the fish.";
 			link.l1 = "Yes, I was just in time! " + GetName( NAMETYPE_ORIG, pchar.questTemp.Slavetrader.UnknownPirateName, NAME_NOM) + " was transferring slaves to the smuggler's ship. Had to sink them to Davy Jones as well, so you have less competitors now.";
 			link.l1.go = "Takeslaves_5_win";
 		break;
+		
 		case "Takeslaves_5_lose":
 			dialog.text = "Yes, I guess I was wrong about you. You were late? Or were just too scared to fight? Whatever. It holds no meaning now. Get lost. I am done with you. Forget everything you saw or heard.";
 			link.l1 = "Farewell then.";
@@ -1549,6 +1664,7 @@ void ProcessDialogEvent()
 			CloseQuestHeader("Slavetrader");
 			pchar.questTemp.Slavetrader = "End_quest";
 		break;
+		
 		case "Takeslaves_5_win":
 			pchar.questTemp.Slavetrader.Nation = npchar.nation;
 			amount = 1600 - GetSquadronGoods(Pchar, GOOD_SLAVES);
@@ -1617,6 +1733,7 @@ void ProcessDialogEvent()
 			link.l1 = "As you wish, bye.";
 			link.l1.go = "node_hanter_1";
 		break;
+		
 		case "node_hanter_1":
 			dialog.text = "This ain't over. No one dares to fool me! And you will pay for your try - I'll make sure that you'll have problems. Now get out from here!";
 			link.l1 = "Fuck you and your slave trading!";
@@ -1626,11 +1743,13 @@ void ProcessDialogEvent()
 			ChangeCharacterHunterScore(pchar, NationShortName(sti(pchar.questTemp.Slavetrader.Nation)) + "hunter", 30);
 			pchar.questTemp.Slavetrader = "End_quest";
 		break;
+			
 		case "Takeslaves_6_win":
 			dialog.text = "It looks like we are doing well together, " + pchar.name + ". I am very glad. See me in a month and, perhaps, I'll find you job just for you. I have a few ideas already.";
 			link.l1 = "Sure, I'll see you in a month. My work with you is very profitable.";
 			link.l1.go = "Takeslaves_7_win";
 		break;
+			
 		case "Takeslaves_7_win":
 			dialog.text = "It will make you a fortune... One last question, " + pchar.name + ", have you found anything unusual in the galleon's cabin?";
 			link.l1 = "Nothing special really... Did I miss anything?";
@@ -1641,6 +1760,7 @@ void ProcessDialogEvent()
 				link.l2.go = "Yestatue";
 			}
 		break;
+			
 		case "Nostatue":
 			dialog.text = "Maybe. Or maybe not... It doesn't matter now. See you in a month. Farewell!";
 			link.l1 = "See you, " + npchar.name + ".";
@@ -1648,12 +1768,14 @@ void ProcessDialogEvent()
 			SaveCurrentQuestDateParam("pchar.questTemp.Slavetrader_wait_1");
 			pchar.questTemp.Slavetrader = "wait_1";
 		break;
+			
 		case "Yestatue":
 			dialog.text = "Exactly! This Medici fibula... have you ever heard about them? That means that it really was in the bastard's cabin... May I take a look?";
 			link.l1 = "Sure, take it.";
 			link.l1.go = "Yestatue_1";
 			RemoveItems(PChar, "talisman8", 1);
 		break;
+			
 		case "Yestatue_1":
 			Log_Info("You gave a talisman");
 			PlaySound("interface\important_item.wav");
@@ -1663,6 +1785,7 @@ void ProcessDialogEvent()
 			link.l2 = "No I won't sell it. The true price of this fibula can't be valued by silver or gold. I know how such things work.";
 			link.l2.go = "Nobuystatue";
 		break;
+			
 		case "Buystatue":
 			dialog.text = "Perfect! I am glad that we had a deal. Take your money. Looking forward to see you in month.";
 			link.l1 = "Farewell, " + npchar.name + ".";
@@ -1671,6 +1794,7 @@ void ProcessDialogEvent()
 			SaveCurrentQuestDateParam("pchar.questTemp.Slavetrader_wait_1");
 			pchar.questTemp.Slavetrader = "wait_1";
 		break;
+			
 		case "Nobuystatue":
 			dialog.text = "You see, I desperately need this fibula! I completely agree with you, it can't be valued with money, any dumb salesman will not even pay you five thousand for it. But it seems that you really know arcane rites, since you refuse to sell it for such sum\nI offer you an exchange, if you don't want money. I have something you might find interesting. Here, take a look. An amazing light armor! See for yourself! I offer you it in exchange for the fibula\nIt is not unique by the way. You sailor, you can always find more for yourself and I can't. Do you agree now?";
 			link.l1 = "Heh... I suppose. Give me my armor and take this fibula.";
@@ -1678,6 +1802,7 @@ void ProcessDialogEvent()
 			link.l2 = "No, this fibula has a much greater price for me than this armor. I shall keep it to myself.";
 			link.l2.go = "Nobuystatue_no";
 		break;
+			
 		case "Nobuystatue_yes":
 			dialog.text = "Splendid! Glad that we had a deal. This is your armor now. Take it. See you in a month. Farewell.";
 			link.l1 = "See you, " + npchar.name + ".";
@@ -1688,6 +1813,7 @@ void ProcessDialogEvent()
 			SaveCurrentQuestDateParam("pchar.questTemp.Slavetrader_wait_1");
 			pchar.questTemp.Slavetrader = "wait_1";
 		break;
+			
 		case "Nobuystatue_no":
 			dialog.text = "Too bad.. Really bad. Well, take it. I don't judge you. See you in month. Farewell.";
 			link.l1 = "Farewell.";
@@ -1698,21 +1824,25 @@ void ProcessDialogEvent()
 			SaveCurrentQuestDateParam("pchar.questTemp.Slavetrader_wait_1");
 			pchar.questTemp.Slavetrader = "wait_1";
 		break;
+			
 		case "EscapeSlave":
 			dialog.text = "You are just in time, " + pchar.name + ". I have a mission for you if you are ready to get it started.";
 			link.l1 = "Sure, I am ready.";
 			link.l1.go = "EscapeSlave_1";
 		break;
+			
 		case "EscapeSlave_1":
 			dialog.text = "Excellent! Now, straight to the point. Have you heard the last news?";
 			link.l1 = "Hm, what do you mean? There are a lot of news coming every day.";
 			link.l1.go = "EscapeSlave_2";
 		break;
+			
 		case "EscapeSlave_2":
 			dialog.text = "This one is all about our business. There was the greatest runaway of slaves in the New World's history! More than a thousand souls have escaped and in the meantime the have destroyed and burned a few Holland's outposts.";
 			link.l1 = "Intriguing. Go on.";
 			link.l1.go = "EscapeSlave_3";
 		break;
+			
 		case "EscapeSlave_3":
 			dialog.text = "But they didn't just run away, somehow they had managed to leave the island! No trails left. Mathias Beck is outraged. But it is not the point… Point is, that I ask you to sail to Curacao, learn what happened there, find the refugees and capture them\nAnd, of course, to save them from the hands of Dutch justice, which would be merciless to them. I will pay 300 pesos per a head - I have heard that they are very good slaves.";
 			link.l1 = "Got it. I'm heading to Curacao. Wait me with the good news.";
@@ -1720,6 +1850,7 @@ void ProcessDialogEvent()
 			link.l2 = "You know, I won't take the mission. I won't deprive that people of their freedom. They have put their life's at risk to get it. They have earned it.";
 			link.l2.go = "EscapeSlave_no";
 		break;
+			
 		case "EscapeSlave_no":
 			dialog.text = "What a pity... I didn't expect that from you... and at the most inappropriate time. I suppose, it's clear for you that our partnership is over. Farewell.";
 			link.l1 = "Have a nice day.";
@@ -1729,6 +1860,7 @@ void ProcessDialogEvent()
 			CloseQuestHeader("Slavetrader");
 			pchar.questTemp.Slavetrader = "End_quest";
 		break;
+			
 		case "EscapeSlave_yes":
 			Slavetrader_GetEscapeShore();
 			pchar.questTemp.Slavetrader.ShipName = GenerateRandomNameToShip(HOLLAND);
@@ -1737,6 +1869,7 @@ void ProcessDialogEvent()
 			AddQuestUserData("Slavetrader", "sName", GetFullName(npchar));
 			DialogExit();
 		break;
+			
 		case "Escape_slaves_win":
 			int iSlaveMoneyH;
 			string sNum;
@@ -1797,6 +1930,7 @@ void ProcessDialogEvent()
 			link.l1 = "Farewell.";
 			link.l1.go = "node_hanter_1";
 		break;
+		
 		case "Escape_slaves_win_1":
 			dialog.text = "I really appreciate you, " + pchar.name + ". Really. Come again here in a month and I will prepare a new business profitable for both of us.";
 			link.l1 = "I am also satisfied with our partnership, " + npchar.name + ". See you in a month.";
@@ -1804,11 +1938,13 @@ void ProcessDialogEvent()
 			SaveCurrentQuestDateParam("pchar.questTemp.Slavetrader_wait_2");
 			pchar.questTemp.Slavetrader = "wait_2";
 		break;
+			
 		case "Slaveshore":
 			dialog.text = "You are just in time, " + pchar.name + ". I am looking for a brave and not scrupulous sailor, ha-ha. Are you ready to handle my job?";
 			link.l1 = "I am listening.";
 			link.l1.go = "Slaveshore_1";
 		break;
+			
 		case "Slaveshore_1":
 			pchar.questTemp.Slavetrader.Island = Islands[GetCharacterCurrentIsland(pchar)].id;
 			pchar.questTemp.Slavetrader.Island.Shore = GetIslandRandomShoreId(pchar.questTemp.Slavetrader.Island);
@@ -1818,6 +1954,7 @@ void ProcessDialogEvent()
 			link.l1 = "Hm... It is not the same as the last job. You suggest me attacking a ship of your own nation!";
 			link.l1.go = "Slaveshore_2";
 		break;
+			
 		case "Slaveshore_2":
 			dialog.text = "I don get it, " + pchar.name + ". Does the ship's flag matters? Do you really care about that?";
 			link.l1 = "Do I? No, I don't give a fuck, gold doesn't have a nationality. It just was a bit unexpected...";
@@ -1825,16 +1962,19 @@ void ProcessDialogEvent()
 			link.l2 = "I do care. I don't want to have " + NationNameAblative(sti(npchar.nation)) + " in my enemies.";
 			link.l2.go = "Slaveshore_3_no";
 		break;
+			
 		case "Slaveshore_3_no":
 			dialog.text = "Are you serious? You are probably kidding me. In that case, go away. And forget about everything you saw or heard here!";
 			link.l1 = "See ya," + npchar.name + ".";
 			link.l1.go = "node_hanter_1";
 		break;
+			
 		case "Slaveshore_3_yes":
 			dialog.text = "Why are you surprised? Because I don't care about coins' nationality? I assure, that indeed, I don't. To be honest, patriotism is bad for a professional banker, unless he is eager to go broke one day\nBut enough of philosophy. Let's cut to the chase - the ship will stay here until the midnight, so you don't have much time left. Are you ready to proceed?";
 			link.l1 = "Yes, " + npchar.name + ", I am on my way.";
 			link.l1.go = "Slaveshore_4";
 		break;
+			
 		case "Slaveshore_4":
 			dialog.text = "Splendid. I have no doubt that you would succeed in our mission. Good luck." + pchar.name + ".";
 			link.l1 = "Thanks! Farewell.";
@@ -1848,21 +1988,25 @@ void ProcessDialogEvent()
 			SetFunctionTimerCondition("Slavetrader_ShoreShipsOver", 0, 0, 1, false);	//таймер
 			pchar.questTemp.Slavetrader = "wait1";	//заглушка
 		break;
+			
 		case "Pinas_lose":
 		dialog.text = "Well, " + GetFullName(pchar) + ", what about your mission? Your cheerless face tells me that you've failed it.";
 			link.l1 = "You are damn right... I.. Well... I was too late. I was in the tavern and when I shipped out there was nobody in the sea.";
 			link.l1.go = "Takeslaves_5_lose";
 		break;
+			
 		case "Slaveshore_5":
 			dialog.text = "" + pchar.name + ", please calm down. It is not my fault! Damn, I have received a report to late... That was a treachery! One of my trusted men has sold me out!";
 			link.l1 = "Fine, I see that you are speaking the truth. Your luck that captain of the pinnace told me that our 'business' was uncovered. I'd have already killed you if he hasn't blabbed out. But you, fucking sack of money, were telling me all the time that you 'own this town'!";
 			link.l1.go = "Slaveshore_6";
 		break;
+			
 		case "Slaveshore_6":
 			dialog.text = "The ambush was organized not by the local authorities, otherwise I would have known... " + pchar.name + ", it is not the right time for quarrels. Both of us are in danger, one of my ex contractors has set us up\nI managed to find out that all gathered proofs - a package of papers - are being transported to our governor-general. If he has them, we are finished! You will suffer the most, by the way.";
 			link.l1 = "Now I see what that bastard captain has meant!";
 			link.l1.go = "Slaveshore_7";
 		break;
+			
 		case "Slaveshore_7": //выбор острова, куда бригантина пойдет
 			switch (sti(NPChar.nation))
             {
@@ -1894,18 +2038,21 @@ void ProcessDialogEvent()
 			SetFunctionTimerCondition("Slavetrader_BrigOver", 0, 0, 15, false);	//таймер
 			pchar.questTemp.Slavetrader = "wait1";	//это нода ожидания, пустая
 		break;
+		
 		case "Slaveshore_8":
 			dialog.text = "Getting this package is your main priority! I won't be sure in my safety until you deliver it to me... Damn..." + pchar.name + ", looks like we've got a problem here...";
 			link.l1 = "What is it?";
 			link.l1.go = "exit";
 			AddDialogExitQuestFunction("Slavetrader_enterSoldiers");
 			break;
+			
 		case "Brig_lose":
 			dialog.text = "Damn... I was counting on you, " + pchar.name + ". Fine then. But we won't be doing any business anymore. If I am not able to bribe an investigator I'd have to run away. And I don't recommend you to stay here - soldiers may come here at any time. Farewell.";
 			link.l1 = "Farewell, " + npchar.name + ".";
 			link.l1.go = "exit";
 			pchar.questTemp.Slavetrader = "End_quest";
 		break;
+			
 		case "Letter_lose":
 			dialog.text = "They were there. Well, we can't do any business together it's not safe anymore. Farewell.";
 			link.l1 = "Farewell, " + npchar.name + ".";
@@ -1913,32 +2060,38 @@ void ProcessDialogEvent()
 			CloseQuestHeader("Slavetrader");
 			pchar.questTemp.Slavetrader = "End_quest";
 		break;
+			
 		case "Brig_win":
 			dialog.text = "Excellent! I had no doubt in you, " + pchar.name + ". Please give me that papers I am too nervous.";
 			link.l1 = "Take them.";
 			link.l1.go = "Brig_win_1";
 		break;
+			
 		case "Brig_win_1":
 			RemoveItems(PChar, "letter_1", 1);
 			dialog.text = "Good... Now I am safe. Governor-general won't know a thing and I've already solved all problems with the local authorities but it was pricey I tell you.";
 			link.l1 = "Sounds great, but don't you think that you have to compensate me my troubles because of your thoughtless actions?";
 			link.l1.go = "Brig_win_2";
 		break;
+			
 		case "Brig_win_2":
 			dialog.text = "Sure, " + pchar.name + ". Even more, I owe you a lot. And I really expect to continue our business. But I ask you to understand me - I've spent a huge sum - governor's and commandant's loyalty cost a lot. And I had to deal with that murder of the whole patrol in my bank...";
 			link.l1 = "You mean that you won't compensate my costs?!";
 			link.l1.go = "Brig_win_3";
 		break;
+			
 		case "Brig_win_3":
 			dialog.text = "Don't be that harsh, " + pchar.name + ". I really do have trouble with money now so I offer you a different kind of payment.";
 			link.l1 = "I am listening to you then.";
 			link.l1.go = "Brig_win_4";
 		break;
+			
 		case "Brig_win_4":
 			dialog.text = "Me and my companion were caught by a storm close to southern shores of Main a year ago. Our ships had been thrown at the rocks of Boca de la Sierpe bay, although they sank soon, we managed to drag our cargo ashore. Chests filled with precious stones and jewelry. The bay seemed to be quite cozy, so we hid treasures without a trouble\nWe were attacked by the Indians the next morning as soon as the storm had ended. That's how the majority of survivors died, including my companion. Me and a few sailors managed to escape on a longboat\nWe had safely reached Cumana, yet I didn't risk to return for the treasures. I am sure that local savages are still protecting their shore as well as my chests. But you can deal with that bunch of redskins\nThe jewelry you'll find there is sufficient enough to cover all your expenses, including an expedition to southern Main.";
 			link.l1 = "Hm... fine. Then I am heading to Cumana";
 			link.l1.go = "Brig_win_5";
 		break;
+			
 		case "Brig_win_5":
 			dialog.text = "You can be confident, " + pchar.name + ", that all I've said was a truth. I expect to see you in a month. I have already got in mind one more deal and I should help my staggered business. Farewell.";
 			link.l1 = "See you, " + npchar.name + ".";
@@ -1949,31 +2102,37 @@ void ProcessDialogEvent()
             Pchar.quest.Slavetrader_Bonanza.win_condition.l1.location = "Shore18";
             Pchar.quest.Slavetrader_Bonanza.function = "Slavetrader_Bonanza";
 		break;
+			
 		case "SlaveGalleon":
 			dialog.text = "And here you are, " + pchar.name + ". Nice, you are just in time as always. I'd like to give you more information about the Caribbean slave market before I'll give you a next mission. Do you know what does the word 'repartimiento' mean?";
 			link.l1 = "Hm, no, " + npchar.name + ", I don't. But I suppose that it is about taking away something from someone. Am I right?";
 			link.l1.go = "SlaveGalleon_1";
 		break;
+			
 		case "SlaveGalleon_end":
 			dialog.text = "You surprise me. What have you expected from me? Go away!";
 			link.l1 = "An illegal business is too tough for my morality. Especially the slave trade.";
 			link.l1.go = "node_hanter_1";
 		break;
+			
 		case "SlaveGalleon_1":
 			dialog.text = "You've almost got it," + pchar.name + ". Taking away someone's freedom. Repartimiento is a tricky and legal way to enslave local Indians. So to speak. Spanish authorities use it against native people of Main. Are you interested in knowing more?";
 			link.l1 = "Why not?";
 			link.l1.go = "SlaveGalleon_2";
 		break;
+			
 		case "SlaveGalleon_2":
 			dialog.text = "Representatives of the Spanish crown visits Indian settlements. Using cynic deception and direct threats, they force Indians to buy all kinds of rubbish like rotten meat and old razors at fabulous prices. On credit\nSome time later, let's say a year, representatives return and demand a payment. If Indians can't pay off, which is what usually happens, the Spanish take a part of their men capable of working, supposedly for a time and to 'teach them how to cultivate land'\nAs you understand, they never return back to their settlements. That's how our trustful redskins get to sugar plantations and redwood factories.";
 			link.l1 = "Heh... really... What Indians do about that? Do they resist when Spanish enslaves them? Or they simply don't understand that?";
 			link.l1.go = "SlaveGalleon_3";
 		break;
+			
 		case "SlaveGalleon_3":
 			dialog.text = "I guess that they always see it coming, but only a few dare to openly oppose, especially when the Spanish show a paper with a fingerprint of the chieftain. Sure, such tactics is normally applied to the peaceful tribes like Arawaks or Miskitos. Such trick will not work with warlike Itza or Akawoys\nWell, let's talk about your mission.";
 			link.l1 = "I already feel the smell of a lot of coins! I am listening to you, " + npchar.name + ".";
 			link.l1.go = "SlaveGalleon_4";
 		break;
+			
 		case "SlaveGalleon_4":
 			Slavetrader_GetHispanShore();
 			sTemp = pchar.questTemp.SlavetraderAreal.add; 
@@ -1984,6 +2143,7 @@ void ProcessDialogEvent()
 			link.l2 = "You know I don't like that repartimiento of yours. It's too cynical. I am not going to do this.";
 			link.l2.go = "SlaveGalleon_end";
 		break;
+			
 		case "SlaveGalleon_5":
 			sTemp = pchar.questTemp.SlavetraderAreal.add; 
 			dialog.text = "I wish you luck then. Know that the captain of this galleon is a very skilled and experienced war sailor. It won't be an easy fight so prepare yourself. Don't waste time, it will take fifteen or twenty days for him to reach " + sTemp + " Santiago. Try not to miss it, though this galleon is really hard to miss\nYes! Almost forgot! There are plenty of Indian trinkets on the ship, redskins often pay their debts with their cult items and craft. Bring to me anything special you find, I will pay you a great a deal for every valuable item.";
@@ -1997,6 +2157,7 @@ void ProcessDialogEvent()
 			AddQuestUserData("Slavetrader", "sShipName", pchar.questTemp.Slavetrader.ShipName);
 			AddQuestUserData("Slavetrader", "sAreal", sTemp);
 		break;
+			
 		case "Lostgalleon":
 			dialog.text = "Well, " + pchar.name + ", it was my very last hope... That's why I've offered this job to you. Nobody else but only you is able to do that... and I see that you are not too. Let's say goodbye then. After the last fail and all of that gossips, all of my clients are gone. And I am almost a bankrupt, perhaps, I have to leave this town. I don't blame you - this job was too tough. Eh... Farewell," + pchar.name + ".";
 			link.l1 = "I am so sorry, " + npchar.name + ", that got too far. I am really sorry. Perhaps, it all will settle down. Goodbye.";
@@ -2004,6 +2165,7 @@ void ProcessDialogEvent()
 			CloseQuestHeader("Slavetrader");
 			pchar.questTemp.Slavetrader = "End_quest";
 		break;
+			
 		case "Wingalleon":
 			pchar.questTemp.Slavetrader.Nation = npchar.nation;
 			amount = 3000 - GetSquadronGoods(Pchar, GOOD_SLAVES);
@@ -2022,6 +2184,7 @@ void ProcessDialogEvent()
 				link.l1.go = "Wingalleon_goaway";
 			}
 		break;
+			
 		case "Wingalleon_goaway":
 			AddQuestRecord("Slavetrader", "9");
 			CloseQuestHeader("Slavetrader");
@@ -2029,6 +2192,7 @@ void ProcessDialogEvent()
 			pchar.questTemp.Slavetrader = "End_quest";
 			DialogExit();
 		break;
+			
 		case "Wingalleon_1":
 			dialog.text = "You don't say so! I swear, I had no idea. A heavy galleon was supposed to sail, not a bloody ship of the line! It seems that they changed their plans in the last moment… But yet you have succeeded!\nI completely agree with you about the money and compensation of your expenses, thing is that I don't possess such sum right now. You know about my recent troubles... But don't go angry, " + pchar.name + ", for God's sake. You give me the cargo and I'll sell it, my client is already waiting\nI will have the whole sum in five day, so you will get what you deserve. You may rely upon me. Here, take all cash I have right now.";
 			link.l1 = "Hm... I expected to receive the money now. I wish you knew what kind of fight I had to go through! Ah, whatever… I will sympathize with you. But keep in mind that if you try to screw me, I will find you even in Europe!";
@@ -2036,6 +2200,7 @@ void ProcessDialogEvent()
 			link.l2 = "You know, " + npchar.name + ", screw you! It wasn't a deal. You can't even imagine what kind of fight I had to handle. I take all of slaves to myself and sell them without your agency.";
 			link.l2.go = "Wingalleon_no";
 		break;
+			
 		case "Wingalleon_no":
 			dialog.text = "So, now you are talking! Looks like unsuspecting " + npchar.name + " was only a cow to milk, a simple delay is enough for you to screw me and to start an operation on your own. It seems that you have forgotten that I was the one who gave you the job and the tipping off about the booty\nVery well… I swear, I will spend every coin I have left to destroy you, to kill you! The whole fleet of " + NationNameGenitive(sti(npchar.nation)) + " will be hunting you! Get out of my sight!";
 			link.l1 = "Don't dare to scare me, an empty money chest. I will sink all your fleet and feed crabs with it.";
@@ -2045,11 +2210,13 @@ void ProcessDialogEvent()
 			ChangeCharacterHunterScore(pchar, NationShortName(sti(pchar.questTemp.Slavetrader.Nation)) + "hunter", 70);
 			pchar.questTemp.Slavetrader = "End_quest";
 		break;
+			
 		case "Wingalleon_yes":
 			dialog.text = "Thank you for your understanding, " + pchar.name + ". I promise that everything will be fine, no need in your threats\nTake this as an advance. Fifteen chests. Five of them will serve as a compensation of moral damage. Come see me in five days to get the rest.\nDon't forget to bring all Indian items you have found on the ship... if you found them at all, of course. I have nothing to pay you for them anyway.";
 			link.l1 = "In five days," + npchar.name + ". In five days...";
 			link.l1.go = "Wingalleon_yes_1";
 		break;
+			
 		case "Wingalleon_yes_1":
 			TakeNItems(pchar, "chest", 15);
 			Log_Info("You've received credit chests");
@@ -2063,17 +2230,20 @@ void ProcessDialogEvent()
 			RemoveCharacterGoods(Pchar, GOOD_SLAVES, sTemp);
 			DialogExit();
 		break;
+	
 		case "FindRat":
 			dialog.text = "As I promised, " + pchar.name + ", I am ready to pay you. Slaves are sold, customer is happy and so are we. After deduction of an advance your reward is" + FindRussianMoneyString(sti(pchar.questTemp.Slavetrader.iSlaveMoney)) + ". Please take your money.";
 			link.l1 = "Splendid, " + npchar.name + ". It's good to deal with a man who can keep his word...";
 			link.l1.go = "FindRat_1";
 		break;
+			
 		case "FindRat_1":
 			AddMoneyToCharacter(pchar, makeint(pchar.questTemp.Slavetrader.iSlaveMoney));
 			dialog.text = "You always can trust in my word, " + pchar.name + ". I have never given you any reason to doubt me. Partners must be honest with each other, that's the key of business\nLet's talk about Indian artifacts now. Show me what you have, don't make such collector like myself waiting.";
 			link.l1 = "Hm... Take a look.";
 			link.l1.go = "FindRat_2";
 		break;
+			
 		case "FindRat_2":
 			if (CheckCharacterItem(pchar, "jewelry30"))
 			{
@@ -2092,6 +2262,7 @@ void ProcessDialogEvent()
 				link.l1.go = "BG_PF";
 			}
 		break;
+			
 		case "BG_money":
 			dialog.text = "Splendid. Take your 30 000 and this Indian knife is mine now.";
 			link.l1 = "Good. And if that's all in what are you interested...";
@@ -2101,6 +2272,7 @@ void ProcessDialogEvent()
 			PlaySound("interface\important_item.wav");
 			RemoveItems(PChar, "jewelry30", 1);
 		break;
+			
 		case "BG_change":
 			dialog.text = "Splendid! Here is your amulet and this Indian knife is mine now.";
 			link.l1 = "Good. And if that's all in what are you interested...";
@@ -2111,16 +2283,19 @@ void ProcessDialogEvent()
 			RemoveItems(PChar, "jewelry30", 1);
 			TakeNItems(pchar, "obereg_9", 1);
 		break;
+			
 		case "BG_no":
 			dialog.text = "Whatever. But it's such a pity anyway...";
 			link.l1 = "Good. And if that's all in what are you interested...";
 			link.l1.go = "BG_PF";
 		break;
+			
 		case "BG_PF":
 			dialog.text = "Wait! Let me take a look again...";
 			link.l1 = "Sure. Come take a look and choose what you want.";
 			link.l1.go = "PF_check";
 		break;
+			
 		case "PF_check":
 			if (CheckCharacterItem(pchar, "mineral31"))
 			{
@@ -2139,6 +2314,7 @@ void ProcessDialogEvent()
 				link.l1.go = "FindRat_3";
 			}
 		break;
+			
 		case "PF_money":
 			dialog.text = "Excellent! Here are your 20 000 pesos and this bone is mine now.";
 			link.l1 = "Nice. I feel good for our deal.";
@@ -2148,6 +2324,7 @@ void ProcessDialogEvent()
 			PlaySound("interface\important_item.wav");
 			RemoveItems(PChar, "mineral31", 1);
 		break;
+			
 		case "PF_change":
 			dialog.text = "Splendid! Here is your amulet and this bone is mine now.";
 			link.l1 = "Nice. I feel good for our deal.";
@@ -2158,36 +2335,43 @@ void ProcessDialogEvent()
 			RemoveItems(PChar, "mineral31", 1);
 			TakeNItems(pchar, "amulet_11", 1);
 		break;
+			
 		case "PF_no":
 			dialog.text = "Whatever. But it's such a pity anyway...";
 			link.l1 = "I need that bone for myself, I am so sorry.";
 			link.l1.go = "FindRat_3";
 		break;
+			
 		case "FindRat_3":
 			dialog.text = "Well... by boarding the galleon, oh I am sorry, the battleship you have saved me. I really appreciate our partnership, " + pchar.name + ". You are my best agent.";
 			link.l1 = "I am flattered. You are quite overestimating my accomplishments...";
 			link.l1.go = "FindRat_4";
 		break;
+			
 		case "FindRat_4":
 			dialog.text = "I am completely serious. And I am going to ask you to accomplish another mission because of your extraordinary skills and because I trust you.";
 			link.l1 = "Heh! Surprising! I am listening. Where is another galleon with salves?";
 			link.l1.go = "FindRat_5";
 		break;
+			
 		case "FindRat_5":
 			dialog.text = "The matter is not about slaves this time. Surprised? I'll pay you well for the mission... Very well.";
 			link.l1 = "Get straight to business.";
 			link.l1.go = "FindRat_6";
 		break;
+			
 		case "FindRat_6":
 			dialog.text = "This business is connected to the recent events you also had been a part of… So, as you may know, I do a quite illegal business - a slave trading. You may also know that I hire privateers like you for all sorts of assignments\nOne of my men betrayed me not long ago for unknown reasons. He gathered proofs and made a report to the authorities. You had a pleasure to see the consequences with your very own eyes. A ship with soldiers had arrived here... you know the rest\nIt took quite an effort from me to settle the situation. As you understand, I can not let this treachery to go unanswered. Besides, I can not live and work peacefully knowing that the rat is still alive. I have sent bounty hunters but there is no result yet\nI ask you to personally deal with this matter. All the more so, his actions affected you too.";
 			link.l1 = "Hm... this bastard must be hanged on an yardarm! Tell me more about him and my payment for the job of course.";
 			link.l1.go = "FindRat_7";
 		break;
+			
 		case "FindRat_7":
 			dialog.text = "Don't worry about that. I will pay a great deal for his elimination and I am talking not just about the money. I won't spare the best items of my collections. Let's talk about the man. His name is Francois Gontier\nHe is aware about my hunt, so he sold his frigate in order to hide his trails. My colleagues told me that he was seen in Panama. I believe that you should start your searches from there.";
 			link.l1 = "Well, I am on my way then.";
 			link.l1.go = "FindRat_8";
 		break;
+			
 		case "FindRat_8":
 			dialog.text = "I wish you luck then. Know that this Gontier is a very experienced sailor and he has a crew of the reckless cut-throats. He has got nothing to loose so he'll be fighting in a very desperate way.";
 			link.l1 = "Not got scared of people like him but I'll consider what you've said. Farewell and be sure that I will get him even in the hell.";
@@ -2197,16 +2381,19 @@ void ProcessDialogEvent()
 			AddQuestUserData("Slavetrader", "sName", GetFullName(npchar));
 			pchar.questTemp.Slavetrader = "FindRatPanama";
 		break;
+			
 		case "Wincorvette":
 			dialog.text = "Splendid! Now he can write his reports to the jellyfish. No one dares to mess with me. My thanks to you, " + pchar.name + ", you are an indispensable man.";
 			link.l1 = "Thank you, " + npchar.name + ", for such a positive rating of my actions. What about my payment?";
 			link.l1.go = "Wincorvette_1";
 		break;
+			
 		case "Wincorvette_1":
 			dialog.text = "Sure. I'd pay the right price for such a difficult job. First, I present you this excellent spyglass.";
 			link.l1 = "Wow, such a gift!";
 			link.l1.go = "Wincorvette_2";
 		break;
+			
 		case "Wincorvette_2":
 			dialog.text = "Besides, here are 100 000 pesos as your primary payment and 50 000 as a compensation for your own costs.";
 			link.l1 = "Thanks, " + npchar.name + ". I say it again that it's a pleasure to deal with you.";
@@ -2215,6 +2402,7 @@ void ProcessDialogEvent()
 			PlaySound("interface\important_item.wav");
 			TakeNItems(pchar, "spyglass4", 1);
 		break;
+			
 		case "Wincorvette_3":
 			dialog.text = "I will be waiting for you in a month just as always. It's a very big deal on the row and you'll need a well equipped squadron. I ask to understand that and prepare yourself well. If my plan works, we will be reach.";
 			link.l1 = "Good," + npchar.name + ". I'll come here when I'd be prepared.";
@@ -2225,6 +2413,7 @@ void ProcessDialogEvent()
 			SaveCurrentQuestDateParam("pchar.questTemp.Slavetrader_wait_5");
 			pchar.questTemp.Slavetrader = "wait_5";
 		break;
+			
 		case "Lostcorvette":
 			dialog.text = "Pity, what a shame... Well, don't feel upset, you are not the first man that scum fooled. I will nail him one day anyway\nAs for you, come and see me in a month. This is big, so gather a well equipped and armed squadron. Please, be serious about it and do you your best to prepare. If my plan works, we will be reach.";
 			link.l1 = "Good, " + npchar.name + ". I'll come here when I'd be prepared.";
@@ -2235,16 +2424,19 @@ void ProcessDialogEvent()
 			SaveCurrentQuestDateParam("pchar.questTemp.Slavetrader_wait_5");
 			pchar.questTemp.Slavetrader = "wait_5";
 		break;
+		
 		case "Havana_fort":
 			dialog.text = "You are just in time, " + pchar.name + "! I was close to start worrying, I was going to send a man to find you\nLet's get started! Your mission is really big and risky now, but the reward is adequate. You will receive at least a million pesos after the job is done.";
 			link.l1 = "Now you are talking! I am listening, " + npchar.name + ".";
 			link.l1.go = "Havana_fort_1";
 		break;
+		
 		case "Havana_fort_1":
 			dialog.text = "The enslaved Indians were being moved by a small bunches to Havana from over the whole Main, also a few galleons came from Africa and were unloaded. By now there are almost a five thousand slaves behind the high walls of Havana's fort.";
 			link.l1 = "I've got a feeling that the deal is about storming the Havana.";
 			link.l1.go = "Havana_fort_2";
 		break;
+		
 		case "Havana_fort_2":
 			dialog.text = "You've got a right feeling, " + pchar.name + ". That is exactly what I want to ask you to do. You and only you. I doubt, that anyone else of my agents is capable of doing this\nI believe that you are in?";
 			link.l1 = "To be honest, " + npchar.name + ", I am a bit dumbfounded now. I had no idea that your activity is so... large-scaled. Sure, I am in. " + RandSwear() + "";
@@ -2252,6 +2444,7 @@ void ProcessDialogEvent()
 			link.l2 = "You know what, " + npchar.name + ", this is going too far. I had enough of that surprises of yours. Next time your greed will want me to declare a war to Spain. If you really need that slaves then storm Havana by yourself.";
 			link.l2.go = "Havana_fort_not";
 		break;
+		
 		case "Havana_fort_not":
 			dialog.text = "Didn't expect that from you... Damn, what do I suppose to tell my customer? Fine. It's your call and I have to find a new partner. Farewell, " + pchar.name + ". And I will not use your services in the future. Remember that you have dropped the deal which could make your progenies reach to the seventh generation.";
 			link.l1 = "You can't get all money in the world. You bite off more than you can chew. Farewell, " + npchar.name + ".";
@@ -2261,16 +2454,19 @@ void ProcessDialogEvent()
 			CloseQuestHeader("Slavetrader");
 			pchar.questTemp.Slavetrader = "End_quest";
 		break;
+		
 		case "Havana_fort_3":
 			dialog.text = "I knew that you'd agree. Now, hear the details. Havana's fort has always been a hard target but it is even harder now\nTwo ships of the line are guarding the shores of the island and you must deal with them first before you storm the fort…";
 			link.l1 = "I see. It won't be the first time I fight battleships. How much time do I have?";
 			link.l1.go = "Havana_fort_4";
 		break;
+		
 		case "Havana_fort_4":
 			dialog.text = "Not much. Three weeks not more and after that the slaves will be moved to Spanish outposts of Cuba. You have to hurry. ";
 			link.l1 = "Let's don't waste our time than. I am on my way!";
 			link.l1.go = "Havana_fort_5";
 		break;
+		
 		case "Havana_fort_5":
 			dialog.text = "One moment!" + pchar.name + ", you and I never had any misunderstandings and disagreements. Nevertheless, I want you to know what is going on here. I count on you, and the client counts on me\mWe have invested a lot of effort and money in this operation. Every single slave, all five thousands must be delivered to me\nOtherwise, we will take very radical measures against you. No offence, this only a notification. ";
 			link.l1 = "Don't worry, " + npchar.name + ", I understand what business is. Farewell.";
@@ -2285,6 +2481,7 @@ void ProcessDialogEvent()
 			characters[GetCharacterIndex("Havana_Mayor")].dialog.captureNode = "Slavetrader_HavanaAttack"; //капитулянтская нода мэра
 			pchar.questTemp.Slavetrader = "wait1";
 		break;
+		
 		case "Win_Havana_Fort":
 			pchar.quest.Slavetrader_FiveTSlavesOver.over = "yes";
 			amount = 5000 - GetSquadronGoods(Pchar, GOOD_SLAVES);
@@ -2307,6 +2504,7 @@ void ProcessDialogEvent()
 			link.l1 = "Hm.. Well, you see...";
 			link.l1.go = "Havana_Fort_no";
 		break;
+		
 		case "Havana_Fort_no":
 			dialog.text = "Fine. I don't need your explanations. We had a deal and I give you one week to get not less than a five thousand slaves. You would have a lot of problems otherwise.";
 			link.l1 = "Fine, fine, just relax, I'll get them for you.";
@@ -2315,17 +2513,20 @@ void ProcessDialogEvent()
 			SetFunctionTimerCondition("Slavetrader_HavanaSeekOver", 0, 0, 7, false);
 			pchar.questTemp.Slavetrader = "Havana_seekslaves";
 		break;
+		
 		case "Havana_Fort_yes":
 			dialog.text = "Splendid! You have accomplished my task just as always. I am very pleased by you.";
 			link.l1 = "So am I... But I would be even more pleased when I'll receive my money for the cargo.";
 			link.l1.go = "Havana_Fort_yes_1";
 		break;
+		
 		case "Havana_Fort_yesA":
 		dialog.text = "I am very glad for that. You were late but you've accomplished my task in the most excellent way.";
 			link.l1 = "And now I want to get money for the cargo.";
 			link.l1.go = "Havana_Fort_yes_1";
 			pchar.quest.Slavetrader_HavanaSeekOver.over = "yes";
 		break;
+		
 		case "Havana_Fort_yes_1":
 			sTemp = GetSquadronGoods(Pchar, GOOD_SLAVES);
 			iSlaveMoney = makeint(sTemp)*200;
@@ -2334,21 +2535,25 @@ void ProcessDialogEvent()
 			link.l1.go = "Havana_Fort_yes_2";
 			RemoveCharacterGoods(Pchar, GOOD_SLAVES, sTemp);
 		break;
+		
 		case "Havana_Fort_yes_2":
 			dialog.text = "" + pchar.name + ", please, don't. We are partners and there is no room for cheating and distrust between us. I promised you a lot of coins and you've got them. I promised you interesting tasks and you've got them too. I have always been compensating your costs even in the darkest days for my business. Haven't I ever keep my word?";
 			link.l1 = "Hm.. No.";
 			link.l1.go = "Havana_Fort_yes_3";
 		break;
+		
 		case "Havana_Fort_yes_3":
 			dialog.text = "See now..." + pchar.name + ", you are the best agent of mine and I am counting to do business with you in the future. ";
 			link.l1 = "Fine, " + npchar.name + ". But you have to understand me as well - a million pesos is a huge sum.";
 			link.l1.go = "Havana_Fort_yes_4";
 		break;
+		
 		case "Havana_Fort_yes_4":
 			dialog.text = "I understand you very well but I have to sell that slaves at first and only then I'll receive money.";
 			link.l1 = "Fine. I think we understood each other.";
 			link.l1.go = "Havana_Fort_yes_5";
 		break;
+		
 		case "Havana_Fort_yes_5":
 			dialog.text = "Splendid. See you in a week. And now I have to prepare the trade with my client.";
 			link.l1 = "I won't bother you then. See you in a week, " + npchar.name + ".";
@@ -2361,31 +2566,37 @@ void ProcessDialogEvent()
 			pchar.questTemp.Slavetrader.Cityname = npchar.city +"_town";
 			LocatorReloadEnterDisable(npchar.city +"_town", "reload8_back", true);//чтобы не ходил неделю сюда вообще
 		break;
+
 		case "Usurer_Escape":
 			dialog.text = "What am I doing here? Well... it's my bank. I bought it two days ago. You are my first client and I can offer you a very tempting credit terms...";
 			link.l1 = "Fuck that credits! Where is " + pchar.questTemp.Slavetrader.Name + "?";
 			link.l1.go = "Usurer_Escape_1";
 		break;
+
 		case "Usurer_Escape_1":
 			dialog.text = "Calm down, please! He ran away long time ago.";
 			link.l1 = "How?";
 			link.l1.go = "Usurer_Escape_2";
 		break;
+		
 		case "Usurer_Escape_2":
 			dialog.text = "Don't you know? He disappeared a week ago. Turned out that he has taken all his client's investments. They say that even the governor was suffered. This house was left and I bought it from the colony.";
 			link.l1 = "Disappeared? How?";
 			link.l1.go = "Usurer_Escape_3";
 		break;
+		
 		case "Usurer_Escape_3":
 			dialog.text = "I've heard that he has run away from our colony... I take it that he owes you too. A lot?";
 			link.l1 = "More than a million! But I'll get this rat anyway! Where has he gone? Name of his ship?";
 			link.l1.go = "Usurer_Escape_4";
 		break;
+		
 		case "Usurer_Escape_4":
 			dialog.text = "Nobody is aware. Seriously. He has just gone. The ship named 'Mauritius' or 'Maurdius' had been sailing away that day, perhaps, he used it to escape.";
 			link.l1 = "Fuck! And I've trusted that bastard! He had a smell of traitor! And I was foolish enough to believe that we are true partners! But I will make him regret one day… Fine," + npchar.name + ", I apologize for my behavior… Farewell.";
 			link.l1.go = "Usurer_Escape_5";
 		break;
+		
 		case "Usurer_Escape_5":
 			string sColony;
 			sColony = npchar.city;
@@ -2400,6 +2611,7 @@ void ProcessDialogEvent()
 			LAi_LocationDisableOfficersGen(&Locations[FindLocation(pchar.location)], false); // разблокируем вход офицеров 2015
 		break;
 	//<--работорговец	
+
 	//--> семейная реликвия
 		case "Noblelombard":
 			dialog.text = "Oh really? It seems that he doesn't want to talk to me by himself.... Fine, let's discuss the matter with you. "+pchar.GenQuest.Noblelombard.Name+" owes me "+FindRussianMoneyString(sti(pchar.GenQuest.Noblelombard.Summ))+": "+FindRussianMoneyString(sti(pchar.GenQuest.Noblelombard.Money))+" and also my interest - "+FindRussianMoneyString(sti(pchar.GenQuest.Noblelombard.Percent))+" for three month. If I don't see money in the nearest day then I will sell his relic and I don't care about its value to him. Business is a business.";
@@ -2422,6 +2634,7 @@ void ProcessDialogEvent()
 			link.l4.go = "Noblelombard_4";
 			pchar.quest.noblelombard = "true";//лесник с нпчара на пчара
 		break;
+		
 		case "Noblelombard_1":
 			dialog.text = "Excellent! It all turned well, I got my money and "+pchar.GenQuest.Noblelombard.Name+" will get back the relic.";
 			link.l1 = "Nice doing business with you, "+npchar.name+"! Farewell now.";
@@ -2430,7 +2643,9 @@ void ProcessDialogEvent()
 			AddMoneyToCharacter(pchar, -sti(pchar.GenQuest.Noblelombard.Summ));
 			pchar.GenQuest.Noblelombard = "full";
 			AddCharacterExpToSkill(pchar, "Leadership", 150);
+	
 		break;
+		
 		case "Noblelombard_2":
 			if(sti(pchar.GenQuest.Noblelombard.Chance) < 7)
 			{
@@ -2442,6 +2657,7 @@ void ProcessDialogEvent()
 				pchar.GenQuest.Noblelombard = "maxpercent";
 				AddCharacterExpToSkill(pchar, "Leadership", 50);
 				AddCharacterExpToSkill(pchar, "Fortune", 70);
+			
 			}
 			else
 			{
@@ -2449,8 +2665,10 @@ void ProcessDialogEvent()
 				link.l1 = "Hm... fine. Too bad that you don't want to compromise.";
 				link.l1.go = "Noblelombard_4";
 				AddCharacterExpToSkill(pchar, "Fortune", 30);
+			
 			}
 		break;
+		
 		case "Noblelombard_3":
 			if(sti(pchar.GenQuest.Noblelombard.Chance) < 3)
 			{
@@ -2469,12 +2687,15 @@ void ProcessDialogEvent()
 				link.l1 = "Hm... fine. Too bad that you don't want to compromise.";
 				link.l1.go = "Noblelombard_4";
 				AddCharacterExpToSkill(pchar, "Fortune", 60);
+	
 			}
 		break;
+		
 		case "Noblelombard_4":
 			DialogExit();
 			pchar.GenQuest.Noblelombard = "fail";
 		break;
+		
 		case "Noblelombard_5":
 			if(sti(pchar.GenQuest.Noblelombard.Chance) == 9)
 			{
@@ -2489,11 +2710,13 @@ void ProcessDialogEvent()
 				link.l1.go = "Noblelombard_9";
 			}
 		break;
+		
 		case "Noblelombard_6":
 			dialog.text = "There is no such a thing for people like "+pchar.GenQuest.Noblelombard.Name+" because they don't have an honor and a conscience. I take it that he has cheated on you?";
 			link.l1 = "He has, I suppose. Whatever, "+npchar.name+", I am not going to stay here for long either and Europe is small... Maybe, we will meet one day. Farewell!";
 			link.l1.go = "Noblelombard_7";
 		break;
+		
 		case "Noblelombard_7":
 			DialogExit();
 			AddQuestRecord("Noblelombard", "6");
@@ -2502,6 +2725,7 @@ void ProcessDialogEvent()
 			DeleteAttribute(Pchar, "GenQuest.Noblelombard");
 			DeleteAttribute(Pchar, "quest.noblelombard"); // лесник с нпчара на пчара
 		break;
+		
 		case "Noblelombard_9":
 			DialogExit();
 			iTemp = sti(pchar.GenQuest.Noblelombard.Regard); // Addon-2016 Jason уменьшаем раздачу дублонов
@@ -2514,6 +2738,7 @@ void ProcessDialogEvent()
 			DeleteAttribute(Pchar, "quest.noblelombard");// с нпчара на пчара  лесник
 		break;
 //<-- семейная реликвия
+
 		// Бремя гасконца
 		case "sharlie_credit":
 			dialog.text = "Monsieur, I don't know you. I lend money only to the local citizens or to the captains. Pardon me...";
@@ -2521,6 +2746,7 @@ void ProcessDialogEvent()
 			link.l1.go = "exit";
 		break;
 		// Бремя гасконца
+		
 		// Addon-2016 Jason, французские миниквесты (ФМК)
 		// ФМК-Гваделупа
 		case "FMQG_x":
@@ -2528,11 +2754,13 @@ void ProcessDialogEvent()
 			link.l1 = "You are a fucking rat! Now listen to me really carefully: I am not that stupid. Pinette had written two copies of the letter. I gave you one of them, the second is in a possession of my trusted agent. If anything happens to me - my guy will deliver it right to the hands of the governor...";
 			link.l1.go = "FMQG_x1";
 		break;
+		
 		case "FMQG_x1":
 			dialog.text = "";
 			link.l1 = "So I suggest you praying for my good health in church on every morning sermon instead of sending assassins for my life. One last warning: make a move against me and you are fucked up. Got it? Good. Take a deep breath and keep counting your doubloons.";
 			link.l1.go = "FMQG_x2";
 		break;
+		
 		case "FMQG_x2":
 			DialogExit();
 			pchar.questTemp.FMQG = "end";
@@ -2551,6 +2779,7 @@ void ProcessDialogEvent()
 			link.l1 = "Nevertheless, you have done so.";
 			link.l1.go = "CapBloodUsurer_2";
 		break;
+		
 		case "CapBloodUsurer_2":
 			dialog.text = "What? What are you talking about?";
 			if (sti(pchar.money) >= 5000)
@@ -2564,6 +2793,8 @@ void ProcessDialogEvent()
     			link.l1.go = "CapBloodUsurer_4";
             }
 		break;
+		
+		
 		case "CapBloodUsurer_3":
             AddMoneyToCharacter(pchar, -5000);
             Pchar.questTemp.CapBloodLine.Ogl = true;
@@ -2573,6 +2804,7 @@ void ProcessDialogEvent()
 			link.l1.go = "exit";
 			NextDiag.TempNode = "First time";
 		break;
+		
 		case "CapBloodUsurer_4":
 			dialog.text = "You brought me money for Ogle?";
 			if (sti(pchar.money) >= 5000)
@@ -2587,11 +2819,13 @@ void ProcessDialogEvent()
     			NextDiag.TempNode = "CapBloodUsurer_4";
             }
 		break;
+		
 		case "CapBloodUsurer_5":
 			dialog.text = "Early this morning, a certain townsman took out a loan with me. Nothing unusual there. The problem is... he deceived me. He gave his name as Raphael Guinness, a man who quite often comes here. To his credit, he was a fair likeness. I gave him a loan of thirty thousand piasters, and thought no more of it - but then Raphael himself stopped in...";
 			link.l1 = "So you want me to hunt down this imposter? What makes you think he's still around here? ";
 			link.l1.go = "CapBloodUsurer_6";
 		break;
+		
 		case "CapBloodUsurer_6":
 			dialog.text = "Oh, he is in the city, I assure you. No ships have sailed yet today. I can offer you ten percent, as a reward. That's three thousand piasters. What do you say?";
 			link.l1 = "You know, perhaps I will help you.";
@@ -2601,12 +2835,15 @@ void ProcessDialogEvent()
 			NextDiag.TempNode = "First time";
 			PChar.questTemp.CapBloodLine.QuestRaff = false;
 		break;
+		
 		case "CapBloodUsurer_7":
+		
             AddQuestRecord("UsurerQuest", "1");
             PChar.questTemp.CapBloodLine.QuestRaff = true;
             NextDiag.CurrentNode = "CapBloodUsurer_8";
 			DialogExit();
 		break;
+		
 		case "CapBloodUsurer_8":
 			dialog.text = "Well, did you succeed?";
 			if (sti(pchar.money) >= 27000)
@@ -2627,12 +2864,14 @@ void ProcessDialogEvent()
 		break;
 	}	
 }
+
 int findCitizenMan(ref NPChar, bool bCity)
 {
     ref ch;
 	int n, nation;
     int storeArray[MAX_COLONIES];
     int howStore = 0;
+
 	if (bCity && sti(Pchar.Ship.Type) == SHIP_NOTUSED)
 	{
 		ch = GetCharacter(NPC_GenerateCharacter("LoanFindingMan", "citiz_"+(rand(9)+11), "man", "man", 10, sti(npchar.nation), -1, false, "citizen"));
@@ -2668,6 +2907,7 @@ int findCitizenMan(ref NPChar, bool bCity)
 	}
 	return sti(ch.index);
 }
+
 int findChestMan(ref NPChar)
 {
     ref ch;
@@ -2676,6 +2916,7 @@ int findChestMan(ref NPChar)
 	SetArraySize(&storeArray, MAX_CHARACTERS); // mitrokosta character refactor
     int howStore = 0;
 	string sTemp, sCity;
+
 	for(n=2; n<MAX_CHARACTERS; n++)
 	{
 		makeref(ch,Characters[n]);
@@ -2751,17 +2992,23 @@ int findChestMan(ref NPChar)
         return storeArray[cRand(howStore-1)];
     }
 }
+
 // ugeen -> проверка, можем ли мы использовать дублоны в качестве вклада
 bool CheckUseDublons(ref NPChar)
 {
 	int iTest 	= FindColony(NPChar.City); // город банка
 	if(iTest == -1) return false;
+	
 	ref rColony = GetColonyByIndex(iTest);
+	 	 
 	bool bOk1 = (rColony.from_sea == "") || (Pchar.location.from_sea == rColony.from_sea); 
 	bool bOk2 = (GetCharacterItem(pchar,"gold_dublon") > 10) || (CheckItemMyCabin("gold_dublon") > 10);
+	
 	if(sti(Pchar.Ship.Type) != SHIP_NOTUSED && bOk1 && bOk2) return true;
+
 	return false;
 }
+
 void SlavetraderGalleonInWorld()
 {
 	//создаем галеон с рабами

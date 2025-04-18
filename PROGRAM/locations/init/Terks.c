@@ -1,8 +1,10 @@
+
 int LocationInitTerks(int n)
 {
 	//////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 	// Остров Теркс
 	//////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+
 	//////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 	// Пляж57
 	//////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
@@ -22,8 +24,10 @@ int LocationInitTerks(int n)
 	locations[n].models.always.shore09.sea_reflection = 1;
 	Locations[n].models.always.shore09seabed = "shore09_sb";
 	Locations[n].models.always.locators = "shore09_locators";
+		
 	Locations[n].models.always.grassPatch = "shore09_grass";
 	Locations[n].models.always.grassPatch.texture = "grass\grassshore.tga.tx";
+	
 	Locations[n].models.always.l1 = "plan1";
 	Locations[n].models.always.l1.level = 9;
 	Locations[n].models.always.l1.tech = "LocationModelBlend";
@@ -47,6 +51,7 @@ int LocationInitTerks(int n)
 	locations[n].reload.l1.autoreload = "1";
 	locations[n].reload.l1.label = "Jungle";
 	locations[n].locators_radius.reload.reload1_back = 2;
+
 	locations[n].reload.l2.name = "boat";
 	locations[n].reload.l2.go = "Terks";
 	locations[n].reload.l2.emerge = "reload_2";
@@ -54,6 +59,7 @@ int LocationInitTerks(int n)
 	locations[n].reload.l2.label = "Sea";
     locations[n].locators_radius.reload.boat = 9.0;
 	n = n + 1;
+
 	//////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 	// Джунгли
 	//////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
@@ -95,12 +101,14 @@ int LocationInitTerks(int n)
 	locations[n].reload.l1.autoreload = "1";
 	locations[n].reload.l1.label = "Shore57";
 	locations[n].locators_radius.reload.reload1_back = 2;
+
 	locations[n].reload.l2.name = "reload2_back";
 	locations[n].reload.l2.go = "Shore56";
 	locations[n].reload.l2.emerge = "reload1";
 	locations[n].reload.l2.autoreload = "1";
 	locations[n].reload.l2.label = "Shore56";
     locations[n].locators_radius.reload.reload2_back = 2;
+
 	locations[n].reload.l3.name = "reload3_back";
 	locations[n].reload.l3.go = "Terks_CaveEntrance";
 	locations[n].reload.l3.emerge = "reload2";
@@ -108,6 +116,7 @@ int LocationInitTerks(int n)
 	locations[n].reload.l3.label = "Jungle";
 	locations[n].locators_radius.reload.reload3_back = 2;
 	n = n + 1;
+
 	//////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 	// Пляж57
 	//////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
@@ -152,6 +161,7 @@ int LocationInitTerks(int n)
 	locations[n].reload.l1.autoreload = "1";
 	locations[n].reload.l1.label = "Jungle";
 	locations[n].locators_radius.reload.reload1_back = 2;
+
 	locations[n].reload.l2.name = "boat";
 	locations[n].reload.l2.go = "Terks";
 	locations[n].reload.l2.emerge = "reload_1";
@@ -159,6 +169,7 @@ int LocationInitTerks(int n)
 	locations[n].reload.l2.label = "Sea";
     locations[n].locators_radius.reload.boat = 9.0;
 	n = n + 1;
+
 	//////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 	// Вход в грот
 	//////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
@@ -200,6 +211,7 @@ int LocationInitTerks(int n)
 	locations[n].reload.l3.autoreload = "0";
 	locations[n].reload.l3.label = "Grot";
 	locations[n].locators_radius.reload.reload1_back = 1.3;
+
 	locations[n].reload.l2.name = "reload2_back";
 	locations[n].reload.l2.go = "Terks_Jungle_01";
 	locations[n].reload.l2.emerge = "reload3";
@@ -207,6 +219,7 @@ int LocationInitTerks(int n)
 	locations[n].reload.l2.label = "Jungle";
 	locations[n].locators_radius.reload.reload2_back = 2.0;
 	n = n + 1;
+
 	//////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 	// Грот
 	//////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
@@ -226,6 +239,7 @@ int LocationInitTerks(int n)
 	locations[n].models.always.grotto1alpha.level = 65532;
 	locations[n].models.always.chest = "chest";	
 	locations[n].models.always.locators = "grotto1_locators";
+
 	locations[n].locators_radius.item.duhi1 = 0.0;
 /*	
 	Locations[n].models.always.rays = "grotto1_rays";
@@ -250,5 +264,6 @@ int LocationInitTerks(int n)
 	locations[n].reload.l1.label = "Cave entrance";
 	locations[n].locators_radius.reload.reload1_back = 2;
 	n = n + 1;
+
 	return n;
 }

@@ -40,6 +40,9 @@ void InitNations()
 	rNation.boardingModel.enemy.m9.ani = "man";
 	rNation.boardingModel.enemy.m10 = "sold_eng_8";
 	rNation.boardingModel.enemy.m10.ani = "man";
+
+
+
 	//France
 	makeref(rNation,Nations[FRANCE]);
 	rNation.Name = "France";
@@ -79,6 +82,8 @@ void InitNations()
 	rNation.boardingModel.enemy.m9.ani = "man";
 	rNation.boardingModel.enemy.m10 = "sold_fra_8";
 	rNation.boardingModel.enemy.m10.ani = "man";
+
+
 	//Spain
 	makeref(rNation,Nations[SPAIN]);
 	rNation.Name = "Spain";
@@ -118,6 +123,7 @@ void InitNations()
 	rNation.boardingModel.enemy.m9.ani = "man";
 	rNation.boardingModel.enemy.m10 = "sold_spa_8";
 	rNation.boardingModel.enemy.m10.ani = "man";
+
 	//Pirate
 	makeref(rNation,Nations[PIRATE]);
 	rNation.Name = "Pirate";
@@ -147,6 +153,7 @@ void InitNations()
 	rNation.boardingModel.enemy.m8.ani = "man";
 	rNation.boardingModel.enemy.m9 = "citiz_50";
 	rNation.boardingModel.enemy.m9.ani = "man";
+
 	//Holland
 	makeref(rNation,Nations[HOLLAND]);
 	rNation.Name = "Holland";
@@ -186,6 +193,8 @@ void InitNations()
 	rNation.boardingModel.enemy.m9.ani = "man";
 	rNation.boardingModel.enemy.m10 = "sold_hol_8";
 	rNation.boardingModel.enemy.m10.ani = "man";
+
+
 	//Player boarding command
 	for(int i = 0; i < MAX_NATIONS; i++)
 	{
@@ -225,5 +234,7 @@ void InitNations()
 		rNation.boardingModel.merchant.m5.ani = "man";
 		//boal <--
 	}
+
 	//Trace("Init nations complete.");
 }
+

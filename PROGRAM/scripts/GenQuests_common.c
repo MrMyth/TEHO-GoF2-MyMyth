@@ -28,6 +28,7 @@ string GenQuest_GenerateGoodBlade() // генерация хороших кли�
 	}	
 	return itemID;
 }
+
 string GenQuest_GenerateBestBlade() // генерация отличных клинков для призов и подарков
 {
 	string itemID;
@@ -51,6 +52,7 @@ string GenQuest_GenerateBestBlade() // генерация отличных кл�
 	}	
 	return itemID;
 }
+
 string GenQuest_GenerateArtefact() // артефакты
 {
 	string itemID;
@@ -125,9 +127,11 @@ string GenQuest_GenerateArtefact() // артефакты
 	}
 	return itemID;
 }
+
 string GenQuest_GeneratePrize() // клинок или артефакт
 {
 	string itm;
+	
 	if(rand(12) > 4) itm = GenQuest_GenerateArtefact();
 	else
 	{
@@ -136,6 +140,7 @@ string GenQuest_GeneratePrize() // клинок или артефакт
 	}
 	return itm;
 }
+
 string GenQuestCommon_GenerateItem()
 {
 	string itm;
@@ -158,10 +163,12 @@ string GenQuestCommon_GenerateItem()
 	}
 	return itm;
 }
+
 string GenQuest_GetQuestTreasureMapDescription(ref itmRef) // надпись на квестовой карте
 {
 	string MapDescription;
 	int i;
+
 	i = FindLocation(itmRef.MapLocId);  // ищем ареал
 	if (i != -1 && locations[i].islandId != "Mein")
 	{
@@ -173,12 +180,16 @@ string GenQuest_GetQuestTreasureMapDescription(ref itmRef) // надпись н�
 		MapDescription = GetConvertStr("type_quest_0_mein", "MapDescribe.txt");
 	}
 	itmRef.MapIslName = MapDescription;
+	
 	MapDescription = GetConvertStr(itmRef.MapLocId, "MapDescribe.txt") + ", " + GetConvertStr(itmRef.MapLocId + "_" + itmRef.MapBoxId, "MapDescribe.txt");
 	itmRef.MaplocName = MapDescription;
+
 	MapDescription = itmRef.MapOwnId;
 	itmRef.MapOwner = MapDescription;	
+		
 	MapDescription = GetConvertStr("type_quest_0", "MapDescribe.txt");
 	MapDescription = GetAssembledString(MapDescription, itmRef);
+	
 	itmRef.MapDescription = MapDescription; 
 	return MapDescription;   	
 }

@@ -1,6 +1,8 @@
+
 int CreateSantoDomingoCharacters(int n)
 {
 	ref ch;
+	
 	///////////////////////////////////////////////////////////////////////////////
 	// ОСНОВНЫЕ ПЕРСОНАЖИ
 	///////////////////////////////////////////////////////////////////////////////
@@ -31,6 +33,8 @@ int CreateSantoDomingoCharacters(int n)
 	LAi_group_MoveCharacter(ch, "SPAIN_CITIZENS");
 	LAi_SetImmortal(ch, true);
 	n = n + 1;
+
+
 	makeref(ch,Characters[n]);			//Священик
 	ch.id		= "SantoDomingo_Priest";
 	ch.model	= "priest_1";
@@ -48,6 +52,7 @@ int CreateSantoDomingoCharacters(int n)
 	LAi_group_MoveCharacter(ch, "SPAIN_CITIZENS");
 	LAi_SetImmortal(ch, true);
 	n = n + 1;
+
 	makeref(ch,Characters[n]);		// ОФициантка
 	ch.id		= "SantoDomingo_waitress";
 	ch.model	= "women_12";
@@ -64,6 +69,7 @@ int CreateSantoDomingoCharacters(int n)
 	LAi_group_MoveCharacter(ch, "SPAIN_CITIZENS");
 	LAi_SetImmortal(ch, true);
 	n = n + 1;
+
 	makeref(ch,Characters[n]);			//Трактирщик
 	ch.id		= "SantoDomingo_tavernkeeper";
 	ch.model	= "barmen_5";
@@ -81,6 +87,8 @@ int CreateSantoDomingoCharacters(int n)
 	LAi_group_MoveCharacter(ch, "SPAIN_CITIZENS");
 	LAi_SetImmortal(ch, true);
 	n = n + 1;
+
+
 	makeref(ch,Characters[n]);			//Торговец
 	ch.id		= "SantoDomingo_trader";
 	ch.model	= "trader_5";
@@ -98,6 +106,7 @@ int CreateSantoDomingoCharacters(int n)
 	LAi_SetImmortal(ch, true);
 	ch.item_date = "";
 	n = n + 1;
+
 	makeref(ch,Characters[n]);			//Корабел
 	ch.id		= "SantoDomingo_shipyarder";
 	ch.model	= "shipowner_5";
@@ -122,6 +131,7 @@ int CreateSantoDomingoCharacters(int n)
 	LAi_group_MoveCharacter(ch, "SPAIN_CITIZENS");
 	LAi_SetImmortal(ch, true);
 	n = n + 1;
+
 	makeref(ch,Characters[n]);			//Банкир
 	ch.id		= "SantoDomingo_usurer";
 	ch.model	= "banker_5";
@@ -141,6 +151,7 @@ int CreateSantoDomingoCharacters(int n)
 	LAi_group_MoveCharacter(ch, "SPAIN_CITIZENS");
 	LAi_SetImmortal(ch, true);
 	n = n + 1;
+
 	makeref(ch,Characters[n]);			//Начальник порта
 	ch.id		= "SantoDomingo_PortMan";
 	ch.model	= "citiz_5";
@@ -157,6 +168,7 @@ int CreateSantoDomingoCharacters(int n)
 	LAi_SetImmortal(ch, true);
 	ch.item_date = "";
 	n = n + 1;
+
 	makeref(ch,Characters[n]);			//Хозяйка борделя
 	ch.id		= "SantoDomingo_Hostess";
 	ch.name		= "Lolita"
@@ -175,6 +187,7 @@ int CreateSantoDomingoCharacters(int n)
 	LAi_SetOwnerType(ch);
 	LAi_group_MoveCharacter(ch, "SPAIN_CITIZENS");
 	n = n + 1;
+
     makeref(ch,Characters[n]);
 	ch.name 	= "Smuggler";
 	ch.lastname = "";
@@ -191,6 +204,7 @@ int CreateSantoDomingoCharacters(int n)
 	LAi_SetHP(ch, 80.0, 80.0);
 	ch.greeting = "smuggler";
 	n = n + 1;
+    
 	makeref(ch,Characters[n]);			//Смотритель маяка
 	ch.id		= "SantoDomingo_Lightman";
 	ch.model	= "keeper_8";
@@ -210,5 +224,6 @@ int CreateSantoDomingoCharacters(int n)
 	LAi_group_MoveCharacter(ch, "SPAIN_CITIZENS");
 	LAi_SetImmortal(ch, true);
 	n = n + 1;
+    
 	return n;
 }

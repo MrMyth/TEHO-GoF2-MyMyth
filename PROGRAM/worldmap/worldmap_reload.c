@@ -1,7 +1,10 @@
+
+
 object wdmLoginToSea;
 object wdm_fader;
 bool wdmLockReload = false;
 bool questwdmLockReload = false;
+
 void wdmReloadToSea()
 {
 	//Если запрещена перегрузка, ничего не делаем
@@ -20,6 +23,7 @@ void wdmReloadToSea()
 	Siege_DailyUpdate();//homo осады 05/11/06
 	SaveCurrentQuestDateParam("WordMapEncounters_DailyUpdate"); //homo карта 25/03/07
 	// расчеты <--
+	
 	wdmLockReload = true;
 	//Обновим текст перегрузки
 	SetReloadNextTipsImage();
@@ -67,6 +71,7 @@ void wdmReloadToSea()
 	SendMessage(&wdm_fader, "ls", FADER_PICTURE0, "loading\ImgBack.tga");
 	SendMessage(&wdm_fader, "ls",FADER_PICTURE, imageName);
 }
+
 void WdmStartFade()
 {
 	PauseAllSounds();
@@ -78,6 +83,7 @@ void WdmStartFade()
 	worldMap.isLoaded = "false";
 	DeleteWmInterface();
 }
+
 void WdmEndFade()
 {
 	int a = GetEventData();
@@ -91,6 +97,7 @@ void WdmEndFade()
 	LayerAddObject(SEA_REALIZE, &reload_fader, -1);
 	ReloadProgressEnd();
 }
+
 void QuitFromWorldMap()
 {
 	//Fade out
@@ -103,13 +110,16 @@ void QuitFromWorldMap()
 	SendMessage(&wdm_fader, "lfl", FADER_OUT, fadeOutTime, true);
 	SendMessage(&wdm_fader, "l", FADER_STARTFRAME);
 }
+
 void WdmEndFadeA()
 {
 	//Delete EventHandler
 	DelEventHandler("FaderEvent_EndFade", "WdmEndFadeA");
 	//Switch to sea
 	Event("QuitFromWorldMap");
+
 }
+
 // VANO function: return sea coordinates
 void WdmPrepareMapForAbordage(aref arPos)
 {
@@ -146,6 +156,7 @@ void WdmPrepareMapForAbordage(aref arPos)
 		worldMap.zeroZ = worldMap.playerShipZ;
 	}
 }
+
 void WdmAddPlayerGroup()
 {
 	//Координаты игрока на карте
@@ -186,6 +197,7 @@ void WdmAddPlayerGroup()
 		worldMap.zeroZ = worldMap.playerShipZ;
 	}
 }
+
 bool WdmAddEncountersData()
 {
 	bool isShipEncounter = false;
@@ -242,6 +254,7 @@ bool WdmAddEncountersData()
 	}
 	return isShipEncounter;
 }
+
 void WdmStormEncounter()
 {
 	wdmLoginToSea.storm = worldMap.playerInStorm;
@@ -251,7 +264,9 @@ void WdmStormEncounter()
 	}else{
 		wdmLoginToSea.tornado = "0";
 	}
+
 	//wdmLoginToSea.tornado = "1";
+
 	if(CheckAttribute(&worldMap, "stormId") != 0)
 	{
 		if(worldMap.stormId != "")

@@ -16,6 +16,7 @@ void ProcessCommonDialogEvent(ref NPChar, aref Link, aref NextDiag)
 				link.l1.go = "terrapin";
 			}
 		break;
+		
 		//суп из черепахи
 		case "terrapin":
 			dialog.text = "He might still be enjoying himself here, but in deep water. Your friend's kicked the bucket. So you're a tad late, captain. That man over there, sitting at the farthest table, paid for his funeral, although I get the feeling that he's the same man that caused it. He's got a hell of a shady face. His name is Robert Martene. If you want, you can walk over and ask him your questions. ";
@@ -23,6 +24,7 @@ void ProcessCommonDialogEvent(ref NPChar, aref Link, aref NextDiag)
 			link.l1.go = "terrapin_1";
 			npchar.quest.terrapin = "true";
 		break;
+		
 		case "terrapin_1":
 			DialogExit();
 			AddQuestRecord("Terrapin", "4");
@@ -31,3 +33,4 @@ void ProcessCommonDialogEvent(ref NPChar, aref Link, aref NextDiag)
 	}
 	UnloadSegment(NPChar.FileDialog2);  // если где-то выход внутри switch  по return не забыть сделать анлод
 }
+

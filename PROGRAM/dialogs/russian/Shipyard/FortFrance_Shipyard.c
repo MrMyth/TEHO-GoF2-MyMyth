@@ -21,6 +21,7 @@ void ProcessCommonDialogEvent(ref NPChar, aref Link, aref NextDiag)
                 link.l1.go = "FMQM_9";
             }
 		break;
+		
 		// Addon-2016 Jason ”ЊЉ-Њартиника
 		case "FMQM":
 			pchar.quest.FMQM_Denial.over = "yes";
@@ -28,11 +29,13 @@ void ProcessCommonDialogEvent(ref NPChar, aref Link, aref NextDiag)
 			link.l1 = "Interesting! Go on, tell me.";
 			link.l1.go = "FMQM_1";
 		break;
+		
 		case "FMQM_1":
 			dialog.text = "Have you ever heard of special resin the Spaniards produce on the island of Trinidad? It is a rare resource of strategic value used to fortify the ship hull. Every barrel costs a hefty sum because the Spanish direct all the resin for the needs of their Navy. Every colonial authority keeps a trade of this good under control, to put it simple, it's a pure contraband\nI need this resin for a special order. Of course, our store doesn't have it, same can be said about our local military warehouses or they simply didn't want to sell it. It's irrelevant really. What is relevant is that I need the resin and I know where to get some. All I need is a captain who is comfortable about boardings.";
 			link.l1 = "I think, I am starting to see your point...";
 			link.l1.go = "FMQM_2";
 		break;
+		
 		case "FMQM_2":
 			dialog.text = "Splendid. There is a small trade convoy located in a harbor of Port-of-Spain. One ship is carrying a decent batch of the resin I am so in need of. I will tell more if you like the idea of plundering the enemies of our nation. What's your call?";
 			link.l1 = "I like your proposal. Ready to give it a try.";
@@ -40,17 +43,20 @@ void ProcessCommonDialogEvent(ref NPChar, aref Link, aref NextDiag)
 			link.l2 = "I'll pass, monsieur. My ship and my crew are not in their brightest state at the moment.";
 			link.l2.go = "FMQM_exit";
 		break;
+		
 		case "FMQM_exit":
 			dialog.text = "Okay, it's your right to do what you want. Sorry for taking your time, captain.";
 			link.l1 = "Goodbye.";
 			link.l1.go = "FMQM_exit_1";
 		break;
+		
 		case "FMQM_exit_1":
 			DialogExit();
 			pchar.questTemp.FMQM = "fail";
 			AddQuestRecord("FMQ_Martinique", "3");
 			CloseQuestHeader("FMQ_Martinique");
 		break;
+		
 		case "FMQM_3":
 			string sTemp = "barquentine";
 			if (MOD_SKILL_ENEMY_RATE < 7) sTemp = "barque";// Addon 2016-1 Jason пиратскаЯ линейка
@@ -58,37 +64,44 @@ void ProcessCommonDialogEvent(ref NPChar, aref Link, aref NextDiag)
 			link.l1 = "Got it. What about a reward?";
 			link.l1.go = "FMQM_4";
 		break;
+		
 		case "FMQM_4":
 			dialog.text = "All I am interested in is the resin. I will pay fifteen golden doubloons for every barrel of stuff. According to my information, the 'Bensecho' carries around a hundred of barrels.";
 			link.l1 = "Holy cow! This is a big sum!";
 			link.l1.go = "FMQM_5";
 		break;
+		
 		case "FMQM_5":
 			dialog.text = "Yes. I told you already that this particular merchandise is very expensive and rare.";
 			link.l1 = "You also told me that this is a contraband.";
 			link.l1.go = "FMQM_6";
 		break;
+		
 		case "FMQM_6":
 			dialog.text = "Don't worry, there will be no need for you to bring it to the store or to smugglers. Come see me when the job's done, we will dock your vessel in my shipyard for repairing and then unload all the cargo secretly at night. No one will suspect anything.";
 			link.l1 = "You think ahead, master. Very well. No wasting time them. I am on the way to set sail.";
 			link.l1.go = "FMQM_7";
 		break;
+		
 		case "FMQM_7":
 			dialog.text = "Godspeed captain.";
 			link.l1 = "...";
 			link.l1.go = "FMQM_8";
 		break;
+		
 		case "FMQM_8":
 			DialogExit();
 			pchar.questTemp.FMQM = "convoy";
 			AddQuestRecord("FMQ_Martinique", "4");
 			SetFunctionTimerCondition("FMQM_ConvoyStart", 0, 0, 1, false);
 		break;
+		
 		case "FMQM_9":
 			dialog.text = "Excellent! Let's put your ship in docks as we agreed before. We will unload her there tonight. Get back to you ship and let me prepare the money for you.";
 			link.l1 = "Let's do this.";
 			link.l1.go = "FMQM_10";
 		break;
+		
 		case "FMQM_10":
 			pchar.quest.FMQM_Late.over = "yes";
 			DialogExit();
@@ -105,3 +118,4 @@ void ProcessCommonDialogEvent(ref NPChar, aref Link, aref NextDiag)
 	}
 	UnloadSegment(NPChar.FileDialog2);  // если где-то выход внутри switch  по return не забыть сделать анлод
 }
+

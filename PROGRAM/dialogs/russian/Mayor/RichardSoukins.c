@@ -4,10 +4,13 @@ void ProcessDialogEvent()
 	ref NPChar, sld;
 	aref Link, NextDiag;
 	int i;
+
 	DeleteAttribute(&Dialog,"Links");
+
 	makeref(NPChar,CharacterRef);
 	makearef(Link, Dialog.Links);
 	makearef(NextDiag, NPChar.Dialog);
+
 	switch(Dialog.CurrentNode)
 	{
 		// ----------------------------------- Диалог первый - первая встреча
@@ -16,6 +19,8 @@ void ProcessDialogEvent()
 			link.l1 = "I am leaving already.";
 			link.l1.go = "exit";
 			NextDiag.TempNode = "First time";
+
+
 					if (npchar.city == sti(pchar.HeroParam.Location))
 					{
 						if(!CheckAttribute(PChar, "questTemp.pirateStartQuest"))
@@ -43,16 +48,19 @@ void ProcessDialogEvent()
 						}
 					}
 		break;
+
  		case "Exit":
 			DialogExit();
 			NextDiag.CurrentNode = NextDiag.TempNode;
 		break;
+
 		case "fight":
 			DialogExit();
 			NextDiag.CurrentNode = NextDiag.TempNode;
 			LAi_group_Attack(NPChar, Pchar);
 			AddDialogExitQuest("MainHeroFightModeOn");
 		break;
+
 		//zagolski. начальный квест за пирата ===================================
 		case "pirateStartQuest":
 			dialog.text = "Hm.. A work, you've said? Actually it's good that you have asked me. I need a man from aside. I want to find out something in the nearest town but my men are known there. Can't promise you a lot but you will get something.";
@@ -78,10 +86,12 @@ void ProcessDialogEvent()
 			dialog.text = "If I had any ideas then I would never use your services. Those men would be dead already. But I am eager to know how they found out about the 'Saintblue's' cargo and my client. It looks like that it was quite easy for them. See now?";
 			link.l1 = "Yes, someone has sold you out.";
 			link.l1.go = "pirateStartQuest_4";
+
 			pchar.questTemp.pirateStartQuest = "1";
 			pchar.questTemp.pirateStartQuest.City = npchar.city;
 			pchar.questTemp.pirateStartQuest.Areal = GetArealByCityName(pchar.questTemp.pirateStartQuest.City);
 			pchar.questTemp.pirateStartQuest.Name = GetFullName(npchar);
+
 			AddQuestRecord("pSQ", "1");
 			AddQuestUserData("pSQ", "sCity", XI_ConvertString("Colony" + pchar.questTemp.pirateStartQuest.City + "Gen"));
 			AddQuestUserData("pSQ", "sName", pchar.questTemp.pirateStartQuest.Name);
@@ -91,6 +101,7 @@ void ProcessDialogEvent()
 			link.l1 = "I see. Than I'll keep a low profile. I am on my way.";
 			link.l1.go = "exit";
 		break;
+
 		case "pirateStartQuest_many":
 			dialog.text = "Thirty thousands you say? That's a large sum... I can only give you 5000 pesos, that's all I have now. And don't even try to escape with money or I'll find you and hang you on the nearest fence! Got it?";
 			link.l1 = "Okay, give me five thousand then...";
@@ -103,6 +114,7 @@ void ProcessDialogEvent()
 			AddMoneyToCharacter(pchar, 5000);
 			pchar.questTemp.pirateStartQuest.many = "";
 		break;
+
 		//------------------------------------
 		case "pirateStartQuest_info_1":
 			dialog.text = "Ha! Excellent news! I was sure that you'd make it. I've got some intriguing information.";
@@ -128,12 +140,15 @@ void ProcessDialogEvent()
 			NextDiag.CurrentNode = NextDiag.TempNode;
 			DialogExit();
 			pchar.questTemp.pirateStartQuest = "4";
+
 			AddQuestRecord("pSQ", "7");
 			AddQuestUserData("pSQ", "sName", pchar.questTemp.pirateStartQuest.Name);
+
 			pchar.quest.zpq_seaBattle.win_condition.l1 = "location";
 			pchar.quest.zpq_seaBattle.win_condition.l1.location = pchar.questTemp.pirateStartQuest.Areal;
 			pchar.quest.zpq_seaBattle.function = "pirateStartQuest_seaBattle";
 		break;
+
 		case "pirateStartQuest_final":
 			dialog.text = "I know, I know. My men were watching the battle and have already reported to me about your flawless victory. Fine, you've done your job well. Here is 15 000 pesos I promised. And thank you, you helped me with a great deal.";
 			link.l1 = "It's fine, I was glad to help! But I have to go now, I've been here too long and I've got a lot things to do. Farewell!";
@@ -143,5 +158,7 @@ void ProcessDialogEvent()
 			CloseQuestHeader("pSQ");
 			group_DeleteGroup("pirateStartQuest_Smuggler_group");
 		break;
+
+
 	}
 }

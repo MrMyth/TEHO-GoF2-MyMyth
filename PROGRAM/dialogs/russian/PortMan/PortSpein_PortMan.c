@@ -20,6 +20,7 @@ void ProcessCommonDialogEvent(ref NPChar, aref Link, aref NextDiag)
 				link.l1.go = "guardoftruth";
 			}
 		break;
+		
 		//Цена чахотки
 		case "Consumption":
 			dialog.text = "Juan? That's all? Can you remember a surname or, at least, a name of his ship? It's a Spanish colony and we have a lot of Juans and Carloses here. I won't be able to help you without any details.";
@@ -34,6 +35,7 @@ void ProcessCommonDialogEvent(ref NPChar, aref Link, aref NextDiag)
 			}
 			npchar.quest.Consumption = "true";
 		break;
+		
 		case "guardoftruth":
 			dialog.text = "Let's see my notes... well-well. Yes, captain Miguel Dichoso was here in April 1654, frigate 'Santa-Quiteria'. He has registered himself, he had come from the colony San-Andres, Providence. He was heading to Cadiz which is in Europe, Spain. Sailed off in 14 of April,1654. That's all I have.";
 			link.l1 = "I see. Thanks for that!";
@@ -44,3 +46,5 @@ void ProcessCommonDialogEvent(ref NPChar, aref Link, aref NextDiag)
 	}
 	UnloadSegment(NPChar.FileDialog2);  // если где-то выход внутри switch  по return не забыть сделать анлод
 }
+
+

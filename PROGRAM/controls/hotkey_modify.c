@@ -1,14 +1,18 @@
 /************************************************************************************************
                               belamour Альтернативный модификатор
+
 HKT_ = быстрый переход 
 HKE_ = мушкет и ХО
 HKB_ = боеприпас
+
 *************************************************************************************************/
+
 void HKT_Button(string sHKB) // быстрый переход
 {
 	int curLocIdx, i; 
 	String locID, sCityID;
 	bool bOk;
+	
 	curLocIdx = FindLoadedLocation();
 	sCityID = Locations[curLocIdx].fastreload;
 	locID = strcut(sHKB, 4 , strlen(sHKB)-1);
@@ -48,6 +52,7 @@ void HKT_Button(string sHKB) // быстрый переход
 	if(pchar.location == sCityID + locID) {Log_info(XI_ConvertString("You are already there")); PlaySound("interface\knock.wav");}
 	if (sHKB == "Fast_port" && pchar.location == pchar.location.from_sea) {Log_info(XI_ConvertString("You are already there")); PlaySound("interface\knock.wav");}
 }	
+
 void HKE_Button(string sHKB) // мушкет и клинки
 {
 	string sGun, sItem, sBlade, BladeType, BladeInfo;
@@ -55,12 +60,15 @@ void HKE_Button(string sHKB) // мушкет и клинки
 	aref aGun, arItems; 
 	bool bOk;
 	int i, p, iItemsNum; 
+
 	int n = 0;
+	
 	BladeType = strcut(sHKB, 3 , strlen(sHKB)-1);
 	sBlade = ""; 
 	bOk = true;
 	if(loadedLocation.type == "underwater") bOk = false;
 	if(!LAi_IsCharacterControl(pchar)) bOk = false;
+	
 	if(bOk)
 	{
 		if (sHKB == "HK_Musket")
@@ -143,12 +151,14 @@ void HKE_Button(string sHKB) // мушкет и клинки
 		}
 	}		
 }		
+
 void HKB_Button(string sHKB) // боеприпас
 {
 	string BulletType = strcut(sHKB, 3 , strlen(sHKB)-1);
 	LAi_SetCharacterUseBullet(pchar, BulletType);
 	LAi_GunSetUnload(pchar);
 	log_info("Ammo type selected - "+GetConvertStr("itmname_"+BulletType, "ItemsDescribe.txt")+"");
+	
 	// предупреждающие логи
 	string GunBulletType = LAi_GetCharacterBulletType(pchar);
 	string GunPowder = LAi_GetCharacterGunpowderType(pchar);
@@ -157,6 +167,7 @@ void HKB_Button(string sHKB) // боеприпас
 	bool bok1 = false;
 	if(GunPowder != ""  && iGunPowder > 0) bOk = true;
 	if(GunPowder == "") bok1 = true;
+	
 	if(GunBulletType != "" && GunBulletType == BulletType) 
 	{
 		if(bOk || bOk1) PlaySound("People Fight\reload1.wav");
@@ -165,13 +176,16 @@ void HKB_Button(string sHKB) // боеприпас
 	if(GunBulletType != BulletType) log_info("Warning!!! Selected ammo type is incompatible with your current weapon");
 	if(GunPowder != ""  && iGunPowder < 1) {log_info("Warning!!! No gunpowder in inventory"); PlaySound("interface\notebook.wav");}
 }
+
 int BladeNum(string Type)
 {
 	int qty = 0;
 	string sItem;
 	ref rItem;
 	aref arItems; 
+		  
 	int i, iItemsNum; 
+	
 	makearef(arItems, pchar.items);
 	iItemsNum = GetAttributesNum(arItems);
 	for(i=0; i<iItemsNum; i++)

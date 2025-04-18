@@ -1,14 +1,19 @@
 #include "items\items.h"
+
 object randItemModels[MAX_LOADED_RANDITEMS];
 object itemModels[ITEMS_QUANTITY];
 object buttonModels[MAX_BUTTONS];
+
 aref useLocators[MAX_BUTTONS];
 aref useAttrs[MAX_BUTTONS];
 int  useLocatorsCount=0;
+
 int iScriptItemStartNum=0;
 int iScriptItemEndNum=0;
 int iScriptItemCount=0;
+
 float SPAWN_TIME = 168.0; //hours = 168.0
+
 void Items_LoadModel (ref _itemModel, ref _item)
 {
 	if (!IsEntity(&_itemModel))
@@ -23,12 +28,15 @@ void Items_LoadModel (ref _itemModel, ref _item)
 		SendMessage(&_itemModel, "ls", MSG_MODEL_SET_TECHNIQUE, "RandItem");
 		LayerAddObject(EXECUTE, &_itemModel, ITEMS_LAYER);
 		LayerAddObject(REALIZE, &_itemModel, ITEMS_LAYER);
+
 		//Trace("ItemLogic: Loaded model "+itemFolder+"\"+_item.model);
 	}
 }
+
 void Item_OnLoadLocation(string currentLocation)
 {
 	//Trace("ItemLogic: On load location "+currentLocation);
+
 	// precache active locators in current location
 	aref   activeLocation;
 	ref chr = GetMainCharacter();
@@ -45,10 +53,12 @@ void Item_OnLoadLocation(string currentLocation)
 			continue;
 		if (!FindLocator(activeLocation.id, an.locator, &al, true))
 			continue;
+
 		useLocators[useLocatorsCount] = al;
 		useAttrs[useLocatorsCount] = an;
 		useLocatorsCount++;
 	}
+	
 	// Warship 11.05.09 удаление неиспользующихся предметов
 	/*
 	if(!actLoadFlag) // FIX При лоаде прогружается лока - все че было нагенерено терлось с сундука
@@ -60,6 +70,7 @@ void Item_OnLoadLocation(string currentLocation)
 	Items_ShowButtons(currentLocation);
 	RandItems_OnLoadLocation(activeLocation);
 	Box_OnLoadLocation(activeLocation);
+
 	for (int itemN=0; itemN<ITEMS_QUANTITY; itemN++)
 	{
 		if (!CheckAttribute(Items[itemN], "startLocator"))
@@ -76,6 +87,7 @@ void Item_OnLoadLocation(string currentLocation)
 		}}
 	}
 }
+
 void Item_OnUnLoadLocation()
 {
 	//Trace("ItemLogic: On unload location");
@@ -89,15 +101,19 @@ void Item_OnUnLoadLocation()
 		if (IsEntity(&buttonModels[buttonN]))
 			DeleteClass(&itemModels[buttonN]);
 	}
+
 	RandItems_OnUnloadLocation();
+
 	ref chr = GetMainCharacter();
 	chr.itemLocationIndex = -1;
 }
+
 void Item_OnEnterLocator(aref _location, string _locator)
 {
 	//Trace("ItemLogic: Entered locator "+_locator);
 	ref chr = GetMainCharacter();
 	int itemN;
+
 	if (findsubstr(_locator, "button", 0) != -1)
 	{ // use item
         for (itemN=ItemsForLocators_start; itemN<ItemsForLocators_end; itemN++)
@@ -152,6 +168,7 @@ void Item_OnEnterLocator(aref _location, string _locator)
     // <===
 	BLI_RefreshCommandMenu();
 }
+
 void Item_OnExitLocator(aref _location, string _locator)
 {
 	Log_SetActiveAction("Nothing");
@@ -161,17 +178,21 @@ void Item_OnExitLocator(aref _location, string _locator)
     QuestCheckExitLocItem(_location, _locator);
     // <===
 }
+
 void Item_OnPickItem()
 {
 	Log_SetActiveAction("Nothing");
 	aref activeLocation;
 	ref chr = GetMainCharacter();
 	makearef(activeLocation, Locations[sti(chr.itemLocationIndex)]);
+
 	int langFile = LanguageOpenFile("ItemsDescribe.txt");
 	string displayItemName, youvegotString;
 	youvegotString = LanguageConvertString(langFile, "youve_got");
 	PlayStereoSound("interface\important_item.wav");
+
 	string itemId;
+
 	if (chr.activeRandItem == true)
 	{
 		string activeRandItemAttribute = "RandItemType"+sti(chr.activeItem);
@@ -179,13 +200,16 @@ void Item_OnPickItem()
 		{
 			SendMessage(&randItemModels[sti(chr.activeItem)], "lslff", MSG_MODEL_BLEND, "blenditemlit", 1000, 1.0, 0.0);
 			GenerateAndAddItems(GetMainCharacter(), Items[sti(activeLocation.(activeRandItemAttribute))].id, 1);
+
 			itemId = Items[sti(activeLocation.(activeRandItemAttribute))].id;
 			if(findSubStr(itemId, "GOF_", 0) == 0){
 				LanguageCloseFile(langFile);
 				langFile = LanguageOpenFile("Gof_ItemsDescribe.txt");
 			}
+
 			displayItemName = LanguageConvertString(langFile, Items[sti(activeLocation.(activeRandItemAttribute))].name);
 			Log_SetStringToLog(youvegotString+" "+displayItemName+"!");
+
 			activeLocation.(activeRandItemAttribute) = -1;
 		}
 	}
@@ -210,6 +234,7 @@ void Item_OnPickItem()
 	DeleteAttribute(chr,"activeItem");
 	LanguageCloseFile(langFile);
 }
+
 void Item_OnUseItem()
 {
 	aref aloc, an, al;
@@ -217,6 +242,7 @@ void Item_OnUseItem()
 	ref chr = GetMainCharacter();
 	int activeItem = sti(chr.activeItem);
 	makearef(activeLocation, Locations[sti(chr.itemLocationIndex)]);
+
 	makearef (aloc, activeLocation.items);
 	// boal баг! нет предмета, а он работает!!!
     if (!CheckCharacterItem(chr, Items[activeItem].id))
@@ -231,34 +257,42 @@ void Item_OnUseItem()
 	Items[activeItem].shown = true;
 	Items[activeItem].shown.used = true; //использован
 	Items_LoadModel(&itemModels[activeItem], &Items[activeItem]);
+
 	FindLocator(activeLocation.id, chr.activeLocator, &al, true);
 	SendMessage(&itemModels[activeItem], "lffffffffffff", MSG_MODEL_SET_POSITION, makeFloat(al.x), makeFloat(al.y), makeFloat(al.z), makeFloat(al.vx.x), makeFloat(al.vx.y), -makeFloat(al.vx.z), makeFloat(al.vy.x), makeFloat(al.vy.y), -makeFloat(al.vy.z), makeFloat(al.vz.x), makeFloat(al.vz.y), -makeFloat(al.vz.z));
 	SendMessage(&itemModels[activeItem], "lslff", MSG_MODEL_BLEND, "blenditem", 1000, 0.0, 1.0);
+
 	SetEventHandler("frame", "Item_OnUseFrame", 0);
 	TakeItemFromCharacter(GetMainCharacter(), Items[activeItem].id);
 	Items[activeItem].startLocator = "";
 	al.active = true;
 	al.timePassed = 0;
+
 	int langFile = LanguageOpenFile("ItemsDescribe.txt");
 	string displayItemName, youvegotString;
 	youvegotString = LanguageConvertString(langFile, "used_item");
 	displayItemName = LanguageConvertString(langFile, Items[activeItem].name);
 	Log_SetStringToLog(youvegotString+" "+displayItemName+"!");
     PlaySound("interface\sobitie_na_karte_001.wav");
+
     // ===> перехват на метод обрабоки для квестовых нужд при опускании предмета в локаторы button. Эдди.
     QuestCheckUseButton(activeLocation, chr.activeLocator, Items[activeItem].id);
     // <===
 	DeleteAttribute(chr,"activeItem");
+	
 	CompleteQuestName("OnUse_"+Items[activeItem].id, "");
 }
+
 void Item_OnUseFrame()
 {
 	aref aloc, an, al;
 	aref activeLocation;
 	ref chr = GetMainCharacter();
+
     if (CheckAttribute(chr, "itemLocationIndex") && sti(chr.itemLocationIndex) > 0) // boal fix 230804
     {
     	makearef(activeLocation, Locations[sti(chr.itemLocationIndex)]);
+
     	makearef (aloc, activeLocation.items);
     	bool usedOnFrame=false;
     	for (int i=0; i<useLocatorsCount; i++)
@@ -276,10 +310,13 @@ void Item_OnUseFrame()
     			al.active = false;
     			continue;
     		}
+
     		usedOnFrame = true;
     		float timeK = makefloat(timePassed) / makefloat(BUTTON_ACTIVATION_TIME);
     		float deltaY = makefloat(an.deltaY) * timeK;
+
     		SendMessage(&buttonModels[i], "lffffffffffff", MSG_MODEL_SET_POSITION, makeFloat(al.x), makeFloat(al.y)+deltaY, makeFloat(al.z), makeFloat(al.vx.x), makeFloat(al.vx.y), -makeFloat(al.vx.z), makeFloat(al.vy.x), makeFloat(al.vy.y), -makeFloat(al.vy.z), makeFloat(al.vz.x), makeFloat(al.vz.y), -makeFloat(al.vz.z));
+
     		for (int j=0; j<ITEMS_QUANTITY; j++)
     		{
     			if (Items[j].useLocator == an.locator)
@@ -297,6 +334,7 @@ void Item_OnUseFrame()
 	if (!usedOnFrame)
 		DelEventHandler("frame", "Item_OnUseFrame");
 }
+
 void Items_ShowButtons(string _locationName)
 {
 	aref al;
@@ -311,20 +349,24 @@ void Items_ShowButtons(string _locationName)
 			SendMessage(&buttonModels[i], "lffffffffffff", MSG_MODEL_SET_POSITION, makeFloat(al.x), makeFloat(al.y)+makefloat(useAttrs[i].deltaY), makeFloat(al.z), makeFloat(al.vx.x), makeFloat(al.vx.y), -makeFloat(al.vx.z), makeFloat(al.vy.x), makeFloat(al.vy.y), -makeFloat(al.vy.z), makeFloat(al.vz.x), makeFloat(al.vz.y), -makeFloat(al.vz.z));
 	}
 }
+
 void Items_ShowItem(int _itemN)
 {
 	aref al;
 	aref activeLocation;
 	ref chr = GetMainCharacter();
 	makearef(activeLocation, Locations[sti(chr.itemLocationIndex)]);
+
 	if (Items[_itemN].model == "")
 	{
 		Trace("ItemLogic: no model for item "+activeLocation.id+"."+Items[_itemN].id);
 		return;
 	}
+
 	if (Items[_itemN].startLocator != "")
 	{ //unused
 		Items_LoadModel(&itemModels[_itemN], &Items[_itemN]);
+
 		if (!FindLocator(Items[_itemN].startLocation, Items[_itemN].startLocator, &al, true))
 			Trace("ItemLogic: locator for item "+Items[_itemN].id+" not found! ["+Items[_itemN].startLocation+">>"+Items[_itemN].startLocator);
 		Trace ("ItemLogic: showing item at "+al.x+", "+al.y+", "+al.z);
@@ -334,7 +376,9 @@ void Items_ShowItem(int _itemN)
 	{ //used
 		if (Items[_itemN].useLocation != activeLocation.id)
 			return;
+
 		Items_LoadModel(&itemModels[_itemN], &Items[_itemN]);
+
 		for (int i=0; i<useLocatorsCount; i++)
 		{
 			al = useLocators[i];
@@ -346,27 +390,34 @@ void Items_ShowItem(int _itemN)
 		}
 	}
 }
+
 void Items_HideItem(int itemN)
 {
 }
+
 int Items_FindItem(string itemID, ref itemARef)
 {
 	aref curItem;
+	
 	for(int i = 0; i < TOTAL_ITEMS; i++)
 	{
 		makearef(curItem,Items[i]);
+		
 		if(CheckAttribute(curItem, "ID") && curItem.id == itemID)
 		{
 			itemARef = curItem;
 			return i;
 		}
 	}
+	
 	return -1;
 }
+
 int Items_FindItemIdx(string itemID) // нужно для поиска только номера
 {
 	return GetItemIndex(itemID);
 }
+
 // ************** RANDOM ITEMS *****************
 void RandItems_OnLoadLocation(ref _location)
 {
@@ -379,6 +430,7 @@ void RandItems_OnLoadLocation(ref _location)
 		locatorName = "randitem"+i;
 		if (!FindLocator(_location.id, locatorName, &randItemlocator, true))
 			break;
+
         // boal -->
         if (!SetLocationQuestRandItem(i, _location, locatorName, randItemLocator))
         {
@@ -415,6 +467,7 @@ void RandItems_OnLoadLocation(ref _location)
 		}
 	}
 }
+
 void RandItems_OnUnloadLocation()
 {
 	for (int itemN=0; itemN<MAX_LOADED_RANDITEMS; itemN++)
@@ -423,15 +476,18 @@ void RandItems_OnUnloadLocation()
 			DeleteClass(&randItemModels[itemN]);
 	}
 }
+
 float Items_MakeTime (float _h, float _d, float _m, float _y)
 {
 	return (_h+24.0*(_d + 30.0*(_m + 12.0*_y)));
 }
+
 void RandItems_SpawnRandItem(int _index, aref _location, aref al)
 {
 	aref randItem;
 	string lastSpawnTimeString;
 	int n;
+
 	string alName = GetAttributeName(al);
 	string alNameAttribute = "items."+alName;
 	if (CheckAttribute(_location, alNameAttribute))
@@ -439,6 +495,7 @@ void RandItems_SpawnRandItem(int _index, aref _location, aref al)
 		n = Items_FindItem(_location.items.(alName), &randItem);
 		if (n == -1)
 			return;
+
 		lastSpawnTimeString = "LastSpawnTime"+_index;
 		_location.(lastSpawnTimeString) = Items_MakeTime(0, 15, 1, 2003);
 	}
@@ -447,35 +504,46 @@ void RandItems_SpawnRandItem(int _index, aref _location, aref al)
 		n = Items_FindItem(RandItems[rand(RANDITEMS_QUANTITY-1)].id, &randItem);
 		if (n == -1)
 			return;
+
 		lastSpawnTimeString = "LastSpawnTime"+_index;
 		_location.(lastSpawnTimeString) = Items_MakeTime(GetTime(), GetDataDay(), GetDataMonth(), GetDataYear());
 	}
+	
     if (GetCharacterSkillToOld(GetMainCharacter(), SKILL_FORTUNE) < rand(15)) return; // boal fix
+    
 	if (!CheckAttribute(randItem, "model") || randItem.model == "")
 	{
 		Trace("ItemLogic: no model for item "+_location.id+"."+randItem.id);
 		return;
 	}
+
 	Items_LoadModel(&randItemModels[_index],  randItem);
 	SendMessage(&randItemModels[_index], "lffffffffffff", MSG_MODEL_SET_POSITION, makeFloat(al.x), makeFloat(al.y), makeFloat(al.z), makeFloat(al.vx.x), makeFloat(al.vx.y), -makeFloat(al.vx.z), makeFloat(al.vy.x), makeFloat(al.vy.y), -makeFloat(al.vy.z), makeFloat(al.vz.x), makeFloat(al.vz.y), -makeFloat(al.vz.z));
+
 	lastSpawnTimeString = "RandItemType"+_index;
 	_location.(lastSpawnTimeString) = n;
 }
+
 void RandItems_DrawRandItem(int _index, aref _location, aref al)
 {
 	string randItemTypeString = "RandItemType"+_index;
 	int n = sti(_location.(randItemTypeString));
+	
     if (GetCharacterSkillToOld(GetMainCharacter(), SKILL_FORTUNE) < rand(15)) return; // boal fix
+    
 	if (Items[n].model == "")
 	{
 		Trace("ItemLogic: no model for item "+_location.id+"."+Items[n].id);
 		return;
 	}
+	
 	Items_LoadModel(&randItemModels[_index],  &Items[n]);
 	SendMessage(&randItemModels[_index], "lffffffffffff", MSG_MODEL_SET_POSITION, makeFloat(al.x), makeFloat(al.y), makeFloat(al.z), makeFloat(al.vx.x), makeFloat(al.vx.y), -makeFloat(al.vx.z), makeFloat(al.vy.x), makeFloat(al.vy.y), -makeFloat(al.vy.z), makeFloat(al.vz.x), makeFloat(al.vz.y), -makeFloat(al.vz.z));
 }
+
 void RandItem_OnEnterLocator(aref _location, string _locator)
 {
+
     int randIndex = sti(strcut(_locator, 8, strlen(_locator)-1));
 	string randItemAttribute = "RandItemType"+randIndex;
 	ref chr = GetMainCharacter();
@@ -493,10 +561,12 @@ void RandItem_OnEnterLocator(aref _location, string _locator)
 		}
 	}
 }
+
 // ****************** BOXES ********************
 void Box_EnterToLocator(aref loc, string locName)
 {
 	if(!CheckAttribute(loc,locName)) return;
+	
 	if(HasSubStr(locName, "private"))
 	{
 		// check if private box opened
@@ -510,6 +580,7 @@ void Box_EnterToLocator(aref loc, string locName)
 					loc.(locName).opened = true;
 					PlaySound("interface\key.wav");
 					if(!CheckCharacterItem(pchar, loc.(locName).key)) Log_Info("Lock pick was used to open this lock!");
+					
 					if(CheckAttribute(loc, locName+".key.delItem"))
 					{
 						TakeItemFromCharacter(pchar, loc.(locName).key); //забрать ключ
@@ -550,6 +621,7 @@ void Box_EnterToLocator(aref loc, string locName)
 		}
 	}
 	}
+	
 	// Warship 15.08.09 Проверка на квестовую закрытость сундуков (не только приватов, вообще всех)
 	if(CheckAttribute(loc, locName + ".QuestClosed"))
 	{
@@ -562,16 +634,19 @@ void Box_EnterToLocator(aref loc, string locName)
 		Log_Testinfo("Нет доступа");
 		return;
 	}
+	
 		pchar.boxname = locName;
 		Log_SetActiveAction("OpenBox");
 		BLI_RefreshCommandMenu();
 	}
+
 void Box_ExitFromLocator(aref loc, string locName)
 {
 	DeleteAttribute(GetMainCharacter(),"boxname");
 	Log_SetActiveAction("Nothing");
 	BLI_RefreshCommandMenu();
 }
+
 void OpenBoxProcedure()
 {
 	ref chr = GetMainCharacter();
@@ -615,6 +690,7 @@ void OpenBoxProcedure()
 		}
 	}
 }
+
 void Box_OnLoadLocation(ref _location)
 {
 	string locatorName;
@@ -635,6 +711,8 @@ void Box_OnLoadLocation(ref _location)
             }
 		}
 	}
+
+       
 	// private box
 	for (i=1; i < MAX_HANDLED_BOXES; i++)
 	{
@@ -643,11 +721,13 @@ void Box_OnLoadLocation(ref _location)
 		{
 			break;
 		}
+
 		if (!CheckAttribute(_location, locatorName))
 		{
 			_location.(locatorName) = "";
 			_location.(locatorName).open = true;
 		}
+		
 		// Warship генерим предметы в сундуке
 		if(!CheckAttribute(_location, locatorName + ".opened")) 
 		{
@@ -655,6 +735,7 @@ void Box_OnLoadLocation(ref _location)
 			FillGenerableItemsForChest(boxLocator);
 		}	
 	}
+
 	// simple box
 	for (i=1; i < MAX_HANDLED_BOXES; i++)
 	{
@@ -663,11 +744,13 @@ void Box_OnLoadLocation(ref _location)
 		{
 			break;
 		}
+
 		// found box
 		bool needRespawn;
 		// boal -->
 		//needRespawn = true;
 	    needRespawn = SetLocationQuestBox(_location, locatorName);
+				
 		if (!needRespawn)
 		{
 		// boal <--
@@ -708,6 +791,7 @@ void Box_OnLoadLocation(ref _location)
     			}
             }
 			// <--
+            
     		//respawn items in box
     		if (needRespawn || isAbordageBox)
     		{
@@ -731,6 +815,7 @@ void Box_OnLoadLocation(ref _location)
 				    _location.(locatorName).items = "";
 				    _location.(locatorName).money = 0;
     			}
+
     			//fill box with new items
     			string goodItemName;
     			int spawnItemsCount = OBJECTS_IN_BOX;
@@ -753,6 +838,7 @@ void Box_OnLoadLocation(ref _location)
     						}
     					}
     				}
+
     			}
 				if (needRespawn || isAbordageBox) // это должно быть здесь когда уже известно значение переменной needRespawn
 				{
@@ -762,29 +848,37 @@ void Box_OnLoadLocation(ref _location)
 				}
     		}//respawn
 		}
+
 	} //for(i)
 }
+
 // Warship Для новой системы - перебор итемов для генерации, т.к. везде ложится по-старинке - items.(itemID) = n, а генерить нужно
 void FillGenerableItemsForChest(aref _chest)
 {
 	int i, count;
 	String itemID;
+	
 	aref chestItems;
 	aref item;
+	
 	makearef(chestItems, _chest.items);
+	
 	for(i = 0; i < GetAttributesNum(chestItems); i++)
 	{
 		item = GetAttributeN(chestItems, i);
 		itemID = GetAttributeName(item);
+		
 		if(IsGenerableItem(itemID))
 		{
 			count = sti(chestItems.(itemID));
 			DeleteAttribute(chestItems, itemID);
+			
 			itemID = GetGeneratedItem(itemID);
 			chestItems.(itemID) = count;
 		}
 	}
 }
+
 bool SpawnItem(ref _chr, ref _id, bool isAbordageBox, float luck)
 {
 	int i = rand(RANDITEMS_QUANTITY-1);
@@ -803,6 +897,7 @@ bool SpawnItem(ref _chr, ref _id, bool isAbordageBox, float luck)
 	{
 		return false;
 	}
+
 	float itemProb = 0.05;
 	if (CheckAttribute(randItem, "rare"))
 	{
@@ -826,7 +921,9 @@ bool SpawnItem(ref _chr, ref _id, bool isAbordageBox, float luck)
 	{
 		return false;
 	}
+	
 	_id = GetGeneratedItem(randItem.id);
 	return true;
 }
+
 object g_TmpModelVariable; // код от к3, в скриптах нет вообще, есть проверка в ядре

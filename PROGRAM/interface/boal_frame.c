@@ -4,7 +4,9 @@ void InitInterface(string iniName)
 {
 	bQuestCheckProcessFreeze = true;
     GameInterface.title = "";
+
     SendMessage(&GameInterface,"ls",MSG_INTERFACE_INIT,iniName);
+
     bNeedResetSound = false;
 	if (CheckAttribute(pchar, "AutoQuest.FramePic")) // признак картинки
 	{
@@ -17,9 +19,12 @@ void InitInterface(string iniName)
 		}
 		else bNeedResetSound = true;
 	}
+	
 	EI_CreateFrame("BORDERS", 25, 20,775,580);
+
 	SetFormatedText("INFO_TEXT", pchar.AutoQuest.FrameText);
 	SendMessage(&GameInterface,"lsl",MSG_INTERFACE_MSG_TO_NODE,"INFO_TEXT",5);
+
 	if (!CheckAttribute(pchar, "GenQuest.FrameLockEsc")) // блокировка эскейпа
 	{
 	SetEventHandler("InterfaceBreak","ProcessBreakExit",0);
@@ -27,6 +32,7 @@ void InitInterface(string iniName)
 	SetEventHandler("ievnt_command","ProcCommand",0);
 	SetEventHandler("evntDoPostExit","DoPostExit",0);
 	}
+	
 	SetEventHandler("My_EndView","EndView",0);
 	PostEvent("My_EndView", makeint(stf(pchar.AutoQuest.FrameAutoEnd)*1000));
 }
@@ -38,10 +44,12 @@ void ProcessBreakExit()
 {
 	IDoExit(RC_INTERFACE_SALARY_EXIT);
 }
+
 void ProcessCancelExit()
 {
 	IDoExit(RC_INTERFACE_SALARY_EXIT);
 }
+
 void IDoExit(int exitCode)
 {
 	if (bNeedResetSound)
@@ -75,18 +83,22 @@ void IDoExit(int exitCode)
 	DelEventHandler("ievnt_command","ProcCommand");
 	DelEventHandler("evntDoPostExit","DoPostExit");
 	DelEventHandler("My_EndView","EndView");
+
 	interfaceResultCommand = exitCode;
 	EndCancelInterface(true);
 	//PostEvent("StopQuestCheckProcessFreeze", 50);
 }
+
 void ProcCommand()
 {
 	string comName = GetEventData();
 	string nodName = GetEventData();
+    
 	switch(nodName)
 	{
 	}
 }
+
 void DoPostExit()
 {
 	int exitCode = GetEventData();

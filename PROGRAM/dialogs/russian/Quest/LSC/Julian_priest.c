@@ -5,11 +5,15 @@ void ProcessDialogEvent()
 	ref NPChar, sld;
 	aref Link, NextDiag;
 	int iTemp;
+
 	DeleteAttribute(&Dialog,"Links");
+
 	makeref(NPChar,CharacterRef);
 	makearef(Link, Dialog.Links);
 	makearef(NextDiag, NPChar.Dialog);
+	
 	ProcessCommonDialogRumors(NPChar, Link, NextDiag);
+	
 	switch(Dialog.CurrentNode)
 	{
 		case "First time":
@@ -49,6 +53,7 @@ void ProcessDialogEvent()
 			}
 			NextDiag.TempNode = "First time";
 		break;
+		
 		case "meeting": // первая встреча
 			dialog.text = "I hope that you will visit our church more often. Take care of your soul, my son. I am also able to heal your body, I work here not only as a pastor, but also as a doctor.";
 			link.l1 = "I want to ask you a few questions about the island.";
@@ -61,6 +66,7 @@ void ProcessDialogEvent()
 			link.l4.go = "exit";
 			NextDiag.TempNode = "First time";
 		break;
+		
 		case "potion":
 			dialog.text = "Sure, my son. What potion do you need?";
 			if (!CheckAttribute(npchar, "potion1_date") || GetNpcQuestPastDayParam(npchar, "potion1_date") >= 1)
@@ -86,6 +92,7 @@ void ProcessDialogEvent()
 			link.l5 = "I am sorry, brother Julian, I have changed my mind.";
 			link.l5.go = "exit";
 		break;
+		
 		case "potion1":
 			npchar.quest.price = 90;
 			npchar.quest.type = 1;
@@ -101,6 +108,7 @@ void ProcessDialogEvent()
 				link.l1.go = "exit";
 			}
 		break;
+		
 		case "potion2":
 			npchar.quest.price = 500;
 			npchar.quest.type = 2;
@@ -116,6 +124,7 @@ void ProcessDialogEvent()
 				link.l1.go = "exit";
 			}
 		break;
+		
 		case "potion3":
 			npchar.quest.price = 200;
 			npchar.quest.type = 3;
@@ -131,6 +140,7 @@ void ProcessDialogEvent()
 				link.l1.go = "exit";
 			}
 		break;
+		
 		case "potion4":
 			npchar.quest.price = 900;
 			npchar.quest.type = 4;
@@ -146,6 +156,7 @@ void ProcessDialogEvent()
 				link.l1.go = "exit";
 			}
 		break;
+		
 		case "potion_pay":
 			AddMoneyToCharacter(pchar, -sti(npchar.quest.price));
 			iTemp = sti(npchar.quest.type);
@@ -156,6 +167,7 @@ void ProcessDialogEvent()
 			link.l1.go = "exit";
 			SaveCurrentNpcQuestDateParam(npchar, "potion"+iTemp+"_date");
 		break;
+		
 		case "amulet":
 			bool bOK = (!CheckAttribute(npchar, "amulet_date")) || (GetNpcQuestPastDayParam(npchar, "amulet_date") >= 3)
 			if (bOk && GetSummonSkillFromName(pchar, SKILL_FORTUNE) > (10+drand(110)))
@@ -183,6 +195,7 @@ void ProcessDialogEvent()
 				link.l1.go = "exit";
 			}
 		break;
+		
 		case "amulet_pay":
 			RemoveItems(pchar, "gold_dublon", 10);
 			GiveItem2Character(pchar, npchar.quest.amulet);
@@ -192,6 +205,7 @@ void ProcessDialogEvent()
 			link.l1 = "Gratitude, brother Julian.";
 			link.l1.go = "exit";
 		break;
+		
 //--------------------------------------- блок вопросов и ответов ---------------------------------------------
 		case "int_quests":
 			dialog.text = "I am listening.";
@@ -218,24 +232,28 @@ void ProcessDialogEvent()
 			link.l10 = "No questions. I am sorry...";
 			link.l10.go = "exit";
 		break;
+		
 		case "ansewer_1":
 			dialog.text = "By the same way as many of locals, my son. My ship was sunk by a storm during my voyage from Havana to the New Spain. Thank God, I survived it and now I serve Him here, helping poor souls to find their true path.";
 			link.l1 = "I see...";
 			link.l1.go = "int_quests";
 			npchar.quest.answer_1 = "true";
 		break;
+		
 		case "ansewer_2":
 			dialog.text = "Less than I want. Most of Narwhals prefer violence to mercy and Rivados are poor and lost sheep. They are blindly perform their pagan trials and putting their immortal souls at risk. There is one dangerous wizard among them and he must be purified by the Saint Inquisition.";
 			link.l1 = "I see...";
 			link.l1.go = "int_quests";
 			npchar.quest.answer_2 = "true";
 		break;
+		
 		case "ansewer_3":
 			dialog.text = "Sancho Carpentero owns tavern on the Fleron, you can find there food, drinks and a warm bed. Axel Yost sells a big variety of goods on the 'Esmeralda'. Ask people on the streets, my son, a lot of them are finding interesting things at the outer ring.";
 			link.l1 = "Thank you!";
 			link.l1.go = "int_quests";
 			npchar.quest.answer_3 = "true";
 		break;
+		
 		case "ansewer_4":
 			dialog.text = "It is all in the hand of our Lord, my son. We believe in Him and we trust Him. Serious troubles have always been staying away from our Island - storms often happen outside it, but it is always quiet here.";
 			link.l1 = "Thanks. You have reassured me.";
@@ -243,6 +261,7 @@ void ProcessDialogEvent()
 			npchar.quest.answer_4 = "true";
 		break;
 // <-- блок вопросов и ответов
+		
 //----------------------------------------- специальные реакции -----------------------------------------------
 		//обнаружение ГГ в сундуках
 		case "Man_FackYou":
@@ -250,12 +269,14 @@ void ProcessDialogEvent()
 			link.l1 = "Shit!";
 			link.l1.go = "fight";
 		break;
+		
 		case "Woman_FackYou":
 			dialog.text = "What?! Decided to check my chests? You won't get away with it!";
 			link.l1 = "Foolish girl!";
 			link.l1.go = "exit_setOwner";
 			LAi_group_Attack(NPChar, Pchar);
 		break;
+		
 		case "fight":
 			NextDiag.CurrentNode = NextDiag.TempNode;
 			DialogExit();
@@ -263,11 +284,13 @@ void ProcessDialogEvent()
 			LAi_group_Attack(NPChar, Pchar);
 			AddDialogExitQuest("MainHeroFightModeOn");
 		break;
+		
 		case "exit_setOwner":
 			LAi_SetOwnerTypeNoGroup(npchar);
 			NextDiag.CurrentNode = NextDiag.TempNode;
 			DialogExit();
 		break;
+		
 		//замечание по обнаженному оружию
 		case "LSCNotBlade":
 			dialog.text = LinkRandPhrase("Listen, you'd better take your weapon away. It makes me nervous.", "You know, running with blade is not tolerated here. Take it away.", "Listen, don't play a medieval knight running with a sword around. Take it away, it doesn't suit you...");
@@ -275,6 +298,7 @@ void ProcessDialogEvent()
 			link.l1.go = "exit";
 			NextDiag.TempNode = "First Time";
 		break;	
+		
 		case "CitizenNotBlade":
 			if (loadedLocation.type == "town")
 			{
@@ -290,12 +314,14 @@ void ProcessDialogEvent()
 			NextDiag.TempNode = "First Time";
 		break;
 // <-- специальные реакции
+		
 		case "Exit":
 			NextDiag.CurrentNode = NextDiag.TempNode;
 			DialogExit();
 		break;
 	}
 }
+
 string SelectLSCChurchAmulet();
 {
 	string sAmulet;

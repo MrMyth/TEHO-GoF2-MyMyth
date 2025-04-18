@@ -4,10 +4,13 @@ void ProcessDialogEvent()
 	ref NPChar, sld;
 	aref Link, NextDiag;
 	string sTemp;
+
 	DeleteAttribute(&Dialog,"Links");
+
 	makeref(NPChar,CharacterRef);
 	makearef(Link, Dialog.Links);
 	makearef(NextDiag, NPChar.Dialog);
+	
 	switch(Dialog.CurrentNode)
 	{
 		case "First time":
@@ -16,6 +19,7 @@ void ProcessDialogEvent()
 			link.l1.go = "exit";			
 			NextDiag.TempNode = "First time";
 		break;
+		
 //------------------------------------- фразы гардов нарвалов --------------------------------------------
 		// пост нарвалов на проход на Сан-Габриэль
 		case "Narval_warning":
@@ -63,18 +67,21 @@ void ProcessDialogEvent()
 			NextDiag.TempNode = "Narval_warning_repeat";
 			DeleteAttribute(npchar, "protector.CheckAlways");
 		break;
+		
 		case "Narval_warning_yes":
 			dialog.text = "Then go and tell that to the tough guy over there. Don't try to cheat on him, our boys with muskets know what to do. So if you are planning any tricks - you'd better turn and leave. Now. I warned you.";
 			link.l1 = "Fine, friend. I got it.";
 			link.l1.go = "exit";
 			NextDiag.TempNode = "Narval_warning_repeat";
 		break;
+		
 		case "Narval_warning_no":
 			dialog.text = "Then you have got nothing to do here if you are not going to end your life, of course. Or you're just joking, huh? Are you kidding me? Actually, I don't care. Go down, my job is to warn but not to stop. You won't make it back if you don't know a password.";
 			link.l1 = "Fine, pal. I got it.";
 			link.l1.go = "exit";
 			NextDiag.TempNode = "Narval_warning_repeat";
 		break;
+		
 		case "Narval_warning_repeat":
 			if (!CheckAttribute(pchar, "questTemp.LSC.nrv_friend")) 
 			{
@@ -90,6 +97,7 @@ void ProcessDialogEvent()
 			}
 			NextDiag.TempNode = "Narval_warning_repeat";
 		break;
+		
 		case "Narval_parol":
 			if (CheckAttribute(pchar, "GenQuest.NarvalConflict"))
 			{
@@ -110,12 +118,14 @@ void ProcessDialogEvent()
 			link.l1 = "I am standing, standing.";	
 			link.l1.go = "check_parol";
 		break;
+		
 		case "check_parol":
 			dialog.text = "Say a password and do it clear and loud.";
 			link.l1.edit = 3;
 			link.l1 = "";	
 			link.l1.go = "check_parol_1";
 		break;
+		
 		case "check_parol_1":
 			sTemp = GetStrSmallRegister(dialogEditStrings[3]);
 			if (sTemp == sNrvParol && CheckAttribute(pchar, "questTemp.LSC.NParol_bye"))
@@ -135,12 +145,14 @@ void ProcessDialogEvent()
 				link.l1.go = "check_parol_fight";
 			}
 		break;
+		
 		case "check_parol_fight":
 			DialogExit();
 			LAi_SetGuardianType(NPChar);
 			LAi_group_MoveCharacter(NPChar, "LSC_NARVAL");
 			LAi_group_Attack(NPChar, Pchar);
 		break;
+		
 		case "Narval_parol_repeat":
 			if (CheckAttribute(pchar, "GenQuest.NarvalConflict"))
 			{
@@ -154,6 +166,7 @@ void ProcessDialogEvent()
 			link.l1.go = "exit";
 			NextDiag.TempNode = "Narval_parol_repeat";
 		break;
+		
 		// у резиденции
 		case "Narval_residence":
 			if (CheckAttribute(pchar, "GenQuest.NarvalConflict"))
@@ -217,6 +230,7 @@ void ProcessDialogEvent()
 			DeleteAttribute(npchar, "protector.CheckAlways");
             }			
 		break;
+		
 		case "Narval_soldier":
 			if (CheckAttribute(pchar, "GenQuest.NarvalConflict"))
 			{
@@ -239,22 +253,26 @@ void ProcessDialogEvent()
 			}
 			NextDiag.TempNode = "Narval_soldier";
 		break;
+		
 		case "negotiations":
 			dialog.text = "Well-well... Calm down. You should have said that you were from the admiral in the first place. See, there are different people wandering around...";
 			link.l1 = "Are you finally going to let me through? Thanks!";
 			link.l1.go = "negotiations_1";
 		break;
+		
 		case "negotiations_1":
 			DialogExit();
 			NextDiag.CurrentNode = "negotiations_2";
 			LocatorReloadEnterDisable("LostShipsCity_town", "reload48", false); // открыть вход к Дональду Гринспи
 		break;
+		
 		case "negotiations_2":
 			dialog.text = "Move along, you are allowed to...";
 			link.l1 = "Oh, really? Can't believe it.";
 			link.l1.go = "exit";
 			NextDiag.TempNode = "negotiations_2";
 		break;
+		
 //------------------------------------- фразы гардов ривадос --------------------------------------------
 		// пост ривадос на проход на Фурию и Веласко
 		case "Rivados_warning":
@@ -302,18 +320,21 @@ void ProcessDialogEvent()
 			NextDiag.TempNode = "Rivados_warning_repeat";
 			DeleteAttribute(npchar, "protector.CheckAlways");
 		break;
+		
 		case "Rivados_warning_yes":
 			dialog.text = "You can go then. This lad will demand a password from you. You'd better leave now if your have any thoughts about tricking us. I have warned you.";
 			link.l1 = "Fine, pal. I got it.";
 			link.l1.go = "exit";
 			NextDiag.TempNode = "Rivados_warning_repeat";
 		break;
+		
 		case "Rivados_warning_no":
 			dialog.text = "Ho-ho! Either you are very brave or a very silly if you are going to visit us without a password. Or are you just joking? Go on then. I am here to warn, not to stop. Beware if you really don't know the password!";
 			link.l1 = "Fine, pal. I got it.";
 			link.l1.go = "exit";
 			NextDiag.TempNode = "Rivados_warning_repeat";
 		break;
+		
 		case "Rivados_warning_repeat":
 			if (!CheckAttribute(pchar, "questTemp.LSC.rvd_friend")) 
 			{
@@ -330,6 +351,7 @@ void ProcessDialogEvent()
 			NextDiag.TempNode = "Rivados_warning_repeat";
 			DeleteAttribute(npchar, "protector.CheckAlways");
 		break;
+		
 		case "Rivados_parol":
 			if (CheckAttribute(pchar, "GenQuest.RivadosConflict"))
 			{
@@ -351,12 +373,14 @@ void ProcessDialogEvent()
 			link.l1 = "I want to pass through.";	
 			link.l1.go = "Rcheck_parol";
 		break;
+		
 		case "Rcheck_parol":
 			dialog.text = "Then say a password and do it loud and clear.";
 			link.l1.edit = 3;
 			link.l1 = "";	
 			link.l1.go = "Rcheck_parol_1";
 		break;
+		
 		case "Rcheck_parol_1":
 			sTemp = GetStrSmallRegister(dialogEditStrings[3]);
 			if (sTemp == sRvdParol && CheckAttribute(pchar, "questTemp.LSC.RParol_bye"))
@@ -376,12 +400,14 @@ void ProcessDialogEvent()
 				link.l1.go = "Rcheck_parol_fight";
 			}
 		break;
+		
 		case "Rcheck_parol_fight":
 			DialogExit();
 			LAi_SetGuardianType(NPChar);
 			LAi_group_MoveCharacter(NPChar, "LSC_RIVADOS");
 			LAi_group_Attack(NPChar, Pchar);
 		break;
+		
 		case "Rivados_parol_repeat":
 			if (CheckAttribute(pchar, "GenQuest.RivadosConflict"))
 			{
@@ -395,6 +421,7 @@ void ProcessDialogEvent()
 			link.l1.go = "exit";
 			NextDiag.TempNode = "Rivados_parol_repeat";
 		break;
+		
 		// у резиденции
 		case "Rivados_residence":
 			if (CheckAttribute(pchar, "GenQuest.RivadosConflict"))
@@ -459,6 +486,7 @@ void ProcessDialogEvent()
 			DeleteAttribute(npchar, "protector.CheckAlways");
             }			
 		break;
+		
 		case "Rivados_soldier":
 			if (CheckAttribute(pchar, "GenQuest.RivadosConflict"))
 			{
@@ -496,6 +524,7 @@ void ProcessDialogEvent()
 			link.l1.go = "exit";
 			NextDiag.TempNode = "Shark_storage";
 		break;
+		
 		// у резиденции
 		case "Shark_residence":
 			if (CheckAttribute(pchar, "GenQuest.SharkConflict"))
@@ -537,6 +566,7 @@ void ProcessDialogEvent()
 			}
 			NextDiag.TempNode = "Shark_residence";
 		break;
+		
 		case "Shark_soldier":
 			if (CheckAttribute(pchar, "GenQuest.SharkConflict"))
 			{
@@ -550,6 +580,7 @@ void ProcessDialogEvent()
 			link.l1.go = "exit";
 			NextDiag.TempNode = "Shark_soldier";
 		break;
+		
 		case "first_talk_night":
 			dialog.text = NPCStringReactionRepeat("Are you drunk? Turn back and walk through the bridge, pass two ships and then you will find another bridge which will take you to the tavern. Sleep there.", 
 				"Are you trying to piss me off? I have just told you what to do. Get lost!", 
@@ -561,21 +592,25 @@ void ProcessDialogEvent()
 				"What?!", npchar, Dialog.CurrentNode);
 			link.l1.go = DialogGoNodeRepeat("exit", "", "", "", npchar, Dialog.CurrentNode);
 		break;
+		
 		case "first_talk_day":
 			dialog.text = "Don't make round eyes, lad. Everybody knows that Steve Shark is our admiral. Do you have any business for him?";
 			link.l1 = "Yes, damn it! I have business for him and it is urgent.";
 			link.l1.go = "first_talk_day_1";
 		break;
+		
 		case "first_talk_day_1":
 			dialog.text = "And what kind of business?";
 			link.l1 = "I will tell about it only to Shark in private. I am working for Jan Swanson, do you know him?";
 			link.l1.go = "first_talk_day_2";
 		break;
+		
 		case "first_talk_day_2":
 			dialog.text = "Forest Devil? Ha! Half of Main knows that man. Listen, lad, don't be stubborn. Either explain yourself or get lost before I get angry. Shark said to spare him from useless people and I am just doing as he ordered.";
 			link.l1 = "Fine. Here, take a look at this letter, it's written by Forest Devil to Shark.";
 			link.l1.go = "first_talk_day_3";
 		break;
+		
 		case "first_talk_day_3":
 			PlaySound("interface\important_item.wav");
 			dialog.text = "(looking)... Fine. I suppose, Steve will find it interesting. Move along.";
@@ -583,6 +618,7 @@ void ProcessDialogEvent()
 			if (pchar.questTemp.LSC == "mary") link.l1.go = "first_talk_day_5";
 			else link.l1.go = "first_talk_day_4";
 		break;
+		
 		case "first_talk_day_4":
 			PlaySound("interface\important_item.wav");
 			npchar.dialog.currentnode = "First time";
@@ -598,6 +634,7 @@ void ProcessDialogEvent()
 			LocatorReloadEnterDisable("LostShipsCity_town", "reload60", true);
 			LocatorReloadEnterDisable("LostShipsCity_town", "reload61", true);
 		break;
+		
 		case "first_talk_day_5":
 			PlaySound("interface\important_item.wav");
 			npchar.dialog.currentnode = "First time";
@@ -606,20 +643,24 @@ void ProcessDialogEvent()
 			sld = characterFromId("Dodson");
 			sld.dialog.currentnode = "entrance";
 		break;
+		
 		case "shark_guard_fight":
 			DialogExit();
 			LAi_SetGuardianType(NPChar);
 			LAi_group_MoveCharacter(NPChar, "LSC_SHARK");
 			LAi_group_Attack(NPChar, Pchar);
 		break;
+		
 		case "":
 			dialog.text = "";
 			link.l1 = "";
 			link.l1.go = "";
 		break;
+		
 		case "Exit":
 			NextDiag.CurrentNode = NextDiag.TempNode;
 			DialogExit();
 		break;
+		
 	}
 }

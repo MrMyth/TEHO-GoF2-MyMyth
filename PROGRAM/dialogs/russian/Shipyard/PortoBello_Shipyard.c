@@ -15,11 +15,13 @@ void ProcessCommonDialogEvent(ref NPChar, aref Link, aref NextDiag)
                 link.l1.go = "Portobello_ratS_1";
             }
 		break;
+		
 		case "Portobello_ratS_1":
 			dialog.text = "He has. He acquired a corvette from me and soon departed to sea.";
 			link.l1 = "Thank you! And do you have any idea where he departed to?";
 			link.l1.go = "Portobello_ratS_2";
 		break;
+			
 		case "Portobello_ratS_2":
 			dialog.text = "No, buddy, I haven't got a clue. I repair and sell ships, I don't track where they go. It's none of my business.";
 			link.l1 = "Well, then. Let's find out...";
@@ -27,6 +29,9 @@ void ProcessCommonDialogEvent(ref NPChar, aref Link, aref NextDiag)
 			pchar.questTemp.Slavetrader = "FindRatPortobello_1";
 			AddQuestRecord("Slavetrader", "21_2");
 		break;
+			
+			
 	}
 	UnloadSegment(NPChar.FileDialog2);  // если где-то выход внутри switch  по return не забыть сделать анлод
 }
+

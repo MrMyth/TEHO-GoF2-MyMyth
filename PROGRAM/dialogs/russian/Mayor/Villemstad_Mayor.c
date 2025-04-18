@@ -16,28 +16,33 @@ void ProcessCommonDialogEvent(ref NPChar, aref Link, aref NextDiag)
                 link.l1.go = "Portugeze";
 			}
 		break;
+
 		case "Cupture_after":
             dialog.text = RandPhraseSimple("You have taken everything already. What else do you want?", "Is there anything left that you didn't grab?");
             link.l1 = RandPhraseSimple("Just looking around...", "Just checking, I might forget to take something...");
             link.l1.go = "exit";
             NextDiag.TempNode = "Cupture_after";
 		break;
+		
 		//Португалец
 		case "Portugeze":
 			dialog.text = "Bart the Portuguese?! Do you have him? Alive?";
 			link.l1 = "I know that you doesn't need him dead. He is alive. And, damn, I have had to put a lot of effort to keep him that way!";
 			link.l1.go = "Portugeze_1";
 		break;
+		
 		case "Portugeze_1":
 			dialog.text = "Most excellent! Now he will tell us everything... Mynheer, prepare the prisoner for a transfer. We will send a military barque to your ship immediately. ";
 			link.l1 = "I'd like to talk about my reward first, mynheer... If you don't mind.";
 			link.l1.go = "Portugeze_2";
 		break;
+		
 		case "Portugeze_2":
 			dialog.text = "Don't worry about your reward, sir. You will get it. We have assigned a price for Bartolomeo the Portuguese's head - one thousand and five hundred doubloons. Lieutenant! Bring to the captain his reward!";
 			link.l1 = "Hm... Hugo has lied to me about two thousand doubloons... Fine then.";
 			link.l1.go = "Portugeze_3";
 		break;
+		
 		case "Portugeze_3":
 			TakeNItems(pchar, "gold_dublon", 1500);
 			Log_Info("You have received 1500 doubloons");
@@ -46,6 +51,7 @@ void ProcessCommonDialogEvent(ref NPChar, aref Link, aref NextDiag)
 			link.l1 = "Sure, mynheer, send the barque to my ship.";
 			link.l1.go = "Portugeze_4";
 		break;
+		
 		case "Portugeze_4":
 			DialogExit();
 			DoQuestReloadToLocation("Villemstad_town", "reload", "reload1", "Portugal_Final");

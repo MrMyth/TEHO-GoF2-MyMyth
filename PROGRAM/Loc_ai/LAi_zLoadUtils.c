@@ -272,6 +272,7 @@ void CreateLostShipsCity(aref loc)
 		}
 	}
 }
+
 void CreatUnderwater(aref loc)
 {
 	if (loc.type == "underwater")
@@ -324,6 +325,7 @@ void CreatUnderwater(aref loc)
 		}
 	}
 }
+
 void CreatePlantation(aref loc)
 {
 	if(CheckAttribute(loc,"type") && loc.type == "Plantation")
@@ -333,22 +335,30 @@ void CreatePlantation(aref loc)
 			return;
 		}
 		if (GetNpcQuestPastDayWOInit(loc, "Plantation_date") < 2) return;
+
 		int iColony = -1;
 		int iNation = -1;
+
 		string sAreal = GiveArealByLocation(loc);
 		if (sAreal == "none") return;
+		
 		string sCity = GetCityNameByIsland(sAreal);
 		if (sCity == "none") return;
+		
 	    iColony = FindColony(sCity);
+
 		if(iColony == -1)
 		{
 			return;
 		}
+
 		iNation = GetCityNation(sCity);
+
 		if(iNation == -1)
 		{
 			return;
 		}
+		
 		SaveCurrentNpcQuestDateParam(loc, "Plantation_date");
 		int iCitizensQuantity, iModel;
 		ref chr;
@@ -359,6 +369,7 @@ void CreatePlantation(aref loc)
 		int num, iMassive, iRank;
 		string sAnime;
 		string model[10];
+	    
 	    	// ==> просто работники
 			model[0] = "prizon_1";
 			model[1] = "prizon_2";
@@ -378,12 +389,15 @@ void CreatePlantation(aref loc)
 				if (model[iMassive] != "")
 				{
 					chr = GetCharacter(NPC_GenerateCharacter("Slave_"+i, model[iMassive], "man", "man_B", 7, iNation, 2, false, "slave"));
+
 					chr.dialog.filename = "Quest\ForAll_dialog.c";
 					chr.dialog.currentnode = "plantation_slave";
+					
 	                chr.greeting = "convict";
 	                chr.CityType = "citizen";
 					chr.city = Colonies[iColony].id;
 					LAi_SetLoginTime(chr, 6.0, 22.99);
+
 					PlaceCharacter(chr, "goto", "random_free");
 					LAi_SetCitizenType(chr);
 					LAi_group_MoveCharacter(chr, slai_group);
@@ -391,6 +405,7 @@ void CreatePlantation(aref loc)
 					model[iMassive] = "";
 				}
 			}
+
 		// солдаты -->
 		if (checkAttribute(loc, "soldiers") && CheckAttribute(loc, "locators.soldiers"))
 		{
@@ -410,6 +425,7 @@ void CreatePlantation(aref loc)
 			chr.greeting = "soldier";
 			chr.MusketerDistance = 0;
 			LAi_SetLoginTime(chr, 6.0, 23.0); //а ночью будет беготня от патруля :)
+
 			LAi_SetPatrolType(chr);
 	        if (sti(Colonies[iColony].HeroOwn) == true)
 			{
@@ -456,6 +472,7 @@ void CreatePlantation(aref loc)
 				LAi_SetReincarnationRankStep(chr, MOD_SKILL_ENEMY_RATE+2); //задаем шаг на увеличение ранга фантомам на реинкарнацию
 				LAi_SetLoginTime(chr, 0.0, 24.0);
 				LAi_SetPatrolType(chr);
+
 	            if (sti(Colonies[iColony].HeroOwn) == true)
 				{
 					LAi_group_MoveCharacter(chr, LAI_GROUP_PLAYER_OWN);
@@ -530,6 +547,7 @@ void CreatePlantation(aref loc)
 		// грузчики <--
 	}	
 }
+
 void CreateItzaLand(aref loc)
 {
 	if(CheckAttribute(loc, "ItzaLand") && !bBettaTestMode)
@@ -539,13 +557,17 @@ void CreateItzaLand(aref loc)
 		int iMassive, warriorRank, i, num;	
 		string model[10];
 		string encGroup, str, locator;
+		
 		encGroup = LAi_FindRandomLocator("encdetector");
 		str = "locators." + encGroup;
 		makearef(grp, loc.(str));
 		num = GetAttributesNum(grp);
+		
 		if(num == 0 ) return;
 		if(num > 10) num = 10;
+		
 		LAi_group_Delete("tayasal_monsters_group");
+		
 		model[0] = "Itza_1";
 		model[1] = "Itza_2";
 		model[2] = "Itza_3";
@@ -556,11 +578,15 @@ void CreateItzaLand(aref loc)
 		model[7] = "Itza_8";
 		model[8] = "Itza_4";
 		model[9] = "Itza_6";	
+		
 		i = 0;
+		
 		chrDisableReloadToLocation = true;
+		
 		//определим ранг войнов. обработаем от сложности, но не менее 20 уровня
 		warriorRank = GetCoffDiff(sti(pchar.rank), 1000) + MOD_SKILL_ENEMY_RATE;
 		if (warriorRank < 20) warriorRank = 20;
+		
 		while(i < num)
 		{
 			iMassive = rand(9);
@@ -570,8 +596,10 @@ void CreateItzaLand(aref loc)
 				FantomMakeCoolFighter(chr, warriorRank, 80 + rand(20), 80 + rand(20), LinkRandPhrase("topor_01","blade_01","blade_02"),"","", 50);
 				TakeNItems(chr,"potion2", rand(3)+1);
 				SetCharacterPerk(chr, "Energaiser"); 
+				
 				locator = GetAttributeName(GetAttributeN(grp, i));
 				ChangeCharacterAddressGroup(chr, loc.id, encGroup, locator);
+				
 				LAi_SetWarriorType(chr);
 				LAi_warrior_SetStay(chr, true);
 				LAi_warrior_DialogEnable(chr, false);
