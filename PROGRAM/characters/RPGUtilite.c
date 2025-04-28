@@ -3621,6 +3621,7 @@ void initNewMainCharacter()//инициализация главного гер�
     	pchar.quest.Tut_start.function                  = "Tut_StartGame";
         Pchar.questTemp.CapBloodLine = false;
     }
+	OffMushketerStart();
 
 	// Warship Для разных квестов
 	// Важно: функция MaryCelesteInit() должна быть тут, а не в initStartState2Character()

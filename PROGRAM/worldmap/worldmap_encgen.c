@@ -313,4 +313,8 @@ void Map_TraderSucces_quest(string sChar)
 			character.lifeDay = 0;
 		}
 	}
+		if (sChar == "MushketCap" && characters[GetCharacterIndex(sChar)].quest == "InMap")
+	{
+		SetMushketFromMapToSea();
+	}
 }

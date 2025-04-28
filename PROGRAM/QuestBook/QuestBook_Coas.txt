@@ -324,7 +324,17 @@ It's done. I received not fifty, but two-hundred thousand for that business with
 #QUEST BerglarsGang
 Brigands and Assassins
 #TEXT  1
-Following a sequence of strange attacks, at length I found some information on the approximate location of the leader of the gang of murderers. I should look for him somewhere in the pearl trade settlements.
-=======
-It's done. I received not fifty, but two-hundred thousand for that business with the xebec. Doesn't that just warm a pirate's heart?
->>>>>>> parent of f09c749 (Add Bergals quest and clean)
+Following a sequence of strange attacks, at length I found some information on the approximate location of the leader of the gang of murderers. I should look for him somewhere in the pearl trade settlements. It's done. I received not fifty, but two-hundred thousand for that business with the xebec. Doesn't that just warm a pirate's heart?
+
+#QUEST SeekDoubleMushket
+The Double-Barreled Musket
+#TEXT  1
+Humphrey Douglas, a resigned English musketeer, has asked me to find his lost double-barreled musket. The weapon was taken away from Humphrey during the pirate attack. No one know the pirates were, but Humphrey heard his ship's crew shouting about some kind of an arrow. I'll need to ask a pirate about this.
+If I find this musket, Humphrey will join my crew as an officer.
+#TEXT  2
+Apparently, Humphrey's ship was attacked by a very unusual corsair, the Albert Zivert. He doesn't belong to the Brotherhood of the Coast, so I won't find him through the pirates. Jackman said that this "Zivert" is always out in the sea, and plies between various island bays.
+Jackman recommended that I carefully measure all passing ships. I need to find the brigantine Arrow.
+#TEXT  3
+I found the musket and handed it over to Humphrey Douglas. Now Humphrey is my very own officer, which is quite nice.
+#TEXT  10
+The brigantine I was looking for is gone. So much for that double-barreled musket.

@@ -620,6 +620,7 @@ int LocationInitTrinidad(int n)
 	//Sound
 	locations[n].type = "house";
  	locations[n].islandId = "Trinidad";
+	locations[n].fastreload = "PortSpein";
 	//Models
 	//Always
 	locations[n].models.always.tavern = "CobHouse";

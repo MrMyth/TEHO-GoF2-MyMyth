@@ -1099,6 +1099,13 @@ void FillAboardCabinBox(ref _location, ref _npchar)
 		
         ok = false;
 	}
+	  if (_npchar.id == "MushketCap")
+	{
+        DeleteAttribute(_location, "box1");
+        _location.box1.money = 103;
+		_location.box1.items.mushket2x2 = 1;
+        ok = false;
+	}
 	
     if (ok) // не квестовый
     {

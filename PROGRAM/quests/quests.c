@@ -10,6 +10,7 @@
 #include "quests\Coas_quests\CapBloodStart.c"
 #include "quests\Coas_quests\Isabella.c"
 #include "quests\Coas_quests\BlueBird.c"
+#include "quests\Coas_quests\OffMushket.c"
 
 #event_handler("LocationWaitNihgtEnd","WaitDatePostEventControl");
 #event_handler("evntQuestCameraRestore","QuestCameraRestore");
