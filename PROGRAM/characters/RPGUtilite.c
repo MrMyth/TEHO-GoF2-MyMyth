@@ -3633,6 +3633,7 @@ void initNewMainCharacter()//инициализация главного гер�
 	ch.DayRandom = Random();
 	DeleteClass(&sound);
 	ResumeAllSounds();
+
 }
 
 void initMainCharacterItem()

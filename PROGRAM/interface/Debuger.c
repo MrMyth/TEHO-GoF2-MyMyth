@@ -19,7 +19,7 @@ SetEventHandler("ievnt_command","ProcCommand",0);
 SetEventHandler("SetScrollerPos","SetScrollerPos",0);
 SetEventHandler("ScrollPosChange","ProcScrollPosChange",0);
 SetEventHandler("ScrollTopChange","ProcScrollChange",0);
-GameInterface.reload_edit.str = "Bravo_village, reload, reload1";
+GameInterface.reload_edit.str = "Ship_deck_Low, goto, goto4";
 }
 void ProcessBreakExit()
 {
