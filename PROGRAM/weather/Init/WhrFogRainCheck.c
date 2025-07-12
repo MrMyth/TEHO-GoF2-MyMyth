@@ -248,7 +248,7 @@ void Whr_FogRainCheck(){
 				WeathersNH.Tornado = true;
 				WeathersNH.Lights = false;
 				if(!CheckAttribute(PChar, "skipWeatherLogs")) // PB
-				// DeathDaisy added a string here instead off GetMyAddressForm, because I thought it would be weird if your crew called you SeÒor or similar
+				// DeathDaisy added a string here instead off GetMyAddressForm, because I thought it would be weird if your crew called you Se—Åor or similar
 					string PCCaptainTitle;
 					if(PChar.sex == "woman")
 						PCCaptainTitle = "Ma'am";

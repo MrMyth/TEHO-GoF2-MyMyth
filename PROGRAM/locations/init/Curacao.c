@@ -625,7 +625,7 @@ int LocationInitCuracao(int n)
 	//////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 	locations[n].id = "Villemstad_bank";
 	locations[n].id.label = "Usurer House";
-	locations[n].filespath.models = "locations\inside\Bank01\";
+	locations[n].filespath.models = "locations\inside\Bank03\";
 	locations[n].image = "loading\inside\bank.tga";
 	//Town sack
 	locations[n].townsack = "Villemstad";
@@ -636,18 +636,18 @@ int LocationInitCuracao(int n)
 	locations[n].islandId = "Curacao";
 	//Models
 	//Always
-	locations[n].models.always.locators = "Bank01_locators";
-	locations[n].models.always.store = "Bank01";
+		locations[n].models.always.locators = "bank03_locators";
+	locations[n].models.always.store = "bank03";
 	locations[n].models.always.store.level = 65538;
-	locations[n].models.always.window = "Bank01_windows";
+	locations[n].models.always.window = "Bank03_windows";
 	locations[n].models.always.window.tech = "LocationWindows";
 	locations[n].models.always.window.level = 65539;
 	locations[n].models.always.back = "..\inside_back";
 	locations[n].models.always.back.level = 65529;
 	//Day
-	locations[n].models.day.charactersPatch = "Bank01_patch";
+	locations[n].models.day.charactersPatch = "bank03_patch";
 	//Night
-	locations[n].models.night.charactersPatch = "Bank01_patch";
+	locations[n].models.night.charactersPatch = "bank03_patch";
 	//Environment
 	locations[n].environment.weather = "true";
 	locations[n].environment.sea = "false";
